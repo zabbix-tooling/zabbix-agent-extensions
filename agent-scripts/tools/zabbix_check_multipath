@@ -43,7 +43,7 @@ def log(line):
 # check if multipathing is enabled
 
 try:
-	proc = subp.Popen(["lsmod"],stdout=subp.PIPE, stdin=subp.PIPE)
+	proc = subp.Popen(["/sbin/lsmod"],stdout=subp.PIPE, stdin=subp.PIPE)
 	line = proc.stdout.readline()
 except:
      print "ERROR: lsmod"
