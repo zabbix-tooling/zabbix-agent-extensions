@@ -1,0 +1,114 @@
+#!/usr/bin/env python
+
+# -*- coding: iso8859-1 -*-
+#
+# check_multipath.py
+#
+#   This program is free software; you can redistribute it and/or modify
+#   it under the terms of the GNU General Public License as published by
+#   the Free Software Foundation; either version 2 of the License, or
+#   (at your option) any later version.
+#
+#   This program is distributed in the hope that it will be useful,
+#   but WITHOUT ANY WARRANTY; without even the implied warranty of
+#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#   GNU General Public License for more details.
+#
+#   You should have received a copy of the GNU General Public License along
+#   with this program; if not, write to the Free Software Foundation, Inc.,
+#   51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+
+"""Package versioning
+"""
+
+import os.path
+import sys
+import re
+import subprocess as subp
+
+os.environ['LANG']="C"
+
+__author__ = "Marc Schoechlin <ms@256bit.org>"
+__version__ = "$Revision$"
+
+
+# path to smartctl
+_multipathPath   = r"/sbin/multipath"
+
+
+def log(line):
+     print >>sys.stderr, "%s: %s" % (sys.argv[0],line)
+
+#########################################################################
+# check if multipathing is enabled
+
+try:
+	proc = subp.Popen(["lsmod"],stdout=subp.PIPE, stdin=subp.PIPE)
+	line = proc.stdout.readline()
+except:
+     print "ERROR: lsmod"
+     log("UNKNOWN: lsmod call exits unexpectedly (%s)" % line)
+     sys.exit(1)
+
+multipath_system = 0
+
+while True:
+   line = proc.stdout.readline()
+   if (line == '' and proc.poll() != None): 
+	break
+   match = re.match(r"^dm_multipath", line)
+   if match:
+      multipath_system = 1
+      break
+
+if multipath_system == 0:
+   log("STATUS OK : No multipathing here")
+   print "OK: n/a"
+   sys.exit(0)
+
+#########################################################################
+# check multipath setup
+if not os.path.isfile(_multipathPath):
+      log("STATUS CRITICAL: multipath enabled, but multipath tool '%s' is not available" % _multipathPath)
+      sys.exit(1)
+
+try:
+	proc = subp.Popen([_multipathPath,"-ll"],stdout=subp.PIPE)
+	line = proc.stdout.readline()
+except:
+     log("UNKNOWN: multipath call exits unexpectedly (%s)" % line)
+     sys.exit(1)
+
+paths = 0
+broken_paths = 0
+luns = 0
+output = ""
+while True:
+   line = proc.stdout.readline()
+   if (line == '' and proc.poll() != None): 
+	break
+   output += sys.argv[0]+" "+line
+   match = re.match(r"^.+\s.*([a-f0-9]{33})",line)
+   if match:
+      ghosts = 0
+      lun = match.group(1)
+      luns += 1
+      continue
+   match = re.match(r"^.*(\d:\d:\d:\d).*$",line)
+   # A path
+   if not match:
+      continue
+   paths += 1
+
+   match = re.match(r"^.*\d:\d:\d:\d.*(faulty|failed).*$",line)
+   if match:
+	broken_paths += 1
+
+if (broken_paths > 0):
+	print "ERROR: L:%i,P:%i,B%i" %(luns,paths,broken_paths)
+        log(output)
+else:
+	print "OK: L:%i,P:%i,B%i" %(luns,paths,broken_paths)
+        log("OK: LUNS:%i, PATHS:%i, BROKEN PATHS %i" %(luns,paths,broken_paths))
+
+# vim: ai et ts=2 shiftwidth=2 expandtab tabstop=3 tw=120

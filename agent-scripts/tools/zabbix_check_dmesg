@@ -1,0 +1,48 @@
+#!/usr/bin/python
+
+import os
+import re
+import sys
+
+try:
+   import cPickle as pickle
+except ImportError:
+   import pickle
+
+dmesg = os.popen('dmesg')
+statusfile="/tmp/zabbix_check_dmesg.pickle"
+
+kernel_problem=re.compile("^.*(general protection fault|kernel BUG at|double fault:|Badness at|Unable to handle kernel|sysctl table check failed|------------[ cut here ]------------|Modules linked in:|Oops:).*$")
+#kernel_problem=re.compile("^.*No (.+) found.*")
+
+error=False
+problems = [] 
+
+try:
+    if (os.path.exists(statusfile)):
+        problems = pickle.load( open(statusfile))
+        error=True
+
+    while True:
+       lineStr = dmesg.readline()
+       if not(lineStr):
+          break
+       lineStr = lineStr.rstrip()
+       match = kernel_problem.match(lineStr)
+       if match:
+           sys.stderr.write("ERROR: "+lineStr+"\n")
+           error=True
+           if (problems.count(match.group(1)) <= 0):
+                problems.append(match.group(1))
+    dmesg.close()
+
+    if ( error == False ):
+        print "OK: ALL OK"
+    else:
+        pickle.dump(problems , open( statusfile, "wb" ) )
+        print "ERROR: "+ ( ", ".join(problems) )
+except:
+    print "ERROR: zabbix extension not functional"
+    raise
+
+
