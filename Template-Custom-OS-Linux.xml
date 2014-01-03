@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
     <version>2.0</version>
-    <date>2014-01-02T16:51:26Z</date>
+    <date>2014-01-03T10:40:22Z</date>
     <groups>
         <group>
             <name>Templates</name>
@@ -1144,7 +1144,7 @@
             </items>
             <discovery_rules>
                 <discovery_rule>
-                    <name>Filesystems Discovery</name>
+                    <name>Filesystems discovery</name>
                     <type>0</type>
                     <snmp_community/>
                     <snmp_oid/>
@@ -1168,9 +1168,9 @@
                     <publickey/>
                     <privatekey/>
                     <port/>
-                    <filter>{#FSTYPE}:^(nfs|xfs|ext2|ext3|ext4|btrfs)</filter>
+                    <filter>{#FSTYPE}:^(xfs|ext2|ext3|ext4|btrfs)</filter>
                     <lifetime>30</lifetime>
-                    <description>Discovery of local filesystems.</description>
+                    <description>Discovery of local filesystems. Overload on host if you need additional filesystem types</description>
                     <item_prototypes>
                         <item_prototype>
                             <name>Disk inode usage {#FSNAME}</name>
