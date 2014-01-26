@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
     <version>2.0</version>
-    <date>2014-01-26T09:44:18Z</date>
+    <date>2014-01-26T10:03:06Z</date>
     <groups>
         <group>
             <name>Templates</name>
@@ -154,7 +154,7 @@
                     <snmp_community/>
                     <multiplier>0</multiplier>
                     <snmp_oid/>
-                    <key>web.page.perf[127.0.0.1,/e/lbstatus.html,{$HTTP_PORT}]</key>
+                    <key>web.page.perf[127.0.0.1,{$LOADBALANCER_CHECK},{$HTTP_PORT}]</key>
                     <delay>120</delay>
                     <history>14</history>
                     <trends>30</trends>
@@ -241,6 +241,10 @@
                     <macro>{$HTTP_PORT}</macro>
                     <value>80</value>
                 </macro>
+                <macro>
+                    <macro>{$LOADBALANCER_CHECK}</macro>
+                    <value>/e/lbstatus.html</value>
+                </macro>
             </macros>
             <templates/>
             <screens>
@@ -286,7 +290,7 @@
                             <dynamic>0</dynamic>
                             <sort_triggers>0</sort_triggers>
                             <resource>
-                                <key>web.page.perf[127.0.0.1,/e/lbstatus.html,{$HTTP_PORT}]</key>
+                                <key>web.page.perf[127.0.0.1,{$LOADBALANCER_CHECK},{$HTTP_PORT}]</key>
                                 <host>Custom - Service - Apache</host>
                             </resource>
                             <application/>
@@ -350,7 +354,7 @@
             <dependencies/>
         </trigger>
         <trigger>
-            <expression>({Custom - Service - Apache:web.page.perf[127.0.0.1,/e/lbstatus.html,{$HTTP_PORT}].avg(300)}=0|{Custom - Service - Apache:web.page.perf[127.0.0.1,/e/lbstatus.html,{$HTTP_PORT}].avg(300)}&gt;30)</expression>
+            <expression>({Custom - Service - Apache:web.page.perf[127.0.0.1,{$LOADBALANCER_CHECK},{$HTTP_PORT}].avg(300)}=0|{Custom - Service - Apache:web.page.perf[127.0.0.1,{$LOADBALANCER_CHECK},{$HTTP_PORT}].avg(300)}&gt;30)</expression>
             <name>Get LB_Check HTTP Local on port {$HTTP_PORT} &gt; 30sec</name>
             <url/>
             <status>0</status>
