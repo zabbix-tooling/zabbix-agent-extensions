@@ -4,8 +4,8 @@ WHAT="$1"
 PORT="${2:-80}"
 HOSTNAME="${3:-127.0.0.1}"
 if [ -z "$WHAT" ];then
-	echo "$0 reader|writer|total|all"
-        exit 1
+	echo "$0 reader|writer|keepalive|total|all"
+   exit 1
 fi
 
 wget -q --timeout=5 -O- "http://$HOSTNAME:$PORT/server-status?auto"|\
@@ -19,34 +19,41 @@ awk -v get=$WHAT '
     sub(/^Scoreboard: /, "", scoreboard);
     total = length(scoreboard);
     for(i=0;i<=length(scoreboard);i++){
-	what = substr(scoreboard, i , 1)
+	     what = substr(scoreboard, i , 1)
         if(what == "W"){
-	   writers++;	
+	       writers++;	
         }
         else if (what == "R"){
-	   reader++;
+	      reader++;
+        }
+        else if (what == "K"){
+	      keepalive++;
         }
     }	
   }
   END{
 	if (total == 0){
-	  print "FAIL: Unable to get scoreboard" > "/dev/stderr";
-	  print "FAIL" ;
-	  exit
+           print "FAIL: Unable to get scoreboard" > "/dev/stderr";
+           print "FAIL" ;
+           exit;
         }
 	if(get == "reader"){
-	  print readers
+	         print readers;
         }
-	if(get == "writer"){
-	  print writers
+	else if(get == "writer"){
+	         print writers;
         }
-	if(get == "total"){
-	  print total
+	else if(get == "keepalive"){
+	         print keepalive;
         }
-	if(get == "all"){
-	  print "Reader " readers ", Writer " writers ", Total " total
-        }else{
-	  print "Reader " readers ", Writer " writers ", Total " total > "/dev/stderr";
+   else if(get == "total"){
+	         print total;
+        }
+   else if(get == "all"){
+	         print "Reader " readers ", Writer " writers "Keepalive" keepalive ", Total " total;
+        }
+   else{
+	         print "Reader " readers ", Writer " writers "Keepalive" keepalive ", Total " total > "/dev/stderr";
         }
   }
 '
