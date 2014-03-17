@@ -1,0 +1,43 @@
+#!/bin/bash
+
+export PATH="/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/root/bin:/usr/bin:/bin:$PATH"
+
+if [ -z "$1" ];then
+   echo "$0 total|biggest|smallest|average"
+   exit 1
+fi
+
+ps auxwwww|awk -v what="$1" '
+   BEGIN{
+     a=0;
+     c=0;
+     max=0;
+     min=0;
+   }
+   /\/httpd2-prefork|\/apache2|\/httpd/{
+     a = a + $6; 
+     c++
+     if ($6 > max){
+   max = $6;
+     }
+     if ((min == 0) || (min > $6)){
+   min = $6;
+     }
+    }
+   END{
+     if (what == "total"){
+      printf("%i",a*1024);
+     }else if (what == "biggest"){
+      printf("%i",max*1024);
+     }else if (what == "smallest"){
+      printf("%i",min*1024);
+     }else if (what == "average"){
+      if (c == 0){
+         printf("0");
+      }else{
+         printf("%i",(a/c)*1024);
+      }
+
+     }
+   }'
+
