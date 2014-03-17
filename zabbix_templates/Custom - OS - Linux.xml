@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
     <version>2.0</version>
-    <date>2014-02-19T13:37:08Z</date>
+    <date>2014-03-17T07:37:15Z</date>
     <groups>
         <group>
             <name>Templates</name>
@@ -2471,7 +2471,7 @@
         <graph>
             <name>CPU Context Switches per Second</name>
             <width>900</width>
-            <height>200</height>
+            <height>300</height>
             <yaxismin>0.0000</yaxismin>
             <yaxismax>100.0000</yaxismax>
             <show_work_period>0</show_work_period>
@@ -2481,7 +2481,7 @@
             <show_3d>0</show_3d>
             <percent_left>0.0000</percent_left>
             <percent_right>0.0000</percent_right>
-            <ymin_type_1>0</ymin_type_1>
+            <ymin_type_1>1</ymin_type_1>
             <ymax_type_1>0</ymax_type_1>
             <ymin_item_1>0</ymin_item_1>
             <ymax_item_1>0</ymax_item_1>
@@ -2491,7 +2491,7 @@
                     <drawtype>0</drawtype>
                     <color>BB0000</color>
                     <yaxisside>0</yaxisside>
-                    <calc_fnc>2</calc_fnc>
+                    <calc_fnc>4</calc_fnc>
                     <type>0</type>
                     <item>
                         <host>Custom - OS - Linux</host>
@@ -2503,7 +2503,7 @@
         <graph>
             <name>CPU Times</name>
             <width>900</width>
-            <height>200</height>
+            <height>300</height>
             <yaxismin>0.0000</yaxismin>
             <yaxismax>105.0000</yaxismax>
             <show_work_period>0</show_work_period>
@@ -2607,7 +2607,7 @@
         <graph>
             <name>Memory Usage</name>
             <width>900</width>
-            <height>200</height>
+            <height>300</height>
             <yaxismin>0.0000</yaxismin>
             <yaxismax>0.0000</yaxismax>
             <show_work_period>0</show_work_period>
@@ -2630,7 +2630,7 @@
                     <drawtype>1</drawtype>
                     <color>BB0000</color>
                     <yaxisside>0</yaxisside>
-                    <calc_fnc>4</calc_fnc>
+                    <calc_fnc>2</calc_fnc>
                     <type>0</type>
                     <item>
                         <host>Custom - OS - Linux</host>
@@ -2642,7 +2642,7 @@
                     <drawtype>1</drawtype>
                     <color>0000EE</color>
                     <yaxisside>0</yaxisside>
-                    <calc_fnc>4</calc_fnc>
+                    <calc_fnc>2</calc_fnc>
                     <type>0</type>
                     <item>
                         <host>Custom - OS - Linux</host>
@@ -2650,11 +2650,11 @@
                     </item>
                 </graph_item>
                 <graph_item>
-                    <sortorder>3</sortorder>
+                    <sortorder>2</sortorder>
                     <drawtype>1</drawtype>
                     <color>CC00CC</color>
                     <yaxisside>0</yaxisside>
-                    <calc_fnc>4</calc_fnc>
+                    <calc_fnc>2</calc_fnc>
                     <type>0</type>
                     <item>
                         <host>Custom - OS - Linux</host>
@@ -2662,11 +2662,11 @@
                     </item>
                 </graph_item>
                 <graph_item>
-                    <sortorder>4</sortorder>
+                    <sortorder>3</sortorder>
                     <drawtype>1</drawtype>
                     <color>00BB00</color>
                     <yaxisside>0</yaxisside>
-                    <calc_fnc>4</calc_fnc>
+                    <calc_fnc>2</calc_fnc>
                     <type>0</type>
                     <item>
                         <host>Custom - OS - Linux</host>
@@ -2678,7 +2678,7 @@
         <graph>
             <name>MTA Mailqueue</name>
             <width>900</width>
-            <height>200</height>
+            <height>300</height>
             <yaxismin>0.0000</yaxismin>
             <yaxismax>100.0000</yaxismax>
             <show_work_period>0</show_work_period>
@@ -2694,7 +2694,7 @@
             <ymax_item_1>0</ymax_item_1>
             <graph_items>
                 <graph_item>
-                    <sortorder>1</sortorder>
+                    <sortorder>0</sortorder>
                     <drawtype>0</drawtype>
                     <color>DD0000</color>
                     <yaxisside>0</yaxisside>
@@ -2710,7 +2710,7 @@
         <graph>
             <name>NFS RPC Operations</name>
             <width>900</width>
-            <height>200</height>
+            <height>300</height>
             <yaxismin>0.0000</yaxismin>
             <yaxismax>100.0000</yaxismax>
             <show_work_period>1</show_work_period>
@@ -2754,7 +2754,7 @@
         <graph>
             <name>Swap Usage</name>
             <width>900</width>
-            <height>200</height>
+            <height>300</height>
             <yaxismin>0.0000</yaxismin>
             <yaxismax>100.0000</yaxismax>
             <show_work_period>1</show_work_period>
@@ -2774,7 +2774,7 @@
                     <drawtype>0</drawtype>
                     <color>C80000</color>
                     <yaxisside>0</yaxisside>
-                    <calc_fnc>2</calc_fnc>
+                    <calc_fnc>4</calc_fnc>
                     <type>0</type>
                     <item>
                         <host>Custom - OS - Linux</host>
@@ -2786,7 +2786,7 @@
                     <drawtype>0</drawtype>
                     <color>00C800</color>
                     <yaxisside>0</yaxisside>
-                    <calc_fnc>2</calc_fnc>
+                    <calc_fnc>4</calc_fnc>
                     <type>0</type>
                     <item>
                         <host>Custom - OS - Linux</host>
@@ -2798,7 +2798,7 @@
                     <drawtype>4</drawtype>
                     <color>0000C8</color>
                     <yaxisside>1</yaxisside>
-                    <calc_fnc>2</calc_fnc>
+                    <calc_fnc>4</calc_fnc>
                     <type>0</type>
                     <item>
                         <host>Custom - OS - Linux</host>
@@ -2810,7 +2810,7 @@
         <graph>
             <name>System Load</name>
             <width>900</width>
-            <height>200</height>
+            <height>300</height>
             <yaxismin>0.0000</yaxismin>
             <yaxismax>100.0000</yaxismax>
             <show_work_period>0</show_work_period>
@@ -2830,7 +2830,7 @@
                     <drawtype>0</drawtype>
                     <color>009900</color>
                     <yaxisside>0</yaxisside>
-                    <calc_fnc>7</calc_fnc>
+                    <calc_fnc>4</calc_fnc>
                     <type>0</type>
                     <item>
                         <host>Custom - OS - Linux</host>
