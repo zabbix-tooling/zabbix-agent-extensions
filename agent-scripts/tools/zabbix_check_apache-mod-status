@@ -4,10 +4,25 @@ WHAT="$1"
 PORT="${2:-80}"
 HOSTNAME="${3:-127.0.0.1}"
 if [ -z "$WHAT" ];then
-	echo "$0 reader|writer|keepalive|total|all"
+   echo "$0 reader|writer|keepalive|total|all|accesses|kbytes"
    exit 1
 fi
 
+
+if [ "$WHAT" == "accesses" ] || [ "$WHAT" == "kbytes" ];then
+  wget -q --timeout=5 -O- "http://$HOSTNAME:$PORT/server-status?auto"|awk -v get=$WHAT '
+     /Total Accesses:/{
+         if (get == "accesses"){
+            printf("%s",$3);
+	 }
+     }
+     /Total kBytes:/{
+         if (get == "kbytes"){
+            printf("%s",$3);
+	 }
+     }
+'
+else
 wget -q --timeout=5 -O- "http://$HOSTNAME:$PORT/server-status?auto"|\
 awk -v get=$WHAT '
   BEGIN{
@@ -57,5 +72,4 @@ awk -v get=$WHAT '
         }
   }
 '
-
-
+fi
