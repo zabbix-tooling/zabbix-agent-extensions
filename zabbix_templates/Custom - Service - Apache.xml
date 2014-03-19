@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
     <version>2.0</version>
-    <date>2014-03-18T13:30:34Z</date>
+    <date>2014-03-19T17:04:55Z</date>
     <groups>
         <group>
             <name>Templates</name>
@@ -719,7 +719,7 @@
         <graph>
             <name>Apache Maxclient Usage</name>
             <width>900</width>
-            <height>200</height>
+            <height>300</height>
             <yaxismin>0.0000</yaxismin>
             <yaxismax>100.0000</yaxismax>
             <show_work_period>0</show_work_period>
