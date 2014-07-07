@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
     <version>2.0</version>
-    <date>2014-05-23T16:22:20Z</date>
+    <date>2014-06-16T16:15:05Z</date>
     <groups>
         <group>
             <name>Templates</name>
@@ -2290,7 +2290,7 @@
             <macros>
                 <macro>
                     <macro>{$HITRATE_PERCENTAGE}</macro>
-                    <value>40</value>
+                    <value>85</value>
                 </macro>
                 <macro>
                     <macro>{$HTTP_PORT_VARNISH}</macro>
