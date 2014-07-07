@@ -1,6 +1,6 @@
 
 Name:           zabbix-agent-extensions
-Version:        1.0.13
+Version:        1.0.14
 Release:        1.0
 License:        n/a
 Group:          Monitoring
@@ -33,11 +33,9 @@ chmod 0440 %{buildroot}/etc/sudoers.d/zabbix
 
 %files
 %defattr(-,root,root)
-%dir %{_bindir}
 %{_bindir}/*
 %dir %{_sysconfdir}/zabbix/zabbix-agent-extensions.d/
 %{_sysconfdir}/zabbix/zabbix-agent-extensions.d/*
-%dir %{_sysconfdir}/sudoers.d/
 %{_sysconfdir}/sudoers.d/zabbix
 
 #%preun
