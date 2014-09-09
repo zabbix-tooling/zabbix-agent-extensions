@@ -29,7 +29,8 @@ assertSuccess(){
 
 echo "*** CLEANUP"
 rpm -e zabbix-agent-extensions
-zypper  --non-interactive install  zabbix-agent
+which zypper &>/dev/null && zypper  --non-interactive install zabbix-agent
+which yum &>/dev/null && yum install zabbix-agent
 rm -rf /etc/zabbix_*
 
 echo "*** TESTS"

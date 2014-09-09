@@ -1,0 +1,2 @@
+agent-config/*.conf etc/zabbix/zabbix-agentd.d/
+tools/* usr/bin/

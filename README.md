@@ -32,12 +32,13 @@ cd zabbix-agent-extensions
 ./ci_test.sh
 ```
 
-Install the rpm archive on every zabbix-agent:
+Install the rpm ior debian archive on as an addition to your zabbix-agents:
 ```
-rpm -Uvh zabbix-agent-extensions-<version>.noarch.rpm
+rpm -Uvh noarch/zabbix-agent-extensions-<version>.noarch.rpm
+dpkg -i zabbix-agent-extensions_<version>_all.deb
 ```
 
-Add the follwing line to your zabbix-agent configuration:
+Add the following line to your zabbix-agent configuration:
 ```
 Include=/etc/zabbix/zabbix-agent-extensions.d/
 ```
