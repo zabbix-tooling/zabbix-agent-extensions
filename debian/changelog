@@ -1,0 +1,7 @@
+zabbix-agent-extensions (1.0.14-0ubuntu1) trusty; urgency=low
+
+  * Initial release.
+
+ -- Marc Schoechlin <ms@256bit.org>  Mon, 08 Sep 2014 18:19:29 +0200
+
+

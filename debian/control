@@ -1,0 +1,13 @@
+Source: zabbix-agent-extensions
+Section: universe/net
+Priority: optional
+Maintainer: Marc Schoechlin <ms@256bit.org>
+Build-Depends: debhelper (>= 7.0.50~)
+Standards-Version: 3.9.1
+Homepage: https://github.com/breuninger-ecom/zabbix-agent-extensions
+
+Package: zabbix-agent-extensions
+Architecture: all
+Depends: ${misc:Depends} zabbix-agent, python, perl, bash, zabbix-agent
+Description: Zabbix Monitoring Infrastructure Scripts
+  Scripts are used by a include in zabbix-agent
