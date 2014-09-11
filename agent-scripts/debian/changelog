@@ -1,4 +1,4 @@
-zabbix-agent-extensions (1.0.14-0ubuntu1) trusty; urgency=low
+zabbix-agent-extensions (1.0.16-0ubuntu1) trusty; urgency=low
 
   * Initial release.
 

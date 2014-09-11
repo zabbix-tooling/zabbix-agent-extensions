@@ -1,13 +1,13 @@
 #!/bin/bash
 
-grep -q "Include=/etc/zabbix/zabbix-agentd.d/" /etc/zabbix/zabbix_agentd.conf  || \
-	echo "Include=/etc/zabbix/zabbix-agentd.d/" >> /etc/zabbix/zabbix_agentd.conf
+#grep -q "Include=/etc/zabbix/zabbix-agentd.d/" /etc/zabbix/zabbix_agentd.conf  || \
+#	echo "Include=/etc/zabbix/zabbix-agentd.d/" >> /etc/zabbix/zabbix_agentd.conf
+#
+#echo "# NO NOT EDIT, INSTALLED BY POSTINSTALL" > /etc/sudoers.d/zabbix
+#echo "Defaults:zabbix !syslog" >> /etc/sudoers.d/zabbix
+#echo "zabbix     ALL=NOPASSWD: /usr/bin/zabbix_check_multipath" >> /etc/sudoers.d/zabbix
+#chmod 0440 /etc/sudoers.d/zabbix
 
-echo "# NO NOT EDIT, INSTALLED BY POSTINSTALL" > /etc/sudoers.d/zabbix
-echo "Defaults:zabbix !syslog" >> /etc/sudoers.d/zabbix
-echo "zabbix     ALL=NOPASSWD: /usr/bin/zabbix_check_multipath" >> /etc/sudoers.d/zabbix
-chmod 0440 /etc/sudoers.d/zabbix
+#usermod -G adm -a zabbix
 
-usermod -G adm -a zabbix
-
-restart zabbix-agent
+#restart zabbix-agent

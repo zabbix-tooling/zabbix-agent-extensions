@@ -65,7 +65,7 @@ awk -v get=$WHAT '
 	         print total;
         }
    else if(get == "all"){
-	         print "Reader " readers ", Writer " writers "Keepalive" keepalive ", Total " total;
+	         print "Reader " readers ", Writer " writers ",Keepalive" keepalive ", Total " total;
         }
    else{
 	         print "Reader " readers ", Writer " writers "Keepalive" keepalive ", Total " total > "/dev/stderr";

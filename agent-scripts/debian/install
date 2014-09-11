@@ -1,2 +1,2 @@
-agent-config/*.conf etc/zabbix/zabbix-agentd.d/
+agent-config/*.conf etc/zabbix/zabbix-agent-extensions.d/
 tools/* usr/bin/

@@ -1,11 +1,14 @@
 #!/bin/bash
 
+VERSION="1.0.14"
+
 set -e
 OPWD="$(pwd)"
 rm -rf BUILDROOT i386 x86_64 noarch *.src.rpm
 rm -f ${NAME}*.deb ${NAME}*.changes ${NAME}*.changes
 
 echo creating rpm archive
+sed "~s,\(Version:[ ]*\)\([^ ]*\),\1${VERSION}," zabbix-agent-extensions.spec
 rpmbuild --define "_sourcedir $PWD" --define "_rpmdir $PWD" --define "_builddir $PWD" \
         --define "_srcrpmdir $PWD" --define "_speccdir $PWD" --target noarch -ba zabbix-agent-extensions.spec
 RET="$?"
