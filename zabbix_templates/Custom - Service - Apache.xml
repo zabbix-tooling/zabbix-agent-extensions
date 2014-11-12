@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
     <version>2.0</version>
-    <date>2014-03-19T17:04:55Z</date>
+    <date>2014-11-12T17:20:04Z</date>
     <groups>
         <group>
             <name>Templates</name>
@@ -28,7 +28,7 @@
                     <snmp_community/>
                     <multiplier>0</multiplier>
                     <snmp_oid/>
-                    <key>apache.keepalive</key>
+                    <key>apache.keepalive[{$HTTP_PORT}]</key>
                     <delay>120</delay>
                     <history>14</history>
                     <trends>30</trends>
@@ -63,6 +63,7 @@
                         </application>
                     </applications>
                     <valuemap/>
+                    <logtimefmt/>
                 </item>
                 <item>
                     <name>Apache Clients Reader</name>
@@ -70,7 +71,7 @@
                     <snmp_community/>
                     <multiplier>0</multiplier>
                     <snmp_oid/>
-                    <key>apache.reader</key>
+                    <key>apache.reader[{$HTTP_PORT}]</key>
                     <delay>120</delay>
                     <history>14</history>
                     <trends>30</trends>
@@ -105,6 +106,7 @@
                         </application>
                     </applications>
                     <valuemap/>
+                    <logtimefmt/>
                 </item>
                 <item>
                     <name>Apache Clients ServerLimit</name>
@@ -112,10 +114,10 @@
                     <snmp_community/>
                     <multiplier>0</multiplier>
                     <snmp_oid/>
-                    <key>apache.total</key>
-                    <delay>120</delay>
+                    <key>apache.total[{$HTTP_PORT}]</key>
+                    <delay>900</delay>
                     <history>14</history>
-                    <trends>30</trends>
+                    <trends>0</trends>
                     <status>0</status>
                     <value_type>3</value_type>
                     <allowed_hosts/>
@@ -147,6 +149,7 @@
                         </application>
                     </applications>
                     <valuemap/>
+                    <logtimefmt/>
                 </item>
                 <item>
                     <name>Apache Clients Writer</name>
@@ -154,7 +157,7 @@
                     <snmp_community/>
                     <multiplier>0</multiplier>
                     <snmp_oid/>
-                    <key>apache.writer</key>
+                    <key>apache.writer[{$HTTP_PORT}]</key>
                     <delay>120</delay>
                     <history>14</history>
                     <trends>30</trends>
@@ -189,6 +192,7 @@
                         </application>
                     </applications>
                     <valuemap/>
+                    <logtimefmt/>
                 </item>
                 <item>
                     <name>Apache Memory Average Process</name>
@@ -231,6 +235,7 @@
                         </application>
                     </applications>
                     <valuemap/>
+                    <logtimefmt/>
                 </item>
                 <item>
                     <name>Apache Memory Biggest Process</name>
@@ -273,6 +278,7 @@
                         </application>
                     </applications>
                     <valuemap/>
+                    <logtimefmt/>
                 </item>
                 <item>
                     <name>Apache Memory Smallest Process</name>
@@ -315,6 +321,7 @@
                         </application>
                     </applications>
                     <valuemap/>
+                    <logtimefmt/>
                 </item>
                 <item>
                     <name>Apache Memory Total</name>
@@ -357,6 +364,7 @@
                         </application>
                     </applications>
                     <valuemap/>
+                    <logtimefmt/>
                 </item>
                 <item>
                     <name>Apache Total Accesses</name>
@@ -364,7 +372,7 @@
                     <snmp_community/>
                     <multiplier>0</multiplier>
                     <snmp_oid/>
-                    <key>apache.accesses</key>
+                    <key>apache.accesses[{$HTTP_PORT}]</key>
                     <delay>120</delay>
                     <history>14</history>
                     <trends>365</trends>
@@ -399,6 +407,7 @@
                         </application>
                     </applications>
                     <valuemap/>
+                    <logtimefmt/>
                 </item>
                 <item>
                     <name>Apache Total Bytes</name>
@@ -406,7 +415,7 @@
                     <snmp_community/>
                     <multiplier>1</multiplier>
                     <snmp_oid/>
-                    <key>apache.kbytes</key>
+                    <key>apache.kbytes[{$HTTP_PORT}]</key>
                     <delay>120</delay>
                     <history>14</history>
                     <trends>365</trends>
@@ -441,6 +450,7 @@
                         </application>
                     </applications>
                     <valuemap/>
+                    <logtimefmt/>
                 </item>
                 <item>
                     <name>Get /e/lbstatus.html response time</name>
@@ -483,6 +493,7 @@
                         </application>
                     </applications>
                     <valuemap/>
+                    <logtimefmt/>
                 </item>
                 <item>
                     <name>TCP Connect Local</name>
@@ -527,6 +538,7 @@
                     <valuemap>
                         <name>Service state</name>
                     </valuemap>
+                    <logtimefmt/>
                 </item>
             </items>
             <discovery_rules/>
@@ -605,7 +617,7 @@
                             <dynamic>0</dynamic>
                             <sort_triggers>0</sort_triggers>
                             <resource>
-                                <key>apache.total</key>
+                                <key>apache.total[{$HTTP_PORT}]</key>
                                 <host>Custom - Service - Apache</host>
                             </resource>
                             <application/>
@@ -680,7 +692,7 @@
     </templates>
     <triggers>
         <trigger>
-            <expression>({Custom - Service - Apache:apache.total.last(0)} * 0.80) &lt; ({Custom - Service - Apache:apache.reader.last(0)} + {Custom - Service - Apache:apache.writer.last(0)} + {Custom - Service - Apache:apache.keepalive.last(0)})</expression>
+            <expression>({Custom - Service - Apache:apache.total[{$HTTP_PORT}].last(0)} * 0.80) &lt; ({Custom - Service - Apache:apache.reader[{$HTTP_PORT}].last(0)} + {Custom - Service - Apache:apache.writer[{$HTTP_PORT}].last(0)} + {Custom - Service - Apache:apache.keepalive[{$HTTP_PORT}].last(0)})</expression>
             <name>Apache Maxclient Usage &gt; 80%</name>
             <url/>
             <status>0</status>
@@ -730,12 +742,9 @@
             <percent_left>0.0000</percent_left>
             <percent_right>0.0000</percent_right>
             <ymin_type_1>1</ymin_type_1>
-            <ymax_type_1>2</ymax_type_1>
+            <ymax_type_1>0</ymax_type_1>
             <ymin_item_1>0</ymin_item_1>
-            <ymax_item_1>
-                <host>Custom - Service - Apache</host>
-                <key>apache.total</key>
-            </ymax_item_1>
+            <ymax_item_1>0</ymax_item_1>
             <graph_items>
                 <graph_item>
                     <sortorder>0</sortorder>
@@ -746,7 +755,7 @@
                     <type>0</type>
                     <item>
                         <host>Custom - Service - Apache</host>
-                        <key>apache.reader</key>
+                        <key>apache.reader[{$HTTP_PORT}]</key>
                     </item>
                 </graph_item>
                 <graph_item>
@@ -758,7 +767,7 @@
                     <type>0</type>
                     <item>
                         <host>Custom - Service - Apache</host>
-                        <key>apache.writer</key>
+                        <key>apache.writer[{$HTTP_PORT}]</key>
                     </item>
                 </graph_item>
                 <graph_item>
@@ -770,7 +779,7 @@
                     <type>0</type>
                     <item>
                         <host>Custom - Service - Apache</host>
-                        <key>apache.keepalive</key>
+                        <key>apache.keepalive[{$HTTP_PORT}]</key>
                     </item>
                 </graph_item>
             </graph_items>
@@ -856,7 +865,7 @@
             <show_3d>0</show_3d>
             <percent_left>0.0000</percent_left>
             <percent_right>0.0000</percent_right>
-            <ymin_type_1>0</ymin_type_1>
+            <ymin_type_1>1</ymin_type_1>
             <ymax_type_1>0</ymax_type_1>
             <ymin_item_1>0</ymin_item_1>
             <ymax_item_1>0</ymax_item_1>
@@ -870,7 +879,7 @@
                     <type>0</type>
                     <item>
                         <host>Custom - Service - Apache</host>
-                        <key>apache.accesses</key>
+                        <key>apache.accesses[{$HTTP_PORT}]</key>
                     </item>
                 </graph_item>
                 <graph_item>
@@ -882,7 +891,7 @@
                     <type>0</type>
                     <item>
                         <host>Custom - Service - Apache</host>
-                        <key>apache.kbytes</key>
+                        <key>apache.kbytes[{$HTTP_PORT}]</key>
                     </item>
                 </graph_item>
             </graph_items>

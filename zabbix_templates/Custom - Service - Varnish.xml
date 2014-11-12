@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
     <version>2.0</version>
-    <date>2014-06-16T16:15:05Z</date>
+    <date>2014-11-12T17:20:30Z</date>
     <groups>
         <group>
             <name>Templates</name>
@@ -87,6 +87,7 @@
                         </application>
                     </applications>
                     <valuemap/>
+                    <logtimefmt/>
                 </item>
                 <item>
                     <name>Backend conn. not attempted</name>
@@ -132,6 +133,7 @@
                         </application>
                     </applications>
                     <valuemap/>
+                    <logtimefmt/>
                 </item>
                 <item>
                     <name>Backend conn. recycles</name>
@@ -177,6 +179,7 @@
                         </application>
                     </applications>
                     <valuemap/>
+                    <logtimefmt/>
                 </item>
                 <item>
                     <name>Backend conn. reuses</name>
@@ -222,6 +225,7 @@
                         </application>
                     </applications>
                     <valuemap/>
+                    <logtimefmt/>
                 </item>
                 <item>
                     <name>Backend conn. success</name>
@@ -267,6 +271,7 @@
                         </application>
                     </applications>
                     <valuemap/>
+                    <logtimefmt/>
                 </item>
                 <item>
                     <name>Backend conn. too many</name>
@@ -312,6 +317,7 @@
                         </application>
                     </applications>
                     <valuemap/>
+                    <logtimefmt/>
                 </item>
                 <item>
                     <name>Backend conn. unused</name>
@@ -357,6 +363,7 @@
                         </application>
                     </applications>
                     <valuemap/>
+                    <logtimefmt/>
                 </item>
                 <item>
                     <name>Backend conn. was closed</name>
@@ -402,6 +409,7 @@
                         </application>
                     </applications>
                     <valuemap/>
+                    <logtimefmt/>
                 </item>
                 <item>
                     <name>Backend requests made</name>
@@ -447,6 +455,7 @@
                         </application>
                     </applications>
                     <valuemap/>
+                    <logtimefmt/>
                 </item>
                 <item>
                     <name>Cache cache_miss</name>
@@ -492,6 +501,7 @@
                         </application>
                     </applications>
                     <valuemap/>
+                    <logtimefmt/>
                 </item>
                 <item>
                     <name>Cache hitpass</name>
@@ -537,6 +547,7 @@
                         </application>
                     </applications>
                     <valuemap/>
+                    <logtimefmt/>
                 </item>
                 <item>
                     <name>Cache hits</name>
@@ -582,6 +593,7 @@
                         </application>
                     </applications>
                     <valuemap/>
+                    <logtimefmt/>
                 </item>
                 <item>
                     <name>Client connections accepted</name>
@@ -627,6 +639,7 @@
                         </application>
                     </applications>
                     <valuemap/>
+                    <logtimefmt/>
                 </item>
                 <item>
                     <name>Client requests received</name>
@@ -672,6 +685,7 @@
                         </application>
                     </applications>
                     <valuemap/>
+                    <logtimefmt/>
                 </item>
                 <item>
                     <name>Connection dropped, no sess/wrk</name>
@@ -717,6 +731,7 @@
                         </application>
                     </applications>
                     <valuemap/>
+                    <logtimefmt/>
                 </item>
                 <item>
                     <name>Connection dropped late</name>
@@ -762,6 +777,7 @@
                         </application>
                     </applications>
                     <valuemap/>
+                    <logtimefmt/>
                 </item>
                 <item>
                     <name>ESI parse errors (unlock)</name>
@@ -807,6 +823,7 @@
                         </application>
                     </applications>
                     <valuemap/>
+                    <logtimefmt/>
                 </item>
                 <item>
                     <name>ESI parse warnings (unlock)</name>
@@ -852,6 +869,7 @@
                         </application>
                     </applications>
                     <valuemap/>
+                    <logtimefmt/>
                 </item>
                 <item>
                     <name>Fetch chunked</name>
@@ -897,6 +915,7 @@
                         </application>
                     </applications>
                     <valuemap/>
+                    <logtimefmt/>
                 </item>
                 <item>
                     <name>Fetch EOF</name>
@@ -942,6 +961,7 @@
                         </application>
                     </applications>
                     <valuemap/>
+                    <logtimefmt/>
                 </item>
                 <item>
                     <name>Fetch failed</name>
@@ -987,6 +1007,7 @@
                         </application>
                     </applications>
                     <valuemap/>
+                    <logtimefmt/>
                 </item>
                 <item>
                     <name>Fetch had bad headers</name>
@@ -1032,6 +1053,7 @@
                         </application>
                     </applications>
                     <valuemap/>
+                    <logtimefmt/>
                 </item>
                 <item>
                     <name>Fetch head</name>
@@ -1077,6 +1099,7 @@
                         </application>
                     </applications>
                     <valuemap/>
+                    <logtimefmt/>
                 </item>
                 <item>
                     <name>Fetch pre HTTP/1.1 closed</name>
@@ -1122,6 +1145,7 @@
                         </application>
                     </applications>
                     <valuemap/>
+                    <logtimefmt/>
                 </item>
                 <item>
                     <name>Fetch wanted close</name>
@@ -1167,6 +1191,7 @@
                         </application>
                     </applications>
                     <valuemap/>
+                    <logtimefmt/>
                 </item>
                 <item>
                     <name>Fetch with Length</name>
@@ -1212,6 +1237,7 @@
                         </application>
                     </applications>
                     <valuemap/>
+                    <logtimefmt/>
                 </item>
                 <item>
                     <name>Fetch zero len</name>
@@ -1257,6 +1283,7 @@
                         </application>
                     </applications>
                     <valuemap/>
+                    <logtimefmt/>
                 </item>
                 <item>
                     <name>N dropped work requests</name>
@@ -1302,6 +1329,7 @@
                         </application>
                     </applications>
                     <valuemap/>
+                    <logtimefmt/>
                 </item>
                 <item>
                     <name>N expired objects</name>
@@ -1340,6 +1368,7 @@
                     <inventory_link>0</inventory_link>
                     <applications/>
                     <valuemap/>
+                    <logtimefmt/>
                 </item>
                 <item>
                     <name>N LRU moved objects</name>
@@ -1378,6 +1407,7 @@
                     <inventory_link>0</inventory_link>
                     <applications/>
                     <valuemap/>
+                    <logtimefmt/>
                 </item>
                 <item>
                     <name>N LRU nuked objects</name>
@@ -1416,6 +1446,7 @@
                     <inventory_link>0</inventory_link>
                     <applications/>
                     <valuemap/>
+                    <logtimefmt/>
                 </item>
                 <item>
                     <name>N overflowed work requests</name>
@@ -1461,6 +1492,7 @@
                         </application>
                     </applications>
                     <valuemap/>
+                    <logtimefmt/>
                 </item>
                 <item>
                     <name>N queued work requests</name>
@@ -1506,6 +1538,7 @@
                         </application>
                     </applications>
                     <valuemap/>
+                    <logtimefmt/>
                 </item>
                 <item>
                     <name>N struct object</name>
@@ -1544,6 +1577,7 @@
                     <inventory_link>0</inventory_link>
                     <applications/>
                     <valuemap/>
+                    <logtimefmt/>
                 </item>
                 <item>
                     <name>N struct objectcore</name>
@@ -1582,6 +1616,7 @@
                     <inventory_link>0</inventory_link>
                     <applications/>
                     <valuemap/>
+                    <logtimefmt/>
                 </item>
                 <item>
                     <name>N struct objecthead</name>
@@ -1620,6 +1655,7 @@
                     <inventory_link>0</inventory_link>
                     <applications/>
                     <valuemap/>
+                    <logtimefmt/>
                 </item>
                 <item>
                     <name>N unresurrected objects</name>
@@ -1658,6 +1694,7 @@
                     <inventory_link>0</inventory_link>
                     <applications/>
                     <valuemap/>
+                    <logtimefmt/>
                 </item>
                 <item>
                     <name>N worker threads</name>
@@ -1703,6 +1740,7 @@
                         </application>
                     </applications>
                     <valuemap/>
+                    <logtimefmt/>
                 </item>
                 <item>
                     <name>N worker threads created</name>
@@ -1748,6 +1786,7 @@
                         </application>
                     </applications>
                     <valuemap/>
+                    <logtimefmt/>
                 </item>
                 <item>
                     <name>N worker threads limited</name>
@@ -1793,6 +1832,7 @@
                         </application>
                     </applications>
                     <valuemap/>
+                    <logtimefmt/>
                 </item>
                 <item>
                     <name>N worker threads not created</name>
@@ -1838,6 +1878,7 @@
                         </application>
                     </applications>
                     <valuemap/>
+                    <logtimefmt/>
                 </item>
                 <item>
                     <name>Objects overflowing workspace</name>
@@ -1883,6 +1924,7 @@
                         </application>
                     </applications>
                     <valuemap/>
+                    <logtimefmt/>
                 </item>
                 <item>
                     <name>Objects sent with sendfile</name>
@@ -1928,6 +1970,7 @@
                         </application>
                     </applications>
                     <valuemap/>
+                    <logtimefmt/>
                 </item>
                 <item>
                     <name>Objects sent with write</name>
@@ -1973,6 +2016,7 @@
                         </application>
                     </applications>
                     <valuemap/>
+                    <logtimefmt/>
                 </item>
                 <item>
                     <name>Session Closed</name>
@@ -2018,6 +2062,7 @@
                         </application>
                     </applications>
                     <valuemap/>
+                    <logtimefmt/>
                 </item>
                 <item>
                     <name>Session herd</name>
@@ -2063,6 +2108,7 @@
                         </application>
                     </applications>
                     <valuemap/>
+                    <logtimefmt/>
                 </item>
                 <item>
                     <name>Session Linger</name>
@@ -2108,6 +2154,7 @@
                         </application>
                     </applications>
                     <valuemap/>
+                    <logtimefmt/>
                 </item>
                 <item>
                     <name>Session Pipeline</name>
@@ -2153,6 +2200,7 @@
                         </application>
                     </applications>
                     <valuemap/>
+                    <logtimefmt/>
                 </item>
                 <item>
                     <name>Session Read Ahead</name>
@@ -2198,6 +2246,7 @@
                         </application>
                     </applications>
                     <valuemap/>
+                    <logtimefmt/>
                 </item>
                 <item>
                     <name>Varnish Hitrate</name>
@@ -2240,6 +2289,7 @@
                         </application>
                     </applications>
                     <valuemap/>
+                    <logtimefmt/>
                 </item>
                 <item>
                     <name>Varnish Loadbalancer Health Check</name>
@@ -2284,6 +2334,7 @@
                     <valuemap>
                         <name>Host status</name>
                     </valuemap>
+                    <logtimefmt/>
                 </item>
             </items>
             <discovery_rules/>
@@ -2514,7 +2565,7 @@
             <dependencies/>
         </trigger>
         <trigger>
-            <expression>(({Custom - Service - Varnish:varnish.stat[cache_hit].last()} / ({Custom - Service - Varnish:varnish.stat[cache_miss].last()} + {Custom - Service - Varnish:varnish.stat[cache_hit].last()}))) &lt; ({$HITRATE_PERCENTAGE}/100)</expression>
+            <expression>(({Custom - Service - Varnish:varnish.stat[cache_hit].sum(#3)} / ({Custom - Service - Varnish:varnish.stat[cache_miss].sum(#3)} + {Custom - Service - Varnish:varnish.stat[cache_hit].sum(#3)}))) &lt; ({$HITRATE_PERCENTAGE}/100)</expression>
             <name>Varnish Hitrate &lt; {$HITRATE_PERCENTAGE}%</name>
             <url/>
             <status>0</status>

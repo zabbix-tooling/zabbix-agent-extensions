@@ -1,6 +1,6 @@
 #!/bin/bash
 
-VERSION="1.0.14"
+VERSION="1.0.17"
 
 set -e
 OPWD="$(pwd)"
