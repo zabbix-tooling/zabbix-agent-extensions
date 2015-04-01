@@ -14,6 +14,7 @@ WHAT="$2"
 curl -s -q "$URL"|awk -v what="$WHAT" '
 BEGIN{
    pat = "activation=" what;
+   a=0
 }
 $0 ~ pat{
    a++;
