@@ -1,0 +1,24 @@
+#!/bin/bash
+
+export PATH="/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/root/bin:/usr/bin:/bin:$PATH"
+
+if [ -z "$1" ];then
+   echo "$0 <JKURL> ACT|DIS|STP"
+   echo "$0 'http://127.0.0.1/jkstatus?mime=txt' ACT"
+   exit 1
+fi
+
+URL="$1"
+WHAT="$2"
+
+curl -s -q "$URL"|awk -v what="$WHAT" '
+BEGIN{
+   pat = "activation=" what;
+}
+$0 ~ pat{
+   a++;
+}
+END{
+   printf("%s", a);
+}
+'
