@@ -21,6 +21,7 @@ This set of of zabbix UserParameter scripts and the template provides the follwi
  * Apache Monitoring:
    * Check Apache Server-Status (Readers, Writers - alert if to many slots are in use)
    * Loadbalancer check
+   * Monitor Mod JK backend status
 
 # How to install the userparameter scripts
 
