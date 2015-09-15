@@ -22,6 +22,8 @@ This set of of zabbix UserParameter scripts and the template provides the follwi
    * Check Apache Server-Status (Readers, Writers - alert if to many slots are in use)
    * Loadbalancer check
    * Monitor Mod JK backend status
+ * Elasticsearch Node and Cluster Monitoring (needs elasticsearch Python module)
+ * Redis Monitoring (needs redis Python module)
 
 # How to install the userparameter scripts
 
