@@ -27,11 +27,14 @@ This set of of zabbix UserParameter scripts and the template provides the follwi
 
 # How to install the userparameter scripts
 
-Invoke the following procedure on your system for package builds
+Invoke the following procedure on your system for package builds on a Ubuntu 14.04 System
+(creats RPM and DEB packages)
 ```
+sudo apt-get install debhelper devscripts rpm
 git clone https://github.com/scoopex/zabbix-agent-extensions.git
 cd zabbix-agent-extensions
 ./ci_build.sh
+# Only for testing purposes on RPM based systems
 ./ci_test.sh
 ```
 
