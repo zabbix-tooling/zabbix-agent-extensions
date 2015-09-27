@@ -6,7 +6,7 @@ A set of zabbix UserParameter scripts and a monitoring template for linux system
 
 # Monitoring details
 
-This package provides the follwing capabilities:
+This package provides the following capabilities:
 
  * Linux standard monitoring using the standard items provided by the zabbix-agent
    * Monitor all local filesystems using dicovery
