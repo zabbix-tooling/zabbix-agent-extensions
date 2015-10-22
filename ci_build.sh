@@ -8,9 +8,9 @@ rm -rf BUILDROOT i386 x86_64 noarch *.src.rpm
 rm -f ${NAME}*.deb ${NAME}*.changes ${NAME}*.changes
 
 echo creating rpm archive
-sed "~s,\(Version:[ ]*\)\([^ ]*\),\1${VERSION}," zabbix-agent-extensions.spec
-rpmbuild --define "_sourcedir $PWD" --define "_rpmdir $PWD" --define "_builddir $PWD" \
-        --define "_srcrpmdir $PWD" --define "_speccdir $PWD" --target noarch -ba zabbix-agent-extensions.spec
+sed -i.bak "~s,\(Version:[ ]*\)\([^ ]*\),\1${VERSION}," zabbix-agent-extensions.spec
+rpmbuild --define "_sourcedir $OPWD" --define "_rpmdir $OPWD" --define "_builddir $OPWD" --define "_topdir $OPWD" \
+        --buildroot="$OPWD/BUILDROOT" --define "_srcrpmdir $OPWD" --define "_speccdir $OPWD" --target noarch -ba zabbix-agent-extensions.spec
 RET="$?"
 if [ "$RET" != "0" ];then
    echo "ERROR: rpm build failed"
