@@ -1,4 +1,4 @@
-zabbix-agent-extensions (1.0.22) trusty; urgency=low
+zabbix-agent-extensions (1.0.23-1) trusty; urgency=low
 
   * add puppet-state monitoring
   * Initial release.

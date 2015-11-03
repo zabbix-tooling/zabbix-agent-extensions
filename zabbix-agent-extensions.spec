@@ -1,7 +1,7 @@
 
 Name:           zabbix-agent-extensions
-Version:        1.0.22
-Release:        1.0
+Version:        1.0.23
+Release:        1
 License:        n/a
 Group:          Monitoring
 Url:            https://github.com/scoopex/zabbix-agent-extensions
