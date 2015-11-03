@@ -7,7 +7,7 @@ rm -f ${NAME}*.deb ${NAME}*.changes ${NAME}*.changes
 
 echo creating rpm archive
 rpmbuild --define "_sourcedir $OPWD" --define "_rpmdir $OPWD" --define "_builddir $OPWD" --define "_topdir $OPWD" \
-        --buildroot="$OPWD/BUILDROOT" --define "_srcrpmdir $OPWD" --define "_speccdir $OPWD" --target noarch -ba zabbix-agent-extensions.spec
+        --buildroot="$OPWD/BUILDROOT" --define "_srcrpmdir $OPWD" --define "_speccdir $OPWD" --target noarch -bb zabbix-agent-extensions.spec
 RET="$?"
 if [ "$RET" != "0" ];then
    echo "ERROR: rpm build failed"
