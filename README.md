@@ -22,7 +22,7 @@ This package provides the following capabilities:
    * Check Apache Server-Status (Readers, Writers - alert if to many slots are in use)
    * Loadbalancer check
    * Monitor Mod JK backend status
- * Elasticsearch Node and Cluster Monitoring (needs elasticsearch Python module)
+ * Elasticsearch Node and Cluster Monitoring (needs elasticsearch and es_stats_zabbix Python modules)
  * Redis Monitoring (needs redis Python module)
 
 # How to install the userparameter scripts
