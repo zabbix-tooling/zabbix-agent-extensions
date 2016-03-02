@@ -24,30 +24,34 @@ This package provides the following capabilities:
    * Monitor Mod JK backend status
  * Elasticsearch Node and Cluster Monitoring (needs elasticsearch and es_stats_zabbix Python modules)
  * Redis Monitoring (needs redis Python module)
+ * Generic discovery
+   * 
 
-# How to install the userparameter scripts
+# How to release and/or install the userparameter scripts
 
-Invoke the following procedure on your system for package builds on a Ubuntu 14.04 System
-(creats RPM and DEB packages)
-```
-sudo apt-get install debhelper devscripts rpm
-git clone https://github.com/scoopex/zabbix-agent-extensions.git
-cd zabbix-agent-extensions
-./ci_build.sh
-# Only for testing purposes on RPM based systems
-./ci_test.sh
-```
-
-Install the rpm ior debian archive on as an addition to your zabbix-agents:
-```
-rpm -Uvh noarch/zabbix-agent-extensions-<version>.noarch.rpm
-dpkg -i zabbix-agent-extensions_<version>_all.deb
-```
-
-Add the following line to your zabbix-agent configuration:
-```
-Include=/etc/zabbix/zabbix-agent-extensions.d/
-```
+ * Release only: Edit this file (README.md) and describe a new feature
+ * Release only: Modify/release version information
+   * agent-scripts/debian/changelog (use "date -R" for a proper timestamp)
+   * zabbix-agent-extensions.spec
+ * Invoke the following procedure on your system for package builds on a Ubuntu 14.04 System
+   (creates RPM and DEB packages)
+   ```
+   sudo apt-get install debhelper devscripts rpm
+   git clone https://github.com/scoopex/zabbix-agent-extensions.git
+   cd zabbix-agent-extensions
+   ./ci_build.sh
+   # Only for testing purposes on RPM based systems
+   ./ci_test.sh
+   ```
+ * Install the rpm ior debian archive on as an addition to your zabbix-agents:
+   ```
+   rpm -Uvh noarch/zabbix-agent-extensions-<version>.noarch.rpm
+   dpkg -i zabbix-agent-extensions_<version>_all.deb
+   ```
+ * Add the following line to your zabbix-agent configuration:
+   ```
+   Include=/etc/zabbix/zabbix-agent-extensions.d/
+   ```
 
 # How to configure the zabbix server
 
@@ -65,7 +69,7 @@ The template will work on zabbix 2.2 and above.
    * Open template "Custom - Service - Apache" and modify the default values defined in the macros
    * Assign template "Custom - Service - Apache" to the desired hosts and modify the default values to host specific settings
 
-
+   
 # Licence and Authors
 
 Additional authors are very welcome - just submit your patches as pull requests.

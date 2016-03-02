@@ -1,8 +1,7 @@
-zabbix-agent-extensions (1.0.24-1) trusty; urgency=low
+zabbix-agent-extensions (1.0.25-1) trusty; urgency=low
 
-  * add puppet-state monitoring
-  * Initial release.
+  * added generic discovery
 
- -- Marc Schoechlin <ms@256bit.org>  Mon, 08 Sep 2014 18:19:29 +0200
+ -- Marc Schoechlin <ms@256bit.org> Wed, 02 Mar 2016 08:02:19 +0100
 
 
