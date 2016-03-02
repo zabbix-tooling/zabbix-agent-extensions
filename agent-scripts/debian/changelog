@@ -1,4 +1,4 @@
-zabbix-agent-extensions (1.0.25-1) trusty; urgency=low
+zabbix-agent-extensions (1.0.26-1) trusty; urgency=low
 
   * added generic discovery
 

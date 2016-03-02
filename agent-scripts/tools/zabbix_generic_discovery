@@ -31,7 +31,7 @@ EOF
 #         "{#FSTYPE}":"rootfs"
 #      },
 
-cat $DIR/$APPNAME/*.json
+cat $DIR/${APPNAME}-*.json
 cat <<'EOF'
           ]
 }
