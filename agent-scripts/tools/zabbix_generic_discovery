@@ -15,11 +15,6 @@ if (! echo "$APPNAME"|egrep -q "^[a-zA-Z0-9\.][a-zA-Z0-9\.]*$" );then
 fi
 
 
-if ( ! [ -d "$DIR/$APPNAME/" ] ) ;then
-   echo -n "NOT SUPPORTED"
-   exit 1
-fi
-
 cat <<'EOF'
 {
    "data":[
