@@ -35,6 +35,7 @@ This package provides the following capabilities:
    * zabbix-agent-extensions.spec
  * Invoke the following procedure on your system for package builds on a Ubuntu 14.04 System
    (creates RPM and DEB packages)
+
    ```
    sudo apt-get install debhelper devscripts rpm
    git clone https://github.com/scoopex/zabbix-agent-extensions.git
@@ -44,11 +45,13 @@ This package provides the following capabilities:
    ./ci_test.sh
    ```
  * Install the rpm ior debian archive on as an addition to your zabbix-agents:
+ 
    ```
    rpm -Uvh noarch/zabbix-agent-extensions-<version>.noarch.rpm
    dpkg -i zabbix-agent-extensions_<version>_all.deb
    ```
  * Add the following line to your zabbix-agent configuration:
+ 
    ```
    Include=/etc/zabbix/zabbix-agent-extensions.d/
    ```
