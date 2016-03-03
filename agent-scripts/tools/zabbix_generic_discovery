@@ -14,7 +14,6 @@ if (! echo "$APPNAME"|egrep -q "^[a-zA-Z0-9\.][a-zA-Z0-9\.]*$" );then
    exit 1
 fi
 
-
 cat <<'EOF'
 {
    "data":[
@@ -26,7 +25,15 @@ EOF
 #         "{#FSTYPE}":"rootfs"
 #      },
 
-cat $DIR/${APPNAME}-*.json
+FIRST=1
+for FILE in $DIR/$APPNAME-*.json;
+do
+   if [ "$FIRST" != "1" ];then
+      echo -n ","
+   fi
+   FIRST=0
+   cat $FILE
+done
 cat <<'EOF'
           ]
 }
