@@ -1,6 +1,6 @@
-zabbix-agent-extensions (1.0.28-1) trusty; urgency=low
+zabbix-agent-extensions (1.0.29-1) trusty; urgency=low
 
-  * added generic discovery
+  * added nginx monitoring
 
  -- Marc Schoechlin <ms@256bit.org> Wed, 02 Mar 2016 08:02:19 +0100
 

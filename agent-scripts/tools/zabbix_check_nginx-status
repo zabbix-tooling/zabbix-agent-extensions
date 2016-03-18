@@ -1,0 +1,41 @@
+#!/bin/bash
+
+WHAT="$1"
+PORT="${2:-80}"
+HOSTNAME="${3:-127.0.0.1}"
+if [ -z "$WHAT" ];then
+   echo "$0 reader|writer|keepalive|accepts|handled|requests"
+   exit 1
+fi
+
+wget -q --user-agent "ZABBIX" --timeout=5 -O- "http://$HOSTNAME:$PORT/basic_status"|awk -v get=$WHAT '
+    /Active connections:/{
+     if (get == "total"){
+            printf("%s",$3);
+	      }
+    }
+    /^ [0-9][0-9]* [0-9][0-9]* [0-9][0-9]*/{
+         if (get == "accepts"){
+            printf("%s",$1);
+	      }
+         if (get == "handled"){
+            printf("%s",$2);
+	      }
+         if (get == "requests"){
+            printf("%s",$3);
+	      }
+    }
+    /Reading: .* Writing: .* Waiting: .*/{
+         if (get == "reader"){
+            printf("%s",$2);
+	      }
+         if (get == "writer"){
+            printf("%s",$4);
+	      }
+         if (get == "keepalive"){
+            printf("%s",$6);
+	      }
+
+     }
+'
+

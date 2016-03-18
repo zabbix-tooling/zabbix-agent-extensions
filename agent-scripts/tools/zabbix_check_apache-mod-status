@@ -10,7 +10,7 @@ fi
 
 
 if [ "$WHAT" == "accesses" ] || [ "$WHAT" == "kbytes" ];then
-  wget -q --timeout=5 -O- "http://$HOSTNAME:$PORT/server-status?auto"|awk -v get=$WHAT '
+  wget -q --timeout=5 --user-agent "ZABBIX" -O- "http://$HOSTNAME:$PORT/server-status?auto"|awk -v get=$WHAT '
      /Total Accesses:/{
          if (get == "accesses"){
             printf("%s",$3);
@@ -23,7 +23,7 @@ if [ "$WHAT" == "accesses" ] || [ "$WHAT" == "kbytes" ];then
      }
 '
 else
-wget -q --timeout=5 -O- "http://$HOSTNAME:$PORT/server-status?auto"|\
+wget -q --timeout=5 --user-agent "ZABBIX" -O- "http://$HOSTNAME:$PORT/server-status?auto"|\
 awk -v get=$WHAT '
   BEGIN{
 	readers = 0; writers = 0; total = 0;

@@ -1,6 +1,6 @@
 
 Name:           zabbix-agent-extensions
-Version:        1.0.28
+Version:        1.0.29
 Release:        1
 License:        n/a
 Group:          Monitoring
