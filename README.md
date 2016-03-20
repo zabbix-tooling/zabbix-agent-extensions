@@ -24,8 +24,10 @@ This package provides the following capabilities:
    * Monitor Mod JK backend status
  * Elasticsearch Node and Cluster Monitoring (needs elasticsearch and es_stats_zabbix Python modules)
  * Redis Monitoring (needs redis Python module)
+ * NGINX Monitoring
  * Generic discovery
-   * 
+   (put json snippets to /var/run/zabbix-generic-discovery/<ITEMNAME>-*.json i.e. with puppet and get a combined discovery value)
+ * Monitor Puppet state
 
 # How to release and/or install the userparameter scripts
 
@@ -38,7 +40,7 @@ This package provides the following capabilities:
 
    ```
    sudo apt-get install debhelper devscripts rpm
-   git clone https://github.com/scoopex/zabbix-agent-extensions.git
+   git clone https://github.com/breuninger-ecom/zabbix-agent-extensions
    cd zabbix-agent-extensions
    ./ci_build.sh
    # Only for testing purposes on RPM based systems
@@ -78,5 +80,6 @@ The template will work on zabbix 2.2 and above.
 Additional authors are very welcome - just submit your patches as pull requests.
 
   * Marc Schoechlin <ms@256bit.org>
+  * Marc Schoechlin <marc.schoechlin@breuninger.de>
  
 This software is licensed by GPLv2 - review file "LICENSE"
