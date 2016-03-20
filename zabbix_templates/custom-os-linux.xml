@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
     <version>2.0</version>
-    <date>2014-11-12T17:20:45Z</date>
+    <date>2016-03-20T07:28:04Z</date>
     <groups>
         <group>
             <name>Templates</name>
@@ -1035,6 +1035,49 @@
                     <logtimefmt/>
                 </item>
                 <item>
+                    <name>Reboot Required</name>
+                    <type>0</type>
+                    <snmp_community/>
+                    <multiplier>0</multiplier>
+                    <snmp_oid/>
+                    <key>vfs.file.exists[/var/run/reboot-required]</key>
+                    <delay>10</delay>
+                    <history>90</history>
+                    <trends>0</trends>
+                    <status>1</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts/>
+                    <units/>
+                    <delta>0</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description>Indicates if a restart is required after system updates.</description>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>OS - Health</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                </item>
+                <item>
                     <name>Server Uptime</name>
                     <type>0</type>
                     <snmp_community/>
@@ -1044,7 +1087,7 @@
                     <delay>600</delay>
                     <history>90</history>
                     <trends>365</trends>
-                    <status>0</status>
+                    <status>1</status>
                     <value_type>3</value_type>
                     <allowed_hosts/>
                     <units>s</units>
@@ -1266,7 +1309,7 @@
                     <status>0</status>
                     <value_type>0</value_type>
                     <allowed_hosts/>
-                    <units/>
+                    <units>%</units>
                     <delta>0</delta>
                     <snmpv3_contextname/>
                     <snmpv3_securityname/>
@@ -1910,7 +1953,7 @@
                     <publickey/>
                     <privatekey/>
                     <port/>
-                    <filter>{#IFNAME}:^(eth|bond|vlan)</filter>
+                    <filter>{#IFNAME}:^(eth|bond|vlan|em)</filter>
                     <lifetime>30</lifetime>
                     <description/>
                     <item_prototypes>
@@ -2013,7 +2056,7 @@
                             <status>0</status>
                             <value_type>3</value_type>
                             <allowed_hosts/>
-                            <units>pkg/sec</units>
+                            <units>bits/sec</units>
                             <delta>1</delta>
                             <snmpv3_contextname/>
                             <snmpv3_securityname/>
@@ -2510,7 +2553,7 @@
             <dependencies/>
         </trigger>
         <trigger>
-            <expression>({Custom - OS - Linux:system.cpu.util[,user,avg1].avg(#3)}+{Custom - OS - Linux:system.cpu.util[,system,avg1].avg(#3)})&gt;90</expression>
+            <expression>({Custom - OS - Linux:system.cpu.util[,user,avg1].avg(#10)}+{Custom - OS - Linux:system.cpu.util[,system,avg1].avg(#10)})&gt;90</expression>
             <name>CPU Usage &gt; 90%</name>
             <url/>
             <status>0</status>
@@ -2566,6 +2609,16 @@
             <status>0</status>
             <priority>1</priority>
             <description/>
+            <type>0</type>
+            <dependencies/>
+        </trigger>
+        <trigger>
+            <expression>{Custom - OS - Linux:vfs.file.exists[/var/run/reboot-required].last()}=1</expression>
+            <name>Reboot required</name>
+            <url/>
+            <status>0</status>
+            <priority>1</priority>
+            <description>This trigger fires if a reboot is required after a system uddate.</description>
             <type>0</type>
             <dependencies/>
         </trigger>

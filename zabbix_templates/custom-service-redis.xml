@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
     <version>2.0</version>
-    <date>2015-10-25T10:10:44Z</date>
+    <date>2016-03-20T07:26:05Z</date>
     <groups>
         <group>
             <name>Templates</name>
@@ -2057,7 +2057,7 @@
             </graph_items>
         </graph>
         <graph>
-            <name>Redis ops\total lists</name>
+            <name>Redis total lists size / oerations per sec</name>
             <width>900</width>
             <height>200</height>
             <yaxismin>0.0000</yaxismin>
@@ -2076,10 +2076,10 @@
             <graph_items>
                 <graph_item>
                     <sortorder>0</sortorder>
-                    <drawtype>1</drawtype>
+                    <drawtype>5</drawtype>
                     <color>00C800</color>
                     <yaxisside>0</yaxisside>
-                    <calc_fnc>2</calc_fnc>
+                    <calc_fnc>4</calc_fnc>
                     <type>0</type>
                     <item>
                         <host>Custom - Service - Redis</host>
@@ -2088,10 +2088,10 @@
                 </graph_item>
                 <graph_item>
                     <sortorder>1</sortorder>
-                    <drawtype>1</drawtype>
+                    <drawtype>2</drawtype>
                     <color>C80000</color>
-                    <yaxisside>0</yaxisside>
-                    <calc_fnc>2</calc_fnc>
+                    <yaxisside>1</yaxisside>
+                    <calc_fnc>4</calc_fnc>
                     <type>0</type>
                     <item>
                         <host>Custom - Service - Redis</host>
