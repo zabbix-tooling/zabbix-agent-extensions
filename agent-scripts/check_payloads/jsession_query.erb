@@ -1,0 +1,33 @@
+{
+  "size": 0,
+  "query": {
+    "filtered": {
+      "query": {
+        "query_string": {
+          "query": "*",
+          "analyze_wildcard": true
+        }
+      },
+      "filter": {
+        "bool": {
+          "must": [
+            {
+              "range": {
+                "@timestamp": {
+                  "gte": "<%= options[:param][:period] %>"
+                }
+              }
+            }
+          ]
+        }
+     }
+    }
+  },
+  "aggs": {
+    "1": {
+      "cardinality": {
+        "field": "jsessionid"
+      }
+    }
+  }
+}
