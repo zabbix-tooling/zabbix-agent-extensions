@@ -1,6 +1,6 @@
-zabbix-agent-extensions (1.0.29-1) trusty; urgency=low
+zabbix-agent-extensions (1.0.30-1) trusty; urgency=low
 
-  * added nginx monitoring
+  * added sudo for puppet checks
 
  -- Marc Schoechlin <ms@256bit.org> Wed, 02 Mar 2016 08:02:19 +0100
 
