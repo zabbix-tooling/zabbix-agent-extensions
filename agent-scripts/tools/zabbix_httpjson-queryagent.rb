@@ -419,9 +419,8 @@ if options[:zabbix]
       collect_values = lambda do |values_a|
         if values_a.size == 1
           [{
-               '{#NAME}'.to_sym => values_a[0] + '_' + port.to_s,
-               '{#PORT}'.to_sym => port.to_s,
-               '{#ITEM}'.to_sym => values_a[0]
+               '{#NAME}'.to_sym => values_a[0],
+               '{#PORT}'.to_sym => port.to_s
            }]
         else
           head, *tail = values_a
