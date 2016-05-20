@@ -1,8 +1,14 @@
+zabbix-agent-extensions (1.0.34) trusty; urgency=low
+
+  * bump version to actually apply fix
+
+ -- Felix Kellner <felix.kellner@breuninger.de> Wed, 20 May 2016 18:00:00 +0200
+
 zabbix-agent-extensions (1.0.33) trusty; urgency=low
 
   * small fix for zabbix wrap in httpjson-queryagent.rb
 
- -- Christopher J. Ruwe <cjr@cruwe.de> Wed, 20 May 2016 12:00:00 +0100
+ -- Felix Kellner <felix.kellner@breuninger.de> Wed, 20 May 2016 17:00:00 +0200
 
 zabbix-agent-extensions (1.0.32) trusty; urgency=low
 
