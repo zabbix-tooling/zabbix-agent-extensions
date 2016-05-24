@@ -1,3 +1,10 @@
+zabbix-agent-extensions (1.0.34-1) trusty; urgency=low
+
+  * correct names and paths mangled in previous packaging attempts
+
+ -- Christopher J. Ruwe <cjr@cruwe.de> Tue, 24 May 2016 08:00:00 +0200
+
+
 zabbix-agent-extensions (1.0.34) trusty; urgency=low
 
   * bump version to actually apply fix

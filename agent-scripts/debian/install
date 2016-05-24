@@ -1,4 +1,4 @@
 agent-config/*.conf etc/zabbix/zabbix-agent-extensions.d/
 check_payloads/* usr/share/zabbix-agent/
-man/*.8.gz usr/share/man/8
+man/*.8.gz usr/share/man/man8
 tools/* usr/bin/
