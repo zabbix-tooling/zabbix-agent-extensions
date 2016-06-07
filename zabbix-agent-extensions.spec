@@ -1,7 +1,7 @@
 
 Name:           zabbix-agent-extensions
 Version:        1.0.35
-Release:        0
+Release:        1
 License:        n/a
 Group:          Monitoring
 Url:            https://gitlab.brnsrv.de:peng/zabbix-agent-extensions
@@ -56,6 +56,8 @@ chown -R zabbix:zabbix /var/cache/zabbix
 #%restart_on_update zabbix-agentd
 
 %changelog
+* Tue Jun 07 2016 cjr@cruwe.de
+- extended with optional caching times
 * Fri Jun 01 2016 cjr@cruwe.de
 - extended httpjson-queryagent.rb w cache
 * Fri May 20 2016 cjr@cruwe.de

@@ -184,9 +184,10 @@ opt_parse = OptionParser.new do |opts|
     options[:collate] = true
   end
 
-  opts.on('--cachable <seconds>',
+  opts.on('--cachable [<seconds>]',
           'allow http responses to be cached and queries to be answered from cache') do |c|
-    options[:cachable] = c.to_i
+    options[:cachable] = ! c.nil? ? c.to_i : 29
+    1+1
   end
 
   opts.on('-f <filename>',

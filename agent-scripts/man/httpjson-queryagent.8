@@ -7,7 +7,7 @@
 \fBhttpjson\-queryagent\.rb\fR \- queries http/json endpoints and selects keys
 .
 .SH "SYNOPSIS"
-\fBhttpjson\-queryagent\.rb\fR \-m \fIhttpmethod\fR GET|POST \-u \fIuristring\fR [ \-f \fIfile\fR ] [ \-p <key=value,\.\.\.> [ \-s leaf\.leaf\.leaf ] [ \-o \fIformat\fR JSON ] [ \-z ] [ \-c ] [ \-\-cachable ]
+\fBhttpjson\-queryagent\.rb\fR \-m \fIhttpmethod\fR GET|POST \-u \fIuristring\fR [ \-f \fIfile\fR ] [ \-p <key=value,\.\.\.> [ \-s leaf\.leaf\.leaf ] [ \-o \fIformat\fR JSON ] [ \-z ] [ \-c ] [ \-\-cachable [\fIseconds\fR]]
 .
 .P
 \fBhttpjson\-queryagent\.rb\fR \-h
@@ -70,8 +70,8 @@ Wraps result into map suitable for Zabbix auto\-discovery\. Not suitable for sin
 Collates output from multiple application endpoints which supply Zabbix auto\-discovery data into one element\. Output will be JSON regardless of \-o JSON\.
 .
 .TP
-\fB\-\-cachable\fR \fIseconds\fR
-Caches responses from http endpoints for the given time measures in seconds\.
+\fB\-\-cachable\fR [\fIseconds\fR]
+Caches responses from http endpoints for the given time measures in seconds\. Defualts to 29s\.
 .
 .TP
 \fB\-h\fR

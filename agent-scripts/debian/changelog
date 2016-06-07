@@ -1,3 +1,10 @@
+zabbix-agent-extensions (1.0.35-1) trusty; urgency=low
+
+  * extended with optional caching times
+
+
+ -- Christopher J. Ruwe <cjr@cruwe.de> Tue, 01 Jun 2016 14:00:00 +0200
+
 zabbix-agent-extensions (1.0.35-0) trusty; urgency=low
 
   * extended httpjson-queryagent.rb w cache
