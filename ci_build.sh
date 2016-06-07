@@ -1,5 +1,5 @@
 #!/bin/bash
-
+#
 set -x
 OPWD="$(pwd)"
 rm -rf BUILDROOT i386 x86_64 noarch *.src.rpm

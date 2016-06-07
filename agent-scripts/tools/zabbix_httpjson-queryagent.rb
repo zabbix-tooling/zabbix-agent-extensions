@@ -8,6 +8,7 @@ require 'uri'
 
 require 'json'
 require 'erb'
+require 'digest'
 
 SUCCESS          = 0
 E_RUN            = 1
@@ -18,11 +19,15 @@ E_ILLEGAL        = 9
 E_INVALID_FILE   = 11
 E_INVALID_SOURCE = 13
 
+CACHE_DIR  = '/var/cache/zabbix'
+
 # json files principally are maps which MAY include arrays. arrays are
 # indexed by natural numbers. hashes as key value pairs MAY use natural
 # numbers either atomically or in string representation as keys. since it
-# is not possible to disambiguate, any structures which may be arrays are
-# casted to maps using the former index as new key.
+# is not possible to disambiguate btw a string representation of a number
+# and a string consisting of a character symbolically representing a natural
+# number, any structures which may be arrays are casted to maps using the
+# former index as new key.
 cast2map   = lambda do |enum_obj|
   if enum_obj.kind_of?(Array)
     # TODO: first, commented out variant does not work with ruby1.8 on
@@ -179,6 +184,11 @@ opt_parse = OptionParser.new do |opts|
     options[:collate] = true
   end
 
+  opts.on('--cachable <seconds>',
+          'allow http responses to be cached and queries to be answered from cache') do |c|
+    options[:cachable] = c.to_i
+  end
+
   opts.on('-f <filename>',
           '--file <filename>',
           'A file with http POSTable payload.') do |filename|
@@ -227,7 +237,7 @@ opt_parse = OptionParser.new do |opts|
     key_value_explode = lambda do |key_value_a|
       if key_value_a.size == 1
         head, tail = key_value_a[0].split('=')
-        { head.to_sym => tail.to_s }
+        {head.to_sym => tail.to_s}
       else
         head, *tail = key_value_a
         key_value_explode.call([head]).merge(key_value_explode.call(tail))
@@ -364,8 +374,26 @@ requests_a         = construct_requests.call(uris_a)
 
 collect_responses       = lambda do |requests_a|
   if requests_a.size == 1
-    request = requests_a[0]
-    [{request[:uri].port => http_call[options[:http_method]].call(request)}]
+    if options[:cachable]
+      request     = requests_a[0]
+      uridigest_s = Digest::SHA256.hexdigest(request[:uri].to_s)
+
+      cache_fn = CACHE_DIR + '/' + uridigest_s
+
+      now_i   = Time.new.to_i
+      mtime_i = File.exist?(cache_fn) ? File.new(cache_fn).mtime.to_i : 0
+
+      if (now_i - mtime_i) < options[:cachable]
+        [{request[:uri].port => File.read(cache_fn)}]
+      else
+        httprsp_h = http_call[options[:http_method]].call(request)
+        File.open(cache_fn, 'w') { |file| file.write(httprsp_h.body) }
+        [{request[:uri].port => httprsp_h}]
+      end
+    else
+      request = requests_a[0]
+      [{request[:uri].port => http_call[options[:http_method]].call(request)}]
+    end
   else
     head, *tail = requests_a
     collect_responses.call([head]).concat(collect_responses.call(tail))
@@ -383,7 +411,11 @@ populate_response_trees = lambda do |responses_a|
     port, response = responses_a[0].keys[0], responses_a[0].values[0]
 
     begin
-      [{ port => JSON.parse(response.body) }]
+      if response.kind_of?(String)
+        [{port => JSON.parse(response)}]
+      else
+        [{port => JSON.parse(response.body)}]
+      end
     rescue JSON::ParserError
       STDERR.puts('Only json-sources can be queried.')
       exit(E_INVALID_SOURCE)
@@ -398,7 +430,7 @@ response_trees_a        = populate_response_trees.call(responses_a)
 select_branches     = lambda do |response_trees_a|
   if response_trees_a.size == 1
     port, tree = response_trees_a[0].keys[0], response_trees_a[0].values[0]
-    [{ port => tree_query.call(tree, options[:selector_a]) }]
+    [{port => tree_query.call(tree, options[:selector_a])}]
   else
     head, *tail = response_trees_a
     select_branches.call([head]).concat(select_branches.call(tail))

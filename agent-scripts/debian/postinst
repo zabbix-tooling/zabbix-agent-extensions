@@ -11,3 +11,5 @@
 #usermod -G adm -a zabbix
 
 #restart zabbix-agent
+
+chown zabbix:zabbix /var/cache/zabbix
