@@ -1,7 +1,7 @@
 
 Name:           zabbix-agent-extensions
 Version:        1.0.36
-Release:        0
+Release:        1
 License:        n/a
 Group:          Monitoring
 Url:            https://gitlab.brnsrv.de:peng/zabbix-agent-extensions
@@ -57,7 +57,9 @@ chown -R zabbix:zabbix /var/cache/zabbix
 
 %changelog
 * Mon Jun 20 2016 cjr@cruwe.de
-- allow httpjson-queryagent to perform complex and recursive queries 
+- removed hickup on debian (softtabs in changelog)
+* Mon Jun 20 2016 cjr@cruwe.de
+- allow httpjson-queryagent to perform complex and recursive queries
 * Mon Jun 20 2016 cjr@cruwe.de
 - made jsession query use cachability
 * Tue Jun 07 2016 cjr@cruwe.de
