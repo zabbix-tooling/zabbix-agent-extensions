@@ -56,6 +56,8 @@ chown -R zabbix:zabbix /var/cache/zabbix
 #%restart_on_update zabbix-agentd
 
 %changelog
+* Mon Jun 20 2016 cjr@cruwe.de
+- made jsession query use cachability
 * Tue Jun 07 2016 cjr@cruwe.de
 - extended with optional caching times
 * Fri Jun 01 2016 cjr@cruwe.de

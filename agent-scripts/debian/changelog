@@ -1,7 +1,12 @@
+zabbix-agent-extensions (1.0.35-2) trusty; urgency=low
+
+  * made zabbix jsession query use cachability
+
+ -- Christopher J. Ruwe <cjr@cruwe.de> Mon, 20 Jun 2016 12:30:00 +0200
+
 zabbix-agent-extensions (1.0.35-1) trusty; urgency=low
 
   * extended with optional caching times
-
 
  -- Christopher J. Ruwe <cjr@cruwe.de> Tue, 01 Jun 2016 14:00:00 +0200
 
