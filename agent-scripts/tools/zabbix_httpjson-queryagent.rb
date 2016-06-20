@@ -110,42 +110,77 @@ tree_query = lambda do |tree_h, selector_a|
     exit(E_ARGV)
   end
 
-
   if selector_a.size == 1
     if selector_a[0].to_s =~ /^\*/
       cast2map.call(tree_h)
     else
       cast2map.call(tree_h[selector_a[0].to_s])
     end
-
   else
     selector_head, *selector_tail = selector_a
 
-    # wildcard query returns a number of (named) branches
-    if selector_head.to_s =~ /^\*/
-
-      # TODO: needs to be done properly with recursion, out of time
-      branches = []
-      tree_h.each_key do |key|
-
-        branch = tree_query.call(tree_h[key],
-                                 selector_tail)
-        if selector_head.to_s =~ /^\*\[.*\]$/ # named branch
-          branch_nominator = selector_head.to_s.match(/\[(.*)\]/)[1]
-          branch_name      = tree_h[key][branch_nominator]
-          branches << {branch_name => branch}
-        else # anon branch
-          branches << branch
-        end
-
+    get_branch_names_w_idx = lambda do |keys_a, nominator|
+      if keys_a.length == 1
+        name_m = [tree_h[keys_a[0]][nominator] => keys_a[0]]
+      else
+        head, *tail = keys_a
+        names_m_a   = get_branch_names_w_idx.call([head], nominator).concat(get_branch_names_w_idx.call(tail, nominator))
       end
+    end
 
-      branches
-    else # non-wildcard query returns leaf
+    get_branches = lambda do |keys_a|
+      if keys_a.length == 1
+        branch = [tree_query.call(tree_h[keys_a[0]], selector_tail)]
+        branch
+      else
+        head, *tail = keys_a
+        branches    = get_branches.call([head]).concat(get_branches.call(tail))
+        branches
+      end
+    end
+
+    name_branches = lambda do |branches, names|
+      if branches.length == 1
+        named_branch = [names[0].keys[0] => branches[0]]
+        named_branch
+      else
+        bhead, *btail    = branches
+        nhead, *ntail    = names
+        named_branches_a = name_branches.call([bhead], [nhead]).concat(name_branches.call(btail, ntail))
+        named_branches_a
+      end
+    end
+
+    if selector_head.to_s =~ /^\*\[.*=.*\]$/
+      # only one branch where property=value, e.g. name=myLittlePony
+      nominator, selector = selector_head.to_s.match(/\[(.*)\]/)[1].split('=')
+
+      branchnames_m_a = get_branch_names_w_idx.call(tree_h.keys, nominator)
+      # TODO: the names given by applications introduce really unnecessary
+      # TODO: complications. fix the problem at origin!
+      # TODO: OrderEntryStatus (de.hybris.platform.persistence.breuningerImpEx_OrderEntryStatus)
+
+      # TODO: needs curry
+      branchname_m    = branchnames_m_a.select { |name| name.keys[0].to_s.split(' ')[0].include?(selector) }
+      theKey          = branchname_m[0].values[0]
+      branch          = tree_query.call(tree_h[theKey], selector_tail)
+      branch
+    elsif selector_head.to_s =~ /^\*\[.*\]$/
+      # many branches grouped by property, e.g. valueOf(property)=name
+      nominator        = selector_head.to_s.match(/\[(.*)\]/)[1]
+
+      # TODO: needs curry
+      branches_a       = get_branches.call(tree_h.keys)
+      names_a          = get_branch_names_w_idx.call(tree_h.keys, nominator)
+      named_branches_a = name_branches.call(branches_a, names_a)
+      named_branches_a
+    elsif selector_head.to_s == '*'
+      branches_a = get_branches.call(tree_h.keys)
+      branches_a
+    else
       tree_query.call(cast2map.call(tree_h[selector_head.to_s]),
                       selector_tail)
     end
-
   end
 end
 
@@ -180,13 +215,13 @@ opt_parse = OptionParser.new do |opts|
 
   opts.on('-c',
           '--collate',
-          'collate multpile pre-formatted zabbix auto-discovery endpoints') do |z|
+          'collate multpile pre-formatted zabbix auto-discovery endpoints') do |c|
     options[:collate] = true
   end
 
   opts.on('--cachable [<seconds>]',
           'allow http responses to be cached and queries to be answered from cache') do |c|
-    options[:cachable] = ! c.nil? ? c.to_i : 29
+    options[:cachable] = !c.nil? ? c.to_i : 29
     1+1
   end
 
@@ -255,6 +290,11 @@ opt_parse = OptionParser.new do |opts|
     # splitting and iterating over array of string, it is necessary to have
     # individual strings atomic =! <String>
     options[:selector_a] = s.split('.').map(&:to_sym)
+  end
+
+  opts.on('--single-atom',
+          'Return atomic value, i.e., non-hash, non-array') do |empty|
+    options[:single_atom] = true
   end
 
   opts.on('-u <URI>',
@@ -495,7 +535,12 @@ else
     if selected_branches_a.size == 1
       port, tree = selected_branches_a[0].first
       # kludge necessary for ruby1.8. TODO: clean when possible!
-      puts tree.inspect
+      if options[:single_atom]
+        puts tree
+      else
+        puts tree.inspect
+      end
+
     else
       puts selected_branches_a.first
     end

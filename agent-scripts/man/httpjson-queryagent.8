@@ -55,7 +55,16 @@ A selector string to query a json and return leaves (or "sub\-trees") looked up 
 A selector string to query a json and return all leaves (or "sub\-trees") matching key hierarchy my contain the \'*\'\-character as a wildcard as in selector\.*\.selector\.
 .
 .IP
-A selector string to query a json and return all leaves (or "sub\-trees") matching key hierarchy\. Names wild\-carded leaves after the value specified by parent[denominator] as in selector\.*[name]\.* Especially suitable for arrays\.
+When a wildcard query returns an array or a map of leaves, then the leaves may be grouped and named after a denominator, which itself is a key in the parent tree\. So, e\.g\. \-s \'regions\.*[name]\.overallStats\' will return an array of maps or arrays, where the individual arrays or maps are named and grouped after the property name\.
+.
+.IP
+Selections can be maded specifying and equality of the grouping property, such as \-s \'regions\.*[name=entityCacheRegion]\.overallStats\', which then will return the overall staticstics of the region named \'entityCacheRegion\'\.
+.
+.TP
+\fB\-\-single\-atom\fR:
+.
+.IP
+Makes the agent return the value only as in 96 instead of [[96]]
 .
 .TP
 \fB\-o\fR, \fB\-\-output\fR \fIformat\fR
@@ -71,7 +80,7 @@ Collates output from multiple application endpoints which supply Zabbix auto\-di
 .
 .TP
 \fB\-\-cachable\fR [\fIseconds\fR]
-Caches responses from http endpoints for the given time measures in seconds\. Defualts to 29s\.
+Caches responses from http endpoints for the given time measures in seconds\. Defaults to 29s\.
 .
 .TP
 \fB\-h\fR
@@ -122,7 +131,7 @@ $ \./httpjson\-queryagent\.rb \-m GET \-u http://user:pass@10\.228\.54\.20:9001/
 \&\./httpjson\-queryagent\.rb \-m GET \-u http://user:pass@10\.228\.54\.20:9001/hac/monitoring/regioncache/data \-s \'regions\.*[name]\.overallStats\' \-o JSON
 .
 .P
-[ { "hits": 360858, "invalidations": 0, "instanceCount": 42200, "fetches": 42247, "evictions": 0, "misses": 42200 }, { "hits": 166651, "invalidations": 352, "instanceCount": 2694, "fetches": 3052, "evictions": 0, "misses": 3046 }, { "hits": 0, "invalidations": 0, "instanceCount": 0, "fetches": 0, "evictions": 0, "misses": 0 }, { "hits": 2506, "invalidations": 0, "instanceCount": 326, "fetches": 326, "evictions": 0, "misses": 326 }, { "hits": 1118153, "invalidations": 1535, "instanceCount": 3950, "fetches": 5526, "evictions": 0, "misses": 5485 } ]
+[ { "typesystemCacheRegion": { "hits": 590990849, "invalidations": 0, "instanceCount": 47185, "fetches": 47199, "evictions": 0, "misses": 47185 } }, { "entityCacheRegion": { "hits": 1477860020, "invalidations": 1465187, "instanceCount": 250000, "fetches": 48343028, "evictions": 46627655, "misses": 48342842 } }, { "PriceDiscountRegion": { "hits": 126553311, "invalidations": 20468, "instanceCount": 5000, "fetches": 23900170, "evictions": 23874702, "misses": 23900170 } }, { "OrderEntryRegion": { "hits": 101443596, "invalidations": 81, "instanceCount": 5000, "fetches": 27910590, "evictions": 27905509, "misses": 27910590 } }, { "queryCacheRegion": { "hits": 300434489, "invalidations": 8523751, "instanceCount": 11214, "fetches": 43930634, "evictions": 35394776, "misses": 43929741 } } ]
 .
 .SS "Example 3 Query for Zabbix auto\-discovery"
 \&\./httpjson\-queryagent\.rb \-m GET \-u http://user:pass@10\.228\.54\.20:9001/hac/monitoring/regioncache/data \-s \'regions\.*\.name\' \-z \-o JSON
@@ -137,13 +146,22 @@ $ \./httpjson\-queryagent\.rb \-m GET \-u http://user:pass@10\.228\.54\.20:9001/
 { "data": [ { "{#NAME}": "typesystemCacheRegion_9001", "{#PORT}": "9001" }, { "{#NAME}": "entityCacheRegion_9001", "{#PORT}": "9001" }, { "{#NAME}": "PriceDiscountRegion_9001", "{#PORT}": "9001" }, { "{#NAME}": "OrderEntryRegion_9001", "{#PORT}": "9001" }, { "{#NAME}": "queryCacheRegion_9001", "{#PORT}": "9001" }, { "{#NAME}": "typesystemCacheRegion_9011", "{#PORT}": "9011" }, { "{#NAME}": "entityCacheRegion_9011", "{#PORT}": "9011" }, { "{#NAME}": "PriceDiscountRegion_9011", "{#PORT}": "9011" }, { "{#NAME}": "OrderEntryRegion_9011", "{#PORT}": "9011" }, { "{#NAME}": "queryCacheRegion_9011", "{#PORT}": "9011" }, { "{#NAME}": "typesystemCacheRegion_9021", "{#PORT}": "9021" }, { "{#NAME}": "entityCacheRegion_9021", "{#PORT}": "9021" }, { "{#NAME}": "PriceDiscountRegion_9021", "{#PORT}": "9021" }, { "{#NAME}": "OrderEntryRegion_9021", "{#PORT}": "9021" }, { "{#NAME}": "queryCacheRegion_9021", "{#PORT}": "9021" } ] }
 .
 .SS "Example 3b Query multiple application endpoints supplying auto\-discovery data for zabbix"
-/httpjson\-queryagent\.rb \-m GET \-u http://admin:hy11remote@10\.228\.54\.21:[9001,9081]/breuningermonitor/zabbix/autodiscover/meters \-s "*" \-c | json
+/httpjson\-queryagent\.rb \-m GET \-u http://\fIuser\fR:\fIpass\fR@10\.228\.54\.21:[9001,9081]/breuningermonitor/zabbix/autodiscover/meters \-s "*" \-c | json
 .
 .P
 { "data": [ { "{#NAME}": "PriceDataListener\.onMessage\.meter", "{#TYPE}": "METER", "{#PORT}": "9001" }, { "{#NAME}": "StockListener\.onMessage\.meter", "{#TYPE}": "METER", "{#PORT}": "9001" }, { "{#NAME}": "PriceDataListener\.onMessage\.meter", "{#TYPE}": "METER", "{#PORT}": "9081" }, { "{#NAME}": "StockListener\.onMessage\.meter", "{#TYPE}": "METER", "{#PORT}": "9081" } ] }
 .
 .SS "Example 4 Querying an elasticsearch node for an aggregation of unique jsession ids in apache logs"
 \&\./httpjson\-queryagent\.rb \-m POST \-f jsession_query\.erb \-u http://localhost:9200/apache\-*/_search \-s aggregations\.1\.value \-p period=now\-15m
+.
+.P
+1622
+.
+.SS "Example 5 Querying an complex json interface for a nested single value"
+\&\./httpjson\-queryagent\.rb \-m GET \-u http://\fIuser\fR:\fIpass\fR@10\.228\.54\.20:9001/hac/monitoring/regioncache/data \-s "regions\.\fI[name=OrderEntryRegion]\.types\.\fR[typeName=OrderEntryStatus]\.hits" \-\-single\-atom
+.
+.P
+185
 .
 .SH "EXIT STATUS"
 0 if SUCCESS
