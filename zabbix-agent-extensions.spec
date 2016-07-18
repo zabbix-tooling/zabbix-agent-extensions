@@ -1,7 +1,7 @@
 
 Name:           zabbix-agent-extensions
-Version:        1.0.36
-Release:        1
+Version:        1.0.37
+Release:        0
 License:        n/a
 Group:          Monitoring
 Url:            https://gitlab.brnsrv.de:peng/zabbix-agent-extensions
