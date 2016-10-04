@@ -7,6 +7,7 @@ from elasticsearch import Elasticsearch
 
 import sys
 import json
+import socket
 
 # Define the fail message
 def zbx_fail():
@@ -33,7 +34,7 @@ if len(sys.argv) < 3:
 
 # Try to establish a connection to elasticsearch
 try:
-    conn = Elasticsearch('localhost:9200', sniff_on_start=False)
+    conn = Elasticsearch(socket.gethostname()+':9200', sniff_on_start=False)
 except Exception, e:
     
     zbx_fail()
