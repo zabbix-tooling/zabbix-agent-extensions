@@ -1,4 +1,4 @@
-enabling nginx stats to be read by zabbix_check_nginx-status:
+#enabling nginx stats to be read by zabbix_check_nginx-status:
 put following configuration on your nginx.conf file:
 
 location /basic_status {
@@ -10,6 +10,6 @@ deny all;}
 and reload the nginx
 
 
-
+#Copy the files 
 zabbix_check_nginx-status => /usr/bin/;
 zabbix_nginx-status.conf  => /etc/zabbix/zabbix_agentd.d/
