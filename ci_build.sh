@@ -1,6 +1,6 @@
 #!/bin/bash
-
-set -e
+#
+set -x
 OPWD="$(pwd)"
 rm -rf BUILDROOT i386 x86_64 noarch *.src.rpm
 rm -f ${NAME}*.deb ${NAME}*.changes ${NAME}*.changes

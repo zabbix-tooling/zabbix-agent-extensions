@@ -1,7 +1,78 @@
-zabbix-agent-extensions (1.0.29-1) trusty; urgency=low
+zabbix-agent-extensions (1.0.37-1) trusty; urgency=low
 
-  * added nginx monitoring
+  * Insert workaroud for port binding problem on ELK - do not use localhost for connection to ELK use hostname() instead
+
+ -- Nils Schaeffler <nils.schaeffler@breuninger.de> Mon, 04 Okt 2016 11:30:00 +0200
+
+zabbix-agent-extensions (1.0.37-0) trusty; urgency=low
+
+  * Add disk performance userparameter
+
+ -- Christian Wolff <christian.wolff@breuninger.de> Mon, 18 Jul 2016 14:00:00 +0200
+
+zabbix-agent-extensions (1.0.36-1) trusty; urgency=low
+
+  * removed hickup on changelog (softtabs)
+
+ -- Christopher J. Ruwe <cjr@cruwe.de> Mon, 20 Jun 2016 15:00:00 +0200
+
+zabbix-agent-extensions (1.0.36-0) trusty; urgency=low
+
+  * allow httpjson-queryagent to perform complex and recursive queries
+
+ -- Christopher J. Ruwe <cjr@cruwe.de> Mon, 20 Jun 2016 15:00:00 +0200
+
+zabbix-agent-extensions (1.0.35-2) trusty; urgency=low
+
+  * made zabbix jsession query use cachability
+
+ -- Christopher J. Ruwe <cjr@cruwe.de> Mon, 20 Jun 2016 12:30:00 +0200
+
+zabbix-agent-extensions (1.0.35-1) trusty; urgency=low
+
+  * extended with optional caching times
+
+ -- Christopher J. Ruwe <cjr@cruwe.de> Tue, 01 Jun 2016 14:00:00 +0200
+
+zabbix-agent-extensions (1.0.35-0) trusty; urgency=low
+
+  * extended httpjson-queryagent.rb w cache
+
+ -- Christopher J. Ruwe <cjr@cruwe.de> Tue, 01 Jun 2016 14:00:00 +0200
+
+zabbix-agent-extensions (1.0.34-1) trusty; urgency=low
+
+  * correct names and paths mangled in previous packaging attempts
+
+ -- Christopher J. Ruwe <cjr@cruwe.de> Tue, 24 May 2016 08:00:00 +0200
+
+
+zabbix-agent-extensions (1.0.34) trusty; urgency=low
+
+  * bump version to actually apply fix
+
+ -- Felix Kellner <felix.kellner@breuninger.de> Wed, 20 May 2016 18:00:00 +0200
+
+zabbix-agent-extensions (1.0.33) trusty; urgency=low
+
+  * small fix for zabbix wrap in httpjson-queryagent.rb
+
+ -- Felix Kellner <felix.kellner@breuninger.de> Wed, 20 May 2016 17:00:00 +0200
+
+zabbix-agent-extensions (1.0.32) trusty; urgency=low
+
+  * added stable version of httpjson-queryagent.rb
+
+ -- Christopher J. Ruwe <cjr@cruwe.de> Wed, 20 May 2016 12:00:00 +0100
+
+zabbix-agent-extensions (1.0.31-1) trusty; urgency=low
+
+  * added generic http_json_checker
+
+ -- Christopher J. Ruwe <cjr@cruwe.de> Wed, 11 May 2016 12:00:00 +0100
+
+zabbix-agent-extensions (1.0.30-1) trusty; urgency=low
+
+  * Look in GIT
 
  -- Marc Schoechlin <ms@256bit.org> Wed, 02 Mar 2016 08:02:19 +0100
-
-

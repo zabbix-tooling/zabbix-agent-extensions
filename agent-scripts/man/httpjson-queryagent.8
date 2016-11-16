@@ -1,0 +1,200 @@
+.\" generated with Ronn/v0.7.3
+.\" http://github.com/rtomayko/ronn/tree/0.7.3
+.
+.TH "HTTPJSON\-QUERYAGENT\.RB" "8" "June 2016" "E. Breuninger Gmbh & Co" "System Administration"
+.
+.SH "NAME"
+\fBhttpjson\-queryagent\.rb\fR \- queries http/json endpoints and selects keys
+.
+.SH "SYNOPSIS"
+\fBhttpjson\-queryagent\.rb\fR \-m \fIhttpmethod\fR GET|POST \-u \fIuristring\fR [ \-f \fIfile\fR ] [ \-p <key=value,\.\.\.> [ \-s leaf\.leaf\.leaf ] [ \-o \fIformat\fR JSON ] [ \-z ] [ \-c ] [ \-\-cachable [\fIseconds\fR]]
+.
+.P
+\fBhttpjson\-queryagent\.rb\fR \-h
+.
+.SH "DESCRIPTION"
+httpjson\-queryagent fetches JSON data from http endpoints\. Complex queries are constructed from query\-files or \-templates\. Templates can be further refined passing parameters\.
+.
+.P
+Flat results are printed on stdout\. JSONs can be printed as is or further refined using a hierarchical selector\.
+.
+.TP
+\fB\-m\fR, \fB\-\-http_method\fR \fIGET|POST\fR:
+.
+.IP
+The http method used to query the endpoint\. Currently, \fBonly GET and POST\fR are supported\. \fBMandatory\.\fR
+.
+.TP
+\fB\-u\fR, \fB\-\-uri\fR \fIuristring\fR:
+.
+.IP
+The uristring describing the endpoint to connect against\. Takes the format [protocol://][user:pass@]hostname|IP[:port][/path]\. Currently, \fBonly http\fR is supported\. \fBMandatory\.\fR
+.
+.IP
+As a deviation from standard uri format, ports may be supplied as a comma\-separated list, but only when doing zabbix auto\-discovery\.
+.
+.TP
+\fB\-f\fR, \fB\-\-filename\fR \fIfilename\fR:
+.
+.IP
+A file containing a http payload for complex queries\. May be a regular flat file or a erb\-template\. File \fBMUST\fR be in packaged path and \fBSHOULD ONLY\fR be supplied by package\.
+.
+.TP
+\fB\-p\fR, \fB\-\-params\fR \fIkey=value,key=value\fR:
+.
+.IP
+Parameters passed as a comma\-separated list of key\-value pairs to be rendered into template file\. \fBMandatory if \-f passes an erb\-template\.\fR
+.
+.TP
+\fB\-s\fR, \fB\-\-selector\fR \fIselectors\fR:
+.
+.IP
+A selector string to query a json and return leaves (or "sub\-trees") looked up using keys as in selector\.selector\.selector\.
+.
+.IP
+A selector string to query a json and return all leaves (or "sub\-trees") matching key hierarchy my contain the \'*\'\-character as a wildcard as in selector\.*\.selector\.
+.
+.IP
+When a wildcard query returns an array or a map of leaves, then the leaves may be grouped and named after a denominator, which itself is a key in the parent tree\. So, e\.g\. \-s \'regions\.*[name]\.overallStats\' will return an array of maps or arrays, where the individual arrays or maps are named and grouped after the property name\.
+.
+.IP
+Selections can be maded specifying and equality of the grouping property, such as \-s \'regions\.*[name=entityCacheRegion]\.overallStats\', which then will return the overall staticstics of the region named \'entityCacheRegion\'\.
+.
+.TP
+\fB\-\-single\-atom\fR:
+.
+.IP
+Makes the agent return the value only as in 96 instead of [[96]]
+.
+.TP
+\fB\-o\fR, \fB\-\-output\fR \fIformat\fR
+Format used for output\. Can only be JSON\. Plain if left out\.
+.
+.TP
+\fB\-z\fR, \fB\-\-zabbix\fR
+Wraps result into map suitable for Zabbix auto\-discovery\. Not suitable for single value queries\. Output will be JSON regardless of \-o JSON\.
+.
+.TP
+\fB\-c\fR, \fB\-\-collate\fR
+Collates output from multiple application endpoints which supply Zabbix auto\-discovery data into one element\. Output will be JSON regardless of \-o JSON\.
+.
+.TP
+\fB\-\-cachable\fR [\fIseconds\fR]
+Caches responses from http endpoints for the given time measures in seconds\. Defaults to 29s\.
+.
+.TP
+\fB\-h\fR
+Prints the help message\.
+.
+.SS "SECURITY CONSIDERATIONS"
+In the best fashion of RESTful interfaces, many applications use POST+payload to specify queries\. When operating as an agent for a monitoring solution like e\.g\. Zabbix, when POSTing, a http\-payload is constructed form in principle any file in the monitoring systems filesystem\. When packaging httpjson\-queryagent\.rb with other agent\-like software, it is \fBstrongly advised to restrict electable payload files into directories writable by root only\.\fR
+.
+.SH "EXAMPLES"
+.
+.SS "Example 1 Query flat json\."
+curl rfs\-test\.brnsrv\.de:8080/metrics
+.
+.P
+{ "mem": 598775, "mem\.free": 413427, "processors": 4, <\.\.\.> }
+.
+.P
+httpjson\-queryagent\.rb \-m GET \-u http://rfs\-test\.brnsrv\.de:8080/metrics \-s mem 598775
+.
+.SS "Example 1a Query with authentication"
+httpjson\-queryagent\.rb \-m GET \-u http://user:pass@rfs\-test\.brnsrv\.de:8080/metrics \-s mem
+.
+.SS "Example 2 Query complex json"
+curl http://user:pass@10\.228\.54\.20:9001/hac/monitoring/regioncache/data/
+.
+.P
+{ "totalRegionCount": 5, "regions": [ { "overallStats": { "hits": 298657399, "invalidations": 0, "instanceCount": 45949, "fetches": 46169, "evictions": 0, "misses": 45949 }, "name": "typesystemCacheRegion", "factor": 99, "types": [ { <\.\.\.> }
+.
+.P
+\&\./httpjson\-queryagent\.rb \-m GET \-u http://user:pass@10\.228\.54\.20:9001/hac/monitoring/regioncache/data \-s regions\.1\.overallStats\.hits
+.
+.P
+871696939
+.
+.SS "Example 2a Query complex json and return \"sub\-tree\""
+\&\./httpjson\-queryagent\.rb \-m GET \-u http://user:pass@10\.228\.54\.20:9001/hac/monitoring/regioncache/data \-s regions\.1\.overallStats
+.
+.P
+{"hits"=>871696939, "invalidations"=>637469, "instanceCount"=>250000, "fetches"=>21037480, "evictions"=>20149884, "misses"=>21037353}
+.
+.SS "Example 2b Query complex json and return multiple subtrees"
+$ \./httpjson\-queryagent\.rb \-m GET \-u http://user:pass@10\.228\.54\.20:9001/hac/monitoring/regioncache/data \-s \'regions\.*\.overallStats\' \-o JSON
+.
+.P
+[ { "hits": 360858, "invalidations": 0, "instanceCount": 42200, "fetches": 42247, "evictions": 0, "misses": 42200 }, { "hits": 166651, "invalidations": 352, "instanceCount": 2694, "fetches": 3052, "evictions": 0, "misses": 3046 }, { "hits": 0, "invalidations": 0, "instanceCount": 0, "fetches": 0, "evictions": 0, "misses": 0 }, { "hits": 2506, "invalidations": 0, "instanceCount": 326, "fetches": 326, "evictions": 0, "misses": 326 }, { "hits": 1118153, "invalidations": 1535, "instanceCount": 3950, "fetches": 5526, "evictions": 0, "misses": 5485 } ]
+.
+.SS "Example 2c Query complex json and return multiple subtrees, grouped by attribute"
+\&\./httpjson\-queryagent\.rb \-m GET \-u http://user:pass@10\.228\.54\.20:9001/hac/monitoring/regioncache/data \-s \'regions\.*[name]\.overallStats\' \-o JSON
+.
+.P
+[ { "typesystemCacheRegion": { "hits": 590990849, "invalidations": 0, "instanceCount": 47185, "fetches": 47199, "evictions": 0, "misses": 47185 } }, { "entityCacheRegion": { "hits": 1477860020, "invalidations": 1465187, "instanceCount": 250000, "fetches": 48343028, "evictions": 46627655, "misses": 48342842 } }, { "PriceDiscountRegion": { "hits": 126553311, "invalidations": 20468, "instanceCount": 5000, "fetches": 23900170, "evictions": 23874702, "misses": 23900170 } }, { "OrderEntryRegion": { "hits": 101443596, "invalidations": 81, "instanceCount": 5000, "fetches": 27910590, "evictions": 27905509, "misses": 27910590 } }, { "queryCacheRegion": { "hits": 300434489, "invalidations": 8523751, "instanceCount": 11214, "fetches": 43930634, "evictions": 35394776, "misses": 43929741 } } ]
+.
+.SS "Example 3 Query for Zabbix auto\-discovery"
+\&\./httpjson\-queryagent\.rb \-m GET \-u http://user:pass@10\.228\.54\.20:9001/hac/monitoring/regioncache/data \-s \'regions\.*\.name\' \-z \-o JSON
+.
+.P
+{ "data": [ { "{#NAME}": "typesystemCacheRegion_9001", "{#PORT}": "9001" }, { "{#NAME}": "entityCacheRegion_9001", "{#PORT}": "9001" }, { "{#NAME}": "PriceDiscountRegion_9001", "{#PORT}": "9001" }, { "{#NAME}": "OrderEntryRegion_9001", "{#PORT}": "9001" }, { "{#NAME}": "queryCacheRegion_9001", "{#PORT}": "9001" } ] }
+.
+.SS "Example 3a Query multiple ports, i\.e\. instances, for Zabbix auto\-discovery"
+\&\./httpjson\-queryagent\.rb \-m GET \-u http://user:pass@10\.228\.54\.20:[9001,9011,9021]/hac/monitoring/regioncache/data \-s \'regions\.*\.name\' \-z \-o JSON
+.
+.P
+{ "data": [ { "{#NAME}": "typesystemCacheRegion_9001", "{#PORT}": "9001" }, { "{#NAME}": "entityCacheRegion_9001", "{#PORT}": "9001" }, { "{#NAME}": "PriceDiscountRegion_9001", "{#PORT}": "9001" }, { "{#NAME}": "OrderEntryRegion_9001", "{#PORT}": "9001" }, { "{#NAME}": "queryCacheRegion_9001", "{#PORT}": "9001" }, { "{#NAME}": "typesystemCacheRegion_9011", "{#PORT}": "9011" }, { "{#NAME}": "entityCacheRegion_9011", "{#PORT}": "9011" }, { "{#NAME}": "PriceDiscountRegion_9011", "{#PORT}": "9011" }, { "{#NAME}": "OrderEntryRegion_9011", "{#PORT}": "9011" }, { "{#NAME}": "queryCacheRegion_9011", "{#PORT}": "9011" }, { "{#NAME}": "typesystemCacheRegion_9021", "{#PORT}": "9021" }, { "{#NAME}": "entityCacheRegion_9021", "{#PORT}": "9021" }, { "{#NAME}": "PriceDiscountRegion_9021", "{#PORT}": "9021" }, { "{#NAME}": "OrderEntryRegion_9021", "{#PORT}": "9021" }, { "{#NAME}": "queryCacheRegion_9021", "{#PORT}": "9021" } ] }
+.
+.SS "Example 3b Query multiple application endpoints supplying auto\-discovery data for zabbix"
+/httpjson\-queryagent\.rb \-m GET \-u http://\fIuser\fR:\fIpass\fR@10\.228\.54\.21:[9001,9081]/breuningermonitor/zabbix/autodiscover/meters \-s "*" \-c | json
+.
+.P
+{ "data": [ { "{#NAME}": "PriceDataListener\.onMessage\.meter", "{#TYPE}": "METER", "{#PORT}": "9001" }, { "{#NAME}": "StockListener\.onMessage\.meter", "{#TYPE}": "METER", "{#PORT}": "9001" }, { "{#NAME}": "PriceDataListener\.onMessage\.meter", "{#TYPE}": "METER", "{#PORT}": "9081" }, { "{#NAME}": "StockListener\.onMessage\.meter", "{#TYPE}": "METER", "{#PORT}": "9081" } ] }
+.
+.SS "Example 4 Querying an elasticsearch node for an aggregation of unique jsession ids in apache logs"
+\&\./httpjson\-queryagent\.rb \-m POST \-f jsession_query\.erb \-u http://localhost:9200/apache\-*/_search \-s aggregations\.1\.value \-p period=now\-15m
+.
+.P
+1622
+.
+.SS "Example 5 Querying an complex json interface for a nested single value"
+\&\./httpjson\-queryagent\.rb \-m GET \-u http://\fIuser\fR:\fIpass\fR@10\.228\.54\.20:9001/hac/monitoring/regioncache/data \-s "regions\.\fI[name=OrderEntryRegion]\.types\.\fR[typeName=OrderEntryStatus]\.hits" \-\-single\-atom
+.
+.P
+185
+.
+.SH "EXIT STATUS"
+0 if SUCCESS
+.
+.P
+1 if runtime ERROR
+.
+.P
+3 if passed arguments are caught as invalid or missing
+.
+.P
+5 if query did not match
+.
+.P
+7 if network connection was refused or timed out
+.
+.P
+9 if operation is considered illegal for security reasons like trying to pass arbitrary payload\-files
+.
+.P
+11 if file passed is not valid format, currently only JSON
+.
+.P
+13 if http response body is not in valid format, currently JSON, cf\. program name
+.
+.SH "AUTHOR"
+Christopher J\. Ruwe, Systemanalyse und \-beratung, \fIcjr@cruwe\.de\fR
+.
+.SH "SEE ALSO"
+Similar commandline parsers exist which could query on http response bodies given by e\.g\. curl\.
+.
+.P
+https://github\.com/trentm/json
+.
+.P
+https://stedolan\.github\.io/jq/

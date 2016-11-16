@@ -1,2 +1,3 @@
 agent-config/*.conf etc/zabbix/zabbix-agent-extensions.d/
+check_payloads/* usr/share/zabbix-agent/
 tools/* usr/bin/
