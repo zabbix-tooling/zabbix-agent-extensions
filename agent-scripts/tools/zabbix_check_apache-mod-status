@@ -26,7 +26,7 @@ else
 wget -q --timeout=5 --user-agent "ZABBIX" -O- "http://$HOSTNAME:$PORT/server-status?auto"|\
 awk -v get=$WHAT '
   BEGIN{
-	readers = 0; writers = 0; total = 0;
+	readers = 0; writers = 0; keepalives = 0; total = 0;
   }
   /Scoreboard:/{
     scoreboard = $0;
@@ -42,7 +42,7 @@ awk -v get=$WHAT '
 	      reader++;
         }
         else if (what == "K"){
-	      keepalive++;
+	      keepalives++;
         }
     }	
   }
@@ -65,10 +65,10 @@ awk -v get=$WHAT '
 	         print total;
         }
    else if(get == "all"){
-	         print "Reader " readers ", Writer " writers ",Keepalive" keepalive ", Total " total;
+	         print "Reader " readers ", Writer " writers ", Keepalive " keepalives ", Total " total;
         }
    else{
-	         print "Reader " readers ", Writer " writers "Keepalive" keepalive ", Total " total > "/dev/stderr";
+	         print "Reader " readers ", Writer " writers ", Keepalive " keepalive ", Total " total > "/dev/stderr";
         }
   }
 '
