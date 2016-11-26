@@ -35,11 +35,13 @@ This package provides the following capabilities:
 
  * Install the packages on the zabbix agent host
  * Test the agent on the agent machine
+ 
    ```
    zabbix_agentd  -t linux.dmesg
    zabbix_agentd --print
    ```
  * Test the agent on the server machine
+ 
    ```
    apt-get install zabbix-get
    zabbix_get -s 127.0.0.1 -k linux.dmesg
