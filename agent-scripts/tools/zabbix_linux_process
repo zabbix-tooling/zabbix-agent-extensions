@@ -1,0 +1,30 @@
+#!/bin/bash
+
+PNAME="$1"
+QRY="$2"
+
+if [ -z "$1" ] || [ -z "$2" ];then
+   echo "$0 <process-name> maxage|minage"
+fi
+
+if [ "$QRY" = "maxage" ];then
+   COMP="0"
+   for pid in $(pgrep "$PNAME");do
+     AGE="$(ps -o etimes= -p "$pid"|awk '{print $1}')"
+     if [ "$AGE" -gt "$COMP" ];then
+      COMP="$AGE"
+     fi
+   done
+   echo -n "$COMP"
+   exit 0
+elif [ "$QRY" = "maxage|minage" ];then
+   COMP="0"
+   for pid in $(pgrep "$PNAME");do
+     AGE="$(ps -o etimes= -p "$pid"|awk '{print $1}')"
+     if [ "$AGE" -le "$COMP" ];then
+      COMP="$AGE"
+     fi
+   done
+   echo -n "$COMP"
+   exit 0
+fi

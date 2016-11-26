@@ -15,6 +15,8 @@ This package provides the following capabilities:
    * Monitor important servcies: smtp, ssh, ntp time difference to zabbix server
    * Swap usage
    * 5min system load
+   * Monitor dmesg for bad behavior of the system
+   * Monitor the maximum and minimum of processes
  * ICMP Ping of the system
  * Monitor the MTA mailqueue
  * Monitor NFS operations/retransmits
