@@ -19,14 +19,14 @@ This package provides the following capabilities:
  * Monitor the MTA mailqueue
  * Monitor NFS operations/retransmits
  * Apache Monitoring:
-   (enable /server-status available on localhost)
+   (enable /server-status available on localhost, https://httpd.apache.org/docs/2.4/mod/mod_status.html)
    * Check Apache Server-Status (Readers, Writers - alert if to many slots are in use)
    * Loadbalancer check
    * Monitor Mod JK backend status
  * Elasticsearch Node and Cluster Monitoring (needs elasticsearch and es_stats_zabbix Python modules)
  * Redis Monitoring (needs redis Python module)
  * NGINX Monitoring
-   (enable /basic_status available on localhost)
+   (enable /basic_status available on localhost, https://nginx.org/en/docs/http/ngx_http_stub_status_module.html)
  * Generic discovery
    (put json snippets to /var/run/zabbix-generic-discovery/<ITEMNAME>-*.json i.e. with puppet and get a combined discovery value)
  * Monitor Puppet state
