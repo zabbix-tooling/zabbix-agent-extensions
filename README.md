@@ -31,6 +31,20 @@ This package provides the following capabilities:
    (put json snippets to /var/run/zabbix-generic-discovery/<ITEMNAME>-*.json i.e. with puppet and get a combined discovery value)
  * Monitor Puppet state
 
+# How to test and debug
+
+ * Install the packages on the zabbix agent host
+ * Test the agent on the agent machine
+   ```
+   zabbix_agentd  -t linux.dmesg
+   zabbix_agentd --print
+   ```
+ * Test the agent on the server machine
+   ```
+   apt-get install zabbix-get
+   zabbix_get -s 127.0.0.1 -k linux.dmesg
+   ```
+
 # How to release and/or install the userparameter scripts
 
  * Release only: Edit this file (README.md) and describe the new feature
