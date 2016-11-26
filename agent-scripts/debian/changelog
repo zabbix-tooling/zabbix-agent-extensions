@@ -1,8 +1,14 @@
+zabbix-agent-extensions (1.0.38-1) trusty; urgency=low
+
+  * Reactivated postinstall procedure
+
+ -- Marc Schoechlin <ms@256bit.org> Sat, 26 Nov 2016 15:29:28 +0100
+
 zabbix-agent-extensions (1.0.37-1) trusty; urgency=low
 
   * Insert workaroud for port binding problem on ELK - do not use localhost for connection to ELK use hostname() instead
 
- -- Nils Schaeffler <nils.schaeffler@breuninger.de> Mon, 04 Okt 2016 11:30:00 +0200
+ -- Nils Schaeffler <nils.schaeffler@breuninger.de> Mon, 04 Oct 2016 11:30:00 +0200
 
 zabbix-agent-extensions (1.0.37-0) trusty; urgency=low
 
