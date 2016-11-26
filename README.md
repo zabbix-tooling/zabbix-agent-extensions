@@ -19,19 +19,21 @@ This package provides the following capabilities:
  * Monitor the MTA mailqueue
  * Monitor NFS operations/retransmits
  * Apache Monitoring:
+   (enable /server-status available on localhost)
    * Check Apache Server-Status (Readers, Writers - alert if to many slots are in use)
    * Loadbalancer check
    * Monitor Mod JK backend status
  * Elasticsearch Node and Cluster Monitoring (needs elasticsearch and es_stats_zabbix Python modules)
  * Redis Monitoring (needs redis Python module)
  * NGINX Monitoring
+   (enable /basic_status available on localhost)
  * Generic discovery
    (put json snippets to /var/run/zabbix-generic-discovery/<ITEMNAME>-*.json i.e. with puppet and get a combined discovery value)
  * Monitor Puppet state
 
 # How to release and/or install the userparameter scripts
 
- * Release only: Edit this file (README.md) and describe a new feature
+ * Release only: Edit this file (README.md) and describe the new feature
  * Release only: Modify/release version information
    * agent-scripts/debian/changelog (use "date -R" for a proper timestamp)
    * zabbix-agent-extensions.spec
