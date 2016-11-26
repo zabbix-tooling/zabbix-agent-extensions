@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
     <version>3.2</version>
-    <date>2016-11-14T15:57:39Z</date>
+    <date>2016-11-26T07:06:35Z</date>
     <groups>
         <group>
             <name>Templates</name>
@@ -3429,10 +3429,7 @@
             <ymin_type_1>1</ymin_type_1>
             <ymax_type_1>0</ymax_type_1>
             <ymin_item_1>0</ymin_item_1>
-            <ymax_item_1>
-                <host>Custom - OS - Linux</host>
-                <key>vm.memory.size[total]</key>
-            </ymax_item_1>
+            <ymax_item_1>0</ymax_item_1>
             <graph_items>
                 <graph_item>
                     <sortorder>0</sortorder>
