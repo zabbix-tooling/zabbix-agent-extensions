@@ -35,16 +35,16 @@ This package provides the following capabilities:
 
 A quick overview is provided by the following files:
 
- * [custom-os-linux](http://htmlpreview.github.io/?https://github.com/breuninger-ecom/zabbix-agent-extensions/zabbix_templates/3.2/documentation/custom-os-linux.html)
- * [custom-os-puppet](http://htmlpreview.github.io/?https://github.com/breuninger-ecom/zabbix-agent-extensions/zabbix_templates/3.2/documentation/custom-os-puppet.html)
- * [custom-service-apache](http://htmlpreview.github.io/?https://github.com/breuninger-ecom/zabbix-agent-extensions/zabbix_templates/3.2/documentation/custom-service-apache.html)
- * [custom-service-cups](http://htmlpreview.github.io/?https://github.com/breuninger-ecom/zabbix-agent-extensions/zabbix_templates/3.2/documentation/custom-service-cups.html)
- * [custom-service-elasticsearch-cluster](http://htmlpreview.github.io/?https://github.com/breuninger-ecom/zabbix-agent-extensions/zabbix_templates/3.2/documentation/custom-service-elasticsearch-cluster.html)
- * [custom-service-elasticsearch-node](http://htmlpreview.github.io/?https://github.com/breuninger-ecom/zabbix-agent-extensions/zabbix_templates/3.2/documentation/custom-service-elasticsearch-node.html)
- * [custom-service-nginx](http://htmlpreview.github.io/?https://github.com/breuninger-ecom/zabbix-agent-extensions/zabbix_templates/3.2/documentation/custom-service-nginx.html)
- * [custom-service-nginx-logstats](http://htmlpreview.github.io/?https://github.com/breuninger-ecom/zabbix-agent-extensions/zabbix_templates/3.2/documentation/custom-service-nginx-logstats.html)
- * [custom-service-redis](http://htmlpreview.github.io/?https://github.com/breuninger-ecom/zabbix-agent-extensions/zabbix_templates/3.2/documentation/custom-service-redis.html)
- * [custom-service-varnish](http://htmlpreview.github.io/?https://github.com/breuninger-ecom/zabbix-agent-extensions/zabbix_templates/3.2/documentation/custom-service-varnish.html)
+ * [custom-os-linux](http://htmlpreview.github.io/?https://github.com/breuninger-ecom/zabbix-agent-extensions/blob/master/zabbix_templates/3.2/documentation/custom-os-linux.html)
+ * [custom-os-puppet](http://htmlpreview.github.io/?https://github.com/breuninger-ecom/zabbix-agent-extensions/blob/master/zabbix_templates/3.2/documentation/custom-os-puppet.html)
+ * [custom-service-apache](http://htmlpreview.github.io/?https://github.com/breuninger-ecom/zabbix-agent-extensions/blob/master/zabbix_templates/3.2/documentation/custom-service-apache.html)
+ * [custom-service-cups](http://htmlpreview.github.io/?https://github.com/breuninger-ecom/zabbix-agent-extensions/blob/master/zabbix_templates/3.2/documentation/custom-service-cups.html)
+ * [custom-service-elasticsearch-cluster](http://htmlpreview.github.io/?https://github.com/breuninger-ecom/zabbix-agent-extensions/blob/master/zabbix_templates/3.2/documentation/custom-service-elasticsearch-cluster.html)
+ * [custom-service-elasticsearch-node](http://htmlpreview.github.io/?https://github.com/breuninger-ecom/zabbix-agent-extensions/blob/master/zabbix_templates/3.2/documentation/custom-service-elasticsearch-node.html)
+ * [custom-service-nginx](http://htmlpreview.github.io/?https://github.com/breuninger-ecom/zabbix-agent-extensions/blob/master/zabbix_templates/3.2/documentation/custom-service-nginx.html)
+ * [custom-service-nginx-logstats](http://htmlpreview.github.io/?https://github.com/breuninger-ecom/zabbix-agent-extensions/blob/master/zabbix_templates/3.2/documentation/custom-service-nginx-logstats.html)
+ * [custom-service-redis](http://htmlpreview.github.io/?https://github.com/breuninger-ecom/zabbix-agent-extensions/blob/master/zabbix_templates/3.2/documentation/custom-service-redis.html)
+ * [custom-service-varnish](http://htmlpreview.github.io/?https://github.com/breuninger-ecom/zabbix-agent-extensions/blob/master/zabbix_templates/3.2/documentation/custom-service-varnish.html)
 
 # How to test and debug
 
