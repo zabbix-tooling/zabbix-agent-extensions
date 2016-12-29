@@ -1,0 +1,44 @@
+<script type="text/javascript">
+<!--//
+function goToPage763(mySelect){
+PageIndex2=mySelect.selectedIndex;
+  {
+     if( mySelect.options[PageIndex2].value != "none")
+     {
+      frames['iframe2'].location.href = mySelect.options[PageIndex2].value;
+     }
+  }
+}
+//-->
+</script>
+
+<form name="form763">
+
+<p>
+Template: 
+<select name="select763" size="1" onchange="goToPage763(this.form.select763)">
+<option value="none" selected="selected"> Select a page and go </option>
+<option value="custom-os-linux.html"> custom-os-linux</option>
+<option value="custom-os-puppet.html"> custom-os-puppet</option>
+<option value="custom-service-apache.html"> custom-service-apache</option>
+<option value="custom-service-cups.html"> custom-service-cups</option>
+<option value="custom-service-elasticsearch-cluster.html"> custom-service-elasticsearch-cluster</option>
+<option value="custom-service-elasticsearch-node.html"> custom-service-elasticsearch-node</option>
+<option value="custom-service-nginx-logstats.html"> custom-service-nginx-logstats</option>
+<option value="custom-service-nginx.html"> custom-service-nginx</option>
+<option value="custom-service-redis.html"> custom-service-redis</option>
+<option value="custom-service-varnish.html"> custom-service-varnish</option>
+</select>
+
+
+</p>
+
+<p>
+<!-- The code below is the code in the body of this document that writes the form-->
+<iframe name="iframe2" src="start.html" align="top" height="90%" width="99%" hspace="10" vspace="10" align="left">
+If you can see this, your browser does not support iframes!
+</iframe>
+<a href="http://www.zabbix.com/documentation/3.2/manual/config/items" target="_new">Zabbix Manual: Items </a></BR>
+<a href="http://www.zabbix.com/documentation/3.2/manual/config/triggers" target="_new">Zabbix Manual: Triggers </a>
+</p>
+</form>

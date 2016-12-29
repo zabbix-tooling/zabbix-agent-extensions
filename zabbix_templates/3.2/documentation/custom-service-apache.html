@@ -1,0 +1,181 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<style type="text/css">
+
+   p.desc{
+     white-space:nowrap;
+   }
+
+   table.pretty {
+    margin: 1em 1em 1em 2em;
+    background: whitesmoke;
+    border-collapse: collapse;
+   }
+
+   table.pretty th, table.pretty td {
+    border: 1px gainsboro solid;
+    padding: 0.2em;
+   }
+
+   table.pretty th {
+    background: gainsboro;
+    text-align: left;
+   }
+
+   table.pretty caption {
+    margin-left: inherit;
+    margin-right: inherit;
+    white-space:nowrap;
+   }
+  </style>
+<body>
+<h2>Macro Overview</h2>
+
+  The following macros can be overloaded on host level.
+  <table class="pretty">
+<tr>
+<th>Name</th><th>Default</th>
+</tr>
+<tr>
+<td>{$HTTP_PORT}</td><td>80</td>
+</tr>
+<tr>
+<td>{$LOADBALANCER_CHECK}</td><td>/e/lbstatus.html</td>
+</tr>
+</table>
+<h1>Static Elements</h1>
+<h2>Trigger Overview</h2>
+<table class="pretty">
+<tr>
+<th>Name</th><th>Description</th><th>Priority</th><th>Expression</th><th>Dependencies</th>
+</tr>
+<tr>
+<td>Apache Maxclient Usage &gt; 80%</td><td>The available maxclient slots are consumed by 80% by reader/writer processes.</td><td style="background-color:#FFFF00;">Warning</td><td><tt>({Custom - Service - Apache:apache.total[{$HTTP_PORT}].last(0)} * 0.80) &lt; ({Custom - Service - Apache:apache.reader[{$HTTP_PORT}].last(0)} + {Custom - Service - Apache:apache.writer[{$HTTP_PORT}].last(0)} + {Custom - Service - Apache:apache.keepalive[{$HTTP_PORT}].last(0)})</tt></td><td><tt></tt></td>
+</tr>
+<tr>
+<td>Apache Mod Jk &gt; 6 Inactive Backends</td><td></td><td style="background-color:#FF0000;">Average</td><td><tt>({Custom - Service - Apache:apache.jk.dis.last()} +{Custom - Service - Apache:apache.jk.stp.last()} ) &gt; 6</tt></td><td><tt></tt></td>
+</tr>
+<tr>
+<td>Apache Mod Jk Disabled Backends &gt; 0</td><td></td><td style="background-color:#FFFF00;">Information</td><td><tt>({Custom - Service - Apache:apache.jk.dis.last()} +{Custom - Service - Apache:apache.jk.stp.last()} )&gt;0</tt></td><td><tt></tt></td>
+</tr>
+<tr>
+<td>Apache Mod Jk Inactive Backends &gt; 20%</td><td></td><td style="background-color:#FFFF00;">Warning</td><td><tt>({Custom - Service - Apache:apache.jk.dis.last()} +{Custom - Service - Apache:apache.jk.stp.last()} ) &gt; (({Custom - Service - Apache:apache.jk.dis.last()} + {Custom - Service - Apache:apache.jk.stp.last()} + {Custom - Service - Apache:apache.jk.act.last()}) * 0.20)</tt></td><td><tt></tt></td>
+</tr>
+<tr>
+<td>Apache Writer &gt; 800</td><td></td><td style="background-color:#FF0000;">Average</td><td><tt>{Custom - Service - Apache:apache.writer[{$HTTP_PORT}].last()}&gt;800</tt></td><td><tt></tt></td>
+</tr>
+<tr>
+<td>Get LB_Check HTTP Local on port {$HTTP_PORT} &gt; 30sec</td><td>Apache did not deliver the standard loadbalancer checkfile within 3 seconds.</td><td style="background-color:#FF0000;">Average</td><td><tt>({Custom - Service - Apache:web.page.perf[127.0.0.1,{$LOADBALANCER_CHECK},{$HTTP_PORT}].avg(300)}=0 or {Custom - Service - Apache:web.page.perf[127.0.0.1,{$LOADBALANCER_CHECK},{$HTTP_PORT}].avg(300)}&gt;30)</tt></td><td><tt>HTTP not reachable on port {$HTTP_PORT} from localhost<br>
+</tt></td>
+</tr>
+<tr>
+<td>HTTP not reachable on port {$HTTP_PORT} from localhost</td><td>Apache was not reachable on {$HTTP_PORT} in the last two monitoring cycles.</td><td style="background-color:#FF0000;">Average</td><td><tt>{Custom - Service - Apache:net.tcp.port[127.0.0.1,{$HTTP_PORT}].sum(#2)}=0</tt></td><td><tt></tt></td>
+</tr>
+</table>
+<h2>Graph Overview</h2>
+<table class="pretty">
+<tr>
+<th>Name</th><th>Elements</th>
+</tr>
+<tr>
+<td>Apache Maxclient Usage</td><td><tt>apache.reader[{$HTTP_PORT}]<br>apache.writer[{$HTTP_PORT}]<br>apache.keepalive[{$HTTP_PORT}]<br>
+</tt></td>
+</tr>
+<tr>
+<td>Apache Memory Usage</td><td><tt>apache.rss.memory.biggest<br>apache.rss.memory.average<br>apache.rss.memory.smallest<br>apache.rss.memory.total<br>
+</tt></td>
+</tr>
+<tr>
+<td>Apache Mod Jk</td><td><tt>apache.jk.act<br>apache.jk.dis<br>apache.jk.stp<br>
+</tt></td>
+</tr>
+<tr>
+<td>Apache Traffic</td><td><tt>apache.accesses[{$HTTP_PORT}]<br>apache.kbytes[{$HTTP_PORT}]<br>
+</tt></td>
+</tr>
+</table>
+<h2>Item Overview</h2>
+<table class="pretty">
+<tr>
+<th>Type</th><th>Name</th><th>Key</th><th>Description</th><th>Interval (sec)</th><th>History Days</th><th>Trend Days</th>
+</tr>
+<tr>
+<td>
+<p class="desc">Zabbix Agent</p>
+</td><td>Apache Total Accesses</td><td><tt>apache.accesses[{$HTTP_PORT}]</tt></td><td></td><td>120</td><td>14</td><td>365</td>
+</tr>
+<tr>
+<td>
+<p class="desc">Zabbix Agent</p>
+</td><td>Apache Mod Jk Activated</td><td><tt>apache.jk.act</tt></td><td>Activated Backends</td><td>300</td><td>14</td><td>0</td>
+</tr>
+<tr>
+<td>
+<p class="desc">Zabbix Agent</p>
+</td><td>Apache Mod Jk Disabled</td><td><tt>apache.jk.dis</tt></td><td>Disabled Backends, no new sessions</td><td>300</td><td>14</td><td>0</td>
+</tr>
+<tr>
+<td>
+<p class="desc">Zabbix Agent</p>
+</td><td>Apache Mod Jk Stopped</td><td><tt>apache.jk.stp</tt></td><td>Stopped Backends, no request processing</td><td>300</td><td>14</td><td>0</td>
+</tr>
+<tr>
+<td>
+<p class="desc">Zabbix Agent</p>
+</td><td>Apache Total Bytes</td><td><tt>apache.kbytes[{$HTTP_PORT}]</tt></td><td></td><td>120</td><td>14</td><td>365</td>
+</tr>
+<tr>
+<td>
+<p class="desc">Zabbix Agent</p>
+</td><td>Apache Clients Keepalive</td><td><tt>apache.keepalive[{$HTTP_PORT}]</tt></td><td>Apache workers which are currently in keepalive state</td><td>120</td><td>14</td><td>30</td>
+</tr>
+<tr>
+<td>
+<p class="desc">Zabbix Agent</p>
+</td><td>Apache Clients Reader</td><td><tt>apache.reader[{$HTTP_PORT}]</tt></td><td>Apache workers which are currently reading a request.</td><td>120</td><td>14</td><td>30</td>
+</tr>
+<tr>
+<td>
+<p class="desc">Zabbix Agent</p>
+</td><td>Apache Memory Average Process</td><td><tt>apache.rss.memory.average</tt></td><td>Average RSS memory used by apache process</td><td>240</td><td>14</td><td>30</td>
+</tr>
+<tr>
+<td>
+<p class="desc">Zabbix Agent</p>
+</td><td>Apache Memory Biggest Process</td><td><tt>apache.rss.memory.biggest</tt></td><td>Biggest RSS memory used by apache process</td><td>240</td><td>14</td><td>30</td>
+</tr>
+<tr>
+<td>
+<p class="desc">Zabbix Agent</p>
+</td><td>Apache Memory Smallest Process</td><td><tt>apache.rss.memory.smallest</tt></td><td>Smallest RSS memory used by apache process</td><td>240</td><td>14</td><td>30</td>
+</tr>
+<tr>
+<td>
+<p class="desc">Zabbix Agent</p>
+</td><td>Apache Memory Total</td><td><tt>apache.rss.memory.total</tt></td><td>Total RSS memory used by apache</td><td>240</td><td>14</td><td>30</td>
+</tr>
+<tr>
+<td>
+<p class="desc">Zabbix Agent</p>
+</td><td>Apache Clients ServerLimit</td><td><tt>apache.total[{$HTTP_PORT}]</tt></td><td>Total amout of possible apache workers.</td><td>900</td><td>14</td><td>0</td>
+</tr>
+<tr>
+<td>
+<p class="desc">Zabbix Agent</p>
+</td><td>Apache Clients Writer</td><td><tt>apache.writer[{$HTTP_PORT}]</tt></td><td>Apache workers which are currently a request result writing to a client.</td><td>120</td><td>14</td><td>30</td>
+</tr>
+<tr>
+<td>
+<p class="desc">Zabbix Agent</p>
+</td><td>TCP Connect Local</td><td><tt>net.tcp.port[127.0.0.1,{$HTTP_PORT}]</tt></td><td></td><td>120</td><td>14</td><td>30</td>
+</tr>
+<tr>
+<td>
+<p class="desc">Zabbix Agent</p>
+</td><td>Get /e/lbstatus.html response time</td><td><tt>web.page.perf[127.0.0.1,{$LOADBALANCER_CHECK},{$HTTP_PORT}]</tt></td><td></td><td>120</td><td>14</td><td>30</td>
+</tr>
+</table>
+</body>
+</html>

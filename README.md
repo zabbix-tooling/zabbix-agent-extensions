@@ -33,6 +33,19 @@ This package provides the following capabilities:
    (put json snippets to /var/run/zabbix-generic-discovery/<ITEMNAME>-*.json i.e. with puppet and get a combined discovery value)
  * Monitor Puppet state
 
+A quick overview is provided by the following files:
+ 
+ * http://htmlpreview.github.io/?https://github.com/breuninger-ecom/zabbix-agent-extensions/tree/master/zabbix_templates/3.2/documentation/custom-os-linux.html
+ * http://htmlpreview.github.io/?https://github.com/breuninger-ecom/zabbix-agent-extensions/tree/master/zabbix_templates/3.2/documentation/custom-os-puppet.html
+ * http://htmlpreview.github.io/?https://github.com/breuninger-ecom/zabbix-agent-extensions/tree/master/zabbix_templates/3.2/documentation/custom-service-apache.html
+ * http://htmlpreview.github.io/?https://github.com/breuninger-ecom/zabbix-agent-extensions/tree/master/zabbix_templates/3.2/documentation/custom-service-cups.html
+ * http://htmlpreview.github.io/?https://github.com/breuninger-ecom/zabbix-agent-extensions/tree/master/zabbix_templates/3.2/documentation/custom-service-elasticsearch-cluster.html
+ * http://htmlpreview.github.io/?https://github.com/breuninger-ecom/zabbix-agent-extensions/tree/master/zabbix_templates/3.2/documentation/custom-service-elasticsearch-node.html
+ * http://htmlpreview.github.io/?https://github.com/breuninger-ecom/zabbix-agent-extensions/tree/master/zabbix_templates/3.2/documentation/custom-service-nginx.html
+ * http://htmlpreview.github.io/?https://github.com/breuninger-ecom/zabbix-agent-extensions/tree/master/zabbix_templates/3.2/documentation/custom-service-nginx-logstats.html
+ * http://htmlpreview.github.io/?https://github.com/breuninger-ecom/zabbix-agent-extensions/tree/master/zabbix_templates/3.2/documentation/custom-service-redis.html
+ * http://htmlpreview.github.io/?https://github.com/breuninger-ecom/zabbix-agent-extensions/tree/master/zabbix_templates/3.2/documentation/custom-service-varnish.html
+
 # How to test and debug
 
  * Install the packages on the zabbix agent host
