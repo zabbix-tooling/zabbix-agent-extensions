@@ -1,14 +1,25 @@
 #!/bin/bash
-#
+
 OPWD="$(pwd)"
 
 TASKS="${1:-rpm deb}"
 
 for TASK in clean $TASKS;
 do
+ cd $OPWD
+ if [ "$TASK" = "release" ];then
+   cd extension-files
+   RELEASE="$(head -1 debian/changelog | sed '~s,^.*(\(..*\)).*$,\1,')"
+   read -e -p "New version: " -i "$RELEASE" RELEASE
+   debchange --newversion $RELEASE --distribution trusty  --urgency low --controlmaint
+   RELEASE="$(head -1 debian/changelog | sed '~s,^.*(\(..*\)).*$,\1,')"
+   cd $OPWD
+   sed -i "~s,^Version:        .*$,Version:        ${RELEASE}," packaging/zabbix-agent-extensions.spec
+ fi
+
  if [ "$TASK" = "clean" ];then
    echo "INFO: removing old build artefacts"
-   rm -rf BUILDROOT i386 x86_64 packages *.src.rpm
+   rm -rf BUILDROOT i386 x86_64 packages *.rpm *.build
    rm -f ${NAME}*.deb ${NAME}*.changes ${NAME}*.changes
  fi
 
