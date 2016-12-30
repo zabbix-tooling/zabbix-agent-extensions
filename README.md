@@ -66,7 +66,7 @@ A quick overview is provided by the following files:
 
  * Release only: Edit this file (README.md) and describe the new feature
  * Release only: Modify/release version information
-   * agent-scripts/debian/changelog (use "date -R" for a proper timestamp)
+   * extension-files/debian/changelog (use "date -R" for a proper timestamp)
    * zabbix-agent-extensions.spec
  * Invoke the following procedure on your system for package builds on a Ubuntu 14.04 System
    (creates RPM and DEB packages)
