@@ -1,6 +1,6 @@
 Name:           zabbix-agent-extensions
 Version:        1.2.43
-Release:        2
+Release:        1
 License:        n/a
 Group:          Monitoring
 Url:            https://github.com/breuninger-ecom/zabbix-agent-extensions
