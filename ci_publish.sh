@@ -11,7 +11,7 @@ set -e
 echo -------------------------Publishing YUM---------------------------
 
 set -x
-scp noarch/zabbix-agent-extensions*.rpm ${TARGET_USER}@${TARGET_HOST}:${TARGET_DESTINATION_YUM}
+scp zabbix-agent-extensions*.rpm ${TARGET_USER}@${TARGET_HOST}:${TARGET_DESTINATION_YUM}
 ssh ${TARGET_USER}@${TARGET_HOST} "/usr/bin/createrepo -s sha ${TARGET_DESTINATION_YUM}"
 set +x
 
