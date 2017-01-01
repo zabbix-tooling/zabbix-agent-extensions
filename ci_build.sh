@@ -13,8 +13,7 @@ do
    read -e -p "New version: " -i "$RELEASE" RELEASE
    debchange --newversion $RELEASE --distribution trusty  --urgency low --controlmaint
    RELEASE="$(head -1 debian/changelog | sed '~s,^.*(\(..*\)).*$,\1,')"
-   cd $OPWD
-   sed -i "~s,^Version:        .*$,Version:        ${RELEASE}," packaging/zabbix-agent-extensions.spec
+   sed -i "~s,^Version:        .*$,Version:        ${RELEASE}," zabbix-agent-extensions.spec
  fi
 
  if [ "$TASK" = "clean" ];then
