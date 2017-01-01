@@ -1,4 +1,4 @@
-zabbix-agent-extensions (1.3.0) trusty; urgency=low
+zabbix-agent-extensions (1.45.0) trusty; urgency=low
 
   * Improved packaging
 
