@@ -27,13 +27,12 @@ do
    if (which rpmbuild &> /dev/null);then
       echo "INFO: creating rpm archive"
       rpmbuild --define "_sourcedir $OPWD" --define "_rpmdir $OPWD" --define "_builddir $OPWD" --define "_topdir $OPWD" \
-              --buildroot="$OPWD/BUILDROOT" --define "_srcrpmdir $OPWD" --define "_speccdir $OPWD" --target noarch -bb packaging/zabbix-agent-extensions.spec
+              --buildroot="$OPWD/BUILDROOT" --define "_srcrpmdir $OPWD" --define "_speccdir $OPWD" --target noarch -bb extension-files/zabbix-agent-extensions.spec
       RET="$?"
       if [ "$RET" != "0" ];then
          echo "ERROR: rpm build failed"
          exit 1
       fi
-
       mv noarch/zabbix-agent-extensions*.noarch.rpm ./
       rmdir noarch
       rpm -qlp zabbix-agent-extensions*.noarch.rpm
