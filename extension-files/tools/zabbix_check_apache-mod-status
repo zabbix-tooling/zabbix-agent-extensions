@@ -39,7 +39,7 @@ awk -v get=$WHAT '
 	       writers++;	
         }
         else if (what == "R"){
-	      reader++;
+	      readers++;
         }
         else if (what == "K"){
 	      keepalives++;
@@ -59,7 +59,7 @@ awk -v get=$WHAT '
 	         print writers;
         }
 	else if(get == "keepalive"){
-	         print keepalive;
+	         print keepalives;
         }
    else if(get == "total"){
 	         print total;
