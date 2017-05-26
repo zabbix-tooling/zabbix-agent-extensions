@@ -8,30 +8,36 @@ A set of zabbix UserParameter scripts and a monitoring template for linux system
 
 This package provides the following capabilities:
 
- * Linux standard monitoring using the standard items provided by the zabbix-agent
-   * Monitor all local filesystems using dicovery
-   * Monitor all interfaces using dicovery
-   * Monitor memory behavior
-   * Monitor important servcies: smtp, ssh, ntp time difference to zabbix server
-   * Swap usage
+ * linux standard monitoring using the standard items provided by the zabbix-agent
+   * monitor memory behavior
+   * monitor important servcies: smtp, ssh, ntp time difference to zabbix server
+   * swap usage
    * 5min system load
-   * Monitor dmesg for bad behavior of the system
-   * Monitor the maximum and minimum of processes
- * ICMP Ping of the system
- * Monitor the MTA mailqueue
- * Monitor NFS operations/retransmits
- * Apache Monitoring:
+   * monitor dmesg for bad behavior of the system
+   * monitor the maximum and minimum of processes
+   * automatic discovery
+      * filesystems: inode and space measures
+      * network interfaces: packets and transferrates per second
+      * storage devices: operations per second
+   * number of processes
+ * monitor ICMP ping 
+ * monitor the MTA mailqueue
+ * monitor NFS operations/retransmits
+ * apache monitoring:
    (enable /server-status available on localhost, https://httpd.apache.org/docs/2.4/mod/mod_status.html)
    * Check Apache Server-Status (Readers, Writers - alert if to many slots are in use)
    * Loadbalancer check
    * Monitor Mod JK backend status
- * Elasticsearch Node and Cluster Monitoring (needs elasticsearch and es_stats_zabbix Python modules)
- * Redis Monitoring (needs redis Python module)
- * NGINX Monitoring
+ * elasticsearch node and cluster monitoring (needs elasticsearch and es_stats_zabbix Python modules)
+ * redis Monitoring (needs redis Python module)
+ * nGINX Monitoring
    (enable /basic_status available on localhost, https://nginx.org/en/docs/http/ngx_http_stub_status_module.html)
- * Generic discovery
+ * generic discovery
    (put json snippets to /var/run/zabbix-generic-discovery/<ITEMNAME>-*.json i.e. with puppet and get a combined discovery value)
- * Monitor Puppet state
+ * monitor puppet state
+
+
+Almost all measures are integrated in graphs which are displayed on the various host screens.
 
 A quick overview is provided by the following files:
 
@@ -75,7 +81,7 @@ A quick overview is provided by the following files:
 
    ```
    sudo apt-get install debhelper devscripts rpm
-   git clone https://github.com/breuninger-ecom/zabbix-agent-extensions
+   git clone https://github.com/scoopex/zabbix-agent-extensions
    cd zabbix-agent-extensions
    ./ci_build.sh
    # Only for testing purposes on RPM based systems
@@ -95,14 +101,18 @@ A quick overview is provided by the following files:
 
 # How to configure the zabbix server
 
-The template will work on zabbix 2.2 and above.
+The templates will work on zabbix 2.2 and above.
 
  * Open Zabbix web frontend
  * Open "Configuration" => "Templates"
  * Press button "Import"
  * Activate Linux template
-   * Load "zabbix_templates/Custom - OS - Linux.xml"
+   * Load "zabbix_templates/3.2/Custom - OS - Linux.xml"
    * Open template "Custom - OS - Linux" and modify the default values defined in the macros
+     * {$DISK_USAGE_PERCENT_ALARM}: percentage of storage usage to send alarms 
+     * {$MAXIMUM_NUMBER_RETRANSMISSIONS}: alert if that number of nfs retransmits appears in one monitoring cycle
+     * {$MONITOR_LOAD_WARNING_MULT} : multiplying factor
+     * {$MONITOR_TIMEOUT} : amount of time to complain if hosts does not provide values anymore
    * Assign template "Custom - OS - Linux" to the desired hosts and modify the default values to host specific settings
  * Activate Apache template
    * Load "zabbix_templates/Custom - Service - Apache.xml"
