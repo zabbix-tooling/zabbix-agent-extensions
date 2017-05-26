@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
     <version>3.2</version>
-    <date>2016-11-26T07:06:35Z</date>
+    <date>2017-05-26T06:24:53Z</date>
     <groups>
         <group>
             <name>Templates</name>
@@ -11,7 +11,7 @@
         <template>
             <template>Custom - OS - Linux</template>
             <name>Custom - OS - Linux</name>
-            <description/>
+            <description>Monitor important linux parameters</description>
             <groups>
                 <group>
                     <name>Templates</name>
@@ -23,9 +23,6 @@
                 </application>
                 <application>
                     <name>OS - Disk Performance</name>
-                </application>
-                <application>
-                    <name>OS - Disks</name>
                 </application>
                 <application>
                     <name>OS - Health</name>
@@ -41,6 +38,9 @@
                 </application>
                 <application>
                     <name>OS - RPC/NFS</name>
+                </application>
+                <application>
+                    <name>OS - Storage</name>
                 </application>
                 <application>
                     <name>OS - Zabbix</name>
@@ -484,6 +484,45 @@
                     <logtimefmt/>
                 </item>
                 <item>
+                    <name>Number of running processes</name>
+                    <type>0</type>
+                    <snmp_community/>
+                    <multiplier>0</multiplier>
+                    <snmp_oid/>
+                    <key>proc.num[,,run]</key>
+                    <delay>60</delay>
+                    <history>7</history>
+                    <trends>365</trends>
+                    <status>0</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts/>
+                    <units/>
+                    <delta>0</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description>Number of processes in running state.</description>
+                    <inventory_link>0</inventory_link>
+                    <applications/>
+                    <valuemap/>
+                    <logtimefmt/>
+                </item>
+                <item>
                     <name>Cron Daemon</name>
                     <type>0</type>
                     <snmp_community/>
@@ -564,6 +603,88 @@
                     <applications>
                         <application>
                             <name>OS - Health</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                </item>
+                <item>
+                    <name>Number of processes</name>
+                    <type>0</type>
+                    <snmp_community/>
+                    <multiplier>0</multiplier>
+                    <snmp_oid/>
+                    <key>proc.num[]</key>
+                    <delay>60</delay>
+                    <history>7</history>
+                    <trends>365</trends>
+                    <status>0</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts/>
+                    <units/>
+                    <delta>0</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description>Total number of processes in any state.</description>
+                    <inventory_link>0</inventory_link>
+                    <applications/>
+                    <valuemap/>
+                    <logtimefmt/>
+                </item>
+                <item>
+                    <name>Interrupts per second</name>
+                    <type>0</type>
+                    <snmp_community/>
+                    <multiplier>0</multiplier>
+                    <snmp_oid/>
+                    <key>system.cpu.intr</key>
+                    <delay>60</delay>
+                    <history>7</history>
+                    <trends>365</trends>
+                    <status>0</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts/>
+                    <units>ips</units>
+                    <delta>1</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description/>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>OS - CPU Times</name>
                         </application>
                     </applications>
                     <valuemap/>
@@ -1224,7 +1345,7 @@
                     <delay>600</delay>
                     <history>90</history>
                     <trends>365</trends>
-                    <status>1</status>
+                    <status>0</status>
                     <value_type>3</value_type>
                     <allowed_hosts/>
                     <units>s</units>
@@ -1258,6 +1379,45 @@
                     <logtimefmt/>
                 </item>
                 <item>
+                    <name>Number of logged in users</name>
+                    <type>0</type>
+                    <snmp_community/>
+                    <multiplier>0</multiplier>
+                    <snmp_oid/>
+                    <key>system.users.num</key>
+                    <delay>60</delay>
+                    <history>7</history>
+                    <trends>365</trends>
+                    <status>0</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts/>
+                    <units/>
+                    <delta>0</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description>Number of users who are currently logged in.</description>
+                    <inventory_link>0</inventory_link>
+                    <applications/>
+                    <valuemap/>
+                    <logtimefmt/>
+                </item>
+                <item>
                     <name>Reboot Required</name>
                     <type>0</type>
                     <snmp_community/>
@@ -1267,7 +1427,7 @@
                     <delay>600</delay>
                     <history>90</history>
                     <trends>0</trends>
-                    <status>1</status>
+                    <status>0</status>
                     <value_type>3</value_type>
                     <allowed_hosts/>
                     <units/>
@@ -1977,13 +2137,13 @@
                     <host_prototypes/>
                 </discovery_rule>
                 <discovery_rule>
-                    <name>Device discovery</name>
+                    <name>Storage Device discovery</name>
                     <type>0</type>
                     <snmp_community/>
                     <snmp_oid/>
                     <key>vfs.dev.discovery</key>
                     <delay>10</delay>
-                    <status>1</status>
+                    <status>0</status>
                     <allowed_hosts/>
                     <snmpv3_contextname/>
                     <snmpv3_securityname/>
@@ -2007,7 +2167,7 @@
                         <conditions>
                             <condition>
                                 <macro>{#DEVNAME}</macro>
-                                <value>^(sd|sa)</value>
+                                <value>.*</value>
                                 <operator>8</operator>
                                 <formulaid>A</formulaid>
                             </condition>
@@ -2017,104 +2177,16 @@
                     <description>Discovery of disks.</description>
                     <item_prototypes>
                         <item_prototype>
-                            <name>Disk {#DEVNAME} Read IOPS Custom</name>
-                            <type>0</type>
-                            <snmp_community/>
-                            <multiplier>0</multiplier>
-                            <snmp_oid/>
-                            <key>custom.vfs.dev.read.ops[{#DEVNAME}]</key>
-                            <delay>10</delay>
-                            <history>30</history>
-                            <trends>90</trends>
-                            <status>1</status>
-                            <value_type>0</value_type>
-                            <allowed_hosts/>
-                            <units>iops</units>
-                            <delta>1</delta>
-                            <snmpv3_contextname/>
-                            <snmpv3_securityname/>
-                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                            <snmpv3_authpassphrase/>
-                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                            <snmpv3_privpassphrase/>
-                            <formula>1</formula>
-                            <delay_flex/>
-                            <params/>
-                            <ipmi_sensor/>
-                            <data_type>0</data_type>
-                            <authtype>0</authtype>
-                            <username/>
-                            <password/>
-                            <publickey/>
-                            <privatekey/>
-                            <port/>
-                            <description/>
-                            <inventory_link>0</inventory_link>
-                            <applications>
-                                <application>
-                                    <name>OS - Disk Performance</name>
-                                </application>
-                            </applications>
-                            <valuemap/>
-                            <logtimefmt/>
-                            <application_prototypes/>
-                        </item_prototype>
-                        <item_prototype>
-                            <name>Disk {#DEVNAME} Write IOPS Custom</name>
-                            <type>0</type>
-                            <snmp_community/>
-                            <multiplier>0</multiplier>
-                            <snmp_oid/>
-                            <key>custom.vfs.dev.write.ops[{#DEVNAME}]</key>
-                            <delay>10</delay>
-                            <history>30</history>
-                            <trends>90</trends>
-                            <status>1</status>
-                            <value_type>0</value_type>
-                            <allowed_hosts/>
-                            <units>iops</units>
-                            <delta>1</delta>
-                            <snmpv3_contextname/>
-                            <snmpv3_securityname/>
-                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                            <snmpv3_authpassphrase/>
-                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                            <snmpv3_privpassphrase/>
-                            <formula>1</formula>
-                            <delay_flex/>
-                            <params/>
-                            <ipmi_sensor/>
-                            <data_type>0</data_type>
-                            <authtype>0</authtype>
-                            <username/>
-                            <password/>
-                            <publickey/>
-                            <privatekey/>
-                            <port/>
-                            <description/>
-                            <inventory_link>0</inventory_link>
-                            <applications>
-                                <application>
-                                    <name>OS - Disk Performance</name>
-                                </application>
-                            </applications>
-                            <valuemap/>
-                            <logtimefmt/>
-                            <application_prototypes/>
-                        </item_prototype>
-                        <item_prototype>
                             <name>Disk {#DEVNAME} Read BPS</name>
                             <type>0</type>
                             <snmp_community/>
                             <multiplier>0</multiplier>
                             <snmp_oid/>
-                            <key>vfs.dev.read[{#DEVNAME},bps,avg5]</key>
-                            <delay>10</delay>
-                            <history>30</history>
+                            <key>vfs.dev.read[{#DEVNAME},bps,avg1]</key>
+                            <delay>60</delay>
+                            <history>14</history>
                             <trends>90</trends>
-                            <status>1</status>
+                            <status>0</status>
                             <value_type>0</value_type>
                             <allowed_hosts/>
                             <units>bps</units>
@@ -2154,11 +2226,11 @@
                             <snmp_community/>
                             <multiplier>0</multiplier>
                             <snmp_oid/>
-                            <key>vfs.dev.read[{#DEVNAME},ops,avg5]</key>
-                            <delay>10</delay>
-                            <history>30</history>
+                            <key>vfs.dev.read[{#DEVNAME},ops,avg1]</key>
+                            <delay>60</delay>
+                            <history>14</history>
                             <trends>90</trends>
-                            <status>1</status>
+                            <status>0</status>
                             <value_type>0</value_type>
                             <allowed_hosts/>
                             <units>iops</units>
@@ -2198,11 +2270,11 @@
                             <snmp_community/>
                             <multiplier>0</multiplier>
                             <snmp_oid/>
-                            <key>vfs.dev.write[{#DEVNAME},bps,avg5]</key>
-                            <delay>10</delay>
-                            <history>30</history>
+                            <key>vfs.dev.write[{#DEVNAME},bps,avg1]</key>
+                            <delay>60</delay>
+                            <history>14</history>
                             <trends>90</trends>
-                            <status>1</status>
+                            <status>0</status>
                             <value_type>0</value_type>
                             <allowed_hosts/>
                             <units>bps</units>
@@ -2242,11 +2314,11 @@
                             <snmp_community/>
                             <multiplier>0</multiplier>
                             <snmp_oid/>
-                            <key>vfs.dev.write[{#DEVNAME},ops,avg5]</key>
-                            <delay>10</delay>
-                            <history>30</history>
+                            <key>vfs.dev.write[{#DEVNAME},ops,avg1]</key>
+                            <delay>60</delay>
+                            <history>14</history>
                             <trends>90</trends>
-                            <status>1</status>
+                            <status>0</status>
                             <value_type>0</value_type>
                             <allowed_hosts/>
                             <units>iops</units>
@@ -2284,19 +2356,19 @@
                     <trigger_prototypes/>
                     <graph_prototypes>
                         <graph_prototype>
-                            <name>Disk {#DEVNAME} IOPS</name>
+                            <name>Disk {#DEVNAME} BPS</name>
                             <width>900</width>
-                            <height>200</height>
+                            <height>300</height>
                             <yaxismin>0.0000</yaxismin>
                             <yaxismax>100.0000</yaxismax>
                             <show_work_period>1</show_work_period>
                             <show_triggers>1</show_triggers>
-                            <type>0</type>
+                            <type>1</type>
                             <show_legend>1</show_legend>
                             <show_3d>0</show_3d>
                             <percent_left>0.0000</percent_left>
                             <percent_right>0.0000</percent_right>
-                            <ymin_type_1>0</ymin_type_1>
+                            <ymin_type_1>1</ymin_type_1>
                             <ymax_type_1>0</ymax_type_1>
                             <ymin_item_1>0</ymin_item_1>
                             <ymax_item_1>0</ymax_item_1>
@@ -2306,41 +2378,41 @@
                                     <drawtype>0</drawtype>
                                     <color>00C800</color>
                                     <yaxisside>0</yaxisside>
-                                    <calc_fnc>2</calc_fnc>
+                                    <calc_fnc>4</calc_fnc>
                                     <type>0</type>
                                     <item>
                                         <host>Custom - OS - Linux</host>
-                                        <key>vfs.dev.read[{#DEVNAME},ops,avg5]</key>
+                                        <key>vfs.dev.read[{#DEVNAME},bps,avg1]</key>
                                     </item>
                                 </graph_item>
                                 <graph_item>
                                     <sortorder>1</sortorder>
                                     <drawtype>0</drawtype>
-                                    <color>C80000</color>
+                                    <color>DD0000</color>
                                     <yaxisside>0</yaxisside>
-                                    <calc_fnc>2</calc_fnc>
+                                    <calc_fnc>4</calc_fnc>
                                     <type>0</type>
                                     <item>
                                         <host>Custom - OS - Linux</host>
-                                        <key>vfs.dev.write[{#DEVNAME},ops,avg5]</key>
+                                        <key>vfs.dev.write[{#DEVNAME},bps,avg1]</key>
                                     </item>
                                 </graph_item>
                             </graph_items>
                         </graph_prototype>
                         <graph_prototype>
-                            <name>Disk {#DEVNAME} IOPS Custom</name>
+                            <name>Disk {#DEVNAME} IOPS</name>
                             <width>900</width>
-                            <height>200</height>
+                            <height>300</height>
                             <yaxismin>0.0000</yaxismin>
                             <yaxismax>100.0000</yaxismax>
                             <show_work_period>1</show_work_period>
                             <show_triggers>1</show_triggers>
-                            <type>0</type>
+                            <type>1</type>
                             <show_legend>1</show_legend>
                             <show_3d>0</show_3d>
                             <percent_left>0.0000</percent_left>
                             <percent_right>0.0000</percent_right>
-                            <ymin_type_1>0</ymin_type_1>
+                            <ymin_type_1>1</ymin_type_1>
                             <ymax_type_1>0</ymax_type_1>
                             <ymin_item_1>0</ymin_item_1>
                             <ymax_item_1>0</ymax_item_1>
@@ -2348,25 +2420,25 @@
                                 <graph_item>
                                     <sortorder>0</sortorder>
                                     <drawtype>0</drawtype>
-                                    <color>0000C8</color>
+                                    <color>00C800</color>
                                     <yaxisside>0</yaxisside>
-                                    <calc_fnc>2</calc_fnc>
+                                    <calc_fnc>4</calc_fnc>
                                     <type>0</type>
                                     <item>
                                         <host>Custom - OS - Linux</host>
-                                        <key>custom.vfs.dev.read.ops[{#DEVNAME}]</key>
+                                        <key>vfs.dev.read[{#DEVNAME},ops,avg1]</key>
                                     </item>
                                 </graph_item>
                                 <graph_item>
                                     <sortorder>1</sortorder>
                                     <drawtype>0</drawtype>
-                                    <color>C800C8</color>
+                                    <color>C80000</color>
                                     <yaxisside>0</yaxisside>
-                                    <calc_fnc>2</calc_fnc>
+                                    <calc_fnc>4</calc_fnc>
                                     <type>0</type>
                                     <item>
                                         <host>Custom - OS - Linux</host>
-                                        <key>custom.vfs.dev.write.ops[{#DEVNAME}]</key>
+                                        <key>vfs.dev.write[{#DEVNAME},ops,avg1]</key>
                                     </item>
                                 </graph_item>
                             </graph_items>
@@ -2451,7 +2523,7 @@
                             <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
-                                    <name>OS - Disks</name>
+                                    <name>OS - Storage</name>
                                 </application>
                             </applications>
                             <valuemap/>
@@ -2495,7 +2567,7 @@
                             <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
-                                    <name>OS - Disks</name>
+                                    <name>OS - Storage</name>
                                 </application>
                             </applications>
                             <valuemap/>
@@ -2539,7 +2611,7 @@
                             <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
-                                    <name>OS - Disks</name>
+                                    <name>OS - Storage</name>
                                 </application>
                             </applications>
                             <valuemap/>
@@ -2583,7 +2655,7 @@
                             <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
-                                    <name>OS - Disks</name>
+                                    <name>OS - Storage</name>
                                 </application>
                             </applications>
                             <valuemap/>
@@ -2627,7 +2699,7 @@
                             <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
-                                    <name>OS - Disks</name>
+                                    <name>OS - Storage</name>
                                 </application>
                             </applications>
                             <valuemap/>
@@ -2671,7 +2743,7 @@
                             <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
-                                    <name>OS - Disks</name>
+                                    <name>OS - Storage</name>
                                 </application>
                             </applications>
                             <valuemap/>
@@ -2784,18 +2856,27 @@
                             <percent_left>0.0000</percent_left>
                             <percent_right>0.0000</percent_right>
                             <ymin_type_1>1</ymin_type_1>
-                            <ymax_type_1>2</ymax_type_1>
+                            <ymax_type_1>0</ymax_type_1>
                             <ymin_item_1>0</ymin_item_1>
-                            <ymax_item_1>
-                                <host>Custom - OS - Linux</host>
-                                <key>vfs.fs.size[{#FSNAME},total]</key>
-                            </ymax_item_1>
+                            <ymax_item_1>0</ymax_item_1>
                             <graph_items>
                                 <graph_item>
                                     <sortorder>0</sortorder>
                                     <drawtype>0</drawtype>
-                                    <color>C80000</color>
+                                    <color>00BBBB</color>
                                     <yaxisside>0</yaxisside>
+                                    <calc_fnc>4</calc_fnc>
+                                    <type>0</type>
+                                    <item>
+                                        <host>Custom - OS - Linux</host>
+                                        <key>vfs.fs.size[{#FSNAME},pused]</key>
+                                    </item>
+                                </graph_item>
+                                <graph_item>
+                                    <sortorder>1</sortorder>
+                                    <drawtype>0</drawtype>
+                                    <color>0000C8</color>
+                                    <yaxisside>1</yaxisside>
                                     <calc_fnc>4</calc_fnc>
                                     <type>0</type>
                                     <item>
@@ -2804,10 +2885,10 @@
                                     </item>
                                 </graph_item>
                                 <graph_item>
-                                    <sortorder>1</sortorder>
+                                    <sortorder>2</sortorder>
                                     <drawtype>0</drawtype>
-                                    <color>00C800</color>
-                                    <yaxisside>0</yaxisside>
+                                    <color>C800C8</color>
+                                    <yaxisside>1</yaxisside>
                                     <calc_fnc>4</calc_fnc>
                                     <type>0</type>
                                     <item>
@@ -2845,7 +2926,7 @@
                 <screen>
                     <name>Custom - OS - Linux</name>
                     <hsize>1</hsize>
-                    <vsize>7</vsize>
+                    <vsize>10</vsize>
                     <screen_items>
                         <screen_item>
                             <resourcetype>0</resourcetype>
@@ -2870,7 +2951,7 @@
                             <application/>
                         </screen_item>
                         <screen_item>
-                            <resourcetype>0</resourcetype>
+                            <resourcetype>1</resourcetype>
                             <width>900</width>
                             <height>300</height>
                             <x>0</x>
@@ -2885,7 +2966,7 @@
                             <dynamic>0</dynamic>
                             <sort_triggers>0</sort_triggers>
                             <resource>
-                                <name>CPU Context Switches per Second</name>
+                                <key>system.cpu.intr</key>
                                 <host>Custom - OS - Linux</host>
                             </resource>
                             <max_columns>3</max_columns>
@@ -2907,7 +2988,7 @@
                             <dynamic>0</dynamic>
                             <sort_triggers>0</sort_triggers>
                             <resource>
-                                <name>Memory Usage</name>
+                                <name>CPU Context Switches per Second</name>
                                 <host>Custom - OS - Linux</host>
                             </resource>
                             <max_columns>3</max_columns>
@@ -2929,7 +3010,7 @@
                             <dynamic>0</dynamic>
                             <sort_triggers>0</sort_triggers>
                             <resource>
-                                <name>Swap Usage</name>
+                                <name>Memory Usage</name>
                                 <host>Custom - OS - Linux</host>
                             </resource>
                             <max_columns>3</max_columns>
@@ -2951,7 +3032,7 @@
                             <dynamic>0</dynamic>
                             <sort_triggers>0</sort_triggers>
                             <resource>
-                                <name>System Load</name>
+                                <name>Swap Usage</name>
                                 <host>Custom - OS - Linux</host>
                             </resource>
                             <max_columns>3</max_columns>
@@ -2973,6 +3054,50 @@
                             <dynamic>0</dynamic>
                             <sort_triggers>0</sort_triggers>
                             <resource>
+                                <name>System Load</name>
+                                <host>Custom - OS - Linux</host>
+                            </resource>
+                            <max_columns>3</max_columns>
+                            <application/>
+                        </screen_item>
+                        <screen_item>
+                            <resourcetype>0</resourcetype>
+                            <width>900</width>
+                            <height>300</height>
+                            <x>0</x>
+                            <y>6</y>
+                            <colspan>1</colspan>
+                            <rowspan>1</rowspan>
+                            <elements>0</elements>
+                            <valign>0</valign>
+                            <halign>0</halign>
+                            <style>0</style>
+                            <url/>
+                            <dynamic>0</dynamic>
+                            <sort_triggers>0</sort_triggers>
+                            <resource>
+                                <name>Processes</name>
+                                <host>Custom - OS - Linux</host>
+                            </resource>
+                            <max_columns>3</max_columns>
+                            <application/>
+                        </screen_item>
+                        <screen_item>
+                            <resourcetype>0</resourcetype>
+                            <width>900</width>
+                            <height>300</height>
+                            <x>0</x>
+                            <y>7</y>
+                            <colspan>1</colspan>
+                            <rowspan>1</rowspan>
+                            <elements>0</elements>
+                            <valign>0</valign>
+                            <halign>0</halign>
+                            <style>0</style>
+                            <url/>
+                            <dynamic>0</dynamic>
+                            <sort_triggers>0</sort_triggers>
+                            <resource>
                                 <name>MTA Mailqueue</name>
                                 <host>Custom - OS - Linux</host>
                             </resource>
@@ -2984,7 +3109,7 @@
                             <width>900</width>
                             <height>200</height>
                             <x>0</x>
-                            <y>6</y>
+                            <y>8</y>
                             <colspan>1</colspan>
                             <rowspan>1</rowspan>
                             <elements>0</elements>
@@ -2999,6 +3124,225 @@
                                 <host>Custom - OS - Linux</host>
                             </resource>
                             <max_columns>3</max_columns>
+                            <application/>
+                        </screen_item>
+                        <screen_item>
+                            <resourcetype>1</resourcetype>
+                            <width>900</width>
+                            <height>300</height>
+                            <x>0</x>
+                            <y>9</y>
+                            <colspan>1</colspan>
+                            <rowspan>1</rowspan>
+                            <elements>0</elements>
+                            <valign>0</valign>
+                            <halign>0</halign>
+                            <style>0</style>
+                            <url/>
+                            <dynamic>0</dynamic>
+                            <sort_triggers>0</sort_triggers>
+                            <resource>
+                                <key>system.users.num</key>
+                                <host>Custom - OS - Linux</host>
+                            </resource>
+                            <max_columns>3</max_columns>
+                            <application/>
+                        </screen_item>
+                    </screen_items>
+                </screen>
+                <screen>
+                    <name>Custom - OS - Linux - Filesystems</name>
+                    <hsize>3</hsize>
+                    <vsize>1</vsize>
+                    <screen_items>
+                        <screen_item>
+                            <resourcetype>20</resourcetype>
+                            <width>500</width>
+                            <height>200</height>
+                            <x>0</x>
+                            <y>0</y>
+                            <colspan>1</colspan>
+                            <rowspan>1</rowspan>
+                            <elements>0</elements>
+                            <valign>1</valign>
+                            <halign>1</halign>
+                            <style>0</style>
+                            <url/>
+                            <dynamic>0</dynamic>
+                            <sort_triggers>0</sort_triggers>
+                            <resource>
+                                <name>Disk {#FSNAME} space usage</name>
+                                <host>Custom - OS - Linux</host>
+                            </resource>
+                            <max_columns>1</max_columns>
+                            <application/>
+                        </screen_item>
+                        <screen_item>
+                            <resourcetype>20</resourcetype>
+                            <width>500</width>
+                            <height>200</height>
+                            <x>1</x>
+                            <y>0</y>
+                            <colspan>1</colspan>
+                            <rowspan>1</rowspan>
+                            <elements>0</elements>
+                            <valign>1</valign>
+                            <halign>1</halign>
+                            <style>0</style>
+                            <url/>
+                            <dynamic>0</dynamic>
+                            <sort_triggers>0</sort_triggers>
+                            <resource>
+                                <name>Disk {#FSNAME} inode usage</name>
+                                <host>Custom - OS - Linux</host>
+                            </resource>
+                            <max_columns>1</max_columns>
+                            <application/>
+                        </screen_item>
+                        <screen_item>
+                            <resourcetype>20</resourcetype>
+                            <width>500</width>
+                            <height>200</height>
+                            <x>2</x>
+                            <y>0</y>
+                            <colspan>1</colspan>
+                            <rowspan>1</rowspan>
+                            <elements>0</elements>
+                            <valign>0</valign>
+                            <halign>0</halign>
+                            <style>0</style>
+                            <url/>
+                            <dynamic>0</dynamic>
+                            <sort_triggers>0</sort_triggers>
+                            <resource>
+                                <name>Disk {#DEVNAME} IOPS</name>
+                                <host>Custom - OS - Linux</host>
+                            </resource>
+                            <max_columns>3</max_columns>
+                            <application/>
+                        </screen_item>
+                    </screen_items>
+                </screen>
+                <screen>
+                    <name>Custom - OS - Linux - Network</name>
+                    <hsize>3</hsize>
+                    <vsize>1</vsize>
+                    <screen_items>
+                        <screen_item>
+                            <resourcetype>20</resourcetype>
+                            <width>500</width>
+                            <height>200</height>
+                            <x>0</x>
+                            <y>0</y>
+                            <colspan>1</colspan>
+                            <rowspan>1</rowspan>
+                            <elements>0</elements>
+                            <valign>1</valign>
+                            <halign>1</halign>
+                            <style>0</style>
+                            <url/>
+                            <dynamic>0</dynamic>
+                            <sort_triggers>0</sort_triggers>
+                            <resource>
+                                <name>Interface {#IFNAME} bits</name>
+                                <host>Custom - OS - Linux</host>
+                            </resource>
+                            <max_columns>3</max_columns>
+                            <application/>
+                        </screen_item>
+                        <screen_item>
+                            <resourcetype>20</resourcetype>
+                            <width>500</width>
+                            <height>200</height>
+                            <x>1</x>
+                            <y>0</y>
+                            <colspan>1</colspan>
+                            <rowspan>1</rowspan>
+                            <elements>0</elements>
+                            <valign>1</valign>
+                            <halign>1</halign>
+                            <style>0</style>
+                            <url/>
+                            <dynamic>0</dynamic>
+                            <sort_triggers>0</sort_triggers>
+                            <resource>
+                                <name>Interface {#IFNAME} packets</name>
+                                <host>Custom - OS - Linux</host>
+                            </resource>
+                            <max_columns>1</max_columns>
+                            <application/>
+                        </screen_item>
+                        <screen_item>
+                            <resourcetype>20</resourcetype>
+                            <width>500</width>
+                            <height>200</height>
+                            <x>2</x>
+                            <y>0</y>
+                            <colspan>1</colspan>
+                            <rowspan>1</rowspan>
+                            <elements>0</elements>
+                            <valign>1</valign>
+                            <halign>1</halign>
+                            <style>0</style>
+                            <url/>
+                            <dynamic>0</dynamic>
+                            <sort_triggers>0</sort_triggers>
+                            <resource>
+                                <name>Interface {#IFNAME} errors</name>
+                                <host>Custom - OS - Linux</host>
+                            </resource>
+                            <max_columns>1</max_columns>
+                            <application/>
+                        </screen_item>
+                    </screen_items>
+                </screen>
+                <screen>
+                    <name>Custom - OS - Linux - Storage Devices</name>
+                    <hsize>2</hsize>
+                    <vsize>1</vsize>
+                    <screen_items>
+                        <screen_item>
+                            <resourcetype>20</resourcetype>
+                            <width>600</width>
+                            <height>200</height>
+                            <x>0</x>
+                            <y>0</y>
+                            <colspan>1</colspan>
+                            <rowspan>1</rowspan>
+                            <elements>0</elements>
+                            <valign>1</valign>
+                            <halign>1</halign>
+                            <style>0</style>
+                            <url/>
+                            <dynamic>0</dynamic>
+                            <sort_triggers>0</sort_triggers>
+                            <resource>
+                                <name>Disk {#DEVNAME} IOPS</name>
+                                <host>Custom - OS - Linux</host>
+                            </resource>
+                            <max_columns>1</max_columns>
+                            <application/>
+                        </screen_item>
+                        <screen_item>
+                            <resourcetype>20</resourcetype>
+                            <width>600</width>
+                            <height>200</height>
+                            <x>1</x>
+                            <y>0</y>
+                            <colspan>1</colspan>
+                            <rowspan>1</rowspan>
+                            <elements>0</elements>
+                            <valign>1</valign>
+                            <halign>1</halign>
+                            <style>0</style>
+                            <url/>
+                            <dynamic>0</dynamic>
+                            <sort_triggers>0</sort_triggers>
+                            <resource>
+                                <name>Disk {#DEVNAME} BPS</name>
+                                <host>Custom - OS - Linux</host>
+                            </resource>
+                            <max_columns>1</max_columns>
                             <application/>
                         </screen_item>
                     </screen_items>
@@ -3553,6 +3897,50 @@
                     <item>
                         <host>Custom - OS - Linux</host>
                         <key>nfs.rpc.retransmits</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <name>Processes</name>
+            <width>900</width>
+            <height>300</height>
+            <yaxismin>0.0000</yaxismin>
+            <yaxismax>100.0000</yaxismax>
+            <show_work_period>1</show_work_period>
+            <show_triggers>1</show_triggers>
+            <type>0</type>
+            <show_legend>1</show_legend>
+            <show_3d>0</show_3d>
+            <percent_left>0.0000</percent_left>
+            <percent_right>0.0000</percent_right>
+            <ymin_type_1>0</ymin_type_1>
+            <ymax_type_1>0</ymax_type_1>
+            <ymin_item_1>0</ymin_item_1>
+            <ymax_item_1>0</ymax_item_1>
+            <graph_items>
+                <graph_item>
+                    <sortorder>0</sortorder>
+                    <drawtype>0</drawtype>
+                    <color>1A7C11</color>
+                    <yaxisside>0</yaxisside>
+                    <calc_fnc>4</calc_fnc>
+                    <type>0</type>
+                    <item>
+                        <host>Custom - OS - Linux</host>
+                        <key>proc.num[]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <drawtype>0</drawtype>
+                    <color>F63100</color>
+                    <yaxisside>1</yaxisside>
+                    <calc_fnc>4</calc_fnc>
+                    <type>0</type>
+                    <item>
+                        <host>Custom - OS - Linux</host>
+                        <key>proc.num[,,run]</key>
                     </item>
                 </graph_item>
             </graph_items>
