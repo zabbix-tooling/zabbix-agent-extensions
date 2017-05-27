@@ -8,6 +8,7 @@ echo "# NO NOT EDIT, INSTALLED BY POSTINSTALL" > /etc/sudoers.d/zabbix
 chmod 0440 /etc/sudoers.d/zabbix
 echo "Defaults:zabbix !syslog" >> /etc/sudoers.d/zabbix
 echo "zabbix     ALL=NOPASSWD: /usr/bin/zabbix_check_multipath" >> /etc/sudoers.d/zabbix
+echo "zabbix     ALL=NOPASSWD: /usr/bin/mailq" >> /etc/sudoers.d/zabbix
 
 usermod -G adm -a zabbix
 

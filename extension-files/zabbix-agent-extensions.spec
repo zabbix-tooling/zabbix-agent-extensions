@@ -1,5 +1,5 @@
 Name:           zabbix-agent-extensions
-Version:        1.45.0
+Version:        1.46.0
 Release:        1
 License:        n/a
 Group:          Monitoring
@@ -18,6 +18,7 @@ gzip extension-files/man/httpjson-queryagent.8 -c > extension-files/man/httpjson
 mkdir -p %{buildroot}/etc/sudoers.d
 echo "Defaults:zabbix !syslog" > %{buildroot}/etc/sudoers.d/zabbix
 echo "zabbix ALL=(ALL) NOPASSWD: /usr/bin/zabbix_check_multipath" >> %{buildroot}/etc/sudoers.d/zabbix
+echo "zabbix ALL=(ALL) NOPASSWD: /usr/bin//usr/bin/mailq" >> %{buildroot}/etc/sudoers.d/zabbix
 chmod 0440 %{buildroot}/etc/sudoers.d/zabbix
 
 %install

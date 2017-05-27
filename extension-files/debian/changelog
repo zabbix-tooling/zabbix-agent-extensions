@@ -1,3 +1,9 @@
+zabbix-agent-extensions (1.46.0) trusty; urgency=low
+
+  * Enhanced sudo permissions
+
+ -- Marc Schoechlin <ms@256bit.org>  Sat, 27 May 2017 09:06:48 +0200
+
 zabbix-agent-extensions (1.45.0) trusty; urgency=low
 
   * Improved packaging

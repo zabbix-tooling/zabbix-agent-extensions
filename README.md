@@ -120,7 +120,6 @@ The templates will work on zabbix 2.2 and above.
    * Load "zabbix_templates/Custom - Service - Apache.xml"
    * Open template "Custom - Service - Apache" and modify the default values defined in the macros
    * Assign template "Custom - Service - Apache" to the desired hosts and modify the default values to host specific settings
-
    
 # Licence and Authors
 
