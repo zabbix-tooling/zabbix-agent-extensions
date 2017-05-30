@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
     <version>3.2</version>
-    <date>2017-05-26T06:24:53Z</date>
+    <date>2017-05-30T18:32:16Z</date>
     <groups>
         <group>
             <name>Templates</name>
@@ -219,6 +219,49 @@
                     <valuemap>
                         <name>Service state</name>
                     </valuemap>
+                    <logtimefmt/>
+                </item>
+                <item>
+                    <name>MTA Queue Total number of frozen messages</name>
+                    <type>0</type>
+                    <snmp_community/>
+                    <multiplier>0</multiplier>
+                    <snmp_oid/>
+                    <key>mailq.count.frozen</key>
+                    <delay>300</delay>
+                    <history>30</history>
+                    <trends>90</trends>
+                    <status>0</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts/>
+                    <units>messages</units>
+                    <delta>0</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description/>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>OS - Misc</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
                     <logtimefmt/>
                 </item>
                 <item>
@@ -3152,7 +3195,7 @@
                 </screen>
                 <screen>
                     <name>Custom - OS - Linux - Filesystems</name>
-                    <hsize>3</hsize>
+                    <hsize>2</hsize>
                     <vsize>1</vsize>
                     <screen_items>
                         <screen_item>
@@ -3197,28 +3240,6 @@
                                 <host>Custom - OS - Linux</host>
                             </resource>
                             <max_columns>1</max_columns>
-                            <application/>
-                        </screen_item>
-                        <screen_item>
-                            <resourcetype>20</resourcetype>
-                            <width>500</width>
-                            <height>200</height>
-                            <x>2</x>
-                            <y>0</y>
-                            <colspan>1</colspan>
-                            <rowspan>1</rowspan>
-                            <elements>0</elements>
-                            <valign>0</valign>
-                            <halign>0</halign>
-                            <style>0</style>
-                            <url/>
-                            <dynamic>0</dynamic>
-                            <sort_triggers>0</sort_triggers>
-                            <resource>
-                                <name>Disk {#DEVNAME} IOPS</name>
-                                <host>Custom - OS - Linux</host>
-                            </resource>
-                            <max_columns>3</max_columns>
                             <application/>
                         </screen_item>
                     </screen_items>
@@ -3846,13 +3867,25 @@
                 <graph_item>
                     <sortorder>0</sortorder>
                     <drawtype>0</drawtype>
-                    <color>DD0000</color>
+                    <color>00CC00</color>
                     <yaxisside>0</yaxisside>
-                    <calc_fnc>2</calc_fnc>
+                    <calc_fnc>4</calc_fnc>
                     <type>0</type>
                     <item>
                         <host>Custom - OS - Linux</host>
                         <key>mailq.count.general</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <drawtype>0</drawtype>
+                    <color>F63100</color>
+                    <yaxisside>1</yaxisside>
+                    <calc_fnc>4</calc_fnc>
+                    <type>0</type>
+                    <item>
+                        <host>Custom - OS - Linux</host>
+                        <key>mailq.count.frozen</key>
                     </item>
                 </graph_item>
             </graph_items>
