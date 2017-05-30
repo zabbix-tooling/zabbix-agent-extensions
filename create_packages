@@ -1,0 +1,75 @@
+#!/bin/bash
+
+######################################################################
+### HELPERS
+
+prepare(){
+
+	echo "***************************************************************************************************************************************"
+	echo "PREPARE"
+	umask 0002
+	mkdir -p -m 755 ${TMPDIR}/usr/bin/
+	cp -av ${SDIR}/tools/* ${TMPDIR}/usr/bin/
+	chmod 755 ${TMPDIR}/usr/bin/*
+
+	mkdir -p -m 755 ${TMPDIR}/etc/zabbix/zabbix-agent-extensions.d/
+	cp -av ${SDIR}/agent-config/* ${TMPDIR}/etc/zabbix/zabbix-agent-extensions.d/
+	chmod 644 ${TMPDIR}/etc/zabbix/zabbix-agent-extensions.d/*
+
+	mkdir -p -m 755 ${TMPDIR}/usr/share/zabbix/
+	cp -av ${SDIR}/check_payloads/* ${TMPDIR}/usr/share/zabbix/
+	chmod 644 ${TMPDIR}/usr/share/zabbix/*
+
+	mkdir -p -m 755 ${TMPDIR}/usr/share/man/man8/
+	gzip ${SDIR}/man/httpjson-queryagent.8 -c > ${TMPDIR}/usr/share/man/man8/httpjson-queryagent.8.gz
+	chmod 644 ${TMPDIR}/usr/share/man/man8/*
+
+	mkdir -p -m 755 ${TMPDIR}/etc/sudoers.d
+	cp ${SDIR}/sudoers ${TMPDIR}/etc/sudoers.d/zabbix
+	chmod 0440 ${TMPDIR}/etc/sudoers.d/*
+
+	mkdir -p -m 755 ${TMPDIR}/var/cache/zabbix
+ 
+}
+
+create_package(){
+	TYPE="$1"
+   echo "***************************************************************************************************************************************"
+   echo "PACKAGE TYPE: $TYPE"
+   echo
+   fpm -s dir -t $TYPE \
+		-n zabbix-agent-extensions \
+      --license GPLv2 \
+      -a all \
+	   --deb-no-default-config-files \
+      --deb-group users \
+      --deb-user zabbix \
+      --post-install ${SDIR}/postinstall \
+      -v $VERSION -C $TMPDIR
+
+   if [ "$TYPE" = "deb" ];then
+   	dpkg -c zabbix-agent-extensions_*.deb
+   elif [ "$TYPE" = "rpm" ];then
+     rpm -qlp zabbix-agent-extensions*.rpm
+   fi
+}
+
+######################################################################
+### MAIN
+if [ -z "$1" ];then
+  echo "$0 <version>"
+  exit 1
+fi
+VERSION="$1"
+SDIR="$(dirname $(readlink -f $0))/extension-files"
+
+rm -rf *.deb *.rpm
+
+TMPDIR="$(mktemp -d)"
+trap "rm -rf $TMPDIR" EXIT TERM INT
+
+prepare
+create_package deb
+create_package rpm
+
+

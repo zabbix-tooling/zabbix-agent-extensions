@@ -1,0 +1,11 @@
+#!/bin/bash
+
+if ! (grep -q "/etc/zabbix/zabbix-agent-extensions.d/" /etc/zabbix/zabbix_agentd.conf);
+then  
+  echo "Include=/etc/zabbix/zabbix-agent-extensions.d/" >> /etc/zabbix/zabbix_agentd.conf
+  /etc/init.d/zabbix-agent restart
+fi
+
+usermod -G adm -a zabbix 
+chown -R zabbix:zabbix /var/cache/zabbix
+

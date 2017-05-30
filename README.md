@@ -72,6 +72,18 @@ A quick overview is provided by the following files:
 
 # How to release and/or install the userparameter scripts
 
+   Adpoted from: https://www.digitalocean.com/community/tutorials/how-to-use-fpm-to-easily-create-packages-in-multiple-formats
+
+ * Install FPM
+   ```
+   sudo apt-get install ruby-dev build-essential
+   gem install fpm
+   ```
+ * Create packages
+   ```
+   ```
+  
+
  * Release only: Edit this file (README.md) and describe the new feature
  * Release only: Modify/release version information
    
