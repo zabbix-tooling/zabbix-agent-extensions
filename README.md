@@ -76,17 +76,18 @@ A quick overview is provided by the following files:
 
  * Install FPM
    ```
-   sudo apt-get install ruby-dev build-essential
+   sudo apt-get install ruby-dev build-essential debhelper devscripts rpm
    gem install fpm
    ```
+ * Get the repo 
+   ```
+   git clone https://github.com/scoopex/zabbix-agent-extensions
+   cd zabbix-agent-extensions
+   ```
+ * Release only: Edit this file (README.md) and describe the new feature
  * Create packages
    ```
-   ```
-  
-
- * Release only: Edit this file (README.md) and describe the new feature
- * Release only: Modify/release version information
-   
+   ./create_packages <version>
    ```
    ./ci_build.sh release
    ```
@@ -94,23 +95,14 @@ A quick overview is provided by the following files:
    (creates RPM and DEB packages)
 
    ```
-   sudo apt-get install debhelper devscripts rpm
-   git clone https://github.com/scoopex/zabbix-agent-extensions
-   cd zabbix-agent-extensions
-   ./ci_build.sh
    # Only for testing purposes on RPM based systems
    ./ci_test.sh
    ```
- * Install the rpm ior debian archive on as an addition to your zabbix-agents:
+ * Install the rpm or debian archive on as an addition to your zabbix-agent:
  
    ```
    rpm -Uvh noarch/zabbix-agent-extensions-<version>.noarch.rpm
    dpkg -i zabbix-agent-extensions_<version>_all.deb
-   ```
- * Add the following line to your zabbix-agent configuration:
- 
-   ```
-   Include=/etc/zabbix/zabbix-agent-extensions.d/
    ```
 
 # How to configure the zabbix server
