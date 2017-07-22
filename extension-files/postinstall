@@ -1,11 +1,18 @@
 #!/bin/bash
 
-if ! (grep -q "/etc/zabbix/zabbix-agent-extensions.d/" /etc/zabbix/zabbix_agentd.conf);
-then  
-  echo "Include=/etc/zabbix/zabbix-agent-extensions.d/" >> /etc/zabbix/zabbix_agentd.conf
-  /etc/init.d/zabbix-agent restart
+THE_INCLUDE="Include=/usr/share/zabbix-agent-extensions/include.d/"
+
+if (grep -q "Ubuntu" /etc/*rel*);then
+   if ! (grep -q "$THE_INCLUDE" /etc/zabbix/zabbix_agentd.conf);
+   then  
+      
+     echo "# Added by postinstall of zabbix-agent-extensions" >> /etc/zabbix/zabbix_agentd.conf
+     echo "$THE_INCLUDE" >> /etc/zabbix/zabbix_agentd.conf
+     /etc/init.d/zabbix-agent restart
+   fi
+
+   usermod -G adm -a zabbix 
+   chown -R zabbix:zabbix /var/cache/zabbix
+else
+   echo "Notice: no postinstall implemented for you distribution, contributions and merge requests are very welcome ;-)"
 fi
-
-usermod -G adm -a zabbix 
-chown -R zabbix:zabbix /var/cache/zabbix
-

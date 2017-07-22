@@ -12,9 +12,9 @@ prepare(){
 	cp -av ${SDIR}/tools/* ${TMPDIR}/usr/bin/
 	chmod 755 ${TMPDIR}/usr/bin/*
 
-	mkdir -p -m 755 ${TMPDIR}/etc/zabbix/zabbix-agent-extensions.d/
-	cp -av ${SDIR}/agent-config/* ${TMPDIR}/etc/zabbix/zabbix-agent-extensions.d/
-	chmod 644 ${TMPDIR}/etc/zabbix/zabbix-agent-extensions.d/*
+	mkdir -p -m 755 ${TMPDIR}/usr/share/zabbix-agent-extensions/include.d/
+	cp -av ${SDIR}/agent-config/* ${TMPDIR}/usr/share/zabbix-agent-extensions/include.d/
+	chmod 644 ${TMPDIR}/usr/share/zabbix-agent-extensions/include.d/*
 
 	mkdir -p -m 755 ${TMPDIR}/usr/share/zabbix/
 	cp -av ${SDIR}/check_payloads/* ${TMPDIR}/usr/share/zabbix/
@@ -58,10 +58,13 @@ create_package(){
 ### MAIN
 if [ -z "$1" ];then
   echo "$0 <version>"
-  exit 1
 fi
-VERSION="$1"
+
+
+VERSION="${1:-1.47}"
 SDIR="$(dirname $(readlink -f $0))/extension-files"
+
+echo "CREATING VERSION: $VERSION"
 
 rm -rf *.deb *.rpm
 
