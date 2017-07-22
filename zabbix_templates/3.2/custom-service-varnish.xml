@@ -2332,9 +2332,6 @@
                             <name>Custom - Service - Varnish</name>
                         </application>
                     </applications>
-                    <valuemap>
-                        <name>Host status</name>
-                    </valuemap>
                     <logtimefmt/>
                 </item>
             </items>
