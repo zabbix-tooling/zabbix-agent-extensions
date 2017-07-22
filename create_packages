@@ -37,6 +37,7 @@ create_package(){
    echo "***************************************************************************************************************************************"
    echo "PACKAGE TYPE: $TYPE"
    echo
+   set -x
    fpm -s dir -t $TYPE \
 		-n zabbix-agent-extensions \
       --license GPLv2 \
@@ -48,6 +49,7 @@ create_package(){
       --url "https://github.com/scoopex/zabbix-agent-extensions" \
       --after-install ${SDIR}/postinstall \
       -v $VERSION -C $TMPDIR --verbose
+   set +x
 
    if [ "$TYPE" = "deb" ];then
    	dpkg -c zabbix-agent-extensions_*.deb
