@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
     <version>3.2</version>
-    <date>2017-05-30T18:32:16Z</date>
+    <date>2017-07-22T06:51:06Z</date>
     <groups>
         <group>
             <name>Templates</name>
@@ -41,6 +41,9 @@
                 </application>
                 <application>
                     <name>OS - Storage</name>
+                </application>
+                <application>
+                    <name>OS - Time</name>
                 </application>
                 <application>
                     <name>OS - Zabbix</name>
@@ -478,6 +481,135 @@
                     <applications>
                         <application>
                             <name>OS - RPC/NFS</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                </item>
+                <item>
+                    <name>NTP Primary Peer Delay</name>
+                    <type>0</type>
+                    <snmp_community/>
+                    <multiplier>0</multiplier>
+                    <snmp_oid/>
+                    <key>ntpd.primarypeer.stats[delay]</key>
+                    <delay>90</delay>
+                    <history>5</history>
+                    <trends>90</trends>
+                    <status>0</status>
+                    <value_type>0</value_type>
+                    <allowed_hosts/>
+                    <units>ms</units>
+                    <delta>0</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description>Round trip communication delay to the remote peer or server (milliseconds)</description>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>OS - Time</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                </item>
+                <item>
+                    <name>NTP Primary Peer Jitter</name>
+                    <type>0</type>
+                    <snmp_community/>
+                    <multiplier>0</multiplier>
+                    <snmp_oid/>
+                    <key>ntpd.primarypeer.stats[jitter]</key>
+                    <delay>90</delay>
+                    <history>5</history>
+                    <trends>90</trends>
+                    <status>0</status>
+                    <value_type>0</value_type>
+                    <allowed_hosts/>
+                    <units>ms</units>
+                    <delta>0</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description>Mean deviation (jitter) in the time reported for that remote peer or server (RMS of difference of multiple time samples, milliseconds)</description>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>OS - Time</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                </item>
+                <item>
+                    <name>NTP Primary Peer RMS Offset</name>
+                    <type>0</type>
+                    <snmp_community/>
+                    <multiplier>0</multiplier>
+                    <snmp_oid/>
+                    <key>ntpd.primarypeer.stats[offset]</key>
+                    <delay>90</delay>
+                    <history>5</history>
+                    <trends>90</trends>
+                    <status>0</status>
+                    <value_type>0</value_type>
+                    <allowed_hosts/>
+                    <units>ms</units>
+                    <delta>0</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description>Mean offset (phase) in the times reported between this local host and the remote peer or server (RMS, milliseconds)</description>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>OS - Time</name>
                         </application>
                     </applications>
                     <valuemap/>
@@ -1213,12 +1345,12 @@
                     <multiplier>0</multiplier>
                     <snmp_oid/>
                     <key>system.localtime</key>
-                    <delay>300</delay>
+                    <delay>1200</delay>
                     <history>7</history>
                     <trends>14</trends>
                     <status>0</status>
                     <value_type>3</value_type>
-                    <allowed_hosts>localhost</allowed_hosts>
+                    <allowed_hosts/>
                     <units/>
                     <delta>0</delta>
                     <snmpv3_contextname/>
@@ -1228,7 +1360,7 @@
                     <snmpv3_authpassphrase/>
                     <snmpv3_privprotocol>0</snmpv3_privprotocol>
                     <snmpv3_privpassphrase/>
-                    <formula>0</formula>
+                    <formula>1</formula>
                     <delay_flex/>
                     <params/>
                     <ipmi_sensor/>
@@ -1243,7 +1375,7 @@
                     <inventory_link>0</inventory_link>
                     <applications>
                         <application>
-                            <name>OS - Health</name>
+                            <name>OS - Time</name>
                         </application>
                     </applications>
                     <valuemap/>
@@ -2956,6 +3088,10 @@
                     <value>1</value>
                 </macro>
                 <macro>
+                    <macro>{$MAX_NTP_OFFSET_MS}</macro>
+                    <value>100</value>
+                </macro>
+                <macro>
                     <macro>{$MONITOR_LOAD_WARNING_MULT}</macro>
                     <value>5</value>
                 </macro>
@@ -2969,7 +3105,7 @@
                 <screen>
                     <name>Custom - OS - Linux</name>
                     <hsize>1</hsize>
-                    <vsize>10</vsize>
+                    <vsize>11</vsize>
                     <screen_items>
                         <screen_item>
                             <resourcetype>0</resourcetype>
@@ -3119,7 +3255,7 @@
                             <dynamic>0</dynamic>
                             <sort_triggers>0</sort_triggers>
                             <resource>
-                                <name>Processes</name>
+                                <name>NTP  Sychronisation</name>
                                 <host>Custom - OS - Linux</host>
                             </resource>
                             <max_columns>3</max_columns>
@@ -3186,6 +3322,28 @@
                             <sort_triggers>0</sort_triggers>
                             <resource>
                                 <key>system.users.num</key>
+                                <host>Custom - OS - Linux</host>
+                            </resource>
+                            <max_columns>3</max_columns>
+                            <application/>
+                        </screen_item>
+                        <screen_item>
+                            <resourcetype>0</resourcetype>
+                            <width>900</width>
+                            <height>300</height>
+                            <x>0</x>
+                            <y>10</y>
+                            <colspan>1</colspan>
+                            <rowspan>1</rowspan>
+                            <elements>0</elements>
+                            <valign>0</valign>
+                            <halign>0</halign>
+                            <style>0</style>
+                            <url/>
+                            <dynamic>0</dynamic>
+                            <sort_triggers>0</sort_triggers>
+                            <resource>
+                                <name>Processes</name>
                                 <host>Custom - OS - Linux</host>
                             </resource>
                             <max_columns>3</max_columns>
@@ -3485,6 +3643,22 @@
             <tags/>
         </trigger>
         <trigger>
+            <expression>{Custom - OS - Linux:ntpd.primarypeer.stats[offset].last()} &gt; {$MAX_NTP_OFFSET_MS} or ((-1 * {Custom - OS - Linux:ntpd.primarypeer.stats[offset].last()}) &gt; {$MAX_NTP_OFFSET_MS})</expression>
+            <recovery_mode>0</recovery_mode>
+            <recovery_expression/>
+            <name>NTP Absolute Time Offset &gt;  {$MAX_NTP_OFFSET_MS} ms</name>
+            <correlation_mode>0</correlation_mode>
+            <correlation_tag/>
+            <url/>
+            <status>0</status>
+            <priority>2</priority>
+            <description>Time difference between the host and the active ntp peer is greater than {$MAX_NTP_OFFSET}</description>
+            <type>0</type>
+            <manual_close>0</manual_close>
+            <dependencies/>
+            <tags/>
+        </trigger>
+        <trigger>
             <expression>{Custom - OS - Linux:vfs.file.exists[/var/run/reboot-required].last()}=1</expression>
             <recovery_mode>0</recovery_mode>
             <recovery_expression/>
@@ -3496,7 +3670,7 @@
             <priority>1</priority>
             <description>This trigger fires if a reboot is required after a system uddate.</description>
             <type>0</type>
-            <manual_close>0</manual_close>
+            <manual_close>1</manual_close>
             <dependencies/>
             <tags/>
         </trigger>
@@ -3584,7 +3758,7 @@
             <expression>{Custom - OS - Linux:system.localtime.fuzzytime(60)}=0</expression>
             <recovery_mode>0</recovery_mode>
             <recovery_expression/>
-            <name>Time out of sync (&gt;60sec)</name>
+            <name>Time difference between zabbix server and host  (&gt;60sec)</name>
             <correlation_mode>0</correlation_mode>
             <correlation_tag/>
             <url/>
@@ -3930,6 +4104,62 @@
                     <item>
                         <host>Custom - OS - Linux</host>
                         <key>nfs.rpc.retransmits</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <name>NTP  Sychronisation</name>
+            <width>900</width>
+            <height>300</height>
+            <yaxismin>0.0000</yaxismin>
+            <yaxismax>100.0000</yaxismax>
+            <show_work_period>1</show_work_period>
+            <show_triggers>1</show_triggers>
+            <type>0</type>
+            <show_legend>1</show_legend>
+            <show_3d>0</show_3d>
+            <percent_left>0.0000</percent_left>
+            <percent_right>0.0000</percent_right>
+            <ymin_type_1>0</ymin_type_1>
+            <ymax_type_1>0</ymax_type_1>
+            <ymin_item_1>0</ymin_item_1>
+            <ymax_item_1>0</ymax_item_1>
+            <graph_items>
+                <graph_item>
+                    <sortorder>0</sortorder>
+                    <drawtype>0</drawtype>
+                    <color>1A7C11</color>
+                    <yaxisside>0</yaxisside>
+                    <calc_fnc>4</calc_fnc>
+                    <type>0</type>
+                    <item>
+                        <host>Custom - OS - Linux</host>
+                        <key>ntpd.primarypeer.stats[delay]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <drawtype>0</drawtype>
+                    <color>F63100</color>
+                    <yaxisside>0</yaxisside>
+                    <calc_fnc>4</calc_fnc>
+                    <type>0</type>
+                    <item>
+                        <host>Custom - OS - Linux</host>
+                        <key>ntpd.primarypeer.stats[offset]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>2</sortorder>
+                    <drawtype>0</drawtype>
+                    <color>2774A4</color>
+                    <yaxisside>0</yaxisside>
+                    <calc_fnc>4</calc_fnc>
+                    <type>0</type>
+                    <item>
+                        <host>Custom - OS - Linux</host>
+                        <key>ntpd.primarypeer.stats[jitter]</key>
                     </item>
                 </graph_item>
             </graph_items>
