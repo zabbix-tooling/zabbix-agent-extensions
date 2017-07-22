@@ -42,10 +42,12 @@ create_package(){
       --license GPLv2 \
       -a all \
 	   --deb-no-default-config-files \
-      --deb-group users \
-      --deb-user zabbix \
-      --post-install ${SDIR}/postinstall \
-      -v $VERSION -C $TMPDIR
+      --deb-group root \
+      --deb-user root \
+      -m "Marc Schoechlin <ms-zabbix-agent-extensions@256bit.org>" \
+      --url "https://github.com/scoopex/zabbix-agent-extensions" \
+      --after-install ${SDIR}/postinstall \
+      -v $VERSION -C $TMPDIR --verbose
 
    if [ "$TYPE" = "deb" ];then
    	dpkg -c zabbix-agent-extensions_*.deb
