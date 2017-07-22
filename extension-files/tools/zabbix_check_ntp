@@ -1,0 +1,35 @@
+#!/usr/bin/env python
+
+import subprocess
+import re
+import sys
+import os
+
+os.environ["PATH"] = "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/sbin:/usr/X11R6/bin"
+
+cmd = "ntpq -c peers"
+cmd_arr = re.compile(r'\s+').split(cmd)
+process = subprocess.Popen(cmd_arr, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+
+if len(sys.argv) != 2 or not re.match("^offset|jitter|delay$",sys.argv[1]):
+  print(sys.argv[0]+ " offset|jitter|delay")
+  sys.exit(1)
+
+what = sys.argv[1]
+
+while True:
+  line = process.stdout.readline()
+  if line == '':
+    break
+
+  m = re.match(r"^(?P<mode>\*|\+)(.+?)\s+.*(?P<delay>-?\d+\.?\d*)\s+(?P<offset>-?\d+\.?\d*)\s+(?P<jitter>-?\d+\.?\d*)$", line)
+  if not m:
+    continue
+  sys.stderr.write("match:%s\n" % line.rstrip())
+
+  if m.group("mode") != "*":
+    continue
+
+  sys.stdout.write(m.group(what))
+
+# vim: ai et ts=2 shiftwidth=2 expandtab
