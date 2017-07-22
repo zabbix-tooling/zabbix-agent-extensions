@@ -77,7 +77,7 @@ A quick overview is provided by the following files:
  * Install FPM
    ```
    sudo apt-get install ruby-dev build-essential debhelper devscripts rpm
-   gem install fpm
+   gem install fpm --user
    ```
  * Get the repo 
    ```
@@ -88,15 +88,6 @@ A quick overview is provided by the following files:
  * Create packages
    ```
    ./create_packages <version>
-   ```
-   ./ci_build.sh release
-   ```
- * Invoke the following procedure on your system for package builds on a Ubuntu 14.04 System
-   (creates RPM and DEB packages)
-
-   ```
-   # Only for testing purposes on RPM based systems
-   ./ci_test.sh
    ```
  * Install the rpm or debian archive on as an addition to your zabbix-agent:
  
