@@ -1,3 +1,10 @@
+zabbix-agent-extensions (1.47.0) trusty; urgency=low
+
+  * Added a ntpd check facility
+
+ -- Marc Schoechlin <ms@256bit.org>  Sat, 22 Jul 2017 07:17:18 +0200
+
+
 zabbix-agent-extensions (1.46.0) trusty; urgency=low
 
   * Enhanced sudo permissions
