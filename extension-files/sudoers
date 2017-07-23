@@ -1,5 +1,5 @@
 
 Defaults:zabbix !syslog
 zabbix ALL=(ALL) NOPASSWD: /usr/bin/zabbix_check_multipath
-zabbix ALL=(ALL) NOPASSWD: /usr/bin//usr/bin/mailq
+zabbix ALL=(ALL) NOPASSWD: /usr/bin/mailq
 
