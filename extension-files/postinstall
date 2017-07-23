@@ -6,7 +6,7 @@ if (grep -q "Ubuntu" /etc/*rel*);then
    if ! (grep -q "$THE_INCLUDE" /etc/zabbix/zabbix_agentd.conf);
    then  
       
-     echo "# Added by postinstall of zabbix-agent-extensions" >> /etc/zabbix/zabbix_agentd.conf
+     echo "# Added by postinstall of package zabbix-agent-extensions" >> /etc/zabbix/zabbix_agentd.conf
      echo "$THE_INCLUDE" >> /etc/zabbix/zabbix_agentd.conf
      /etc/init.d/zabbix-agent restart
    fi
