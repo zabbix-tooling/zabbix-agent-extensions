@@ -18,7 +18,7 @@ gzip extension-files/man/httpjson-queryagent.8 -c > extension-files/man/httpjson
 mkdir -p %{buildroot}/etc/sudoers.d
 echo "Defaults:zabbix !syslog" > %{buildroot}/etc/sudoers.d/zabbix
 echo "zabbix ALL=(ALL) NOPASSWD: /usr/bin/zabbix_check_multipath" >> %{buildroot}/etc/sudoers.d/zabbix
-echo "zabbix ALL=(ALL) NOPASSWD: /usr/bin//usr/bin/mailq" >> %{buildroot}/etc/sudoers.d/zabbix
+echo "zabbix ALL=(ALL) NOPASSWD: /usr/bin/mailq" >> %{buildroot}/etc/sudoers.d/zabbix
 chmod 0440 %{buildroot}/etc/sudoers.d/zabbix
 
 %install
