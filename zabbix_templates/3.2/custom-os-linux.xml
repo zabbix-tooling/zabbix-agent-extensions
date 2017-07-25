@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
     <version>3.2</version>
-    <date>2017-07-22T06:51:06Z</date>
+    <date>2017-07-25T15:28:33Z</date>
     <groups>
         <group>
             <name>Templates</name>
@@ -487,6 +487,51 @@
                     <logtimefmt/>
                 </item>
                 <item>
+                    <name>NTP good peer count</name>
+                    <type>0</type>
+                    <snmp_community/>
+                    <multiplier>0</multiplier>
+                    <snmp_oid/>
+                    <key>ntpd.peers.goodcount</key>
+                    <delay>600</delay>
+                    <history>1</history>
+                    <trends>14</trends>
+                    <status>0</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts/>
+                    <units>servers</units>
+                    <delta>0</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description>Number of good ntp peer servers (should be at least 3 severs).&#13;
+&#13;
+A man with one watch knows what time it is. A man with two watches is never sure.</description>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>OS - Time</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                </item>
+                <item>
                     <name>NTP Primary Peer Delay</name>
                     <type>0</type>
                     <snmp_community/>
@@ -530,7 +575,7 @@
                     <logtimefmt/>
                 </item>
                 <item>
-                    <name>NTP Primary Peer Jitter</name>
+                    <name>NTP Primary Peer RMS Jitter</name>
                     <type>0</type>
                     <snmp_community/>
                     <multiplier>0</multiplier>
@@ -3092,6 +3137,10 @@
                     <value>100</value>
                 </macro>
                 <macro>
+                    <macro>{$MIN_NTP_SERVER_COUNT}</macro>
+                    <value>2</value>
+                </macro>
+                <macro>
                     <macro>{$MONITOR_LOAD_WARNING_MULT}</macro>
                     <value>5</value>
                 </macro>
@@ -3646,13 +3695,51 @@
             <expression>{Custom - OS - Linux:ntpd.primarypeer.stats[offset].last()} &gt; {$MAX_NTP_OFFSET_MS} or ((-1 * {Custom - OS - Linux:ntpd.primarypeer.stats[offset].last()}) &gt; {$MAX_NTP_OFFSET_MS})</expression>
             <recovery_mode>0</recovery_mode>
             <recovery_expression/>
-            <name>NTP Absolute Time Offset &gt;  {$MAX_NTP_OFFSET_MS} ms</name>
+            <name>NTP Absolute RMS Time Offset &gt;  {$MAX_NTP_OFFSET_MS} ms</name>
             <correlation_mode>0</correlation_mode>
             <correlation_tag/>
             <url/>
             <status>0</status>
             <priority>2</priority>
             <description>Time difference between the host and the active ntp peer is greater than {$MAX_NTP_OFFSET}</description>
+            <type>0</type>
+            <manual_close>0</manual_close>
+            <dependencies>
+                <dependency>
+                    <name>NTP Absolute Time RMS Offset no data</name>
+                    <expression>{Custom - OS - Linux:ntpd.primarypeer.stats[offset].nodata(3600)}=1</expression>
+                    <recovery_expression/>
+                </dependency>
+            </dependencies>
+            <tags/>
+        </trigger>
+        <trigger>
+            <expression>{Custom - OS - Linux:ntpd.primarypeer.stats[offset].nodata(3600)}=1</expression>
+            <recovery_mode>0</recovery_mode>
+            <recovery_expression/>
+            <name>NTP Absolute Time RMS Offset no data</name>
+            <correlation_mode>0</correlation_mode>
+            <correlation_tag/>
+            <url/>
+            <status>0</status>
+            <priority>2</priority>
+            <description>No ntp time information</description>
+            <type>0</type>
+            <manual_close>0</manual_close>
+            <dependencies/>
+            <tags/>
+        </trigger>
+        <trigger>
+            <expression>{Custom - OS - Linux:ntpd.peers.goodcount.last()}&lt;= {$MIN_NTP_SERVER_COUNT}</expression>
+            <recovery_mode>0</recovery_mode>
+            <recovery_expression/>
+            <name>Number of good NTP peers &lt;= {$MIN_NTP_SERVER_COUNT}</name>
+            <correlation_mode>0</correlation_mode>
+            <correlation_tag/>
+            <url/>
+            <status>0</status>
+            <priority>3</priority>
+            <description/>
             <type>0</type>
             <manual_close>0</manual_close>
             <dependencies/>
@@ -4128,7 +4215,7 @@
             <graph_items>
                 <graph_item>
                     <sortorder>0</sortorder>
-                    <drawtype>0</drawtype>
+                    <drawtype>4</drawtype>
                     <color>1A7C11</color>
                     <yaxisside>0</yaxisside>
                     <calc_fnc>4</calc_fnc>
@@ -4142,7 +4229,7 @@
                     <sortorder>1</sortorder>
                     <drawtype>0</drawtype>
                     <color>F63100</color>
-                    <yaxisside>0</yaxisside>
+                    <yaxisside>1</yaxisside>
                     <calc_fnc>4</calc_fnc>
                     <type>0</type>
                     <item>
@@ -4154,7 +4241,7 @@
                     <sortorder>2</sortorder>
                     <drawtype>0</drawtype>
                     <color>2774A4</color>
-                    <yaxisside>0</yaxisside>
+                    <yaxisside>1</yaxisside>
                     <calc_fnc>4</calc_fnc>
                     <type>0</type>
                     <item>
