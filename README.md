@@ -35,7 +35,7 @@ This package provides the following capabilities:
  * NGINX Monitoring
    (enable /basic_status available on localhost, https://nginx.org/en/docs/http/ngx_http_stub_status_module.html)
  * generic discovery
-   (put json snippets to /var/run/zabbix-generic-discovery/<ITEMNAME>-*.json i.e. with puppet and get a combined discovery value)
+   (put json snippets to /var/run/zabbix-generic-discovery/ITEMNAME.json i.e. with puppet and get a combined discovery value)
  * monitor puppet state
 
 

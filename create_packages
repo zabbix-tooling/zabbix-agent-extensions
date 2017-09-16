@@ -65,7 +65,7 @@ if [ -z "$1" ];then
 fi
 
 
-VERSION="${1:-2.0rc1}"
+VERSION="${1:-2.0}"
 SDIR="$(dirname $(readlink -f $0))/extension-files"
 
 echo "CREATING VERSION: $VERSION"
