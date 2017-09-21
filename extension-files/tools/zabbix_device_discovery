@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 # Marc Schoechlin <ms@256bit.org>
+# Marc Schoechlin <Marc.Schoechlin@globalways.net>
 
 import glob
 import re
@@ -12,8 +13,8 @@ import configparser
 
 ####################################################################################
 
-regex_includes = ["/dev/.*"]
-regex_excludes = ["/dev/loop.*"]
+regex_includes = [".*"]
+regex_excludes = ["loop.*"]
 
 ####################################################################################
 #### HELPERS
@@ -31,19 +32,20 @@ def check_match(matchfor, device_name, regexes):
 
 
 # module "configparser" seems not to support sectionless inifiles
-def read_config(config_files):
-  regex_includes = []
-  regex_excludes = []
+def read_config(config_files, regex_includes, regex_excludes):
   for config_file in config_files:
    if os.path.exists(config_file):
+       if args.debug:
+         sys.stderr.write("reading config file %s\n" % config_file)
        with open(config_file, 'r') as f:     
          config_string = '[global]\n' + f.read() 
          config = configparser.ConfigParser() 
          config.read_string(config_string)
+         re_c = re.compile(r',')
          if "regex_includes" in config["global"]:
-            regex_includes = ",".split(config["global"]["regex_includes"])
+            regex_includes = re_c.split(config["global"]["regex_includes"])
          if "regex_excludes" in config["global"]:
-            regex_excludes = ",".split(config["global"]["regex_excludes"])
+            regex_excludes = re_c.split(config["global"]["regex_excludes"])
    return (regex_includes,regex_excludes)
 
 ####################################################################################
@@ -74,13 +76,13 @@ devices_discovered = {'data': []}
 
 # read the config
 if args.config is not None:
-  (regex_includes, regex_excludes) = read_config(args.config)
+  (regex_includes, regex_excludes) = read_config(args.config, regex_includes, regex_excludes)
 
 # perform discovery
 for filename in glob.glob('/sys/block/*'):
   if not os.path.islink(filename): 
     continue
-  device_name = "/dev/" + os.path.basename(filename)
+  device_name = os.path.basename(filename)
   if args.debug:
     sys.stderr.write("** DEVICE %s\n" % device_name)
 
@@ -93,7 +95,7 @@ for filename in glob.glob('/sys/block/*'):
     continue
 
   device = {}
-  device['#DEVNAME'] = device_name
+  device['#BLOCKDEVICE'] = device_name
   devices_discovered['data'].append(device)
 
 if args.debug:
