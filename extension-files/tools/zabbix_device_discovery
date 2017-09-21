@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 
+# Marc Schoechlin <ms@256bit.org>
+
 import glob
 import re
 import os
@@ -10,13 +12,14 @@ import configparser
 
 ####################################################################################
 
-regex_includes = [ "/dev/.*" ]
-regex_excludes = [ "/dev/loop.*" ]
+regex_includes = ["/dev/.*"]
+regex_excludes = ["/dev/loop.*"]
 
 ####################################################################################
 #### HELPERS
 
-def check_match(matchfor,device_name,regexes):
+
+def check_match(matchfor, device_name, regexes):
   ret = False
   for regex in regexes:
     regex = regex.strip()
@@ -25,6 +28,7 @@ def check_match(matchfor,device_name,regexes):
       	sys.stderr.write("%s match: %s with %s\n" % (matchfor, device_name, regex))
       ret = True
   return ret
+
 
 # module "configparser" seems not to support sectionless inifiles
 def read_config(config_files):
@@ -44,6 +48,7 @@ def read_config(config_files):
 
 ####################################################################################
 #### MAIN
+
 
 parser = argparse.ArgumentParser(
     description='perform device disovery for zabbix'
@@ -69,7 +74,7 @@ devices_discovered = {'data': []}
 
 # read the config
 if args.config is not None:
-  (regex_includes,regex_excludes) = read_config(args.config)
+  (regex_includes, regex_excludes) = read_config(args.config)
 
 # perform discovery
 for filename in glob.glob('/sys/block/*'):
