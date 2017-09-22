@@ -38,7 +38,7 @@ kernel_problems["oom"] =  re.compile("Out of memory: Kill process")
 # [80508.690871] kauditd_printk_skb: 2 callbacks suppressed
 parse_dmesg = re.compile(r"^\[(?P<timestamp>\d+\.\d+)\] (?P<msg>.*)$")
 
-status_file = "/tmp/%s_%s.pickle" % (EXECUTABLE, os.getlogin())
+status_file = "/tmp/%s_%s.pickle" % (EXECUTABLE, os.getuid())
 status_data = get_status_data(status_file)
 
 latest_time_stamp = status_data["timestamp"]
