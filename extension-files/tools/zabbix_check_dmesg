@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 
 import os
 import re
@@ -9,40 +9,69 @@ try:
 except ImportError:
    import pickle
 
-dmesg = os.popen('dmesg')
-statusfile="/tmp/zabbix_check_dmesg.pickle"
 
-kernel_problem=re.compile("^.*(general protection fault|kernel BUG at|double fault:|Badness at|Unable to handle kernel|sysctl table check failed|------------[ cut here ]------------|Modules linked in:|Oops:).*$")
-#kernel_problem=re.compile("^.*No (.+) found.*")
 
-error=False
-problems = [] 
+def get_status_data(statusfile):
+    data = {}
+    data["timestamp"] = -1
+    if os.path.exists(statusfile):
+        try:
+            data = pickle.load(open(statusfile, "rb"))
+        except:
+            sys.stderr.write("ERROR: unable to read statusfile %s" % statusfile)
+    return data
 
-try:
-    if (os.path.exists(statusfile)):
-        problems = pickle.load( open(statusfile))
-        error=True
+######################################################################################################
+# MAIN
 
-    while True:
-       lineStr = dmesg.readline()
-       if not(lineStr):
-          break
-       lineStr = lineStr.rstrip()
-       match = kernel_problem.match(lineStr)
-       if match:
-           sys.stderr.write("ERROR: "+lineStr+"\n")
-           error=True
-           if (problems.count(match.group(1)) <= 0):
-                problems.append(match.group(1))
-    dmesg.close()
+EXECUTABLE = "zabbix_check_dmesg"
 
-    if ( error == False ):
-        print "OK: ALL OK"
-    else:
-        pickle.dump(problems , open( statusfile, "wb" ) )
-        print "ERROR: "+ ( ", ".join(problems) )
-except:
-    print "ERROR: zabbix extension not functional"
-    raise
+dmesg = os.popen('dmesg --color=never')
+
+# kernel problems
+kernel_problems = {}
+kernel_problems["general protection fault"] = re.compile("^.*general protection fault.*$")
+kernel_problems["bug"] = re.compile(".*(kernel BUG at|double fault:|Badness at|Unable to handle kernel|" +
+                                    "sysctl table check failed|------------[ cut here ]------------|Modules linked in:|Oops:).*$")
+kernel_problems["oom"] =  re.compile("Out of memory: Kill process")
+
+# [80508.690871] kauditd_printk_skb: 2 callbacks suppressed
+parse_dmesg = re.compile(r"^\[(?P<timestamp>\d+\.\d+)\] (?P<msg>.*)$")
+
+status_file = "/tmp/%s_%s.pickle" % (EXECUTABLE, os.getlogin())
+status_data = get_status_data(status_file)
+
+latest_time_stamp = status_data["timestamp"]
+
+status = "OK"
+matched = []
+
+while True:
+    line_str = dmesg.readline()
+    if not (line_str):
+        break
+
+    m = parse_dmesg.match(line_str)
+    if not m:
+        continue
+
+    current_time_stamp = float(m.group("timestamp"))
+    msg = m.group("msg")
+
+    if current_time_stamp >= latest_time_stamp:
+        latest_time_stamp = current_time_stamp
+        for ident, regex in kernel_problems.items():
+            if regex.match(msg):
+                status = "ERROR"
+                sys.stderr.write("%s : %s : %s\n" % (EXECUTABLE, ident, line_str))
+                matched.append("%s/%s" % (ident, current_time_stamp))
+
+status_data["timestamp"] = latest_time_stamp
+
+if len(matched) == 0:
+    matched.append("ALL OK (%s)" % latest_time_stamp )
+
+sys.stdout.write("%s: %s" % (status, ", ".join(matched)))
+pickle.dump(status_data , open( status_file, "wb" ) )
 
 
