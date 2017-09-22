@@ -18,7 +18,8 @@ This package provides the following capabilities:
    * monitor dmesg for bad behavior of the system
    * monitor the maximum and minimum of processes
    * automatic discovery
-      * filesystems: inode and space measures
+      * filesystems: inode and space measures<BR>
+        (the amount of discovered devices can be limited by a configuration file on the monitored host)
       * network interfaces: packets and transferrates per second
       * storage devices: operations per second
    * number of processes
