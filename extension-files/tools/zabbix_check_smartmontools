@@ -48,11 +48,17 @@ def get_attribute(device, attribute):
             result = c_value
     print(result)
 
-# https://256bit.org/app/zabbix/disc_prototypes.php?parent_discoveryid=24290
-# https://github.com/v-zhuravlev/zbx-smartctl/blob/master/Template_3.0_HDD_SMARTMONTOOLS_2_WITH_LLD.xml
-#
-#UserParameter=uHDD[*], sudo smartctl -A $1| grep -i "$2"| tail -1| cut -c 88-|cut -f1 -d' '
-
+def get_info(device, info):
+    cmd = "smartctl -i /dev/%s" % device
+    process = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
+    out, err = process.communicate()
+    result = None
+    for line in out.decode('utf8').splitlines():
+        m = re.match("^%s:\s+(.*)$" % info, line)
+        if not m:
+            continue
+        result = m.group(1)
+    print(result)
 
 ####################################################################################
 #### MAIN
@@ -67,11 +73,8 @@ parser.add_argument(
     action='store_true',
 )
 
-parser.add_argument(
-    '--health',
-    help='Health information',
-    action='store_true',
-)
+
+parser_group = parser.add_mutually_exclusive_group(required=True)
 
 parser.add_argument(
    '--device',
@@ -82,14 +85,26 @@ parser.add_argument(
    required=True,
 )
 
-parser.add_argument(
+parser_group.add_argument(
+    '--health',
+    help='Health information',
+    action='store_true',
+)
+
+parser_group.add_argument(
    '--attribute',
    nargs='?',
    type=str,
-   help='the device attribute (smartctl -A',
+   help='the device attribute (smartctl -A <device>)',
    default=None,
-   required=False,
 )
+parser_group.add_argument(
+   '--info',
+   nargs='?',
+   type=str,
+   help='the device info (smartctl -i <device>)',
+)
+
 
 args = parser.parse_args()
 args.device = re.sub("/dev/+", "", args.device)
@@ -99,5 +114,8 @@ if args.health:
 
 if args.attribute:
     get_attribute(args.device, args.attribute)
+
+if args.info:
+    get_info(args.device, args.info)
 
 # vim: ai et ts=2 shiftwidth=2 expandtab
