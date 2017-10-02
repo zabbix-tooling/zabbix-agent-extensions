@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
     <version>3.2</version>
-    <date>2017-10-05T13:44:43Z</date>
+    <date>2016-11-26T07:06:35Z</date>
     <groups>
         <group>
             <name>Templates</name>
@@ -11,7 +11,7 @@
         <template>
             <template>Custom - OS - Linux</template>
             <name>Custom - OS - Linux</name>
-            <description>Monitor important linux parameters</description>
+            <description/>
             <groups>
                 <group>
                     <name>Templates</name>
@@ -23,6 +23,9 @@
                 </application>
                 <application>
                     <name>OS - Disk Performance</name>
+                </application>
+                <application>
+                    <name>OS - Disks</name>
                 </application>
                 <application>
                     <name>OS - Health</name>
@@ -37,16 +40,7 @@
                     <name>OS - Net</name>
                 </application>
                 <application>
-                    <name>OS - Processes</name>
-                </application>
-                <application>
                     <name>OS - RPC/NFS</name>
-                </application>
-                <application>
-                    <name>OS - Storage</name>
-                </application>
-                <application>
-                    <name>OS - Time</name>
                 </application>
                 <application>
                     <name>OS - Zabbix</name>
@@ -183,92 +177,6 @@
                     <logtimefmt/>
                 </item>
                 <item>
-                    <name>Maximum number of processes</name>
-                    <type>0</type>
-                    <snmp_community/>
-                    <multiplier>0</multiplier>
-                    <snmp_oid/>
-                    <key>kernel.maxproc</key>
-                    <delay>300</delay>
-                    <history>7</history>
-                    <trends>365</trends>
-                    <status>0</status>
-                    <value_type>3</value_type>
-                    <allowed_hosts/>
-                    <units/>
-                    <delta>0</delta>
-                    <snmpv3_contextname/>
-                    <snmpv3_securityname/>
-                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                    <snmpv3_authpassphrase/>
-                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                    <snmpv3_privpassphrase/>
-                    <formula>1</formula>
-                    <delay_flex/>
-                    <params/>
-                    <ipmi_sensor/>
-                    <data_type>0</data_type>
-                    <authtype>0</authtype>
-                    <username/>
-                    <password/>
-                    <publickey/>
-                    <privatekey/>
-                    <port/>
-                    <description>Total number of possible processes.</description>
-                    <inventory_link>0</inventory_link>
-                    <applications>
-                        <application>
-                            <name>OS - Processes</name>
-                        </application>
-                    </applications>
-                    <valuemap/>
-                    <logtimefmt/>
-                </item>
-                <item>
-                    <name>Linux Kernel Dmesg Health</name>
-                    <type>0</type>
-                    <snmp_community/>
-                    <multiplier>0</multiplier>
-                    <snmp_oid/>
-                    <key>linux.dmesg</key>
-                    <delay>300</delay>
-                    <history>90</history>
-                    <trends>0</trends>
-                    <status>0</status>
-                    <value_type>4</value_type>
-                    <allowed_hosts/>
-                    <units/>
-                    <delta>0</delta>
-                    <snmpv3_contextname/>
-                    <snmpv3_securityname/>
-                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                    <snmpv3_authpassphrase/>
-                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                    <snmpv3_privpassphrase/>
-                    <formula>1</formula>
-                    <delay_flex/>
-                    <params/>
-                    <ipmi_sensor/>
-                    <data_type>0</data_type>
-                    <authtype>0</authtype>
-                    <username/>
-                    <password/>
-                    <publickey/>
-                    <privatekey/>
-                    <port/>
-                    <description>Reads the output of dmesg and discovers kernel problems.</description>
-                    <inventory_link>0</inventory_link>
-                    <applications>
-                        <application>
-                            <name>OS - Health</name>
-                        </application>
-                    </applications>
-                    <valuemap/>
-                    <logtimefmt/>
-                </item>
-                <item>
                     <name>Check FCP Multipath</name>
                     <type>0</type>
                     <snmp_community/>
@@ -311,49 +219,6 @@
                     <valuemap>
                         <name>Service state</name>
                     </valuemap>
-                    <logtimefmt/>
-                </item>
-                <item>
-                    <name>MTA Queue Total number of frozen messages</name>
-                    <type>0</type>
-                    <snmp_community/>
-                    <multiplier>0</multiplier>
-                    <snmp_oid/>
-                    <key>mailq.count.frozen</key>
-                    <delay>300</delay>
-                    <history>30</history>
-                    <trends>90</trends>
-                    <status>0</status>
-                    <value_type>3</value_type>
-                    <allowed_hosts/>
-                    <units>messages</units>
-                    <delta>0</delta>
-                    <snmpv3_contextname/>
-                    <snmpv3_securityname/>
-                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                    <snmpv3_authpassphrase/>
-                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                    <snmpv3_privpassphrase/>
-                    <formula>1</formula>
-                    <delay_flex/>
-                    <params/>
-                    <ipmi_sensor/>
-                    <data_type>0</data_type>
-                    <authtype>0</authtype>
-                    <username/>
-                    <password/>
-                    <publickey/>
-                    <privatekey/>
-                    <port/>
-                    <description/>
-                    <inventory_link>0</inventory_link>
-                    <applications>
-                        <application>
-                            <name>OS - Misc</name>
-                        </application>
-                    </applications>
-                    <valuemap/>
                     <logtimefmt/>
                 </item>
                 <item>
@@ -576,180 +441,6 @@
                     <logtimefmt/>
                 </item>
                 <item>
-                    <name>NTP good peer count</name>
-                    <type>0</type>
-                    <snmp_community/>
-                    <multiplier>0</multiplier>
-                    <snmp_oid/>
-                    <key>ntpd.peers.goodcount</key>
-                    <delay>600</delay>
-                    <history>1</history>
-                    <trends>14</trends>
-                    <status>0</status>
-                    <value_type>3</value_type>
-                    <allowed_hosts/>
-                    <units>servers</units>
-                    <delta>0</delta>
-                    <snmpv3_contextname/>
-                    <snmpv3_securityname/>
-                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                    <snmpv3_authpassphrase/>
-                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                    <snmpv3_privpassphrase/>
-                    <formula>1</formula>
-                    <delay_flex/>
-                    <params/>
-                    <ipmi_sensor/>
-                    <data_type>0</data_type>
-                    <authtype>0</authtype>
-                    <username/>
-                    <password/>
-                    <publickey/>
-                    <privatekey/>
-                    <port/>
-                    <description>Number of good ntp peer servers (should be at least 3 severs).&#13;
-&#13;
-A man with one watch knows what time it is. A man with two watches is never sure.</description>
-                    <inventory_link>0</inventory_link>
-                    <applications>
-                        <application>
-                            <name>OS - Time</name>
-                        </application>
-                    </applications>
-                    <valuemap/>
-                    <logtimefmt/>
-                </item>
-                <item>
-                    <name>NTP Primary Peer Delay</name>
-                    <type>0</type>
-                    <snmp_community/>
-                    <multiplier>0</multiplier>
-                    <snmp_oid/>
-                    <key>ntpd.primarypeer.stats[delay]</key>
-                    <delay>90</delay>
-                    <history>5</history>
-                    <trends>90</trends>
-                    <status>0</status>
-                    <value_type>0</value_type>
-                    <allowed_hosts/>
-                    <units>ms</units>
-                    <delta>0</delta>
-                    <snmpv3_contextname/>
-                    <snmpv3_securityname/>
-                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                    <snmpv3_authpassphrase/>
-                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                    <snmpv3_privpassphrase/>
-                    <formula>1</formula>
-                    <delay_flex/>
-                    <params/>
-                    <ipmi_sensor/>
-                    <data_type>0</data_type>
-                    <authtype>0</authtype>
-                    <username/>
-                    <password/>
-                    <publickey/>
-                    <privatekey/>
-                    <port/>
-                    <description>Round trip communication delay to the remote peer or server (milliseconds)</description>
-                    <inventory_link>0</inventory_link>
-                    <applications>
-                        <application>
-                            <name>OS - Time</name>
-                        </application>
-                    </applications>
-                    <valuemap/>
-                    <logtimefmt/>
-                </item>
-                <item>
-                    <name>NTP Primary Peer RMS Jitter</name>
-                    <type>0</type>
-                    <snmp_community/>
-                    <multiplier>0</multiplier>
-                    <snmp_oid/>
-                    <key>ntpd.primarypeer.stats[jitter]</key>
-                    <delay>90</delay>
-                    <history>5</history>
-                    <trends>90</trends>
-                    <status>0</status>
-                    <value_type>0</value_type>
-                    <allowed_hosts/>
-                    <units>ms</units>
-                    <delta>0</delta>
-                    <snmpv3_contextname/>
-                    <snmpv3_securityname/>
-                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                    <snmpv3_authpassphrase/>
-                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                    <snmpv3_privpassphrase/>
-                    <formula>1</formula>
-                    <delay_flex/>
-                    <params/>
-                    <ipmi_sensor/>
-                    <data_type>0</data_type>
-                    <authtype>0</authtype>
-                    <username/>
-                    <password/>
-                    <publickey/>
-                    <privatekey/>
-                    <port/>
-                    <description>Mean deviation (jitter) in the time reported for that remote peer or server (RMS of difference of multiple time samples, milliseconds)</description>
-                    <inventory_link>0</inventory_link>
-                    <applications>
-                        <application>
-                            <name>OS - Time</name>
-                        </application>
-                    </applications>
-                    <valuemap/>
-                    <logtimefmt/>
-                </item>
-                <item>
-                    <name>NTP Primary Peer RMS Offset</name>
-                    <type>0</type>
-                    <snmp_community/>
-                    <multiplier>0</multiplier>
-                    <snmp_oid/>
-                    <key>ntpd.primarypeer.stats[offset]</key>
-                    <delay>90</delay>
-                    <history>5</history>
-                    <trends>90</trends>
-                    <status>0</status>
-                    <value_type>0</value_type>
-                    <allowed_hosts/>
-                    <units>ms</units>
-                    <delta>0</delta>
-                    <snmpv3_contextname/>
-                    <snmpv3_securityname/>
-                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                    <snmpv3_authpassphrase/>
-                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                    <snmpv3_privpassphrase/>
-                    <formula>1</formula>
-                    <delay_flex/>
-                    <params/>
-                    <ipmi_sensor/>
-                    <data_type>0</data_type>
-                    <authtype>0</authtype>
-                    <username/>
-                    <password/>
-                    <publickey/>
-                    <privatekey/>
-                    <port/>
-                    <description>Mean offset (phase) in the times reported between this local host and the remote peer or server (RMS, milliseconds)</description>
-                    <inventory_link>0</inventory_link>
-                    <applications>
-                        <application>
-                            <name>OS - Time</name>
-                        </application>
-                    </applications>
-                    <valuemap/>
-                    <logtimefmt/>
-                </item>
-                <item>
                     <name>Memory in Userspace</name>
                     <type>15</type>
                     <snmp_community/>
@@ -787,92 +478,6 @@ A man with one watch knows what time it is. A man with two watches is never sure
                     <applications>
                         <application>
                             <name>OS - Memory</name>
-                        </application>
-                    </applications>
-                    <valuemap/>
-                    <logtimefmt/>
-                </item>
-                <item>
-                    <name>Number of running processes</name>
-                    <type>0</type>
-                    <snmp_community/>
-                    <multiplier>0</multiplier>
-                    <snmp_oid/>
-                    <key>proc.num[,,run]</key>
-                    <delay>60</delay>
-                    <history>7</history>
-                    <trends>365</trends>
-                    <status>0</status>
-                    <value_type>3</value_type>
-                    <allowed_hosts/>
-                    <units/>
-                    <delta>0</delta>
-                    <snmpv3_contextname/>
-                    <snmpv3_securityname/>
-                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                    <snmpv3_authpassphrase/>
-                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                    <snmpv3_privpassphrase/>
-                    <formula>1</formula>
-                    <delay_flex/>
-                    <params/>
-                    <ipmi_sensor/>
-                    <data_type>0</data_type>
-                    <authtype>0</authtype>
-                    <username/>
-                    <password/>
-                    <publickey/>
-                    <privatekey/>
-                    <port/>
-                    <description>Number of processes in running state.</description>
-                    <inventory_link>0</inventory_link>
-                    <applications>
-                        <application>
-                            <name>OS - Processes</name>
-                        </application>
-                    </applications>
-                    <valuemap/>
-                    <logtimefmt/>
-                </item>
-                <item>
-                    <name>Number of zombie processes</name>
-                    <type>0</type>
-                    <snmp_community/>
-                    <multiplier>0</multiplier>
-                    <snmp_oid/>
-                    <key>proc.num[,,zomb]</key>
-                    <delay>60</delay>
-                    <history>7</history>
-                    <trends>365</trends>
-                    <status>0</status>
-                    <value_type>3</value_type>
-                    <allowed_hosts/>
-                    <units/>
-                    <delta>0</delta>
-                    <snmpv3_contextname/>
-                    <snmpv3_securityname/>
-                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                    <snmpv3_authpassphrase/>
-                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                    <snmpv3_privpassphrase/>
-                    <formula>1</formula>
-                    <delay_flex/>
-                    <params/>
-                    <ipmi_sensor/>
-                    <data_type>0</data_type>
-                    <authtype>0</authtype>
-                    <username/>
-                    <password/>
-                    <publickey/>
-                    <privatekey/>
-                    <port/>
-                    <description>Number of processes in running state.</description>
-                    <inventory_link>0</inventory_link>
-                    <applications>
-                        <application>
-                            <name>OS - Processes</name>
                         </application>
                     </applications>
                     <valuemap/>
@@ -959,92 +564,6 @@ A man with one watch knows what time it is. A man with two watches is never sure
                     <applications>
                         <application>
                             <name>OS - Health</name>
-                        </application>
-                    </applications>
-                    <valuemap/>
-                    <logtimefmt/>
-                </item>
-                <item>
-                    <name>Number of processes</name>
-                    <type>0</type>
-                    <snmp_community/>
-                    <multiplier>0</multiplier>
-                    <snmp_oid/>
-                    <key>proc.num[]</key>
-                    <delay>60</delay>
-                    <history>7</history>
-                    <trends>365</trends>
-                    <status>0</status>
-                    <value_type>3</value_type>
-                    <allowed_hosts/>
-                    <units/>
-                    <delta>0</delta>
-                    <snmpv3_contextname/>
-                    <snmpv3_securityname/>
-                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                    <snmpv3_authpassphrase/>
-                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                    <snmpv3_privpassphrase/>
-                    <formula>1</formula>
-                    <delay_flex/>
-                    <params/>
-                    <ipmi_sensor/>
-                    <data_type>0</data_type>
-                    <authtype>0</authtype>
-                    <username/>
-                    <password/>
-                    <publickey/>
-                    <privatekey/>
-                    <port/>
-                    <description>Total number of processes in any state.</description>
-                    <inventory_link>0</inventory_link>
-                    <applications>
-                        <application>
-                            <name>OS - Processes</name>
-                        </application>
-                    </applications>
-                    <valuemap/>
-                    <logtimefmt/>
-                </item>
-                <item>
-                    <name>Interrupts per second</name>
-                    <type>0</type>
-                    <snmp_community/>
-                    <multiplier>0</multiplier>
-                    <snmp_oid/>
-                    <key>system.cpu.intr</key>
-                    <delay>60</delay>
-                    <history>7</history>
-                    <trends>365</trends>
-                    <status>0</status>
-                    <value_type>3</value_type>
-                    <allowed_hosts/>
-                    <units>ips</units>
-                    <delta>1</delta>
-                    <snmpv3_contextname/>
-                    <snmpv3_securityname/>
-                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                    <snmpv3_authpassphrase/>
-                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                    <snmpv3_privpassphrase/>
-                    <formula>1</formula>
-                    <delay_flex/>
-                    <params/>
-                    <ipmi_sensor/>
-                    <data_type>0</data_type>
-                    <authtype>0</authtype>
-                    <username/>
-                    <password/>
-                    <publickey/>
-                    <privatekey/>
-                    <port/>
-                    <description/>
-                    <inventory_link>0</inventory_link>
-                    <applications>
-                        <application>
-                            <name>OS - CPU Times</name>
                         </application>
                     </applications>
                     <valuemap/>
@@ -1530,12 +1049,12 @@ A man with one watch knows what time it is. A man with two watches is never sure
                     <multiplier>0</multiplier>
                     <snmp_oid/>
                     <key>system.localtime</key>
-                    <delay>1200</delay>
+                    <delay>300</delay>
                     <history>7</history>
                     <trends>14</trends>
                     <status>0</status>
                     <value_type>3</value_type>
-                    <allowed_hosts/>
+                    <allowed_hosts>localhost</allowed_hosts>
                     <units/>
                     <delta>0</delta>
                     <snmpv3_contextname/>
@@ -1545,7 +1064,7 @@ A man with one watch knows what time it is. A man with two watches is never sure
                     <snmpv3_authpassphrase/>
                     <snmpv3_privprotocol>0</snmpv3_privprotocol>
                     <snmpv3_privpassphrase/>
-                    <formula>1</formula>
+                    <formula>0</formula>
                     <delay_flex/>
                     <params/>
                     <ipmi_sensor/>
@@ -1560,7 +1079,7 @@ A man with one watch knows what time it is. A man with two watches is never sure
                     <inventory_link>0</inventory_link>
                     <applications>
                         <application>
-                            <name>OS - Time</name>
+                            <name>OS - Health</name>
                         </application>
                     </applications>
                     <valuemap/>
@@ -1705,7 +1224,7 @@ A man with one watch knows what time it is. A man with two watches is never sure
                     <delay>600</delay>
                     <history>90</history>
                     <trends>365</trends>
-                    <status>0</status>
+                    <status>1</status>
                     <value_type>3</value_type>
                     <allowed_hosts/>
                     <units>s</units>
@@ -1739,92 +1258,6 @@ A man with one watch knows what time it is. A man with two watches is never sure
                     <logtimefmt/>
                 </item>
                 <item>
-                    <name>Number of logged in users</name>
-                    <type>0</type>
-                    <snmp_community/>
-                    <multiplier>0</multiplier>
-                    <snmp_oid/>
-                    <key>system.users.num</key>
-                    <delay>60</delay>
-                    <history>7</history>
-                    <trends>365</trends>
-                    <status>0</status>
-                    <value_type>3</value_type>
-                    <allowed_hosts/>
-                    <units/>
-                    <delta>0</delta>
-                    <snmpv3_contextname/>
-                    <snmpv3_securityname/>
-                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                    <snmpv3_authpassphrase/>
-                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                    <snmpv3_privpassphrase/>
-                    <formula>1</formula>
-                    <delay_flex/>
-                    <params/>
-                    <ipmi_sensor/>
-                    <data_type>0</data_type>
-                    <authtype>0</authtype>
-                    <username/>
-                    <password/>
-                    <publickey/>
-                    <privatekey/>
-                    <port/>
-                    <description>Number of users who are currently logged in.</description>
-                    <inventory_link>0</inventory_link>
-                    <applications>
-                        <application>
-                            <name>OS - Misc</name>
-                        </application>
-                    </applications>
-                    <valuemap/>
-                    <logtimefmt/>
-                </item>
-                <item>
-                    <name>Available entropy</name>
-                    <type>0</type>
-                    <snmp_community/>
-                    <multiplier>0</multiplier>
-                    <snmp_oid/>
-                    <key>vfs.file.contents[/proc/sys/kernel/random/entropy_avail]</key>
-                    <delay>300</delay>
-                    <history>7</history>
-                    <trends>182</trends>
-                    <status>0</status>
-                    <value_type>3</value_type>
-                    <allowed_hosts/>
-                    <units/>
-                    <delta>0</delta>
-                    <snmpv3_contextname/>
-                    <snmpv3_securityname/>
-                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                    <snmpv3_authpassphrase/>
-                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                    <snmpv3_privpassphrase/>
-                    <formula>1</formula>
-                    <delay_flex/>
-                    <params/>
-                    <ipmi_sensor/>
-                    <data_type>0</data_type>
-                    <authtype>0</authtype>
-                    <username/>
-                    <password/>
-                    <publickey/>
-                    <privatekey/>
-                    <port/>
-                    <description/>
-                    <inventory_link>0</inventory_link>
-                    <applications>
-                        <application>
-                            <name>OS - Misc</name>
-                        </application>
-                    </applications>
-                    <valuemap/>
-                    <logtimefmt/>
-                </item>
-                <item>
                     <name>Reboot Required</name>
                     <type>0</type>
                     <snmp_community/>
@@ -1834,7 +1267,7 @@ A man with one watch knows what time it is. A man with two watches is never sure
                     <delay>600</delay>
                     <history>90</history>
                     <trends>0</trends>
-                    <status>0</status>
+                    <status>1</status>
                     <value_type>3</value_type>
                     <allowed_hosts/>
                     <units/>
@@ -1862,104 +1295,6 @@ A man with one watch knows what time it is. A man with two watches is never sure
                     <applications>
                         <application>
                             <name>OS - Health</name>
-                        </application>
-                    </applications>
-                    <valuemap/>
-                    <logtimefmt/>
-                </item>
-                <item>
-                    <name>MD Raid Inconsistent Devices</name>
-                    <type>0</type>
-                    <snmp_community/>
-                    <multiplier>0</multiplier>
-                    <snmp_oid/>
-                    <key>vfs.file.regmatch[/proc/mdstat,&quot;\[.*_.*\]&quot;,,]</key>
-                    <delay>120</delay>
-                    <history>30</history>
-                    <trends>0</trends>
-                    <status>0</status>
-                    <value_type>3</value_type>
-                    <allowed_hosts/>
-                    <units/>
-                    <delta>0</delta>
-                    <snmpv3_contextname/>
-                    <snmpv3_securityname/>
-                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                    <snmpv3_authpassphrase/>
-                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                    <snmpv3_privpassphrase/>
-                    <formula>1</formula>
-                    <delay_flex/>
-                    <params/>
-                    <ipmi_sensor/>
-                    <data_type>0</data_type>
-                    <authtype>0</authtype>
-                    <username/>
-                    <password/>
-                    <publickey/>
-                    <privatekey/>
-                    <port/>
-                    <description>There are inconsistent devices.&#13;
-&#13;
-This looks like this:&#13;
-&#13;
-md1 : active raid1 sdb2[2] sda2[0]&#13;
-      195310144 blocks [2/1] [U_]&#13;
-      [=&gt;...................]  recovery =  8.5% (16775552/195310144) finish=17.0min speed=259783K/sec</description>
-                    <inventory_link>0</inventory_link>
-                    <applications>
-                        <application>
-                            <name>OS - Misc</name>
-                        </application>
-                    </applications>
-                    <valuemap/>
-                    <logtimefmt/>
-                </item>
-                <item>
-                    <name>MD Raid Sequential Activity</name>
-                    <type>0</type>
-                    <snmp_community/>
-                    <multiplier>0</multiplier>
-                    <snmp_oid/>
-                    <key>vfs.file.regmatch[/proc/mdstat,finish=,,]</key>
-                    <delay>120</delay>
-                    <history>30</history>
-                    <trends>0</trends>
-                    <status>0</status>
-                    <value_type>3</value_type>
-                    <allowed_hosts/>
-                    <units/>
-                    <delta>0</delta>
-                    <snmpv3_contextname/>
-                    <snmpv3_securityname/>
-                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                    <snmpv3_authpassphrase/>
-                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                    <snmpv3_privpassphrase/>
-                    <formula>1</formula>
-                    <delay_flex/>
-                    <params/>
-                    <ipmi_sensor/>
-                    <data_type>0</data_type>
-                    <authtype>0</authtype>
-                    <username/>
-                    <password/>
-                    <publickey/>
-                    <privatekey/>
-                    <port/>
-                    <description>See /proc/mdstat&#13;
-&#13;
-Manual Check: &#13;
-[======&gt;..............]  check = 34.1% (716160/2095040) finish=0.0min speed=238720K/sec&#13;
-&#13;
-Recovery:&#13;
-[==========&gt;..........]  resync =  50.0% (514048/1028096) finish=97.3min</description>
-                    <inventory_link>0</inventory_link>
-                    <applications>
-                        <application>
-                            <name>OS - Misc</name>
                         </application>
                     </applications>
                     <valuemap/>
@@ -2188,7 +1523,7 @@ Recovery:&#13;
                     <snmp_community/>
                     <snmp_oid/>
                     <key>net.if.discovery</key>
-                    <delay>600</delay>
+                    <delay>3600</delay>
                     <status>0</status>
                     <allowed_hosts/>
                     <snmpv3_contextname/>
@@ -2220,7 +1555,7 @@ Recovery:&#13;
                         </conditions>
                     </filter>
                     <lifetime>7</lifetime>
-                    <description>Discovery of network interfaces</description>
+                    <description/>
                     <item_prototypes>
                         <item_prototype>
                             <name>Interface {#IFNAME} Bits Inbound</name>
@@ -2642,13 +1977,13 @@ Recovery:&#13;
                     <host_prototypes/>
                 </discovery_rule>
                 <discovery_rule>
-                    <name>Block Device discovery</name>
+                    <name>Device discovery</name>
                     <type>0</type>
                     <snmp_community/>
                     <snmp_oid/>
                     <key>vfs.dev.discovery</key>
-                    <delay>600</delay>
-                    <status>0</status>
+                    <delay>10</delay>
+                    <status>1</status>
                     <allowed_hosts/>
                     <snmpv3_contextname/>
                     <snmpv3_securityname/>
@@ -2671,8 +2006,8 @@ Recovery:&#13;
                         <formula/>
                         <conditions>
                             <condition>
-                                <macro>{#BLOCKDEVICE}</macro>
-                                <value>^.*</value>
+                                <macro>{#DEVNAME}</macro>
+                                <value>^(sd|sa)</value>
                                 <operator>8</operator>
                                 <formulaid>A</formulaid>
                             </condition>
@@ -2682,16 +2017,148 @@ Recovery:&#13;
                     <description>Discovery of disks.</description>
                     <item_prototypes>
                         <item_prototype>
-                            <name>Disk {#BLOCKDEVICE} Read IOPS</name>
+                            <name>Disk {#DEVNAME} Read IOPS Custom</name>
                             <type>0</type>
                             <snmp_community/>
                             <multiplier>0</multiplier>
                             <snmp_oid/>
-                            <key>vfs.dev.read[{#BLOCKDEVICE},ops,avg1]</key>
-                            <delay>60</delay>
-                            <history>14</history>
+                            <key>custom.vfs.dev.read.ops[{#DEVNAME}]</key>
+                            <delay>10</delay>
+                            <history>30</history>
                             <trends>90</trends>
-                            <status>0</status>
+                            <status>1</status>
+                            <value_type>0</value_type>
+                            <allowed_hosts/>
+                            <units>iops</units>
+                            <delta>1</delta>
+                            <snmpv3_contextname/>
+                            <snmpv3_securityname/>
+                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                            <snmpv3_authpassphrase/>
+                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                            <snmpv3_privpassphrase/>
+                            <formula>1</formula>
+                            <delay_flex/>
+                            <params/>
+                            <ipmi_sensor/>
+                            <data_type>0</data_type>
+                            <authtype>0</authtype>
+                            <username/>
+                            <password/>
+                            <publickey/>
+                            <privatekey/>
+                            <port/>
+                            <description/>
+                            <inventory_link>0</inventory_link>
+                            <applications>
+                                <application>
+                                    <name>OS - Disk Performance</name>
+                                </application>
+                            </applications>
+                            <valuemap/>
+                            <logtimefmt/>
+                            <application_prototypes/>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Disk {#DEVNAME} Write IOPS Custom</name>
+                            <type>0</type>
+                            <snmp_community/>
+                            <multiplier>0</multiplier>
+                            <snmp_oid/>
+                            <key>custom.vfs.dev.write.ops[{#DEVNAME}]</key>
+                            <delay>10</delay>
+                            <history>30</history>
+                            <trends>90</trends>
+                            <status>1</status>
+                            <value_type>0</value_type>
+                            <allowed_hosts/>
+                            <units>iops</units>
+                            <delta>1</delta>
+                            <snmpv3_contextname/>
+                            <snmpv3_securityname/>
+                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                            <snmpv3_authpassphrase/>
+                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                            <snmpv3_privpassphrase/>
+                            <formula>1</formula>
+                            <delay_flex/>
+                            <params/>
+                            <ipmi_sensor/>
+                            <data_type>0</data_type>
+                            <authtype>0</authtype>
+                            <username/>
+                            <password/>
+                            <publickey/>
+                            <privatekey/>
+                            <port/>
+                            <description/>
+                            <inventory_link>0</inventory_link>
+                            <applications>
+                                <application>
+                                    <name>OS - Disk Performance</name>
+                                </application>
+                            </applications>
+                            <valuemap/>
+                            <logtimefmt/>
+                            <application_prototypes/>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Disk {#DEVNAME} Read BPS</name>
+                            <type>0</type>
+                            <snmp_community/>
+                            <multiplier>0</multiplier>
+                            <snmp_oid/>
+                            <key>vfs.dev.read[{#DEVNAME},bps,avg5]</key>
+                            <delay>10</delay>
+                            <history>30</history>
+                            <trends>90</trends>
+                            <status>1</status>
+                            <value_type>0</value_type>
+                            <allowed_hosts/>
+                            <units>bps</units>
+                            <delta>0</delta>
+                            <snmpv3_contextname/>
+                            <snmpv3_securityname/>
+                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                            <snmpv3_authpassphrase/>
+                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                            <snmpv3_privpassphrase/>
+                            <formula>1</formula>
+                            <delay_flex/>
+                            <params/>
+                            <ipmi_sensor/>
+                            <data_type>0</data_type>
+                            <authtype>0</authtype>
+                            <username/>
+                            <password/>
+                            <publickey/>
+                            <privatekey/>
+                            <port/>
+                            <description/>
+                            <inventory_link>0</inventory_link>
+                            <applications>
+                                <application>
+                                    <name>OS - Disk Performance</name>
+                                </application>
+                            </applications>
+                            <valuemap/>
+                            <logtimefmt/>
+                            <application_prototypes/>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Disk {#DEVNAME} Read IOPS</name>
+                            <type>0</type>
+                            <snmp_community/>
+                            <multiplier>0</multiplier>
+                            <snmp_oid/>
+                            <key>vfs.dev.read[{#DEVNAME},ops,avg5]</key>
+                            <delay>10</delay>
+                            <history>30</history>
+                            <trends>90</trends>
+                            <status>1</status>
                             <value_type>0</value_type>
                             <allowed_hosts/>
                             <units>iops</units>
@@ -2726,19 +2193,19 @@ Recovery:&#13;
                             <application_prototypes/>
                         </item_prototype>
                         <item_prototype>
-                            <name>Disk {#BLOCKDEVICE} Read SPS</name>
+                            <name>Disk {#DEVNAME} Write BPS</name>
                             <type>0</type>
                             <snmp_community/>
                             <multiplier>0</multiplier>
                             <snmp_oid/>
-                            <key>vfs.dev.read[{#BLOCKDEVICE},sps,avg1]</key>
-                            <delay>60</delay>
-                            <history>14</history>
+                            <key>vfs.dev.write[{#DEVNAME},bps,avg5]</key>
+                            <delay>10</delay>
+                            <history>30</history>
                             <trends>90</trends>
-                            <status>0</status>
+                            <status>1</status>
                             <value_type>0</value_type>
                             <allowed_hosts/>
-                            <units>sps</units>
+                            <units>bps</units>
                             <delta>0</delta>
                             <snmpv3_contextname/>
                             <snmpv3_securityname/>
@@ -2770,63 +2237,19 @@ Recovery:&#13;
                             <application_prototypes/>
                         </item_prototype>
                         <item_prototype>
-                            <name>Disk {#BLOCKDEVICE} Write IOPS</name>
+                            <name>Disk {#DEVNAME} Write IOPS</name>
                             <type>0</type>
                             <snmp_community/>
                             <multiplier>0</multiplier>
                             <snmp_oid/>
-                            <key>vfs.dev.write[{#BLOCKDEVICE},ops,avg1]</key>
-                            <delay>60</delay>
-                            <history>14</history>
+                            <key>vfs.dev.write[{#DEVNAME},ops,avg5]</key>
+                            <delay>10</delay>
+                            <history>30</history>
                             <trends>90</trends>
-                            <status>0</status>
+                            <status>1</status>
                             <value_type>0</value_type>
                             <allowed_hosts/>
                             <units>iops</units>
-                            <delta>0</delta>
-                            <snmpv3_contextname/>
-                            <snmpv3_securityname/>
-                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                            <snmpv3_authpassphrase/>
-                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                            <snmpv3_privpassphrase/>
-                            <formula>1</formula>
-                            <delay_flex/>
-                            <params/>
-                            <ipmi_sensor/>
-                            <data_type>0</data_type>
-                            <authtype>0</authtype>
-                            <username/>
-                            <password/>
-                            <publickey/>
-                            <privatekey/>
-                            <port/>
-                            <description/>
-                            <inventory_link>0</inventory_link>
-                            <applications>
-                                <application>
-                                    <name>OS - Disk Performance</name>
-                                </application>
-                            </applications>
-                            <valuemap/>
-                            <logtimefmt/>
-                            <application_prototypes/>
-                        </item_prototype>
-                        <item_prototype>
-                            <name>Disk {#BLOCKDEVICE} Write SPS</name>
-                            <type>0</type>
-                            <snmp_community/>
-                            <multiplier>0</multiplier>
-                            <snmp_oid/>
-                            <key>vfs.dev.write[{#BLOCKDEVICE},sps,avg1]</key>
-                            <delay>60</delay>
-                            <history>14</history>
-                            <trends>90</trends>
-                            <status>0</status>
-                            <value_type>0</value_type>
-                            <allowed_hosts/>
-                            <units>sps</units>
                             <delta>0</delta>
                             <snmpv3_contextname/>
                             <snmpv3_securityname/>
@@ -2861,19 +2284,19 @@ Recovery:&#13;
                     <trigger_prototypes/>
                     <graph_prototypes>
                         <graph_prototype>
-                            <name>Blockdevice {#BLOCKDEVICE} BPS</name>
+                            <name>Disk {#DEVNAME} IOPS</name>
                             <width>900</width>
-                            <height>300</height>
+                            <height>200</height>
                             <yaxismin>0.0000</yaxismin>
                             <yaxismax>100.0000</yaxismax>
                             <show_work_period>1</show_work_period>
                             <show_triggers>1</show_triggers>
-                            <type>1</type>
+                            <type>0</type>
                             <show_legend>1</show_legend>
                             <show_3d>0</show_3d>
                             <percent_left>0.0000</percent_left>
                             <percent_right>0.0000</percent_right>
-                            <ymin_type_1>1</ymin_type_1>
+                            <ymin_type_1>0</ymin_type_1>
                             <ymax_type_1>0</ymax_type_1>
                             <ymin_item_1>0</ymin_item_1>
                             <ymax_item_1>0</ymax_item_1>
@@ -2883,55 +2306,11 @@ Recovery:&#13;
                                     <drawtype>0</drawtype>
                                     <color>00C800</color>
                                     <yaxisside>0</yaxisside>
-                                    <calc_fnc>4</calc_fnc>
+                                    <calc_fnc>2</calc_fnc>
                                     <type>0</type>
                                     <item>
                                         <host>Custom - OS - Linux</host>
-                                        <key>vfs.dev.read[{#BLOCKDEVICE},sps,avg1]</key>
-                                    </item>
-                                </graph_item>
-                                <graph_item>
-                                    <sortorder>1</sortorder>
-                                    <drawtype>0</drawtype>
-                                    <color>DD0000</color>
-                                    <yaxisside>0</yaxisside>
-                                    <calc_fnc>4</calc_fnc>
-                                    <type>0</type>
-                                    <item>
-                                        <host>Custom - OS - Linux</host>
-                                        <key>vfs.dev.write[{#BLOCKDEVICE},sps,avg1]</key>
-                                    </item>
-                                </graph_item>
-                            </graph_items>
-                        </graph_prototype>
-                        <graph_prototype>
-                            <name>Blockdevice {#BLOCKDEVICE} IOPS</name>
-                            <width>900</width>
-                            <height>300</height>
-                            <yaxismin>0.0000</yaxismin>
-                            <yaxismax>100.0000</yaxismax>
-                            <show_work_period>1</show_work_period>
-                            <show_triggers>1</show_triggers>
-                            <type>1</type>
-                            <show_legend>1</show_legend>
-                            <show_3d>0</show_3d>
-                            <percent_left>0.0000</percent_left>
-                            <percent_right>0.0000</percent_right>
-                            <ymin_type_1>1</ymin_type_1>
-                            <ymax_type_1>0</ymax_type_1>
-                            <ymin_item_1>0</ymin_item_1>
-                            <ymax_item_1>0</ymax_item_1>
-                            <graph_items>
-                                <graph_item>
-                                    <sortorder>0</sortorder>
-                                    <drawtype>0</drawtype>
-                                    <color>00C800</color>
-                                    <yaxisside>0</yaxisside>
-                                    <calc_fnc>4</calc_fnc>
-                                    <type>0</type>
-                                    <item>
-                                        <host>Custom - OS - Linux</host>
-                                        <key>vfs.dev.read[{#BLOCKDEVICE},ops,avg1]</key>
+                                        <key>vfs.dev.read[{#DEVNAME},ops,avg5]</key>
                                     </item>
                                 </graph_item>
                                 <graph_item>
@@ -2939,11 +2318,55 @@ Recovery:&#13;
                                     <drawtype>0</drawtype>
                                     <color>C80000</color>
                                     <yaxisside>0</yaxisside>
-                                    <calc_fnc>4</calc_fnc>
+                                    <calc_fnc>2</calc_fnc>
                                     <type>0</type>
                                     <item>
                                         <host>Custom - OS - Linux</host>
-                                        <key>vfs.dev.write[{#BLOCKDEVICE},ops,avg1]</key>
+                                        <key>vfs.dev.write[{#DEVNAME},ops,avg5]</key>
+                                    </item>
+                                </graph_item>
+                            </graph_items>
+                        </graph_prototype>
+                        <graph_prototype>
+                            <name>Disk {#DEVNAME} IOPS Custom</name>
+                            <width>900</width>
+                            <height>200</height>
+                            <yaxismin>0.0000</yaxismin>
+                            <yaxismax>100.0000</yaxismax>
+                            <show_work_period>1</show_work_period>
+                            <show_triggers>1</show_triggers>
+                            <type>0</type>
+                            <show_legend>1</show_legend>
+                            <show_3d>0</show_3d>
+                            <percent_left>0.0000</percent_left>
+                            <percent_right>0.0000</percent_right>
+                            <ymin_type_1>0</ymin_type_1>
+                            <ymax_type_1>0</ymax_type_1>
+                            <ymin_item_1>0</ymin_item_1>
+                            <ymax_item_1>0</ymax_item_1>
+                            <graph_items>
+                                <graph_item>
+                                    <sortorder>0</sortorder>
+                                    <drawtype>0</drawtype>
+                                    <color>0000C8</color>
+                                    <yaxisside>0</yaxisside>
+                                    <calc_fnc>2</calc_fnc>
+                                    <type>0</type>
+                                    <item>
+                                        <host>Custom - OS - Linux</host>
+                                        <key>custom.vfs.dev.read.ops[{#DEVNAME}]</key>
+                                    </item>
+                                </graph_item>
+                                <graph_item>
+                                    <sortorder>1</sortorder>
+                                    <drawtype>0</drawtype>
+                                    <color>C800C8</color>
+                                    <yaxisside>0</yaxisside>
+                                    <calc_fnc>2</calc_fnc>
+                                    <type>0</type>
+                                    <item>
+                                        <host>Custom - OS - Linux</host>
+                                        <key>custom.vfs.dev.write.ops[{#DEVNAME}]</key>
                                     </item>
                                 </graph_item>
                             </graph_items>
@@ -2952,118 +2375,12 @@ Recovery:&#13;
                     <host_prototypes/>
                 </discovery_rule>
                 <discovery_rule>
-                    <name>Hard Disk discovery</name>
-                    <type>0</type>
-                    <snmp_community/>
-                    <snmp_oid/>
-                    <key>vfs.dev.discovery.rawdisks</key>
-                    <delay>600</delay>
-                    <status>0</status>
-                    <allowed_hosts/>
-                    <snmpv3_contextname/>
-                    <snmpv3_securityname/>
-                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                    <snmpv3_authpassphrase/>
-                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                    <snmpv3_privpassphrase/>
-                    <delay_flex/>
-                    <params/>
-                    <ipmi_sensor/>
-                    <authtype>0</authtype>
-                    <username/>
-                    <password/>
-                    <publickey/>
-                    <privatekey/>
-                    <port/>
-                    <filter>
-                        <evaltype>0</evaltype>
-                        <formula/>
-                        <conditions>
-                            <condition>
-                                <macro>{#BLOCKDEVICE}</macro>
-                                <value>^.*</value>
-                                <operator>8</operator>
-                                <formulaid>A</formulaid>
-                            </condition>
-                        </conditions>
-                    </filter>
-                    <lifetime>7</lifetime>
-                    <description>Discovery of physical disks.</description>
-                    <item_prototypes>
-                        <item_prototype>
-                            <name>Smart Health Status {#BLOCKDEVICE}</name>
-                            <type>0</type>
-                            <snmp_community/>
-                            <multiplier>0</multiplier>
-                            <snmp_oid/>
-                            <key>hardware.disk.health[{#BLOCKDEVICE}]</key>
-                            <delay>600</delay>
-                            <history>60</history>
-                            <trends>0</trends>
-                            <status>0</status>
-                            <value_type>4</value_type>
-                            <allowed_hosts/>
-                            <units/>
-                            <delta>0</delta>
-                            <snmpv3_contextname/>
-                            <snmpv3_securityname/>
-                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                            <snmpv3_authpassphrase/>
-                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                            <snmpv3_privpassphrase/>
-                            <formula>1</formula>
-                            <delay_flex/>
-                            <params/>
-                            <ipmi_sensor/>
-                            <data_type>0</data_type>
-                            <authtype>0</authtype>
-                            <username/>
-                            <password/>
-                            <publickey/>
-                            <privatekey/>
-                            <port/>
-                            <description/>
-                            <inventory_link>0</inventory_link>
-                            <applications>
-                                <application>
-                                    <name>OS - Health</name>
-                                </application>
-                            </applications>
-                            <valuemap/>
-                            <logtimefmt/>
-                            <application_prototypes/>
-                        </item_prototype>
-                    </item_prototypes>
-                    <trigger_prototypes>
-                        <trigger_prototype>
-                            <expression>{Custom - OS - Linux:hardware.disk.health[{#BLOCKDEVICE}].str(PASSED)}=0</expression>
-                            <recovery_mode>0</recovery_mode>
-                            <recovery_expression/>
-                            <name>Smart Disk Health {#BLOCKDEVICE}</name>
-                            <correlation_mode>0</correlation_mode>
-                            <correlation_tag/>
-                            <url/>
-                            <status>0</status>
-                            <priority>3</priority>
-                            <description>A disk failed or is going to fail in the next 24 hours. Watch zabbix agent log to get details.</description>
-                            <type>0</type>
-                            <manual_close>0</manual_close>
-                            <dependencies/>
-                            <tags/>
-                        </trigger_prototype>
-                    </trigger_prototypes>
-                    <graph_prototypes/>
-                    <host_prototypes/>
-                </discovery_rule>
-                <discovery_rule>
                     <name>Filesystems discovery</name>
                     <type>0</type>
                     <snmp_community/>
                     <snmp_oid/>
                     <key>vfs.fs.discovery</key>
-                    <delay>600</delay>
+                    <delay>3600</delay>
                     <status>0</status>
                     <allowed_hosts/>
                     <snmpv3_contextname/>
@@ -3088,14 +2405,14 @@ Recovery:&#13;
                         <conditions>
                             <condition>
                                 <macro>{#FSTYPE}</macro>
-                                <value>^(xfs|ext2|ext3|jfs|reiserfs|ext4|btrfs)</value>
+                                <value>^(xfs|ext2|ext3|ext4|btrfs)</value>
                                 <operator>8</operator>
                                 <formulaid>A</formulaid>
                             </condition>
                         </conditions>
                     </filter>
                     <lifetime>7</lifetime>
-                    <description>Discovery of filesystems</description>
+                    <description>Discovery of local filesystems. Overload on host if you need additional filesystem types</description>
                     <item_prototypes>
                         <item_prototype>
                             <name>Disk {#FSNAME} inode use percentage</name>
@@ -3134,7 +2451,7 @@ Recovery:&#13;
                             <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
-                                    <name>OS - Storage</name>
+                                    <name>OS - Disks</name>
                                 </application>
                             </applications>
                             <valuemap/>
@@ -3178,7 +2495,7 @@ Recovery:&#13;
                             <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
-                                    <name>OS - Storage</name>
+                                    <name>OS - Disks</name>
                                 </application>
                             </applications>
                             <valuemap/>
@@ -3222,7 +2539,7 @@ Recovery:&#13;
                             <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
-                                    <name>OS - Storage</name>
+                                    <name>OS - Disks</name>
                                 </application>
                             </applications>
                             <valuemap/>
@@ -3266,7 +2583,7 @@ Recovery:&#13;
                             <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
-                                    <name>OS - Storage</name>
+                                    <name>OS - Disks</name>
                                 </application>
                             </applications>
                             <valuemap/>
@@ -3310,7 +2627,7 @@ Recovery:&#13;
                             <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
-                                    <name>OS - Storage</name>
+                                    <name>OS - Disks</name>
                                 </application>
                             </applications>
                             <valuemap/>
@@ -3354,7 +2671,7 @@ Recovery:&#13;
                             <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
-                                    <name>OS - Storage</name>
+                                    <name>OS - Disks</name>
                                 </application>
                             </applications>
                             <valuemap/>
@@ -3467,27 +2784,18 @@ Recovery:&#13;
                             <percent_left>0.0000</percent_left>
                             <percent_right>0.0000</percent_right>
                             <ymin_type_1>1</ymin_type_1>
-                            <ymax_type_1>0</ymax_type_1>
+                            <ymax_type_1>2</ymax_type_1>
                             <ymin_item_1>0</ymin_item_1>
-                            <ymax_item_1>0</ymax_item_1>
+                            <ymax_item_1>
+                                <host>Custom - OS - Linux</host>
+                                <key>vfs.fs.size[{#FSNAME},total]</key>
+                            </ymax_item_1>
                             <graph_items>
                                 <graph_item>
                                     <sortorder>0</sortorder>
                                     <drawtype>0</drawtype>
-                                    <color>00BBBB</color>
+                                    <color>C80000</color>
                                     <yaxisside>0</yaxisside>
-                                    <calc_fnc>4</calc_fnc>
-                                    <type>0</type>
-                                    <item>
-                                        <host>Custom - OS - Linux</host>
-                                        <key>vfs.fs.size[{#FSNAME},pused]</key>
-                                    </item>
-                                </graph_item>
-                                <graph_item>
-                                    <sortorder>1</sortorder>
-                                    <drawtype>0</drawtype>
-                                    <color>0000C8</color>
-                                    <yaxisside>1</yaxisside>
                                     <calc_fnc>4</calc_fnc>
                                     <type>0</type>
                                     <item>
@@ -3496,10 +2804,10 @@ Recovery:&#13;
                                     </item>
                                 </graph_item>
                                 <graph_item>
-                                    <sortorder>2</sortorder>
+                                    <sortorder>1</sortorder>
                                     <drawtype>0</drawtype>
-                                    <color>C800C8</color>
-                                    <yaxisside>1</yaxisside>
+                                    <color>00C800</color>
+                                    <yaxisside>0</yaxisside>
                                     <calc_fnc>4</calc_fnc>
                                     <type>0</type>
                                     <item>
@@ -3524,14 +2832,6 @@ Recovery:&#13;
                     <value>1</value>
                 </macro>
                 <macro>
-                    <macro>{$MAX_NTP_OFFSET_MS}</macro>
-                    <value>100</value>
-                </macro>
-                <macro>
-                    <macro>{$MIN_NTP_SERVER_COUNT}</macro>
-                    <value>2</value>
-                </macro>
-                <macro>
                     <macro>{$MONITOR_LOAD_WARNING_MULT}</macro>
                     <value>5</value>
                 </macro>
@@ -3543,111 +2843,9 @@ Recovery:&#13;
             <templates/>
             <screens>
                 <screen>
-                    <name>Custom - OS - Linux - Blockdevice</name>
-                    <hsize>2</hsize>
-                    <vsize>1</vsize>
-                    <screen_items>
-                        <screen_item>
-                            <resourcetype>20</resourcetype>
-                            <width>600</width>
-                            <height>200</height>
-                            <x>0</x>
-                            <y>0</y>
-                            <colspan>1</colspan>
-                            <rowspan>1</rowspan>
-                            <elements>0</elements>
-                            <valign>1</valign>
-                            <halign>1</halign>
-                            <style>0</style>
-                            <url/>
-                            <dynamic>0</dynamic>
-                            <sort_triggers>0</sort_triggers>
-                            <resource>
-                                <name>Blockdevice {#BLOCKDEVICE} IOPS</name>
-                                <host>Custom - OS - Linux</host>
-                            </resource>
-                            <max_columns>1</max_columns>
-                            <application/>
-                        </screen_item>
-                        <screen_item>
-                            <resourcetype>20</resourcetype>
-                            <width>600</width>
-                            <height>200</height>
-                            <x>1</x>
-                            <y>0</y>
-                            <colspan>1</colspan>
-                            <rowspan>1</rowspan>
-                            <elements>0</elements>
-                            <valign>1</valign>
-                            <halign>1</halign>
-                            <style>0</style>
-                            <url/>
-                            <dynamic>0</dynamic>
-                            <sort_triggers>0</sort_triggers>
-                            <resource>
-                                <name>Blockdevice {#BLOCKDEVICE} BPS</name>
-                                <host>Custom - OS - Linux</host>
-                            </resource>
-                            <max_columns>1</max_columns>
-                            <application/>
-                        </screen_item>
-                    </screen_items>
-                </screen>
-                <screen>
-                    <name>Custom - OS - Linux - Filesystems</name>
-                    <hsize>2</hsize>
-                    <vsize>1</vsize>
-                    <screen_items>
-                        <screen_item>
-                            <resourcetype>20</resourcetype>
-                            <width>500</width>
-                            <height>200</height>
-                            <x>0</x>
-                            <y>0</y>
-                            <colspan>1</colspan>
-                            <rowspan>1</rowspan>
-                            <elements>0</elements>
-                            <valign>1</valign>
-                            <halign>1</halign>
-                            <style>0</style>
-                            <url/>
-                            <dynamic>0</dynamic>
-                            <sort_triggers>0</sort_triggers>
-                            <resource>
-                                <name>Disk {#FSNAME} space usage</name>
-                                <host>Custom - OS - Linux</host>
-                            </resource>
-                            <max_columns>1</max_columns>
-                            <application/>
-                        </screen_item>
-                        <screen_item>
-                            <resourcetype>20</resourcetype>
-                            <width>500</width>
-                            <height>200</height>
-                            <x>1</x>
-                            <y>0</y>
-                            <colspan>1</colspan>
-                            <rowspan>1</rowspan>
-                            <elements>0</elements>
-                            <valign>1</valign>
-                            <halign>1</halign>
-                            <style>0</style>
-                            <url/>
-                            <dynamic>0</dynamic>
-                            <sort_triggers>0</sort_triggers>
-                            <resource>
-                                <name>Disk {#FSNAME} inode usage</name>
-                                <host>Custom - OS - Linux</host>
-                            </resource>
-                            <max_columns>1</max_columns>
-                            <application/>
-                        </screen_item>
-                    </screen_items>
-                </screen>
-                <screen>
-                    <name>Custom - OS - Linux - General</name>
+                    <name>Custom - OS - Linux</name>
                     <hsize>1</hsize>
-                    <vsize>11</vsize>
+                    <vsize>7</vsize>
                     <screen_items>
                         <screen_item>
                             <resourcetype>0</resourcetype>
@@ -3672,33 +2870,11 @@ Recovery:&#13;
                             <application/>
                         </screen_item>
                         <screen_item>
-                            <resourcetype>1</resourcetype>
-                            <width>900</width>
-                            <height>300</height>
-                            <x>0</x>
-                            <y>1</y>
-                            <colspan>1</colspan>
-                            <rowspan>1</rowspan>
-                            <elements>0</elements>
-                            <valign>0</valign>
-                            <halign>0</halign>
-                            <style>0</style>
-                            <url/>
-                            <dynamic>0</dynamic>
-                            <sort_triggers>0</sort_triggers>
-                            <resource>
-                                <key>system.cpu.intr</key>
-                                <host>Custom - OS - Linux</host>
-                            </resource>
-                            <max_columns>3</max_columns>
-                            <application/>
-                        </screen_item>
-                        <screen_item>
                             <resourcetype>0</resourcetype>
                             <width>900</width>
                             <height>300</height>
                             <x>0</x>
-                            <y>2</y>
+                            <y>1</y>
                             <colspan>1</colspan>
                             <rowspan>1</rowspan>
                             <elements>0</elements>
@@ -3720,7 +2896,7 @@ Recovery:&#13;
                             <width>900</width>
                             <height>300</height>
                             <x>0</x>
-                            <y>3</y>
+                            <y>2</y>
                             <colspan>1</colspan>
                             <rowspan>1</rowspan>
                             <elements>0</elements>
@@ -3742,7 +2918,7 @@ Recovery:&#13;
                             <width>900</width>
                             <height>300</height>
                             <x>0</x>
-                            <y>4</y>
+                            <y>3</y>
                             <colspan>1</colspan>
                             <rowspan>1</rowspan>
                             <elements>0</elements>
@@ -3764,7 +2940,7 @@ Recovery:&#13;
                             <width>900</width>
                             <height>300</height>
                             <x>0</x>
-                            <y>5</y>
+                            <y>4</y>
                             <colspan>1</colspan>
                             <rowspan>1</rowspan>
                             <elements>0</elements>
@@ -3786,29 +2962,7 @@ Recovery:&#13;
                             <width>900</width>
                             <height>300</height>
                             <x>0</x>
-                            <y>6</y>
-                            <colspan>1</colspan>
-                            <rowspan>1</rowspan>
-                            <elements>0</elements>
-                            <valign>0</valign>
-                            <halign>0</halign>
-                            <style>0</style>
-                            <url/>
-                            <dynamic>0</dynamic>
-                            <sort_triggers>0</sort_triggers>
-                            <resource>
-                                <name>NTP  Sychronisation</name>
-                                <host>Custom - OS - Linux</host>
-                            </resource>
-                            <max_columns>3</max_columns>
-                            <application/>
-                        </screen_item>
-                        <screen_item>
-                            <resourcetype>0</resourcetype>
-                            <width>900</width>
-                            <height>300</height>
-                            <x>0</x>
-                            <y>7</y>
+                            <y>5</y>
                             <colspan>1</colspan>
                             <rowspan>1</rowspan>
                             <elements>0</elements>
@@ -3830,7 +2984,7 @@ Recovery:&#13;
                             <width>900</width>
                             <height>200</height>
                             <x>0</x>
-                            <y>8</y>
+                            <y>6</y>
                             <colspan>1</colspan>
                             <rowspan>1</rowspan>
                             <elements>0</elements>
@@ -3847,145 +3001,12 @@ Recovery:&#13;
                             <max_columns>3</max_columns>
                             <application/>
                         </screen_item>
-                        <screen_item>
-                            <resourcetype>1</resourcetype>
-                            <width>900</width>
-                            <height>300</height>
-                            <x>0</x>
-                            <y>9</y>
-                            <colspan>1</colspan>
-                            <rowspan>1</rowspan>
-                            <elements>0</elements>
-                            <valign>0</valign>
-                            <halign>0</halign>
-                            <style>0</style>
-                            <url/>
-                            <dynamic>0</dynamic>
-                            <sort_triggers>0</sort_triggers>
-                            <resource>
-                                <key>system.users.num</key>
-                                <host>Custom - OS - Linux</host>
-                            </resource>
-                            <max_columns>3</max_columns>
-                            <application/>
-                        </screen_item>
-                        <screen_item>
-                            <resourcetype>0</resourcetype>
-                            <width>900</width>
-                            <height>300</height>
-                            <x>0</x>
-                            <y>10</y>
-                            <colspan>1</colspan>
-                            <rowspan>1</rowspan>
-                            <elements>0</elements>
-                            <valign>0</valign>
-                            <halign>0</halign>
-                            <style>0</style>
-                            <url/>
-                            <dynamic>0</dynamic>
-                            <sort_triggers>0</sort_triggers>
-                            <resource>
-                                <name>Processes</name>
-                                <host>Custom - OS - Linux</host>
-                            </resource>
-                            <max_columns>3</max_columns>
-                            <application/>
-                        </screen_item>
-                    </screen_items>
-                </screen>
-                <screen>
-                    <name>Custom - OS - Linux - Network</name>
-                    <hsize>3</hsize>
-                    <vsize>1</vsize>
-                    <screen_items>
-                        <screen_item>
-                            <resourcetype>20</resourcetype>
-                            <width>500</width>
-                            <height>200</height>
-                            <x>0</x>
-                            <y>0</y>
-                            <colspan>1</colspan>
-                            <rowspan>1</rowspan>
-                            <elements>0</elements>
-                            <valign>1</valign>
-                            <halign>1</halign>
-                            <style>0</style>
-                            <url/>
-                            <dynamic>0</dynamic>
-                            <sort_triggers>0</sort_triggers>
-                            <resource>
-                                <name>Interface {#IFNAME} bits</name>
-                                <host>Custom - OS - Linux</host>
-                            </resource>
-                            <max_columns>3</max_columns>
-                            <application/>
-                        </screen_item>
-                        <screen_item>
-                            <resourcetype>20</resourcetype>
-                            <width>500</width>
-                            <height>200</height>
-                            <x>1</x>
-                            <y>0</y>
-                            <colspan>1</colspan>
-                            <rowspan>1</rowspan>
-                            <elements>0</elements>
-                            <valign>1</valign>
-                            <halign>1</halign>
-                            <style>0</style>
-                            <url/>
-                            <dynamic>0</dynamic>
-                            <sort_triggers>0</sort_triggers>
-                            <resource>
-                                <name>Interface {#IFNAME} packets</name>
-                                <host>Custom - OS - Linux</host>
-                            </resource>
-                            <max_columns>1</max_columns>
-                            <application/>
-                        </screen_item>
-                        <screen_item>
-                            <resourcetype>20</resourcetype>
-                            <width>500</width>
-                            <height>200</height>
-                            <x>2</x>
-                            <y>0</y>
-                            <colspan>1</colspan>
-                            <rowspan>1</rowspan>
-                            <elements>0</elements>
-                            <valign>1</valign>
-                            <halign>1</halign>
-                            <style>0</style>
-                            <url/>
-                            <dynamic>0</dynamic>
-                            <sort_triggers>0</sort_triggers>
-                            <resource>
-                                <name>Interface {#IFNAME} errors</name>
-                                <host>Custom - OS - Linux</host>
-                            </resource>
-                            <max_columns>1</max_columns>
-                            <application/>
-                        </screen_item>
                     </screen_items>
                 </screen>
             </screens>
         </template>
     </templates>
     <triggers>
-        <trigger>
-            <expression>({Custom - OS - Linux:kernel.maxproc.last()} * 0.9) &lt; {Custom - OS - Linux:proc.num[].last()}</expression>
-            <recovery_mode>0</recovery_mode>
-            <recovery_expression/>
-            <name>90% of possible processes reached</name>
-            <correlation_mode>0</correlation_mode>
-            <correlation_tag/>
-            <url/>
-            <status>0</status>
-            <priority>3</priority>
-            <description/>
-            <type>0</type>
-            <manual_close>0</manual_close>
-            <dependencies/>
-            <tags/>
-        </trigger>
         <trigger>
             <expression>{Custom - OS - Linux:linux.multipath.str(ERROR)}&lt;&gt;0</expression>
             <recovery_mode>0</recovery_mode>
@@ -4067,63 +3088,6 @@ Recovery:&#13;
             <tags/>
         </trigger>
         <trigger>
-            <expression>{Custom - OS - Linux:linux.dmesg.str(ERROR:)}=1</expression>
-            <recovery_mode>2</recovery_mode>
-            <recovery_expression/>
-            <name>Linux Kernel Problems</name>
-            <correlation_mode>0</correlation_mode>
-            <correlation_tag/>
-            <url/>
-            <status>0</status>
-            <priority>2</priority>
-            <description>A kernel problem occurred.&#13;
-Review dmesg with the timestamps listed in the item.&#13;
-&#13;
-This trigger does not recover automatically, to get rid of this trigger, you have to use the &quot;Close problem&quot;</description>
-            <type>0</type>
-            <manual_close>1</manual_close>
-            <dependencies/>
-            <tags/>
-        </trigger>
-        <trigger>
-            <expression>{Custom - OS - Linux:vfs.file.regmatch[/proc/mdstat,&quot;\[.*_.*\]&quot;,,].last()}=1</expression>
-            <recovery_mode>0</recovery_mode>
-            <recovery_expression/>
-            <name>MD Raid inconsistent devices</name>
-            <correlation_mode>0</correlation_mode>
-            <correlation_tag/>
-            <url/>
-            <status>0</status>
-            <priority>3</priority>
-            <description>There are inconsistent devices</description>
-            <type>0</type>
-            <manual_close>0</manual_close>
-            <dependencies/>
-            <tags/>
-        </trigger>
-        <trigger>
-            <expression>{Custom - OS - Linux:vfs.file.regmatch[/proc/mdstat,finish=,,].last()}=1</expression>
-            <recovery_mode>0</recovery_mode>
-            <recovery_expression/>
-            <name>MD Raid sequential activity</name>
-            <correlation_mode>0</correlation_mode>
-            <correlation_tag/>
-            <url/>
-            <status>0</status>
-            <priority>1</priority>
-            <description>Sequential raid activity in progress</description>
-            <type>0</type>
-            <manual_close>0</manual_close>
-            <dependencies>
-                <dependency>
-                    <name>MD Raid inconsistent devices</name>
-                    <expression>{Custom - OS - Linux:vfs.file.regmatch[/proc/mdstat,&quot;\[.*_.*\]&quot;,,].last()}=1</expression>
-                    <recovery_expression/>
-                </dependency>
-            </dependencies>
-            <tags/>
-        </trigger>
-        <trigger>
             <expression>{Custom - OS - Linux:mailq.count.general.avg(1200)}&gt;1500 and ({Custom - OS - Linux:mailq.count.general.avg(1200)}&gt;{Custom - OS - Linux:mailq.count.general.avg(2400)})</expression>
             <recovery_mode>0</recovery_mode>
             <recovery_expression/>
@@ -4156,60 +3120,6 @@ This trigger does not recover automatically, to get rid of this trigger, you hav
             <tags/>
         </trigger>
         <trigger>
-            <expression>{Custom - OS - Linux:ntpd.primarypeer.stats[offset].last()} &gt; {$MAX_NTP_OFFSET_MS} or ((-1 * {Custom - OS - Linux:ntpd.primarypeer.stats[offset].last()}) &gt; {$MAX_NTP_OFFSET_MS})</expression>
-            <recovery_mode>0</recovery_mode>
-            <recovery_expression/>
-            <name>NTP Absolute RMS Time Offset &gt;  {$MAX_NTP_OFFSET_MS} ms</name>
-            <correlation_mode>0</correlation_mode>
-            <correlation_tag/>
-            <url/>
-            <status>0</status>
-            <priority>2</priority>
-            <description>Time difference between the host and the active ntp peer is greater than {$MAX_NTP_OFFSET}</description>
-            <type>0</type>
-            <manual_close>0</manual_close>
-            <dependencies>
-                <dependency>
-                    <name>NTP Absolute Time RMS Offset no data</name>
-                    <expression>{Custom - OS - Linux:ntpd.primarypeer.stats[offset].nodata(3600)}=1</expression>
-                    <recovery_expression/>
-                </dependency>
-            </dependencies>
-            <tags/>
-        </trigger>
-        <trigger>
-            <expression>{Custom - OS - Linux:ntpd.primarypeer.stats[offset].nodata(3600)}=1</expression>
-            <recovery_mode>0</recovery_mode>
-            <recovery_expression/>
-            <name>NTP Absolute Time RMS Offset no data</name>
-            <correlation_mode>0</correlation_mode>
-            <correlation_tag/>
-            <url/>
-            <status>0</status>
-            <priority>2</priority>
-            <description>No ntp time information</description>
-            <type>0</type>
-            <manual_close>0</manual_close>
-            <dependencies/>
-            <tags/>
-        </trigger>
-        <trigger>
-            <expression>{Custom - OS - Linux:ntpd.peers.goodcount.last()}&lt;= {$MIN_NTP_SERVER_COUNT}</expression>
-            <recovery_mode>0</recovery_mode>
-            <recovery_expression/>
-            <name>Number of good NTP peers &lt;= {$MIN_NTP_SERVER_COUNT}</name>
-            <correlation_mode>0</correlation_mode>
-            <correlation_tag/>
-            <url/>
-            <status>0</status>
-            <priority>3</priority>
-            <description/>
-            <type>0</type>
-            <manual_close>0</manual_close>
-            <dependencies/>
-            <tags/>
-        </trigger>
-        <trigger>
             <expression>{Custom - OS - Linux:vfs.file.exists[/var/run/reboot-required].last()}=1</expression>
             <recovery_mode>0</recovery_mode>
             <recovery_expression/>
@@ -4219,11 +3129,9 @@ This trigger does not recover automatically, to get rid of this trigger, you hav
             <url/>
             <status>0</status>
             <priority>1</priority>
-            <description>This trigger fires if a reboot is required after a system uddate.&#13;
-&#13;
-Remove the flagfile if you decide that no reboot is required (/var/run/reboot-required).</description>
+            <description>This trigger fires if a reboot is required after a system uddate.</description>
             <type>0</type>
-            <manual_close>1</manual_close>
+            <manual_close>0</manual_close>
             <dependencies/>
             <tags/>
         </trigger>
@@ -4311,7 +3219,7 @@ Remove the flagfile if you decide that no reboot is required (/var/run/reboot-re
             <expression>{Custom - OS - Linux:system.localtime.fuzzytime(60)}=0</expression>
             <recovery_mode>0</recovery_mode>
             <recovery_expression/>
-            <name>Time difference between zabbix server and host  (&gt;60sec)</name>
+            <name>Time out of sync (&gt;60sec)</name>
             <correlation_mode>0</correlation_mode>
             <correlation_tag/>
             <url/>
@@ -4594,25 +3502,13 @@ Remove the flagfile if you decide that no reboot is required (/var/run/reboot-re
                 <graph_item>
                     <sortorder>0</sortorder>
                     <drawtype>0</drawtype>
-                    <color>00CC00</color>
+                    <color>DD0000</color>
                     <yaxisside>0</yaxisside>
-                    <calc_fnc>4</calc_fnc>
+                    <calc_fnc>2</calc_fnc>
                     <type>0</type>
                     <item>
                         <host>Custom - OS - Linux</host>
                         <key>mailq.count.general</key>
-                    </item>
-                </graph_item>
-                <graph_item>
-                    <sortorder>1</sortorder>
-                    <drawtype>0</drawtype>
-                    <color>F63100</color>
-                    <yaxisside>1</yaxisside>
-                    <calc_fnc>4</calc_fnc>
-                    <type>0</type>
-                    <item>
-                        <host>Custom - OS - Linux</host>
-                        <key>mailq.count.frozen</key>
                     </item>
                 </graph_item>
             </graph_items>
@@ -4657,118 +3553,6 @@ Remove the flagfile if you decide that no reboot is required (/var/run/reboot-re
                     <item>
                         <host>Custom - OS - Linux</host>
                         <key>nfs.rpc.retransmits</key>
-                    </item>
-                </graph_item>
-            </graph_items>
-        </graph>
-        <graph>
-            <name>NTP  Sychronisation</name>
-            <width>900</width>
-            <height>300</height>
-            <yaxismin>0.0000</yaxismin>
-            <yaxismax>100.0000</yaxismax>
-            <show_work_period>1</show_work_period>
-            <show_triggers>1</show_triggers>
-            <type>0</type>
-            <show_legend>1</show_legend>
-            <show_3d>0</show_3d>
-            <percent_left>0.0000</percent_left>
-            <percent_right>0.0000</percent_right>
-            <ymin_type_1>0</ymin_type_1>
-            <ymax_type_1>0</ymax_type_1>
-            <ymin_item_1>0</ymin_item_1>
-            <ymax_item_1>0</ymax_item_1>
-            <graph_items>
-                <graph_item>
-                    <sortorder>0</sortorder>
-                    <drawtype>4</drawtype>
-                    <color>1A7C11</color>
-                    <yaxisside>0</yaxisside>
-                    <calc_fnc>4</calc_fnc>
-                    <type>0</type>
-                    <item>
-                        <host>Custom - OS - Linux</host>
-                        <key>ntpd.primarypeer.stats[delay]</key>
-                    </item>
-                </graph_item>
-                <graph_item>
-                    <sortorder>1</sortorder>
-                    <drawtype>0</drawtype>
-                    <color>F63100</color>
-                    <yaxisside>1</yaxisside>
-                    <calc_fnc>4</calc_fnc>
-                    <type>0</type>
-                    <item>
-                        <host>Custom - OS - Linux</host>
-                        <key>ntpd.primarypeer.stats[offset]</key>
-                    </item>
-                </graph_item>
-                <graph_item>
-                    <sortorder>2</sortorder>
-                    <drawtype>0</drawtype>
-                    <color>2774A4</color>
-                    <yaxisside>1</yaxisside>
-                    <calc_fnc>4</calc_fnc>
-                    <type>0</type>
-                    <item>
-                        <host>Custom - OS - Linux</host>
-                        <key>ntpd.primarypeer.stats[jitter]</key>
-                    </item>
-                </graph_item>
-            </graph_items>
-        </graph>
-        <graph>
-            <name>Processes</name>
-            <width>900</width>
-            <height>300</height>
-            <yaxismin>0.0000</yaxismin>
-            <yaxismax>100.0000</yaxismax>
-            <show_work_period>1</show_work_period>
-            <show_triggers>1</show_triggers>
-            <type>0</type>
-            <show_legend>1</show_legend>
-            <show_3d>0</show_3d>
-            <percent_left>0.0000</percent_left>
-            <percent_right>0.0000</percent_right>
-            <ymin_type_1>0</ymin_type_1>
-            <ymax_type_1>0</ymax_type_1>
-            <ymin_item_1>0</ymin_item_1>
-            <ymax_item_1>0</ymax_item_1>
-            <graph_items>
-                <graph_item>
-                    <sortorder>0</sortorder>
-                    <drawtype>0</drawtype>
-                    <color>1A7C11</color>
-                    <yaxisside>0</yaxisside>
-                    <calc_fnc>4</calc_fnc>
-                    <type>0</type>
-                    <item>
-                        <host>Custom - OS - Linux</host>
-                        <key>proc.num[]</key>
-                    </item>
-                </graph_item>
-                <graph_item>
-                    <sortorder>1</sortorder>
-                    <drawtype>0</drawtype>
-                    <color>F63100</color>
-                    <yaxisside>1</yaxisside>
-                    <calc_fnc>4</calc_fnc>
-                    <type>0</type>
-                    <item>
-                        <host>Custom - OS - Linux</host>
-                        <key>proc.num[,,run]</key>
-                    </item>
-                </graph_item>
-                <graph_item>
-                    <sortorder>2</sortorder>
-                    <drawtype>0</drawtype>
-                    <color>2774A4</color>
-                    <yaxisside>1</yaxisside>
-                    <calc_fnc>4</calc_fnc>
-                    <type>0</type>
-                    <item>
-                        <host>Custom - OS - Linux</host>
-                        <key>proc.num[,,zomb]</key>
                     </item>
                 </graph_item>
             </graph_items>
