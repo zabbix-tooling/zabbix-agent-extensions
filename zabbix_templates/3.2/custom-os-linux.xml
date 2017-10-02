@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
     <version>3.2</version>
-    <date>2017-09-22T07:43:48Z</date>
+    <date>2017-10-02T16:48:24Z</date>
     <groups>
         <group>
             <name>Templates</name>
@@ -3964,7 +3964,7 @@ Recovery:&#13;
             <expression>{Custom - OS - Linux:linux.dmesg.str(ERROR:)}=1</expression>
             <recovery_mode>2</recovery_mode>
             <recovery_expression/>
-            <name>Kernel Errors</name>
+            <name>Linux Kernel Problems</name>
             <correlation_mode>0</correlation_mode>
             <correlation_tag/>
             <url/>
