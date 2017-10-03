@@ -25,6 +25,7 @@ This package provides the following capabilities:
    * number of processes
  * monitor ICMP ping 
  * monitor the MTA mailqueue
+ * added monitoring of smart state
  * monitor NFS operations/retransmits
  * apache monitoring:
    (enable /server-status available on localhost, https://httpd.apache.org/docs/2.4/mod/mod_status.html)
