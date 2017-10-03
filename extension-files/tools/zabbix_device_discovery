@@ -1,59 +1,105 @@
 #!/usr/bin/env python3
+#
+#   This program is free software; you can redistribute it and/or modify
+#   it under the terms of the GNU General Public License as published by
+#   the Free Software Foundation; either version 2 of the License, or
+#   (at your option) any later version.
+#
+#   This program is distributed in the hope that it will be useful,
+#   but WITHOUT ANY WARRANTY; without even the implied warranty of
+#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#   GNU General Public License for more details.
+#
+#   You should have received a copy of the GNU General Public License along
+#   with this program; if not, write to the Free Software Foundation, Inc.,
+#   51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 # Marc Schoechlin <ms@256bit.org>
 # Marc Schoechlin <Marc.Schoechlin@globalways.net>
 
-import glob
-import re
-import os
-import json
-import sys
 import argparse
 import configparser
+import glob
+import json
+import os
+import re
+import sys
 
 ####################################################################################
 
-regex_includes = [".*"]
-regex_excludes = ["loop.*"]
+config_default = {
+    "regex_includes": [".*"],
+    "regex_excludes": ["loop.*", "fd.*", "sr.*", ],
+}
+
 
 ####################################################################################
 #### HELPERS
 
 
 def check_match(matchfor, device_name, regexes):
-  ret = False
-  for regex in regexes:
-    regex = regex.strip()
-    if re.match(r"^%s$" % regex, device_name):
-      if args.debug:
-      	sys.stderr.write("%s match: %s with %s\n" % (matchfor, device_name, regex))
-      ret = True
-  return ret
+    ret = False
+    for regex in regexes:
+        regex = regex.strip()
+        if re.match(r"^%s$" % regex, device_name):
+            if args.debug:
+                sys.stderr.write("%s match: %s with %s\n" % (matchfor, device_name, regex))
+            ret = True
+    return ret
 
 
 # module "configparser" seems not to support sectionless inifiles
-def read_config(config_files, regex_includes, regex_excludes):
-  for config_file in config_files:
-   if os.path.exists(config_file):
-       if args.debug:
-         sys.stderr.write("reading config file %s\n" % config_file)
-       with open(config_file, 'r') as f:     
-         config_string = '[global]\n' + f.read() 
-         config = configparser.ConfigParser() 
-         config.read_string(config_string)
-         re_c = re.compile(r',')
-         if "regex_includes" in config["global"]:
-            regex_includes = re_c.split(config["global"]["regex_includes"])
-         if "regex_excludes" in config["global"]:
-            regex_excludes = re_c.split(config["global"]["regex_excludes"])
-   return (regex_includes,regex_excludes)
+def read_config(config_file):
+    config = config_default
+    if os.path.exists(config_file):
+        if args.debug:
+            sys.stderr.write("reading config file %s\n" % config_file)
+        try:
+            fh = open(config_file, 'r')
+            content = fh.read()
+
+            # Remove multiline comments
+            content = re.sub('^\s*/\*.*?\*/\s*', '', content, 0, re.DOTALL | re.MULTILINE)
+            # Remove single line comments
+            content = re.sub('^\s*//.*$\n', '', content, 0, re.MULTILINE)
+
+            config = json.loads(content)
+
+            fh.close()
+        except FileNotFoundError:
+            exitError("Config file does not exist")
+        except PermissionError:
+            exitError("Could not read config file")
+        except json.decoder.JSONDecodeError:
+            exitError("Could not parse JSON config file")
+        except:
+            exitError("An unexpected error occured while reading config file")
+
+    return config
+
 
 ####################################################################################
 #### MAIN
 
 
 parser = argparse.ArgumentParser(
-    description='perform device disovery for zabbix'
+    description='perform device disovery for zabbix',
+    formatter_class=argparse.RawTextHelpFormatter,
+    epilog='''Example json configuration file:
+{
+  "regex_includes": [
+    ".*"
+  ],
+  "regex_excludes": [
+    "loop.*"
+  ]
+}
+
+Options ar evaluated like this:
+- stage 1: include the following devices by regex
+- stage 2: exclude the following devices from step 1 by regex
+
+    '''
 )
 parser.add_argument(
     '--debug',
@@ -62,12 +108,12 @@ parser.add_argument(
 )
 
 parser.add_argument(
-   '--config',
-   nargs='*',
-   type=str,
-   help='configuration file',
-   default=None,
-   required=False,
+    '--config',
+    nargs='?',
+    type=str,
+    help='configuration file',
+    default=None,
+    required=False,
 )
 
 args = parser.parse_args()
@@ -76,31 +122,36 @@ devices_discovered = {'data': []}
 
 # read the config
 if args.config is not None:
-  (regex_includes, regex_excludes) = read_config(args.config, regex_includes, regex_excludes)
+    config = read_config(args.config)
+else:
+    config = config_default
+
+if args.debug:
+    sys.stderr.write("** Effective config:\n%s\n" % json.dumps(config, indent=2))
 
 # perform discovery
 for filename in glob.glob('/sys/block/*'):
-  if not os.path.islink(filename): 
-    continue
-  device_name = os.path.basename(filename)
-  if args.debug:
-    sys.stderr.write("** DEVICE %s\n" % device_name)
+    if not os.path.islink(filename):
+        continue
+    device_name = os.path.basename(filename)
+    if args.debug:
+        sys.stderr.write("** DEVICE %s\n" % device_name)
 
-  # Check matched devices
-  if not check_match("include", device_name, regex_includes):
-    continue
+    # Check matched devices
+    if not check_match("include", device_name, config["regex_includes"]):
+        continue
 
-  # Check excluded devices
-  if check_match("exclude", device_name, regex_excludes):
-    continue
+    # Check excluded devices
+    if check_match("exclude", device_name, config["regex_excludes"]):
+        continue
 
-  device = {}
-  device['{#BLOCKDEVICE}'] = device_name
-  devices_discovered['data'].append(device)
+    device = {}
+    device['#BLOCKDEVICE'] = device_name
+    devices_discovered['data'].append(device)
 
 if args.debug:
-  print(json.dumps(devices_discovered, sort_keys=True, indent=2))
+    print(json.dumps(devices_discovered, sort_keys=True, indent=2))
 else:
-  print(json.dumps(devices_discovered, sort_keys=True))
+    print(json.dumps(devices_discovered, sort_keys=True))
 
 # vim: ai et ts=2 shiftwidth=2 expandtab
