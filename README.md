@@ -98,6 +98,33 @@ A quick overview is provided by the following files:
    dpkg -i zabbix-agent-extensions_<version>_all.deb
    ```
 
+# How to configure discovery for zabbix agent
+ 
+ * Configure disk device discovery
+    * Create file: /etc/zabbix/item_zabbix_device_discovery.json
+    * Add content to include/exclude devices
+      ```
+{
+  "regex_includes": [
+    ".*"
+  ],
+  "regex_excludes": [
+    "loop.*"
+  ]
+}
+      ```
+    * Test
+      ```
+      zabbix_agentd -t "vfs.dev.discovery"
+      ```
+ * Configure generic discovery
+   * Decide to use a appname consiting of the following characters: a-zA-Z0-9. (Alphanumeric and dot characters)
+   * Add file snippes to /var/run/zabbix-generic-discovery/ which look like <appname>-<anything>.json
+   * Test the disovery by
+     ```
+      zabbix_agentd -t "generic.discovery[appname]"
+     ```
+
 # How to configure the zabbix server
 
 The templates will work on zabbix 2.2 and above.
@@ -117,6 +144,7 @@ The templates will work on zabbix 2.2 and above.
    * Load "zabbix_templates/Custom - Service - Apache.xml"
    * Open template "Custom - Service - Apache" and modify the default values defined in the macros
    * Assign template "Custom - Service - Apache" to the desired hosts and modify the default values to host specific settings
+ * ...
    
 # Licence and Authors
 

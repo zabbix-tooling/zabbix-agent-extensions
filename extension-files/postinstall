@@ -13,6 +13,8 @@ if (grep -q "Ubuntu" /etc/*rel*);then
 
    usermod -G adm -a zabbix 
    chown -R zabbix:zabbix /var/cache/zabbix
+   mkdir -p /var/run/zabbix-generic-discovery/
+   chown zabbix:zabbix /var/run/zabbix-generic-discovery/
 else
    echo "Notice: no postinstall implemented for you distribution, contributions and merge requests are very welcome ;-)"
 fi
