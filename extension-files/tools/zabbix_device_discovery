@@ -95,7 +95,7 @@ for filename in glob.glob('/sys/block/*'):
     continue
 
   device = {}
-  device['#BLOCKDEVICE'] = device_name
+  device['{#BLOCKDEVICE}'] = device_name
   devices_discovered['data'].append(device)
 
 if args.debug:
