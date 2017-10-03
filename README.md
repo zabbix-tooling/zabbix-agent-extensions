@@ -120,6 +120,12 @@ A quick overview is provided by the following files:
  * Configure generic discovery
    * Decide to use a appname consiting of the following characters: a-zA-Z0-9. (Alphanumeric and dot characters)
    * Add file snippes to /var/run/zabbix-generic-discovery/ which look like <appname>-<anything>.json
+     ```
+     {
+        "{#FSNAME}":"\/",
+        "{#FSTYPE}":"rootfs"
+     },
+     ```
    * Test the disovery by
      ```
       zabbix_agentd -t "generic.discovery[appname]"
