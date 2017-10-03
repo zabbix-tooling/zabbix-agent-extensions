@@ -158,7 +158,7 @@ for filename in glob.glob('/sys/block/*'):
     if check_match("exclude", device_name, config["regex_excludes"]):
         continue
 
-    if args.only_hardware and not is_real_hardware_device(device_name):
+    if args.only_rawdisk and not is_real_hardware_device(device_name):
         continue
 
     device = {}
