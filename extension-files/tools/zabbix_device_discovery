@@ -48,6 +48,12 @@ def read_config(config_files, regex_includes, regex_excludes):
             regex_excludes = re_c.split(config["global"]["regex_excludes"])
    return (regex_includes,regex_excludes)
 
+def is_real_hardware_device(device):
+    if os.path.exists("/sys/block/%s/device/vendor" % device):
+        return True
+    else:
+        return False
+
 ####################################################################################
 #### MAIN
 
@@ -60,6 +66,13 @@ parser.add_argument(
     help='Output debug information',
     action='store_true',
 )
+
+parser.add_argument(
+    '--only_hardware',
+    help='Output only hardware devices',
+    action='store_true',
+)
+
 
 parser.add_argument(
    '--config',
@@ -94,9 +107,14 @@ for filename in glob.glob('/sys/block/*'):
   if check_match("exclude", device_name, regex_excludes):
     continue
 
+  if args.only_hardware and not is_real_hardware_device(device_name):
+    continue
+
   device = {}
   device['{#BLOCKDEVICE}'] = device_name
   devices_discovered['data'].append(device)
+
+
 
 if args.debug:
   print(json.dumps(devices_discovered, sort_keys=True, indent=2))
