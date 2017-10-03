@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
     <version>3.2</version>
-    <date>2017-10-02T16:48:24Z</date>
+    <date>2017-10-03T18:28:34Z</date>
     <groups>
         <group>
             <name>Templates</name>
@@ -2188,7 +2188,7 @@ Recovery:&#13;
                     <snmp_community/>
                     <snmp_oid/>
                     <key>net.if.discovery</key>
-                    <delay>3600</delay>
+                    <delay>600</delay>
                     <status>0</status>
                     <allowed_hosts/>
                     <snmpv3_contextname/>
@@ -2220,7 +2220,7 @@ Recovery:&#13;
                         </conditions>
                     </filter>
                     <lifetime>7</lifetime>
-                    <description/>
+                    <description>Discovery of network interfaces</description>
                     <item_prototypes>
                         <item_prototype>
                             <name>Interface {#IFNAME} Bits Inbound</name>
@@ -2647,7 +2647,7 @@ Recovery:&#13;
                     <snmp_community/>
                     <snmp_oid/>
                     <key>vfs.dev.discovery</key>
-                    <delay>10</delay>
+                    <delay>600</delay>
                     <status>0</status>
                     <allowed_hosts/>
                     <snmpv3_contextname/>
@@ -2671,8 +2671,8 @@ Recovery:&#13;
                         <formula/>
                         <conditions>
                             <condition>
-                                <macro>{#DEVNAME}</macro>
-                                <value>.*</value>
+                                <macro>{#BLOCKDEVICE}</macro>
+                                <value>^.*</value>
                                 <operator>8</operator>
                                 <formulaid>A</formulaid>
                             </condition>
@@ -2682,56 +2682,12 @@ Recovery:&#13;
                     <description>Discovery of disks.</description>
                     <item_prototypes>
                         <item_prototype>
-                            <name>Disk {#DEVNAME} Read BPS</name>
+                            <name>Disk {#BLOCKDEVICE} Read IOPS</name>
                             <type>0</type>
                             <snmp_community/>
                             <multiplier>0</multiplier>
                             <snmp_oid/>
-                            <key>vfs.dev.read[{#DEVNAME},bps,avg1]</key>
-                            <delay>60</delay>
-                            <history>14</history>
-                            <trends>90</trends>
-                            <status>0</status>
-                            <value_type>0</value_type>
-                            <allowed_hosts/>
-                            <units>bps</units>
-                            <delta>0</delta>
-                            <snmpv3_contextname/>
-                            <snmpv3_securityname/>
-                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                            <snmpv3_authpassphrase/>
-                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                            <snmpv3_privpassphrase/>
-                            <formula>1</formula>
-                            <delay_flex/>
-                            <params/>
-                            <ipmi_sensor/>
-                            <data_type>0</data_type>
-                            <authtype>0</authtype>
-                            <username/>
-                            <password/>
-                            <publickey/>
-                            <privatekey/>
-                            <port/>
-                            <description/>
-                            <inventory_link>0</inventory_link>
-                            <applications>
-                                <application>
-                                    <name>OS - Disk Performance</name>
-                                </application>
-                            </applications>
-                            <valuemap/>
-                            <logtimefmt/>
-                            <application_prototypes/>
-                        </item_prototype>
-                        <item_prototype>
-                            <name>Disk {#DEVNAME} Read IOPS</name>
-                            <type>0</type>
-                            <snmp_community/>
-                            <multiplier>0</multiplier>
-                            <snmp_oid/>
-                            <key>vfs.dev.read[{#DEVNAME},ops,avg1]</key>
+                            <key>vfs.dev.read[{#BLOCKDEVICE},ops,avg1]</key>
                             <delay>60</delay>
                             <history>14</history>
                             <trends>90</trends>
@@ -2770,12 +2726,12 @@ Recovery:&#13;
                             <application_prototypes/>
                         </item_prototype>
                         <item_prototype>
-                            <name>Disk {#DEVNAME} Write BPS</name>
+                            <name>Disk {#BLOCKDEVICE} Read SPS</name>
                             <type>0</type>
                             <snmp_community/>
                             <multiplier>0</multiplier>
                             <snmp_oid/>
-                            <key>vfs.dev.write[{#DEVNAME},bps,avg1]</key>
+                            <key>vfs.dev.read[{#BLOCKDEVICE},sps,avg1]</key>
                             <delay>60</delay>
                             <history>14</history>
                             <trends>90</trends>
@@ -2814,12 +2770,12 @@ Recovery:&#13;
                             <application_prototypes/>
                         </item_prototype>
                         <item_prototype>
-                            <name>Disk {#DEVNAME} Write IOPS</name>
+                            <name>Disk {#BLOCKDEVICE} Write IOPS</name>
                             <type>0</type>
                             <snmp_community/>
                             <multiplier>0</multiplier>
                             <snmp_oid/>
-                            <key>vfs.dev.write[{#DEVNAME},ops,avg1]</key>
+                            <key>vfs.dev.write[{#BLOCKDEVICE},ops,avg1]</key>
                             <delay>60</delay>
                             <history>14</history>
                             <trends>90</trends>
@@ -2827,6 +2783,50 @@ Recovery:&#13;
                             <value_type>0</value_type>
                             <allowed_hosts/>
                             <units>iops</units>
+                            <delta>0</delta>
+                            <snmpv3_contextname/>
+                            <snmpv3_securityname/>
+                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                            <snmpv3_authpassphrase/>
+                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                            <snmpv3_privpassphrase/>
+                            <formula>1</formula>
+                            <delay_flex/>
+                            <params/>
+                            <ipmi_sensor/>
+                            <data_type>0</data_type>
+                            <authtype>0</authtype>
+                            <username/>
+                            <password/>
+                            <publickey/>
+                            <privatekey/>
+                            <port/>
+                            <description/>
+                            <inventory_link>0</inventory_link>
+                            <applications>
+                                <application>
+                                    <name>OS - Disk Performance</name>
+                                </application>
+                            </applications>
+                            <valuemap/>
+                            <logtimefmt/>
+                            <application_prototypes/>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Disk {#BLOCKDEVICE} Write SPS</name>
+                            <type>0</type>
+                            <snmp_community/>
+                            <multiplier>0</multiplier>
+                            <snmp_oid/>
+                            <key>vfs.dev.write[{#BLOCKDEVICE},sps,avg1]</key>
+                            <delay>60</delay>
+                            <history>14</history>
+                            <trends>90</trends>
+                            <status>0</status>
+                            <value_type>0</value_type>
+                            <allowed_hosts/>
+                            <units>bps</units>
                             <delta>0</delta>
                             <snmpv3_contextname/>
                             <snmpv3_securityname/>
@@ -2861,7 +2861,7 @@ Recovery:&#13;
                     <trigger_prototypes/>
                     <graph_prototypes>
                         <graph_prototype>
-                            <name>Disk {#DEVNAME} BPS</name>
+                            <name>Blockdevice {#BLOCKDEVICE} BPS</name>
                             <width>900</width>
                             <height>300</height>
                             <yaxismin>0.0000</yaxismin>
@@ -2887,7 +2887,7 @@ Recovery:&#13;
                                     <type>0</type>
                                     <item>
                                         <host>Custom - OS - Linux</host>
-                                        <key>vfs.dev.read[{#DEVNAME},bps,avg1]</key>
+                                        <key>vfs.dev.read[{#BLOCKDEVICE},sps,avg1]</key>
                                     </item>
                                 </graph_item>
                                 <graph_item>
@@ -2899,13 +2899,13 @@ Recovery:&#13;
                                     <type>0</type>
                                     <item>
                                         <host>Custom - OS - Linux</host>
-                                        <key>vfs.dev.write[{#DEVNAME},bps,avg1]</key>
+                                        <key>vfs.dev.write[{#BLOCKDEVICE},sps,avg1]</key>
                                     </item>
                                 </graph_item>
                             </graph_items>
                         </graph_prototype>
                         <graph_prototype>
-                            <name>Disk {#DEVNAME} IOPS</name>
+                            <name>Blockdevice {#BLOCKDEVICE} IOPS</name>
                             <width>900</width>
                             <height>300</height>
                             <yaxismin>0.0000</yaxismin>
@@ -2931,7 +2931,7 @@ Recovery:&#13;
                                     <type>0</type>
                                     <item>
                                         <host>Custom - OS - Linux</host>
-                                        <key>vfs.dev.read[{#DEVNAME},ops,avg1]</key>
+                                        <key>vfs.dev.read[{#BLOCKDEVICE},ops,avg1]</key>
                                     </item>
                                 </graph_item>
                                 <graph_item>
@@ -2943,7 +2943,7 @@ Recovery:&#13;
                                     <type>0</type>
                                     <item>
                                         <host>Custom - OS - Linux</host>
-                                        <key>vfs.dev.write[{#DEVNAME},ops,avg1]</key>
+                                        <key>vfs.dev.write[{#BLOCKDEVICE},ops,avg1]</key>
                                     </item>
                                 </graph_item>
                             </graph_items>
@@ -2952,12 +2952,118 @@ Recovery:&#13;
                     <host_prototypes/>
                 </discovery_rule>
                 <discovery_rule>
+                    <name>Hard Disk discovery</name>
+                    <type>0</type>
+                    <snmp_community/>
+                    <snmp_oid/>
+                    <key>vfs.dev.discovery.rawdisk</key>
+                    <delay>600</delay>
+                    <status>0</status>
+                    <allowed_hosts/>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <filter>
+                        <evaltype>0</evaltype>
+                        <formula/>
+                        <conditions>
+                            <condition>
+                                <macro>{#BLOCKDEVICE}</macro>
+                                <value>^.*</value>
+                                <operator>8</operator>
+                                <formulaid>A</formulaid>
+                            </condition>
+                        </conditions>
+                    </filter>
+                    <lifetime>7</lifetime>
+                    <description>Discovery of physical disks.</description>
+                    <item_prototypes>
+                        <item_prototype>
+                            <name>Smart Health Status {#BLOCKDEVICE}</name>
+                            <type>0</type>
+                            <snmp_community/>
+                            <multiplier>0</multiplier>
+                            <snmp_oid/>
+                            <key>hardware.disk.health[{#BLOCKDEVICE}]</key>
+                            <delay>600</delay>
+                            <history>60</history>
+                            <trends>0</trends>
+                            <status>0</status>
+                            <value_type>4</value_type>
+                            <allowed_hosts/>
+                            <units/>
+                            <delta>0</delta>
+                            <snmpv3_contextname/>
+                            <snmpv3_securityname/>
+                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                            <snmpv3_authpassphrase/>
+                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                            <snmpv3_privpassphrase/>
+                            <formula>1</formula>
+                            <delay_flex/>
+                            <params/>
+                            <ipmi_sensor/>
+                            <data_type>0</data_type>
+                            <authtype>0</authtype>
+                            <username/>
+                            <password/>
+                            <publickey/>
+                            <privatekey/>
+                            <port/>
+                            <description/>
+                            <inventory_link>0</inventory_link>
+                            <applications>
+                                <application>
+                                    <name>OS - Health</name>
+                                </application>
+                            </applications>
+                            <valuemap/>
+                            <logtimefmt/>
+                            <application_prototypes/>
+                        </item_prototype>
+                    </item_prototypes>
+                    <trigger_prototypes>
+                        <trigger_prototype>
+                            <expression>{Custom - OS - Linux:hardware.disk.health[{#BLOCKDEVICE}].str(PASSED)}=0</expression>
+                            <recovery_mode>0</recovery_mode>
+                            <recovery_expression/>
+                            <name>Smart Disk Health {#BLOCKDEVICE}</name>
+                            <correlation_mode>0</correlation_mode>
+                            <correlation_tag/>
+                            <url/>
+                            <status>0</status>
+                            <priority>3</priority>
+                            <description>A disk failed or is going to fail in the next 24 hours. Watch zabbix agent log to get details.</description>
+                            <type>0</type>
+                            <manual_close>0</manual_close>
+                            <dependencies/>
+                            <tags/>
+                        </trigger_prototype>
+                    </trigger_prototypes>
+                    <graph_prototypes/>
+                    <host_prototypes/>
+                </discovery_rule>
+                <discovery_rule>
                     <name>Filesystems discovery</name>
                     <type>0</type>
                     <snmp_community/>
                     <snmp_oid/>
                     <key>vfs.fs.discovery</key>
-                    <delay>3600</delay>
+                    <delay>600</delay>
                     <status>0</status>
                     <allowed_hosts/>
                     <snmpv3_contextname/>
@@ -2982,14 +3088,14 @@ Recovery:&#13;
                         <conditions>
                             <condition>
                                 <macro>{#FSTYPE}</macro>
-                                <value>^(xfs|ext2|ext3|ext4|btrfs)</value>
+                                <value>^(xfs|ext2|ext3|jfs|reiserfs|ext4|btrfs)</value>
                                 <operator>8</operator>
                                 <formulaid>A</formulaid>
                             </condition>
                         </conditions>
                     </filter>
                     <lifetime>7</lifetime>
-                    <description>Discovery of local filesystems. Overload on host if you need additional filesystem types</description>
+                    <description>Discovery of filesystems</description>
                     <item_prototypes>
                         <item_prototype>
                             <name>Disk {#FSNAME} inode use percentage</name>
@@ -3437,7 +3543,109 @@ Recovery:&#13;
             <templates/>
             <screens>
                 <screen>
-                    <name>Custom - OS - Linux</name>
+                    <name>Custom - OS - Linux - Blockdevice</name>
+                    <hsize>2</hsize>
+                    <vsize>1</vsize>
+                    <screen_items>
+                        <screen_item>
+                            <resourcetype>20</resourcetype>
+                            <width>600</width>
+                            <height>200</height>
+                            <x>0</x>
+                            <y>0</y>
+                            <colspan>1</colspan>
+                            <rowspan>1</rowspan>
+                            <elements>0</elements>
+                            <valign>1</valign>
+                            <halign>1</halign>
+                            <style>0</style>
+                            <url/>
+                            <dynamic>0</dynamic>
+                            <sort_triggers>0</sort_triggers>
+                            <resource>
+                                <name>Blockdevice {#BLOCKDEVICE} IOPS</name>
+                                <host>Custom - OS - Linux</host>
+                            </resource>
+                            <max_columns>1</max_columns>
+                            <application/>
+                        </screen_item>
+                        <screen_item>
+                            <resourcetype>20</resourcetype>
+                            <width>600</width>
+                            <height>200</height>
+                            <x>1</x>
+                            <y>0</y>
+                            <colspan>1</colspan>
+                            <rowspan>1</rowspan>
+                            <elements>0</elements>
+                            <valign>1</valign>
+                            <halign>1</halign>
+                            <style>0</style>
+                            <url/>
+                            <dynamic>0</dynamic>
+                            <sort_triggers>0</sort_triggers>
+                            <resource>
+                                <name>Blockdevice {#BLOCKDEVICE} BPS</name>
+                                <host>Custom - OS - Linux</host>
+                            </resource>
+                            <max_columns>1</max_columns>
+                            <application/>
+                        </screen_item>
+                    </screen_items>
+                </screen>
+                <screen>
+                    <name>Custom - OS - Linux - Filesystems</name>
+                    <hsize>2</hsize>
+                    <vsize>1</vsize>
+                    <screen_items>
+                        <screen_item>
+                            <resourcetype>20</resourcetype>
+                            <width>500</width>
+                            <height>200</height>
+                            <x>0</x>
+                            <y>0</y>
+                            <colspan>1</colspan>
+                            <rowspan>1</rowspan>
+                            <elements>0</elements>
+                            <valign>1</valign>
+                            <halign>1</halign>
+                            <style>0</style>
+                            <url/>
+                            <dynamic>0</dynamic>
+                            <sort_triggers>0</sort_triggers>
+                            <resource>
+                                <name>Disk {#FSNAME} space usage</name>
+                                <host>Custom - OS - Linux</host>
+                            </resource>
+                            <max_columns>1</max_columns>
+                            <application/>
+                        </screen_item>
+                        <screen_item>
+                            <resourcetype>20</resourcetype>
+                            <width>500</width>
+                            <height>200</height>
+                            <x>1</x>
+                            <y>0</y>
+                            <colspan>1</colspan>
+                            <rowspan>1</rowspan>
+                            <elements>0</elements>
+                            <valign>1</valign>
+                            <halign>1</halign>
+                            <style>0</style>
+                            <url/>
+                            <dynamic>0</dynamic>
+                            <sort_triggers>0</sort_triggers>
+                            <resource>
+                                <name>Disk {#FSNAME} inode usage</name>
+                                <host>Custom - OS - Linux</host>
+                            </resource>
+                            <max_columns>1</max_columns>
+                            <application/>
+                        </screen_item>
+                    </screen_items>
+                </screen>
+                <screen>
+                    <name>Custom - OS - Linux - General</name>
                     <hsize>1</hsize>
                     <vsize>11</vsize>
                     <screen_items>
@@ -3686,57 +3894,6 @@ Recovery:&#13;
                     </screen_items>
                 </screen>
                 <screen>
-                    <name>Custom - OS - Linux - Filesystems</name>
-                    <hsize>2</hsize>
-                    <vsize>1</vsize>
-                    <screen_items>
-                        <screen_item>
-                            <resourcetype>20</resourcetype>
-                            <width>500</width>
-                            <height>200</height>
-                            <x>0</x>
-                            <y>0</y>
-                            <colspan>1</colspan>
-                            <rowspan>1</rowspan>
-                            <elements>0</elements>
-                            <valign>1</valign>
-                            <halign>1</halign>
-                            <style>0</style>
-                            <url/>
-                            <dynamic>0</dynamic>
-                            <sort_triggers>0</sort_triggers>
-                            <resource>
-                                <name>Disk {#FSNAME} space usage</name>
-                                <host>Custom - OS - Linux</host>
-                            </resource>
-                            <max_columns>1</max_columns>
-                            <application/>
-                        </screen_item>
-                        <screen_item>
-                            <resourcetype>20</resourcetype>
-                            <width>500</width>
-                            <height>200</height>
-                            <x>1</x>
-                            <y>0</y>
-                            <colspan>1</colspan>
-                            <rowspan>1</rowspan>
-                            <elements>0</elements>
-                            <valign>1</valign>
-                            <halign>1</halign>
-                            <style>0</style>
-                            <url/>
-                            <dynamic>0</dynamic>
-                            <sort_triggers>0</sort_triggers>
-                            <resource>
-                                <name>Disk {#FSNAME} inode usage</name>
-                                <host>Custom - OS - Linux</host>
-                            </resource>
-                            <max_columns>1</max_columns>
-                            <application/>
-                        </screen_item>
-                    </screen_items>
-                </screen>
-                <screen>
                     <name>Custom - OS - Linux - Network</name>
                     <hsize>3</hsize>
                     <vsize>1</vsize>
@@ -3802,57 +3959,6 @@ Recovery:&#13;
                             <sort_triggers>0</sort_triggers>
                             <resource>
                                 <name>Interface {#IFNAME} errors</name>
-                                <host>Custom - OS - Linux</host>
-                            </resource>
-                            <max_columns>1</max_columns>
-                            <application/>
-                        </screen_item>
-                    </screen_items>
-                </screen>
-                <screen>
-                    <name>Custom - OS - Linux - Storage Devices</name>
-                    <hsize>2</hsize>
-                    <vsize>1</vsize>
-                    <screen_items>
-                        <screen_item>
-                            <resourcetype>20</resourcetype>
-                            <width>600</width>
-                            <height>200</height>
-                            <x>0</x>
-                            <y>0</y>
-                            <colspan>1</colspan>
-                            <rowspan>1</rowspan>
-                            <elements>0</elements>
-                            <valign>1</valign>
-                            <halign>1</halign>
-                            <style>0</style>
-                            <url/>
-                            <dynamic>0</dynamic>
-                            <sort_triggers>0</sort_triggers>
-                            <resource>
-                                <name>Disk {#DEVNAME} IOPS</name>
-                                <host>Custom - OS - Linux</host>
-                            </resource>
-                            <max_columns>1</max_columns>
-                            <application/>
-                        </screen_item>
-                        <screen_item>
-                            <resourcetype>20</resourcetype>
-                            <width>600</width>
-                            <height>200</height>
-                            <x>1</x>
-                            <y>0</y>
-                            <colspan>1</colspan>
-                            <rowspan>1</rowspan>
-                            <elements>0</elements>
-                            <valign>1</valign>
-                            <halign>1</halign>
-                            <style>0</style>
-                            <url/>
-                            <dynamic>0</dynamic>
-                            <sort_triggers>0</sort_triggers>
-                            <resource>
-                                <name>Disk {#DEVNAME} BPS</name>
                                 <host>Custom - OS - Linux</host>
                             </resource>
                             <max_columns>1</max_columns>
