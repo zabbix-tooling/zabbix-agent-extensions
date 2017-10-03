@@ -19,20 +19,22 @@ import subprocess
 #### HELPERS
 
 def get_health(device):
-
     cmd = "smartctl -H /dev/%s" % device
     process = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
     out, err = process.communicate()
 
-    result = "FAILED: no health result"
+    result = None
     for line in out.decode('utf8').splitlines():
         m = re.match(r"^SMART overall-health self-assessment test result:\s*(.*)$", line)
         if not m:
             continue
         result = m.group(1)
-    print(result)
-    #out.decode('utf8'), err.decode('utf8')
 
+    if result is None or not "PASSED" in result:
+        result = "FAILED: no health result"
+        sys.stderr.write("%s :: get_health :: %s:\n--\n%s\n%s\n--\n" % (__file__,cmd,out.decode('utf8'), err.decode('utf8')))
+
+    print(result)
 
 
 ####################################################################################
@@ -64,6 +66,7 @@ parser.add_argument(
 )
 
 args = parser.parse_args()
+args.device = re.sub("/dev/+", "", args.device)
 
 if args.health:
     get_health(args.device)
