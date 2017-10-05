@@ -9,13 +9,6 @@ import argparse
 import subprocess
 
 ####################################################################################
-
-# https://github.com/v-zhuravlev/zbx-smartctl
-# https://www.smartmontools.org/wiki/Supported_RAID-Controllers
-# https://blog.kokolor.es/zabbix-check-smart-s-m-a-r-t-hdd-monitoring-mit-zabbix/
-# https://wiki.ubuntuusers.de/Festplattenstatus/
-# http://xmodulo.com/check-hard-disk-health-linux-smartmontools.html
-####################################################################################
 #### HELPERS
 
 def get_health(device):
@@ -25,16 +18,40 @@ def get_health(device):
 
     result = None
     for line in out.decode('utf8').splitlines():
-        m = re.match(r"^SMART overall-health self-assessment test result:\s*(.*)$", line)
+        m = re.match(r"^.*test result:\s*(.*)$", line)
         if not m:
             continue
         result = m.group(1)
 
     if result is None or not "PASSED" in result:
         result = "FAILED: no health result"
-        sys.stderr.write("%s :: get_health :: %s:\n--\n%s\n%s\n--\n" % (__file__,cmd,out.decode('utf8'), err.decode('utf8')))
+        sys.stderr.write("%s :: get_health :: %s:\n--\n%s\n%s\n--\n" % (__file__, cmd, out.decode('utf8'), err.decode('utf8')))
 
     print(result)
+
+def get_attribute(device, attribute):
+    cmd = "smartctl -A /dev/%s" % device
+    process = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
+    out, err = process.communicate()
+    result = None
+    #   1 Raw_Read_Error_Rate     0x000a   100   100   000    Old_age   Always       -       0
+    for line in out.decode('utf8').splitlines():
+        if attribute == "Temperature_Celsius":
+            line = re.sub("\(Min\/Max \d+\/\d+\)", "", line) 
+
+        m = re.match(r"^\s*\d+\s+([^\s]+?)\s+0x.*\s+(([^\s]+))\s*$", line)
+        if not m:
+            continue
+        c_attrib = m.group(1)
+        c_value = m.group(2)
+        if attribute == c_attrib:
+            result = c_value
+    print(result)
+
+# https://256bit.org/app/zabbix/disc_prototypes.php?parent_discoveryid=24290
+# https://github.com/v-zhuravlev/zbx-smartctl/blob/master/Template_3.0_HDD_SMARTMONTOOLS_2_WITH_LLD.xml
+#
+#UserParameter=uHDD[*], sudo smartctl -A $1| grep -i "$2"| tail -1| cut -c 88-|cut -f1 -d' '
 
 
 ####################################################################################
@@ -65,10 +82,22 @@ parser.add_argument(
    required=True,
 )
 
+parser.add_argument(
+   '--attribute',
+   nargs='?',
+   type=str,
+   help='the device attribute (smartctl -A',
+   default=None,
+   required=True,
+)
+
 args = parser.parse_args()
 args.device = re.sub("/dev/+", "", args.device)
 
 if args.health:
     get_health(args.device)
+
+if args.attribute:
+    get_attribute(args.device, args.attribute)
 
 # vim: ai et ts=2 shiftwidth=2 expandtab
