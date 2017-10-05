@@ -8,13 +8,13 @@ if (grep -q "Ubuntu" /etc/*rel*);then
       
      echo "# Added by postinstall of package zabbix-agent-extensions" >> /etc/zabbix/zabbix_agentd.conf
      echo "$THE_INCLUDE" >> /etc/zabbix/zabbix_agentd.conf
-     /etc/init.d/zabbix-agent restart
    fi
 
    usermod -G adm -a zabbix 
    chown -R zabbix:zabbix /var/cache/zabbix
-   mkdir -p /var/run/zabbix-generic-discovery/
+   mkdir -m 755 -p /var/run/zabbix-generic-discovery/
    chown zabbix:zabbix /var/run/zabbix-generic-discovery/
+   /etc/init.d/zabbix-agent restart
 else
    echo "Notice: no postinstall implemented for you distribution, contributions and merge requests are very welcome ;-)"
 fi
