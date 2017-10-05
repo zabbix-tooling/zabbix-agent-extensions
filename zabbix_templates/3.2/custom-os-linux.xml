@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
     <version>3.2</version>
-    <date>2017-10-03T18:37:09Z</date>
+    <date>2017-10-05T13:44:43Z</date>
     <groups>
         <group>
             <name>Templates</name>
@@ -2956,7 +2956,7 @@ Recovery:&#13;
                     <type>0</type>
                     <snmp_community/>
                     <snmp_oid/>
-                    <key>vfs.dev.discovery.rawdisk</key>
+                    <key>vfs.dev.discovery.rawdisks</key>
                     <delay>600</delay>
                     <status>0</status>
                     <allowed_hosts/>
