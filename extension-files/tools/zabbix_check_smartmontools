@@ -96,6 +96,7 @@ parser_group.add_argument(
    nargs='?',
    type=str,
    help='the device attribute (smartctl -A <device>)',
+   default=None,
 )
 parser_group.add_argument(
    '--info',
