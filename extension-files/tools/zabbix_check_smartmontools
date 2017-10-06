@@ -88,7 +88,7 @@ parser.add_argument(
    type=str,
    help='the device attribute (smartctl -A',
    default=None,
-   required=True,
+   required=False,
 )
 
 args = parser.parse_args()
