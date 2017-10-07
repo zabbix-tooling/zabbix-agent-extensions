@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
     <version>3.2</version>
-    <date>2017-10-07T06:23:24Z</date>
+    <date>2017-10-07T07:01:11Z</date>
     <groups>
         <group>
             <name>Templates</name>
@@ -545,7 +545,7 @@
                                 <graph_item>
                                     <sortorder>0</sortorder>
                                     <drawtype>0</drawtype>
-                                    <color>1A7C11</color>
+                                    <color>6C59DC</color>
                                     <yaxisside>0</yaxisside>
                                     <calc_fnc>4</calc_fnc>
                                     <type>0</type>
@@ -557,7 +557,7 @@
                                 <graph_item>
                                     <sortorder>1</sortorder>
                                     <drawtype>0</drawtype>
-                                    <color>F63100</color>
+                                    <color>AC8C14</color>
                                     <yaxisside>0</yaxisside>
                                     <calc_fnc>4</calc_fnc>
                                     <type>0</type>
@@ -569,7 +569,7 @@
                                 <graph_item>
                                     <sortorder>2</sortorder>
                                     <drawtype>0</drawtype>
-                                    <color>2774A4</color>
+                                    <color>611F27</color>
                                     <yaxisside>0</yaxisside>
                                     <calc_fnc>4</calc_fnc>
                                     <type>0</type>
@@ -581,7 +581,7 @@
                                 <graph_item>
                                     <sortorder>3</sortorder>
                                     <drawtype>0</drawtype>
-                                    <color>A54F10</color>
+                                    <color>F230E0</color>
                                     <yaxisside>0</yaxisside>
                                     <calc_fnc>4</calc_fnc>
                                     <type>0</type>
@@ -593,7 +593,7 @@
                                 <graph_item>
                                     <sortorder>4</sortorder>
                                     <drawtype>0</drawtype>
-                                    <color>FC6EA3</color>
+                                    <color>5CCD18</color>
                                     <yaxisside>0</yaxisside>
                                     <calc_fnc>4</calc_fnc>
                                     <type>0</type>
@@ -607,7 +607,7 @@
                         <graph_prototype>
                             <name>OS - Linux - Hardware - Disks - Lifetime</name>
                             <width>900</width>
-                            <height>200</height>
+                            <height>300</height>
                             <yaxismin>0.0000</yaxismin>
                             <yaxismax>100.0000</yaxismax>
                             <show_work_period>1</show_work_period>
@@ -625,9 +625,9 @@
                                 <graph_item>
                                     <sortorder>0</sortorder>
                                     <drawtype>0</drawtype>
-                                    <color>1A7C11</color>
-                                    <yaxisside>1</yaxisside>
-                                    <calc_fnc>4</calc_fnc>
+                                    <color>2774A4</color>
+                                    <yaxisside>0</yaxisside>
+                                    <calc_fnc>2</calc_fnc>
                                     <type>0</type>
                                     <item>
                                         <host>Custom - OS - Linux - Hardware</host>
@@ -637,9 +637,9 @@
                                 <graph_item>
                                     <sortorder>1</sortorder>
                                     <drawtype>0</drawtype>
-                                    <color>F63100</color>
+                                    <color>A54F10</color>
                                     <yaxisside>0</yaxisside>
-                                    <calc_fnc>4</calc_fnc>
+                                    <calc_fnc>2</calc_fnc>
                                     <type>0</type>
                                     <item>
                                         <host>Custom - OS - Linux - Hardware</host>
