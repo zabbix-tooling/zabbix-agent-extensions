@@ -12,7 +12,7 @@ This package provides the following capabilities:
 
  * linux standard monitoring using the standard items provided by the zabbix-agent
    * monitor memory behavior
-   * monitor important servcies: smtp, ssh, ntp time difference to zabbix server
+   * monitor important servcies: smtp, ssh, cron
    * swap usage
    * 5min system load
    * monitor dmesg for bad behavior of the system
@@ -25,7 +25,6 @@ This package provides the following capabilities:
    * number of processes
  * monitor ICMP ping 
  * monitor the MTA mailqueue
- * added monitoring of smart state
  * monitor NFS operations/retransmits
  * apache monitoring:
    (enable /server-status available on localhost, https://httpd.apache.org/docs/2.4/mod/mod_status.html)
@@ -39,6 +38,15 @@ This package provides the following capabilities:
  * generic discovery
    (put json snippets to /var/run/zabbix-generic-discovery/ITEMNAME.json i.e. with puppet and get a combined discovery value)
  * monitor puppet state
+ * linux software raid state
+ * check quality of ntp sync behavior
+ * check for required reboot
+ * Configurable autodiscovery of block devices
+ * Monitor performance havior of discovered block devices
+ * Configurable autodisovery of real disk devices
+ * Check smart state of disks and gather statistics
+ * Discover network devices and monitor performance and error behavior
+ * Zabbix agent version 
 
 
 Almost all measures are integrated in graphs which are displayed on the various host screens.
@@ -46,6 +54,7 @@ Almost all measures are integrated in graphs which are displayed on the various 
 A quick overview is provided by the following files:
 
  * [custom-os-linux](http://htmlpreview.github.io/?https://github.com/scoopex/zabbix-agent-extensions/blob/master/zabbix_templates/3.2/documentation/custom-os-linux.html)
+ * [custom-os-linux-hardware](http://htmlpreview.github.io/?https://github.com/scoopex/zabbix-agent-extensions/blob/master/zabbix_templates/3.2/documentation/custom-os-linuxi-hardware.html)
  * [custom-os-puppet](http://htmlpreview.github.io/?https://github.com/scoopex/zabbix-agent-extensions/blob/master/zabbix_templates/3.2/documentation/custom-os-puppet.html)
  * [custom-service-apache](http://htmlpreview.github.io/?https://github.com/scoopex/zabbix-agent-extensions/blob/master/zabbix_templates/3.2/documentation/custom-service-apache.html)
  * [custom-service-cups](http://htmlpreview.github.io/?https://github.com/scoopex/zabbix-agent-extensions/blob/master/zabbix_templates/3.2/documentation/custom-service-cups.html)
