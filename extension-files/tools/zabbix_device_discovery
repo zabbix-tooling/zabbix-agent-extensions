@@ -28,7 +28,7 @@ import sys
 
 config_default = {
     "regex_includes": [".*"],
-    "regex_excludes": ["loop.*", "fd.*", "sr.*", ],
+    "regex_excludes": ["loop.*", "fd.*", "sr.*", "dm.*" ],
 }
 
 
