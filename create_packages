@@ -58,6 +58,10 @@ create_package(){
    fi
 }
 
+create_docu(){
+ cd $SDIR/../zabbix_templates/3.2
+ ./create_template_documentation
+}
 ######################################################################
 ### MAIN
 if [ -z "$1" ];then
@@ -65,7 +69,7 @@ if [ -z "$1" ];then
 fi
 
 
-VERSION="${1:-2.2}"
+VERSION="${1:-2.3}"
 SDIR="$(dirname $(readlink -f $0))/extension-files"
 
 echo "CREATING VERSION: $VERSION"
@@ -78,5 +82,6 @@ trap "rm -rf $TMPDIR" EXIT TERM INT
 prepare
 create_package deb
 create_package rpm
+create_docu
 
 
