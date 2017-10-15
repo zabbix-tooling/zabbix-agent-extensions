@@ -1,0 +1,39 @@
+language: bash
+
+dist: xenial
+sudo: required
+
+env:
+    - PATH=/home/travis/.gem/ruby/2.4.0/bin:/bin:/sbin:/usr/bin:/usr/local/bin:/usr/local/sbin:/usr/sbin:/usr/X11R6/bin
+
+rvm:
+  - 2.2.3
+
+before_install:
+    - sudo apt-get install ruby-dev build-essential debhelper devscripts rpm xalan wget -y
+      #- gem install fpm --user
+
+install: gem install fpm
+
+script:
+    - sudo gem install fpm
+    - type -a fpm
+    - ./create_packages
+    - ./ci_test
+
+notifications:
+  email:
+    recipients:
+      - ms-travisci@256bit.org
+    on_success: change
+    on_failure: always
+
+# https://docs.travis-ci.com/user/deployment/releases/
+#deploy:
+#  provider: releases
+#  api_key: "GITHUB OAUTH TOKEN"
+#  file: "FILE TO UPLOAD"
+#  skip_cleanup: true
+#  on:
+#    tags: true
+

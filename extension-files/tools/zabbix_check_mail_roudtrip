@@ -24,9 +24,6 @@ import sys
 
 config_default = {
 }
-
-# https://hilfe.web.de/pop-imap/imap/imap-serverdaten.html
-
 ####################################################################################
 #### HELPERS
 
@@ -36,12 +33,14 @@ import traceback
 import time
 import uuid
 
+
 def my_random_string(string_length=10):
     """Returns a random string of length string_length."""
-    random = str(uuid.uuid4()) # Convert UUID format to a Python string.
-    random = random.upper() # Make all characters uppercase.
-    random = random.replace("-","") # Remove the UUID '-'.
-    return random[0:string_length] # Return the random string.
+    random = str(uuid.uuid4())  # Convert UUID format to a Python string.
+    random = random.upper()  # Make all characters uppercase.
+    random = random.replace("-", "")  # Remove the UUID '-'.
+    return random[0:string_length]  # Return the random string.
+
 
 def read_config(config_file):
     config = config_default
@@ -71,6 +70,51 @@ def read_config(config_file):
 
     return config
 
+def check_send_mail(smtp_config):
+
+    try:
+        ident = smtp_config["ident"]
+        fromaddr = smtp_config["from"]
+        toaddr = smtp_config["to"]
+        server_name = smtp_config["server"]
+        port = smtp_config["port"]
+        login = smtp_config["login"]
+        password = smtp_config["password"]
+    except:
+        sys.stderr.write("missing parameters in ")
+        sys.stdout.write("0\n")
+
+    msg = ("From: %s\r\nTo: %s\r\n\r\n" % (fromaddr, toaddr))
+
+    id_nr = int(time.time())
+    msg += "Subject: MAIL ROUNDTRIP TESTMAIL %s :: %s" % (ident, id_nr)
+    msg += "\n\n"
+    for n in range(1, 100):
+        msg += my_random_string(n) + " "
+
+    try:
+        server = smtplib.SMTP(server_name, port)
+        if args.debug:
+            server.set_debuglevel(1)
+        server.starttls()
+        server.ehlo()
+        server.login(login, password)
+        server.sendmail(fromaddr, toaddr, msg)
+        server.quit()
+    except Exception as e:
+        print("Exception happened:")
+        sys.stderr.write('*' * 60 + "\n")
+        sys.stderr.write("*** " + str(e) + "\n")
+        sys.stderr.write('*' * 60 + "\n")
+        sys.stderr.write("\n")
+        traceback.print_exc(file=sys.stderr)
+        sys.stderr.write('-' * 60 + "\n")
+        sys.stdout("1\n")
+        sys.exit(0)
+    sys.stdout.write("0\n")
+    sys.exit(0)
+
+
 ####################################################################################
 #### MAIN
 
@@ -79,17 +123,25 @@ parser = argparse.ArgumentParser(
     formatter_class=argparse.RawTextHelpFormatter,
     epilog='''Example json configuration file:
 {
-  "regex_includes": [
-    ".*"
-  ],
-  "regex_excludes": [
-    "loop.*"
-  ]
+	"smtp": [{
+		"ident": "myserver",
+		"type": "smtp",
+		"server": "foo.bar.serverfarm.st",
+		"login": "bar",
+		"password": "pass123",
+		"from": "lalal@blala.de",
+		"freq": "300"
+	}],
+	"imap": [{
+		"ident": "remoteserver",
+		"type": "imap",
+		"server": "imap.foobar.serverfarm.st",
+		"login": "bar",
+		"password": "pass",
+		"freq": "300"
+	}]
 }
 
-Options ar evaluated like this:
-- stage 1: include the following devices by regex
-- stage 2: exclude the following devices from step 1 by regex
 
     '''
 )
@@ -100,32 +152,37 @@ parser.add_argument(
     action='store_true',
 )
 
+parser_group = parser.add_mutually_exclusive_group(required=True)
 
-parser.add_argument(
-   '--smtp',
-   nargs='?',
-   type=str,
-   help='configuration file',
-   default=None,
-   required=False,
+parser_group.add_argument(
+    '--discovery',
+    help='Output discovery information',
+    action='store_true',
+)
+
+parser_group.add_argument(
+    '--smtp',
+    nargs='?',
+    type=str,
+    help='configuration file',
+    default=None,
+)
+
+parser_group.add_argument(
+    '--imap',
+    nargs='?',
+    type=str,
+    help='configuration file',
+    default=None,
 )
 
 parser.add_argument(
-   '--smtp',
-   nargs='?',
-   type=str,
-   help='configuration file',
-   default=None,
-   required=False,
-)
-
-parser.add_argument(
-   '--config',
-   nargs='?',
-   type=str,
-   help='configuration file',
-   default=None,
-   required=False,
+    '--config',
+    nargs='?',
+    type=str,
+    help='configuration file',
+    default=None,
+    required=True,
 )
 
 args = parser.parse_args()
@@ -141,41 +198,12 @@ else:
 if args.debug:
     sys.stderr.write("** Effective config:\n%s\n" % json.dumps(config, indent=2))
 
+if args.smtp is not None:
+    for config_c in (config["smtp"]):
+        if config_c["ident"] == args.smtp:
+            check_send_mail(config_c)
+            break
 
 
-fromaddr="marc.schoechlin@web.de"
-toaddr="marc.schoechlin@web.de"
-login="marc.schoechlin@web.de"
-password="Einie0ci"
-
-# Add the From: and To: headers at the start!
-msg = ("From: %s\r\nTo: %s\r\n\r\n" % (fromaddr, toaddr))
 
 
-id_nr = int(time.time())
-msg += "Subject: MAIL ROUNDTRIP TESTMAIL :: %s" % id_nr
-msg += "\n\n"
-for n in range(1,100):
-    msg += my_random_string(n) + " "
-
-print(msg)
-
-try:
-    server = smtplib.SMTP('smtp.web.de', 587)
-    server.set_debuglevel(0)
-    server.starttls()
-    server.ehlo()
-    server.login(login,password)
-    server.sendmail(fromaddr, toaddr, msg)
-    server.quit()
-except Exception as e:
-    print("Exception happened:")
-    sys.stderr.write('*' * 60 + "\n")
-    sys.stderr.write("*** " + str(e)+"\n")
-    sys.stderr.write('*' * 60 + "\n")
-    sys.stderr.write("\n")
-    traceback.print_exc(file=sys.stderr)
-    sys.stderr.write('-' * 60 +  "\n")
-    sys.exit(1)
-
-sys.exit(0)

@@ -1,5 +1,10 @@
 #!/bin/bash
 
+
+######################################################################
+
+VERSION="${1:-2.3}"
+
 ######################################################################
 ### HELPERS
 
@@ -53,8 +58,14 @@ create_package(){
 
    if [ "$TYPE" = "deb" ];then
    	dpkg -c zabbix-agent-extensions_*.deb
+      RET="$?"
    elif [ "$TYPE" = "rpm" ];then
-     rpm -qlp zabbix-agent-extensions*.rpm
+      rpm -qlp zabbix-agent-extensions*.rpm
+      RET="$?"
+   fi
+   if [ "$RET" != "0" ];then
+       echo "ERROR: error on creation of $TYPE package"
+       exit 1
    fi
 }
 
@@ -64,19 +75,29 @@ create_docu(){
  cd $SDIR/../zabbix_templates/3.4
  ./create_template_documentation
 }
+
 ######################################################################
 ### MAIN
 if [ -z "$1" ];then
   echo "$0 <version>"
 fi
 
-
-VERSION="${1:-2.3}"
 SDIR="$(dirname $(readlink -f $0))/extension-files"
 
-echo "CREATING VERSION: $VERSION"
+for P in $HOME/.gem/ruby/*/bin/fpm;do
+   P="$(dirname $P)"
+   export PATH="$P:$PATH"
+done
 
-rm -rf *.deb *.rpm
+echo "PATH: $PATH"
+
+if ( ! (type -a fpm >/dev/null 2>&1 ) );then
+   echo "Unable to find 'fpm'"
+   exit 100
+fi
+
+echo "CREATING VERSION: $VERSION"
+rm -rf zabbix-agent-extensions_*.deb zabbix-agent-extensions*.rpm
 
 TMPDIR="$(mktemp -d)"
 trap "rm -rf $TMPDIR" EXIT TERM INT
@@ -86,4 +107,4 @@ create_package deb
 create_package rpm
 create_docu
 
-
+exit 0
