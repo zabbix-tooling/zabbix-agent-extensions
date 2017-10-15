@@ -9,3 +9,12 @@ before_script:
 script:
     - ./create_packages
     - sudo dpkg -i zabbix-agent-extensions_*_all.deb
+
+#deploy:
+#  provider: releases
+#  api_key: "GITHUB OAUTH TOKEN"
+#  file: "FILE TO UPLOAD"
+#  skip_cleanup: true
+#  on:
+#    tags: true
+
