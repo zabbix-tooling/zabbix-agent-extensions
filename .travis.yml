@@ -7,7 +7,7 @@ before_script:
     - sudo dpkg -i zabbix-agent_*_amd64.deb
 
 script:
-    - export PATH=~/.gem/ruby/2.3.0/bin:$PATH
+    - export PATH=~/.gem/ruby/2.4.0/bin:$PATH
     - ./create_packages
     - sudo dpkg -i zabbix-agent-extensions_*_all.deb
     
