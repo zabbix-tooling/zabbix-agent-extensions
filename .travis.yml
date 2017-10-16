@@ -7,9 +7,8 @@ before_script:
     - sudo dpkg -i zabbix-agent_*_amd64.deb
 
 script:
-    - export PATH=~/.gem/ruby/2.4.0/bin:$PATH
-    - ./create_packages
-    - sudo dpkg -i zabbix-agent-extensions_*_all.deb
+    - PATH=/home/travis/.gem/ruby/2.4.0/bin:$PATH ./create_packages
+    - ./ci_test.sh
     
 # https://docs.travis-ci.com/user/deployment/releases/
 #deploy:

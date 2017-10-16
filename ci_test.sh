@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 FAILED_TESTS=""
 
 assertSuccess(){
@@ -28,20 +27,13 @@ assertSuccess(){
 
 
 echo "*** CLEANUP"
-rpm -e zabbix-agent-extensions
-which zypper &>/dev/null && zypper  --non-interactive install zabbix-agent
-which yum &>/dev/null && yum install zabbix-agent
-rm -rf /etc/zabbix_*
+dpkg -P zabbix-agent-extensions
+rm -rf /etc/zabbix_* /var/log/zabbix /var/run/zabbix
 
 echo "*** TESTS"
+assertSuccess STOP_ON_ERROR 'sudo dpkg -i zabbix-agent-extensions_*_all.deb'
 
-assertSuccess STOP_ON_ERROR 'rpm -hiv noarch/zabbix-agent-extensions-*.noarch.rpm'
-
-for item in `cat /etc/zabbix/zabbix-agentd.d/*|grep UserParameter|sed '~s,UserParameter=,,'|awk -F',' '{print $1}'`; do 
-  assertSuccess CONTINUE_ON_ERROR "zabbix_agentd -t $item; zabbix_agentd -t $item 2>/dev/null|grep -v -q ZBX_NOTSUPPORTED"
-done
-
-assertSuccess STOP_ON_ERROR 'rpm -e zabbix-agent-extensions'
+assertSuccess STOP_ON_ERROR 'sudo dpkg -P zabbix-agent-extensions'
 
 echo
 echo
