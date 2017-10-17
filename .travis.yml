@@ -1,5 +1,8 @@
 language: bash
 
+env:
+    - PATH=/home/travis/.gem/ruby/2.4.0/bin:/bin:/sbin:/usr/bin:/usr/local/bin:/usr/local/sbin:/usr/sbin:/usr/X11R6/bin
+
 before_script:
     - sudo apt-get install ruby-dev build-essential debhelper devscripts rpm xalan -y
     - gem install fpm --user
@@ -7,7 +10,7 @@ before_script:
     - sudo dpkg -i zabbix-agent_*_amd64.deb
 
 script:
-    - PATH=/home/travis/.gem/ruby/2.4.0/bin:$PATH ./create_packages
+    - ./create_packages
     - ./ci_test.sh
     
 # https://docs.travis-ci.com/user/deployment/releases/

@@ -75,6 +75,7 @@ SDIR="$(dirname $(readlink -f $0))/extension-files"
 echo "CREATING VERSION: $VERSION"
 
 rm -rf *.deb *.rpm
+echo "PATH: $PATH"
 
 TMPDIR="$(mktemp -d)"
 trap "rm -rf $TMPDIR" EXIT TERM INT
