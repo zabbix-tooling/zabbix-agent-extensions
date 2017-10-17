@@ -27,12 +27,18 @@ assertSuccess(){
 
 
 echo "*** CLEANUP"
+REL="3.2.8-1+xenial"
 dpkg -P zabbix-agent-extensions
-rm -rf /etc/zabbix_* /var/log/zabbix /var/run/zabbix
+sudo rm -rf /etc/zabbix_* /var/log/zabbix /var/run/zabbix
+wget "http://repo.zabbix.com/zabbix/3.2/ubuntu/pool/main/z/zabbix/zabbix-agent_${REL}_amd64.deb "
+wget "http://repo.zabbix.com/zabbix/3.2/ubuntu/pool/main/z/zabbix/zabbix-get_${REL}_amd64.deb "
+sudo dpkg -i zabbix-agent*.deb zabbix-get*.deb 
 
 echo "*** TESTS"
-assertSuccess STOP_ON_ERROR 'sudo dpkg -i zabbix-agent-extensions_*_all.deb'
 
+assertSuccess STOP_ON_ERROR "sudo dpkg -i zabbix-agent-extensions_*.deb"
+assertSuccess STOP_ON_ERROR "zabbix_get -s 127.0.0.1 -k linux.dmesg|grep 'OK: ALL OK'" # Without sudo
+assertSuccess STOP_ON_ERROR "zabbix_get -s 127.0.0.1 -k linux.multipath|grep 'OK:" # With sudo
 assertSuccess STOP_ON_ERROR 'sudo dpkg -P zabbix-agent-extensions'
 
 echo

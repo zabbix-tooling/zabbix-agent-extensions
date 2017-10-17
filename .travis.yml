@@ -6,8 +6,6 @@ env:
 before_script:
     - sudo apt-get install ruby-dev build-essential debhelper devscripts rpm xalan -y
     - gem install fpm --user
-    - wget http://repo.zabbix.com/zabbix/3.2/ubuntu/pool/main/z/zabbix/zabbix-agent_3.2.8-1+xenial_amd64.deb
-    - sudo dpkg -i zabbix-agent_*_amd64.deb
 
 script:
     - ./create_packages
