@@ -10,7 +10,15 @@ before_script:
 script:
     - ./create_packages
     - ./ci_test.sh
-    
+
+
+notifications:
+  email:
+    recipients:
+      - ms-travisci@256bit.org
+    on_success: change
+    on_failure: always
+
 # https://docs.travis-ci.com/user/deployment/releases/
 #deploy:
 #  provider: releases

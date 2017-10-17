@@ -31,8 +31,9 @@ REL="3.2.8-1+xenial"
 dpkg -P zabbix-agent-extensions
 sudo rm -rf /etc/zabbix_* /var/log/zabbix /var/run/zabbix
 wget "http://repo.zabbix.com/zabbix/3.2/ubuntu/pool/main/z/zabbix/zabbix-agent_${REL}_amd64.deb "
-wget "http://repo.zabbix.com/zabbix/3.2/ubuntu/pool/main/z/zabbix/zabbix-get_${REL}_amd64.deb "
-sudo dpkg -i zabbix-agent*.deb zabbix-get*.deb 
+wget "http://repo.zabbix.com/zabbix/3.2/ubuntu/pool/main/z/zabbix/zabbix-get_${REL}_amd64.deb"
+ls -l *.deb
+sudo dpkg -i zabbix-agent_*.deb zabbix-get_*.deb 
 
 echo "*** TESTS"
 
