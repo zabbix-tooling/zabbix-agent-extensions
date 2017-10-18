@@ -1,7 +1,7 @@
 language: bash
 
 before_script:
-    - sudo apt-get install ruby-dev build-essential debhelper devscripts rpm xalan -y
+    - sudo apt-get install ruby-dev build-essential debhelper devscripts rpm xalan wget -y
     - gem install fpm --user
 
 script:
