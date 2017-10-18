@@ -1,16 +1,12 @@
 language: bash
 
-env:
-    - PATH=/home/travis/.gem/ruby/2.4.0/bin:/bin:/sbin:/usr/bin:/usr/local/bin:/usr/local/sbin:/usr/sbin:/usr/X11R6/bin
-
 before_script:
     - sudo apt-get install ruby-dev build-essential debhelper devscripts rpm xalan -y
     - gem install fpm --user
 
 script:
     - ./create_packages
-    - ./ci_test.sh
-
+    - ./ci_test
 
 notifications:
   email:

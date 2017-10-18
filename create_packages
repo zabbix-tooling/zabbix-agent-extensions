@@ -1,5 +1,10 @@
 #!/bin/bash
 
+
+######################################################################
+
+VERSION="${1:-2.3}"
+
 ######################################################################
 ### HELPERS
 
@@ -62,16 +67,21 @@ create_docu(){
  cd $SDIR/../zabbix_templates/3.2
  ./create_template_documentation
 }
+
 ######################################################################
 ### MAIN
 if [ -z "$1" ];then
   echo "$0 <version>"
 fi
 
-
-VERSION="${1:-2.3}"
 SDIR="$(dirname $(readlink -f $0))/extension-files"
 
+for P in /home/travis/.gem/ruby/*/bin/fpm;do
+   P="$(dirname $P)"
+   export PATH="$P:$PATH"
+done
+
+echo "PATH: $PATH"
 echo "CREATING VERSION: $VERSION"
 
 rm -rf *.deb *.rpm
