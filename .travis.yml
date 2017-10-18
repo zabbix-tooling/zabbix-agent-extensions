@@ -6,8 +6,6 @@ before_script:
 
 script:
     - ./create_packages
-    - pwd
-    - ls -l 
     - ./ci_test
 
 notifications:
