@@ -1,0 +1,57 @@
+#!/bin/bash
+
+
+rm -rf documentation
+mkdir documentation
+
+cat > documentation/index.html <<'EOF'
+<script type="text/javascript">
+<!--//
+function goToPage763(mySelect){
+PageIndex2=mySelect.selectedIndex;
+  {
+     if( mySelect.options[PageIndex2].value != "none")
+     {
+      frames['iframe2'].location.href = mySelect.options[PageIndex2].value;
+     }
+  }
+}
+//-->
+</script>
+
+<form name="form763">
+
+<p>
+Template: 
+<select name="select763" size="1" onchange="goToPage763(this.form.select763)">
+<option value="none" selected="selected"> Select a page and go </option>
+EOF
+
+for i in custom*.xml; do 
+   DOCUFILE="documentation/${i%%.xml}.html"
+   DOCUFILE="$(echo $DOCUFILE|tr ' ' '_')"
+   xalan -in "$i" -out $DOCUFILE -xsl transform.xsl; 
+   echo "<option value=\"$(echo ${i%%.xml}|tr ' ' '_').html\"> ${i%%.xml}</option>" >> documentation/index.html
+done
+
+cat >> documentation/index.html <<'EOF'
+</select>
+
+
+</p>
+
+<p>
+<!-- The code below is the code in the body of this document that writes the form-->
+<iframe name="iframe2" src="start.html" align="top" height="90%" width="99%" hspace="10" vspace="10" align="left">
+If you can see this, your browser does not support iframes!
+</iframe>
+<a href="http://www.zabbix.com/documentation/3.2/manual/config/items" target="_new">Zabbix Manual: Items </a></BR>
+<a href="http://www.zabbix.com/documentation/3.2/manual/config/triggers" target="_new">Zabbix Manual: Triggers </a>
+</p>
+</form>
+EOF
+
+
+cat > documentation/start.html <<'EOF'
+ Please select a template...
+EOF

@@ -61,6 +61,8 @@ create_package(){
 create_docu(){
  cd $SDIR/../zabbix_templates/3.2
  ./create_template_documentation
+ cd $SDIR/../zabbix_templates/3.4
+ ./create_template_documentation
 }
 ######################################################################
 ### MAIN

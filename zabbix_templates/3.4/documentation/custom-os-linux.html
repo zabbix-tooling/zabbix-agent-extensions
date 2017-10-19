@@ -198,209 +198,209 @@ Remove the flagfile if you decide that no reboot is required (/var/run/reboot-re
 <tr>
 <td>
 <p class="desc">Zabbix Agent</p>
-</td><td>Zabbix Agent Ping</td><td><tt>agent.ping</tt></td><td></td><td>600</td><td>60</td><td>0</td>
+</td><td>Zabbix Agent Ping</td><td><tt>agent.ping</tt></td><td></td><td>10m</td><td>60d</td><td>0</td>
 </tr>
 <tr>
 <td>
 <p class="desc">Zabbix Agent</p>
-</td><td>Zabbix Agent Release</td><td><tt>agent.version</tt></td><td></td><td>600</td><td>8</td><td>0</td>
+</td><td>Zabbix Agent Release</td><td><tt>agent.version</tt></td><td></td><td>10m</td><td>8d</td><td>0</td>
 </tr>
 <tr>
 <td>
 <p class="desc">Simple check</p>
-</td><td>ICMP Ping</td><td><tt>icmpping[,,,,]</tt></td><td></td><td>60</td><td>7</td><td>365</td>
+</td><td>ICMP Ping</td><td><tt>icmpping[,,,,]</tt></td><td></td><td>1m</td><td>1w</td><td>365d</td>
 </tr>
 <tr>
 <td>
 <p class="desc">Zabbix Agent</p>
-</td><td>Maximum number of processes</td><td><tt>kernel.maxproc</tt></td><td>Total number of possible processes.</td><td>300</td><td>7</td><td>365</td>
+</td><td>Maximum number of processes</td><td><tt>kernel.maxproc</tt></td><td>Total number of possible processes.</td><td>5m</td><td>1w</td><td>365d</td>
 </tr>
 <tr>
 <td>
 <p class="desc">Zabbix Agent</p>
-</td><td>Linux Kernel Dmesg Health</td><td><tt>linux.dmesg</tt></td><td>Reads the output of dmesg and discovers kernel problems.</td><td>300</td><td>90</td><td>0</td>
+</td><td>Linux Kernel Dmesg Health</td><td><tt>linux.dmesg</tt></td><td>Reads the output of dmesg and discovers kernel problems.</td><td>5m</td><td>90d</td><td>0</td>
 </tr>
 <tr>
 <td>
 <p class="desc">Zabbix Agent</p>
-</td><td>Multipathing Device Mapping</td><td><tt>linux.multipath</tt></td><td></td><td>300</td><td>14</td><td>0</td>
+</td><td>Multipathing Device Mapping</td><td><tt>linux.multipath</tt></td><td></td><td>5m</td><td>2w</td><td>0</td>
 </tr>
 <tr>
 <td>
 <p class="desc">Zabbix Agent</p>
-</td><td>MTA Queue Total number of frozen messages</td><td><tt>mailq.count.frozen</tt></td><td></td><td>300</td><td>30</td><td>90</td>
+</td><td>MTA Queue Total number of frozen messages</td><td><tt>mailq.count.frozen</tt></td><td></td><td>5m</td><td>30d</td><td>90d</td>
 </tr>
 <tr>
 <td>
 <p class="desc">Zabbix Agent</p>
-</td><td>MTA Queue Total number of messages</td><td><tt>mailq.count.general</tt></td><td></td><td>300</td><td>30</td><td>90</td>
+</td><td>MTA Queue Total number of messages</td><td><tt>mailq.count.general</tt></td><td></td><td>5m</td><td>30d</td><td>90d</td>
 </tr>
 <tr>
 <td>
 <p class="desc">Zabbix Agent</p>
-</td><td>SMTP Server</td><td><tt>net.tcp.service[smtp,,25]</tt></td><td></td><td>600</td><td>90</td><td>90</td>
+</td><td>SMTP Server</td><td><tt>net.tcp.service[smtp,,25]</tt></td><td></td><td>10m</td><td>90d</td><td>90d</td>
 </tr>
 <tr>
 <td>
 <p class="desc">Zabbix Agent</p>
-</td><td>SSH Server</td><td><tt>net.tcp.service[ssh,,22]</tt></td><td></td><td>300</td><td>90</td><td>90</td>
+</td><td>SSH Server</td><td><tt>net.tcp.service[ssh,,22]</tt></td><td></td><td>5m</td><td>90d</td><td>90d</td>
 </tr>
 <tr>
 <td>
 <p class="desc">Zabbix Agent</p>
-</td><td>NFS RPC Calls</td><td><tt>nfs.rpc.calls</tt></td><td>RPC operations per second</td><td>120</td><td>14</td><td>365</td>
+</td><td>NFS RPC Calls</td><td><tt>nfs.rpc.calls</tt></td><td>RPC operations per second</td><td>2m</td><td>2w</td><td>365d</td>
 </tr>
 <tr>
 <td>
 <p class="desc">Zabbix Agent</p>
-</td><td>NFS RPC Retransmits</td><td><tt>nfs.rpc.retransmits</tt></td><td>RPC retransmits in the last two minutes</td><td>120</td><td>14</td><td>365</td>
+</td><td>NFS RPC Retransmits</td><td><tt>nfs.rpc.retransmits</tt></td><td>RPC retransmits in the last two minutes</td><td>2m</td><td>2w</td><td>365d</td>
 </tr>
 <tr>
 <td>
 <p class="desc">Zabbix Agent</p>
 </td><td>NTP good peer count</td><td><tt>ntpd.peers.goodcount</tt></td><td>Number of good ntp peer servers (should be at least 3 severs).&#13;
 &#13;
-A man with one watch knows what time it is. A man with two watches is never sure.</td><td>600</td><td>1</td><td>14</td>
+A man with one watch knows what time it is. A man with two watches is never sure.</td><td>10m</td><td>1d</td><td>2w</td>
 </tr>
 <tr>
 <td>
 <p class="desc">Zabbix Agent</p>
-</td><td>NTP Primary Peer Delay</td><td><tt>ntpd.primarypeer.stats[delay]</tt></td><td>Round trip communication delay to the remote peer or server (milliseconds)</td><td>90</td><td>5</td><td>90</td>
+</td><td>NTP Primary Peer Delay</td><td><tt>ntpd.primarypeer.stats[delay]</tt></td><td>Round trip communication delay to the remote peer or server (milliseconds)</td><td>90s</td><td>5d</td><td>90d</td>
 </tr>
 <tr>
 <td>
 <p class="desc">Zabbix Agent</p>
-</td><td>NTP Primary Peer RMS Jitter</td><td><tt>ntpd.primarypeer.stats[jitter]</tt></td><td>Mean deviation (jitter) in the time reported for that remote peer or server (RMS of difference of multiple time samples, milliseconds)</td><td>90</td><td>5</td><td>90</td>
+</td><td>NTP Primary Peer RMS Jitter</td><td><tt>ntpd.primarypeer.stats[jitter]</tt></td><td>Mean deviation (jitter) in the time reported for that remote peer or server (RMS of difference of multiple time samples, milliseconds)</td><td>90s</td><td>5d</td><td>90d</td>
 </tr>
 <tr>
 <td>
 <p class="desc">Zabbix Agent</p>
-</td><td>NTP Primary Peer RMS Offset</td><td><tt>ntpd.primarypeer.stats[offset]</tt></td><td>Mean offset (phase) in the times reported between this local host and the remote peer or server (RMS, milliseconds)</td><td>90</td><td>5</td><td>90</td>
+</td><td>NTP Primary Peer RMS Offset</td><td><tt>ntpd.primarypeer.stats[offset]</tt></td><td>Mean offset (phase) in the times reported between this local host and the remote peer or server (RMS, milliseconds)</td><td>90s</td><td>5d</td><td>90d</td>
 </tr>
 <tr>
 <td>
 <p class="desc">Calculated</p>
-</td><td>Memory in Userspace</td><td><tt>os.linux.memory.userspace</tt></td><td></td><td>120</td><td>14</td><td>365</td>
+</td><td>Memory in Userspace</td><td><tt>os.linux.memory.userspace</tt></td><td></td><td>2m</td><td>2w</td><td>365d</td>
 </tr>
 <tr>
 <td>
 <p class="desc">Zabbix Agent</p>
-</td><td>Number of running processes</td><td><tt>proc.num[,,run]</tt></td><td>Number of processes in running state.</td><td>60</td><td>7</td><td>365</td>
+</td><td>Number of running processes</td><td><tt>proc.num[,,run]</tt></td><td>Number of processes in running state.</td><td>1m</td><td>1w</td><td>365d</td>
 </tr>
 <tr>
 <td>
 <p class="desc">Zabbix Agent</p>
-</td><td>Number of zombie processes</td><td><tt>proc.num[,,zomb]</tt></td><td>Number of processes in running state.</td><td>60</td><td>7</td><td>365</td>
+</td><td>Number of zombie processes</td><td><tt>proc.num[,,zomb]</tt></td><td>Number of processes in running state.</td><td>1m</td><td>1w</td><td>365d</td>
 </tr>
 <tr>
 <td>
 <p class="desc">Zabbix Agent</p>
-</td><td>Cron Daemon</td><td><tt>proc.num[cron,,,]</tt></td><td>Ubuntu,Debian, ...</td><td>600</td><td>90</td><td>365</td>
+</td><td>Cron Daemon</td><td><tt>proc.num[cron,,,]</tt></td><td>Ubuntu,Debian, ...</td><td>10m</td><td>90d</td><td>365d</td>
 </tr>
 <tr>
 <td>
 <p class="desc">Zabbix Agent</p>
-</td><td>Cron Daemon</td><td><tt>proc.num[crond,,,]</tt></td><td></td><td>600</td><td>90</td><td>0</td>
+</td><td>Cron Daemon</td><td><tt>proc.num[crond,,,]</tt></td><td></td><td>10m</td><td>90d</td><td>0</td>
 </tr>
 <tr>
 <td>
 <p class="desc">Zabbix Agent</p>
-</td><td>Number of processes</td><td><tt>proc.num[]</tt></td><td>Total number of processes in any state.</td><td>60</td><td>7</td><td>365</td>
+</td><td>Number of processes</td><td><tt>proc.num[]</tt></td><td>Total number of processes in any state.</td><td>1m</td><td>1w</td><td>365d</td>
 </tr>
 <tr>
 <td>
 <p class="desc">Zabbix Agent</p>
-</td><td>Interrupts per second</td><td><tt>system.cpu.intr</tt></td><td></td><td>60</td><td>7</td><td>365</td>
+</td><td>Interrupts per second</td><td><tt>system.cpu.intr</tt></td><td></td><td>1m</td><td>1w</td><td>365d</td>
 </tr>
 <tr>
 <td>
 <p class="desc">Zabbix Agent</p>
-</td><td>System Load 5min</td><td><tt>system.cpu.load[,avg5]</tt></td><td></td><td>300</td><td>90</td><td>365</td>
+</td><td>System Load 5min</td><td><tt>system.cpu.load[,avg5]</tt></td><td></td><td>5m</td><td>90d</td><td>365d</td>
 </tr>
 <tr>
 <td>
 <p class="desc">Zabbix Agent</p>
-</td><td>CPU Count</td><td><tt>system.cpu.num</tt></td><td></td><td>28800</td><td>90</td><td>365</td>
+</td><td>CPU Count</td><td><tt>system.cpu.num</tt></td><td></td><td>8h</td><td>90d</td><td>365d</td>
 </tr>
 <tr>
 <td>
 <p class="desc">Zabbix Agent</p>
-</td><td>CPU context switches</td><td><tt>system.cpu.switches</tt></td><td></td><td>300</td><td>30</td><td>365</td>
+</td><td>CPU context switches</td><td><tt>system.cpu.switches</tt></td><td></td><td>5m</td><td>30d</td><td>365d</td>
 </tr>
 <tr>
 <td>
 <p class="desc">Zabbix Agent</p>
-</td><td>CPU $2 time ($3)</td><td><tt>system.cpu.util[,idle,avg1]</tt></td><td></td><td>60</td><td>14</td><td>365</td>
+</td><td>CPU $2 time ($3)</td><td><tt>system.cpu.util[,idle,avg1]</tt></td><td></td><td>1m</td><td>2w</td><td>365d</td>
 </tr>
 <tr>
 <td>
 <p class="desc">Zabbix Agent</p>
-</td><td>CPU interrupt time (avg1)</td><td><tt>system.cpu.util[,interrupt,avg1]</tt></td><td></td><td>60</td><td>14</td><td>365</td>
+</td><td>CPU interrupt time (avg1)</td><td><tt>system.cpu.util[,interrupt,avg1]</tt></td><td></td><td>1m</td><td>2w</td><td>365d</td>
 </tr>
 <tr>
 <td>
 <p class="desc">Zabbix Agent</p>
-</td><td>CPU $2 time ($3)</td><td><tt>system.cpu.util[,iowait,avg1]</tt></td><td></td><td>60</td><td>14</td><td>365</td>
+</td><td>CPU $2 time ($3)</td><td><tt>system.cpu.util[,iowait,avg1]</tt></td><td></td><td>1m</td><td>2w</td><td>365d</td>
 </tr>
 <tr>
 <td>
 <p class="desc">Zabbix Agent</p>
-</td><td>CPU $2 time ($3)</td><td><tt>system.cpu.util[,nice,avg1]</tt></td><td></td><td>60</td><td>14</td><td>365</td>
+</td><td>CPU $2 time ($3)</td><td><tt>system.cpu.util[,nice,avg1]</tt></td><td></td><td>1m</td><td>2w</td><td>365d</td>
 </tr>
 <tr>
 <td>
 <p class="desc">Zabbix Agent</p>
-</td><td>CPU softirq time (avg1)</td><td><tt>system.cpu.util[,softirq,avg1]</tt></td><td></td><td>60</td><td>14</td><td>365</td>
+</td><td>CPU softirq time (avg1)</td><td><tt>system.cpu.util[,softirq,avg1]</tt></td><td></td><td>1m</td><td>2w</td><td>365d</td>
 </tr>
 <tr>
 <td>
 <p class="desc">Zabbix Agent</p>
-</td><td>CPU steal time (avg1)</td><td><tt>system.cpu.util[,steal,avg1]</tt></td><td></td><td>60</td><td>14</td><td>365</td>
+</td><td>CPU steal time (avg1)</td><td><tt>system.cpu.util[,steal,avg1]</tt></td><td></td><td>1m</td><td>2w</td><td>365d</td>
 </tr>
 <tr>
 <td>
 <p class="desc">Zabbix Agent</p>
-</td><td>CPU $2 time ($3)</td><td><tt>system.cpu.util[,system,avg1]</tt></td><td></td><td>60</td><td>14</td><td>365</td>
+</td><td>CPU $2 time ($3)</td><td><tt>system.cpu.util[,system,avg1]</tt></td><td></td><td>1m</td><td>2w</td><td>365d</td>
 </tr>
 <tr>
 <td>
 <p class="desc">Zabbix Agent</p>
-</td><td>CPU user time (avg1)</td><td><tt>system.cpu.util[,user,avg1]</tt></td><td></td><td>60</td><td>14</td><td>365</td>
+</td><td>CPU user time (avg1)</td><td><tt>system.cpu.util[,user,avg1]</tt></td><td></td><td>1m</td><td>2w</td><td>365d</td>
 </tr>
 <tr>
 <td>
 <p class="desc">Zabbix Agent</p>
-</td><td>Swap In Pages</td><td><tt>system.swap.in[,pages]</tt></td><td>Pages moved  from SWAP to Memory</td><td>120</td><td>14</td><td>0</td>
+</td><td>Swap In Pages</td><td><tt>system.swap.in[,pages]</tt></td><td>Pages moved  from SWAP to Memory</td><td>2m</td><td>2w</td><td>0</td>
 </tr>
 <tr>
 <td>
 <p class="desc">Zabbix Agent</p>
-</td><td>Swap Out Pages</td><td><tt>system.swap.out[,pages]</tt></td><td>Pages moved from Memory to SWAP</td><td>120</td><td>14</td><td>0</td>
+</td><td>Swap Out Pages</td><td><tt>system.swap.out[,pages]</tt></td><td>Pages moved from Memory to SWAP</td><td>2m</td><td>2w</td><td>0</td>
 </tr>
 <tr>
 <td>
 <p class="desc">Zabbix Agent</p>
-</td><td>Swap usage</td><td><tt>system.swap.size[,pused]</tt></td><td></td><td>300</td><td>90</td><td>90</td>
+</td><td>Swap usage</td><td><tt>system.swap.size[,pused]</tt></td><td></td><td>5m</td><td>90d</td><td>90d</td>
 </tr>
 <tr>
 <td>
 <p class="desc">Zabbix Agent</p>
-</td><td>Server Uptime</td><td><tt>system.uptime</tt></td><td></td><td>600</td><td>90</td><td>365</td>
+</td><td>Server Uptime</td><td><tt>system.uptime</tt></td><td></td><td>10m</td><td>90d</td><td>365d</td>
 </tr>
 <tr>
 <td>
 <p class="desc">Zabbix Agent</p>
-</td><td>Number of logged in users</td><td><tt>system.users.num</tt></td><td>Number of users who are currently logged in.</td><td>60</td><td>7</td><td>365</td>
+</td><td>Number of logged in users</td><td><tt>system.users.num</tt></td><td>Number of users who are currently logged in.</td><td>1m</td><td>1w</td><td>365d</td>
 </tr>
 <tr>
 <td>
 <p class="desc">Zabbix Agent</p>
-</td><td>Available entropy</td><td><tt>vfs.file.contents[/proc/sys/kernel/random/entropy_avail]</tt></td><td></td><td>300</td><td>7</td><td>182</td>
+</td><td>Available entropy</td><td><tt>vfs.file.contents[/proc/sys/kernel/random/entropy_avail]</tt></td><td></td><td>5m</td><td>1w</td><td>26w</td>
 </tr>
 <tr>
 <td>
 <p class="desc">Zabbix Agent</p>
-</td><td>Reboot Required</td><td><tt>vfs.file.exists[/var/run/reboot-required]</tt></td><td>Indicates if a restart is required after system updates.</td><td>600</td><td>90</td><td>0</td>
+</td><td>Reboot Required</td><td><tt>vfs.file.exists[/var/run/reboot-required]</tt></td><td>Indicates if a restart is required after system updates.</td><td>10m</td><td>90d</td><td>0</td>
 </tr>
 <tr>
 <td>
@@ -411,7 +411,7 @@ Manual Check: &#13;
 [======&gt;..............]  check = 34.1% (716160/2095040) finish=0.0min speed=238720K/sec&#13;
 &#13;
 Recovery:&#13;
-[==========&gt;..........]  resync =  50.0% (514048/1028096) finish=97.3min</td><td>300</td><td>30</td><td>0</td>
+[==========&gt;..........]  resync =  50.0% (514048/1028096) finish=97.3min</td><td>5m</td><td>30d</td><td>0</td>
 </tr>
 <tr>
 <td>
@@ -422,32 +422,32 @@ This looks like this:&#13;
 &#13;
 md1 : active raid1 sdb2[2] sda2[0]&#13;
       195310144 blocks [2/1] [U_]&#13;
-      [=&gt;...................]  recovery =  8.5% (16775552/195310144) finish=17.0min speed=259783K/sec</td><td>300</td><td>30</td><td>0</td>
+      [=&gt;...................]  recovery =  8.5% (16775552/195310144) finish=17.0min speed=259783K/sec</td><td>5m</td><td>30d</td><td>0</td>
 </tr>
 <tr>
 <td>
 <p class="desc">Zabbix Agent</p>
-</td><td>Memory Available</td><td><tt>vm.memory.size[available]</tt></td><td></td><td>120</td><td>14</td><td>365</td>
+</td><td>Memory Available</td><td><tt>vm.memory.size[available]</tt></td><td></td><td>2m</td><td>2w</td><td>365d</td>
 </tr>
 <tr>
 <td>
 <p class="desc">Zabbix Agent</p>
-</td><td>Memory Buffers</td><td><tt>vm.memory.size[buffers]</tt></td><td></td><td>120</td><td>14</td><td>365</td>
+</td><td>Memory Buffers</td><td><tt>vm.memory.size[buffers]</tt></td><td></td><td>2m</td><td>2w</td><td>365d</td>
 </tr>
 <tr>
 <td>
 <p class="desc">Zabbix Agent</p>
-</td><td>Memory Cached</td><td><tt>vm.memory.size[cached]</tt></td><td></td><td>120</td><td>14</td><td>365</td>
+</td><td>Memory Cached</td><td><tt>vm.memory.size[cached]</tt></td><td></td><td>2m</td><td>2w</td><td>365d</td>
 </tr>
 <tr>
 <td>
 <p class="desc">Zabbix Agent</p>
-</td><td>Memory Free</td><td><tt>vm.memory.size[free]</tt></td><td></td><td>120</td><td>14</td><td>365</td>
+</td><td>Memory Free</td><td><tt>vm.memory.size[free]</tt></td><td></td><td>2m</td><td>2w</td><td>365d</td>
 </tr>
 <tr>
 <td>
 <p class="desc">Zabbix Agent</p>
-</td><td>Memory Total</td><td><tt>vm.memory.size[total]</tt></td><td></td><td>600</td><td>14</td><td>365</td>
+</td><td>Memory Total</td><td><tt>vm.memory.size[total]</tt></td><td></td><td>10m</td><td>2w</td><td>365d</td>
 </tr>
 </table>
 <h1>Discovery rule "Network interfaces discovery"</h1>
@@ -467,7 +467,7 @@ md1 : active raid1 sdb2[2] sda2[0]&#13;
 </td>
 </tr>
 <tr>
-<td>Delay</td><td>600</td>
+<td>Delay</td><td>10m</td>
 </tr>
 </table>
 <h2>Trigger Overview</h2>
@@ -505,32 +505,32 @@ md1 : active raid1 sdb2[2] sda2[0]&#13;
 <tr>
 <td>
 <p class="desc">Zabbix Agent</p>
-</td><td>Interface {#IFNAME} Bits Inbound</td><td><tt>net.if.in[{#IFNAME},bytes]</tt></td><td></td><td>300</td><td>30</td><td>365</td>
+</td><td>Interface {#IFNAME} Bits Inbound</td><td><tt>net.if.in[{#IFNAME},bytes]</tt></td><td></td><td>5m</td><td>30d</td><td>365d</td>
 </tr>
 <tr>
 <td>
 <p class="desc">Zabbix Agent</p>
-</td><td>Interface $1 Errors Inbound</td><td><tt>net.if.in[{#IFNAME},errors]</tt></td><td></td><td>300</td><td>90</td><td>365</td>
+</td><td>Interface $1 Errors Inbound</td><td><tt>net.if.in[{#IFNAME},errors]</tt></td><td></td><td>5m</td><td>90d</td><td>365d</td>
 </tr>
 <tr>
 <td>
 <p class="desc">Zabbix Agent</p>
-</td><td>Interface {#IFNAME} Packets Inbound</td><td><tt>net.if.in[{#IFNAME},packets]</tt></td><td></td><td>300</td><td>30</td><td>365</td>
+</td><td>Interface {#IFNAME} Packets Inbound</td><td><tt>net.if.in[{#IFNAME},packets]</tt></td><td></td><td>5m</td><td>30d</td><td>365d</td>
 </tr>
 <tr>
 <td>
 <p class="desc">Zabbix Agent</p>
-</td><td>Interface {#IFNAME} Bits Outbound</td><td><tt>net.if.out[{#IFNAME},bytes]</tt></td><td></td><td>300</td><td>30</td><td>365</td>
+</td><td>Interface {#IFNAME} Bits Outbound</td><td><tt>net.if.out[{#IFNAME},bytes]</tt></td><td></td><td>5m</td><td>30d</td><td>365d</td>
 </tr>
 <tr>
 <td>
 <p class="desc">Zabbix Agent</p>
-</td><td>Interface $1 Errors Outbound</td><td><tt>net.if.out[{#IFNAME},errors]</tt></td><td></td><td>300</td><td>90</td><td>365</td>
+</td><td>Interface $1 Errors Outbound</td><td><tt>net.if.out[{#IFNAME},errors]</tt></td><td></td><td>5m</td><td>90d</td><td>365d</td>
 </tr>
 <tr>
 <td>
 <p class="desc">Zabbix Agent</p>
-</td><td>Interface {#IFNAME} Packets Outbound</td><td><tt>net.if.out[{#IFNAME},packets]</tt></td><td></td><td>300</td><td>30</td><td>365</td>
+</td><td>Interface {#IFNAME} Packets Outbound</td><td><tt>net.if.out[{#IFNAME},packets]</tt></td><td></td><td>5m</td><td>30d</td><td>365d</td>
 </tr>
 </table>
 <h1>Discovery rule "Block Device discovery"</h1>
@@ -550,7 +550,7 @@ md1 : active raid1 sdb2[2] sda2[0]&#13;
 </td>
 </tr>
 <tr>
-<td>Delay</td><td>600</td>
+<td>Delay</td><td>10m</td>
 </tr>
 </table>
 <h2>Trigger Overview</h2>
@@ -581,22 +581,22 @@ md1 : active raid1 sdb2[2] sda2[0]&#13;
 <tr>
 <td>
 <p class="desc">Zabbix Agent</p>
-</td><td>Disk {#BLOCKDEVICE} Read IOPS</td><td><tt>vfs.dev.read[{#BLOCKDEVICE},ops,avg1]</tt></td><td></td><td>60</td><td>14</td><td>90</td>
+</td><td>Disk {#BLOCKDEVICE} Read IOPS</td><td><tt>vfs.dev.read[{#BLOCKDEVICE},ops,avg1]</tt></td><td></td><td>1m</td><td>2w</td><td>90d</td>
 </tr>
 <tr>
 <td>
 <p class="desc">Zabbix Agent</p>
-</td><td>Disk {#BLOCKDEVICE} Read SPS</td><td><tt>vfs.dev.read[{#BLOCKDEVICE},sps,avg1]</tt></td><td></td><td>60</td><td>14</td><td>90</td>
+</td><td>Disk {#BLOCKDEVICE} Read SPS</td><td><tt>vfs.dev.read[{#BLOCKDEVICE},sps,avg1]</tt></td><td></td><td>1m</td><td>2w</td><td>90d</td>
 </tr>
 <tr>
 <td>
 <p class="desc">Zabbix Agent</p>
-</td><td>Disk {#BLOCKDEVICE} Write IOPS</td><td><tt>vfs.dev.write[{#BLOCKDEVICE},ops,avg1]</tt></td><td></td><td>60</td><td>14</td><td>90</td>
+</td><td>Disk {#BLOCKDEVICE} Write IOPS</td><td><tt>vfs.dev.write[{#BLOCKDEVICE},ops,avg1]</tt></td><td></td><td>1m</td><td>2w</td><td>90d</td>
 </tr>
 <tr>
 <td>
 <p class="desc">Zabbix Agent</p>
-</td><td>Disk {#BLOCKDEVICE} Write SPS</td><td><tt>vfs.dev.write[{#BLOCKDEVICE},sps,avg1]</tt></td><td></td><td>60</td><td>14</td><td>90</td>
+</td><td>Disk {#BLOCKDEVICE} Write SPS</td><td><tt>vfs.dev.write[{#BLOCKDEVICE},sps,avg1]</tt></td><td></td><td>1m</td><td>2w</td><td>90d</td>
 </tr>
 </table>
 <h1>Discovery rule "Filesystems discovery"</h1>
@@ -616,7 +616,7 @@ md1 : active raid1 sdb2[2] sda2[0]&#13;
 </td>
 </tr>
 <tr>
-<td>Delay</td><td>600</td>
+<td>Delay</td><td>10m</td>
 </tr>
 </table>
 <h2>Trigger Overview</h2>
@@ -653,32 +653,32 @@ md1 : active raid1 sdb2[2] sda2[0]&#13;
 <tr>
 <td>
 <p class="desc">Zabbix Agent</p>
-</td><td>Disk {#FSNAME} inode use percentage</td><td><tt>vfs.fs.inode[{#FSNAME},pused]</tt></td><td></td><td>300</td><td>90</td><td>365</td>
+</td><td>Disk {#FSNAME} inode use percentage</td><td><tt>vfs.fs.inode[{#FSNAME},pused]</tt></td><td></td><td>5m</td><td>90d</td><td>365d</td>
 </tr>
 <tr>
 <td>
 <p class="desc">Zabbix Agent</p>
-</td><td>Disk {#FSNAME} inode total</td><td><tt>vfs.fs.inode[{#FSNAME},total]</tt></td><td></td><td>3600</td><td>90</td><td>365</td>
+</td><td>Disk {#FSNAME} inode total</td><td><tt>vfs.fs.inode[{#FSNAME},total]</tt></td><td></td><td>1h</td><td>90d</td><td>365d</td>
 </tr>
 <tr>
 <td>
 <p class="desc">Zabbix Agent</p>
-</td><td>Disk {#FSNAME} inode usage</td><td><tt>vfs.fs.inode[{#FSNAME},used]</tt></td><td></td><td>300</td><td>90</td><td>365</td>
+</td><td>Disk {#FSNAME} inode usage</td><td><tt>vfs.fs.inode[{#FSNAME},used]</tt></td><td></td><td>5m</td><td>90d</td><td>365d</td>
 </tr>
 <tr>
 <td>
 <p class="desc">Zabbix Agent</p>
-</td><td>Disk {#FSNAME} size use percentage</td><td><tt>vfs.fs.size[{#FSNAME},pused]</tt></td><td></td><td>300</td><td>90</td><td>365</td>
+</td><td>Disk {#FSNAME} size use percentage</td><td><tt>vfs.fs.size[{#FSNAME},pused]</tt></td><td></td><td>5m</td><td>90d</td><td>365d</td>
 </tr>
 <tr>
 <td>
 <p class="desc">Zabbix Agent</p>
-</td><td>Disk {#FSNAME} space total</td><td><tt>vfs.fs.size[{#FSNAME},total]</tt></td><td></td><td>3600</td><td>90</td><td>365</td>
+</td><td>Disk {#FSNAME} space total</td><td><tt>vfs.fs.size[{#FSNAME},total]</tt></td><td></td><td>1h</td><td>90d</td><td>365d</td>
 </tr>
 <tr>
 <td>
 <p class="desc">Zabbix Agent</p>
-</td><td>Disk {#FSNAME} space usage</td><td><tt>vfs.fs.size[{#FSNAME},used]</tt></td><td></td><td>300</td><td>90</td><td>365</td>
+</td><td>Disk {#FSNAME} space usage</td><td><tt>vfs.fs.size[{#FSNAME},used]</tt></td><td></td><td>5m</td><td>90d</td><td>365d</td>
 </tr>
 </table>
 </body>
