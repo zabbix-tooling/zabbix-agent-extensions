@@ -17,6 +17,7 @@ install: gem install fpm
 
 script:
     - sudo gem install fpm
+    - type -a fpm
     - ./create_packages
     - ./ci_test
 
