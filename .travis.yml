@@ -1,7 +1,13 @@
 language: bash
 
+dist: xenial
+sudo: required
+
 env:
     - PATH=/home/travis/.gem/ruby/2.4.0/bin:/bin:/sbin:/usr/bin:/usr/local/bin:/usr/local/sbin:/usr/sbin:/usr/X11R6/bin
+
+rvm:
+  - 2.2.3
 
 before_install:
     - sudo apt-get install ruby-dev build-essential debhelper devscripts rpm xalan wget -y
@@ -10,8 +16,9 @@ before_install:
 install: gem install fpm
 
 script:
-    - ./create_packages
-    - ./ci_test
+    - sudo gem install fpm
+     ./create_packages
+     ./ci_test
 
 notifications:
   email:
