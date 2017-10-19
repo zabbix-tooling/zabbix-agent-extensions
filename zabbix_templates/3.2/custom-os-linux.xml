@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
     <version>3.2</version>
-    <date>2017-10-07T06:23:10Z</date>
+    <date>2017-10-19T17:10:37Z</date>
     <groups>
         <group>
             <name>Templates</name>
@@ -1826,13 +1826,13 @@ A man with one watch knows what time it is. A man with two watches is never sure
                     <logtimefmt/>
                 </item>
                 <item>
-                    <name>MD Raid Sequential Activity</name>
+                    <name>MD Raid synchronous activity</name>
                     <type>0</type>
                     <snmp_community/>
                     <multiplier>0</multiplier>
                     <snmp_oid/>
-                    <key>vfs.file.regmatch[/proc/mdstat,&quot;finish=&quot;,,]</key>
-                    <delay>120</delay>
+                    <key>vfs.file.regmatch[/proc/mdstat,&quot;finish&quot;,,]</key>
+                    <delay>300</delay>
                     <history>30</history>
                     <trends>0</trends>
                     <status>0</status>
@@ -1880,8 +1880,8 @@ Recovery:&#13;
                     <snmp_community/>
                     <multiplier>0</multiplier>
                     <snmp_oid/>
-                    <key>vfs.file.regmatch[/proc/mdstat,&quot;\[.*_.*\]&quot;,,]</key>
-                    <delay>120</delay>
+                    <key>vfs.file.regmatch[/proc/mdstat,&quot;\[UU*\]&quot;,,]</key>
+                    <delay>300</delay>
                     <history>30</history>
                     <trends>0</trends>
                     <status>0</status>
@@ -3219,7 +3219,7 @@ md1 : active raid1 sdb2[2] sda2[0]&#13;
                             <expression>{Custom - OS - Linux:vfs.fs.inode[{#FSNAME},pused].last(0)}&gt;{$DISK_USAGE_PERCENT_ALARM}</expression>
                             <recovery_mode>0</recovery_mode>
                             <recovery_expression/>
-                            <name>Disk inode usage for {#FSNAME} &gt; {$DISK_USAGE_PERCENT_ALARM}</name>
+                            <name>Filesystem inode usage for {#FSNAME} &gt; {$DISK_USAGE_PERCENT_ALARM}</name>
                             <correlation_mode>0</correlation_mode>
                             <correlation_tag/>
                             <url/>
@@ -3235,7 +3235,7 @@ md1 : active raid1 sdb2[2] sda2[0]&#13;
                             <expression>{Custom - OS - Linux:vfs.fs.size[{#FSNAME},pused].last(0)}&gt;{$DISK_USAGE_PERCENT_ALARM}</expression>
                             <recovery_mode>0</recovery_mode>
                             <recovery_expression/>
-                            <name>Disk space usage for {#FSNAME} &gt; {$DISK_USAGE_PERCENT_ALARM}</name>
+                            <name>Filesystem space usage for {#FSNAME} &gt; {$DISK_USAGE_PERCENT_ALARM}</name>
                             <correlation_mode>0</correlation_mode>
                             <correlation_tag/>
                             <url/>
@@ -3250,7 +3250,7 @@ md1 : active raid1 sdb2[2] sda2[0]&#13;
                     </trigger_prototypes>
                     <graph_prototypes>
                         <graph_prototype>
-                            <name>Disk {#FSNAME} inode usage</name>
+                            <name>Filesystem {#FSNAME} inode usage</name>
                             <width>900</width>
                             <height>200</height>
                             <yaxismin>0.0000</yaxismin>
@@ -3306,7 +3306,7 @@ md1 : active raid1 sdb2[2] sda2[0]&#13;
                             </graph_items>
                         </graph_prototype>
                         <graph_prototype>
-                            <name>Disk {#FSNAME} space usage</name>
+                            <name>Filesystem {#FSNAME} space usage</name>
                             <width>900</width>
                             <height>200</height>
                             <yaxismin>0.0000</yaxismin>
@@ -3466,7 +3466,7 @@ md1 : active raid1 sdb2[2] sda2[0]&#13;
                             <dynamic>0</dynamic>
                             <sort_triggers>0</sort_triggers>
                             <resource>
-                                <name>Disk {#FSNAME} space usage</name>
+                                <name>Filesystem {#FSNAME} space usage</name>
                                 <host>Custom - OS - Linux</host>
                             </resource>
                             <max_columns>1</max_columns>
@@ -3488,7 +3488,7 @@ md1 : active raid1 sdb2[2] sda2[0]&#13;
                             <dynamic>0</dynamic>
                             <sort_triggers>0</sort_triggers>
                             <resource>
-                                <name>Disk {#FSNAME} inode usage</name>
+                                <name>Filesystem {#FSNAME} inode usage</name>
                                 <host>Custom - OS - Linux</host>
                             </resource>
                             <max_columns>1</max_columns>
@@ -3947,7 +3947,7 @@ This trigger does not recover automatically, to get rid of this trigger, you hav
             <tags/>
         </trigger>
         <trigger>
-            <expression>{Custom - OS - Linux:vfs.file.regmatch[/proc/mdstat,&quot;\[.*_.*\]&quot;,,].last()}=1</expression>
+            <expression>{Custom - OS - Linux:vfs.file.regmatch[/proc/mdstat,&quot;\[UU*\]&quot;,,].last()}=0</expression>
             <recovery_mode>0</recovery_mode>
             <recovery_expression/>
             <name>MD Raid inconsistent devices</name>
@@ -3963,10 +3963,10 @@ This trigger does not recover automatically, to get rid of this trigger, you hav
             <tags/>
         </trigger>
         <trigger>
-            <expression>{Custom - OS - Linux:vfs.file.regmatch[/proc/mdstat,&quot;finish=&quot;,,].last()}=1</expression>
+            <expression>{Custom - OS - Linux:vfs.file.regmatch[/proc/mdstat,&quot;finish&quot;,,].last()}=1</expression>
             <recovery_mode>0</recovery_mode>
             <recovery_expression/>
-            <name>MD Raid sequential activity</name>
+            <name>MD Raid synchronous activity</name>
             <correlation_mode>0</correlation_mode>
             <correlation_tag/>
             <url/>
@@ -3978,7 +3978,7 @@ This trigger does not recover automatically, to get rid of this trigger, you hav
             <dependencies>
                 <dependency>
                     <name>MD Raid inconsistent devices</name>
-                    <expression>{Custom - OS - Linux:vfs.file.regmatch[/proc/mdstat,&quot;\[.*_.*\]&quot;,,].last()}=1</expression>
+                    <expression>{Custom - OS - Linux:vfs.file.regmatch[/proc/mdstat,&quot;\[UU*\]&quot;,,].last()}=0</expression>
                     <recovery_expression/>
                 </dependency>
             </dependencies>
