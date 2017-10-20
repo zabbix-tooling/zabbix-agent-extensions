@@ -14,6 +14,7 @@ before_script: gem install fpm
 script:
     - sudo gem install fpm
     - type -a fpm # is fpm in place?
+    - env
     - fpm --help # is it working?
     - ./create_packages
     - ./ci_test
