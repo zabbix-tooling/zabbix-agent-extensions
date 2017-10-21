@@ -90,16 +90,22 @@ parser = argparse.ArgumentParser(
     description='perform device disovery for zabbix',
     formatter_class=argparse.RawTextHelpFormatter,
     epilog='''Example json configuration file:
+
+i.e. /etc/zabbix/item_zabbix_device_discovery.json:
+---
 {
   "regex_includes": [
     ".*"
   ],
   "regex_excludes": [
-    "loop.*"
+    "loop.*", 
+    "fd.*", 
+    "sr.*"
   ]
 }
+---
 
-Options ar evaluated like this:
+Options are evaluated like this:
 - stage 1: include the following devices by regex
 - stage 2: exclude the following devices from step 1 by regex
 
