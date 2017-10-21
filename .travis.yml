@@ -1,16 +1,29 @@
 language: bash
 
-before_script:
-    - sudo apt-get install ruby-dev build-essential debhelper devscripts rpm xalan -y
-    - gem install fpm --user
-    - wget http://repo.zabbix.com/zabbix/3.2/ubuntu/pool/main/z/zabbix/zabbix-agent_3.2.8-1+xenial_amd64.deb
-    - sudo dpkg -i zabbix-agent_*_amd64.deb
+dist: xenial
+sudo: required
+
+env:
+    - PATH=/home/travis/.gem/ruby/2.4.0/bin:/bin:/sbin:/usr/bin:/usr/local/bin:/usr/local/sbin:/usr/sbin:/usr/X11R6/bin
+
+before_install:
+    - sudo apt-get update
+    - sudo apt-get upgrade
+    - sudo apt-get install ruby-dev build-essential debhelper devscripts rpm xalan wget -y
 
 script:
-    - export PATH=~/.gem/ruby/2.4.0/bin:$PATH
+    - sudo gem install fpm
+    - env
     - ./create_packages
-    - sudo dpkg -i zabbix-agent-extensions_*_all.deb
-    
+    - ./ci_test
+
+notifications:
+  email:
+    recipients:
+      - ms-travisci@256bit.org
+    on_success: change
+    on_failure: always
+
 # https://docs.travis-ci.com/user/deployment/releases/
 #deploy:
 #  provider: releases

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
     <version>3.2</version>
-    <date>2017-10-19T17:11:03Z</date>
+    <date>2016-11-14T15:59:27Z</date>
     <groups>
         <group>
             <name>Templates</name>
@@ -9,8 +9,8 @@
     </groups>
     <templates>
         <template>
-            <template>Custom - Service - Apache</template>
-            <name>Custom - Service - Apache</name>
+            <template>Custom - Service - Elasticsearch Node</template>
+            <name>Custom - Service - Elasticsearch Node</name>
             <description/>
             <groups>
                 <group>
@@ -19,24 +19,24 @@
             </groups>
             <applications>
                 <application>
-                    <name>Service - Apache</name>
+                    <name>Elasticsearch Node</name>
                 </application>
             </applications>
             <items>
                 <item>
-                    <name>Apache Total Accesses</name>
-                    <type>0</type>
+                    <name>Records indexed per second</name>
+                    <type>7</type>
                     <snmp_community/>
                     <multiplier>0</multiplier>
                     <snmp_oid/>
-                    <key>apache.accesses[{$HTTP_PORT}]</key>
-                    <delay>120</delay>
-                    <history>14</history>
-                    <trends>365</trends>
+                    <key>elasticsearch[{$NODENAME},index_total]</key>
+                    <delay>90</delay>
+                    <history>30</history>
+                    <trends>90</trends>
                     <status>0</status>
-                    <value_type>3</value_type>
+                    <value_type>0</value_type>
                     <allowed_hosts/>
-                    <units>req/sec</units>
+                    <units/>
                     <delta>1</delta>
                     <snmpv3_contextname/>
                     <snmpv3_securityname/>
@@ -60,26 +60,26 @@
                     <inventory_link>0</inventory_link>
                     <applications>
                         <application>
-                            <name>Service - Apache</name>
+                            <name>Elasticsearch Node</name>
                         </application>
                     </applications>
                     <valuemap/>
                     <logtimefmt/>
                 </item>
                 <item>
-                    <name>Apache Mod Jk Activated</name>
-                    <type>0</type>
+                    <name>Node Storage Size</name>
+                    <type>7</type>
                     <snmp_community/>
                     <multiplier>0</multiplier>
                     <snmp_oid/>
-                    <key>apache.jk.act</key>
-                    <delay>300</delay>
-                    <history>14</history>
-                    <trends>0</trends>
+                    <key>elasticsearch[{$NODENAME},size_in_bytes]</key>
+                    <delay>30</delay>
+                    <history>30</history>
+                    <trends>90</trends>
                     <status>0</status>
                     <value_type>3</value_type>
                     <allowed_hosts/>
-                    <units>backends</units>
+                    <units>B</units>
                     <delta>0</delta>
                     <snmpv3_contextname/>
                     <snmpv3_securityname/>
@@ -99,117 +99,31 @@
                     <publickey/>
                     <privatekey/>
                     <port/>
-                    <description>Activated Backends</description>
+                    <description/>
                     <inventory_link>0</inventory_link>
                     <applications>
                         <application>
-                            <name>Service - Apache</name>
+                            <name>Elasticsearch Node</name>
                         </application>
                     </applications>
                     <valuemap/>
                     <logtimefmt/>
                 </item>
                 <item>
-                    <name>Apache Mod Jk Disabled</name>
-                    <type>0</type>
-                    <snmp_community/>
-                    <multiplier>0</multiplier>
-                    <snmp_oid/>
-                    <key>apache.jk.dis</key>
-                    <delay>300</delay>
-                    <history>14</history>
-                    <trends>0</trends>
-                    <status>0</status>
-                    <value_type>3</value_type>
-                    <allowed_hosts/>
-                    <units>backends</units>
-                    <delta>0</delta>
-                    <snmpv3_contextname/>
-                    <snmpv3_securityname/>
-                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                    <snmpv3_authpassphrase/>
-                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                    <snmpv3_privpassphrase/>
-                    <formula>1</formula>
-                    <delay_flex/>
-                    <params/>
-                    <ipmi_sensor/>
-                    <data_type>0</data_type>
-                    <authtype>0</authtype>
-                    <username/>
-                    <password/>
-                    <publickey/>
-                    <privatekey/>
-                    <port/>
-                    <description>Disabled Backends, no new sessions</description>
-                    <inventory_link>0</inventory_link>
-                    <applications>
-                        <application>
-                            <name>Service - Apache</name>
-                        </application>
-                    </applications>
-                    <valuemap/>
-                    <logtimefmt/>
-                </item>
-                <item>
-                    <name>Apache Mod Jk Stopped</name>
-                    <type>0</type>
-                    <snmp_community/>
-                    <multiplier>0</multiplier>
-                    <snmp_oid/>
-                    <key>apache.jk.stp</key>
-                    <delay>300</delay>
-                    <history>14</history>
-                    <trends>0</trends>
-                    <status>0</status>
-                    <value_type>3</value_type>
-                    <allowed_hosts/>
-                    <units>backends</units>
-                    <delta>0</delta>
-                    <snmpv3_contextname/>
-                    <snmpv3_securityname/>
-                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                    <snmpv3_authpassphrase/>
-                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                    <snmpv3_privpassphrase/>
-                    <formula>1</formula>
-                    <delay_flex/>
-                    <params/>
-                    <ipmi_sensor/>
-                    <data_type>0</data_type>
-                    <authtype>0</authtype>
-                    <username/>
-                    <password/>
-                    <publickey/>
-                    <privatekey/>
-                    <port/>
-                    <description>Stopped Backends, no request processing</description>
-                    <inventory_link>0</inventory_link>
-                    <applications>
-                        <application>
-                            <name>Service - Apache</name>
-                        </application>
-                    </applications>
-                    <valuemap/>
-                    <logtimefmt/>
-                </item>
-                <item>
-                    <name>Apache Total Bytes</name>
-                    <type>0</type>
+                    <name>JVM Heap Pool Old Percentage</name>
+                    <type>15</type>
                     <snmp_community/>
                     <multiplier>1</multiplier>
                     <snmp_oid/>
-                    <key>apache.kbytes[{$HTTP_PORT}]</key>
-                    <delay>120</delay>
-                    <history>14</history>
-                    <trends>365</trends>
+                    <key>es.node.jvm.pool.old</key>
+                    <delay>30</delay>
+                    <history>30</history>
+                    <trends>90</trends>
                     <status>0</status>
-                    <value_type>3</value_type>
+                    <value_type>0</value_type>
                     <allowed_hosts/>
-                    <units>bit/sec</units>
-                    <delta>1</delta>
+                    <units>%</units>
+                    <delta>0</delta>
                     <snmpv3_contextname/>
                     <snmpv3_securityname/>
                     <snmpv3_securitylevel>0</snmpv3_securitylevel>
@@ -217,7 +131,136 @@
                     <snmpv3_authpassphrase/>
                     <snmpv3_privprotocol>0</snmpv3_privprotocol>
                     <snmpv3_privpassphrase/>
-                    <formula>8192</formula>
+                    <formula>100</formula>
+                    <delay_flex/>
+                    <params>last(&quot;nodestats[{$NODENAME},jvm.mem.pools.old.used_in_bytes]&quot;) / last(&quot;nodestats[{$NODENAME},jvm.mem.pools.old.max_in_bytes]&quot;)</params>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description/>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>Elasticsearch Node</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                </item>
+                <item>
+                    <name>JVM Heap Pool Survivor Percentage</name>
+                    <type>15</type>
+                    <snmp_community/>
+                    <multiplier>1</multiplier>
+                    <snmp_oid/>
+                    <key>es.node.jvm.pool.survivor</key>
+                    <delay>30</delay>
+                    <history>30</history>
+                    <trends>90</trends>
+                    <status>0</status>
+                    <value_type>0</value_type>
+                    <allowed_hosts/>
+                    <units>%</units>
+                    <delta>0</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>100</formula>
+                    <delay_flex/>
+                    <params>last(&quot;nodestats[{$NODENAME},jvm.mem.pools.survivor.used_in_bytes]&quot;) / last(&quot;nodestats[{$NODENAME},jvm.mem.pools.survivor.max_in_bytes]&quot;)</params>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description/>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>Elasticsearch Node</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                </item>
+                <item>
+                    <name>JVM Heap Pool Young Percentage</name>
+                    <type>15</type>
+                    <snmp_community/>
+                    <multiplier>1</multiplier>
+                    <snmp_oid/>
+                    <key>es.node.jvm.pool.young</key>
+                    <delay>30</delay>
+                    <history>30</history>
+                    <trends>90</trends>
+                    <status>0</status>
+                    <value_type>0</value_type>
+                    <allowed_hosts/>
+                    <units>%</units>
+                    <delta>0</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>100</formula>
+                    <delay_flex/>
+                    <params>last(&quot;nodestats[{$NODENAME},jvm.mem.pools.young.used_in_bytes]&quot;) / last(&quot;nodestats[{$NODENAME},jvm.mem.pools.young.max_in_bytes]&quot;)</params>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description/>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>Elasticsearch Node</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                </item>
+                <item>
+                    <name>JVM GC Collection Count Old</name>
+                    <type>0</type>
+                    <snmp_community/>
+                    <multiplier>0</multiplier>
+                    <snmp_oid/>
+                    <key>nodestats[{$NODENAME},jvm.gc.collectors.old.collection_count]</key>
+                    <delay>30</delay>
+                    <history>30</history>
+                    <trends>90</trends>
+                    <status>0</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts/>
+                    <units/>
+                    <delta>2</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1</formula>
                     <delay_flex/>
                     <params/>
                     <ipmi_sensor/>
@@ -232,26 +275,155 @@
                     <inventory_link>0</inventory_link>
                     <applications>
                         <application>
-                            <name>Service - Apache</name>
+                            <name>Elasticsearch Node</name>
                         </application>
                     </applications>
                     <valuemap/>
                     <logtimefmt/>
                 </item>
                 <item>
-                    <name>Apache Clients Keepalive</name>
+                    <name>JVM GC Collection Time Old</name>
                     <type>0</type>
                     <snmp_community/>
                     <multiplier>0</multiplier>
                     <snmp_oid/>
-                    <key>apache.keepalive[{$HTTP_PORT}]</key>
-                    <delay>120</delay>
-                    <history>14</history>
-                    <trends>30</trends>
+                    <key>nodestats[{$NODENAME},jvm.gc.collectors.old.collection_time_in_millis]</key>
+                    <delay>30</delay>
+                    <history>30</history>
+                    <trends>90</trends>
                     <status>0</status>
                     <value_type>3</value_type>
                     <allowed_hosts/>
-                    <units>tasks</units>
+                    <units>ms</units>
+                    <delta>2</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description/>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>Elasticsearch Node</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                </item>
+                <item>
+                    <name>JVM GC Collection Count Young</name>
+                    <type>0</type>
+                    <snmp_community/>
+                    <multiplier>0</multiplier>
+                    <snmp_oid/>
+                    <key>nodestats[{$NODENAME},jvm.gc.collectors.young.collection_count]</key>
+                    <delay>30</delay>
+                    <history>30</history>
+                    <trends>90</trends>
+                    <status>0</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts/>
+                    <units/>
+                    <delta>2</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description/>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>Elasticsearch Node</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                </item>
+                <item>
+                    <name>JVM GC Collection Time Young</name>
+                    <type>0</type>
+                    <snmp_community/>
+                    <multiplier>0</multiplier>
+                    <snmp_oid/>
+                    <key>nodestats[{$NODENAME},jvm.gc.collectors.young.collection_time_in_millis]</key>
+                    <delay>30</delay>
+                    <history>30</history>
+                    <trends>90</trends>
+                    <status>0</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts/>
+                    <units>ms</units>
+                    <delta>2</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description/>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>Elasticsearch Node</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                </item>
+                <item>
+                    <name>JVM Heap Max</name>
+                    <type>0</type>
+                    <snmp_community/>
+                    <multiplier>0</multiplier>
+                    <snmp_oid/>
+                    <key>nodestats[{$NODENAME},jvm.mem.heap_max_in_bytes]</key>
+                    <delay>30</delay>
+                    <history>30</history>
+                    <trends>90</trends>
+                    <status>0</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts/>
+                    <units>B</units>
                     <delta>0</delta>
                     <snmpv3_contextname/>
                     <snmpv3_securityname/>
@@ -271,30 +443,30 @@
                     <publickey/>
                     <privatekey/>
                     <port/>
-                    <description>Apache workers which are currently in keepalive state</description>
+                    <description/>
                     <inventory_link>0</inventory_link>
                     <applications>
                         <application>
-                            <name>Service - Apache</name>
+                            <name>Elasticsearch Node</name>
                         </application>
                     </applications>
                     <valuemap/>
                     <logtimefmt/>
                 </item>
                 <item>
-                    <name>Apache Clients Reader</name>
+                    <name>JVM Heap Used</name>
                     <type>0</type>
                     <snmp_community/>
                     <multiplier>0</multiplier>
                     <snmp_oid/>
-                    <key>apache.reader[{$HTTP_PORT}]</key>
-                    <delay>120</delay>
-                    <history>14</history>
-                    <trends>30</trends>
+                    <key>nodestats[{$NODENAME},jvm.mem.heap_used_in_bytes]</key>
+                    <delay>30</delay>
+                    <history>30</history>
+                    <trends>90</trends>
                     <status>0</status>
                     <value_type>3</value_type>
                     <allowed_hosts/>
-                    <units>tasks</units>
+                    <units>B</units>
                     <delta>0</delta>
                     <snmpv3_contextname/>
                     <snmpv3_securityname/>
@@ -314,286 +486,329 @@
                     <publickey/>
                     <privatekey/>
                     <port/>
-                    <description>Apache workers which are currently reading a request.</description>
+                    <description/>
                     <inventory_link>0</inventory_link>
                     <applications>
                         <application>
-                            <name>Service - Apache</name>
+                            <name>Elasticsearch Node</name>
                         </application>
                     </applications>
                     <valuemap/>
                     <logtimefmt/>
                 </item>
                 <item>
-                    <name>Apache Memory Average Process</name>
+                    <name>JVM Heap Percentage</name>
                     <type>0</type>
                     <snmp_community/>
                     <multiplier>0</multiplier>
                     <snmp_oid/>
-                    <key>apache.rss.memory.average</key>
-                    <delay>240</delay>
-                    <history>14</history>
-                    <trends>30</trends>
-                    <status>0</status>
-                    <value_type>3</value_type>
-                    <allowed_hosts/>
-                    <units>bytes</units>
-                    <delta>0</delta>
-                    <snmpv3_contextname/>
-                    <snmpv3_securityname/>
-                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                    <snmpv3_authpassphrase/>
-                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                    <snmpv3_privpassphrase/>
-                    <formula>1</formula>
-                    <delay_flex/>
-                    <params/>
-                    <ipmi_sensor/>
-                    <data_type>0</data_type>
-                    <authtype>0</authtype>
-                    <username/>
-                    <password/>
-                    <publickey/>
-                    <privatekey/>
-                    <port/>
-                    <description>Average RSS memory used by apache process</description>
-                    <inventory_link>0</inventory_link>
-                    <applications>
-                        <application>
-                            <name>Service - Apache</name>
-                        </application>
-                    </applications>
-                    <valuemap/>
-                    <logtimefmt/>
-                </item>
-                <item>
-                    <name>Apache Memory Biggest Process</name>
-                    <type>0</type>
-                    <snmp_community/>
-                    <multiplier>0</multiplier>
-                    <snmp_oid/>
-                    <key>apache.rss.memory.biggest</key>
-                    <delay>240</delay>
-                    <history>14</history>
-                    <trends>30</trends>
-                    <status>0</status>
-                    <value_type>3</value_type>
-                    <allowed_hosts/>
-                    <units>bytes</units>
-                    <delta>0</delta>
-                    <snmpv3_contextname/>
-                    <snmpv3_securityname/>
-                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                    <snmpv3_authpassphrase/>
-                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                    <snmpv3_privpassphrase/>
-                    <formula>1</formula>
-                    <delay_flex/>
-                    <params/>
-                    <ipmi_sensor/>
-                    <data_type>0</data_type>
-                    <authtype>0</authtype>
-                    <username/>
-                    <password/>
-                    <publickey/>
-                    <privatekey/>
-                    <port/>
-                    <description>Biggest RSS memory used by apache process</description>
-                    <inventory_link>0</inventory_link>
-                    <applications>
-                        <application>
-                            <name>Service - Apache</name>
-                        </application>
-                    </applications>
-                    <valuemap/>
-                    <logtimefmt/>
-                </item>
-                <item>
-                    <name>Apache Memory Smallest Process</name>
-                    <type>0</type>
-                    <snmp_community/>
-                    <multiplier>0</multiplier>
-                    <snmp_oid/>
-                    <key>apache.rss.memory.smallest</key>
-                    <delay>240</delay>
-                    <history>14</history>
-                    <trends>30</trends>
-                    <status>0</status>
-                    <value_type>3</value_type>
-                    <allowed_hosts/>
-                    <units>bytes</units>
-                    <delta>0</delta>
-                    <snmpv3_contextname/>
-                    <snmpv3_securityname/>
-                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                    <snmpv3_authpassphrase/>
-                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                    <snmpv3_privpassphrase/>
-                    <formula>1</formula>
-                    <delay_flex/>
-                    <params/>
-                    <ipmi_sensor/>
-                    <data_type>0</data_type>
-                    <authtype>0</authtype>
-                    <username/>
-                    <password/>
-                    <publickey/>
-                    <privatekey/>
-                    <port/>
-                    <description>Smallest RSS memory used by apache process</description>
-                    <inventory_link>0</inventory_link>
-                    <applications>
-                        <application>
-                            <name>Service - Apache</name>
-                        </application>
-                    </applications>
-                    <valuemap/>
-                    <logtimefmt/>
-                </item>
-                <item>
-                    <name>Apache Memory Total</name>
-                    <type>0</type>
-                    <snmp_community/>
-                    <multiplier>0</multiplier>
-                    <snmp_oid/>
-                    <key>apache.rss.memory.total</key>
-                    <delay>240</delay>
-                    <history>14</history>
-                    <trends>30</trends>
-                    <status>0</status>
-                    <value_type>3</value_type>
-                    <allowed_hosts/>
-                    <units>bytes</units>
-                    <delta>0</delta>
-                    <snmpv3_contextname/>
-                    <snmpv3_securityname/>
-                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                    <snmpv3_authpassphrase/>
-                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                    <snmpv3_privpassphrase/>
-                    <formula>1</formula>
-                    <delay_flex/>
-                    <params/>
-                    <ipmi_sensor/>
-                    <data_type>0</data_type>
-                    <authtype>0</authtype>
-                    <username/>
-                    <password/>
-                    <publickey/>
-                    <privatekey/>
-                    <port/>
-                    <description>Total RSS memory used by apache</description>
-                    <inventory_link>0</inventory_link>
-                    <applications>
-                        <application>
-                            <name>Service - Apache</name>
-                        </application>
-                    </applications>
-                    <valuemap/>
-                    <logtimefmt/>
-                </item>
-                <item>
-                    <name>Apache Clients ServerLimit</name>
-                    <type>0</type>
-                    <snmp_community/>
-                    <multiplier>0</multiplier>
-                    <snmp_oid/>
-                    <key>apache.total[{$HTTP_PORT}]</key>
-                    <delay>900</delay>
-                    <history>14</history>
-                    <trends>0</trends>
-                    <status>0</status>
-                    <value_type>3</value_type>
-                    <allowed_hosts/>
-                    <units>tasks</units>
-                    <delta>0</delta>
-                    <snmpv3_contextname/>
-                    <snmpv3_securityname/>
-                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                    <snmpv3_authpassphrase/>
-                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                    <snmpv3_privpassphrase/>
-                    <formula>1</formula>
-                    <delay_flex/>
-                    <params/>
-                    <ipmi_sensor/>
-                    <data_type>0</data_type>
-                    <authtype>0</authtype>
-                    <username/>
-                    <password/>
-                    <publickey/>
-                    <privatekey/>
-                    <port/>
-                    <description>Total amout of possible apache workers.</description>
-                    <inventory_link>0</inventory_link>
-                    <applications>
-                        <application>
-                            <name>Service - Apache</name>
-                        </application>
-                    </applications>
-                    <valuemap/>
-                    <logtimefmt/>
-                </item>
-                <item>
-                    <name>Apache Clients Writer</name>
-                    <type>0</type>
-                    <snmp_community/>
-                    <multiplier>0</multiplier>
-                    <snmp_oid/>
-                    <key>apache.writer[{$HTTP_PORT}]</key>
-                    <delay>120</delay>
-                    <history>14</history>
-                    <trends>30</trends>
-                    <status>0</status>
-                    <value_type>3</value_type>
-                    <allowed_hosts/>
-                    <units>tasks</units>
-                    <delta>0</delta>
-                    <snmpv3_contextname/>
-                    <snmpv3_securityname/>
-                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                    <snmpv3_authpassphrase/>
-                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                    <snmpv3_privpassphrase/>
-                    <formula>1</formula>
-                    <delay_flex/>
-                    <params/>
-                    <ipmi_sensor/>
-                    <data_type>0</data_type>
-                    <authtype>0</authtype>
-                    <username/>
-                    <password/>
-                    <publickey/>
-                    <privatekey/>
-                    <port/>
-                    <description>Apache workers which are currently a request result writing to a client.</description>
-                    <inventory_link>0</inventory_link>
-                    <applications>
-                        <application>
-                            <name>Service - Apache</name>
-                        </application>
-                    </applications>
-                    <valuemap/>
-                    <logtimefmt/>
-                </item>
-                <item>
-                    <name>TCP Connect Local</name>
-                    <type>0</type>
-                    <snmp_community/>
-                    <multiplier>0</multiplier>
-                    <snmp_oid/>
-                    <key>net.tcp.port[127.0.0.1,{$HTTP_PORT}]</key>
-                    <delay>120</delay>
-                    <history>14</history>
-                    <trends>30</trends>
+                    <key>nodestats[{$NODENAME},jvm.mem.heap_used_percent]</key>
+                    <delay>30</delay>
+                    <history>30</history>
+                    <trends>90</trends>
                     <status>0</status>
                     <value_type>0</value_type>
+                    <allowed_hosts/>
+                    <units>%</units>
+                    <delta>0</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description/>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>Elasticsearch Node</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                </item>
+                <item>
+                    <name>JVM Heap Pool Old Max</name>
+                    <type>0</type>
+                    <snmp_community/>
+                    <multiplier>0</multiplier>
+                    <snmp_oid/>
+                    <key>nodestats[{$NODENAME},jvm.mem.pools.old.max_in_bytes]</key>
+                    <delay>30</delay>
+                    <history>30</history>
+                    <trends>90</trends>
+                    <status>0</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts/>
+                    <units>B</units>
+                    <delta>0</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description/>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>Elasticsearch Node</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                </item>
+                <item>
+                    <name>JVM Heap Pool Old Used</name>
+                    <type>0</type>
+                    <snmp_community/>
+                    <multiplier>0</multiplier>
+                    <snmp_oid/>
+                    <key>nodestats[{$NODENAME},jvm.mem.pools.old.used_in_bytes]</key>
+                    <delay>30</delay>
+                    <history>30</history>
+                    <trends>90</trends>
+                    <status>0</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts/>
+                    <units>B</units>
+                    <delta>0</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description/>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>Elasticsearch Node</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                </item>
+                <item>
+                    <name>JVM Heap Pool Survivor Max</name>
+                    <type>0</type>
+                    <snmp_community/>
+                    <multiplier>0</multiplier>
+                    <snmp_oid/>
+                    <key>nodestats[{$NODENAME},jvm.mem.pools.survivor.max_in_bytes]</key>
+                    <delay>30</delay>
+                    <history>30</history>
+                    <trends>90</trends>
+                    <status>0</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts/>
+                    <units>B</units>
+                    <delta>0</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description/>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>Elasticsearch Node</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                </item>
+                <item>
+                    <name>JVM Heap Pool Survivor Used</name>
+                    <type>0</type>
+                    <snmp_community/>
+                    <multiplier>0</multiplier>
+                    <snmp_oid/>
+                    <key>nodestats[{$NODENAME},jvm.mem.pools.survivor.used_in_bytes]</key>
+                    <delay>30</delay>
+                    <history>30</history>
+                    <trends>90</trends>
+                    <status>0</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts/>
+                    <units>B</units>
+                    <delta>0</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description/>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>Elasticsearch Node</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                </item>
+                <item>
+                    <name>JVM Heap Pool Young Max</name>
+                    <type>0</type>
+                    <snmp_community/>
+                    <multiplier>0</multiplier>
+                    <snmp_oid/>
+                    <key>nodestats[{$NODENAME},jvm.mem.pools.young.max_in_bytes]</key>
+                    <delay>30</delay>
+                    <history>30</history>
+                    <trends>90</trends>
+                    <status>0</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts/>
+                    <units>B</units>
+                    <delta>0</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description/>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>Elasticsearch Node</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                </item>
+                <item>
+                    <name>JVM Heap Pool Young Used</name>
+                    <type>0</type>
+                    <snmp_community/>
+                    <multiplier>0</multiplier>
+                    <snmp_oid/>
+                    <key>nodestats[{$NODENAME},jvm.mem.pools.young.used_in_bytes]</key>
+                    <delay>30</delay>
+                    <history>30</history>
+                    <trends>90</trends>
+                    <status>0</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts/>
+                    <units>B</units>
+                    <delta>0</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description/>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>Elasticsearch Node</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                </item>
+                <item>
+                    <name>JVM Threads</name>
+                    <type>0</type>
+                    <snmp_community/>
+                    <multiplier>0</multiplier>
+                    <snmp_oid/>
+                    <key>nodestats[{$NODENAME},jvm.threads.count]</key>
+                    <delay>30</delay>
+                    <history>30</history>
+                    <trends>90</trends>
+                    <status>0</status>
+                    <value_type>3</value_type>
                     <allowed_hosts/>
                     <units/>
                     <delta>0</delta>
@@ -619,28 +834,26 @@
                     <inventory_link>0</inventory_link>
                     <applications>
                         <application>
-                            <name>Service - Apache</name>
+                            <name>Elasticsearch Node</name>
                         </application>
                     </applications>
-                    <valuemap>
-                        <name>Service state</name>
-                    </valuemap>
+                    <valuemap/>
                     <logtimefmt/>
                 </item>
                 <item>
-                    <name>Get /e/lbstatus.html response time</name>
+                    <name>Process Max Open File Descriptors</name>
                     <type>0</type>
                     <snmp_community/>
                     <multiplier>0</multiplier>
                     <snmp_oid/>
-                    <key>web.page.perf[127.0.0.1,{$LOADBALANCER_CHECK},{$HTTP_PORT}]</key>
-                    <delay>120</delay>
-                    <history>14</history>
-                    <trends>30</trends>
-                    <status>0</status>
-                    <value_type>0</value_type>
+                    <key>nodestats[{$NODENAME},process.max_file_descriptors]</key>
+                    <delay>30</delay>
+                    <history>30</history>
+                    <trends>90</trends>
+                    <status>1</status>
+                    <value_type>3</value_type>
                     <allowed_hosts/>
-                    <units>sec</units>
+                    <units/>
                     <delta>0</delta>
                     <snmpv3_contextname/>
                     <snmpv3_securityname/>
@@ -664,7 +877,93 @@
                     <inventory_link>0</inventory_link>
                     <applications>
                         <application>
-                            <name>Service - Apache</name>
+                            <name>Elasticsearch Node</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                </item>
+                <item>
+                    <name>Process Open File Descriptors</name>
+                    <type>0</type>
+                    <snmp_community/>
+                    <multiplier>0</multiplier>
+                    <snmp_oid/>
+                    <key>nodestats[{$NODENAME},process.open_file_descriptors]</key>
+                    <delay>30</delay>
+                    <history>30</history>
+                    <trends>90</trends>
+                    <status>0</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts/>
+                    <units/>
+                    <delta>0</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description/>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>Elasticsearch Node</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                </item>
+                <item>
+                    <name>Elasticsearch Service Status</name>
+                    <type>7</type>
+                    <snmp_community/>
+                    <multiplier>0</multiplier>
+                    <snmp_oid/>
+                    <key>proc.num[,elasticsearch,,/usr/lib/jvm/java-7-openjdk-amd64//bin/java]</key>
+                    <delay>30</delay>
+                    <history>30</history>
+                    <trends>90</trends>
+                    <status>0</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts/>
+                    <units/>
+                    <delta>0</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description/>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>Elasticsearch Node</name>
                         </application>
                     </applications>
                     <valuemap/>
@@ -673,32 +972,23 @@
             </items>
             <discovery_rules/>
             <httptests/>
-            <macros>
-                <macro>
-                    <macro>{$HTTP_PORT}</macro>
-                    <value>80</value>
-                </macro>
-                <macro>
-                    <macro>{$LOADBALANCER_CHECK}</macro>
-                    <value>/e/lbstatus.html</value>
-                </macro>
-            </macros>
+            <macros/>
             <templates/>
             <screens>
                 <screen>
-                    <name>Custom - Service - Apache</name>
+                    <name>Custom - Service - Elasticsearch Node Database</name>
                     <hsize>1</hsize>
-                    <vsize>7</vsize>
+                    <vsize>3</vsize>
                     <screen_items>
                         <screen_item>
-                            <resourcetype>0</resourcetype>
-                            <width>900</width>
-                            <height>300</height>
+                            <resourcetype>3</resourcetype>
+                            <width>500</width>
+                            <height>100</height>
                             <x>0</x>
                             <y>0</y>
                             <colspan>1</colspan>
                             <rowspan>1</rowspan>
-                            <elements>0</elements>
+                            <elements>5</elements>
                             <valign>0</valign>
                             <halign>0</halign>
                             <style>0</style>
@@ -706,14 +996,14 @@
                             <dynamic>0</dynamic>
                             <sort_triggers>0</sort_triggers>
                             <resource>
-                                <name>Apache Traffic</name>
-                                <host>Custom - Service - Apache</host>
+                                <key>proc.num[,elasticsearch,,/usr/lib/jvm/java-7-openjdk-amd64//bin/java]</key>
+                                <host>Custom - Service - Elasticsearch Node</host>
                             </resource>
                             <max_columns>3</max_columns>
                             <application/>
                         </screen_item>
                         <screen_item>
-                            <resourcetype>0</resourcetype>
+                            <resourcetype>1</resourcetype>
                             <width>900</width>
                             <height>300</height>
                             <x>0</x>
@@ -728,8 +1018,8 @@
                             <dynamic>0</dynamic>
                             <sort_triggers>0</sort_triggers>
                             <resource>
-                                <name>Apache Maxclient Usage</name>
-                                <host>Custom - Service - Apache</host>
+                                <key>elasticsearch[{$NODENAME},size_in_bytes]</key>
+                                <host>Custom - Service - Elasticsearch Node</host>
                             </resource>
                             <max_columns>3</max_columns>
                             <application/>
@@ -750,18 +1040,25 @@
                             <dynamic>0</dynamic>
                             <sort_triggers>0</sort_triggers>
                             <resource>
-                                <key>web.page.perf[127.0.0.1,{$LOADBALANCER_CHECK},{$HTTP_PORT}]</key>
-                                <host>Custom - Service - Apache</host>
+                                <key>elasticsearch[{$NODENAME},index_total]</key>
+                                <host>Custom - Service - Elasticsearch Node</host>
                             </resource>
                             <max_columns>3</max_columns>
                             <application/>
                         </screen_item>
+                    </screen_items>
+                </screen>
+                <screen>
+                    <name>Custom - Service - Elasticsearch Node Memory</name>
+                    <hsize>1</hsize>
+                    <vsize>3</vsize>
+                    <screen_items>
                         <screen_item>
-                            <resourcetype>1</resourcetype>
+                            <resourcetype>0</resourcetype>
                             <width>900</width>
                             <height>300</height>
                             <x>0</x>
-                            <y>3</y>
+                            <y>0</y>
                             <colspan>1</colspan>
                             <rowspan>1</rowspan>
                             <elements>0</elements>
@@ -772,30 +1069,8 @@
                             <dynamic>0</dynamic>
                             <sort_triggers>0</sort_triggers>
                             <resource>
-                                <key>apache.total[{$HTTP_PORT}]</key>
-                                <host>Custom - Service - Apache</host>
-                            </resource>
-                            <max_columns>3</max_columns>
-                            <application/>
-                        </screen_item>
-                        <screen_item>
-                            <resourcetype>1</resourcetype>
-                            <width>900</width>
-                            <height>300</height>
-                            <x>0</x>
-                            <y>4</y>
-                            <colspan>1</colspan>
-                            <rowspan>1</rowspan>
-                            <elements>0</elements>
-                            <valign>0</valign>
-                            <halign>0</halign>
-                            <style>0</style>
-                            <url/>
-                            <dynamic>0</dynamic>
-                            <sort_triggers>0</sort_triggers>
-                            <resource>
-                                <key>net.tcp.port[127.0.0.1,{$HTTP_PORT}]</key>
-                                <host>Custom - Service - Apache</host>
+                                <name>JVM Heap</name>
+                                <host>Custom - Service - Elasticsearch Node</host>
                             </resource>
                             <max_columns>3</max_columns>
                             <application/>
@@ -805,7 +1080,7 @@
                             <width>900</width>
                             <height>300</height>
                             <x>0</x>
-                            <y>5</y>
+                            <y>1</y>
                             <colspan>1</colspan>
                             <rowspan>1</rowspan>
                             <elements>0</elements>
@@ -816,8 +1091,8 @@
                             <dynamic>0</dynamic>
                             <sort_triggers>0</sort_triggers>
                             <resource>
-                                <name>Apache Memory Usage</name>
-                                <host>Custom - Service - Apache</host>
+                                <name>JVM Heap Detailed</name>
+                                <host>Custom - Service - Elasticsearch Node</host>
                             </resource>
                             <max_columns>3</max_columns>
                             <application/>
@@ -827,7 +1102,7 @@
                             <width>900</width>
                             <height>300</height>
                             <x>0</x>
-                            <y>6</y>
+                            <y>2</y>
                             <colspan>1</colspan>
                             <rowspan>1</rowspan>
                             <elements>0</elements>
@@ -838,8 +1113,8 @@
                             <dynamic>0</dynamic>
                             <sort_triggers>0</sort_triggers>
                             <resource>
-                                <name>Apache Mod Jk</name>
-                                <host>Custom - Service - Apache</host>
+                                <name>JVM Heap Detailed Percentage</name>
+                                <host>Custom - Service - Elasticsearch Node</host>
                             </resource>
                             <max_columns>3</max_columns>
                             <application/>
@@ -851,118 +1126,16 @@
     </templates>
     <triggers>
         <trigger>
-            <expression>({Custom - Service - Apache:apache.total[{$HTTP_PORT}].last(0)} * 0.80) &lt; ({Custom - Service - Apache:apache.reader[{$HTTP_PORT}].last(0)} + {Custom - Service - Apache:apache.writer[{$HTTP_PORT}].last(0)} + {Custom - Service - Apache:apache.keepalive[{$HTTP_PORT}].last(0)})</expression>
+            <expression>{Custom - Service - Elasticsearch Node:proc.num[,elasticsearch,,/usr/lib/jvm/java-7-openjdk-amd64//bin/java].last()}=0</expression>
             <recovery_mode>0</recovery_mode>
             <recovery_expression/>
-            <name>Apache Maxclient Usage &gt; 80%</name>
+            <name>Elasticsearch Service Status</name>
             <correlation_mode>0</correlation_mode>
             <correlation_tag/>
             <url/>
             <status>0</status>
-            <priority>2</priority>
-            <description>The available maxclient slots are consumed by 80% by reader/writer processes.</description>
-            <type>0</type>
-            <manual_close>0</manual_close>
-            <dependencies/>
-            <tags/>
-        </trigger>
-        <trigger>
-            <expression>({Custom - Service - Apache:apache.jk.dis.last()} +{Custom - Service - Apache:apache.jk.stp.last()} ) &gt; 6</expression>
-            <recovery_mode>0</recovery_mode>
-            <recovery_expression/>
-            <name>Apache Mod Jk &gt; 6 Inactive Backends</name>
-            <correlation_mode>0</correlation_mode>
-            <correlation_tag/>
-            <url/>
-            <status>0</status>
-            <priority>3</priority>
-            <description/>
-            <type>0</type>
-            <manual_close>0</manual_close>
-            <dependencies/>
-            <tags/>
-        </trigger>
-        <trigger>
-            <expression>({Custom - Service - Apache:apache.jk.dis.last()} +{Custom - Service - Apache:apache.jk.stp.last()} )&gt;0</expression>
-            <recovery_mode>0</recovery_mode>
-            <recovery_expression/>
-            <name>Apache Mod Jk Disabled Backends &gt; 0</name>
-            <correlation_mode>0</correlation_mode>
-            <correlation_tag/>
-            <url/>
-            <status>0</status>
-            <priority>1</priority>
-            <description/>
-            <type>0</type>
-            <manual_close>0</manual_close>
-            <dependencies/>
-            <tags/>
-        </trigger>
-        <trigger>
-            <expression>({Custom - Service - Apache:apache.jk.dis.last()} +{Custom - Service - Apache:apache.jk.stp.last()} ) &gt; (({Custom - Service - Apache:apache.jk.dis.last()} + {Custom - Service - Apache:apache.jk.stp.last()} + {Custom - Service - Apache:apache.jk.act.last()}) * 0.20)</expression>
-            <recovery_mode>0</recovery_mode>
-            <recovery_expression/>
-            <name>Apache Mod Jk Inactive Backends &gt; 20%</name>
-            <correlation_mode>0</correlation_mode>
-            <correlation_tag/>
-            <url/>
-            <status>0</status>
-            <priority>2</priority>
-            <description/>
-            <type>0</type>
-            <manual_close>0</manual_close>
-            <dependencies/>
-            <tags/>
-        </trigger>
-        <trigger>
-            <expression>{Custom - Service - Apache:apache.writer[{$HTTP_PORT}].last()}&gt;800</expression>
-            <recovery_mode>0</recovery_mode>
-            <recovery_expression/>
-            <name>Apache Writer &gt; 800</name>
-            <correlation_mode>0</correlation_mode>
-            <correlation_tag/>
-            <url/>
-            <status>0</status>
-            <priority>3</priority>
-            <description/>
-            <type>0</type>
-            <manual_close>0</manual_close>
-            <dependencies/>
-            <tags/>
-        </trigger>
-        <trigger>
-            <expression>({Custom - Service - Apache:web.page.perf[127.0.0.1,{$LOADBALANCER_CHECK},{$HTTP_PORT}].avg(300)}=0 or {Custom - Service - Apache:web.page.perf[127.0.0.1,{$LOADBALANCER_CHECK},{$HTTP_PORT}].avg(300)}&gt;30)</expression>
-            <recovery_mode>0</recovery_mode>
-            <recovery_expression/>
-            <name>Get LB_Check HTTP Local on port {$HTTP_PORT} &gt; 30sec</name>
-            <correlation_mode>0</correlation_mode>
-            <correlation_tag/>
-            <url/>
-            <status>0</status>
-            <priority>3</priority>
-            <description>Apache did not deliver the standard loadbalancer checkfile within 3 seconds.</description>
-            <type>0</type>
-            <manual_close>0</manual_close>
-            <dependencies>
-                <dependency>
-                    <name>HTTP not reachable on port {$HTTP_PORT} from localhost</name>
-                    <expression>{Custom - Service - Apache:net.tcp.port[127.0.0.1,{$HTTP_PORT}].sum(#2)}=0</expression>
-                    <recovery_expression/>
-                </dependency>
-            </dependencies>
-            <tags/>
-        </trigger>
-        <trigger>
-            <expression>{Custom - Service - Apache:net.tcp.port[127.0.0.1,{$HTTP_PORT}].sum(#2)}=0</expression>
-            <recovery_mode>0</recovery_mode>
-            <recovery_expression/>
-            <name>HTTP not reachable on port {$HTTP_PORT} from localhost</name>
-            <correlation_mode>0</correlation_mode>
-            <correlation_tag/>
-            <url/>
-            <status>0</status>
-            <priority>3</priority>
-            <description>Apache was not reachable on {$HTTP_PORT} in the last two monitoring cycles.</description>
+            <priority>4</priority>
+            <description>Elasticsearch status is 0 value if ES service is running and 1 if ES service is down</description>
             <type>0</type>
             <manual_close>0</manual_close>
             <dependencies/>
@@ -971,19 +1144,19 @@
     </triggers>
     <graphs>
         <graph>
-            <name>Apache Maxclient Usage</name>
+            <name>Elasticsearch Idx per Sec</name>
             <width>900</width>
-            <height>300</height>
+            <height>200</height>
             <yaxismin>0.0000</yaxismin>
             <yaxismax>100.0000</yaxismax>
-            <show_work_period>0</show_work_period>
+            <show_work_period>1</show_work_period>
             <show_triggers>1</show_triggers>
-            <type>1</type>
+            <type>0</type>
             <show_legend>1</show_legend>
             <show_3d>0</show_3d>
             <percent_left>0.0000</percent_left>
             <percent_right>0.0000</percent_right>
-            <ymin_type_1>1</ymin_type_1>
+            <ymin_type_1>0</ymin_type_1>
             <ymax_type_1>0</ymax_type_1>
             <ymin_item_1>0</ymin_item_1>
             <ymax_item_1>0</ymax_item_1>
@@ -991,45 +1164,207 @@
                 <graph_item>
                     <sortorder>0</sortorder>
                     <drawtype>0</drawtype>
-                    <color>00BB00</color>
+                    <color>C80000</color>
                     <yaxisside>0</yaxisside>
-                    <calc_fnc>4</calc_fnc>
+                    <calc_fnc>2</calc_fnc>
                     <type>0</type>
                     <item>
-                        <host>Custom - Service - Apache</host>
-                        <key>apache.reader[{$HTTP_PORT}]</key>
-                    </item>
-                </graph_item>
-                <graph_item>
-                    <sortorder>1</sortorder>
-                    <drawtype>0</drawtype>
-                    <color>CC0000</color>
-                    <yaxisside>0</yaxisside>
-                    <calc_fnc>4</calc_fnc>
-                    <type>0</type>
-                    <item>
-                        <host>Custom - Service - Apache</host>
-                        <key>apache.writer[{$HTTP_PORT}]</key>
-                    </item>
-                </graph_item>
-                <graph_item>
-                    <sortorder>2</sortorder>
-                    <drawtype>0</drawtype>
-                    <color>CCCCCC</color>
-                    <yaxisside>0</yaxisside>
-                    <calc_fnc>4</calc_fnc>
-                    <type>0</type>
-                    <item>
-                        <host>Custom - Service - Apache</host>
-                        <key>apache.keepalive[{$HTTP_PORT}]</key>
+                        <host>Custom - Service - Elasticsearch Node</host>
+                        <key>elasticsearch[{$NODENAME},index_total]</key>
                     </item>
                 </graph_item>
             </graph_items>
         </graph>
         <graph>
-            <name>Apache Memory Usage</name>
+            <name>JVM Heap</name>
             <width>900</width>
-            <height>300</height>
+            <height>200</height>
+            <yaxismin>0.0000</yaxismin>
+            <yaxismax>100.0000</yaxismax>
+            <show_work_period>1</show_work_period>
+            <show_triggers>1</show_triggers>
+            <type>0</type>
+            <show_legend>1</show_legend>
+            <show_3d>0</show_3d>
+            <percent_left>0.0000</percent_left>
+            <percent_right>0.0000</percent_right>
+            <ymin_type_1>2</ymin_type_1>
+            <ymax_type_1>0</ymax_type_1>
+            <ymin_item_1>
+                <host>Custom - Service - Elasticsearch Node</host>
+                <key>nodestats[{$NODENAME},jvm.mem.heap_max_in_bytes]</key>
+            </ymin_item_1>
+            <ymax_item_1>0</ymax_item_1>
+            <graph_items>
+                <graph_item>
+                    <sortorder>0</sortorder>
+                    <drawtype>1</drawtype>
+                    <color>00C800</color>
+                    <yaxisside>0</yaxisside>
+                    <calc_fnc>4</calc_fnc>
+                    <type>0</type>
+                    <item>
+                        <host>Custom - Service - Elasticsearch Node</host>
+                        <key>nodestats[{$NODENAME},jvm.mem.heap_max_in_bytes]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <drawtype>1</drawtype>
+                    <color>C80000</color>
+                    <yaxisside>0</yaxisside>
+                    <calc_fnc>4</calc_fnc>
+                    <type>0</type>
+                    <item>
+                        <host>Custom - Service - Elasticsearch Node</host>
+                        <key>nodestats[{$NODENAME},jvm.mem.heap_used_in_bytes]</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <name>JVM Heap Detailed</name>
+            <width>900</width>
+            <height>200</height>
+            <yaxismin>0.0000</yaxismin>
+            <yaxismax>100.0000</yaxismax>
+            <show_work_period>1</show_work_period>
+            <show_triggers>1</show_triggers>
+            <type>0</type>
+            <show_legend>1</show_legend>
+            <show_3d>0</show_3d>
+            <percent_left>0.0000</percent_left>
+            <percent_right>0.0000</percent_right>
+            <ymin_type_1>0</ymin_type_1>
+            <ymax_type_1>2</ymax_type_1>
+            <ymin_item_1>0</ymin_item_1>
+            <ymax_item_1>
+                <host>Custom - Service - Elasticsearch Node</host>
+                <key>nodestats[{$NODENAME},jvm.mem.heap_max_in_bytes]</key>
+            </ymax_item_1>
+            <graph_items>
+                <graph_item>
+                    <sortorder>0</sortorder>
+                    <drawtype>1</drawtype>
+                    <color>00C800</color>
+                    <yaxisside>0</yaxisside>
+                    <calc_fnc>4</calc_fnc>
+                    <type>0</type>
+                    <item>
+                        <host>Custom - Service - Elasticsearch Node</host>
+                        <key>nodestats[{$NODENAME},jvm.mem.heap_used_in_bytes]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <drawtype>1</drawtype>
+                    <color>C80000</color>
+                    <yaxisside>0</yaxisside>
+                    <calc_fnc>4</calc_fnc>
+                    <type>0</type>
+                    <item>
+                        <host>Custom - Service - Elasticsearch Node</host>
+                        <key>nodestats[{$NODENAME},jvm.mem.pools.old.used_in_bytes]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>2</sortorder>
+                    <drawtype>1</drawtype>
+                    <color>0000C8</color>
+                    <yaxisside>0</yaxisside>
+                    <calc_fnc>4</calc_fnc>
+                    <type>0</type>
+                    <item>
+                        <host>Custom - Service - Elasticsearch Node</host>
+                        <key>nodestats[{$NODENAME},jvm.mem.pools.survivor.used_in_bytes]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>3</sortorder>
+                    <drawtype>1</drawtype>
+                    <color>C800C8</color>
+                    <yaxisside>0</yaxisside>
+                    <calc_fnc>4</calc_fnc>
+                    <type>0</type>
+                    <item>
+                        <host>Custom - Service - Elasticsearch Node</host>
+                        <key>nodestats[{$NODENAME},jvm.mem.pools.young.used_in_bytes]</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <name>JVM Heap Detailed Percentage</name>
+            <width>900</width>
+            <height>200</height>
+            <yaxismin>0.0000</yaxismin>
+            <yaxismax>100.0000</yaxismax>
+            <show_work_period>1</show_work_period>
+            <show_triggers>1</show_triggers>
+            <type>0</type>
+            <show_legend>1</show_legend>
+            <show_3d>0</show_3d>
+            <percent_left>0.0000</percent_left>
+            <percent_right>0.0000</percent_right>
+            <ymin_type_1>1</ymin_type_1>
+            <ymax_type_1>1</ymax_type_1>
+            <ymin_item_1>0</ymin_item_1>
+            <ymax_item_1>0</ymax_item_1>
+            <graph_items>
+                <graph_item>
+                    <sortorder>0</sortorder>
+                    <drawtype>0</drawtype>
+                    <color>C80000</color>
+                    <yaxisside>0</yaxisside>
+                    <calc_fnc>4</calc_fnc>
+                    <type>0</type>
+                    <item>
+                        <host>Custom - Service - Elasticsearch Node</host>
+                        <key>nodestats[{$NODENAME},jvm.mem.heap_used_percent]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <drawtype>0</drawtype>
+                    <color>0000C8</color>
+                    <yaxisside>0</yaxisside>
+                    <calc_fnc>4</calc_fnc>
+                    <type>0</type>
+                    <item>
+                        <host>Custom - Service - Elasticsearch Node</host>
+                        <key>es.node.jvm.pool.survivor</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>2</sortorder>
+                    <drawtype>0</drawtype>
+                    <color>C800C8</color>
+                    <yaxisside>0</yaxisside>
+                    <calc_fnc>4</calc_fnc>
+                    <type>0</type>
+                    <item>
+                        <host>Custom - Service - Elasticsearch Node</host>
+                        <key>es.node.jvm.pool.young</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>3</sortorder>
+                    <drawtype>0</drawtype>
+                    <color>00C800</color>
+                    <yaxisside>0</yaxisside>
+                    <calc_fnc>4</calc_fnc>
+                    <type>0</type>
+                    <item>
+                        <host>Custom - Service - Elasticsearch Node</host>
+                        <key>es.node.jvm.pool.old</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <name>JVM Open File Descriptors</name>
+            <width>900</width>
+            <height>200</height>
             <yaxismin>0.0000</yaxismin>
             <yaxismax>100.0000</yaxismax>
             <show_work_period>1</show_work_period>
@@ -1052,108 +1387,16 @@
                     <calc_fnc>4</calc_fnc>
                     <type>0</type>
                     <item>
-                        <host>Custom - Service - Apache</host>
-                        <key>apache.rss.memory.biggest</key>
-                    </item>
-                </graph_item>
-                <graph_item>
-                    <sortorder>1</sortorder>
-                    <drawtype>0</drawtype>
-                    <color>C80000</color>
-                    <yaxisside>0</yaxisside>
-                    <calc_fnc>4</calc_fnc>
-                    <type>0</type>
-                    <item>
-                        <host>Custom - Service - Apache</host>
-                        <key>apache.rss.memory.average</key>
-                    </item>
-                </graph_item>
-                <graph_item>
-                    <sortorder>2</sortorder>
-                    <drawtype>0</drawtype>
-                    <color>0000C8</color>
-                    <yaxisside>0</yaxisside>
-                    <calc_fnc>4</calc_fnc>
-                    <type>0</type>
-                    <item>
-                        <host>Custom - Service - Apache</host>
-                        <key>apache.rss.memory.smallest</key>
-                    </item>
-                </graph_item>
-                <graph_item>
-                    <sortorder>3</sortorder>
-                    <drawtype>4</drawtype>
-                    <color>C800C8</color>
-                    <yaxisside>1</yaxisside>
-                    <calc_fnc>4</calc_fnc>
-                    <type>0</type>
-                    <item>
-                        <host>Custom - Service - Apache</host>
-                        <key>apache.rss.memory.total</key>
+                        <host>Custom - Service - Elasticsearch Node</host>
+                        <key>nodestats[{$NODENAME},process.open_file_descriptors]</key>
                     </item>
                 </graph_item>
             </graph_items>
         </graph>
         <graph>
-            <name>Apache Mod Jk</name>
+            <name>JVM Threads</name>
             <width>900</width>
             <height>200</height>
-            <yaxismin>0.0000</yaxismin>
-            <yaxismax>100.0000</yaxismax>
-            <show_work_period>0</show_work_period>
-            <show_triggers>1</show_triggers>
-            <type>1</type>
-            <show_legend>1</show_legend>
-            <show_3d>0</show_3d>
-            <percent_left>0.0000</percent_left>
-            <percent_right>0.0000</percent_right>
-            <ymin_type_1>1</ymin_type_1>
-            <ymax_type_1>0</ymax_type_1>
-            <ymin_item_1>0</ymin_item_1>
-            <ymax_item_1>0</ymax_item_1>
-            <graph_items>
-                <graph_item>
-                    <sortorder>0</sortorder>
-                    <drawtype>0</drawtype>
-                    <color>00BB00</color>
-                    <yaxisside>0</yaxisside>
-                    <calc_fnc>2</calc_fnc>
-                    <type>0</type>
-                    <item>
-                        <host>Custom - Service - Apache</host>
-                        <key>apache.jk.act</key>
-                    </item>
-                </graph_item>
-                <graph_item>
-                    <sortorder>1</sortorder>
-                    <drawtype>0</drawtype>
-                    <color>CC00CC</color>
-                    <yaxisside>0</yaxisside>
-                    <calc_fnc>2</calc_fnc>
-                    <type>0</type>
-                    <item>
-                        <host>Custom - Service - Apache</host>
-                        <key>apache.jk.dis</key>
-                    </item>
-                </graph_item>
-                <graph_item>
-                    <sortorder>2</sortorder>
-                    <drawtype>0</drawtype>
-                    <color>DD0000</color>
-                    <yaxisside>0</yaxisside>
-                    <calc_fnc>2</calc_fnc>
-                    <type>0</type>
-                    <item>
-                        <host>Custom - Service - Apache</host>
-                        <key>apache.jk.stp</key>
-                    </item>
-                </graph_item>
-            </graph_items>
-        </graph>
-        <graph>
-            <name>Apache Traffic</name>
-            <width>900</width>
-            <height>300</height>
             <yaxismin>0.0000</yaxismin>
             <yaxismax>100.0000</yaxismax>
             <show_work_period>1</show_work_period>
@@ -1163,7 +1406,7 @@
             <show_3d>0</show_3d>
             <percent_left>0.0000</percent_left>
             <percent_right>0.0000</percent_right>
-            <ymin_type_1>1</ymin_type_1>
+            <ymin_type_1>0</ymin_type_1>
             <ymax_type_1>0</ymax_type_1>
             <ymin_item_1>0</ymin_item_1>
             <ymax_item_1>0</ymax_item_1>
@@ -1171,43 +1414,16 @@
                 <graph_item>
                     <sortorder>0</sortorder>
                     <drawtype>0</drawtype>
-                    <color>C80000</color>
-                    <yaxisside>1</yaxisside>
-                    <calc_fnc>4</calc_fnc>
-                    <type>0</type>
-                    <item>
-                        <host>Custom - Service - Apache</host>
-                        <key>apache.accesses[{$HTTP_PORT}]</key>
-                    </item>
-                </graph_item>
-                <graph_item>
-                    <sortorder>1</sortorder>
-                    <drawtype>0</drawtype>
-                    <color>00BB00</color>
+                    <color>00C800</color>
                     <yaxisside>0</yaxisside>
                     <calc_fnc>4</calc_fnc>
                     <type>0</type>
                     <item>
-                        <host>Custom - Service - Apache</host>
-                        <key>apache.kbytes[{$HTTP_PORT}]</key>
+                        <host>Custom - Service - Elasticsearch Node</host>
+                        <key>nodestats[{$NODENAME},jvm.threads.count]</key>
                     </item>
                 </graph_item>
             </graph_items>
         </graph>
     </graphs>
-    <value_maps>
-        <value_map>
-            <name>Service state</name>
-            <mappings>
-                <mapping>
-                    <value>0</value>
-                    <newvalue>Down</newvalue>
-                </mapping>
-                <mapping>
-                    <value>1</value>
-                    <newvalue>Up</newvalue>
-                </mapping>
-            </mappings>
-        </value_map>
-    </value_maps>
 </zabbix_export>

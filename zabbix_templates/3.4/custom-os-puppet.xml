@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
     <version>3.2</version>
-    <date>2017-10-19T17:11:03Z</date>
+    <date>2016-11-14T15:58:05Z</date>
     <groups>
         <group>
             <name>Templates</name>
@@ -9,8 +9,8 @@
     </groups>
     <templates>
         <template>
-            <template>Custom - Service - Apache</template>
-            <name>Custom - Service - Apache</name>
+            <template>Custom - OS - Puppet</template>
+            <name>Custom - OS - Puppet</name>
             <description/>
             <groups>
                 <group>
@@ -19,25 +19,25 @@
             </groups>
             <applications>
                 <application>
-                    <name>Service - Apache</name>
+                    <name>OS - Puppet</name>
                 </application>
             </applications>
             <items>
                 <item>
-                    <name>Apache Total Accesses</name>
+                    <name>Puppet Agent Process</name>
                     <type>0</type>
                     <snmp_community/>
                     <multiplier>0</multiplier>
                     <snmp_oid/>
-                    <key>apache.accesses[{$HTTP_PORT}]</key>
-                    <delay>120</delay>
-                    <history>14</history>
+                    <key>proc.num[puppet,,,]</key>
+                    <delay>300</delay>
+                    <history>90</history>
                     <trends>365</trends>
                     <status>0</status>
                     <value_type>3</value_type>
                     <allowed_hosts/>
-                    <units>req/sec</units>
-                    <delta>1</delta>
+                    <units/>
+                    <delta>0</delta>
                     <snmpv3_contextname/>
                     <snmpv3_securityname/>
                     <snmpv3_securitylevel>0</snmpv3_securitylevel>
@@ -60,26 +60,28 @@
                     <inventory_link>0</inventory_link>
                     <applications>
                         <application>
-                            <name>Service - Apache</name>
+                            <name>OS - Puppet</name>
                         </application>
                     </applications>
-                    <valuemap/>
+                    <valuemap>
+                        <name>Service state</name>
+                    </valuemap>
                     <logtimefmt/>
                 </item>
                 <item>
-                    <name>Apache Mod Jk Activated</name>
+                    <name>Puppet Environment</name>
                     <type>0</type>
                     <snmp_community/>
                     <multiplier>0</multiplier>
                     <snmp_oid/>
-                    <key>apache.jk.act</key>
+                    <key>puppet.environment</key>
                     <delay>300</delay>
-                    <history>14</history>
+                    <history>30</history>
                     <trends>0</trends>
                     <status>0</status>
-                    <value_type>3</value_type>
+                    <value_type>4</value_type>
                     <allowed_hosts/>
-                    <units>backends</units>
+                    <units/>
                     <delta>0</delta>
                     <snmpv3_contextname/>
                     <snmpv3_securityname/>
@@ -89,135 +91,6 @@
                     <snmpv3_privprotocol>0</snmpv3_privprotocol>
                     <snmpv3_privpassphrase/>
                     <formula>1</formula>
-                    <delay_flex/>
-                    <params/>
-                    <ipmi_sensor/>
-                    <data_type>0</data_type>
-                    <authtype>0</authtype>
-                    <username/>
-                    <password/>
-                    <publickey/>
-                    <privatekey/>
-                    <port/>
-                    <description>Activated Backends</description>
-                    <inventory_link>0</inventory_link>
-                    <applications>
-                        <application>
-                            <name>Service - Apache</name>
-                        </application>
-                    </applications>
-                    <valuemap/>
-                    <logtimefmt/>
-                </item>
-                <item>
-                    <name>Apache Mod Jk Disabled</name>
-                    <type>0</type>
-                    <snmp_community/>
-                    <multiplier>0</multiplier>
-                    <snmp_oid/>
-                    <key>apache.jk.dis</key>
-                    <delay>300</delay>
-                    <history>14</history>
-                    <trends>0</trends>
-                    <status>0</status>
-                    <value_type>3</value_type>
-                    <allowed_hosts/>
-                    <units>backends</units>
-                    <delta>0</delta>
-                    <snmpv3_contextname/>
-                    <snmpv3_securityname/>
-                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                    <snmpv3_authpassphrase/>
-                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                    <snmpv3_privpassphrase/>
-                    <formula>1</formula>
-                    <delay_flex/>
-                    <params/>
-                    <ipmi_sensor/>
-                    <data_type>0</data_type>
-                    <authtype>0</authtype>
-                    <username/>
-                    <password/>
-                    <publickey/>
-                    <privatekey/>
-                    <port/>
-                    <description>Disabled Backends, no new sessions</description>
-                    <inventory_link>0</inventory_link>
-                    <applications>
-                        <application>
-                            <name>Service - Apache</name>
-                        </application>
-                    </applications>
-                    <valuemap/>
-                    <logtimefmt/>
-                </item>
-                <item>
-                    <name>Apache Mod Jk Stopped</name>
-                    <type>0</type>
-                    <snmp_community/>
-                    <multiplier>0</multiplier>
-                    <snmp_oid/>
-                    <key>apache.jk.stp</key>
-                    <delay>300</delay>
-                    <history>14</history>
-                    <trends>0</trends>
-                    <status>0</status>
-                    <value_type>3</value_type>
-                    <allowed_hosts/>
-                    <units>backends</units>
-                    <delta>0</delta>
-                    <snmpv3_contextname/>
-                    <snmpv3_securityname/>
-                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                    <snmpv3_authpassphrase/>
-                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                    <snmpv3_privpassphrase/>
-                    <formula>1</formula>
-                    <delay_flex/>
-                    <params/>
-                    <ipmi_sensor/>
-                    <data_type>0</data_type>
-                    <authtype>0</authtype>
-                    <username/>
-                    <password/>
-                    <publickey/>
-                    <privatekey/>
-                    <port/>
-                    <description>Stopped Backends, no request processing</description>
-                    <inventory_link>0</inventory_link>
-                    <applications>
-                        <application>
-                            <name>Service - Apache</name>
-                        </application>
-                    </applications>
-                    <valuemap/>
-                    <logtimefmt/>
-                </item>
-                <item>
-                    <name>Apache Total Bytes</name>
-                    <type>0</type>
-                    <snmp_community/>
-                    <multiplier>1</multiplier>
-                    <snmp_oid/>
-                    <key>apache.kbytes[{$HTTP_PORT}]</key>
-                    <delay>120</delay>
-                    <history>14</history>
-                    <trends>365</trends>
-                    <status>0</status>
-                    <value_type>3</value_type>
-                    <allowed_hosts/>
-                    <units>bit/sec</units>
-                    <delta>1</delta>
-                    <snmpv3_contextname/>
-                    <snmpv3_securityname/>
-                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                    <snmpv3_authpassphrase/>
-                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                    <snmpv3_privpassphrase/>
-                    <formula>8192</formula>
                     <delay_flex/>
                     <params/>
                     <ipmi_sensor/>
@@ -232,26 +105,26 @@
                     <inventory_link>0</inventory_link>
                     <applications>
                         <application>
-                            <name>Service - Apache</name>
+                            <name>OS - Puppet</name>
                         </application>
                     </applications>
                     <valuemap/>
                     <logtimefmt/>
                 </item>
                 <item>
-                    <name>Apache Clients Keepalive</name>
+                    <name>Puppet Changes Total</name>
                     <type>0</type>
                     <snmp_community/>
                     <multiplier>0</multiplier>
                     <snmp_oid/>
-                    <key>apache.keepalive[{$HTTP_PORT}]</key>
-                    <delay>120</delay>
-                    <history>14</history>
-                    <trends>30</trends>
+                    <key>puppet[changes,total]</key>
+                    <delay>300</delay>
+                    <history>30</history>
+                    <trends>365</trends>
                     <status>0</status>
                     <value_type>3</value_type>
                     <allowed_hosts/>
-                    <units>tasks</units>
+                    <units/>
                     <delta>0</delta>
                     <snmpv3_contextname/>
                     <snmpv3_securityname/>
@@ -271,30 +144,30 @@
                     <publickey/>
                     <privatekey/>
                     <port/>
-                    <description>Apache workers which are currently in keepalive state</description>
+                    <description/>
                     <inventory_link>0</inventory_link>
                     <applications>
                         <application>
-                            <name>Service - Apache</name>
+                            <name>OS - Puppet</name>
                         </application>
                     </applications>
                     <valuemap/>
                     <logtimefmt/>
                 </item>
                 <item>
-                    <name>Apache Clients Reader</name>
+                    <name>Puppet Events Failure</name>
                     <type>0</type>
                     <snmp_community/>
                     <multiplier>0</multiplier>
                     <snmp_oid/>
-                    <key>apache.reader[{$HTTP_PORT}]</key>
-                    <delay>120</delay>
-                    <history>14</history>
-                    <trends>30</trends>
+                    <key>puppet[events,failure]</key>
+                    <delay>300</delay>
+                    <history>30</history>
+                    <trends>365</trends>
                     <status>0</status>
                     <value_type>3</value_type>
                     <allowed_hosts/>
-                    <units>tasks</units>
+                    <units/>
                     <delta>0</delta>
                     <snmpv3_contextname/>
                     <snmpv3_securityname/>
@@ -314,30 +187,30 @@
                     <publickey/>
                     <privatekey/>
                     <port/>
-                    <description>Apache workers which are currently reading a request.</description>
+                    <description/>
                     <inventory_link>0</inventory_link>
                     <applications>
                         <application>
-                            <name>Service - Apache</name>
+                            <name>OS - Puppet</name>
                         </application>
                     </applications>
                     <valuemap/>
                     <logtimefmt/>
                 </item>
                 <item>
-                    <name>Apache Memory Average Process</name>
+                    <name>Puppet Events Success</name>
                     <type>0</type>
                     <snmp_community/>
                     <multiplier>0</multiplier>
                     <snmp_oid/>
-                    <key>apache.rss.memory.average</key>
-                    <delay>240</delay>
-                    <history>14</history>
-                    <trends>30</trends>
+                    <key>puppet[events,success]</key>
+                    <delay>300</delay>
+                    <history>30</history>
+                    <trends>365</trends>
                     <status>0</status>
                     <value_type>3</value_type>
                     <allowed_hosts/>
-                    <units>bytes</units>
+                    <units/>
                     <delta>0</delta>
                     <snmpv3_contextname/>
                     <snmpv3_securityname/>
@@ -357,30 +230,30 @@
                     <publickey/>
                     <privatekey/>
                     <port/>
-                    <description>Average RSS memory used by apache process</description>
+                    <description/>
                     <inventory_link>0</inventory_link>
                     <applications>
                         <application>
-                            <name>Service - Apache</name>
+                            <name>OS - Puppet</name>
                         </application>
                     </applications>
                     <valuemap/>
                     <logtimefmt/>
                 </item>
                 <item>
-                    <name>Apache Memory Biggest Process</name>
+                    <name>Puppet Events Total</name>
                     <type>0</type>
                     <snmp_community/>
                     <multiplier>0</multiplier>
                     <snmp_oid/>
-                    <key>apache.rss.memory.biggest</key>
-                    <delay>240</delay>
-                    <history>14</history>
-                    <trends>30</trends>
+                    <key>puppet[events,total]</key>
+                    <delay>300</delay>
+                    <history>30</history>
+                    <trends>365</trends>
                     <status>0</status>
                     <value_type>3</value_type>
                     <allowed_hosts/>
-                    <units>bytes</units>
+                    <units/>
                     <delta>0</delta>
                     <snmpv3_contextname/>
                     <snmpv3_securityname/>
@@ -400,30 +273,30 @@
                     <publickey/>
                     <privatekey/>
                     <port/>
-                    <description>Biggest RSS memory used by apache process</description>
+                    <description/>
                     <inventory_link>0</inventory_link>
                     <applications>
                         <application>
-                            <name>Service - Apache</name>
+                            <name>OS - Puppet</name>
                         </application>
                     </applications>
                     <valuemap/>
                     <logtimefmt/>
                 </item>
                 <item>
-                    <name>Apache Memory Smallest Process</name>
+                    <name>Puppet resources changed</name>
                     <type>0</type>
                     <snmp_community/>
                     <multiplier>0</multiplier>
                     <snmp_oid/>
-                    <key>apache.rss.memory.smallest</key>
-                    <delay>240</delay>
-                    <history>14</history>
-                    <trends>30</trends>
+                    <key>puppet[resources,changed]</key>
+                    <delay>300</delay>
+                    <history>30</history>
+                    <trends>365</trends>
                     <status>0</status>
                     <value_type>3</value_type>
                     <allowed_hosts/>
-                    <units>bytes</units>
+                    <units/>
                     <delta>0</delta>
                     <snmpv3_contextname/>
                     <snmpv3_securityname/>
@@ -443,30 +316,30 @@
                     <publickey/>
                     <privatekey/>
                     <port/>
-                    <description>Smallest RSS memory used by apache process</description>
+                    <description/>
                     <inventory_link>0</inventory_link>
                     <applications>
                         <application>
-                            <name>Service - Apache</name>
+                            <name>OS - Puppet</name>
                         </application>
                     </applications>
                     <valuemap/>
                     <logtimefmt/>
                 </item>
                 <item>
-                    <name>Apache Memory Total</name>
+                    <name>Puppet resources failed_to_restart</name>
                     <type>0</type>
                     <snmp_community/>
                     <multiplier>0</multiplier>
                     <snmp_oid/>
-                    <key>apache.rss.memory.total</key>
-                    <delay>240</delay>
-                    <history>14</history>
-                    <trends>30</trends>
+                    <key>puppet[resources,failed_to_restart]</key>
+                    <delay>300</delay>
+                    <history>30</history>
+                    <trends>365</trends>
                     <status>0</status>
                     <value_type>3</value_type>
                     <allowed_hosts/>
-                    <units>bytes</units>
+                    <units/>
                     <delta>0</delta>
                     <snmpv3_contextname/>
                     <snmpv3_securityname/>
@@ -486,30 +359,30 @@
                     <publickey/>
                     <privatekey/>
                     <port/>
-                    <description>Total RSS memory used by apache</description>
+                    <description/>
                     <inventory_link>0</inventory_link>
                     <applications>
                         <application>
-                            <name>Service - Apache</name>
+                            <name>OS - Puppet</name>
                         </application>
                     </applications>
                     <valuemap/>
                     <logtimefmt/>
                 </item>
                 <item>
-                    <name>Apache Clients ServerLimit</name>
+                    <name>Puppet resources out_of_sync</name>
                     <type>0</type>
                     <snmp_community/>
                     <multiplier>0</multiplier>
                     <snmp_oid/>
-                    <key>apache.total[{$HTTP_PORT}]</key>
-                    <delay>900</delay>
-                    <history>14</history>
-                    <trends>0</trends>
+                    <key>puppet[resources,out_of_sync]</key>
+                    <delay>300</delay>
+                    <history>30</history>
+                    <trends>365</trends>
                     <status>0</status>
                     <value_type>3</value_type>
                     <allowed_hosts/>
-                    <units>tasks</units>
+                    <units/>
                     <delta>0</delta>
                     <snmpv3_contextname/>
                     <snmpv3_securityname/>
@@ -529,30 +402,30 @@
                     <publickey/>
                     <privatekey/>
                     <port/>
-                    <description>Total amout of possible apache workers.</description>
+                    <description/>
                     <inventory_link>0</inventory_link>
                     <applications>
                         <application>
-                            <name>Service - Apache</name>
+                            <name>OS - Puppet</name>
                         </application>
                     </applications>
                     <valuemap/>
                     <logtimefmt/>
                 </item>
                 <item>
-                    <name>Apache Clients Writer</name>
+                    <name>Puppet resources restarted</name>
                     <type>0</type>
                     <snmp_community/>
                     <multiplier>0</multiplier>
                     <snmp_oid/>
-                    <key>apache.writer[{$HTTP_PORT}]</key>
-                    <delay>120</delay>
-                    <history>14</history>
-                    <trends>30</trends>
+                    <key>puppet[resources,restarted]</key>
+                    <delay>300</delay>
+                    <history>30</history>
+                    <trends>365</trends>
                     <status>0</status>
                     <value_type>3</value_type>
                     <allowed_hosts/>
-                    <units>tasks</units>
+                    <units/>
                     <delta>0</delta>
                     <snmpv3_contextname/>
                     <snmpv3_securityname/>
@@ -572,26 +445,155 @@
                     <publickey/>
                     <privatekey/>
                     <port/>
-                    <description>Apache workers which are currently a request result writing to a client.</description>
+                    <description/>
                     <inventory_link>0</inventory_link>
                     <applications>
                         <application>
-                            <name>Service - Apache</name>
+                            <name>OS - Puppet</name>
                         </application>
                     </applications>
                     <valuemap/>
                     <logtimefmt/>
                 </item>
                 <item>
-                    <name>TCP Connect Local</name>
+                    <name>Puppet resources scheduled</name>
                     <type>0</type>
                     <snmp_community/>
                     <multiplier>0</multiplier>
                     <snmp_oid/>
-                    <key>net.tcp.port[127.0.0.1,{$HTTP_PORT}]</key>
-                    <delay>120</delay>
-                    <history>14</history>
-                    <trends>30</trends>
+                    <key>puppet[resources,scheduled]</key>
+                    <delay>300</delay>
+                    <history>30</history>
+                    <trends>365</trends>
+                    <status>0</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts/>
+                    <units/>
+                    <delta>0</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description/>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>OS - Puppet</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                </item>
+                <item>
+                    <name>Puppet resources skipped</name>
+                    <type>0</type>
+                    <snmp_community/>
+                    <multiplier>0</multiplier>
+                    <snmp_oid/>
+                    <key>puppet[resources,skipped]</key>
+                    <delay>300</delay>
+                    <history>30</history>
+                    <trends>365</trends>
+                    <status>0</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts/>
+                    <units/>
+                    <delta>0</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description/>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>OS - Puppet</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                </item>
+                <item>
+                    <name>Puppet resources total</name>
+                    <type>0</type>
+                    <snmp_community/>
+                    <multiplier>0</multiplier>
+                    <snmp_oid/>
+                    <key>puppet[resources,total]</key>
+                    <delay>300</delay>
+                    <history>30</history>
+                    <trends>365</trends>
+                    <status>0</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts/>
+                    <units/>
+                    <delta>0</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description/>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>OS - Puppet</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                </item>
+                <item>
+                    <name>Puppet time config_retrieval</name>
+                    <type>0</type>
+                    <snmp_community/>
+                    <multiplier>0</multiplier>
+                    <snmp_oid/>
+                    <key>puppet[time,config_retrieval]</key>
+                    <delay>300</delay>
+                    <history>30</history>
+                    <trends>365</trends>
                     <status>0</status>
                     <value_type>0</value_type>
                     <allowed_hosts/>
@@ -619,28 +621,26 @@
                     <inventory_link>0</inventory_link>
                     <applications>
                         <application>
-                            <name>Service - Apache</name>
+                            <name>OS - Puppet</name>
                         </application>
                     </applications>
-                    <valuemap>
-                        <name>Service state</name>
-                    </valuemap>
+                    <valuemap/>
                     <logtimefmt/>
                 </item>
                 <item>
-                    <name>Get /e/lbstatus.html response time</name>
+                    <name>Puppet time last_run</name>
                     <type>0</type>
                     <snmp_community/>
                     <multiplier>0</multiplier>
                     <snmp_oid/>
-                    <key>web.page.perf[127.0.0.1,{$LOADBALANCER_CHECK},{$HTTP_PORT}]</key>
-                    <delay>120</delay>
-                    <history>14</history>
-                    <trends>30</trends>
+                    <key>puppet[time,last_run]</key>
+                    <delay>300</delay>
+                    <history>30</history>
+                    <trends>365</trends>
                     <status>0</status>
-                    <value_type>0</value_type>
+                    <value_type>3</value_type>
                     <allowed_hosts/>
-                    <units>sec</units>
+                    <units/>
                     <delta>0</delta>
                     <snmpv3_contextname/>
                     <snmpv3_securityname/>
@@ -664,7 +664,50 @@
                     <inventory_link>0</inventory_link>
                     <applications>
                         <application>
-                            <name>Service - Apache</name>
+                            <name>OS - Puppet</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                </item>
+                <item>
+                    <name>Puppet time total</name>
+                    <type>0</type>
+                    <snmp_community/>
+                    <multiplier>0</multiplier>
+                    <snmp_oid/>
+                    <key>puppet[time,total]</key>
+                    <delay>300</delay>
+                    <history>30</history>
+                    <trends>365</trends>
+                    <status>0</status>
+                    <value_type>0</value_type>
+                    <allowed_hosts/>
+                    <units/>
+                    <delta>0</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description/>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>OS - Puppet</name>
                         </application>
                     </applications>
                     <valuemap/>
@@ -673,209 +716,22 @@
             </items>
             <discovery_rules/>
             <httptests/>
-            <macros>
-                <macro>
-                    <macro>{$HTTP_PORT}</macro>
-                    <value>80</value>
-                </macro>
-                <macro>
-                    <macro>{$LOADBALANCER_CHECK}</macro>
-                    <value>/e/lbstatus.html</value>
-                </macro>
-            </macros>
+            <macros/>
             <templates/>
-            <screens>
-                <screen>
-                    <name>Custom - Service - Apache</name>
-                    <hsize>1</hsize>
-                    <vsize>7</vsize>
-                    <screen_items>
-                        <screen_item>
-                            <resourcetype>0</resourcetype>
-                            <width>900</width>
-                            <height>300</height>
-                            <x>0</x>
-                            <y>0</y>
-                            <colspan>1</colspan>
-                            <rowspan>1</rowspan>
-                            <elements>0</elements>
-                            <valign>0</valign>
-                            <halign>0</halign>
-                            <style>0</style>
-                            <url/>
-                            <dynamic>0</dynamic>
-                            <sort_triggers>0</sort_triggers>
-                            <resource>
-                                <name>Apache Traffic</name>
-                                <host>Custom - Service - Apache</host>
-                            </resource>
-                            <max_columns>3</max_columns>
-                            <application/>
-                        </screen_item>
-                        <screen_item>
-                            <resourcetype>0</resourcetype>
-                            <width>900</width>
-                            <height>300</height>
-                            <x>0</x>
-                            <y>1</y>
-                            <colspan>1</colspan>
-                            <rowspan>1</rowspan>
-                            <elements>0</elements>
-                            <valign>0</valign>
-                            <halign>0</halign>
-                            <style>0</style>
-                            <url/>
-                            <dynamic>0</dynamic>
-                            <sort_triggers>0</sort_triggers>
-                            <resource>
-                                <name>Apache Maxclient Usage</name>
-                                <host>Custom - Service - Apache</host>
-                            </resource>
-                            <max_columns>3</max_columns>
-                            <application/>
-                        </screen_item>
-                        <screen_item>
-                            <resourcetype>1</resourcetype>
-                            <width>900</width>
-                            <height>300</height>
-                            <x>0</x>
-                            <y>2</y>
-                            <colspan>1</colspan>
-                            <rowspan>1</rowspan>
-                            <elements>0</elements>
-                            <valign>0</valign>
-                            <halign>0</halign>
-                            <style>0</style>
-                            <url/>
-                            <dynamic>0</dynamic>
-                            <sort_triggers>0</sort_triggers>
-                            <resource>
-                                <key>web.page.perf[127.0.0.1,{$LOADBALANCER_CHECK},{$HTTP_PORT}]</key>
-                                <host>Custom - Service - Apache</host>
-                            </resource>
-                            <max_columns>3</max_columns>
-                            <application/>
-                        </screen_item>
-                        <screen_item>
-                            <resourcetype>1</resourcetype>
-                            <width>900</width>
-                            <height>300</height>
-                            <x>0</x>
-                            <y>3</y>
-                            <colspan>1</colspan>
-                            <rowspan>1</rowspan>
-                            <elements>0</elements>
-                            <valign>0</valign>
-                            <halign>0</halign>
-                            <style>0</style>
-                            <url/>
-                            <dynamic>0</dynamic>
-                            <sort_triggers>0</sort_triggers>
-                            <resource>
-                                <key>apache.total[{$HTTP_PORT}]</key>
-                                <host>Custom - Service - Apache</host>
-                            </resource>
-                            <max_columns>3</max_columns>
-                            <application/>
-                        </screen_item>
-                        <screen_item>
-                            <resourcetype>1</resourcetype>
-                            <width>900</width>
-                            <height>300</height>
-                            <x>0</x>
-                            <y>4</y>
-                            <colspan>1</colspan>
-                            <rowspan>1</rowspan>
-                            <elements>0</elements>
-                            <valign>0</valign>
-                            <halign>0</halign>
-                            <style>0</style>
-                            <url/>
-                            <dynamic>0</dynamic>
-                            <sort_triggers>0</sort_triggers>
-                            <resource>
-                                <key>net.tcp.port[127.0.0.1,{$HTTP_PORT}]</key>
-                                <host>Custom - Service - Apache</host>
-                            </resource>
-                            <max_columns>3</max_columns>
-                            <application/>
-                        </screen_item>
-                        <screen_item>
-                            <resourcetype>0</resourcetype>
-                            <width>900</width>
-                            <height>300</height>
-                            <x>0</x>
-                            <y>5</y>
-                            <colspan>1</colspan>
-                            <rowspan>1</rowspan>
-                            <elements>0</elements>
-                            <valign>0</valign>
-                            <halign>0</halign>
-                            <style>0</style>
-                            <url/>
-                            <dynamic>0</dynamic>
-                            <sort_triggers>0</sort_triggers>
-                            <resource>
-                                <name>Apache Memory Usage</name>
-                                <host>Custom - Service - Apache</host>
-                            </resource>
-                            <max_columns>3</max_columns>
-                            <application/>
-                        </screen_item>
-                        <screen_item>
-                            <resourcetype>0</resourcetype>
-                            <width>900</width>
-                            <height>300</height>
-                            <x>0</x>
-                            <y>6</y>
-                            <colspan>1</colspan>
-                            <rowspan>1</rowspan>
-                            <elements>0</elements>
-                            <valign>0</valign>
-                            <halign>0</halign>
-                            <style>0</style>
-                            <url/>
-                            <dynamic>0</dynamic>
-                            <sort_triggers>0</sort_triggers>
-                            <resource>
-                                <name>Apache Mod Jk</name>
-                                <host>Custom - Service - Apache</host>
-                            </resource>
-                            <max_columns>3</max_columns>
-                            <application/>
-                        </screen_item>
-                    </screen_items>
-                </screen>
-            </screens>
+            <screens/>
         </template>
     </templates>
     <triggers>
         <trigger>
-            <expression>({Custom - Service - Apache:apache.total[{$HTTP_PORT}].last(0)} * 0.80) &lt; ({Custom - Service - Apache:apache.reader[{$HTTP_PORT}].last(0)} + {Custom - Service - Apache:apache.writer[{$HTTP_PORT}].last(0)} + {Custom - Service - Apache:apache.keepalive[{$HTTP_PORT}].last(0)})</expression>
+            <expression>{Custom - OS - Puppet:puppet[events,failure].last()}&gt;0</expression>
             <recovery_mode>0</recovery_mode>
             <recovery_expression/>
-            <name>Apache Maxclient Usage &gt; 80%</name>
+            <name>Failure in Last Puppet Run</name>
             <correlation_mode>0</correlation_mode>
             <correlation_tag/>
             <url/>
             <status>0</status>
             <priority>2</priority>
-            <description>The available maxclient slots are consumed by 80% by reader/writer processes.</description>
-            <type>0</type>
-            <manual_close>0</manual_close>
-            <dependencies/>
-            <tags/>
-        </trigger>
-        <trigger>
-            <expression>({Custom - Service - Apache:apache.jk.dis.last()} +{Custom - Service - Apache:apache.jk.stp.last()} ) &gt; 6</expression>
-            <recovery_mode>0</recovery_mode>
-            <recovery_expression/>
-            <name>Apache Mod Jk &gt; 6 Inactive Backends</name>
-            <correlation_mode>0</correlation_mode>
-            <correlation_tag/>
-            <url/>
-            <status>0</status>
-            <priority>3</priority>
             <description/>
             <type>0</type>
             <manual_close>0</manual_close>
@@ -883,10 +739,42 @@
             <tags/>
         </trigger>
         <trigger>
-            <expression>({Custom - Service - Apache:apache.jk.dis.last()} +{Custom - Service - Apache:apache.jk.stp.last()} )&gt;0</expression>
+            <expression>{Custom - OS - Puppet:puppet[time,last_run].fuzzytime(3600)}=0</expression>
             <recovery_mode>0</recovery_mode>
             <recovery_expression/>
-            <name>Apache Mod Jk Disabled Backends &gt; 0</name>
+            <name>Last Puppet Run older than one hour</name>
+            <correlation_mode>0</correlation_mode>
+            <correlation_tag/>
+            <url/>
+            <status>0</status>
+            <priority>2</priority>
+            <description/>
+            <type>0</type>
+            <manual_close>0</manual_close>
+            <dependencies/>
+            <tags/>
+        </trigger>
+        <trigger>
+            <expression>({Custom - OS - Puppet:proc.num[puppet,,,].last()}&lt;1) or ({Custom - OS - Puppet:proc.num[puppet,,,].nodata(3600)}=1)</expression>
+            <recovery_mode>0</recovery_mode>
+            <recovery_expression/>
+            <name>Puppet Agent Process</name>
+            <correlation_mode>0</correlation_mode>
+            <correlation_tag/>
+            <url/>
+            <status>0</status>
+            <priority>2</priority>
+            <description>Trigger if Puppet Agent Process is not running or has no data for 1h</description>
+            <type>0</type>
+            <manual_close>0</manual_close>
+            <dependencies/>
+            <tags/>
+        </trigger>
+        <trigger>
+            <expression>{Custom - OS - Puppet:puppet[time,config_retrieval].last()}&gt;60</expression>
+            <recovery_mode>0</recovery_mode>
+            <recovery_expression/>
+            <name>Puppet Retrieve Catalog took 60 sec</name>
             <correlation_mode>0</correlation_mode>
             <correlation_tag/>
             <url/>
@@ -898,87 +786,17 @@
             <dependencies/>
             <tags/>
         </trigger>
-        <trigger>
-            <expression>({Custom - Service - Apache:apache.jk.dis.last()} +{Custom - Service - Apache:apache.jk.stp.last()} ) &gt; (({Custom - Service - Apache:apache.jk.dis.last()} + {Custom - Service - Apache:apache.jk.stp.last()} + {Custom - Service - Apache:apache.jk.act.last()}) * 0.20)</expression>
-            <recovery_mode>0</recovery_mode>
-            <recovery_expression/>
-            <name>Apache Mod Jk Inactive Backends &gt; 20%</name>
-            <correlation_mode>0</correlation_mode>
-            <correlation_tag/>
-            <url/>
-            <status>0</status>
-            <priority>2</priority>
-            <description/>
-            <type>0</type>
-            <manual_close>0</manual_close>
-            <dependencies/>
-            <tags/>
-        </trigger>
-        <trigger>
-            <expression>{Custom - Service - Apache:apache.writer[{$HTTP_PORT}].last()}&gt;800</expression>
-            <recovery_mode>0</recovery_mode>
-            <recovery_expression/>
-            <name>Apache Writer &gt; 800</name>
-            <correlation_mode>0</correlation_mode>
-            <correlation_tag/>
-            <url/>
-            <status>0</status>
-            <priority>3</priority>
-            <description/>
-            <type>0</type>
-            <manual_close>0</manual_close>
-            <dependencies/>
-            <tags/>
-        </trigger>
-        <trigger>
-            <expression>({Custom - Service - Apache:web.page.perf[127.0.0.1,{$LOADBALANCER_CHECK},{$HTTP_PORT}].avg(300)}=0 or {Custom - Service - Apache:web.page.perf[127.0.0.1,{$LOADBALANCER_CHECK},{$HTTP_PORT}].avg(300)}&gt;30)</expression>
-            <recovery_mode>0</recovery_mode>
-            <recovery_expression/>
-            <name>Get LB_Check HTTP Local on port {$HTTP_PORT} &gt; 30sec</name>
-            <correlation_mode>0</correlation_mode>
-            <correlation_tag/>
-            <url/>
-            <status>0</status>
-            <priority>3</priority>
-            <description>Apache did not deliver the standard loadbalancer checkfile within 3 seconds.</description>
-            <type>0</type>
-            <manual_close>0</manual_close>
-            <dependencies>
-                <dependency>
-                    <name>HTTP not reachable on port {$HTTP_PORT} from localhost</name>
-                    <expression>{Custom - Service - Apache:net.tcp.port[127.0.0.1,{$HTTP_PORT}].sum(#2)}=0</expression>
-                    <recovery_expression/>
-                </dependency>
-            </dependencies>
-            <tags/>
-        </trigger>
-        <trigger>
-            <expression>{Custom - Service - Apache:net.tcp.port[127.0.0.1,{$HTTP_PORT}].sum(#2)}=0</expression>
-            <recovery_mode>0</recovery_mode>
-            <recovery_expression/>
-            <name>HTTP not reachable on port {$HTTP_PORT} from localhost</name>
-            <correlation_mode>0</correlation_mode>
-            <correlation_tag/>
-            <url/>
-            <status>0</status>
-            <priority>3</priority>
-            <description>Apache was not reachable on {$HTTP_PORT} in the last two monitoring cycles.</description>
-            <type>0</type>
-            <manual_close>0</manual_close>
-            <dependencies/>
-            <tags/>
-        </trigger>
     </triggers>
     <graphs>
         <graph>
-            <name>Apache Maxclient Usage</name>
+            <name>Puppet Resources</name>
             <width>900</width>
             <height>300</height>
             <yaxismin>0.0000</yaxismin>
             <yaxismax>100.0000</yaxismax>
-            <show_work_period>0</show_work_period>
+            <show_work_period>1</show_work_period>
             <show_triggers>1</show_triggers>
-            <type>1</type>
+            <type>0</type>
             <show_legend>1</show_legend>
             <show_3d>0</show_3d>
             <percent_left>0.0000</percent_left>
@@ -991,81 +809,25 @@
                 <graph_item>
                     <sortorder>0</sortorder>
                     <drawtype>0</drawtype>
-                    <color>00BB00</color>
+                    <color>C80000</color>
                     <yaxisside>0</yaxisside>
                     <calc_fnc>4</calc_fnc>
                     <type>0</type>
                     <item>
-                        <host>Custom - Service - Apache</host>
-                        <key>apache.reader[{$HTTP_PORT}]</key>
+                        <host>Custom - OS - Puppet</host>
+                        <key>puppet[resources,total]</key>
                     </item>
                 </graph_item>
                 <graph_item>
                     <sortorder>1</sortorder>
-                    <drawtype>0</drawtype>
-                    <color>CC0000</color>
-                    <yaxisside>0</yaxisside>
-                    <calc_fnc>4</calc_fnc>
-                    <type>0</type>
-                    <item>
-                        <host>Custom - Service - Apache</host>
-                        <key>apache.writer[{$HTTP_PORT}]</key>
-                    </item>
-                </graph_item>
-                <graph_item>
-                    <sortorder>2</sortorder>
-                    <drawtype>0</drawtype>
-                    <color>CCCCCC</color>
-                    <yaxisside>0</yaxisside>
-                    <calc_fnc>4</calc_fnc>
-                    <type>0</type>
-                    <item>
-                        <host>Custom - Service - Apache</host>
-                        <key>apache.keepalive[{$HTTP_PORT}]</key>
-                    </item>
-                </graph_item>
-            </graph_items>
-        </graph>
-        <graph>
-            <name>Apache Memory Usage</name>
-            <width>900</width>
-            <height>300</height>
-            <yaxismin>0.0000</yaxismin>
-            <yaxismax>100.0000</yaxismax>
-            <show_work_period>1</show_work_period>
-            <show_triggers>1</show_triggers>
-            <type>0</type>
-            <show_legend>1</show_legend>
-            <show_3d>0</show_3d>
-            <percent_left>0.0000</percent_left>
-            <percent_right>0.0000</percent_right>
-            <ymin_type_1>0</ymin_type_1>
-            <ymax_type_1>0</ymax_type_1>
-            <ymin_item_1>0</ymin_item_1>
-            <ymax_item_1>0</ymax_item_1>
-            <graph_items>
-                <graph_item>
-                    <sortorder>0</sortorder>
                     <drawtype>0</drawtype>
                     <color>00C800</color>
                     <yaxisside>0</yaxisside>
                     <calc_fnc>4</calc_fnc>
                     <type>0</type>
                     <item>
-                        <host>Custom - Service - Apache</host>
-                        <key>apache.rss.memory.biggest</key>
-                    </item>
-                </graph_item>
-                <graph_item>
-                    <sortorder>1</sortorder>
-                    <drawtype>0</drawtype>
-                    <color>C80000</color>
-                    <yaxisside>0</yaxisside>
-                    <calc_fnc>4</calc_fnc>
-                    <type>0</type>
-                    <item>
-                        <host>Custom - Service - Apache</host>
-                        <key>apache.rss.memory.average</key>
+                        <host>Custom - OS - Puppet</host>
+                        <key>puppet[resources,changed]</key>
                     </item>
                 </graph_item>
                 <graph_item>
@@ -1076,120 +838,56 @@
                     <calc_fnc>4</calc_fnc>
                     <type>0</type>
                     <item>
-                        <host>Custom - Service - Apache</host>
-                        <key>apache.rss.memory.smallest</key>
+                        <host>Custom - OS - Puppet</host>
+                        <key>puppet[resources,failed_to_restart]</key>
                     </item>
                 </graph_item>
                 <graph_item>
                     <sortorder>3</sortorder>
-                    <drawtype>4</drawtype>
+                    <drawtype>0</drawtype>
                     <color>C800C8</color>
-                    <yaxisside>1</yaxisside>
-                    <calc_fnc>4</calc_fnc>
-                    <type>0</type>
-                    <item>
-                        <host>Custom - Service - Apache</host>
-                        <key>apache.rss.memory.total</key>
-                    </item>
-                </graph_item>
-            </graph_items>
-        </graph>
-        <graph>
-            <name>Apache Mod Jk</name>
-            <width>900</width>
-            <height>200</height>
-            <yaxismin>0.0000</yaxismin>
-            <yaxismax>100.0000</yaxismax>
-            <show_work_period>0</show_work_period>
-            <show_triggers>1</show_triggers>
-            <type>1</type>
-            <show_legend>1</show_legend>
-            <show_3d>0</show_3d>
-            <percent_left>0.0000</percent_left>
-            <percent_right>0.0000</percent_right>
-            <ymin_type_1>1</ymin_type_1>
-            <ymax_type_1>0</ymax_type_1>
-            <ymin_item_1>0</ymin_item_1>
-            <ymax_item_1>0</ymax_item_1>
-            <graph_items>
-                <graph_item>
-                    <sortorder>0</sortorder>
-                    <drawtype>0</drawtype>
-                    <color>00BB00</color>
-                    <yaxisside>0</yaxisside>
-                    <calc_fnc>2</calc_fnc>
-                    <type>0</type>
-                    <item>
-                        <host>Custom - Service - Apache</host>
-                        <key>apache.jk.act</key>
-                    </item>
-                </graph_item>
-                <graph_item>
-                    <sortorder>1</sortorder>
-                    <drawtype>0</drawtype>
-                    <color>CC00CC</color>
-                    <yaxisside>0</yaxisside>
-                    <calc_fnc>2</calc_fnc>
-                    <type>0</type>
-                    <item>
-                        <host>Custom - Service - Apache</host>
-                        <key>apache.jk.dis</key>
-                    </item>
-                </graph_item>
-                <graph_item>
-                    <sortorder>2</sortorder>
-                    <drawtype>0</drawtype>
-                    <color>DD0000</color>
-                    <yaxisside>0</yaxisside>
-                    <calc_fnc>2</calc_fnc>
-                    <type>0</type>
-                    <item>
-                        <host>Custom - Service - Apache</host>
-                        <key>apache.jk.stp</key>
-                    </item>
-                </graph_item>
-            </graph_items>
-        </graph>
-        <graph>
-            <name>Apache Traffic</name>
-            <width>900</width>
-            <height>300</height>
-            <yaxismin>0.0000</yaxismin>
-            <yaxismax>100.0000</yaxismax>
-            <show_work_period>1</show_work_period>
-            <show_triggers>1</show_triggers>
-            <type>0</type>
-            <show_legend>1</show_legend>
-            <show_3d>0</show_3d>
-            <percent_left>0.0000</percent_left>
-            <percent_right>0.0000</percent_right>
-            <ymin_type_1>1</ymin_type_1>
-            <ymax_type_1>0</ymax_type_1>
-            <ymin_item_1>0</ymin_item_1>
-            <ymax_item_1>0</ymax_item_1>
-            <graph_items>
-                <graph_item>
-                    <sortorder>0</sortorder>
-                    <drawtype>0</drawtype>
-                    <color>C80000</color>
-                    <yaxisside>1</yaxisside>
-                    <calc_fnc>4</calc_fnc>
-                    <type>0</type>
-                    <item>
-                        <host>Custom - Service - Apache</host>
-                        <key>apache.accesses[{$HTTP_PORT}]</key>
-                    </item>
-                </graph_item>
-                <graph_item>
-                    <sortorder>1</sortorder>
-                    <drawtype>0</drawtype>
-                    <color>00BB00</color>
                     <yaxisside>0</yaxisside>
                     <calc_fnc>4</calc_fnc>
                     <type>0</type>
                     <item>
-                        <host>Custom - Service - Apache</host>
-                        <key>apache.kbytes[{$HTTP_PORT}]</key>
+                        <host>Custom - OS - Puppet</host>
+                        <key>puppet[resources,out_of_sync]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>4</sortorder>
+                    <drawtype>0</drawtype>
+                    <color>00C8C8</color>
+                    <yaxisside>0</yaxisside>
+                    <calc_fnc>4</calc_fnc>
+                    <type>0</type>
+                    <item>
+                        <host>Custom - OS - Puppet</host>
+                        <key>puppet[resources,restarted]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>5</sortorder>
+                    <drawtype>0</drawtype>
+                    <color>C8C800</color>
+                    <yaxisside>0</yaxisside>
+                    <calc_fnc>4</calc_fnc>
+                    <type>0</type>
+                    <item>
+                        <host>Custom - OS - Puppet</host>
+                        <key>puppet[resources,scheduled]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>6</sortorder>
+                    <drawtype>0</drawtype>
+                    <color>C8C8C8</color>
+                    <yaxisside>0</yaxisside>
+                    <calc_fnc>4</calc_fnc>
+                    <type>0</type>
+                    <item>
+                        <host>Custom - OS - Puppet</host>
+                        <key>puppet[resources,skipped]</key>
                     </item>
                 </graph_item>
             </graph_items>
