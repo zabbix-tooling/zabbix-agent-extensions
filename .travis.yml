@@ -14,6 +14,7 @@ before_install:
 script:
     - sudo gem install fpm
     - env
+    - type -a fpm
     - ./create_packages
     - ./ci_test
 
