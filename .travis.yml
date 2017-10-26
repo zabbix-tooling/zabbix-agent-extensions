@@ -15,6 +15,7 @@ script:
     - sudo gem install fpm
     - env
     - type -a fpm
+    - fpm --help
     - ./create_packages
     - ./ci_test
 
