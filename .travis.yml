@@ -3,16 +3,13 @@ language: bash
 dist: trusty
 sudo: required
 
-env:
-    - PATH=/home/travis/.gem/ruby/2.4.0/bin:/bin:/sbin:/usr/bin:/usr/local/bin:/usr/local/sbin:/usr/sbin:/usr/X11R6/bin
-
 before_install:
     - sudo apt-get update
     - sudo apt-get upgrade
     - sudo apt-get install ruby-dev build-essential debhelper devscripts rpm xalan wget -y
 
 script:
-    - sudo gem install fpm
+    - gem install fpm
     - env
     - type -a fpm
     - fpm --help
