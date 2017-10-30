@@ -20,12 +20,12 @@ notifications:
     on_success: change
     on_failure: always
 
-# https://docs.travis-ci.com/user/deployment/releases/
-#deploy:
-#  provider: releases
-#  api_key: "GITHUB OAUTH TOKEN"
-#  file: "FILE TO UPLOAD"
-#  skip_cleanup: true
-#  on:
-#    tags: true
+deploy:
+  provider: releases
+  #api_key: "GITHUB OAUTH TOKEN"
+  file: "zabbix-agent-extensions_*_all.deb"
+  file: "zabbix-agent-extensions-*.noarch.rpm"
+  skip_cleanup: true
+  on:
+    tags: true
 
