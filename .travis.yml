@@ -16,20 +16,14 @@ notifications:
     - ms-travisci@256bit.org
     on_success: change
     on_failure: always
-
-#before_deploy:
-#  - export RELEASE_PKG_FILE_DEB=$(ls *.deb)
-#  - export RELEASE_PKG_FILE_RPM=$(ls *.rpm)
-#  - echo "DEPLOYMENT FILES: $RELEASE_PKG_FILE_DEB, $RELEASE_PKG_FILE_RPM"
 deploy:
   provider: releases
   api_key:
     secure: kySI7Haw3FrObyZQXW1lL6wY6ONJPZWIvKAPkOh1ZMsm4nubHOeQt4+zGL1mk3pVCNmSZUxjiQyPN5o74UCuWsObQZcbfxrEVJQ5MaBEIom7HNG0Uyw1tHO5jJJR3U+0MuVse4TtUPnM86tdMGSLJZqPOg6A1t+ORsPnjNoEizLtyeF84TiXjAnCQtx9XiL6tglT2mUYZKgTQMiKyFPmUtNTetQf/TKr6oaM2w63hhf6sOyCIYtzqIFc4CDBYmiGj5sFGXlP9PnLNGQnkqTjpC3694vcy2Ak9WOCwa3qDsLKMIvd1B2olBTUAZbiUf8pWnTwfXWPVlYepuS6FdkKF+uE/Y/TTvX0WshegoLPhp8hnVFMQIkOSor68ZxjOa3u8SXwYlD5lNB6g6eXNQKBCiQ8lxeGwu0aH33lWfmAoQOJmWZM/Mjo0jT/bxP3Ry1FFD17SSX5wQSn27nvTmmSrC4HacLsoM7HrdoSE3ZhcV0jPnwL9FuGGnc5k28ggNyVlu5n/f2vXpH3WQ9mbTCTl6MMoC6E7K/kGQBmR230EOtRA7pvYuE71l689S5U9DQ+97uG9LZqk83lhmWzZOzjVXno9fvFjY9ypkCYhgxSTkl3VFghTYRfEEONjoLGr0TKFkrz4QuNUBFqO/5IG1w+mUyxmEeAAihL8Odv9xiNYpM=
-#  file: "${RELEASE_PKG_FILE_DEB}"
-# file: "${RELEASE_PKG_FILE_RPM}"
   file_glob: true
-  file: "zabbix-agent-extensions-*.noarch.rpm"
-  file: "zabbix-agent-extensions_*_all.deb"
+  file: 
+    - "zabbix-agent-extensions-*.noarch.rpm"
+    - "zabbix-agent-extensions_*_all.deb"
   skip_cleanup: true
   on:
     repo: scoopex/zabbix-agent-extensions
