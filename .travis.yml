@@ -25,7 +25,8 @@ deploy:
   skip_cleanup: true
   on:
     repo: scoopex/zabbix-agent-extensions
-    #  branches:
-    #    only:
-    #    - master
-    #    - /^v\d+(\.\d+)+$/
+    tags: true
+    branches:
+      only:
+        - master
+        - /^v\d+(\.\d+)+$/
