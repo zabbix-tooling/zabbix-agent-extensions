@@ -35,6 +35,7 @@ wget -c "http://repo.zabbix.com/zabbix/3.2/ubuntu/pool/main/z/zabbix/zabbix-get_
 ls -l *.deb *.rpm
 sudo dpkg -i zabbix-agent_*.deb zabbix-get_*.deb 
 sudo tail -F /var/log/zabbix/zabbix_agentd.log &
+ps auxwww|grep zabbix_agentd
 
 sleep 3
 
