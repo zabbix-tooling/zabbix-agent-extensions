@@ -70,7 +70,8 @@ def read_config(config_file):
 
     return config
 
-def check_send_mail(smtp_config):
+# https://yuji.wordpress.com/2011/06/22/python-imaplib-imap-example-with-gmail/
+def check_smtp_send(smtp_config):
 
     try:
         ident = smtp_config["ident"]
@@ -114,6 +115,49 @@ def check_send_mail(smtp_config):
     sys.stdout.write("0\n")
     sys.exit(0)
 
+def check_imap_receive(imap_config):
+
+    try:
+        ident = imap_config["ident"]
+        fromaddr = imap_config["from"]
+        toaddr = imap_config["to"]
+        server_name = imap_config["server"]
+        port = imap_config["port"]
+        login = imap_config["login"]
+        password = imap_config["password"]
+    except:
+        sys.stderr.write("missing parameters in ")
+        sys.stdout.write("0\n")
+
+    msg = ("From: %s\r\nTo: %s\r\n\r\n" % (fromaddr, toaddr))
+
+    id_nr = int(time.time())
+    msg += "Subject: MAIL ROUNDTRIP TESTMAIL %s :: %s" % (ident, id_nr)
+    msg += "\n\n"
+    for n in range(1, 100):
+        msg += my_random_string(n) + " "
+
+    try:
+        server = smtplib.SMTP(server_name, port)
+        if args.debug:
+            server.set_debuglevel(1)
+        server.starttls()
+        server.ehlo()
+        server.login(login, password)
+        server.sendmail(fromaddr, toaddr, msg)
+        server.quit()
+    except Exception as e:
+        print("Exception happened:")
+        sys.stderr.write('*' * 60 + "\n")
+        sys.stderr.write("*** " + str(e) + "\n")
+        sys.stderr.write('*' * 60 + "\n")
+        sys.stderr.write("\n")
+        traceback.print_exc(file=sys.stderr)
+        sys.stderr.write('-' * 60 + "\n")
+        sys.stdout("1\n")
+        sys.exit(0)
+    sys.stdout.write("0\n")
+    sys.exit(0)
 
 ####################################################################################
 #### MAIN
@@ -198,12 +242,19 @@ else:
 if args.debug:
     sys.stderr.write("** Effective config:\n%s\n" % json.dumps(config, indent=2))
 
+ret = 1
 if args.smtp is not None:
     for config_c in (config["smtp"]):
         if config_c["ident"] == args.smtp:
-            check_send_mail(config_c)
+            check_smtp_send(config_c)
+            break
+
+if args.imap is not None:
+    for config_c in (config["imap"]):
+        if config_c["ident"] == args.imap:
+            check_imap_receive(config_c)
             break
 
 
 
-
+sys.exit(0)

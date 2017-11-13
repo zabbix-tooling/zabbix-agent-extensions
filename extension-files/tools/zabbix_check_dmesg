@@ -76,7 +76,7 @@ while True:
     current_time_stamp = float(m.group("timestamp"))
     msg = m.group("msg")
 
-    if current_time_stamp >= latest_time_stamp:
+    if current_time_stamp > latest_time_stamp:
         latest_time_stamp = current_time_stamp
         for ident, regex in kernel_problems.items():
             if regex.match(msg):
