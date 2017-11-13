@@ -28,14 +28,16 @@ assertSuccess(){
 
 echo "*** CLEANUP"
 REL="3.2.8-1+xenial"
-sudo dpkg -P zabbix-agent-extensions
+sudo dpkg -P zabbix-agent-extensions zabbix-agent
 sudo rm -rf /etc/zabbix_* /var/log/zabbix /var/run/zabbix zabbix-agent_*.deb zabbix-get_*.deb
 wget -c "http://repo.zabbix.com/zabbix/3.2/ubuntu/pool/main/z/zabbix/zabbix-agent_${REL}_amd64.deb"
 wget -c "http://repo.zabbix.com/zabbix/3.2/ubuntu/pool/main/z/zabbix/zabbix-get_${REL}_amd64.deb"
+ps auxwww|grep zabbix_agentd
+killall -KILL zabbix_agentd
 ls -l *.deb *.rpm
 sudo dpkg -i zabbix-agent_*.deb zabbix-get_*.deb 
+sudo netstat -nlp|grep 10051
 sudo tail -F /var/log/zabbix/zabbix_agentd.log &
-ps auxwww|grep zabbix_agentd
 
 sleep 3
 
