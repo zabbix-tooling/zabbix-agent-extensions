@@ -42,8 +42,8 @@ assertSuccess STOP_ON_ERROR "sudo dpkg -i zabbix-agent-extensions_*.deb"
 sleep 3
 ps auxwww|grep zabbix_agentd
 sudo netstat -nlp|grep zabbix_agentd
-assertSuccess STOP_ON_ERROR "zabbix_get -s 127.0.0.1 -k linux.dmesg|grep -C 30 'OK: ALL OK'" # Without sudo
-assertSuccess STOP_ON_ERROR "zabbix_get -s 127.0.0.1 -k linux.multipath|grep -C 30 'OK:'" # With sudo
+assertSuccess STOP_ON_ERROR "zabbix_get -s localhost -k linux.dmesg|grep -C 30 'OK: ALL OK'" # Without sudo
+assertSuccess STOP_ON_ERROR "zabbix_get -s localhost -k linux.multipath|grep -C 30 'OK:'" # With sudo
 assertSuccess STOP_ON_ERROR 'sudo dpkg -P zabbix-agent-extensions'
 
 echo
