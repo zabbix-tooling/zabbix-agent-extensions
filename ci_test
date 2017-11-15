@@ -36,15 +36,14 @@ sudo killall -KILL zabbix_agentd
 sudo dpkg -i zabbix-agent_*.deb zabbix-get_*.deb 
 sudo sed  -i '~s,# DebugLevel.*,DebugLevel=4,' /etc/zabbix/zabbix_agentd.conf
 sudo tail -F /var/log/zabbix/zabbix_agentd.log &
-sleep 1
 
 echo "*** TESTS"
 assertSuccess STOP_ON_ERROR "sudo dpkg -i zabbix-agent-extensions_*.deb"
 sleep 3
 ps auxwww|grep zabbix_agentd
 sudo netstat -nlp|grep zabbix_agentd
-assertSuccess STOP_ON_ERROR "zabbix_get -s localhost -k linux.dmesg|grep -C 30 'OK: ALL OK'" # Without sudo
-assertSuccess STOP_ON_ERROR "zabbix_get -s localhost -k linux.multipath|grep -C 30 'OK:'" # With sudo
+assertSuccess STOP_ON_ERROR "zabbix_get -s localhost -k linux.dmesg | grep 'OK: ALL OK'" # Without sudo
+assertSuccess STOP_ON_ERROR "zabbix_get -s localhost -k linux.multipath | grep 'OK:'" # With sudo
 assertSuccess STOP_ON_ERROR 'sudo dpkg -P zabbix-agent-extensions'
 
 echo
