@@ -15,6 +15,7 @@
 #   51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 APPNAME="$1"
+TYPE="$2"
 DIR="/var/run/zabbix-generic-discovery/"
 
 # Checks
@@ -23,32 +24,52 @@ if [ -z "$APPNAME" ];then
    exit 1
 fi
 
+if ( ! (echo "$TYPE"|egrep -q "^(json|plain)$"));then
+   echo -n "NOT SUPPORTED, USE 'json' or 'plain'"
+   exit 1
+fi
+
 if (! echo "$APPNAME"|egrep -q "^[a-zA-Z0-9\.][a-zA-Z0-9\.]*$" );then
    echo -n "NOT SUPPORTED"
    exit 1
 fi
 
-cat <<'EOF'
-{
-   "data":[
+# JSON ##################################################################
+if [ "$TYPE" = "json" ];then
+
+   cat <<'EOF'
+   {
+      "data":[
 EOF
 
-# Example entry
-#      {
-#         "{#FSNAME}":"\/",
-#         "{#FSTYPE}":"rootfs"
-#      },
+   # Example entry
+   #      {
+   #         "{#FSNAME}":"\/",
+   #         "{#FSTYPE}":"rootfs"
+   #      },
 
-FIRST=1
-for FILE in $DIR/$APPNAME-*.json;
-do
-   if [ "$FIRST" != "1" ];then
-      echo -n ","
-   fi
-   FIRST=0
-   cat $FILE
-done
-cat <<'EOF'
-          ]
-}
+   FIRST=1
+   shopt -s nullglob
+   for FILE in $DIR/$APPNAME-*.json;
+   do
+      if [ "$FIRST" != "1" ];then
+         echo -n ","
+      fi
+      FIRST=0
+      cat $FILE
+   done
+   shopt -u nullglob
+   cat <<'EOF'
+             ]
+   }
 EOF
+
+# PLAIN #################################################################
+elif  [ "$TYPE" = "plain" ];then
+   shopt -s nullglob
+   for FILE in $DIR/$APPNAME-*.plain;
+   do
+      echo -n "'$(cat $FILE)',"
+   done 
+   shopt -u nullglob
+fi
