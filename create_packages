@@ -13,6 +13,7 @@ prepare(){
 	echo "***************************************************************************************************************************************"
 	echo "PREPARE"
    set -e
+   set -x
 	umask 0002
 	mkdir -p -m 755 ${TMPDIR}/usr/bin/
 	cp -av ${SDIR}/tools/* ${TMPDIR}/usr/bin/
@@ -36,6 +37,7 @@ prepare(){
 	chmod 0440 ${TMPDIR}/etc/sudoers.d/*
 
 	mkdir -p -m 755 ${TMPDIR}/var/cache/zabbix
+   set +x
    set +e
  
 }
