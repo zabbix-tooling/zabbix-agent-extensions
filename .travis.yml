@@ -7,8 +7,8 @@ before_install:
 - sudo apt-get install ruby-dev build-essential debhelper devscripts rpm xalan wget -y
 script:
 - gem install fpm
-- "./create_packages"
-- "./ci_test"
+- ./create_packages
+- ./ci_test
 notifications:
   email:
     recipients:
