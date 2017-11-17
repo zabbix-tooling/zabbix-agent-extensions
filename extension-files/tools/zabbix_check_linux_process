@@ -31,11 +31,11 @@ if [ "$QRY" = "maxage" ];then
    done
    echo -n "$COMP"
    exit 0
-elif [ "$QRY" = "maxage|minage" ];then
+elif [ "$QRY" = "minage" ];then
    COMP="0"
    for pid in $(pgrep "$PNAME");do
      AGE="$(ps -o etimes= -p "$pid"|awk '{print $1}')"
-     if [ "$AGE" -le "$COMP" ];then
+     if [ "$AGE" -le "$COMP" ] || [ "$COMP" = "0" ];then
       COMP="$AGE"
      fi
    done

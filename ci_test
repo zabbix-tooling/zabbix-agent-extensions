@@ -39,10 +39,13 @@ sudo tail -F /var/log/zabbix/zabbix_agentd.log &
 
 echo "*** TESTS"
 assertSuccess STOP_ON_ERROR "sudo dpkg -i zabbix-agent-extensions_*.deb"
-assertSuccess STOP_ON_ERROR "zabbix_get -s localhost -k linux.dmesg | tee /dev/stderr | grep -q -P 'OK: ALL OK|ERROR:'"
+assertSuccess STOP_ON_ERROR "zabbix_get -s localhost -k linux.dmesg | tee /dev/stderr | grep -q -P 'OK: ALL OK|ERROR:'" # Without sudo
 assertSuccess STOP_ON_ERROR "zabbix_get -s localhost -k linux.dmesg | tee /dev/stderr | grep -q 'OK: ALL OK'" # Without sudo
 assertSuccess STOP_ON_ERROR "zabbix_get -s localhost -k linux.multipath | tee /dev/stderr | grep -q 'OK:'" # With sudo
 assertSuccess STOP_ON_ERROR "zabbix_get -s localhost -k vfs.dev.discovery | tee /dev/stderr | grep -q '#BLOCKDEVICE'" # With sudo
+assertSuccess STOP_ON_ERROR "zabbix_get -s localhost -k 'custom.process[zabbix_agentd,minage]'|tee /dev/stderr | grep -q -P '^\d$'"
+assertSuccess STOP_ON_ERROR "zabbix_get -s localhost -k 'custom.process[zabbix_agentd,maxage]'|tee /dev/stderr | grep -q -P '^\d$'"
+assertSuccess STOP_ON_ERROR "zabbix_get -s localhost -k 'custom.process[nosuchprocess,maxage]'|tee /dev/stderr | grep -q -P '^\d$'"
 assertSuccess STOP_ON_ERROR 'sudo dpkg -P zabbix-agent-extensions'
 
 echo
