@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
     <version>3.4</version>
-    <date>2017-10-19T18:00:36Z</date>
+    <date>2017-11-17T10:58:49Z</date>
     <groups>
         <group>
             <name>Templates</name>
@@ -103,7 +103,7 @@
                     <snmp_community/>
                     <snmp_oid/>
                     <key>agent.version</key>
-                    <delay>10m</delay>
+                    <delay>60m</delay>
                     <history>8d</history>
                     <trends>0</trends>
                     <status>0</status>
@@ -125,7 +125,7 @@
                     <publickey/>
                     <privatekey/>
                     <port/>
-                    <description/>
+                    <description>The release of the zabbix agent</description>
                     <inventory_link>0</inventory_link>
                     <applications>
                         <application>
@@ -2072,6 +2072,47 @@ md1 : active raid1 sdb2[2] sda2[0]&#13;
                     <jmx_endpoint/>
                     <master_item/>
                 </item>
+                <item>
+                    <name>Zabbix Agent Extension Release</name>
+                    <type>0</type>
+                    <snmp_community/>
+                    <snmp_oid/>
+                    <key>zabbix.agent_extensions.version</key>
+                    <delay>60m</delay>
+                    <history>8d</history>
+                    <trends>0</trends>
+                    <status>0</status>
+                    <value_type>4</value_type>
+                    <allowed_hosts/>
+                    <units/>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description>The release of the zabbix agent extensions</description>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>OS - Zabbix</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                    <preprocessing/>
+                    <jmx_endpoint/>
+                    <master_item/>
+                </item>
             </items>
             <discovery_rules>
                 <discovery_rule>
@@ -3871,7 +3912,7 @@ md1 : active raid1 sdb2[2] sda2[0]&#13;
             <expression>{Custom - OS - Linux:linux.dmesg.str(ERROR:)}=1</expression>
             <recovery_mode>2</recovery_mode>
             <recovery_expression/>
-            <name>Linux Kernel Problems</name>
+            <name>Linux Kernel Problems - {ITEM.VALUE1}</name>
             <correlation_mode>0</correlation_mode>
             <correlation_tag/>
             <url/>
