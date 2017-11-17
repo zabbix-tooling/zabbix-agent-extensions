@@ -12,6 +12,7 @@ prepare(){
 
 	echo "***************************************************************************************************************************************"
 	echo "PREPARE"
+   set -e
 	umask 0002
 	mkdir -p -m 755 ${TMPDIR}/usr/bin/
 	cp -av ${SDIR}/tools/* ${TMPDIR}/usr/bin/
@@ -19,6 +20,7 @@ prepare(){
 
 	mkdir -p -m 755 ${TMPDIR}/usr/share/zabbix-agent-extensions/include.d/
 	cp -av ${SDIR}/agent-config/* ${TMPDIR}/usr/share/zabbix-agent-extensions/include.d/
+   sed -i "~s,VERSION TO BE REPLACED,${VERSION}," ${TMPDIR}/usr/share/zabbix-agent-extensions/include.d/zabbix-agent-extensions.conf
 	chmod 644 ${TMPDIR}/usr/share/zabbix-agent-extensions/include.d/*
 
 	mkdir -p -m 755 ${TMPDIR}/usr/share/zabbix/
@@ -34,6 +36,7 @@ prepare(){
 	chmod 0440 ${TMPDIR}/etc/sudoers.d/*
 
 	mkdir -p -m 755 ${TMPDIR}/var/cache/zabbix
+   set +e
  
 }
 
