@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
     <version>3.4</version>
-    <date>2017-10-19T18:00:52Z</date>
+    <date>2017-11-18T20:36:28Z</date>
     <groups>
         <group>
             <name>Templates</name>
@@ -30,7 +30,7 @@
                     <snmp_community/>
                     <snmp_oid/>
                     <key>vfs.dev.discovery.rawdisks</key>
-                    <delay>10m</delay>
+                    <delay>15m</delay>
                     <status>0</status>
                     <allowed_hosts/>
                     <snmpv3_contextname/>
@@ -54,7 +54,7 @@
                         <conditions>
                             <condition>
                                 <macro>{#BLOCKDEVICE}</macro>
-                                <value>^.*</value>
+                                <value>.*</value>
                                 <operator>8</operator>
                                 <formulaid>A</formulaid>
                             </condition>
@@ -509,7 +509,7 @@
                     </trigger_prototypes>
                     <graph_prototypes>
                         <graph_prototype>
-                            <name>OS - Linux - Hardware - Disks - Errors</name>
+                            <name>Disk {#BLOCKDEVICE} - Errors</name>
                             <width>900</width>
                             <height>300</height>
                             <yaxismin>0.0000</yaxismin>
@@ -589,7 +589,7 @@
                             </graph_items>
                         </graph_prototype>
                         <graph_prototype>
-                            <name>OS - Linux - Hardware - Disks - Lifetime</name>
+                            <name>Disk {#BLOCKDEVICE} - Lifetime</name>
                             <width>900</width>
                             <height>300</height>
                             <yaxismin>0.0000</yaxismin>
@@ -687,7 +687,7 @@
                             <dynamic>0</dynamic>
                             <sort_triggers>0</sort_triggers>
                             <resource>
-                                <name>OS - Linux - Hardware - Disks - Errors</name>
+                                <name>Disk {#BLOCKDEVICE} - Errors</name>
                                 <host>Custom - OS - Linux - Hardware</host>
                             </resource>
                             <max_columns>1</max_columns>
@@ -709,7 +709,7 @@
                             <dynamic>0</dynamic>
                             <sort_triggers>0</sort_triggers>
                             <resource>
-                                <name>OS - Linux - Hardware - Disks - Lifetime</name>
+                                <name>Disk {#BLOCKDEVICE} - Lifetime</name>
                                 <host>Custom - OS - Linux - Hardware</host>
                             </resource>
                             <max_columns>1</max_columns>

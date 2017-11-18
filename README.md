@@ -101,7 +101,8 @@ A quick overview is provided by the following files:
  * Release only: Edit this file (README.md) and describe the new feature
  * Create packages
    ```
-   ./create_packages <version>
+   git commit ....
+   ./create_packages
    ```
  * Install the rpm or debian archive on as an addition to your zabbix-agent:
  
@@ -109,6 +110,14 @@ A quick overview is provided by the following files:
    rpm -Uvh noarch/zabbix-agent-extensions-<version>.noarch.rpm
    dpkg -i zabbix-agent-extensions_<version>_all.deb
    ```
+ * Push release
+   ```
+   git tag <release-number>
+   ./create_packages
+   git push
+   git push --tags
+   ```
+ * TravisCI builds and tests the release and uploads it to github
 
 # How to configure discovery for zabbix agent
  
