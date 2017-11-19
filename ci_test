@@ -40,7 +40,7 @@ sudo tail -F /var/log/zabbix/zabbix_agentd.log &
 echo "*** VALIDATIONS"
 
 COMPILEDIR="mktemp -d /tmp/pycompile-XXXXXX"
-for SCRIPT IN in $(grep -l "#!/usr/bin/env python3" extension-files/tools/*|sort -u|xargs);
+for SCRIPT in $(grep -l "#!/usr/bin/env python3" extension-files/tools/*|sort -u|xargs);
 do
    cp $SCRIPT $COMPILEDIR/
    assertSuccess STOP_ON_ERROR "python -m py_compile ${COMPILEDIR}/$(basename $SCRIPT)"
