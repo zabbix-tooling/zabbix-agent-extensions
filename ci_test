@@ -37,6 +37,15 @@ sudo dpkg -i zabbix-agent_*.deb zabbix-get_*.deb
 sudo sed  -i '~s,# DebugLevel.*,DebugLevel=4,' /etc/zabbix/zabbix_agentd.conf
 sudo tail -F /var/log/zabbix/zabbix_agentd.log &
 
+echo "*** VALIDATIONS"
+
+COMPILEDIR="mktemp -d /tmp/pycompile-XXXXXX"
+for SCRIPT IN in $(grep -l "#!/usr/bin/env python3" extension-files/tools/*|sort -u|xargs);
+do
+   cp $SCRIPT $COMPILEDIR/
+   assertSuccess STOP_ON_ERROR "python -m py_compile ${COMPILEDIR}/$(basename $SCRIPT)"
+done
+
 echo "*** TESTS"
 assertSuccess STOP_ON_ERROR "sudo dpkg -i zabbix-agent-extensions_*.deb"
 assertSuccess STOP_ON_ERROR "zabbix_get -s localhost -k linux.dmesg | tee /dev/stderr | grep -q -P 'OK: ALL OK|ERROR:'" # Without sudo
