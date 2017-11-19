@@ -91,7 +91,7 @@
 <td>ICMP Ping no data for {$MONITOR_TIMEOUT} seconds</td><td>Host is not reachable by a icmp-echo request for the last three measures or not measurement.</td><td style="background-color:#FF0000;">High</td><td><tt>{Custom - OS - Linux:icmpping[,,,,].nodata({$MONITOR_TIMEOUT})}=1</tt></td><td><tt></tt></td>
 </tr>
 <tr>
-<td>Linux Kernel Problems</td><td>A kernel problem occurred.&#13;
+<td>Linux Kernel Problems - {ITEM.VALUE1}</td><td>A kernel problem occurred.&#13;
 Review dmesg with the timestamps listed in the item.&#13;
 &#13;
 This trigger does not recover automatically, to get rid of this trigger, you have to use the "Close problem"</td><td style="background-color:#FFFF00;">Warning</td><td><tt>{Custom - OS - Linux:linux.dmesg.str(ERROR:)}=1</tt></td><td><tt></tt></td>
@@ -203,7 +203,7 @@ Remove the flagfile if you decide that no reboot is required (/var/run/reboot-re
 <tr>
 <td>
 <p class="desc">Zabbix Agent</p>
-</td><td>Zabbix Agent Release</td><td><tt>agent.version</tt></td><td></td><td>10m</td><td>8d</td><td>0</td>
+</td><td>Zabbix Agent Release</td><td><tt>agent.version</tt></td><td>The release of the zabbix agent</td><td>60m</td><td>8d</td><td>0</td>
 </tr>
 <tr>
 <td>
@@ -448,6 +448,11 @@ md1 : active raid1 sdb2[2] sda2[0]&#13;
 <td>
 <p class="desc">Zabbix Agent</p>
 </td><td>Memory Total</td><td><tt>vm.memory.size[total]</tt></td><td></td><td>10m</td><td>2w</td><td>365d</td>
+</tr>
+<tr>
+<td>
+<p class="desc">Zabbix Agent</p>
+</td><td>Zabbix Agent Extension Release</td><td><tt>zabbix.agent_extensions.version</tt></td><td>The release of the zabbix agent extensions</td><td>60m</td><td>8d</td><td>0</td>
 </tr>
 </table>
 <h1>Discovery rule "Network interfaces discovery"</h1>

@@ -93,7 +93,7 @@
 </td>
 </tr>
 <tr>
-<td>Delay</td><td>10m</td>
+<td>Delay</td><td>15m</td>
 </tr>
 </table>
 <h2>Trigger Overview</h2>
@@ -111,11 +111,11 @@
 <th>Name</th><th>Elements</th>
 </tr>
 <tr>
-<td>OS - Linux - Hardware - Disks - Errors</td><td><tt>hardware.disk.smart.attributes[{#BLOCKDEVICE},Reallocated_Sector_Ct]<br>hardware.disk.smart.attributes[{#BLOCKDEVICE},Spin_Retry_Count]<br>hardware.disk.smart.attributes[{#BLOCKDEVICE},Current_Pending_Sector]<br>hardware.disk.smart.attributes[{#BLOCKDEVICE},Offline_Uncorrectable]<br>hardware.disk.smart.attributes[{#BLOCKDEVICE},UDMA_CRC_Error_Count]<br>
+<td>Disk {#BLOCKDEVICE} - Errors</td><td><tt>hardware.disk.smart.attributes[{#BLOCKDEVICE},Reallocated_Sector_Ct]<br>hardware.disk.smart.attributes[{#BLOCKDEVICE},Spin_Retry_Count]<br>hardware.disk.smart.attributes[{#BLOCKDEVICE},Current_Pending_Sector]<br>hardware.disk.smart.attributes[{#BLOCKDEVICE},Offline_Uncorrectable]<br>hardware.disk.smart.attributes[{#BLOCKDEVICE},UDMA_CRC_Error_Count]<br>
 </tt></td>
 </tr>
 <tr>
-<td>OS - Linux - Hardware - Disks - Lifetime</td><td><tt>hardware.disk.smart.attributes[{#BLOCKDEVICE},Power_On_Hours]<br>hardware.disk.smart.attributes[{#BLOCKDEVICE},Temperature_Celsius]<br>
+<td>Disk {#BLOCKDEVICE} - Lifetime</td><td><tt>hardware.disk.smart.attributes[{#BLOCKDEVICE},Power_On_Hours]<br>hardware.disk.smart.attributes[{#BLOCKDEVICE},Temperature_Celsius]<br>
 </tt></td>
 </tr>
 </table>

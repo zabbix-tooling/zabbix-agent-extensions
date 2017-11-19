@@ -7,11 +7,26 @@ import os
 import sys
 import argparse
 import subprocess
+import stat
 
 ####################################################################################
 #### HELPERS
 
+
+def is_device(dev):
+    dev = "/dev/%s" % dev
+    try:
+        mode = os.stat(dev).st_mode
+    except:
+        return False
+    return stat.S_ISBLK(mode)
+
 def get_health(device):
+
+    if not is_device(device):
+        sys.stderr.write("%s :: get_health :: FAILED - device /dev/%s does not exist\n" % (__file__, device))
+        return
+
     cmd = "smartctl -H /dev/%s" % device
     process = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
     out, err = process.communicate()
@@ -30,6 +45,11 @@ def get_health(device):
     print(result)
 
 def get_attribute(device, attribute):
+
+    if not is_device(device):
+        sys.stderr.write("%s :: get_attribute :: FAILED - device /dev/%s does not exist\n" (__file__, device))
+        return
+
     cmd = "smartctl -A /dev/%s" % device
     process = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
     out, err = process.communicate()
@@ -49,6 +69,11 @@ def get_attribute(device, attribute):
     print(result)
 
 def get_info(device, info):
+
+    if not is_device(device):
+        sys.stderr.write("%s :: get_info :: FAILED - device /dev/%s does not exist\n" (__file__, device))
+        return
+
     cmd = "smartctl -i /dev/%s" % device
     process = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
     out, err = process.communicate()
