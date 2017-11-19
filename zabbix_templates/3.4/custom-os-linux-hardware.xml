@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
     <version>3.4</version>
-    <date>2017-11-18T20:36:28Z</date>
+    <date>2017-11-19T08:49:37Z</date>
     <groups>
         <group>
             <name>Templates</name>
@@ -610,8 +610,8 @@
                                     <sortorder>0</sortorder>
                                     <drawtype>0</drawtype>
                                     <color>2774A4</color>
-                                    <yaxisside>0</yaxisside>
-                                    <calc_fnc>2</calc_fnc>
+                                    <yaxisside>1</yaxisside>
+                                    <calc_fnc>4</calc_fnc>
                                     <type>0</type>
                                     <item>
                                         <host>Custom - OS - Linux - Hardware</host>
@@ -623,7 +623,7 @@
                                     <drawtype>0</drawtype>
                                     <color>A54F10</color>
                                     <yaxisside>0</yaxisside>
-                                    <calc_fnc>2</calc_fnc>
+                                    <calc_fnc>4</calc_fnc>
                                     <type>0</type>
                                     <item>
                                         <host>Custom - OS - Linux - Hardware</host>
