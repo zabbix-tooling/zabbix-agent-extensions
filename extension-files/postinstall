@@ -2,7 +2,7 @@
 
 THE_INCLUDE="Include=/usr/share/zabbix-agent-extensions/include.d/"
 
-if (grep -q "Ubuntu" /etc/*rel*);then
+if ((grep -q "Ubuntu" /etc/*rel*) || (grep -q "Debian" /etc/*rel*));then
    if ! (grep -q "$THE_INCLUDE" /etc/zabbix/zabbix_agentd.conf);
    then  
       
