@@ -2,19 +2,34 @@
 
 THE_INCLUDE="Include=/usr/share/zabbix-agent-extensions/include.d/"
 
-if ((grep -q "Ubuntu" /etc/*rel*) || (grep -q "Debian" /etc/*rel*));then
+if ( (grep -q "Ubuntu" /etc/os-release) || (grep -q "Debian" /etc/os-release) || (grep -qi "Centos" /etc/os-release) );then
    if ! (grep -q "$THE_INCLUDE" /etc/zabbix/zabbix_agentd.conf);
    then  
-      
+     echo "" >> /etc/zabbix/zabbix_agentd.conf
+     echo "#################################################################" >> /etc/zabbix/zabbix_agentd.conf
      echo "# Added by postinstall of package zabbix-agent-extensions" >> /etc/zabbix/zabbix_agentd.conf
      echo "$THE_INCLUDE" >> /etc/zabbix/zabbix_agentd.conf
    fi
 
    usermod -G adm -a zabbix 
+
    chown -R zabbix:zabbix /var/cache/zabbix
    mkdir -m 755 -p /var/run/zabbix-generic-discovery/
    chown zabbix:zabbix /var/run/zabbix-generic-discovery/
-   /etc/init.d/zabbix-agent restart
+  
+   if (which systemctl >/dev/null 2>&1);then
+      systemctl restart zabbix-agent
+   else
+      /etc/init.d/zabbix-agent restart
+   fi
+
 else
    echo "Notice: no postinstall implemented for you distribution, contributions and merge requests are very welcome ;-)"
+fi
+
+if (grep -qi "Centos" /etc/os-release);then
+  echo "Installing SELinux rules"
+  checkmodule -M -m -o /var/run/zabbix/centos_zabbix_agent.mod /usr/share/zabbix-agent-extensions/selinux/centos_zabbix_agent.te
+  semodule_package -m /var/run/zabbix/zabbix_agent.mod -o /var/run/zabbix/centos_zabbix_agent.pp
+  semodule -i /var/run/zabbix/centos_zabbix_agent.pp
 fi

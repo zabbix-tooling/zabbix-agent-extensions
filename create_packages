@@ -24,6 +24,10 @@ prepare(){
    sed -i "~s,VERSION TO BE REPLACED,${VERSION}," ${TMPDIR}/usr/share/zabbix-agent-extensions/include.d/zabbix_agent_extensions.conf
 	chmod 644 ${TMPDIR}/usr/share/zabbix-agent-extensions/include.d/*
 
+	mkdir -p -m 755 ${TMPDIR}/usr/share/zabbix-agent-extensions/selinux
+	cp -av ${SDIR}/selinux/* ${TMPDIR}/usr/share/zabbix-agent-extensions/selinux/
+	chmod 644 ${TMPDIR}/usr/share/zabbix-agent-extensions/selinux/*
+
 	mkdir -p -m 755 ${TMPDIR}/usr/share/zabbix/
 	cp -av ${SDIR}/check_payloads/* ${TMPDIR}/usr/share/zabbix/
 	chmod 644 ${TMPDIR}/usr/share/zabbix/*
