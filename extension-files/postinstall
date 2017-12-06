@@ -29,7 +29,7 @@ fi
 
 if (grep -qi "Centos" /etc/os-release);then
   echo "Installing SELinux rules"
-  checkmodule -M -m -o /var/run/zabbix/centos_zabbix_agent.mod /usr/share/zabbix-agent-extensions/selinux/centos_zabbix_agent.te
+  checkmodule -M -m -o /var/run/zabbix/zabbix_agent.mod /usr/share/zabbix-agent-extensions/selinux/centos_zabbix_agent.te
   semodule_package -m /var/run/zabbix/zabbix_agent.mod -o /var/run/zabbix/centos_zabbix_agent.pp
   semodule -i /var/run/zabbix/centos_zabbix_agent.pp
 fi
