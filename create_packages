@@ -58,6 +58,9 @@ create_package(){
       -a all \
 	   --deb-no-default-config-files \
       --deb-group root \
+      --rpm-group root \
+      --deb-user root \
+      --rpm-user root \
       --deb-user root \
       -m "Marc Schoechlin <ms-zabbix-agent-extensions@256bit.org>" \
       --url "https://github.com/scoopex/zabbix-agent-extensions" \
