@@ -84,7 +84,10 @@ while True:
                 sys.stderr.write("%s : %s : %s\n" % (EXECUTABLE, ident, line_str))
                 matched.append("%s/%s" % (ident, current_time_stamp))
 
-status_data["timestamp"] = latest_time_stamp
+if current_time_stamp < latest_time_stamp:
+    status_data["timestamp"] = current_time_stamp
+else:
+    status_data["timestamp"] = latest_time_stamp
 
 if len(matched) == 0:
     matched.append("ALL OK (%s)" % latest_time_stamp)
