@@ -36,7 +36,8 @@ if (grep -qi "Centos" /etc/os-release);then
   semodule -i /var/run/zabbix/centos_zabbix_agent.pp
 fi
 
-if (grep -qi "Debian" /etc/os-release);then
+if (grep -q "Debian" /etc/os-release);then
+ echo "Installing sysctl config"
  echo "kernel.dmesg_restrict=0" > /etc/sysctl.d/99-dmesg.conf
  sysctl -p
 fi
