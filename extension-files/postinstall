@@ -18,8 +18,10 @@ if ( (grep -q "Ubuntu" /etc/os-release) || (grep -q "Debian" /etc/os-release) ||
    chown zabbix:zabbix /var/run/zabbix-generic-discovery/
   
    if (which systemctl >/dev/null 2>&1);then
+      echo "Restarting with systemctl"
       systemctl restart zabbix-agent
    else
+      echo "Restarting with /etc/init.d/zabbix-agent"
       /etc/init.d/zabbix-agent restart
    fi
 

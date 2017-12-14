@@ -34,28 +34,39 @@ wget -c "http://repo.zabbix.com/zabbix/3.2/ubuntu/pool/main/z/zabbix/zabbix-agen
 wget -c "http://repo.zabbix.com/zabbix/3.2/ubuntu/pool/main/z/zabbix/zabbix-get_${REL}_amd64.deb"
 sudo killall -KILL zabbix_agentd
 sudo dpkg -i zabbix-agent_*.deb zabbix-get_*.deb 
-sudo sed  -i '~s,# DebugLevel.*,DebugLevel=4,' /etc/zabbix/zabbix_agentd.conf
-sudo tail -F /var/log/zabbix/zabbix_agentd.log &
+sudo sed  -i '~s,# DebugLevel.*,DebugLevel=2,' /etc/zabbix/zabbix_agentd.conf
+sudo sed  -i '~s,^Server=.*,Server=127.0.0.1' /etc/zabbix/zabbix_agentd.conf
 
 echo "*** VALIDATIONS"
-
 COMPILEDIR="$(mktemp -d /tmp/pycompile-XXXXXX)"
 for SCRIPT in $(grep -l "#!/usr/bin/env python3" extension-files/tools/*|sort -u|xargs);
 do
    cp $SCRIPT $COMPILEDIR/
-   assertSuccess STOP_ON_ERROR "python -m py_compile ${COMPILEDIR}/$(basename $SCRIPT)"
+   assertSuccess STOP_ON_ERROR "python3 -m py_compile ${COMPILEDIR}/$(basename $SCRIPT)"
 done
 
 echo "*** TESTS"
 assertSuccess STOP_ON_ERROR "sudo dpkg -i zabbix-agent-extensions_*.deb"
-assertSuccess STOP_ON_ERROR "zabbix_get -s localhost -k linux.dmesg | tee /dev/stderr | grep -q -P 'OK: ALL OK|ERROR:'" # Without sudo
-assertSuccess STOP_ON_ERROR "zabbix_get -s localhost -k linux.dmesg | tee /dev/stderr | grep -q 'OK: ALL OK|ERROR:'" # Without sudo
-assertSuccess STOP_ON_ERROR "zabbix_get -s localhost -k linux.multipath | tee /dev/stderr | grep -q 'OK:'" # With sudo
-assertSuccess STOP_ON_ERROR "zabbix_get -s localhost -k vfs.dev.discovery | tee /dev/stderr | grep -q '#BLOCKDEVICE'" # With sudo
-assertSuccess STOP_ON_ERROR "zabbix_get -s localhost -k 'custom.process[zabbix_agentd,minage]'|tee /dev/stderr | grep -q -P '^\d+$'"
-assertSuccess STOP_ON_ERROR "zabbix_get -s localhost -k 'custom.process[zabbix_agentd,maxage]'|tee /dev/stderr | grep -q -P '^\d+$'"
-assertSuccess STOP_ON_ERROR "zabbix_get -s localhost -k 'custom.process[nosuchprocess,maxage]'|tee /dev/stderr | grep -q -P '^\d+$'"
-assertSuccess STOP_ON_ERROR "zabbix_get -s localhost -k 'zabbix.agent_extensions.version'|tee /dev/stderr | grep -q -P '^\d+'"
+sudo tail -f /var/log/zabbix/zabbix_agentd.log &
+for i in `seq 1 30`;do
+   nc -vvv -w 1 127.0.0.1 10050
+   if [ "$?" = "0" ];then
+      break
+   fi
+   echo -n "."
+   sleep 1
+done
+echo
+pkill tail
+
+assertSuccess STOP_ON_ERROR "zabbix_get -s 127.0.0.1 -k linux.dmesg | tee /dev/stderr | grep -q -P 'OK: ALL OK|ERROR:'" # Without sudo
+assertSuccess STOP_ON_ERROR "zabbix_get -s 127.0.0.1 -k linux.dmesg | tee /dev/stderr | grep -q -P 'OK: ALL OK|ERROR:'" # Without sudo
+assertSuccess STOP_ON_ERROR "zabbix_get -s 127.0.0.1 -k linux.multipath | tee /dev/stderr | grep -q 'OK:'" # With sudo
+assertSuccess STOP_ON_ERROR "zabbix_get -s 127.0.0.1 -k vfs.dev.discovery | tee /dev/stderr | grep -q '#BLOCKDEVICE'" # With sudo
+assertSuccess STOP_ON_ERROR "zabbix_get -s 127.0.0.1 -k 'custom.process[zabbix_agentd,minage]'|tee /dev/stderr | grep -q -P '^\d+$'"
+assertSuccess STOP_ON_ERROR "zabbix_get -s 127.0.0.1 -k 'custom.process[zabbix_agentd,maxage]'|tee /dev/stderr | grep -q -P '^\d+$'"
+assertSuccess STOP_ON_ERROR "zabbix_get -s 127.0.0.1 -k 'custom.process[nosuchprocess,maxage]'|tee /dev/stderr | grep -q -P '^\d+$'"
+assertSuccess STOP_ON_ERROR "zabbix_get -s 127.0.0.1 -k 'zabbix.agent_extensions.version'|tee /dev/stderr | grep -q -P '^\d+'"
 assertSuccess STOP_ON_ERROR 'sudo dpkg -P zabbix-agent-extensions'
 
 echo
