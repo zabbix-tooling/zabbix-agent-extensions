@@ -29,10 +29,15 @@ def get_status_data(statusfile):
     data = {}
     data["timestamp"] = -1
     if os.path.exists(statusfile):
-        try:
-            data = pickle.load(open(statusfile, "rb"))
-        except:
-            sys.stderr.write("ERROR: unable to read statusfile %s" % statusfile)
+        mtime_statusfile = os.stat(statusfile).st_mtime
+        mtime_kmsg = os.stat("/proc/kmsg").st_mtime
+        if mtime_statusfile < mtime_kmsg:
+           sys.stderr.write("Skipping load of old status data, old status file from before last boot detected (/proc/kmsg younger than %s)" % statusfile)
+        else:
+           try:
+               data = pickle.load(open(statusfile, "rb"))
+           except:
+               sys.stderr.write("ERROR: unable to read statusfile %s" % statusfile)
     return data
 
 
@@ -74,10 +79,6 @@ while True:
 
     lines += 1
     current_time_stamp = float(m.group("timestamp"))
-
-    if latest_time_stamp > current_time_stamp:
-        latest_time_stamp = current_time_stamp
-
     msg = m.group("msg")
 
     if current_time_stamp > latest_time_stamp:
@@ -98,5 +99,5 @@ if lines <= 0:
     matched = []
     matched.append("parsing failed")
 
-sys.stdout.write("%s: %s" % (status, ", ".join(matched)))
 pickle.dump(status_data, open(status_file, "wb"))
+sys.stdout.write("%s: %s\n" % (status, ", ".join(matched)))
