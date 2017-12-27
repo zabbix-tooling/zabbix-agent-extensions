@@ -85,7 +85,7 @@ while True:
         for ident, regex in kernel_problems.items():
             if regex.match(msg):
                 status = "ERROR"
-                sys.stderr.write("%s : %s : %s\n" % (EXECUTABLE, ident, line_str))
+                #sys.stderr.write("%s : %s : %s\n" % (EXECUTABLE, ident, line_str))
                 matched.append("%s/%s" % (ident, current_time_stamp))
 
 status_data["timestamp"] = latest_time_stamp
