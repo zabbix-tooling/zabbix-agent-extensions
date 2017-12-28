@@ -30,7 +30,7 @@ def get_status_data(statusfile):
     data["timestamp"] = -1
     if os.path.exists(statusfile):
         mtime_statusfile = os.stat(statusfile).st_mtime
-        mtime_kmsg = os.stat("/proc/kmsg").st_mtime
+        mtime_kmsg = os.stat("/dev/kmsg").st_mtime
         if mtime_statusfile < mtime_kmsg:
            sys.stderr.write("Skipping load of old status data, old status file from before last boot detected (/proc/kmsg younger than %s)" % statusfile)
         else:
@@ -55,6 +55,7 @@ kernel_problems["bug"] = re.compile(".*(kernel BUG at|double fault:|Badness at|[
                                     "sysctl table check failed|------------[ cut here ]------------|Oops:).*$")
 kernel_problems["oom"] = re.compile(".*Out of memory: Kill process.*")
 kernel_problems["userland_kill"] = re.compile(".*killed by.*")
+kernel_problems["ioerror"] = re.compile(r".*(end_request: I/O error, dev ..*, sector ..*|error on device ..*, logical block ..*).*")
 
 # [80508.690871] kauditd_printk_skb: 2 callbacks suppressed
 parse_dmesg = re.compile(r"\[\s*(?P<timestamp>\d+\.\d+)\] (?P<msg>.*)$")
@@ -99,5 +100,10 @@ if lines <= 0:
     matched = []
     matched.append("parsing failed")
 
-pickle.dump(status_data, open(status_file, "wb"))
+try:
+    pickle.dump(status_data, open(status_file, "wb"))
+except:
+    status="ERROR"
+    matched.append("but storing status failed")
+
 sys.stdout.write("%s: %s\n" % (status, ", ".join(matched)))
