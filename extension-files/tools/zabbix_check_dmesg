@@ -24,6 +24,9 @@ try:
 except ImportError:
     import pickle
 
+######################################################################################################
+# HELPERS
+######################################################################################################
 
 def get_status_data(statusfile):
     data = {}
@@ -32,7 +35,8 @@ def get_status_data(statusfile):
         mtime_statusfile = os.stat(statusfile).st_mtime
         mtime_kmsg = os.stat("/dev/kmsg").st_mtime
         if mtime_statusfile < mtime_kmsg:
-           sys.stderr.write("Skipping load of old status data, old status file from before last boot detected (/proc/kmsg younger than %s)" % statusfile)
+           sys.stderr.write("Skipping load of old status data, old status file from "+
+                            "before last boot detected (/proc/kmsg younger than %s)" % statusfile)
         else:
            try:
                data = pickle.load(open(statusfile, "rb"))
@@ -43,6 +47,7 @@ def get_status_data(statusfile):
 
 ######################################################################################################
 # MAIN
+######################################################################################################
 
 EXECUTABLE = os.path.basename(__file__)
 
@@ -104,6 +109,6 @@ try:
     pickle.dump(status_data, open(status_file, "wb"))
 except:
     status="ERROR"
-    matched.append("but storing status failed")
+    matched.append("but storing status to %s failed" % status_file)
 
 sys.stdout.write("%s: %s\n" % (status, ", ".join(matched)))
