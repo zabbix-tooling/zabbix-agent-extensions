@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
     <version>3.4</version>
-    <date>2017-11-17T10:58:49Z</date>
+    <date>2018-01-03T09:40:59Z</date>
     <groups>
         <group>
             <name>Templates</name>
@@ -58,7 +58,7 @@
             <items>
                 <item>
                     <name>Zabbix Agent Ping</name>
-                    <type>0</type>
+                    <type>7</type>
                     <snmp_community/>
                     <snmp_oid/>
                     <key>agent.ping</key>
@@ -99,7 +99,7 @@
                 </item>
                 <item>
                     <name>Zabbix Agent Release</name>
-                    <type>0</type>
+                    <type>7</type>
                     <snmp_community/>
                     <snmp_oid/>
                     <key>agent.version</key>
@@ -143,13 +143,13 @@
                     <type>3</type>
                     <snmp_community/>
                     <snmp_oid/>
-                    <key>icmpping[,,,,]</key>
-                    <delay>1m</delay>
+                    <key>icmpping[,1,,,]</key>
+                    <delay>2m</delay>
                     <history>1w</history>
                     <trends>365d</trends>
                     <status>0</status>
                     <value_type>3</value_type>
-                    <allowed_hosts>localhost</allowed_hosts>
+                    <allowed_hosts/>
                     <units/>
                     <snmpv3_contextname/>
                     <snmpv3_securityname/>
@@ -181,7 +181,7 @@
                 </item>
                 <item>
                     <name>Maximum number of processes</name>
-                    <type>0</type>
+                    <type>7</type>
                     <snmp_community/>
                     <snmp_oid/>
                     <key>kernel.maxproc</key>
@@ -222,7 +222,7 @@
                 </item>
                 <item>
                     <name>Linux Kernel Dmesg Health</name>
-                    <type>0</type>
+                    <type>7</type>
                     <snmp_community/>
                     <snmp_oid/>
                     <key>linux.dmesg</key>
@@ -263,7 +263,7 @@
                 </item>
                 <item>
                     <name>Multipathing Device Mapping</name>
-                    <type>0</type>
+                    <type>7</type>
                     <snmp_community/>
                     <snmp_oid/>
                     <key>linux.multipath</key>
@@ -304,7 +304,7 @@
                 </item>
                 <item>
                     <name>MTA Queue Total number of frozen messages</name>
-                    <type>0</type>
+                    <type>7</type>
                     <snmp_community/>
                     <snmp_oid/>
                     <key>mailq.count.frozen</key>
@@ -345,7 +345,7 @@
                 </item>
                 <item>
                     <name>MTA Queue Total number of messages</name>
-                    <type>0</type>
+                    <type>7</type>
                     <snmp_community/>
                     <snmp_oid/>
                     <key>mailq.count.general</key>
@@ -386,7 +386,7 @@
                 </item>
                 <item>
                     <name>SMTP Server</name>
-                    <type>0</type>
+                    <type>7</type>
                     <snmp_community/>
                     <snmp_oid/>
                     <key>net.tcp.service[smtp,,25]</key>
@@ -429,7 +429,7 @@
                 </item>
                 <item>
                     <name>SSH Server</name>
-                    <type>0</type>
+                    <type>7</type>
                     <snmp_community/>
                     <snmp_oid/>
                     <key>net.tcp.service[ssh,,22]</key>
@@ -472,7 +472,7 @@
                 </item>
                 <item>
                     <name>NFS RPC Calls</name>
-                    <type>0</type>
+                    <type>7</type>
                     <snmp_community/>
                     <snmp_oid/>
                     <key>nfs.rpc.calls</key>
@@ -518,7 +518,7 @@
                 </item>
                 <item>
                     <name>NFS RPC Retransmits</name>
-                    <type>0</type>
+                    <type>7</type>
                     <snmp_community/>
                     <snmp_oid/>
                     <key>nfs.rpc.retransmits</key>
@@ -564,7 +564,7 @@
                 </item>
                 <item>
                     <name>NTP good peer count</name>
-                    <type>0</type>
+                    <type>7</type>
                     <snmp_community/>
                     <snmp_oid/>
                     <key>ntpd.peers.goodcount</key>
@@ -607,7 +607,7 @@ A man with one watch knows what time it is. A man with two watches is never sure
                 </item>
                 <item>
                     <name>NTP Primary Peer Delay</name>
-                    <type>0</type>
+                    <type>7</type>
                     <snmp_community/>
                     <snmp_oid/>
                     <key>ntpd.primarypeer.stats[delay]</key>
@@ -648,7 +648,7 @@ A man with one watch knows what time it is. A man with two watches is never sure
                 </item>
                 <item>
                     <name>NTP Primary Peer RMS Jitter</name>
-                    <type>0</type>
+                    <type>7</type>
                     <snmp_community/>
                     <snmp_oid/>
                     <key>ntpd.primarypeer.stats[jitter]</key>
@@ -689,7 +689,7 @@ A man with one watch knows what time it is. A man with two watches is never sure
                 </item>
                 <item>
                     <name>NTP Primary Peer RMS Offset</name>
-                    <type>0</type>
+                    <type>7</type>
                     <snmp_community/>
                     <snmp_oid/>
                     <key>ntpd.primarypeer.stats[offset]</key>
@@ -730,7 +730,7 @@ A man with one watch knows what time it is. A man with two watches is never sure
                 </item>
                 <item>
                     <name>Memory in Userspace</name>
-                    <type>15</type>
+                    <type>7</type>
                     <snmp_community/>
                     <snmp_oid/>
                     <key>os.linux.memory.userspace</key>
@@ -771,7 +771,7 @@ A man with one watch knows what time it is. A man with two watches is never sure
                 </item>
                 <item>
                     <name>Number of running processes</name>
-                    <type>0</type>
+                    <type>7</type>
                     <snmp_community/>
                     <snmp_oid/>
                     <key>proc.num[,,run]</key>
@@ -812,7 +812,7 @@ A man with one watch knows what time it is. A man with two watches is never sure
                 </item>
                 <item>
                     <name>Number of zombie processes</name>
-                    <type>0</type>
+                    <type>7</type>
                     <snmp_community/>
                     <snmp_oid/>
                     <key>proc.num[,,zomb]</key>
@@ -853,7 +853,7 @@ A man with one watch knows what time it is. A man with two watches is never sure
                 </item>
                 <item>
                     <name>Cron Daemon</name>
-                    <type>0</type>
+                    <type>7</type>
                     <snmp_community/>
                     <snmp_oid/>
                     <key>proc.num[cron,,,]</key>
@@ -894,7 +894,7 @@ A man with one watch knows what time it is. A man with two watches is never sure
                 </item>
                 <item>
                     <name>Cron Daemon</name>
-                    <type>0</type>
+                    <type>7</type>
                     <snmp_community/>
                     <snmp_oid/>
                     <key>proc.num[crond,,,]</key>
@@ -935,7 +935,7 @@ A man with one watch knows what time it is. A man with two watches is never sure
                 </item>
                 <item>
                     <name>Number of processes</name>
-                    <type>0</type>
+                    <type>7</type>
                     <snmp_community/>
                     <snmp_oid/>
                     <key>proc.num[]</key>
@@ -976,7 +976,7 @@ A man with one watch knows what time it is. A man with two watches is never sure
                 </item>
                 <item>
                     <name>Interrupts per second</name>
-                    <type>0</type>
+                    <type>7</type>
                     <snmp_community/>
                     <snmp_oid/>
                     <key>system.cpu.intr</key>
@@ -1022,7 +1022,7 @@ A man with one watch knows what time it is. A man with two watches is never sure
                 </item>
                 <item>
                     <name>System Load 5min</name>
-                    <type>0</type>
+                    <type>7</type>
                     <snmp_community/>
                     <snmp_oid/>
                     <key>system.cpu.load[,avg5]</key>
@@ -1063,7 +1063,7 @@ A man with one watch knows what time it is. A man with two watches is never sure
                 </item>
                 <item>
                     <name>CPU Count</name>
-                    <type>0</type>
+                    <type>7</type>
                     <snmp_community/>
                     <snmp_oid/>
                     <key>system.cpu.num</key>
@@ -1104,7 +1104,7 @@ A man with one watch knows what time it is. A man with two watches is never sure
                 </item>
                 <item>
                     <name>CPU context switches</name>
-                    <type>0</type>
+                    <type>7</type>
                     <snmp_community/>
                     <snmp_oid/>
                     <key>system.cpu.switches</key>
@@ -1150,7 +1150,7 @@ A man with one watch knows what time it is. A man with two watches is never sure
                 </item>
                 <item>
                     <name>CPU $2 time ($3)</name>
-                    <type>0</type>
+                    <type>7</type>
                     <snmp_community/>
                     <snmp_oid/>
                     <key>system.cpu.util[,idle,avg1]</key>
@@ -1191,7 +1191,7 @@ A man with one watch knows what time it is. A man with two watches is never sure
                 </item>
                 <item>
                     <name>CPU interrupt time (avg1)</name>
-                    <type>0</type>
+                    <type>7</type>
                     <snmp_community/>
                     <snmp_oid/>
                     <key>system.cpu.util[,interrupt,avg1]</key>
@@ -1232,7 +1232,7 @@ A man with one watch knows what time it is. A man with two watches is never sure
                 </item>
                 <item>
                     <name>CPU $2 time ($3)</name>
-                    <type>0</type>
+                    <type>7</type>
                     <snmp_community/>
                     <snmp_oid/>
                     <key>system.cpu.util[,iowait,avg1]</key>
@@ -1273,7 +1273,7 @@ A man with one watch knows what time it is. A man with two watches is never sure
                 </item>
                 <item>
                     <name>CPU $2 time ($3)</name>
-                    <type>0</type>
+                    <type>7</type>
                     <snmp_community/>
                     <snmp_oid/>
                     <key>system.cpu.util[,nice,avg1]</key>
@@ -1314,7 +1314,7 @@ A man with one watch knows what time it is. A man with two watches is never sure
                 </item>
                 <item>
                     <name>CPU softirq time (avg1)</name>
-                    <type>0</type>
+                    <type>7</type>
                     <snmp_community/>
                     <snmp_oid/>
                     <key>system.cpu.util[,softirq,avg1]</key>
@@ -1355,7 +1355,7 @@ A man with one watch knows what time it is. A man with two watches is never sure
                 </item>
                 <item>
                     <name>CPU steal time (avg1)</name>
-                    <type>0</type>
+                    <type>7</type>
                     <snmp_community/>
                     <snmp_oid/>
                     <key>system.cpu.util[,steal,avg1]</key>
@@ -1396,7 +1396,7 @@ A man with one watch knows what time it is. A man with two watches is never sure
                 </item>
                 <item>
                     <name>CPU $2 time ($3)</name>
-                    <type>0</type>
+                    <type>7</type>
                     <snmp_community/>
                     <snmp_oid/>
                     <key>system.cpu.util[,system,avg1]</key>
@@ -1437,7 +1437,7 @@ A man with one watch knows what time it is. A man with two watches is never sure
                 </item>
                 <item>
                     <name>CPU user time (avg1)</name>
-                    <type>0</type>
+                    <type>7</type>
                     <snmp_community/>
                     <snmp_oid/>
                     <key>system.cpu.util[,user,avg1]</key>
@@ -1478,7 +1478,7 @@ A man with one watch knows what time it is. A man with two watches is never sure
                 </item>
                 <item>
                     <name>Swap In Pages</name>
-                    <type>0</type>
+                    <type>7</type>
                     <snmp_community/>
                     <snmp_oid/>
                     <key>system.swap.in[,pages]</key>
@@ -1524,7 +1524,7 @@ A man with one watch knows what time it is. A man with two watches is never sure
                 </item>
                 <item>
                     <name>Swap Out Pages</name>
-                    <type>0</type>
+                    <type>7</type>
                     <snmp_community/>
                     <snmp_oid/>
                     <key>system.swap.out[,pages]</key>
@@ -1570,7 +1570,7 @@ A man with one watch knows what time it is. A man with two watches is never sure
                 </item>
                 <item>
                     <name>Swap usage</name>
-                    <type>0</type>
+                    <type>7</type>
                     <snmp_community/>
                     <snmp_oid/>
                     <key>system.swap.size[,pused]</key>
@@ -1611,7 +1611,7 @@ A man with one watch knows what time it is. A man with two watches is never sure
                 </item>
                 <item>
                     <name>Server Uptime</name>
-                    <type>0</type>
+                    <type>7</type>
                     <snmp_community/>
                     <snmp_oid/>
                     <key>system.uptime</key>
@@ -1652,7 +1652,7 @@ A man with one watch knows what time it is. A man with two watches is never sure
                 </item>
                 <item>
                     <name>Number of logged in users</name>
-                    <type>0</type>
+                    <type>7</type>
                     <snmp_community/>
                     <snmp_oid/>
                     <key>system.users.num</key>
@@ -1693,7 +1693,7 @@ A man with one watch knows what time it is. A man with two watches is never sure
                 </item>
                 <item>
                     <name>Available entropy</name>
-                    <type>0</type>
+                    <type>7</type>
                     <snmp_community/>
                     <snmp_oid/>
                     <key>vfs.file.contents[/proc/sys/kernel/random/entropy_avail]</key>
@@ -1734,7 +1734,7 @@ A man with one watch knows what time it is. A man with two watches is never sure
                 </item>
                 <item>
                     <name>Reboot Required</name>
-                    <type>0</type>
+                    <type>7</type>
                     <snmp_community/>
                     <snmp_oid/>
                     <key>vfs.file.exists[/var/run/reboot-required]</key>
@@ -1775,7 +1775,7 @@ A man with one watch knows what time it is. A man with two watches is never sure
                 </item>
                 <item>
                     <name>MD Raid synchronous activity</name>
-                    <type>0</type>
+                    <type>7</type>
                     <snmp_community/>
                     <snmp_oid/>
                     <key>vfs.file.regmatch[/proc/mdstat,&quot;finish&quot;,,]</key>
@@ -1822,7 +1822,7 @@ Recovery:&#13;
                 </item>
                 <item>
                     <name>MD Raid Inconsistent Devices</name>
-                    <type>0</type>
+                    <type>7</type>
                     <snmp_community/>
                     <snmp_oid/>
                     <key>vfs.file.regmatch[/proc/mdstat,&quot;\[UU*\]&quot;,,]</key>
@@ -1869,7 +1869,7 @@ md1 : active raid1 sdb2[2] sda2[0]&#13;
                 </item>
                 <item>
                     <name>Memory Available</name>
-                    <type>0</type>
+                    <type>7</type>
                     <snmp_community/>
                     <snmp_oid/>
                     <key>vm.memory.size[available]</key>
@@ -1910,7 +1910,7 @@ md1 : active raid1 sdb2[2] sda2[0]&#13;
                 </item>
                 <item>
                     <name>Memory Buffers</name>
-                    <type>0</type>
+                    <type>7</type>
                     <snmp_community/>
                     <snmp_oid/>
                     <key>vm.memory.size[buffers]</key>
@@ -1951,7 +1951,7 @@ md1 : active raid1 sdb2[2] sda2[0]&#13;
                 </item>
                 <item>
                     <name>Memory Cached</name>
-                    <type>0</type>
+                    <type>7</type>
                     <snmp_community/>
                     <snmp_oid/>
                     <key>vm.memory.size[cached]</key>
@@ -1992,7 +1992,7 @@ md1 : active raid1 sdb2[2] sda2[0]&#13;
                 </item>
                 <item>
                     <name>Memory Free</name>
-                    <type>0</type>
+                    <type>7</type>
                     <snmp_community/>
                     <snmp_oid/>
                     <key>vm.memory.size[free]</key>
@@ -2033,7 +2033,7 @@ md1 : active raid1 sdb2[2] sda2[0]&#13;
                 </item>
                 <item>
                     <name>Memory Total</name>
-                    <type>0</type>
+                    <type>7</type>
                     <snmp_community/>
                     <snmp_oid/>
                     <key>vm.memory.size[total]</key>
@@ -2074,7 +2074,7 @@ md1 : active raid1 sdb2[2] sda2[0]&#13;
                 </item>
                 <item>
                     <name>Zabbix Agent Extension Release</name>
-                    <type>0</type>
+                    <type>7</type>
                     <snmp_community/>
                     <snmp_oid/>
                     <key>zabbix.agent_extensions.version</key>
@@ -2117,7 +2117,7 @@ md1 : active raid1 sdb2[2] sda2[0]&#13;
             <discovery_rules>
                 <discovery_rule>
                     <name>Network interfaces discovery</name>
-                    <type>0</type>
+                    <type>7</type>
                     <snmp_community/>
                     <snmp_oid/>
                     <key>net.if.discovery</key>
@@ -2156,7 +2156,7 @@ md1 : active raid1 sdb2[2] sda2[0]&#13;
                     <item_prototypes>
                         <item_prototype>
                             <name>Interface {#IFNAME} Bits Inbound</name>
-                            <type>0</type>
+                            <type>7</type>
                             <snmp_community/>
                             <snmp_oid/>
                             <key>net.if.in[{#IFNAME},bytes]</key>
@@ -2207,7 +2207,7 @@ md1 : active raid1 sdb2[2] sda2[0]&#13;
                         </item_prototype>
                         <item_prototype>
                             <name>Interface $1 Errors Inbound</name>
-                            <type>0</type>
+                            <type>7</type>
                             <snmp_community/>
                             <snmp_oid/>
                             <key>net.if.in[{#IFNAME},errors]</key>
@@ -2254,7 +2254,7 @@ md1 : active raid1 sdb2[2] sda2[0]&#13;
                         </item_prototype>
                         <item_prototype>
                             <name>Interface {#IFNAME} Packets Inbound</name>
-                            <type>0</type>
+                            <type>7</type>
                             <snmp_community/>
                             <snmp_oid/>
                             <key>net.if.in[{#IFNAME},packets]</key>
@@ -2301,7 +2301,7 @@ md1 : active raid1 sdb2[2] sda2[0]&#13;
                         </item_prototype>
                         <item_prototype>
                             <name>Interface {#IFNAME} Bits Outbound</name>
-                            <type>0</type>
+                            <type>7</type>
                             <snmp_community/>
                             <snmp_oid/>
                             <key>net.if.out[{#IFNAME},bytes]</key>
@@ -2352,7 +2352,7 @@ md1 : active raid1 sdb2[2] sda2[0]&#13;
                         </item_prototype>
                         <item_prototype>
                             <name>Interface $1 Errors Outbound</name>
-                            <type>0</type>
+                            <type>7</type>
                             <snmp_community/>
                             <snmp_oid/>
                             <key>net.if.out[{#IFNAME},errors]</key>
@@ -2399,7 +2399,7 @@ md1 : active raid1 sdb2[2] sda2[0]&#13;
                         </item_prototype>
                         <item_prototype>
                             <name>Interface {#IFNAME} Packets Outbound</name>
-                            <type>0</type>
+                            <type>7</type>
                             <snmp_community/>
                             <snmp_oid/>
                             <key>net.if.out[{#IFNAME},packets]</key>
@@ -2602,7 +2602,7 @@ md1 : active raid1 sdb2[2] sda2[0]&#13;
                 </discovery_rule>
                 <discovery_rule>
                     <name>Block Device discovery</name>
-                    <type>0</type>
+                    <type>7</type>
                     <snmp_community/>
                     <snmp_oid/>
                     <key>vfs.dev.discovery</key>
@@ -2641,7 +2641,7 @@ md1 : active raid1 sdb2[2] sda2[0]&#13;
                     <item_prototypes>
                         <item_prototype>
                             <name>Disk {#BLOCKDEVICE} Read IOPS</name>
-                            <type>0</type>
+                            <type>7</type>
                             <snmp_community/>
                             <snmp_oid/>
                             <key>vfs.dev.read[{#BLOCKDEVICE},ops,avg1]</key>
@@ -2683,7 +2683,7 @@ md1 : active raid1 sdb2[2] sda2[0]&#13;
                         </item_prototype>
                         <item_prototype>
                             <name>Disk {#BLOCKDEVICE} Read SPS</name>
-                            <type>0</type>
+                            <type>7</type>
                             <snmp_community/>
                             <snmp_oid/>
                             <key>vfs.dev.read[{#BLOCKDEVICE},sps,avg1]</key>
@@ -2725,7 +2725,7 @@ md1 : active raid1 sdb2[2] sda2[0]&#13;
                         </item_prototype>
                         <item_prototype>
                             <name>Disk {#BLOCKDEVICE} Write IOPS</name>
-                            <type>0</type>
+                            <type>7</type>
                             <snmp_community/>
                             <snmp_oid/>
                             <key>vfs.dev.write[{#BLOCKDEVICE},ops,avg1]</key>
@@ -2767,7 +2767,7 @@ md1 : active raid1 sdb2[2] sda2[0]&#13;
                         </item_prototype>
                         <item_prototype>
                             <name>Disk {#BLOCKDEVICE} Write SPS</name>
-                            <type>0</type>
+                            <type>7</type>
                             <snmp_community/>
                             <snmp_oid/>
                             <key>vfs.dev.write[{#BLOCKDEVICE},sps,avg1]</key>
@@ -2904,7 +2904,7 @@ md1 : active raid1 sdb2[2] sda2[0]&#13;
                 </discovery_rule>
                 <discovery_rule>
                     <name>Filesystems discovery</name>
-                    <type>0</type>
+                    <type>7</type>
                     <snmp_community/>
                     <snmp_oid/>
                     <key>vfs.fs.discovery</key>
@@ -2943,7 +2943,7 @@ md1 : active raid1 sdb2[2] sda2[0]&#13;
                     <item_prototypes>
                         <item_prototype>
                             <name>Disk {#FSNAME} inode use percentage</name>
-                            <type>0</type>
+                            <type>7</type>
                             <snmp_community/>
                             <snmp_oid/>
                             <key>vfs.fs.inode[{#FSNAME},pused]</key>
@@ -2985,7 +2985,7 @@ md1 : active raid1 sdb2[2] sda2[0]&#13;
                         </item_prototype>
                         <item_prototype>
                             <name>Disk {#FSNAME} inode total</name>
-                            <type>0</type>
+                            <type>7</type>
                             <snmp_community/>
                             <snmp_oid/>
                             <key>vfs.fs.inode[{#FSNAME},total]</key>
@@ -3027,7 +3027,7 @@ md1 : active raid1 sdb2[2] sda2[0]&#13;
                         </item_prototype>
                         <item_prototype>
                             <name>Disk {#FSNAME} inode usage</name>
-                            <type>0</type>
+                            <type>7</type>
                             <snmp_community/>
                             <snmp_oid/>
                             <key>vfs.fs.inode[{#FSNAME},used]</key>
@@ -3069,7 +3069,7 @@ md1 : active raid1 sdb2[2] sda2[0]&#13;
                         </item_prototype>
                         <item_prototype>
                             <name>Disk {#FSNAME} size use percentage</name>
-                            <type>0</type>
+                            <type>7</type>
                             <snmp_community/>
                             <snmp_oid/>
                             <key>vfs.fs.size[{#FSNAME},pused]</key>
@@ -3111,7 +3111,7 @@ md1 : active raid1 sdb2[2] sda2[0]&#13;
                         </item_prototype>
                         <item_prototype>
                             <name>Disk {#FSNAME} space total</name>
-                            <type>0</type>
+                            <type>7</type>
                             <snmp_community/>
                             <snmp_oid/>
                             <key>vfs.fs.size[{#FSNAME},total]</key>
@@ -3153,7 +3153,7 @@ md1 : active raid1 sdb2[2] sda2[0]&#13;
                         </item_prototype>
                         <item_prototype>
                             <name>Disk {#FSNAME} space usage</name>
-                            <type>0</type>
+                            <type>7</type>
                             <snmp_community/>
                             <snmp_oid/>
                             <key>vfs.fs.size[{#FSNAME},used]</key>
@@ -3362,7 +3362,7 @@ md1 : active raid1 sdb2[2] sda2[0]&#13;
                 </macro>
                 <macro>
                     <macro>{$MIN_NTP_SERVER_COUNT}</macro>
-                    <value>2</value>
+                    <value>1</value>
                 </macro>
                 <macro>
                     <macro>{$MONITOR_LOAD_WARNING_MULT}</macro>
@@ -3877,7 +3877,7 @@ md1 : active raid1 sdb2[2] sda2[0]&#13;
             <tags/>
         </trigger>
         <trigger>
-            <expression>{Custom - OS - Linux:icmpping[,,,,].count(#3,0,&quot;eq&quot;)}=3</expression>
+            <expression>{Custom - OS - Linux:icmpping[,1,,,].count(#3,0,&quot;eq&quot;)}=3</expression>
             <recovery_mode>0</recovery_mode>
             <recovery_expression/>
             <name>ICMP Ping</name>
@@ -3889,11 +3889,17 @@ md1 : active raid1 sdb2[2] sda2[0]&#13;
             <description>Host is not reachable by a icmp-echo request for the last three measures or not measurement data arrived in the last 900 seconds(15min).</description>
             <type>0</type>
             <manual_close>0</manual_close>
-            <dependencies/>
+            <dependencies>
+                <dependency>
+                    <name>ICMP Ping no data for {$MONITOR_TIMEOUT} seconds</name>
+                    <expression>{Custom - OS - Linux:icmpping[,1,,,].nodata({$MONITOR_TIMEOUT})}=1</expression>
+                    <recovery_expression/>
+                </dependency>
+            </dependencies>
             <tags/>
         </trigger>
         <trigger>
-            <expression>{Custom - OS - Linux:icmpping[,,,,].nodata({$MONITOR_TIMEOUT})}=1</expression>
+            <expression>{Custom - OS - Linux:icmpping[,1,,,].nodata({$MONITOR_TIMEOUT})}=1</expression>
             <recovery_mode>0</recovery_mode>
             <recovery_expression/>
             <name>ICMP Ping no data for {$MONITOR_TIMEOUT} seconds</name>
@@ -3901,7 +3907,7 @@ md1 : active raid1 sdb2[2] sda2[0]&#13;
             <correlation_tag/>
             <url/>
             <status>0</status>
-            <priority>4</priority>
+            <priority>3</priority>
             <description>Host is not reachable by a icmp-echo request for the last three measures or not measurement.</description>
             <type>0</type>
             <manual_close>0</manual_close>
@@ -4094,7 +4100,7 @@ Remove the flagfile if you decide that no reboot is required (/var/run/reboot-re
             <correlation_tag/>
             <url/>
             <status>0</status>
-            <priority>3</priority>
+            <priority>2</priority>
             <description/>
             <type>0</type>
             <manual_close>0</manual_close>
@@ -4110,7 +4116,7 @@ Remove the flagfile if you decide that no reboot is required (/var/run/reboot-re
             <correlation_tag/>
             <url/>
             <status>0</status>
-            <priority>2</priority>
+            <priority>3</priority>
             <description/>
             <type>0</type>
             <manual_close>0</manual_close>
@@ -4159,13 +4165,14 @@ Remove the flagfile if you decide that no reboot is required (/var/run/reboot-re
             <url/>
             <status>0</status>
             <priority>4</priority>
-            <description>Zabbix agent does not respond to a ping request in the last two calls or no information about &#13; agent-status is received in the last 30 minutes.</description>
+            <description>Zabbix agent does not respond to a ping request in the last two calls or no information about &#13;
+ agent-status is received in the last 30 minutes.</description>
             <type>0</type>
             <manual_close>0</manual_close>
             <dependencies>
                 <dependency>
                     <name>ICMP Ping</name>
-                    <expression>{Custom - OS - Linux:icmpping[,,,,].count(#3,0,&quot;eq&quot;)}=3</expression>
+                    <expression>{Custom - OS - Linux:icmpping[,1,,,].count(#3,0,&quot;eq&quot;)}=3</expression>
                     <recovery_expression/>
                 </dependency>
             </dependencies>
@@ -4180,17 +4187,11 @@ Remove the flagfile if you decide that no reboot is required (/var/run/reboot-re
             <correlation_tag/>
             <url/>
             <status>0</status>
-            <priority>2</priority>
+            <priority>3</priority>
             <description>No measurement information about agent-status is received in the last {$AGENT_TIMEOUT} seconds</description>
             <type>0</type>
             <manual_close>0</manual_close>
-            <dependencies>
-                <dependency>
-                    <name>ICMP Ping</name>
-                    <expression>{Custom - OS - Linux:icmpping[,,,,].count(#3,0,&quot;eq&quot;)}=3</expression>
-                    <recovery_expression/>
-                </dependency>
-            </dependencies>
+            <dependencies/>
             <tags/>
         </trigger>
     </triggers>
@@ -4466,7 +4467,7 @@ Remove the flagfile if you decide that no reboot is required (/var/run/reboot-re
                     <drawtype>0</drawtype>
                     <color>00C800</color>
                     <yaxisside>0</yaxisside>
-                    <calc_fnc>2</calc_fnc>
+                    <calc_fnc>4</calc_fnc>
                     <type>0</type>
                     <item>
                         <host>Custom - OS - Linux</host>
@@ -4477,8 +4478,8 @@ Remove the flagfile if you decide that no reboot is required (/var/run/reboot-re
                     <sortorder>1</sortorder>
                     <drawtype>0</drawtype>
                     <color>C80000</color>
-                    <yaxisside>0</yaxisside>
-                    <calc_fnc>2</calc_fnc>
+                    <yaxisside>1</yaxisside>
+                    <calc_fnc>4</calc_fnc>
                     <type>0</type>
                     <item>
                         <host>Custom - OS - Linux</host>
