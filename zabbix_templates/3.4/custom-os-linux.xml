@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
     <version>3.4</version>
-    <date>2018-01-03T09:40:59Z</date>
+    <date>2018-01-15T03:33:16Z</date>
     <groups>
         <group>
             <name>Templates</name>
@@ -730,7 +730,7 @@ A man with one watch knows what time it is. A man with two watches is never sure
                 </item>
                 <item>
                     <name>Memory in Userspace</name>
-                    <type>7</type>
+                    <type>15</type>
                     <snmp_community/>
                     <snmp_oid/>
                     <key>os.linux.memory.userspace</key>
@@ -2808,52 +2808,25 @@ md1 : active raid1 sdb2[2] sda2[0]&#13;
                             <master_item_prototype/>
                         </item_prototype>
                     </item_prototypes>
-                    <trigger_prototypes/>
+                    <trigger_prototypes>
+                        <trigger_prototype>
+                            <expression>{Custom - OS - Linux:vfs.dev.write[{#BLOCKDEVICE},ops,avg1].avg(#10)}&gt; {$DISK_HIGH_IOPS_LIMIT}</expression>
+                            <recovery_mode>0</recovery_mode>
+                            <recovery_expression/>
+                            <name>Blockdevice {#BLOCKDEVICE} write limit {$DISK_HIGH_IOPS_LIMIT}/sec reached, currently {ITEM.VALUE1}/sec</name>
+                            <correlation_mode>0</correlation_mode>
+                            <correlation_tag/>
+                            <url/>
+                            <status>1</status>
+                            <priority>1</priority>
+                            <description/>
+                            <type>0</type>
+                            <manual_close>0</manual_close>
+                            <dependencies/>
+                            <tags/>
+                        </trigger_prototype>
+                    </trigger_prototypes>
                     <graph_prototypes>
-                        <graph_prototype>
-                            <name>Blockdevice {#BLOCKDEVICE} BPS</name>
-                            <width>900</width>
-                            <height>300</height>
-                            <yaxismin>0.0000</yaxismin>
-                            <yaxismax>100.0000</yaxismax>
-                            <show_work_period>1</show_work_period>
-                            <show_triggers>1</show_triggers>
-                            <type>1</type>
-                            <show_legend>1</show_legend>
-                            <show_3d>0</show_3d>
-                            <percent_left>0.0000</percent_left>
-                            <percent_right>0.0000</percent_right>
-                            <ymin_type_1>1</ymin_type_1>
-                            <ymax_type_1>0</ymax_type_1>
-                            <ymin_item_1>0</ymin_item_1>
-                            <ymax_item_1>0</ymax_item_1>
-                            <graph_items>
-                                <graph_item>
-                                    <sortorder>0</sortorder>
-                                    <drawtype>0</drawtype>
-                                    <color>00C800</color>
-                                    <yaxisside>0</yaxisside>
-                                    <calc_fnc>4</calc_fnc>
-                                    <type>0</type>
-                                    <item>
-                                        <host>Custom - OS - Linux</host>
-                                        <key>vfs.dev.read[{#BLOCKDEVICE},sps,avg1]</key>
-                                    </item>
-                                </graph_item>
-                                <graph_item>
-                                    <sortorder>1</sortorder>
-                                    <drawtype>0</drawtype>
-                                    <color>DD0000</color>
-                                    <yaxisside>0</yaxisside>
-                                    <calc_fnc>4</calc_fnc>
-                                    <type>0</type>
-                                    <item>
-                                        <host>Custom - OS - Linux</host>
-                                        <key>vfs.dev.write[{#BLOCKDEVICE},sps,avg1]</key>
-                                    </item>
-                                </graph_item>
-                            </graph_items>
-                        </graph_prototype>
                         <graph_prototype>
                             <name>Blockdevice {#BLOCKDEVICE} IOPS</name>
                             <width>900</width>
@@ -2894,6 +2867,50 @@ md1 : active raid1 sdb2[2] sda2[0]&#13;
                                     <item>
                                         <host>Custom - OS - Linux</host>
                                         <key>vfs.dev.write[{#BLOCKDEVICE},ops,avg1]</key>
+                                    </item>
+                                </graph_item>
+                            </graph_items>
+                        </graph_prototype>
+                        <graph_prototype>
+                            <name>Blockdevice {#BLOCKDEVICE} SPS</name>
+                            <width>900</width>
+                            <height>300</height>
+                            <yaxismin>0.0000</yaxismin>
+                            <yaxismax>100.0000</yaxismax>
+                            <show_work_period>1</show_work_period>
+                            <show_triggers>1</show_triggers>
+                            <type>1</type>
+                            <show_legend>1</show_legend>
+                            <show_3d>0</show_3d>
+                            <percent_left>0.0000</percent_left>
+                            <percent_right>0.0000</percent_right>
+                            <ymin_type_1>1</ymin_type_1>
+                            <ymax_type_1>0</ymax_type_1>
+                            <ymin_item_1>0</ymin_item_1>
+                            <ymax_item_1>0</ymax_item_1>
+                            <graph_items>
+                                <graph_item>
+                                    <sortorder>0</sortorder>
+                                    <drawtype>0</drawtype>
+                                    <color>00C800</color>
+                                    <yaxisside>0</yaxisside>
+                                    <calc_fnc>4</calc_fnc>
+                                    <type>0</type>
+                                    <item>
+                                        <host>Custom - OS - Linux</host>
+                                        <key>vfs.dev.read[{#BLOCKDEVICE},sps,avg1]</key>
+                                    </item>
+                                </graph_item>
+                                <graph_item>
+                                    <sortorder>1</sortorder>
+                                    <drawtype>0</drawtype>
+                                    <color>DD0000</color>
+                                    <yaxisside>0</yaxisside>
+                                    <calc_fnc>4</calc_fnc>
+                                    <type>0</type>
+                                    <item>
+                                        <host>Custom - OS - Linux</host>
+                                        <key>vfs.dev.write[{#BLOCKDEVICE},sps,avg1]</key>
                                     </item>
                                 </graph_item>
                             </graph_items>
@@ -3349,6 +3366,10 @@ md1 : active raid1 sdb2[2] sda2[0]&#13;
             <httptests/>
             <macros>
                 <macro>
+                    <macro>{$DISK_HIGH_IOPS_LIMIT}</macro>
+                    <value>150</value>
+                </macro>
+                <macro>
                     <macro>{$DISK_USAGE_PERCENT_ALARM}</macro>
                     <value>97</value>
                 </macro>
@@ -3418,7 +3439,7 @@ md1 : active raid1 sdb2[2] sda2[0]&#13;
                             <dynamic>0</dynamic>
                             <sort_triggers>0</sort_triggers>
                             <resource>
-                                <name>Blockdevice {#BLOCKDEVICE} BPS</name>
+                                <name>Blockdevice {#BLOCKDEVICE} SPS</name>
                                 <host>Custom - OS - Linux</host>
                             </resource>
                             <max_columns>1</max_columns>
@@ -4050,7 +4071,7 @@ This trigger does not recover automatically, to get rid of this trigger, you hav
             <correlation_tag/>
             <url/>
             <status>0</status>
-            <priority>3</priority>
+            <priority>2</priority>
             <description/>
             <type>0</type>
             <manual_close>0</manual_close>

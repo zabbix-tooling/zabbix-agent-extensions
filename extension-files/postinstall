@@ -29,15 +29,3 @@ else
    echo "Notice: no postinstall implemented for you distribution, contributions and merge requests are very welcome ;-)"
 fi
 
-if (grep -qi "Centos" /etc/os-release);then
-  echo "Installing SELinux rules"
-  checkmodule -M -m -o /var/run/zabbix/zabbix_agent.mod /usr/share/zabbix-agent-extensions/selinux/centos_zabbix_agent.te
-  semodule_package -m /var/run/zabbix/zabbix_agent.mod -o /var/run/zabbix/centos_zabbix_agent.pp
-  semodule -i /var/run/zabbix/centos_zabbix_agent.pp
-fi
-
-if (grep -q "Debian" /etc/os-release);then
- echo "Installing sysctl config"
- echo "kernel.dmesg_restrict=0" > /etc/sysctl.d/99-dmesg.conf
- sysctl -p
-fi
