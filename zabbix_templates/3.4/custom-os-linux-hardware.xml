@@ -639,30 +639,6 @@
             </discovery_rules>
             <httptests/>
             <macros>
-                <macro>
-                    <macro>{$DISK_USAGE_PERCENT_ALARM}</macro>
-                    <value>97</value>
-                </macro>
-                <macro>
-                    <macro>{$MAXIMUM_NUMBER_RETRANSMISSIONS}</macro>
-                    <value>1</value>
-                </macro>
-                <macro>
-                    <macro>{$MAX_NTP_OFFSET_MS}</macro>
-                    <value>100</value>
-                </macro>
-                <macro>
-                    <macro>{$MIN_NTP_SERVER_COUNT}</macro>
-                    <value>2</value>
-                </macro>
-                <macro>
-                    <macro>{$MONITOR_LOAD_WARNING_MULT}</macro>
-                    <value>5</value>
-                </macro>
-                <macro>
-                    <macro>{$MONITOR_TIMEOUT}</macro>
-                    <value>14400</value>
-                </macro>
             </macros>
             <templates/>
             <screens>
