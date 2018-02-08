@@ -12,8 +12,7 @@ import socket
 
 # Define the fail message
 def zbx_fail():
-    print
-    "ZBX_NOTSUPPORTED"
+    print("ZBX_NOTSUPPORTED")
     sys.exit(2)
 
 
@@ -127,7 +126,6 @@ else:  # Not clusterwide, check the next arg
 if returnval is None:
     zbx_fail()
 else:
-    print
-    returnval
+    print(returnval)
 
 # End
