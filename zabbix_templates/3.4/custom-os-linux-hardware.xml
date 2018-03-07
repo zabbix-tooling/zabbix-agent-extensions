@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
     <version>3.4</version>
-    <date>2017-11-19T08:49:37Z</date>
+    <date>2018-03-07T20:39:24Z</date>
     <groups>
         <group>
             <name>Templates</name>
@@ -26,7 +26,7 @@
             <discovery_rules>
                 <discovery_rule>
                     <name>Hard Disk discovery</name>
-                    <type>0</type>
+                    <type>7</type>
                     <snmp_community/>
                     <snmp_oid/>
                     <key>vfs.dev.discovery.rawdisks</key>
@@ -65,7 +65,7 @@
                     <item_prototypes>
                         <item_prototype>
                             <name>{#BLOCKDEVICE} Smart Health Status</name>
-                            <type>0</type>
+                            <type>7</type>
                             <snmp_community/>
                             <snmp_oid/>
                             <key>hardware.disk.health[{#BLOCKDEVICE}]</key>
@@ -107,7 +107,7 @@
                         </item_prototype>
                         <item_prototype>
                             <name>{#BLOCKDEVICE}: ID 197 Current_Pending_Sector</name>
-                            <type>0</type>
+                            <type>7</type>
                             <snmp_community/>
                             <snmp_oid/>
                             <key>hardware.disk.smart.attributes[{#BLOCKDEVICE},Current_Pending_Sector]</key>
@@ -149,7 +149,7 @@
                         </item_prototype>
                         <item_prototype>
                             <name>{#BLOCKDEVICE}: ID 198 Offline_Uncorrectable</name>
-                            <type>0</type>
+                            <type>7</type>
                             <snmp_community/>
                             <snmp_oid/>
                             <key>hardware.disk.smart.attributes[{#BLOCKDEVICE},Offline_Uncorrectable]</key>
@@ -191,7 +191,7 @@
                         </item_prototype>
                         <item_prototype>
                             <name>{#BLOCKDEVICE}: ID 9 Power On Hours</name>
-                            <type>0</type>
+                            <type>7</type>
                             <snmp_community/>
                             <snmp_oid/>
                             <key>hardware.disk.smart.attributes[{#BLOCKDEVICE},Power_On_Hours]</key>
@@ -238,7 +238,7 @@
                         </item_prototype>
                         <item_prototype>
                             <name>{#BLOCKDEVICE}: ID 5 Reallocated Sectors Count</name>
-                            <type>0</type>
+                            <type>7</type>
                             <snmp_community/>
                             <snmp_oid/>
                             <key>hardware.disk.smart.attributes[{#BLOCKDEVICE},Reallocated_Sector_Ct]</key>
@@ -280,7 +280,7 @@
                         </item_prototype>
                         <item_prototype>
                             <name>{#BLOCKDEVICE}: ID 10 Spin_Retry_Count</name>
-                            <type>0</type>
+                            <type>7</type>
                             <snmp_community/>
                             <snmp_oid/>
                             <key>hardware.disk.smart.attributes[{#BLOCKDEVICE},Spin_Retry_Count]</key>
@@ -322,7 +322,7 @@
                         </item_prototype>
                         <item_prototype>
                             <name>{#BLOCKDEVICE}: ID 194 Temperature</name>
-                            <type>0</type>
+                            <type>7</type>
                             <snmp_community/>
                             <snmp_oid/>
                             <key>hardware.disk.smart.attributes[{#BLOCKDEVICE},Temperature_Celsius]</key>
@@ -364,7 +364,7 @@
                         </item_prototype>
                         <item_prototype>
                             <name>{#BLOCKDEVICE}: ID 199 UDMA_CRC_Error</name>
-                            <type>0</type>
+                            <type>7</type>
                             <snmp_community/>
                             <snmp_oid/>
                             <key>hardware.disk.smart.attributes[{#BLOCKDEVICE},UDMA_CRC_Error_Count]</key>
@@ -406,7 +406,7 @@
                         </item_prototype>
                         <item_prototype>
                             <name>{#BLOCKDEVICE} Device model</name>
-                            <type>0</type>
+                            <type>7</type>
                             <snmp_community/>
                             <snmp_oid/>
                             <key>hardware.disk.smart.info[{#BLOCKDEVICE},Device Model]</key>
@@ -448,7 +448,7 @@
                         </item_prototype>
                         <item_prototype>
                             <name>{#BLOCKDEVICE} Serial Number</name>
-                            <type>0</type>
+                            <type>7</type>
                             <snmp_community/>
                             <snmp_oid/>
                             <key>hardware.disk.smart.info[{#BLOCKDEVICE},Serial Number]</key>
@@ -639,6 +639,30 @@
             </discovery_rules>
             <httptests/>
             <macros>
+                <macro>
+                    <macro>{$DISK_USAGE_PERCENT_ALARM}</macro>
+                    <value>97</value>
+                </macro>
+                <macro>
+                    <macro>{$MAXIMUM_NUMBER_RETRANSMISSIONS}</macro>
+                    <value>1</value>
+                </macro>
+                <macro>
+                    <macro>{$MAX_NTP_OFFSET_MS}</macro>
+                    <value>100</value>
+                </macro>
+                <macro>
+                    <macro>{$MIN_NTP_SERVER_COUNT}</macro>
+                    <value>2</value>
+                </macro>
+                <macro>
+                    <macro>{$MONITOR_LOAD_WARNING_MULT}</macro>
+                    <value>5</value>
+                </macro>
+                <macro>
+                    <macro>{$MONITOR_TIMEOUT}</macro>
+                    <value>14400</value>
+                </macro>
             </macros>
             <templates/>
             <screens>
