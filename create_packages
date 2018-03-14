@@ -10,6 +10,8 @@ VERSION="${1:-$(git describe --abbrev=0 --tags)}"
 
 prepare(){
 
+   PY="$1"
+
 	echo "***************************************************************************************************************************************"
 	echo "PREPARE"
    set -e
@@ -18,6 +20,10 @@ prepare(){
 	mkdir -p -m 755 ${TMPDIR}/usr/bin/
 	cp -av ${SDIR}/tools/* ${TMPDIR}/usr/bin/
 	chmod 755 ${TMPDIR}/usr/bin/*
+
+   if [ "$PY" = "2" ];then
+     sed -i '~s,#!/usr/bin/env python3,#!/usr/bin/env python,' ${TMPDIR}/usr/bin/*
+   fi
 
 	mkdir -p -m 755 ${TMPDIR}/usr/share/zabbix-agent-extensions/include.d/
 	cp -av ${SDIR}/agent-config/* ${TMPDIR}/usr/share/zabbix-agent-extensions/include.d/
@@ -44,12 +50,19 @@ prepare(){
 
 create_package(){
 	TYPE="$1"
+   PY="$2"
+
+   if [ "$PY" = "3" ];then
+      SUFFIX=""
+   else
+      SUFFIX="-python2"
+   fi
    echo "***************************************************************************************************************************************"
    echo "PACKAGE TYPE: $TYPE"
    echo
    set -x
    fpm -s dir -t $TYPE \
-		-n zabbix-agent-extensions \
+		-n "zabbix-agent-extensions$SUFFIX" \
       --license GPLv2 \
       -a all \
 	   --deb-no-default-config-files \
@@ -65,10 +78,10 @@ create_package(){
    set +x
 
    if [ "$TYPE" = "deb" ];then
-   	dpkg -c zabbix-agent-extensions_*.deb
+   	dpkg -c zabbix-agent-extensions${SUFFIX}_${VERSION}_all.deb
       RET="$?"
    elif [ "$TYPE" = "rpm" ];then
-      rpm -qlp zabbix-agent-extensions*.rpm
+      rpm -qlp zabbix-agent-extensions${SUFFIX}-${VERSION}-1.noarch.rpm
       RET="$?"
    fi
    if [ "$RET" != "0" ];then
@@ -108,9 +121,17 @@ rm -rf zabbix-agent-extensions_*.deb zabbix-agent-extensions*.rpm
 TMPDIR="$(mktemp -d)"
 trap "rm -rf $TMPDIR" EXIT TERM INT
 
-prepare
-create_package deb
-create_package rpm
+prepare 3
+create_package deb 3
+create_package rpm 3
+rm -rf $TMPDIR
+trap "" EXIT TERM INT
+
+TMPDIR="$(mktemp -d)"
+trap "rm -rf $TMPDIR" EXIT TERM INT
+prepare 2
+create_package deb 2
+create_package rpm 2
 create_docu
 
 exit 0

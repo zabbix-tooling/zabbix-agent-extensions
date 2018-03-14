@@ -38,6 +38,24 @@
 <tr>
 <th>Name</th><th>Default</th>
 </tr>
+<tr>
+<td>{$DISK_USAGE_PERCENT_ALARM}</td><td>97</td>
+</tr>
+<tr>
+<td>{$MAXIMUM_NUMBER_RETRANSMISSIONS}</td><td>1</td>
+</tr>
+<tr>
+<td>{$MAX_NTP_OFFSET_MS}</td><td>100</td>
+</tr>
+<tr>
+<td>{$MIN_NTP_SERVER_COUNT}</td><td>2</td>
+</tr>
+<tr>
+<td>{$MONITOR_LOAD_WARNING_MULT}</td><td>5</td>
+</tr>
+<tr>
+<td>{$MONITOR_TIMEOUT}</td><td>14400</td>
+</tr>
 </table>
 <h1>Static Elements</h1>
 <h2>Trigger Overview</h2>
@@ -71,7 +89,7 @@
 </tr>
 <tr>
 <td>Type</td><td>
-<p class="desc">Zabbix Agent</p>
+<p class="desc">Zabbix Agent (active)</p>
 </td>
 </tr>
 <tr>
@@ -108,52 +126,52 @@
 </tr>
 <tr>
 <td>
-<p class="desc">Zabbix Agent</p>
+<p class="desc">Zabbix Agent (active)</p>
 </td><td>{#BLOCKDEVICE} Smart Health Status</td><td><tt>hardware.disk.health[{#BLOCKDEVICE}]</tt></td><td></td><td>10m</td><td>60d</td><td>0</td>
 </tr>
 <tr>
 <td>
-<p class="desc">Zabbix Agent</p>
+<p class="desc">Zabbix Agent (active)</p>
 </td><td>{#BLOCKDEVICE}: ID 197 Current_Pending_Sector</td><td><tt>hardware.disk.smart.attributes[{#BLOCKDEVICE},Current_Pending_Sector]</tt></td><td></td><td>2h</td><td>1w</td><td>0</td>
 </tr>
 <tr>
 <td>
-<p class="desc">Zabbix Agent</p>
+<p class="desc">Zabbix Agent (active)</p>
 </td><td>{#BLOCKDEVICE}: ID 198 Offline_Uncorrectable</td><td><tt>hardware.disk.smart.attributes[{#BLOCKDEVICE},Offline_Uncorrectable]</tt></td><td></td><td>2h</td><td>1w</td><td>0</td>
 </tr>
 <tr>
 <td>
-<p class="desc">Zabbix Agent</p>
+<p class="desc">Zabbix Agent (active)</p>
 </td><td>{#BLOCKDEVICE}: ID 9 Power On Hours</td><td><tt>hardware.disk.smart.attributes[{#BLOCKDEVICE},Power_On_Hours]</tt></td><td></td><td>2h</td><td>1w</td><td>0</td>
 </tr>
 <tr>
 <td>
-<p class="desc">Zabbix Agent</p>
+<p class="desc">Zabbix Agent (active)</p>
 </td><td>{#BLOCKDEVICE}: ID 5 Reallocated Sectors Count</td><td><tt>hardware.disk.smart.attributes[{#BLOCKDEVICE},Reallocated_Sector_Ct]</tt></td><td></td><td>2h</td><td>1w</td><td>0</td>
 </tr>
 <tr>
 <td>
-<p class="desc">Zabbix Agent</p>
+<p class="desc">Zabbix Agent (active)</p>
 </td><td>{#BLOCKDEVICE}: ID 10 Spin_Retry_Count</td><td><tt>hardware.disk.smart.attributes[{#BLOCKDEVICE},Spin_Retry_Count]</tt></td><td></td><td>2h</td><td>1w</td><td>0</td>
 </tr>
 <tr>
 <td>
-<p class="desc">Zabbix Agent</p>
+<p class="desc">Zabbix Agent (active)</p>
 </td><td>{#BLOCKDEVICE}: ID 194 Temperature</td><td><tt>hardware.disk.smart.attributes[{#BLOCKDEVICE},Temperature_Celsius]</tt></td><td></td><td>10m</td><td>1w</td><td>90d</td>
 </tr>
 <tr>
 <td>
-<p class="desc">Zabbix Agent</p>
+<p class="desc">Zabbix Agent (active)</p>
 </td><td>{#BLOCKDEVICE}: ID 199 UDMA_CRC_Error</td><td><tt>hardware.disk.smart.attributes[{#BLOCKDEVICE},UDMA_CRC_Error_Count]</tt></td><td></td><td>2h</td><td>1w</td><td>365d</td>
 </tr>
 <tr>
 <td>
-<p class="desc">Zabbix Agent</p>
+<p class="desc">Zabbix Agent (active)</p>
 </td><td>{#BLOCKDEVICE} Device model</td><td><tt>hardware.disk.smart.info[{#BLOCKDEVICE},Device Model]</tt></td><td></td><td>1d</td><td>90d</td><td>0</td>
 </tr>
 <tr>
 <td>
-<p class="desc">Zabbix Agent</p>
+<p class="desc">Zabbix Agent (active)</p>
 </td><td>{#BLOCKDEVICE} Serial Number</td><td><tt>hardware.disk.smart.info[{#BLOCKDEVICE},Serial Number]</tt></td><td></td><td>1d</td><td>90d</td><td>0</td>
 </tr>
 </table>
