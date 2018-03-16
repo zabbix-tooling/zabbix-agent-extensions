@@ -33,12 +33,12 @@ def get_health(device):
 
     result = None
     for line in out.decode('utf8').splitlines():
-        m = re.match(r"^.*test result:\s*(.*)$", line)
+        m = re.match(r"^.*(test result:|Health Status:)\s*(.*)$", line)
         if not m:
             continue
-        result = m.group(1)
+        result = m.group(2)
 
-    if result is None or not "PASSED" in result:
+    if result is None:
         result = "FAILED: no health result"
         sys.stderr.write("%s :: get_health :: %s:\n--\n%s\n%s\n--\n" % (__file__, cmd, out.decode('utf8'), err.decode('utf8')))
 
