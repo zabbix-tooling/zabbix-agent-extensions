@@ -15,7 +15,6 @@
 #   51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 # Marc Schoechlin <ms@256bit.org>
-# Marc Schoechlin <Marc.Schoechlin@globalways.net>
 
 import argparse
 import glob
@@ -28,7 +27,7 @@ import sys
 
 config_default = {
     "regex_includes": [".*"],
-    "regex_excludes": ["loop.*", "fd.*", "sr.*", "dm.*" ],
+    "regex_excludes": ["loop.*", "fd.*", "sr.*", "dm.*", "ram.*" ],
 }
 
 
