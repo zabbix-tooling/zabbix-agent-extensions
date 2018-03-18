@@ -126,11 +126,16 @@ A quick overview is provided by the following files:
     * Add content to include/exclude devices
       ```
 {
-  "regex_includes": [
+  "regex_includes_name": [
     ".*"
   ],
-  "regex_excludes": [
-    "loop.*"
+  "regex_includes_model": [
+    ".*"
+  ],
+  "regex_excludes_name": [
+    "loop.*", "fd.*", "sr.*", "dm.*", "ram.*"
+  ]
+  "regex_excludes_model": [
   ]
 }
       ```

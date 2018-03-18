@@ -26,14 +26,16 @@ import sys
 ####################################################################################
 
 config_default = {
-    "regex_includes": [".*"],
-    "regex_excludes": ["loop.*", "fd.*", "sr.*", "dm.*", "ram.*" ],
+    "regex_includes_name": [".*"],
+    "regex_includes_model": [".*"],
+    "regex_excludes_name": ["loop.*", "fd.*", "sr.*", "dm.*", "ram.*" ],
+    "regex_excludes_model": [],
+    "smartctl_subdevices": {},
 }
 
 
 ####################################################################################
 #### HELPERS
-
 
 def check_match(matchfor, device_name, regexes):
     ret = False
@@ -72,6 +74,7 @@ def read_config(config_file):
         except:
             sys.stderr.write("An unexpected error occured while reading config file\n")
 
+    config.setdefault("smartctl_subdevices", {})
     return config
 
 
@@ -93,14 +96,23 @@ parser = argparse.ArgumentParser(
 i.e. /etc/zabbix/item_zabbix_device_discovery.json:
 ---
 {
-  "regex_includes": [
+  "regex_includes_name": [
     ".*"
   ],
-  "regex_excludes": [
-    "loop.*", 
-    "fd.*", 
-    "sr.*"
-  ]
+  "regex_includes_model": [
+    ".*"
+  ],
+  "regex_excludes_name": [
+    "loop.*", "fd.*", "sr.*" "md.*"
+  ],
+  "regex_excludes_model": [
+  ],
+  "smartctl_subdevices": {
+    "sda": [
+      "-d megaraid,0",
+      "-d megaraid,1"
+    ]
+  }
 }
 ---
 
@@ -115,6 +127,13 @@ parser.add_argument(
     help='Output debug information',
     action='store_true',
 )
+
+parser.add_argument(
+    '--smart',
+    help='Discovery for smartctl',
+    action='store_true',
+)
+
 
 parser.add_argument(
     '--only_rawdisk',
@@ -145,28 +164,49 @@ else:
 if args.debug:
     sys.stderr.write("** Effective config:\n%s\n" % json.dumps(config, indent=2))
 
+
+
 # perform discovery
 for filename in glob.glob('/sys/block/*'):
     if not os.path.islink(filename):
         continue
     device_name = os.path.basename(filename)
+
+    device_model_file = "/sys/block/%s/device/model" % device_name
+    device_model = "UNDEFINED"
+    
+    if os.path.isfile(device_model_file):
+        with open(device_model_file) as f_model:
+                device_model = f_model.readline()
+
     if args.debug:
-        sys.stderr.write("** DEVICE %s\n" % device_name)
+        sys.stderr.write("** DEVICE %s / MODEL %s\n" % (device_name,device_model))
 
     # Check matched devices
-    if not check_match("include", device_name, config["regex_includes"]):
+    if not check_match("include", device_name, config["regex_includes_name"]):
+        continue
+
+    if not check_match("include", device_model, config["regex_includes_model"]):
         continue
 
     # Check excluded devices
-    if check_match("exclude", device_name, config["regex_excludes"]):
+    if check_match("exclude", device_name, config["regex_excludes_name"]):
+        continue
+    if check_match("exclude", device_model, config["regex_excludes_model"]):
         continue
 
     if args.only_rawdisk and not is_real_hardware_device(device_name):
         continue
 
-    device = {}
-    device['{#BLOCKDEVICE}'] = device_name
-    devices_discovered['data'].append(device)
+    if args.smart and device_name in config["smartctl_subdevices"]:
+        for smartarg in config["smartctl_subdevices"][device_name]:
+            device = {}
+            device['{#BLOCKDEVICE}'] = device_name +  " " + smartarg
+            devices_discovered['data'].append(device)
+    else:
+        device = {}
+        device['{#BLOCKDEVICE}'] = device_name
+        devices_discovered['data'].append(device)
 
 
 

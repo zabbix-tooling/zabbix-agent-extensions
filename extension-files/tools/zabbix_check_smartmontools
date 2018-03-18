@@ -14,20 +14,27 @@ import stat
 
 
 def is_device(dev):
-    dev = "/dev/%s" % dev
-    try:
-        mode = os.stat(dev).st_mode
-    except:
-        return False
-    return stat.S_ISBLK(mode)
+
+    m = re.match(r"^([a-zA-Z0-9]+)([\sa-zA-Z0-9,-_\/]+)?$", dev)
+    if m:
+      dev = "/dev/%s" % m.group(1)
+      try:
+          mode = os.stat(dev).st_mode
+      except:
+          return False
+      return stat.S_ISBLK(mode)
+    else:
+      sys.stderr.write("%s :: get_health :: FAILED - device >>%s<< parameter is not valid\n" % (__file__, device))
+      return False
 
 def get_health(device):
 
     if not is_device(device):
-        sys.stderr.write("%s :: get_health :: FAILED - device /dev/%s does not exist\n" % (__file__, device))
+        sys.stderr.write("%s :: get_health :: FAILED - device >>%s<< does not exist\n" % (__file__, device))
         return
 
     cmd = "smartctl -H /dev/%s" % device
+    print(cmd)
     process = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
     out, err = process.communicate()
 
@@ -47,7 +54,7 @@ def get_health(device):
 def get_attribute(device, attribute):
 
     if not is_device(device):
-        sys.stderr.write("%s :: get_attribute :: FAILED - device /dev/%s does not exist\n" (__file__, device))
+        sys.stderr.write("%s :: get_health :: FAILED - device >>%s<< does not exist\n" % (__file__, device))
         return
 
     cmd = "smartctl -A /dev/%s" % device
@@ -71,7 +78,7 @@ def get_attribute(device, attribute):
 def get_info(device, info):
 
     if not is_device(device):
-        sys.stderr.write("%s :: get_info :: FAILED - device /dev/%s does not exist\n" (__file__, device))
+        sys.stderr.write("%s :: get_health :: FAILED - device >>%s<< does not exist\n" % (__file__, device))
         return
 
     cmd = "smartctl -i /dev/%s" % device
