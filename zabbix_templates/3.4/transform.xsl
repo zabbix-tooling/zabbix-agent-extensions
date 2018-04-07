@@ -116,6 +116,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
     <tr>
       <xsl:choose>
          <xsl:when test="type='0'"><td><p class="desc">Zabbix Agent</p></td></xsl:when>
+         <xsl:when test="type='2'"><td><p class="desc">Zabbix Trapper</p></td></xsl:when>
          <xsl:when test="type='3'"><td><p class="desc">Simple check</p></td></xsl:when>
          <xsl:when test="type='7'"><td><p class="desc">Zabbix Agent (active)</p></td></xsl:when>
          <xsl:when test="type='10'"><td><p class="desc">External check</p></td></xsl:when>
@@ -146,6 +147,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
       <td>Type</td>
       <xsl:choose>
          <xsl:when test="type='0'"><td><p class="desc">Zabbix Agent</p></td></xsl:when>
+         <xsl:when test="type='2'"><td><p class="desc">Zabbix Trapper</p></td></xsl:when>
          <xsl:when test="type='3'"><td><p class="desc">Simple check</p></td></xsl:when>
          <xsl:when test="type='7'"><td><p class="desc">Zabbix Agent (active)</p></td></xsl:when>
          <xsl:when test="type='10'"><td><p class="desc">External check</p></td></xsl:when>
@@ -221,6 +223,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
     <tr>
       <xsl:choose>
          <xsl:when test="type='0'"><td><p class="desc">Zabbix Agent</p></td></xsl:when>
+         <xsl:when test="type='2'"><td><p class="desc">Zabbix Trapper</p></td></xsl:when>
          <xsl:when test="type='3'"><td><p class="desc">Simple check</p></td></xsl:when>
          <xsl:when test="type='7'"><td><p class="desc">Zabbix Agent (active)</p></td></xsl:when>
          <xsl:when test="type='10'"><td><p class="desc">External check</p></td></xsl:when>
