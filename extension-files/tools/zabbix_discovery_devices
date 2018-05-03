@@ -172,12 +172,22 @@ for filename in glob.glob('/sys/block/*'):
         continue
     device_name = os.path.basename(filename)
 
-    device_model_file = "/sys/block/%s/device/model" % device_name
+    device_model_file = "/sys/block/%s/device" % device_name
     device_model = "UNDEFINED"
     
     if os.path.isfile(device_model_file):
         with open(device_model_file) as f_model:
                 device_model = f_model.readline()
+
+    device_size_file = "/sys/block/%s/size" % device_name 
+    device_size = 0
+    if os.path.isfile(device_size_file):
+        with open(device_size_file) as f_size:
+               device_size = int(f_size.readline().strip())
+    if device_size == 0:
+        if args.debug:
+             sys.stderr.write("ignoring device %s, its size is 0\n")
+        continue
 
     if args.debug:
         sys.stderr.write("** DEVICE %s / MODEL %s\n" % (device_name,device_model))
