@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
     <version>3.4</version>
-    <date>2018-02-04T19:50:07Z</date>
+    <date>2018-05-03T07:34:36Z</date>
     <groups>
         <group>
             <name>Templates</name>
@@ -611,7 +611,7 @@ A man with one watch knows what time it is. A man with two watches is never sure
                     <snmp_community/>
                     <snmp_oid/>
                     <key>ntpd.primarypeer.stats[delay]</key>
-                    <delay>90s</delay>
+                    <delay>120s</delay>
                     <history>5d</history>
                     <trends>90d</trends>
                     <status>0</status>
@@ -652,7 +652,7 @@ A man with one watch knows what time it is. A man with two watches is never sure
                     <snmp_community/>
                     <snmp_oid/>
                     <key>ntpd.primarypeer.stats[jitter]</key>
-                    <delay>90s</delay>
+                    <delay>120s</delay>
                     <history>5d</history>
                     <trends>90d</trends>
                     <status>0</status>
@@ -693,7 +693,7 @@ A man with one watch knows what time it is. A man with two watches is never sure
                     <snmp_community/>
                     <snmp_oid/>
                     <key>ntpd.primarypeer.stats[offset]</key>
-                    <delay>90s</delay>
+                    <delay>120s</delay>
                     <history>5d</history>
                     <trends>90d</trends>
                     <status>0</status>
@@ -1825,7 +1825,7 @@ Recovery:&#13;
                     <type>7</type>
                     <snmp_community/>
                     <snmp_oid/>
-                    <key>vfs.file.regmatch[/proc/mdstat,&quot;\[UU*\]&quot;,,]</key>
+                    <key>vfs.file.regmatch[/proc/mdstat,&quot;\[.*_.*\]&quot;,,]</key>
                     <delay>5m</delay>
                     <history>30d</history>
                     <trends>0</trends>
@@ -2121,7 +2121,7 @@ md1 : active raid1 sdb2[2] sda2[0]&#13;
                     <snmp_community/>
                     <snmp_oid/>
                     <key>net.if.discovery</key>
-                    <delay>10m</delay>
+                    <delay>1h</delay>
                     <status>0</status>
                     <allowed_hosts/>
                     <snmpv3_contextname/>
@@ -2145,17 +2145,17 @@ md1 : active raid1 sdb2[2] sda2[0]&#13;
                         <conditions>
                             <condition>
                                 <macro>{#IFNAME}</macro>
-                                <value>^(eth|bond|vlan|em)</value>
+                                <value>^(eth|bond|xapi|enp|eno|vlan|em)</value>
                                 <operator>8</operator>
                                 <formulaid>A</formulaid>
                             </condition>
                         </conditions>
                     </filter>
-                    <lifetime>1w</lifetime>
+                    <lifetime>3d</lifetime>
                     <description>Discovery of network interfaces</description>
                     <item_prototypes>
                         <item_prototype>
-                            <name>Interface {#IFNAME} Bits Inbound</name>
+                            <name>Net {#IFNAME} Bits In</name>
                             <type>7</type>
                             <snmp_community/>
                             <snmp_oid/>
@@ -2206,7 +2206,7 @@ md1 : active raid1 sdb2[2] sda2[0]&#13;
                             <master_item_prototype/>
                         </item_prototype>
                         <item_prototype>
-                            <name>Interface $1 Errors Inbound</name>
+                            <name>Net $1 Errors In</name>
                             <type>7</type>
                             <snmp_community/>
                             <snmp_oid/>
@@ -2217,7 +2217,7 @@ md1 : active raid1 sdb2[2] sda2[0]&#13;
                             <status>0</status>
                             <value_type>3</value_type>
                             <allowed_hosts/>
-                            <units>errors/sec</units>
+                            <units>e/sec</units>
                             <snmpv3_contextname/>
                             <snmpv3_securityname/>
                             <snmpv3_securitylevel>0</snmpv3_securitylevel>
@@ -2253,7 +2253,7 @@ md1 : active raid1 sdb2[2] sda2[0]&#13;
                             <master_item_prototype/>
                         </item_prototype>
                         <item_prototype>
-                            <name>Interface {#IFNAME} Packets Inbound</name>
+                            <name>Net {#IFNAME} Packets In</name>
                             <type>7</type>
                             <snmp_community/>
                             <snmp_oid/>
@@ -2300,7 +2300,7 @@ md1 : active raid1 sdb2[2] sda2[0]&#13;
                             <master_item_prototype/>
                         </item_prototype>
                         <item_prototype>
-                            <name>Interface {#IFNAME} Bits Outbound</name>
+                            <name>Net {#IFNAME} Bits Out</name>
                             <type>7</type>
                             <snmp_community/>
                             <snmp_oid/>
@@ -2351,7 +2351,7 @@ md1 : active raid1 sdb2[2] sda2[0]&#13;
                             <master_item_prototype/>
                         </item_prototype>
                         <item_prototype>
-                            <name>Interface $1 Errors Outbound</name>
+                            <name>Net $1 Errors Out</name>
                             <type>7</type>
                             <snmp_community/>
                             <snmp_oid/>
@@ -2362,7 +2362,7 @@ md1 : active raid1 sdb2[2] sda2[0]&#13;
                             <status>0</status>
                             <value_type>3</value_type>
                             <allowed_hosts/>
-                            <units>errors/sec</units>
+                            <units>e/sec</units>
                             <snmpv3_contextname/>
                             <snmpv3_securityname/>
                             <snmpv3_securitylevel>0</snmpv3_securitylevel>
@@ -2398,7 +2398,7 @@ md1 : active raid1 sdb2[2] sda2[0]&#13;
                             <master_item_prototype/>
                         </item_prototype>
                         <item_prototype>
-                            <name>Interface {#IFNAME} Packets Outbound</name>
+                            <name>Net {#IFNAME} Packets Out</name>
                             <type>7</type>
                             <snmp_community/>
                             <snmp_oid/>
@@ -2450,7 +2450,7 @@ md1 : active raid1 sdb2[2] sda2[0]&#13;
                             <expression>(({Custom - OS - Linux:net.if.in[{#IFNAME},errors].last(0)}&gt;0) or ({Custom - OS - Linux:net.if.out[{#IFNAME},errors].last(0)}&gt;0))</expression>
                             <recovery_mode>0</recovery_mode>
                             <recovery_expression/>
-                            <name>Interface {#IFNAME} errors</name>
+                            <name>Interface {#IFNAME} errors : {ITEM.VALUE1}/{ITEM.VALUE2} (in/out)</name>
                             <correlation_mode>0</correlation_mode>
                             <correlation_tag/>
                             <url/>
@@ -2636,7 +2636,7 @@ md1 : active raid1 sdb2[2] sda2[0]&#13;
                             </condition>
                         </conditions>
                     </filter>
-                    <lifetime>1w</lifetime>
+                    <lifetime>3d</lifetime>
                     <description>Discovery of disks.</description>
                     <item_prototypes>
                         <item_prototype>
@@ -2817,7 +2817,7 @@ md1 : active raid1 sdb2[2] sda2[0]&#13;
                             <correlation_mode>0</correlation_mode>
                             <correlation_tag/>
                             <url/>
-                            <status>1</status>
+                            <status>0</status>
                             <priority>1</priority>
                             <description>This trigger alerts disks which are consuming more than the configured IOPs limit. You can use this to discover systems high high read rates.</description>
                             <type>0</type>
@@ -2833,7 +2833,7 @@ md1 : active raid1 sdb2[2] sda2[0]&#13;
                             <correlation_mode>0</correlation_mode>
                             <correlation_tag/>
                             <url/>
-                            <status>1</status>
+                            <status>0</status>
                             <priority>1</priority>
                             <description>This trigger alerts disks which are consuming more than the configured IOPs limit. You can use this to discover systems high high write rates.</description>
                             <type>0</type>
@@ -2971,17 +2971,59 @@ md1 : active raid1 sdb2[2] sda2[0]&#13;
                             </condition>
                         </conditions>
                     </filter>
-                    <lifetime>1w</lifetime>
+                    <lifetime>3d</lifetime>
                     <description>Discovery of filesystems</description>
                     <item_prototypes>
+                        <item_prototype>
+                            <name>Disk {#FSNAME} inode free</name>
+                            <type>7</type>
+                            <snmp_community/>
+                            <snmp_oid/>
+                            <key>vfs.fs.inode[{#FSNAME},free]</key>
+                            <delay>600s</delay>
+                            <history>7d</history>
+                            <trends>365d</trends>
+                            <status>0</status>
+                            <value_type>3</value_type>
+                            <allowed_hosts/>
+                            <units>i</units>
+                            <snmpv3_contextname/>
+                            <snmpv3_securityname/>
+                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                            <snmpv3_authpassphrase/>
+                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                            <snmpv3_privpassphrase/>
+                            <params/>
+                            <ipmi_sensor/>
+                            <authtype>0</authtype>
+                            <username/>
+                            <password/>
+                            <publickey/>
+                            <privatekey/>
+                            <port/>
+                            <description/>
+                            <inventory_link>0</inventory_link>
+                            <applications>
+                                <application>
+                                    <name>OS - Storage</name>
+                                </application>
+                            </applications>
+                            <valuemap/>
+                            <logtimefmt/>
+                            <preprocessing/>
+                            <jmx_endpoint/>
+                            <application_prototypes/>
+                            <master_item_prototype/>
+                        </item_prototype>
                         <item_prototype>
                             <name>Disk {#FSNAME} inode use percentage</name>
                             <type>7</type>
                             <snmp_community/>
                             <snmp_oid/>
                             <key>vfs.fs.inode[{#FSNAME},pused]</key>
-                            <delay>5m</delay>
-                            <history>90d</history>
+                            <delay>600s</delay>
+                            <history>7d</history>
                             <trends>365d</trends>
                             <status>0</status>
                             <value_type>0</value_type>
@@ -3023,7 +3065,7 @@ md1 : active raid1 sdb2[2] sda2[0]&#13;
                             <snmp_oid/>
                             <key>vfs.fs.inode[{#FSNAME},total]</key>
                             <delay>1h</delay>
-                            <history>90d</history>
+                            <history>2d</history>
                             <trends>365d</trends>
                             <status>0</status>
                             <value_type>3</value_type>
@@ -3064,8 +3106,8 @@ md1 : active raid1 sdb2[2] sda2[0]&#13;
                             <snmp_community/>
                             <snmp_oid/>
                             <key>vfs.fs.inode[{#FSNAME},used]</key>
-                            <delay>5m</delay>
-                            <history>90d</history>
+                            <delay>600s</delay>
+                            <history>7d</history>
                             <trends>365d</trends>
                             <status>0</status>
                             <value_type>3</value_type>
@@ -3101,13 +3143,55 @@ md1 : active raid1 sdb2[2] sda2[0]&#13;
                             <master_item_prototype/>
                         </item_prototype>
                         <item_prototype>
+                            <name>Disk {#FSNAME} space free</name>
+                            <type>7</type>
+                            <snmp_community/>
+                            <snmp_oid/>
+                            <key>vfs.fs.size[{#FSNAME},free]</key>
+                            <delay>600s</delay>
+                            <history>7d</history>
+                            <trends>365d</trends>
+                            <status>0</status>
+                            <value_type>3</value_type>
+                            <allowed_hosts/>
+                            <units>B</units>
+                            <snmpv3_contextname/>
+                            <snmpv3_securityname/>
+                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                            <snmpv3_authpassphrase/>
+                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                            <snmpv3_privpassphrase/>
+                            <params/>
+                            <ipmi_sensor/>
+                            <authtype>0</authtype>
+                            <username/>
+                            <password/>
+                            <publickey/>
+                            <privatekey/>
+                            <port/>
+                            <description/>
+                            <inventory_link>0</inventory_link>
+                            <applications>
+                                <application>
+                                    <name>OS - Storage</name>
+                                </application>
+                            </applications>
+                            <valuemap/>
+                            <logtimefmt/>
+                            <preprocessing/>
+                            <jmx_endpoint/>
+                            <application_prototypes/>
+                            <master_item_prototype/>
+                        </item_prototype>
+                        <item_prototype>
                             <name>Disk {#FSNAME} size use percentage</name>
                             <type>7</type>
                             <snmp_community/>
                             <snmp_oid/>
                             <key>vfs.fs.size[{#FSNAME},pused]</key>
-                            <delay>5m</delay>
-                            <history>90d</history>
+                            <delay>600s</delay>
+                            <history>7d</history>
                             <trends>365d</trends>
                             <status>0</status>
                             <value_type>0</value_type>
@@ -3149,7 +3233,7 @@ md1 : active raid1 sdb2[2] sda2[0]&#13;
                             <snmp_oid/>
                             <key>vfs.fs.size[{#FSNAME},total]</key>
                             <delay>1h</delay>
-                            <history>90d</history>
+                            <history>2d</history>
                             <trends>365d</trends>
                             <status>0</status>
                             <value_type>3</value_type>
@@ -3190,8 +3274,8 @@ md1 : active raid1 sdb2[2] sda2[0]&#13;
                             <snmp_community/>
                             <snmp_oid/>
                             <key>vfs.fs.size[{#FSNAME},used]</key>
-                            <delay>5m</delay>
-                            <history>90d</history>
+                            <delay>600s</delay>
+                            <history>7d</history>
                             <trends>365d</trends>
                             <status>0</status>
                             <value_type>3</value_type>
@@ -3241,15 +3325,56 @@ md1 : active raid1 sdb2[2] sda2[0]&#13;
                             <description>Partition is running out of inodes. The volume contains to much files. Please increase volume size, delete unnecessary files and inform application owner.</description>
                             <type>0</type>
                             <manual_close>0</manual_close>
+                            <dependencies>
+                                <dependency>
+                                    <name>Filesystem inode WARNING usage for {#FSNAME} &gt; {$DISK_USAGE_PERCENT_WARN}% =&gt;  {ITEM.VALUE1}</name>
+                                    <expression>{Custom - OS - Linux:vfs.fs.inode[{#FSNAME},pused].last(0)}&gt;{$DISK_USAGE_PERCENT_WARN}</expression>
+                                    <recovery_expression/>
+                                </dependency>
+                            </dependencies>
+                            <tags/>
+                        </trigger_prototype>
+                        <trigger_prototype>
+                            <expression>{Custom - OS - Linux:vfs.fs.inode[{#FSNAME},pused].last(0)}&gt;{$DISK_USAGE_PERCENT_WARN}</expression>
+                            <recovery_mode>0</recovery_mode>
+                            <recovery_expression/>
+                            <name>Filesystem inode WARNING usage for {#FSNAME} &gt; {$DISK_USAGE_PERCENT_WARN}% =&gt;  {ITEM.VALUE1}</name>
+                            <correlation_mode>0</correlation_mode>
+                            <correlation_tag/>
+                            <url/>
+                            <status>0</status>
+                            <priority>2</priority>
+                            <description>Partition is running out of inodes. The volume contains to much files. Please increase volume size, delete unnecessary files and inform application owner.</description>
+                            <type>0</type>
+                            <manual_close>0</manual_close>
                             <dependencies/>
                             <tags/>
                         </trigger_prototype>
                         <trigger_prototype>
-                            <expression>({Custom - OS - Linux:vfs.fs.size[{#FSNAME},pused].last(0)}&gt;{$DISK_USAGE_PERCENT_ALARM} and {Custom - OS - Linux:vfs.fs.size[{#FSNAME},total].last(0)}&lt;109951162777) or&#13;
-({Custom - OS - Linux:vfs.fs.size[{#FSNAME},total].last(0)}&gt;=109951162777 and ({Custom - OS - Linux:vfs.fs.size[{#FSNAME},total].last(0)}-{Custom - OS - Linux:vfs.fs.size[{#FSNAME},used].last(0)}) &lt; ({$DISK_USAGE_ABOVE_1TB_MINFREE_GBYTES} * 107374182))</expression>
+                            <expression>({Custom - OS - Linux:vfs.fs.size[{#FSNAME},free].last(0)} &lt;  ({$DISK_USAGE_ABOVE_1TB_MINFREE_GBYTES} * 1073741824)) and ({Custom - OS - Linux:vfs.fs.size[{#FSNAME},total].last(0)}&gt;=1099511627776)</expression>
                             <recovery_mode>0</recovery_mode>
                             <recovery_expression/>
-                            <name>Filesystem space usage for {#FSNAME} &gt; {$DISK_USAGE_PERCENT_ALARM}% or free space &lt; {$DISK_USAGE_ABOVE_1TB_MINFREE_GBYTES}GB =&gt; {ITEM.VALUE1}</name>
+                            <name>Filesystem space {#FSNAME} free space &lt;  {$DISK_USAGE_ABOVE_1TB_MINFREE_GBYTES}GB ({#FSNAME} &gt; 1TB) =&gt; {ITEM.VALUE1}</name>
+                            <correlation_mode>0</correlation_mode>
+                            <correlation_tag/>
+                            <url/>
+                            <status>0</status>
+                            <priority>3</priority>
+                            <description>Partition is running out of space. The volume contains to much data. Please increase volume size, delete unnecessary files or inform application owner.&#13;
+&#13;
+Filesystem smaller than 1TB are alarmed if the precentage specified by {$DISK_USAGE_PERCENT_ALARM} is reached.&#13;
+&#13;
+Filesystem greater that 1TB are alarmed if the free space of the partion is lower than {$DISK_USAGE_ABOVE_1TB_MINFREE_GBYTES} gigagbytes.</description>
+                            <type>0</type>
+                            <manual_close>0</manual_close>
+                            <dependencies/>
+                            <tags/>
+                        </trigger_prototype>
+                        <trigger_prototype>
+                            <expression>({Custom - OS - Linux:vfs.fs.size[{#FSNAME},pused].last(0)}&gt;{$DISK_USAGE_PERCENT_ALARM} and {Custom - OS - Linux:vfs.fs.size[{#FSNAME},total].last(0)}&lt;1099511627776)</expression>
+                            <recovery_mode>0</recovery_mode>
+                            <recovery_expression/>
+                            <name>Filesystem space {#FSNAME} usage &gt; {$DISK_USAGE_PERCENT_ALARM}% ({#FSNAME} &lt; 1TB) =&gt;  {ITEM.VALUE1}</name>
                             <correlation_mode>0</correlation_mode>
                             <correlation_tag/>
                             <url/>
@@ -3275,12 +3400,12 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
                             <yaxismax>100.0000</yaxismax>
                             <show_work_period>1</show_work_period>
                             <show_triggers>1</show_triggers>
-                            <type>0</type>
+                            <type>1</type>
                             <show_legend>1</show_legend>
                             <show_3d>0</show_3d>
                             <percent_left>0.0000</percent_left>
                             <percent_right>0.0000</percent_right>
-                            <ymin_type_1>1</ymin_type_1>
+                            <ymin_type_1>0</ymin_type_1>
                             <ymax_type_1>0</ymax_type_1>
                             <ymin_item_1>0</ymin_item_1>
                             <ymax_item_1>0</ymax_item_1>
@@ -3288,13 +3413,13 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
                                 <graph_item>
                                     <sortorder>0</sortorder>
                                     <drawtype>0</drawtype>
-                                    <color>00BBBB</color>
-                                    <yaxisside>0</yaxisside>
+                                    <color>C800C8</color>
+                                    <yaxisside>1</yaxisside>
                                     <calc_fnc>4</calc_fnc>
                                     <type>0</type>
                                     <item>
                                         <host>Custom - OS - Linux</host>
-                                        <key>vfs.fs.inode[{#FSNAME},pused]</key>
+                                        <key>vfs.fs.inode[{#FSNAME},used]</key>
                                     </item>
                                 </graph_item>
                                 <graph_item>
@@ -3306,19 +3431,51 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
                                     <type>0</type>
                                     <item>
                                         <host>Custom - OS - Linux</host>
-                                        <key>vfs.fs.inode[{#FSNAME},total]</key>
+                                        <key>vfs.fs.inode[{#FSNAME},free]</key>
                                     </item>
                                 </graph_item>
+                            </graph_items>
+                        </graph_prototype>
+                        <graph_prototype>
+                            <name>Filesystem {#FSNAME} percentages</name>
+                            <width>900</width>
+                            <height>200</height>
+                            <yaxismin>0.0000</yaxismin>
+                            <yaxismax>100.0000</yaxismax>
+                            <show_work_period>1</show_work_period>
+                            <show_triggers>1</show_triggers>
+                            <type>0</type>
+                            <show_legend>1</show_legend>
+                            <show_3d>0</show_3d>
+                            <percent_left>0.0000</percent_left>
+                            <percent_right>0.0000</percent_right>
+                            <ymin_type_1>0</ymin_type_1>
+                            <ymax_type_1>0</ymax_type_1>
+                            <ymin_item_1>0</ymin_item_1>
+                            <ymax_item_1>0</ymax_item_1>
+                            <graph_items>
                                 <graph_item>
-                                    <sortorder>2</sortorder>
+                                    <sortorder>0</sortorder>
                                     <drawtype>0</drawtype>
-                                    <color>C800C8</color>
-                                    <yaxisside>1</yaxisside>
+                                    <color>CC00CC</color>
+                                    <yaxisside>0</yaxisside>
                                     <calc_fnc>4</calc_fnc>
                                     <type>0</type>
                                     <item>
                                         <host>Custom - OS - Linux</host>
-                                        <key>vfs.fs.inode[{#FSNAME},used]</key>
+                                        <key>vfs.fs.inode[{#FSNAME},pused]</key>
+                                    </item>
+                                </graph_item>
+                                <graph_item>
+                                    <sortorder>1</sortorder>
+                                    <drawtype>0</drawtype>
+                                    <color>009999</color>
+                                    <yaxisside>0</yaxisside>
+                                    <calc_fnc>4</calc_fnc>
+                                    <type>0</type>
+                                    <item>
+                                        <host>Custom - OS - Linux</host>
+                                        <key>vfs.fs.size[{#FSNAME},pused]</key>
                                     </item>
                                 </graph_item>
                             </graph_items>
@@ -3331,12 +3488,12 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
                             <yaxismax>100.0000</yaxismax>
                             <show_work_period>1</show_work_period>
                             <show_triggers>1</show_triggers>
-                            <type>0</type>
+                            <type>1</type>
                             <show_legend>1</show_legend>
                             <show_3d>0</show_3d>
                             <percent_left>0.0000</percent_left>
                             <percent_right>0.0000</percent_right>
-                            <ymin_type_1>1</ymin_type_1>
+                            <ymin_type_1>0</ymin_type_1>
                             <ymax_type_1>0</ymax_type_1>
                             <ymin_item_1>0</ymin_item_1>
                             <ymax_item_1>0</ymax_item_1>
@@ -3344,13 +3501,13 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
                                 <graph_item>
                                     <sortorder>0</sortorder>
                                     <drawtype>0</drawtype>
-                                    <color>00BBBB</color>
-                                    <yaxisside>0</yaxisside>
+                                    <color>C800C8</color>
+                                    <yaxisside>1</yaxisside>
                                     <calc_fnc>4</calc_fnc>
                                     <type>0</type>
                                     <item>
                                         <host>Custom - OS - Linux</host>
-                                        <key>vfs.fs.size[{#FSNAME},pused]</key>
+                                        <key>vfs.fs.size[{#FSNAME},used]</key>
                                     </item>
                                 </graph_item>
                                 <graph_item>
@@ -3362,19 +3519,7 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
                                     <type>0</type>
                                     <item>
                                         <host>Custom - OS - Linux</host>
-                                        <key>vfs.fs.size[{#FSNAME},total]</key>
-                                    </item>
-                                </graph_item>
-                                <graph_item>
-                                    <sortorder>2</sortorder>
-                                    <drawtype>0</drawtype>
-                                    <color>C800C8</color>
-                                    <yaxisside>1</yaxisside>
-                                    <calc_fnc>4</calc_fnc>
-                                    <type>0</type>
-                                    <item>
-                                        <host>Custom - OS - Linux</host>
-                                        <key>vfs.fs.size[{#FSNAME},used]</key>
+                                        <key>vfs.fs.size[{#FSNAME},free]</key>
                                     </item>
                                 </graph_item>
                             </graph_items>
@@ -3392,7 +3537,7 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
                 </macro>
                 <macro>
                     <macro>{$DISK_HIGH_WRITE_IOPS_LIMIT}</macro>
-                    <value>500</value>
+                    <value>10000</value>
                 </macro>
                 <macro>
                     <macro>{$DISK_IOPS_LIMIT_MEASURES}</macro>
@@ -3400,11 +3545,15 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
                 </macro>
                 <macro>
                     <macro>{$DISK_USAGE_ABOVE_1TB_MINFREE_GBYTES}</macro>
-                    <value>100</value>
+                    <value>50</value>
                 </macro>
                 <macro>
                     <macro>{$DISK_USAGE_PERCENT_ALARM}</macro>
                     <value>97</value>
+                </macro>
+                <macro>
+                    <macro>{$DISK_USAGE_PERCENT_WARN}</macro>
+                    <value>90</value>
                 </macro>
                 <macro>
                     <macro>{$MAXIMUM_NUMBER_RETRANSMISSIONS}</macro>
@@ -3482,7 +3631,7 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
                 </screen>
                 <screen>
                     <name>Custom - OS - Linux - Filesystems</name>
-                    <hsize>2</hsize>
+                    <hsize>3</hsize>
                     <vsize>1</vsize>
                     <screen_items>
                         <screen_item>
@@ -3524,6 +3673,28 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
                             <sort_triggers>0</sort_triggers>
                             <resource>
                                 <name>Filesystem {#FSNAME} inode usage</name>
+                                <host>Custom - OS - Linux</host>
+                            </resource>
+                            <max_columns>1</max_columns>
+                            <application/>
+                        </screen_item>
+                        <screen_item>
+                            <resourcetype>20</resourcetype>
+                            <width>500</width>
+                            <height>200</height>
+                            <x>2</x>
+                            <y>0</y>
+                            <colspan>1</colspan>
+                            <rowspan>1</rowspan>
+                            <elements>0</elements>
+                            <valign>0</valign>
+                            <halign>0</halign>
+                            <style>0</style>
+                            <url/>
+                            <dynamic>0</dynamic>
+                            <sort_triggers>0</sort_triggers>
+                            <resource>
+                                <name>Filesystem {#FSNAME} percentages</name>
                                 <host>Custom - OS - Linux</host>
                             </resource>
                             <max_columns>1</max_columns>
@@ -3804,7 +3975,7 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
                                 <name>Interface {#IFNAME} bits</name>
                                 <host>Custom - OS - Linux</host>
                             </resource>
-                            <max_columns>3</max_columns>
+                            <max_columns>1</max_columns>
                             <application/>
                         </screen_item>
                         <screen_item>
@@ -3988,7 +4159,7 @@ This trigger does not recover automatically, to get rid of this trigger, you hav
             <tags/>
         </trigger>
         <trigger>
-            <expression>{Custom - OS - Linux:vfs.file.regmatch[/proc/mdstat,&quot;\[UU*\]&quot;,,].last()}=0</expression>
+            <expression>{Custom - OS - Linux:vfs.file.regmatch[/proc/mdstat,&quot;\[.*_.*\]&quot;,,].last()}=1</expression>
             <recovery_mode>0</recovery_mode>
             <recovery_expression/>
             <name>MD Raid inconsistent devices</name>
@@ -4019,7 +4190,7 @@ This trigger does not recover automatically, to get rid of this trigger, you hav
             <dependencies>
                 <dependency>
                     <name>MD Raid inconsistent devices</name>
-                    <expression>{Custom - OS - Linux:vfs.file.regmatch[/proc/mdstat,&quot;\[UU*\]&quot;,,].last()}=0</expression>
+                    <expression>{Custom - OS - Linux:vfs.file.regmatch[/proc/mdstat,&quot;\[.*_.*\]&quot;,,].last()}=1</expression>
                     <recovery_expression/>
                 </dependency>
             </dependencies>
