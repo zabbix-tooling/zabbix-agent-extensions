@@ -172,7 +172,7 @@ for filename in glob.glob('/sys/block/*'):
         continue
     device_name = os.path.basename(filename)
 
-    device_model_file = "/sys/block/%s/device" % device_name
+    device_model_file = "/sys/block/%s/device/model" % device_name
     device_model = "UNDEFINED"
     
     if os.path.isfile(device_model_file):
@@ -186,7 +186,7 @@ for filename in glob.glob('/sys/block/*'):
                device_size = int(f_size.readline().strip())
     if device_size == 0:
         if args.debug:
-             sys.stderr.write("ignoring device %s, its size is 0\n")
+             sys.stderr.write("ignoring device %s, its size is 0\n" % device_name)
         continue
 
     if args.debug:
@@ -202,6 +202,7 @@ for filename in glob.glob('/sys/block/*'):
     # Check excluded devices
     if check_match("exclude", device_name, config["regex_excludes_name"]):
         continue
+
     if check_match("exclude", device_model, config["regex_excludes_model"]):
         continue
 
