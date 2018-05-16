@@ -1,4 +1,4 @@
-#!/usr/bin/env ruby
+#!/usr/bin/env python3
 #
 #   This program is free software; you can redistribute it and/or modify
 #   it under the terms of the GNU General Public License as published by
@@ -14,20 +14,42 @@
 #   with this program; if not, write to the Free Software Foundation, Inc.,
 #   51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
-require 'yaml'
-# /opt/puppetlabs/puppet/cache/state/last_run_summary.yaml
-#
-# /opt/puppetlabs/puppet/cache/state/agent_disabled.lock
-puppet_state = YAML.load_file('/var/lib/puppet/state/last_run_summary.yaml')
+import yaml
+import json
+import os
 
-value = nil
 
-ARGV.each do |arg|
-  if value == nil
-    value = puppet_state.fetch(arg)
-  else
-    value = value.fetch(arg)
-  end
-end
+possible_state_files = [
+    "/opt/puppetlabs/puppet/cache/state/last_run_summary.yaml",
+    "/var/lib/puppet/state/last_run_summary.yaml"
+]
 
-print "#{value}"
+possible_disable_check_files = [
+    "/opt/puppetlabs/puppet/cache/state/agent_disabled.lock",
+    "/var/lib/puppet/state/agent_disabled.lock"
+]
+
+dict_state = {}
+for state_file in possible_state_files:
+    if os.path.exists(state_file):
+        try:
+            with open(state_file, 'r') as stream:
+                dict_state = yaml.load(stream)
+        except Exception as e:
+            dict_state["state_file"] = "ERROR: unable to load : %s / %s " % (str(e), state_file)
+        break
+
+
+dict_state["disabled"] = "NO"
+
+for disable_file in possible_disable_check_files:
+    if os.path.exists(disable_file):
+        try:
+            with open(disable_file) as json_data:
+                dict_state["disabled"] = "YES: " + json.load(json_data)["disabled_message"]
+        except Exception as e:
+            dict_state["disabled"] = "ERROR: unable to load %s / %s " % (str(e), disable_file)
+            pass
+        break
+
+print(json.dumps(dict_state, ensure_ascii=False, indent=4))
