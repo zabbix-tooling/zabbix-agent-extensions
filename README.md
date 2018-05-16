@@ -122,7 +122,8 @@ A quick overview is provided by the following files:
 # How to configure discovery for zabbix agent
  
  * Configure disk device discovery
-    * Create file: /etc/zabbix/item_zabbix_device_discovery.json
+    * Create file: /etc/zabbix/item_zabbix_device_discovery.json<BR>
+      (if the file does not exist, the default is used)
     * Add content to include/exclude devices<BR>
       (what it does: include all devices and hardware models, after that filter out all devices and models which match to one of the python regexes) 
       ```
