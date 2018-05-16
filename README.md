@@ -123,25 +123,28 @@ A quick overview is provided by the following files:
  
  * Configure disk device discovery
     * Create file: /etc/zabbix/item_zabbix_device_discovery.json
-    * Add content to include/exclude devices
+    * Add content to include/exclude devices<BR>
+      (what it does: include all devices and hardware models, after that filter out all devices and models which match to one of the python regexes) 
       ```
-{
-  "regex_includes_name": [
-    ".*"
-  ],
-  "regex_includes_model": [
-    ".*"
-  ],
-  "regex_excludes_name": [
-    "loop.*", "fd.*", "sr.*", "dm.*", "ram.*"
-  ]
-  "regex_excludes_model": [
-  ]
-}
+      {
+        "regex_includes_name": [
+          ".*"
+        ],
+        "regex_includes_model": [
+          ".*"
+        ],
+        "regex_excludes_name": [
+          "loop.*", "fd.*", "sr.*", "dm.*", "ram.*"
+        ]
+        "regex_excludes_model": [
+          ".*PERC.*"
+        ]
+      }
       ```
     * Test
       ```
       zabbix_agentd -t "vfs.dev.discovery"
+      /usr/bin/zabbix_discovery_devices --config /etc/zabbix/item_zabbix_discovery_devices.json --debug
       ```
  * Configure generic discovery
    * Decide to use a appname consiting of the following characters: a-zA-Z0-9. (Alphanumeric and dot characters)

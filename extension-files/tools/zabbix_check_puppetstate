@@ -15,7 +15,9 @@
 #   51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 require 'yaml'
-
+# /opt/puppetlabs/puppet/cache/state/last_run_summary.yaml
+#
+# /opt/puppetlabs/puppet/cache/state/agent_disabled.lock
 puppet_state = YAML.load_file('/var/lib/puppet/state/last_run_summary.yaml')
 
 value = nil
