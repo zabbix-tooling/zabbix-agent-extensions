@@ -187,6 +187,7 @@ The templates will work on zabbix 2.2 and above.
 Additional authors are very welcome - just submit your patches as pull requests.
 
   * Marc Schoechlin <ms@256bit.org>
+  * Marc Schoechlin <marc.schoechlin@vico-research.com>
   * Marc Schoechlin <marc.schoechlin@breuninger.de> (not active anymore)
  
 This software is licensed by GPLv2 - review file "LICENSE"
