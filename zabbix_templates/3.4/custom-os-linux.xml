@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
     <version>3.4</version>
-    <date>2018-05-03T07:34:36Z</date>
+    <date>2018-05-17T10:41:05Z</date>
     <groups>
         <group>
             <name>Templates</name>
@@ -3705,7 +3705,7 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
                 <screen>
                     <name>Custom - OS - Linux - General</name>
                     <hsize>1</hsize>
-                    <vsize>11</vsize>
+                    <vsize>12</vsize>
                     <screen_items>
                         <screen_item>
                             <resourcetype>0</resourcetype>
@@ -3730,11 +3730,33 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
                             <application/>
                         </screen_item>
                         <screen_item>
-                            <resourcetype>1</resourcetype>
+                            <resourcetype>0</resourcetype>
                             <width>900</width>
                             <height>300</height>
                             <x>0</x>
                             <y>1</y>
+                            <colspan>1</colspan>
+                            <rowspan>1</rowspan>
+                            <elements>0</elements>
+                            <valign>0</valign>
+                            <halign>0</halign>
+                            <style>0</style>
+                            <url/>
+                            <dynamic>0</dynamic>
+                            <sort_triggers>0</sort_triggers>
+                            <resource>
+                                <name>CPU Times AVG</name>
+                                <host>Custom - OS - Linux</host>
+                            </resource>
+                            <max_columns>3</max_columns>
+                            <application/>
+                        </screen_item>
+                        <screen_item>
+                            <resourcetype>1</resourcetype>
+                            <width>900</width>
+                            <height>300</height>
+                            <x>0</x>
+                            <y>2</y>
                             <colspan>1</colspan>
                             <rowspan>1</rowspan>
                             <elements>0</elements>
@@ -3756,7 +3778,7 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
                             <width>900</width>
                             <height>300</height>
                             <x>0</x>
-                            <y>2</y>
+                            <y>3</y>
                             <colspan>1</colspan>
                             <rowspan>1</rowspan>
                             <elements>0</elements>
@@ -3778,7 +3800,7 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
                             <width>900</width>
                             <height>300</height>
                             <x>0</x>
-                            <y>3</y>
+                            <y>4</y>
                             <colspan>1</colspan>
                             <rowspan>1</rowspan>
                             <elements>0</elements>
@@ -3800,7 +3822,7 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
                             <width>900</width>
                             <height>300</height>
                             <x>0</x>
-                            <y>4</y>
+                            <y>5</y>
                             <colspan>1</colspan>
                             <rowspan>1</rowspan>
                             <elements>0</elements>
@@ -3822,7 +3844,7 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
                             <width>900</width>
                             <height>300</height>
                             <x>0</x>
-                            <y>5</y>
+                            <y>6</y>
                             <colspan>1</colspan>
                             <rowspan>1</rowspan>
                             <elements>0</elements>
@@ -3844,7 +3866,7 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
                             <width>900</width>
                             <height>300</height>
                             <x>0</x>
-                            <y>6</y>
+                            <y>7</y>
                             <colspan>1</colspan>
                             <rowspan>1</rowspan>
                             <elements>0</elements>
@@ -3866,7 +3888,7 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
                             <width>900</width>
                             <height>300</height>
                             <x>0</x>
-                            <y>7</y>
+                            <y>8</y>
                             <colspan>1</colspan>
                             <rowspan>1</rowspan>
                             <elements>0</elements>
@@ -3888,7 +3910,7 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
                             <width>900</width>
                             <height>200</height>
                             <x>0</x>
-                            <y>8</y>
+                            <y>9</y>
                             <colspan>1</colspan>
                             <rowspan>1</rowspan>
                             <elements>0</elements>
@@ -3910,7 +3932,7 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
                             <width>900</width>
                             <height>300</height>
                             <x>0</x>
-                            <y>9</y>
+                            <y>10</y>
                             <colspan>1</colspan>
                             <rowspan>1</rowspan>
                             <elements>0</elements>
@@ -3932,7 +3954,7 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
                             <width>900</width>
                             <height>300</height>
                             <x>0</x>
-                            <y>10</y>
+                            <y>11</y>
                             <colspan>1</colspan>
                             <rowspan>1</rowspan>
                             <elements>0</elements>
@@ -4140,25 +4162,6 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
             <tags/>
         </trigger>
         <trigger>
-            <expression>{Custom - OS - Linux:linux.dmesg.str(ERROR:)}=1</expression>
-            <recovery_mode>2</recovery_mode>
-            <recovery_expression/>
-            <name>Linux Kernel Problems - {ITEM.VALUE1}</name>
-            <correlation_mode>0</correlation_mode>
-            <correlation_tag/>
-            <url/>
-            <status>0</status>
-            <priority>2</priority>
-            <description>A kernel problem occurred.&#13;
-Review dmesg with the timestamps listed in the item.&#13;
-&#13;
-This trigger does not recover automatically, to get rid of this trigger, you have to use the &quot;Close problem&quot;</description>
-            <type>0</type>
-            <manual_close>1</manual_close>
-            <dependencies/>
-            <tags/>
-        </trigger>
-        <trigger>
             <expression>{Custom - OS - Linux:vfs.file.regmatch[/proc/mdstat,&quot;\[.*_.*\]&quot;,,].last()}=1</expression>
             <recovery_mode>0</recovery_mode>
             <recovery_expression/>
@@ -4285,6 +4288,25 @@ This trigger does not recover automatically, to get rid of this trigger, you hav
             <description/>
             <type>0</type>
             <manual_close>0</manual_close>
+            <dependencies/>
+            <tags/>
+        </trigger>
+        <trigger>
+            <expression>{Custom - OS - Linux:linux.dmesg.str(ERROR:)}=1</expression>
+            <recovery_mode>2</recovery_mode>
+            <recovery_expression/>
+            <name>OS Kernel - {ITEM.VALUE1}</name>
+            <correlation_mode>0</correlation_mode>
+            <correlation_tag/>
+            <url/>
+            <status>0</status>
+            <priority>2</priority>
+            <description>A kernel problem occurred.&#13;
+Review dmesg with the timestamps listed in the item.&#13;
+&#13;
+This trigger does not recover automatically, to get rid of this trigger, you have to use the &quot;Close problem&quot;</description>
+            <type>0</type>
+            <manual_close>1</manual_close>
             <dependencies/>
             <tags/>
         </trigger>
@@ -4578,6 +4600,110 @@ Remove the flagfile if you decide that no reboot is required (/var/run/reboot-re
                     <color>777777</color>
                     <yaxisside>0</yaxisside>
                     <calc_fnc>4</calc_fnc>
+                    <type>0</type>
+                    <item>
+                        <host>Custom - OS - Linux</host>
+                        <key>system.cpu.util[,steal,avg1]</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <name>CPU Times AVG</name>
+            <width>900</width>
+            <height>300</height>
+            <yaxismin>0.0000</yaxismin>
+            <yaxismax>105.0000</yaxismax>
+            <show_work_period>0</show_work_period>
+            <show_triggers>0</show_triggers>
+            <type>0</type>
+            <show_legend>1</show_legend>
+            <show_3d>0</show_3d>
+            <percent_left>0.0000</percent_left>
+            <percent_right>0.0000</percent_right>
+            <ymin_type_1>1</ymin_type_1>
+            <ymax_type_1>0</ymax_type_1>
+            <ymin_item_1>0</ymin_item_1>
+            <ymax_item_1>0</ymax_item_1>
+            <graph_items>
+                <graph_item>
+                    <sortorder>0</sortorder>
+                    <drawtype>0</drawtype>
+                    <color>DD0000</color>
+                    <yaxisside>0</yaxisside>
+                    <calc_fnc>2</calc_fnc>
+                    <type>0</type>
+                    <item>
+                        <host>Custom - OS - Linux</host>
+                        <key>system.cpu.util[,system,avg1]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <drawtype>0</drawtype>
+                    <color>00AA00</color>
+                    <yaxisside>0</yaxisside>
+                    <calc_fnc>2</calc_fnc>
+                    <type>0</type>
+                    <item>
+                        <host>Custom - OS - Linux</host>
+                        <key>system.cpu.util[,user,avg1]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>2</sortorder>
+                    <drawtype>0</drawtype>
+                    <color>CC00CC</color>
+                    <yaxisside>0</yaxisside>
+                    <calc_fnc>2</calc_fnc>
+                    <type>0</type>
+                    <item>
+                        <host>Custom - OS - Linux</host>
+                        <key>system.cpu.util[,interrupt,avg1]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>3</sortorder>
+                    <drawtype>0</drawtype>
+                    <color>00BBBB</color>
+                    <yaxisside>0</yaxisside>
+                    <calc_fnc>2</calc_fnc>
+                    <type>0</type>
+                    <item>
+                        <host>Custom - OS - Linux</host>
+                        <key>system.cpu.util[,iowait,avg1]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>4</sortorder>
+                    <drawtype>0</drawtype>
+                    <color>0000DD</color>
+                    <yaxisside>0</yaxisside>
+                    <calc_fnc>2</calc_fnc>
+                    <type>0</type>
+                    <item>
+                        <host>Custom - OS - Linux</host>
+                        <key>system.cpu.util[,nice,avg1]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>5</sortorder>
+                    <drawtype>0</drawtype>
+                    <color>FF00FF</color>
+                    <yaxisside>0</yaxisside>
+                    <calc_fnc>2</calc_fnc>
+                    <type>0</type>
+                    <item>
+                        <host>Custom - OS - Linux</host>
+                        <key>system.cpu.util[,softirq,avg1]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>6</sortorder>
+                    <drawtype>0</drawtype>
+                    <color>777777</color>
+                    <yaxisside>0</yaxisside>
+                    <calc_fnc>2</calc_fnc>
                     <type>0</type>
                     <item>
                         <host>Custom - OS - Linux</host>

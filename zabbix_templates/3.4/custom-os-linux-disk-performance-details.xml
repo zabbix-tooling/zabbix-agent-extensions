@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
     <version>3.4</version>
-    <date>2018-03-07T20:41:42Z</date>
+    <date>2018-05-17T10:41:33Z</date>
     <groups>
         <group>
             <name>Templates</name>
@@ -9,8 +9,8 @@
     </groups>
     <templates>
         <template>
-            <template>Custom - OS - Linux - Disk Performance Details</template>
-            <name>Custom - OS - Linux - Disk Performance Details</name>
+            <template>Custom - OS - Linux - Disk IO details</template>
+            <name>Custom - OS - Linux - Disk IO details</name>
             <description/>
             <groups>
                 <group>
@@ -19,7 +19,7 @@
             </groups>
             <applications>
                 <application>
-                    <name>Custom - OS - Linux - Disk Performance Details</name>
+                    <name>Custom - OS - Linux - Disk IO details</name>
                 </application>
             </applications>
             <items/>
@@ -90,7 +90,7 @@ The only field that should go to zero. Incremented as requests are given to appr
                             <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
-                                    <name>Custom - OS - Linux - Disk Performance Details</name>
+                                    <name>Custom - OS - Linux - Disk IO details</name>
                                 </application>
                             </applications>
                             <valuemap/>
@@ -109,7 +109,7 @@ The only field that should go to zero. Incremented as requests are given to appr
                             <delay>60</delay>
                             <history>7d</history>
                             <trends>182d</trends>
-                            <status>0</status>
+                            <status>1</status>
                             <value_type>3</value_type>
                             <allowed_hosts/>
                             <units>ms</units>
@@ -133,7 +133,7 @@ Number of milliseconds spent doing I/Os. This field increases so long as field #
                             <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
-                                    <name>Custom - OS - Linux - Disk Performance Details</name>
+                                    <name>Custom - OS - Linux - Disk IO details</name>
                                 </application>
                             </applications>
                             <valuemap/>
@@ -144,6 +144,50 @@ Number of milliseconds spent doing I/Os. This field increases so long as field #
                                     <params/>
                                 </step>
                             </preprocessing>
+                            <jmx_endpoint/>
+                            <application_prototypes/>
+                            <master_item_prototype/>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>$1:IO:Queue Depth</name>
+                            <type>7</type>
+                            <snmp_community/>
+                            <snmp_oid/>
+                            <key>custom.vfs.dev.queue_depth[{#DEVICENAME}]</key>
+                            <delay>60</delay>
+                            <history>7d</history>
+                            <trends>182d</trends>
+                            <status>0</status>
+                            <value_type>3</value_type>
+                            <allowed_hosts/>
+                            <units>io</units>
+                            <snmpv3_contextname/>
+                            <snmpv3_securityname/>
+                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                            <snmpv3_authpassphrase/>
+                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                            <snmpv3_privpassphrase/>
+                            <params/>
+                            <ipmi_sensor/>
+                            <authtype>0</authtype>
+                            <username/>
+                            <password/>
+                            <publickey/>
+                            <privatekey/>
+                            <port/>
+                            <description>Field #12&#13;
+Number of I/Os currently in progress.&#13;
+The only field that should go to zero. Incremented as requests are given to appropriate struct request_queue and decremented as they finish.</description>
+                            <inventory_link>0</inventory_link>
+                            <applications>
+                                <application>
+                                    <name>Custom - OS - Linux - Disk IO details</name>
+                                </application>
+                            </applications>
+                            <valuemap/>
+                            <logtimefmt/>
+                            <preprocessing/>
                             <jmx_endpoint/>
                             <application_prototypes/>
                             <master_item_prototype/>
@@ -182,7 +226,7 @@ Reads and writes which are adjacent to each other may be merged for efficiency. 
                             <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
-                                    <name>Custom - OS - Linux - Disk Performance Details</name>
+                                    <name>Custom - OS - Linux - Disk IO details</name>
                                 </application>
                             </applications>
                             <valuemap/>
@@ -206,7 +250,7 @@ Reads and writes which are adjacent to each other may be merged for efficiency. 
                             <delay>60</delay>
                             <history>7d</history>
                             <trends>182d</trends>
-                            <status>0</status>
+                            <status>1</status>
                             <value_type>3</value_type>
                             <allowed_hosts/>
                             <units>ms</units>
@@ -231,7 +275,7 @@ This is the total number of milliseconds spent by all reads (as measured from __
                             <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
-                                    <name>Custom - OS - Linux - Disk Performance Details</name>
+                                    <name>Custom - OS - Linux - Disk IO details</name>
                                 </application>
                             </applications>
                             <valuemap/>
@@ -279,7 +323,7 @@ This is the total number of reads completed successfully.</description>
                             <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
-                                    <name>Custom - OS - Linux - Disk Performance Details</name>
+                                    <name>Custom - OS - Linux - Disk IO details</name>
                                 </application>
                             </applications>
                             <valuemap/>
@@ -327,7 +371,7 @@ This is the total number of sectors read successfully.</description>
                             <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
-                                    <name>Custom - OS - Linux - Disk Performance Details</name>
+                                    <name>Custom - OS - Linux - Disk IO details</name>
                                 </application>
                             </applications>
                             <valuemap/>
@@ -355,7 +399,7 @@ This is the total number of sectors read successfully.</description>
                             <delay>60</delay>
                             <history>7d</history>
                             <trends>182d</trends>
-                            <status>0</status>
+                            <status>1</status>
                             <value_type>3</value_type>
                             <allowed_hosts/>
                             <units>ms</units>
@@ -380,7 +424,7 @@ This field is incremented at each I/O start, I/O completion, I/O merge, or read 
                             <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
-                                    <name>Custom - OS - Linux - Disk Performance Details</name>
+                                    <name>Custom - OS - Linux - Disk IO details</name>
                                 </application>
                             </applications>
                             <valuemap/>
@@ -429,7 +473,7 @@ Reads and writes which are adjacent to each other may be merged for efficiency. 
                             <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
-                                    <name>Custom - OS - Linux - Disk Performance Details</name>
+                                    <name>Custom - OS - Linux - Disk IO details</name>
                                 </application>
                             </applications>
                             <valuemap/>
@@ -478,7 +522,7 @@ This is the total number of milliseconds spent by all writes (as measured from _
                             <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
-                                    <name>Custom - OS - Linux - Disk Performance Details</name>
+                                    <name>Custom - OS - Linux - Disk IO details</name>
                                 </application>
                             </applications>
                             <valuemap/>
@@ -526,7 +570,7 @@ This is the total number of writes completed successfully.</description>
                             <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
-                                    <name>Custom - OS - Linux - Disk Performance Details</name>
+                                    <name>Custom - OS - Linux - Disk IO details</name>
                                 </application>
                             </applications>
                             <valuemap/>
@@ -574,297 +618,7 @@ This is the total number of sectors written successfully.</description>
                             <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
-                                    <name>Custom - OS - Linux - Disk Performance Details</name>
-                                </application>
-                            </applications>
-                            <valuemap/>
-                            <logtimefmt/>
-                            <preprocessing>
-                                <step>
-                                    <type>10</type>
-                                    <params/>
-                                </step>
-                                <step>
-                                    <type>1</type>
-                                    <params>512</params>
-                                </step>
-                            </preprocessing>
-                            <jmx_endpoint/>
-                            <application_prototypes/>
-                            <master_item_prototype/>
-                        </item_prototype>
-                        <item_prototype>
-                            <name>$1:Read:Ops per second [z]</name>
-                            <type>7</type>
-                            <snmp_community/>
-                            <snmp_oid/>
-                            <key>vfs.dev.read[{#DEVICENAME},operations]</key>
-                            <delay>60</delay>
-                            <history>7d</history>
-                            <trends>182d</trends>
-                            <status>1</status>
-                            <value_type>3</value_type>
-                            <allowed_hosts/>
-                            <units>ops/s</units>
-                            <snmpv3_contextname/>
-                            <snmpv3_securityname/>
-                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                            <snmpv3_authpassphrase/>
-                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                            <snmpv3_privpassphrase/>
-                            <params/>
-                            <ipmi_sensor/>
-                            <authtype>0</authtype>
-                            <username/>
-                            <password/>
-                            <publickey/>
-                            <privatekey/>
-                            <port/>
-                            <description>This is the total number of reads completed successfully.</description>
-                            <inventory_link>0</inventory_link>
-                            <applications>
-                                <application>
-                                    <name>Custom - OS - Linux - Disk Performance Details</name>
-                                </application>
-                            </applications>
-                            <valuemap/>
-                            <logtimefmt/>
-                            <preprocessing>
-                                <step>
-                                    <type>10</type>
-                                    <params/>
-                                </step>
-                            </preprocessing>
-                            <jmx_endpoint/>
-                            <application_prototypes/>
-                            <master_item_prototype/>
-                        </item_prototype>
-                        <item_prototype>
-                            <name>$1:Read:ms [z]</name>
-                            <type>7</type>
-                            <snmp_community/>
-                            <snmp_oid/>
-                            <key>vfs.dev.read[{#DEVICENAME},ops]</key>
-                            <delay>60</delay>
-                            <history>7d</history>
-                            <trends>182d</trends>
-                            <status>1</status>
-                            <value_type>0</value_type>
-                            <allowed_hosts/>
-                            <units>ms</units>
-                            <snmpv3_contextname/>
-                            <snmpv3_securityname/>
-                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                            <snmpv3_authpassphrase/>
-                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                            <snmpv3_privpassphrase/>
-                            <params/>
-                            <ipmi_sensor/>
-                            <authtype>0</authtype>
-                            <username/>
-                            <password/>
-                            <publickey/>
-                            <privatekey/>
-                            <port/>
-                            <description>This is the total number of milliseconds spent by all reads (as measured from __make_request() to end_that_request_last()).</description>
-                            <inventory_link>0</inventory_link>
-                            <applications>
-                                <application>
-                                    <name>Custom - OS - Linux - Disk Performance Details</name>
-                                </application>
-                            </applications>
-                            <valuemap/>
-                            <logtimefmt/>
-                            <preprocessing>
-                                <step>
-                                    <type>10</type>
-                                    <params/>
-                                </step>
-                            </preprocessing>
-                            <jmx_endpoint/>
-                            <application_prototypes/>
-                            <master_item_prototype/>
-                        </item_prototype>
-                        <item_prototype>
-                            <name>$1:Read:Bytes/sec [z]</name>
-                            <type>7</type>
-                            <snmp_community/>
-                            <snmp_oid/>
-                            <key>vfs.dev.read[{#DEVICENAME},sectors]</key>
-                            <delay>60</delay>
-                            <history>7d</history>
-                            <trends>182d</trends>
-                            <status>1</status>
-                            <value_type>3</value_type>
-                            <allowed_hosts/>
-                            <units>B/sec</units>
-                            <snmpv3_contextname/>
-                            <snmpv3_securityname/>
-                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                            <snmpv3_authpassphrase/>
-                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                            <snmpv3_privpassphrase/>
-                            <params/>
-                            <ipmi_sensor/>
-                            <authtype>0</authtype>
-                            <username/>
-                            <password/>
-                            <publickey/>
-                            <privatekey/>
-                            <port/>
-                            <description>This is the total number of sectors read successfully.</description>
-                            <inventory_link>0</inventory_link>
-                            <applications>
-                                <application>
-                                    <name>Custom - OS - Linux - Disk Performance Details</name>
-                                </application>
-                            </applications>
-                            <valuemap/>
-                            <logtimefmt/>
-                            <preprocessing>
-                                <step>
-                                    <type>10</type>
-                                    <params/>
-                                </step>
-                                <step>
-                                    <type>1</type>
-                                    <params>512</params>
-                                </step>
-                            </preprocessing>
-                            <jmx_endpoint/>
-                            <application_prototypes/>
-                            <master_item_prototype/>
-                        </item_prototype>
-                        <item_prototype>
-                            <name>$1:Write:Ops per second [z]</name>
-                            <type>7</type>
-                            <snmp_community/>
-                            <snmp_oid/>
-                            <key>vfs.dev.write[{#DEVICENAME},operations]</key>
-                            <delay>60</delay>
-                            <history>7d</history>
-                            <trends>182d</trends>
-                            <status>1</status>
-                            <value_type>3</value_type>
-                            <allowed_hosts/>
-                            <units>ops/s</units>
-                            <snmpv3_contextname/>
-                            <snmpv3_securityname/>
-                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                            <snmpv3_authpassphrase/>
-                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                            <snmpv3_privpassphrase/>
-                            <params/>
-                            <ipmi_sensor/>
-                            <authtype>0</authtype>
-                            <username/>
-                            <password/>
-                            <publickey/>
-                            <privatekey/>
-                            <port/>
-                            <description>This is the total number of reads completed successfully.</description>
-                            <inventory_link>0</inventory_link>
-                            <applications>
-                                <application>
-                                    <name>Custom - OS - Linux - Disk Performance Details</name>
-                                </application>
-                            </applications>
-                            <valuemap/>
-                            <logtimefmt/>
-                            <preprocessing>
-                                <step>
-                                    <type>10</type>
-                                    <params/>
-                                </step>
-                            </preprocessing>
-                            <jmx_endpoint/>
-                            <application_prototypes/>
-                            <master_item_prototype/>
-                        </item_prototype>
-                        <item_prototype>
-                            <name>$1:Write:ms [z]</name>
-                            <type>7</type>
-                            <snmp_community/>
-                            <snmp_oid/>
-                            <key>vfs.dev.write[{#DEVICENAME},ops]</key>
-                            <delay>60</delay>
-                            <history>7d</history>
-                            <trends>182d</trends>
-                            <status>1</status>
-                            <value_type>0</value_type>
-                            <allowed_hosts/>
-                            <units>ms</units>
-                            <snmpv3_contextname/>
-                            <snmpv3_securityname/>
-                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                            <snmpv3_authpassphrase/>
-                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                            <snmpv3_privpassphrase/>
-                            <params/>
-                            <ipmi_sensor/>
-                            <authtype>0</authtype>
-                            <username/>
-                            <password/>
-                            <publickey/>
-                            <privatekey/>
-                            <port/>
-                            <description>This is the total number of milliseconds spent by all reads (as measured from __make_request() to end_that_request_last()).</description>
-                            <inventory_link>0</inventory_link>
-                            <applications>
-                                <application>
-                                    <name>Custom - OS - Linux - Disk Performance Details</name>
-                                </application>
-                            </applications>
-                            <valuemap/>
-                            <logtimefmt/>
-                            <preprocessing>
-                                <step>
-                                    <type>10</type>
-                                    <params/>
-                                </step>
-                            </preprocessing>
-                            <jmx_endpoint/>
-                            <application_prototypes/>
-                            <master_item_prototype/>
-                        </item_prototype>
-                        <item_prototype>
-                            <name>$1:Write:Bytes/sec [z]</name>
-                            <type>7</type>
-                            <snmp_community/>
-                            <snmp_oid/>
-                            <key>vfs.dev.write[{#DEVICENAME},sectors]</key>
-                            <delay>60</delay>
-                            <history>7d</history>
-                            <trends>182d</trends>
-                            <status>1</status>
-                            <value_type>3</value_type>
-                            <allowed_hosts/>
-                            <units>B/sec</units>
-                            <snmpv3_contextname/>
-                            <snmpv3_securityname/>
-                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                            <snmpv3_authpassphrase/>
-                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                            <snmpv3_privpassphrase/>
-                            <params/>
-                            <ipmi_sensor/>
-                            <authtype>0</authtype>
-                            <username/>
-                            <password/>
-                            <publickey/>
-                            <privatekey/>
-                            <port/>
-                            <description>This is the total number of sectors read successfully.</description>
-                            <inventory_link>0</inventory_link>
-                            <applications>
-                                <application>
-                                    <name>Custom - OS - Linux - Disk Performance Details</name>
+                                    <name>Custom - OS - Linux - Disk IO details</name>
                                 </application>
                             </applications>
                             <valuemap/>
@@ -892,9 +646,9 @@ This is the total number of sectors written successfully.</description>
                             <height>200</height>
                             <yaxismin>0.0000</yaxismin>
                             <yaxismax>100.0000</yaxismax>
-                            <show_work_period>1</show_work_period>
-                            <show_triggers>1</show_triggers>
-                            <type>7</type>
+                            <show_work_period>0</show_work_period>
+                            <show_triggers>0</show_triggers>
+                            <type>1</type>
                             <show_legend>1</show_legend>
                             <show_3d>0</show_3d>
                             <percent_left>0.0000</percent_left>
@@ -909,10 +663,10 @@ This is the total number of sectors written successfully.</description>
                                     <drawtype>5</drawtype>
                                     <color>00C800</color>
                                     <yaxisside>0</yaxisside>
-                                    <calc_fnc>2</calc_fnc>
+                                    <calc_fnc>4</calc_fnc>
                                     <type>7</type>
                                     <item>
-                                        <host>Custom - OS - Linux - Disk Performance Details</host>
+                                        <host>Custom - OS - Linux - Disk IO details</host>
                                         <key>custom.vfs.dev.read.sectors[{#DEVICENAME}]</key>
                                     </item>
                                 </graph_item>
@@ -921,11 +675,55 @@ This is the total number of sectors written successfully.</description>
                                     <drawtype>5</drawtype>
                                     <color>C80000</color>
                                     <yaxisside>0</yaxisside>
-                                    <calc_fnc>2</calc_fnc>
+                                    <calc_fnc>4</calc_fnc>
                                     <type>7</type>
                                     <item>
-                                        <host>Custom - OS - Linux - Disk Performance Details</host>
+                                        <host>Custom - OS - Linux - Disk IO details</host>
                                         <key>custom.vfs.dev.write.sectors[{#DEVICENAME}]</key>
+                                    </item>
+                                </graph_item>
+                            </graph_items>
+                        </graph_prototype>
+                        <graph_prototype>
+                            <name>Disk {#DEVICENAME} - IO Queue</name>
+                            <width>900</width>
+                            <height>200</height>
+                            <yaxismin>0.0000</yaxismin>
+                            <yaxismax>100.0000</yaxismax>
+                            <show_work_period>0</show_work_period>
+                            <show_triggers>0</show_triggers>
+                            <type>0</type>
+                            <show_legend>1</show_legend>
+                            <show_3d>0</show_3d>
+                            <percent_left>0.0000</percent_left>
+                            <percent_right>0.0000</percent_right>
+                            <ymin_type_1>0</ymin_type_1>
+                            <ymax_type_1>0</ymax_type_1>
+                            <ymin_item_1>0</ymin_item_1>
+                            <ymax_item_1>0</ymax_item_1>
+                            <graph_items>
+                                <graph_item>
+                                    <sortorder>0</sortorder>
+                                    <drawtype>0</drawtype>
+                                    <color>2774A4</color>
+                                    <yaxisside>1</yaxisside>
+                                    <calc_fnc>4</calc_fnc>
+                                    <type>0</type>
+                                    <item>
+                                        <host>Custom - OS - Linux - Disk IO details</host>
+                                        <key>custom.vfs.dev.io.active[{#DEVICENAME}]</key>
+                                    </item>
+                                </graph_item>
+                                <graph_item>
+                                    <sortorder>1</sortorder>
+                                    <drawtype>0</drawtype>
+                                    <color>DD0000</color>
+                                    <yaxisside>1</yaxisside>
+                                    <calc_fnc>2</calc_fnc>
+                                    <type>0</type>
+                                    <item>
+                                        <host>Custom - OS - Linux - Disk IO details</host>
+                                        <key>custom.vfs.dev.queue_depth[{#DEVICENAME}]</key>
                                     </item>
                                 </graph_item>
                             </graph_items>
@@ -936,9 +734,9 @@ This is the total number of sectors written successfully.</description>
                             <height>200</height>
                             <yaxismin>0.0000</yaxismin>
                             <yaxismax>100.0000</yaxismax>
-                            <show_work_period>1</show_work_period>
-                            <show_triggers>1</show_triggers>
-                            <type>7</type>
+                            <show_work_period>0</show_work_period>
+                            <show_triggers>0</show_triggers>
+                            <type>0</type>
                             <show_legend>1</show_legend>
                             <show_3d>0</show_3d>
                             <percent_left>0.0000</percent_left>
@@ -953,10 +751,10 @@ This is the total number of sectors written successfully.</description>
                                     <drawtype>0</drawtype>
                                     <color>00C800</color>
                                     <yaxisside>0</yaxisside>
-                                    <calc_fnc>2</calc_fnc>
+                                    <calc_fnc>4</calc_fnc>
                                     <type>7</type>
                                     <item>
-                                        <host>Custom - OS - Linux - Disk Performance Details</host>
+                                        <host>Custom - OS - Linux - Disk IO details</host>
                                         <key>custom.vfs.dev.read.merged[{#DEVICENAME}]</key>
                                     </item>
                                 </graph_item>
@@ -965,10 +763,10 @@ This is the total number of sectors written successfully.</description>
                                     <drawtype>0</drawtype>
                                     <color>C80000</color>
                                     <yaxisside>0</yaxisside>
-                                    <calc_fnc>2</calc_fnc>
+                                    <calc_fnc>4</calc_fnc>
                                     <type>7</type>
                                     <item>
-                                        <host>Custom - OS - Linux - Disk Performance Details</host>
+                                        <host>Custom - OS - Linux - Disk IO details</host>
                                         <key>custom.vfs.dev.write.merged[{#DEVICENAME}]</key>
                                     </item>
                                 </graph_item>
@@ -980,9 +778,9 @@ This is the total number of sectors written successfully.</description>
                             <height>200</height>
                             <yaxismin>0.0000</yaxismin>
                             <yaxismax>100.0000</yaxismax>
-                            <show_work_period>1</show_work_period>
-                            <show_triggers>1</show_triggers>
-                            <type>7</type>
+                            <show_work_period>0</show_work_period>
+                            <show_triggers>0</show_triggers>
+                            <type>0</type>
                             <show_legend>1</show_legend>
                             <show_3d>0</show_3d>
                             <percent_left>0.0000</percent_left>
@@ -997,10 +795,10 @@ This is the total number of sectors written successfully.</description>
                                     <drawtype>0</drawtype>
                                     <color>00C800</color>
                                     <yaxisside>0</yaxisside>
-                                    <calc_fnc>2</calc_fnc>
+                                    <calc_fnc>4</calc_fnc>
                                     <type>7</type>
                                     <item>
-                                        <host>Custom - OS - Linux - Disk Performance Details</host>
+                                        <host>Custom - OS - Linux - Disk IO details</host>
                                         <key>custom.vfs.dev.read.ops[{#DEVICENAME}]</key>
                                     </item>
                                 </graph_item>
@@ -1009,114 +807,10 @@ This is the total number of sectors written successfully.</description>
                                     <drawtype>0</drawtype>
                                     <color>C80000</color>
                                     <yaxisside>0</yaxisside>
-                                    <calc_fnc>2</calc_fnc>
+                                    <calc_fnc>4</calc_fnc>
                                     <type>7</type>
                                     <item>
-                                        <host>Custom - OS - Linux - Disk Performance Details</host>
-                                        <key>custom.vfs.dev.write.ops[{#DEVICENAME}]</key>
-                                    </item>
-                                </graph_item>
-                            </graph_items>
-                        </graph_prototype>
-                        <graph_prototype>
-                            <name>Disk {#DEVICENAME} - Overview</name>
-                            <width>900</width>
-                            <height>200</height>
-                            <yaxismin>0.0000</yaxismin>
-                            <yaxismax>100.0000</yaxismax>
-                            <show_work_period>1</show_work_period>
-                            <show_triggers>1</show_triggers>
-                            <type>7</type>
-                            <show_legend>1</show_legend>
-                            <show_3d>0</show_3d>
-                            <percent_left>0.0000</percent_left>
-                            <percent_right>0.0000</percent_right>
-                            <ymin_type_1>0</ymin_type_1>
-                            <ymax_type_1>0</ymax_type_1>
-                            <ymin_item_1>0</ymin_item_1>
-                            <ymax_item_1>0</ymax_item_1>
-                            <graph_items>
-                                <graph_item>
-                                    <sortorder>0</sortorder>
-                                    <drawtype>0</drawtype>
-                                    <color>00C8C8</color>
-                                    <yaxisside>0</yaxisside>
-                                    <calc_fnc>7</calc_fnc>
-                                    <type>7</type>
-                                    <item>
-                                        <host>Custom - OS - Linux - Disk Performance Details</host>
-                                        <key>custom.vfs.dev.io.active[{#DEVICENAME}]</key>
-                                    </item>
-                                </graph_item>
-                                <graph_item>
-                                    <sortorder>1</sortorder>
-                                    <drawtype>0</drawtype>
-                                    <color>C8C800</color>
-                                    <yaxisside>1</yaxisside>
-                                    <calc_fnc>7</calc_fnc>
-                                    <type>7</type>
-                                    <item>
-                                        <host>Custom - OS - Linux - Disk Performance Details</host>
-                                        <key>custom.vfs.dev.read.sectors[{#DEVICENAME}]</key>
-                                    </item>
-                                </graph_item>
-                                <graph_item>
-                                    <sortorder>2</sortorder>
-                                    <drawtype>0</drawtype>
-                                    <color>960000</color>
-                                    <yaxisside>0</yaxisside>
-                                    <calc_fnc>7</calc_fnc>
-                                    <type>7</type>
-                                    <item>
-                                        <host>Custom - OS - Linux - Disk Performance Details</host>
-                                        <key>custom.vfs.dev.read.merged[{#DEVICENAME}]</key>
-                                    </item>
-                                </graph_item>
-                                <graph_item>
-                                    <sortorder>3</sortorder>
-                                    <drawtype>0</drawtype>
-                                    <color>C8C8C8</color>
-                                    <yaxisside>0</yaxisside>
-                                    <calc_fnc>7</calc_fnc>
-                                    <type>7</type>
-                                    <item>
-                                        <host>Custom - OS - Linux - Disk Performance Details</host>
-                                        <key>custom.vfs.dev.read.ops[{#DEVICENAME}]</key>
-                                    </item>
-                                </graph_item>
-                                <graph_item>
-                                    <sortorder>4</sortorder>
-                                    <drawtype>0</drawtype>
-                                    <color>009600</color>
-                                    <yaxisside>1</yaxisside>
-                                    <calc_fnc>7</calc_fnc>
-                                    <type>7</type>
-                                    <item>
-                                        <host>Custom - OS - Linux - Disk Performance Details</host>
-                                        <key>custom.vfs.dev.write.sectors[{#DEVICENAME}]</key>
-                                    </item>
-                                </graph_item>
-                                <graph_item>
-                                    <sortorder>5</sortorder>
-                                    <drawtype>0</drawtype>
-                                    <color>960096</color>
-                                    <yaxisside>0</yaxisside>
-                                    <calc_fnc>7</calc_fnc>
-                                    <type>7</type>
-                                    <item>
-                                        <host>Custom - OS - Linux - Disk Performance Details</host>
-                                        <key>custom.vfs.dev.write.merged[{#DEVICENAME}]</key>
-                                    </item>
-                                </graph_item>
-                                <graph_item>
-                                    <sortorder>6</sortorder>
-                                    <drawtype>0</drawtype>
-                                    <color>000096</color>
-                                    <yaxisside>0</yaxisside>
-                                    <calc_fnc>7</calc_fnc>
-                                    <type>7</type>
-                                    <item>
-                                        <host>Custom - OS - Linux - Disk Performance Details</host>
+                                        <host>Custom - OS - Linux - Disk IO details</host>
                                         <key>custom.vfs.dev.write.ops[{#DEVICENAME}]</key>
                                     </item>
                                 </graph_item>
@@ -1132,36 +826,36 @@ This is the total number of sectors written successfully.</description>
             <templates/>
             <screens>
                 <screen>
-                    <name>Custom - OS - Linux - DIsk Performance Details</name>
-                    <hsize>4</hsize>
+                    <name>Custom - OS - Linux - Disk IO Queues</name>
+                    <hsize>2</hsize>
                     <vsize>1</vsize>
                     <screen_items>
                         <screen_item>
                             <resourcetype>20</resourcetype>
-                            <width>350</width>
-                            <height>200</height>
+                            <width>500</width>
+                            <height>300</height>
                             <x>0</x>
                             <y>0</y>
                             <colspan>1</colspan>
                             <rowspan>1</rowspan>
                             <elements>0</elements>
-                            <valign>1</valign>
+                            <valign>0</valign>
                             <halign>0</halign>
                             <style>0</style>
                             <url/>
                             <dynamic>0</dynamic>
                             <sort_triggers>0</sort_triggers>
                             <resource>
-                                <name>Disk {#DEVICENAME} - Overview</name>
-                                <host>Custom - OS - Linux - Disk Performance Details</host>
+                                <name>Disk {#DEVICENAME} - IO Queue</name>
+                                <host>Custom - OS - Linux - Disk IO details</host>
                             </resource>
                             <max_columns>1</max_columns>
                             <application/>
                         </screen_item>
                         <screen_item>
                             <resourcetype>20</resourcetype>
-                            <width>350</width>
-                            <height>200</height>
+                            <width>500</width>
+                            <height>300</height>
                             <x>1</x>
                             <y>0</y>
                             <colspan>1</colspan>
@@ -1174,17 +868,46 @@ This is the total number of sectors written successfully.</description>
                             <dynamic>0</dynamic>
                             <sort_triggers>0</sort_triggers>
                             <resource>
+                                <name>Disk {#DEVICENAME} - Merged</name>
+                                <host>Custom - OS - Linux - Disk IO details</host>
+                            </resource>
+                            <max_columns>1</max_columns>
+                            <application/>
+                        </screen_item>
+                    </screen_items>
+                </screen>
+                <screen>
+                    <name>Custom - OS - Linux - Disk IO Throughput</name>
+                    <hsize>2</hsize>
+                    <vsize>1</vsize>
+                    <screen_items>
+                        <screen_item>
+                            <resourcetype>20</resourcetype>
+                            <width>500</width>
+                            <height>300</height>
+                            <x>0</x>
+                            <y>0</y>
+                            <colspan>1</colspan>
+                            <rowspan>1</rowspan>
+                            <elements>0</elements>
+                            <valign>1</valign>
+                            <halign>0</halign>
+                            <style>0</style>
+                            <url/>
+                            <dynamic>0</dynamic>
+                            <sort_triggers>0</sort_triggers>
+                            <resource>
                                 <name>Disk {#DEVICENAME} - Bytes/second</name>
-                                <host>Custom - OS - Linux - Disk Performance Details</host>
+                                <host>Custom - OS - Linux - Disk IO details</host>
                             </resource>
                             <max_columns>1</max_columns>
                             <application/>
                         </screen_item>
                         <screen_item>
                             <resourcetype>20</resourcetype>
-                            <width>350</width>
-                            <height>200</height>
-                            <x>2</x>
+                            <width>500</width>
+                            <height>300</height>
+                            <x>1</x>
                             <y>0</y>
                             <colspan>1</colspan>
                             <rowspan>1</rowspan>
@@ -1197,29 +920,7 @@ This is the total number of sectors written successfully.</description>
                             <sort_triggers>0</sort_triggers>
                             <resource>
                                 <name>Disk {#DEVICENAME} - Ops/second</name>
-                                <host>Custom - OS - Linux - Disk Performance Details</host>
-                            </resource>
-                            <max_columns>1</max_columns>
-                            <application/>
-                        </screen_item>
-                        <screen_item>
-                            <resourcetype>20</resourcetype>
-                            <width>350</width>
-                            <height>200</height>
-                            <x>3</x>
-                            <y>0</y>
-                            <colspan>1</colspan>
-                            <rowspan>1</rowspan>
-                            <elements>0</elements>
-                            <valign>1</valign>
-                            <halign>0</halign>
-                            <style>0</style>
-                            <url/>
-                            <dynamic>0</dynamic>
-                            <sort_triggers>0</sort_triggers>
-                            <resource>
-                                <name>Disk {#DEVICENAME} - Merged</name>
-                                <host>Custom - OS - Linux - Disk Performance Details</host>
+                                <host>Custom - OS - Linux - Disk IO details</host>
                             </resource>
                             <max_columns>1</max_columns>
                             <application/>
