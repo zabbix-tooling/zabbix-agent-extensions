@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
     <version>3.4</version>
-    <date>2018-05-17T10:41:05Z</date>
+    <date>2018-05-24T10:24:19Z</date>
     <groups>
         <group>
             <name>Templates</name>
@@ -2450,7 +2450,7 @@ md1 : active raid1 sdb2[2] sda2[0]&#13;
                             <expression>(({Custom - OS - Linux:net.if.in[{#IFNAME},errors].last(0)}&gt;0) or ({Custom - OS - Linux:net.if.out[{#IFNAME},errors].last(0)}&gt;0))</expression>
                             <recovery_mode>0</recovery_mode>
                             <recovery_expression/>
-                            <name>Interface {#IFNAME} errors : {ITEM.VALUE1}/{ITEM.VALUE2} (in/out)</name>
+                            <name>Interface {#IFNAME} errors : {ITEM.LASTVALUE1}/{ITEM.LASTVALUE2} (in/out)</name>
                             <correlation_mode>0</correlation_mode>
                             <correlation_tag/>
                             <url/>
@@ -2813,7 +2813,7 @@ md1 : active raid1 sdb2[2] sda2[0]&#13;
                             <expression>{Custom - OS - Linux:vfs.dev.read[{#BLOCKDEVICE},ops,avg1].avg({$DISK_IOPS_LIMIT_MEASURES})}&gt; {$DISK_HIGH_READ_IOPS_LIMIT}</expression>
                             <recovery_mode>1</recovery_mode>
                             <recovery_expression>{Custom - OS - Linux:vfs.dev.write[{#BLOCKDEVICE},ops,avg1].avg({$DISK_IOPS_LIMIT_MEASURES})}&lt;(0.25* {$DISK_HIGH_READ_IOPS_LIMIT})</recovery_expression>
-                            <name>Blockdevice {#BLOCKDEVICE} read limit {$DISK_HIGH_READ_IOPS_LIMIT}/sec reached, currently {ITEM.VALUE1}/sec</name>
+                            <name>Blockdevice {#BLOCKDEVICE} read limit {$DISK_HIGH_READ_IOPS_LIMIT}/sec reached, currently {ITEM.LASTVALUE1}/sec</name>
                             <correlation_mode>0</correlation_mode>
                             <correlation_tag/>
                             <url/>
@@ -2829,7 +2829,7 @@ md1 : active raid1 sdb2[2] sda2[0]&#13;
                             <expression>{Custom - OS - Linux:vfs.dev.write[{#BLOCKDEVICE},ops,avg1].avg({$DISK_IOPS_LIMIT_MEASURES})}&gt; {$DISK_HIGH_WRITE_IOPS_LIMIT}</expression>
                             <recovery_mode>1</recovery_mode>
                             <recovery_expression>{Custom - OS - Linux:vfs.dev.write[{#BLOCKDEVICE},ops,avg1].avg({$DISK_IOPS_LIMIT_MEASURES})}&lt;(0.25* {$DISK_HIGH_WRITE_IOPS_LIMIT})</recovery_expression>
-                            <name>Blockdevice {#BLOCKDEVICE} write limit {$DISK_HIGH_WRITE_IOPS_LIMIT}/sec reached, currently {ITEM.VALUE1}/sec</name>
+                            <name>Blockdevice {#BLOCKDEVICE} write limit {$DISK_HIGH_WRITE_IOPS_LIMIT}/sec reached, currently {ITEM.LASTVALUE1}/sec</name>
                             <correlation_mode>0</correlation_mode>
                             <correlation_tag/>
                             <url/>
@@ -3316,7 +3316,7 @@ md1 : active raid1 sdb2[2] sda2[0]&#13;
                             <expression>{Custom - OS - Linux:vfs.fs.inode[{#FSNAME},pused].last(0)}&gt;{$DISK_USAGE_PERCENT_ALARM}</expression>
                             <recovery_mode>0</recovery_mode>
                             <recovery_expression/>
-                            <name>Filesystem inode usage for {#FSNAME} &gt; {$DISK_USAGE_PERCENT_ALARM}% =&gt;  {ITEM.VALUE1}</name>
+                            <name>Filesystem inode usage for {#FSNAME} &gt; {$DISK_USAGE_PERCENT_ALARM}% =&gt;  {ITEM.LASTVALUE1}</name>
                             <correlation_mode>0</correlation_mode>
                             <correlation_tag/>
                             <url/>
@@ -3327,7 +3327,7 @@ md1 : active raid1 sdb2[2] sda2[0]&#13;
                             <manual_close>0</manual_close>
                             <dependencies>
                                 <dependency>
-                                    <name>Filesystem inode WARNING usage for {#FSNAME} &gt; {$DISK_USAGE_PERCENT_WARN}% =&gt;  {ITEM.VALUE1}</name>
+                                    <name>Filesystem inode WARNING usage for {#FSNAME} &gt; {$DISK_USAGE_PERCENT_WARN}% =&gt;  {ITEM.LASTVALUE1}</name>
                                     <expression>{Custom - OS - Linux:vfs.fs.inode[{#FSNAME},pused].last(0)}&gt;{$DISK_USAGE_PERCENT_WARN}</expression>
                                     <recovery_expression/>
                                 </dependency>
@@ -3338,7 +3338,7 @@ md1 : active raid1 sdb2[2] sda2[0]&#13;
                             <expression>{Custom - OS - Linux:vfs.fs.inode[{#FSNAME},pused].last(0)}&gt;{$DISK_USAGE_PERCENT_WARN}</expression>
                             <recovery_mode>0</recovery_mode>
                             <recovery_expression/>
-                            <name>Filesystem inode WARNING usage for {#FSNAME} &gt; {$DISK_USAGE_PERCENT_WARN}% =&gt;  {ITEM.VALUE1}</name>
+                            <name>Filesystem inode WARNING usage for {#FSNAME} &gt; {$DISK_USAGE_PERCENT_WARN}% =&gt;  {ITEM.LASTVALUE1}</name>
                             <correlation_mode>0</correlation_mode>
                             <correlation_tag/>
                             <url/>
@@ -3354,7 +3354,7 @@ md1 : active raid1 sdb2[2] sda2[0]&#13;
                             <expression>({Custom - OS - Linux:vfs.fs.size[{#FSNAME},free].last(0)} &lt;  ({$DISK_USAGE_ABOVE_1TB_MINFREE_GBYTES} * 1073741824)) and ({Custom - OS - Linux:vfs.fs.size[{#FSNAME},total].last(0)}&gt;=1099511627776)</expression>
                             <recovery_mode>0</recovery_mode>
                             <recovery_expression/>
-                            <name>Filesystem space {#FSNAME} free space &lt;  {$DISK_USAGE_ABOVE_1TB_MINFREE_GBYTES}GB ({#FSNAME} &gt; 1TB) =&gt; {ITEM.VALUE1}</name>
+                            <name>Filesystem space {#FSNAME} free space &lt;  {$DISK_USAGE_ABOVE_1TB_MINFREE_GBYTES}GB ({#FSNAME} &gt; 1TB) =&gt; {ITEM.LASTVALUE1}  free</name>
                             <correlation_mode>0</correlation_mode>
                             <correlation_tag/>
                             <url/>
@@ -3374,7 +3374,7 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
                             <expression>({Custom - OS - Linux:vfs.fs.size[{#FSNAME},pused].last(0)}&gt;{$DISK_USAGE_PERCENT_ALARM} and {Custom - OS - Linux:vfs.fs.size[{#FSNAME},total].last(0)}&lt;1099511627776)</expression>
                             <recovery_mode>0</recovery_mode>
                             <recovery_expression/>
-                            <name>Filesystem space {#FSNAME} usage &gt; {$DISK_USAGE_PERCENT_ALARM}% ({#FSNAME} &lt; 1TB) =&gt;  {ITEM.VALUE1}</name>
+                            <name>Filesystem space {#FSNAME} usage &gt; {$DISK_USAGE_PERCENT_ALARM}% ({#FSNAME} &lt; 1TB) =&gt;  {ITEM.LASTVALUE1}</name>
                             <correlation_mode>0</correlation_mode>
                             <correlation_tag/>
                             <url/>
@@ -4418,7 +4418,7 @@ Remove the flagfile if you decide that no reboot is required (/var/run/reboot-re
             <expression>({Custom - OS - Linux:system.cpu.load[,avg5].last(0)}&gt;15 and {Custom - OS - Linux:system.cpu.num.last(0)}&lt;3) or ({Custom - OS - Linux:system.cpu.num.last(0)}&gt;2 and ({Custom - OS - Linux:system.cpu.load[,avg5].last(0)}&gt;{Custom - OS - Linux:system.cpu.num.last(0)}*{$MONITOR_LOAD_WARNING_MULT}))</expression>
             <recovery_mode>0</recovery_mode>
             <recovery_expression/>
-            <name>System Load, {ITEM.VALUE1}</name>
+            <name>System Load, {ITEM.LASTVALUE1}</name>
             <correlation_mode>0</correlation_mode>
             <correlation_tag/>
             <url/>
