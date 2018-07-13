@@ -18,7 +18,7 @@ prepare(){
    set -x
 	umask 0002
 	mkdir -p -m 755 ${TMPDIR}/usr/bin/
-	cp -av ${SDIR}/tools/* ${TMPDIR}/usr/bin/
+	cp -av ${SDIR}/tools/zabbix_* ${TMPDIR}/usr/bin/
 	chmod 755 ${TMPDIR}/usr/bin/*
 
    if [ "$PY" = "2" ];then
