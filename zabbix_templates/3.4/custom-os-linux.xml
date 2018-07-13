@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
     <version>3.4</version>
-    <date>2018-05-24T10:24:19Z</date>
+    <date>2018-07-13T10:21:04Z</date>
     <groups>
         <group>
             <name>Templates</name>
@@ -3573,7 +3573,7 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
                 </macro>
                 <macro>
                     <macro>{$MONITOR_TIMEOUT}</macro>
-                    <value>14400</value>
+                    <value>900</value>
                 </macro>
             </macros>
             <templates/>
@@ -4092,7 +4092,7 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
             <tags/>
         </trigger>
         <trigger>
-            <expression>({Custom - OS - Linux:system.cpu.util[,user,avg1].avg(#10)}+{Custom - OS - Linux:system.cpu.util[,system,avg1].avg(#10)})&gt;90</expression>
+            <expression>({Custom - OS - Linux:system.cpu.util[,user,avg1].avg(1h)}+{Custom - OS - Linux:system.cpu.util[,system,avg1].avg(1h)}+{Custom - OS - Linux:system.cpu.util[,iowait,avg1].avg(1h)})&gt;90</expression>
             <recovery_mode>0</recovery_mode>
             <recovery_expression/>
             <name>CPU Usage &gt; 90%</name>
@@ -4101,7 +4101,7 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
             <url/>
             <status>0</status>
             <priority>2</priority>
-            <description>The average of system and user cpu time is higher than 90%</description>
+            <description>The average of system + user + iowait cpu time is higher than 90%</description>
             <type>0</type>
             <manual_close>0</manual_close>
             <dependencies/>
@@ -4322,6 +4322,9 @@ This trigger does not recover automatically, to get rid of this trigger, you hav
             <priority>1</priority>
             <description>This trigger fires if a reboot is required after a system uddate.&#13;
 &#13;
+Rebooting the system is a good idea, bcause this improves security and fixes bug in installed components which cannot be reloaded by a service restart.&#13;
+(livbc-updates, kernel, ...)&#13;
+&#13;
 Remove the flagfile if you decide that no reboot is required (/var/run/reboot-required).</description>
             <type>0</type>
             <manual_close>1</manual_close>
@@ -4467,7 +4470,13 @@ Remove the flagfile if you decide that no reboot is required (/var/run/reboot-re
             <description>No measurement information about agent-status is received in the last {$AGENT_TIMEOUT} seconds</description>
             <type>0</type>
             <manual_close>0</manual_close>
-            <dependencies/>
+            <dependencies>
+                <dependency>
+                    <name>ICMP Ping</name>
+                    <expression>{Custom - OS - Linux:icmpping[,1,,,].count(#3,0,&quot;eq&quot;)}=3</expression>
+                    <recovery_expression/>
+                </dependency>
+            </dependencies>
             <tags/>
         </trigger>
     </triggers>
