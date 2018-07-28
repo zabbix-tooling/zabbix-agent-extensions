@@ -14,31 +14,58 @@
 #   with this program; if not, write to the Free Software Foundation, Inc.,
 #   51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
-import yaml
 import json
 import os
-
+import sys
+import re
 
 possible_state_files = [
     "/opt/puppetlabs/puppet/cache/state/last_run_summary.yaml",
     "/var/lib/puppet/state/last_run_summary.yaml"
 ]
 
+possible_run_report = [
+    "/opt/puppetlabs/puppet/cache/state/last_run_report.yaml",
+    "/var/lib/puppet/state/last_run_report.yaml"
+]
 possible_disable_check_files = [
     "/opt/puppetlabs/puppet/cache/state/agent_disabled.lock",
     "/var/lib/puppet/state/agent_disabled.lock"
 ]
 
+
+# Q: Why the not the "yaml" module?
+# A: We do not want to install extra module only because of a simple file read on all monitored systems
+
+def read_puppet_yaml(file_name):
+    read_dict = {}
+    key = None
+
+    with open(file_name, 'r') as stream:
+        for line in stream:
+            m = re.match("^([^ ]+):", line)
+            if m:
+                key = m.group(1)
+                read_dict[key] = {}
+                continue
+            m = re.match("^[ ]+([^ ]+): (.+)$", line)
+            if m:
+                read_dict[key][m.group(1)] = m.group(2)
+
+    if key is None:
+        raise Exception("broken yaml puppet format")
+    return read_dict
+
+
 dict_state = {}
+dict_state["state"] = "ERROR: no puppet here"
 for state_file in possible_state_files:
     if os.path.exists(state_file):
         try:
-            with open(state_file, 'r') as stream:
-                dict_state = yaml.load(stream)
+            dict_state = read_puppet_yaml(state_file)
         except Exception as e:
             dict_state["state_file"] = "ERROR: unable to load : %s / %s " % (str(e), state_file)
         break
-
 
 dict_state["disabled"] = "NO"
 
@@ -52,4 +79,34 @@ for disable_file in possible_disable_check_files:
             pass
         break
 
-print(json.dumps(dict_state, ensure_ascii=False, indent=4))
+if "resources" in dict_state:
+    if int(dict_state["resources"]["failed"]) > 0:
+        dict_state["state"] = "ERROR: puppetrun failed"
+    elif int(dict_state["resources"]["changed"]) > 0:
+        dict_state["state"] = "OK: puppetrun successful, %s changes" % dict_state["resources"]["changed"]
+    else:
+        dict_state["state"] = "OK: puppetrun successful, no changes"
+
+
+for run_report_file in possible_run_report:
+    if os.path.exists(run_report_file):
+        try:
+            with open(run_report_file) as report_data:
+                for line in report_data:
+                    print(line)
+                    m = re.match("^environment: (.+)$", line)
+                    if m:
+                        dict_state["environment"] = m.group(1)
+                        break
+        except Exception as e:
+            dict_state["environment"] = "unknown"
+            pass
+        break
+
+
+if len(sys.argv) == 2:
+    print(dict_state[sys.argv[1]])
+elif len(sys.argv) == 3:
+    print(dict_state[sys.argv[1]][sys.argv[2]])
+else:
+    print(json.dumps(dict_state, ensure_ascii=False, indent=4))
