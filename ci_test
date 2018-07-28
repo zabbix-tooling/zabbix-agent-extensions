@@ -28,6 +28,7 @@ assertSuccess(){
 
 echo "*** CLEANUP"
 REL="3.2.10-1+xenial"
+sez -x
 sudo dpkg -P zabbix-agent-extensions zabbix-agent
 sudo rm -rf /etc/zabbix_* /var/log/zabbix /var/run/zabbix zabbix-agent_*.deb zabbix-get_*.deb
 wget -c "http://repo.zabbix.com/zabbix/3.2/ubuntu/pool/main/z/zabbix/zabbix-agent_${REL}_amd64.deb"
@@ -38,6 +39,7 @@ sudo sed  -i '~s,# DebugLevel.*,DebugLevel=2,' /etc/zabbix/zabbix_agentd.conf
 sudo sed  -i '~s,^Server=.*,Server=127.0.0.1' /etc/zabbix/zabbix_agentd.conf
 sudo mkdir -m 755  -p /opt/puppetlabs/puppet/cache/state/
 sudo cp puppet_last_run_summary.yaml /opt/puppetlabs/puppet/cache/state/last_run_summary.yaml
+set +x
 
 echo "*** VALIDATIONS"
 COMPILEDIR="$(mktemp -d /tmp/pycompile-XXXXXX)"
