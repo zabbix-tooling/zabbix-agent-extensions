@@ -38,7 +38,7 @@ sudo dpkg -i zabbix-agent_*.deb zabbix-get_*.deb
 sudo sed  -i '~s,# DebugLevel.*,DebugLevel=2,' /etc/zabbix/zabbix_agentd.conf
 sudo sed  -i '~s,^Server=.*,Server=127.0.0.1,' /etc/zabbix/zabbix_agentd.conf
 sudo mkdir -m 755  -p /opt/puppetlabs/puppet/cache/state/
-sudo cp extension-files/tools/test/puppet_last_run_summary.yaml /opt/puppetlabs/puppet/cache/state/last_run_summary.yaml
+sudo cp extension-files/tools/test/puppet_*.yaml /opt/puppetlabs/puppet/cache/state/
 set +x
 
 echo "*** VALIDATIONS"
