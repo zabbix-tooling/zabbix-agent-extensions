@@ -43,7 +43,7 @@ set +x
 
 echo "*** VALIDATIONS"
 COMPILEDIR="$(mktemp -d /tmp/pycompile-XXXXXX)"
-for SCRIPT in $(grep -l "#!/usr/bin/env python3" extension-files/tools/*|sort -u|xargs);
+for SCRIPT in $(grep -l "#!/usr/bin/env python3" extension-files/tools/zabbix_*|sort -u|xargs);
 do
    cp $SCRIPT $COMPILEDIR/
    assertSuccess STOP_ON_ERROR "python3 -m py_compile ${COMPILEDIR}/$(basename $SCRIPT)"
