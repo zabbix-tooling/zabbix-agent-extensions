@@ -67,7 +67,7 @@ for state_file in possible_state_files:
             dict_state["state_file"] = "ERROR: unable to load : %s / %s " % (str(e), state_file)
         break
 
-dict_state["disabled"] = "NO"
+dict_state["disabled"] = "NOT DISABLED"
 
 for disable_file in possible_disable_check_files:
     if os.path.exists(disable_file):
