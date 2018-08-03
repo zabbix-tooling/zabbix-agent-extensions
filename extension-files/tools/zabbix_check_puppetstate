@@ -108,7 +108,4 @@ if len(sys.argv) == 2:
 elif len(sys.argv) == 3:
     print(dict_state[sys.argv[1]][sys.argv[2]])
 else:
-    if 'time' in dict_state:
-        time = dict_state['time']['total']
-        dict_state['time'] = { 'total': time}
     print(json.dumps(dict_state, ensure_ascii=False, indent=4))
