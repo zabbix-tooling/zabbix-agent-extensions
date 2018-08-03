@@ -93,7 +93,6 @@ for run_report_file in possible_run_report:
         try:
             with open(run_report_file) as report_data:
                 for line in report_data:
-                    print(line)
                     m = re.match("^environment: (.+)$", line)
                     if m:
                         dict_state["environment"] = m.group(1)
