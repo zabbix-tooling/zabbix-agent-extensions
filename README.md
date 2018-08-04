@@ -41,6 +41,7 @@ This package provides the following capabilities:
  * generic discovery
    (put json snippets to /var/run/zabbix-generic-discovery/ITEMNAME.json i.e. with puppet and get a combined discovery value)
  * monitor puppet state
+   (execution statistics, disabled state, ...)
  * linux software raid state
  * check quality of ntp sync behavior
  * check for required reboot
