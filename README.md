@@ -55,7 +55,11 @@ This package provides the following capabilities:
 
 Almost all measures are integrated in graphs which are displayed on the various host screens.
 
-A quick overview is provided by the following files:
+The project inlcudes various zabbix templates for relase 3.4.
+
+Note: There are also 2.2 and 3.0 templates, but they are outdated because we do not support them anymore. Probably these outdated templates might be a good starting point for your own environment.
+
+A quick is provided by the following files:
 
  * [custom-os-linux](http://htmlpreview.github.io/?https://github.com/scoopex/zabbix-agent-extensions/blob/master/zabbix_templates/3.4/documentation/custom-os-linux.html)
  * [custom-os-linux-hardware](http://htmlpreview.github.io/?https://github.com/scoopex/zabbix-agent-extensions/blob/master/zabbix_templates/3.4/documentation/custom-os-linux-hardware.html)
@@ -68,6 +72,7 @@ A quick overview is provided by the following files:
  * [custom-service-nginx-logstats](http://htmlpreview.github.io/?https://github.com/scoopex/zabbix-agent-extensions/blob/master/zabbix_templates/3.4/documentation/custom-service-nginx-logstats.html)
  * [custom-service-redis](http://htmlpreview.github.io/?https://github.com/scoopex/zabbix-agent-extensions/blob/master/zabbix_templates/3.4/documentation/custom-service-redis.html)
  * [custom-service-varnish](http://htmlpreview.github.io/?https://github.com/scoopex/zabbix-agent-extensions/blob/master/zabbix_templates/3.4/documentation/custom-service-varnish.html)
+
 
 # How to test and debug
 
