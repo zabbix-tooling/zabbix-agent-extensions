@@ -45,6 +45,7 @@ This package provides the following capabilities:
  * linux software raid state
  * check quality of ntp sync behavior
  * check for required reboot
+ * monitor open file descriptors
  * Configurable autodiscovery of block devices
  * Monitor performance havior of discovered block devices
  * Configurable autodisovery of real disk devices

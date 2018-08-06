@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
     <version>3.4</version>
-    <date>2018-07-13T10:21:04Z</date>
+    <date>2018-08-06T14:02:50Z</date>
     <groups>
         <group>
             <name>Templates</name>
@@ -151,6 +151,47 @@
                     <value_type>3</value_type>
                     <allowed_hosts/>
                     <units/>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description/>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>OS - Health</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                    <preprocessing/>
+                    <jmx_endpoint/>
+                    <master_item/>
+                </item>
+                <item>
+                    <name>Number of maximum open file descriptors</name>
+                    <type>7</type>
+                    <snmp_community/>
+                    <snmp_oid/>
+                    <key>kernel.maxfiles</key>
+                    <delay>1h</delay>
+                    <history>1d</history>
+                    <trends>14d</trends>
+                    <status>0</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts/>
+                    <units>files</units>
                     <snmpv3_contextname/>
                     <snmpv3_securityname/>
                     <snmpv3_securitylevel>0</snmpv3_securitylevel>
@@ -1774,6 +1815,47 @@ A man with one watch knows what time it is. A man with two watches is never sure
                     <master_item/>
                 </item>
                 <item>
+                    <name>Number of current open file descriptors</name>
+                    <type>7</type>
+                    <snmp_community/>
+                    <snmp_oid/>
+                    <key>vfs.file.regexp[/proc/sys/fs/file-nr,&quot;([0-9]+)\s+([0-9]+)\s+([0-9]+)&quot;,,1,2,\1]</key>
+                    <delay>240</delay>
+                    <history>3d</history>
+                    <trends>14d</trends>
+                    <status>0</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts/>
+                    <units>files</units>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description/>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>OS - Health</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                    <preprocessing/>
+                    <jmx_endpoint/>
+                    <master_item/>
+                </item>
+                <item>
                     <name>MD Raid synchronous activity</name>
                     <type>7</type>
                     <snmp_community/>
@@ -2448,6 +2530,22 @@ md1 : active raid1 sdb2[2] sda2[0]&#13;
                     <trigger_prototypes>
                         <trigger_prototype>
                             <expression>(({Custom - OS - Linux:net.if.in[{#IFNAME},errors].last(0)}&gt;0) or ({Custom - OS - Linux:net.if.out[{#IFNAME},errors].last(0)}&gt;0))</expression>
+                            <recovery_mode>0</recovery_mode>
+                            <recovery_expression/>
+                            <name>Interface {#IFNAME} errors : {ITEM.LASTVALUE1}/{ITEM.LASTVALUE2} (in/out)</name>
+                            <correlation_mode>0</correlation_mode>
+                            <correlation_tag/>
+                            <url/>
+                            <status>0</status>
+                            <priority>2</priority>
+                            <description>There are interface errors, check your network equipment</description>
+                            <type>0</type>
+                            <manual_close>0</manual_close>
+                            <dependencies/>
+                            <tags/>
+                        </trigger_prototype>
+                        <trigger_prototype>
+                            <expression>(({Custom - OS - Linux:net.if.in[{#IFNAME},errors].last(0)}&gt;0) or ({Custom - OS - Linux:net.if.out[{#IFNAME},errors].last(0)}&gt;{$MAX_NETWORK_ERRORS_PERIOD}))</expression>
                             <recovery_mode>0</recovery_mode>
                             <recovery_expression/>
                             <name>Interface {#IFNAME} errors : {ITEM.LASTVALUE1}/{ITEM.LASTVALUE2} (in/out)</name>
@@ -3557,7 +3655,7 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
                 </macro>
                 <macro>
                     <macro>{$MAXIMUM_NUMBER_RETRANSMISSIONS}</macro>
-                    <value>1</value>
+                    <value>5</value>
                 </macro>
                 <macro>
                     <macro>{$MAX_NTP_OFFSET_MS}</macro>
@@ -3705,7 +3803,7 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
                 <screen>
                     <name>Custom - OS - Linux - General</name>
                     <hsize>1</hsize>
-                    <vsize>12</vsize>
+                    <vsize>13</vsize>
                     <screen_items>
                         <screen_item>
                             <resourcetype>0</resourcetype>
@@ -3789,7 +3887,7 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
                             <dynamic>0</dynamic>
                             <sort_triggers>0</sort_triggers>
                             <resource>
-                                <name>CPU Context Switches per Second</name>
+                                <name>CPU Context Switches</name>
                                 <host>Custom - OS - Linux</host>
                             </resource>
                             <max_columns>3</max_columns>
@@ -3971,6 +4069,28 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
                             <max_columns>3</max_columns>
                             <application/>
                         </screen_item>
+                        <screen_item>
+                            <resourcetype>0</resourcetype>
+                            <width>900</width>
+                            <height>300</height>
+                            <x>0</x>
+                            <y>12</y>
+                            <colspan>1</colspan>
+                            <rowspan>1</rowspan>
+                            <elements>0</elements>
+                            <valign>0</valign>
+                            <halign>0</halign>
+                            <style>0</style>
+                            <url/>
+                            <dynamic>0</dynamic>
+                            <sort_triggers>0</sort_triggers>
+                            <resource>
+                                <name>File descriptors</name>
+                                <host>Custom - OS - Linux</host>
+                            </resource>
+                            <max_columns>3</max_columns>
+                            <application/>
+                        </screen_item>
                     </screen_items>
                 </screen>
                 <screen>
@@ -4050,6 +4170,22 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
         </template>
     </templates>
     <triggers>
+        <trigger>
+            <expression>{Custom - OS - Linux:vfs.file.regexp[/proc/sys/fs/file-nr,&quot;([0-9]+)\s+([0-9]+)\s+([0-9]+)&quot;,,1,2,\1].last()} &gt; (0.9 * {Custom - OS - Linux:kernel.maxfiles.last()})</expression>
+            <recovery_mode>0</recovery_mode>
+            <recovery_expression/>
+            <name>90% of possible file descriptors reached</name>
+            <correlation_mode>0</correlation_mode>
+            <correlation_tag/>
+            <url/>
+            <status>0</status>
+            <priority>3</priority>
+            <description/>
+            <type>0</type>
+            <manual_close>0</manual_close>
+            <dependencies/>
+            <tags/>
+        </trigger>
         <trigger>
             <expression>({Custom - OS - Linux:kernel.maxproc.last()} * 0.9) &lt; {Custom - OS - Linux:proc.num[].last()}</expression>
             <recovery_mode>0</recovery_mode>
@@ -4219,7 +4355,7 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
             <expression>{Custom - OS - Linux:nfs.rpc.retransmits.last()}&gt;{$MAXIMUM_NUMBER_RETRANSMISSIONS}</expression>
             <recovery_mode>0</recovery_mode>
             <recovery_expression/>
-            <name>NFS Retransmissions &gt; {$MAXIMUM_NUMBER_RETRANSMISSIONS}</name>
+            <name>NFS Retransmissions - {ITEM.VALUE1} &gt; {$MAXIMUM_NUMBER_RETRANSMISSIONS}</name>
             <correlation_mode>0</correlation_mode>
             <correlation_tag/>
             <url/>
@@ -4482,7 +4618,7 @@ Remove the flagfile if you decide that no reboot is required (/var/run/reboot-re
     </triggers>
     <graphs>
         <graph>
-            <name>CPU Context Switches per Second</name>
+            <name>CPU Context Switches</name>
             <width>900</width>
             <height>300</height>
             <yaxismin>0.0000</yaxismin>
@@ -4717,6 +4853,50 @@ Remove the flagfile if you decide that no reboot is required (/var/run/reboot-re
                     <item>
                         <host>Custom - OS - Linux</host>
                         <key>system.cpu.util[,steal,avg1]</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <name>File descriptors</name>
+            <width>900</width>
+            <height>300</height>
+            <yaxismin>0.0000</yaxismin>
+            <yaxismax>100.0000</yaxismax>
+            <show_work_period>1</show_work_period>
+            <show_triggers>1</show_triggers>
+            <type>0</type>
+            <show_legend>1</show_legend>
+            <show_3d>0</show_3d>
+            <percent_left>0.0000</percent_left>
+            <percent_right>0.0000</percent_right>
+            <ymin_type_1>1</ymin_type_1>
+            <ymax_type_1>0</ymax_type_1>
+            <ymin_item_1>0</ymin_item_1>
+            <ymax_item_1>0</ymax_item_1>
+            <graph_items>
+                <graph_item>
+                    <sortorder>0</sortorder>
+                    <drawtype>0</drawtype>
+                    <color>1A7C11</color>
+                    <yaxisside>0</yaxisside>
+                    <calc_fnc>4</calc_fnc>
+                    <type>0</type>
+                    <item>
+                        <host>Custom - OS - Linux</host>
+                        <key>vfs.file.regexp[/proc/sys/fs/file-nr,&quot;([0-9]+)\s+([0-9]+)\s+([0-9]+)&quot;,,1,2,\1]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <drawtype>0</drawtype>
+                    <color>F63100</color>
+                    <yaxisside>0</yaxisside>
+                    <calc_fnc>4</calc_fnc>
+                    <type>0</type>
+                    <item>
+                        <host>Custom - OS - Linux</host>
+                        <key>kernel.maxfiles</key>
                     </item>
                 </graph_item>
             </graph_items>
