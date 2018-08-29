@@ -57,7 +57,7 @@
 <td>{$DISK_USAGE_PERCENT_WARN}</td><td>90</td>
 </tr>
 <tr>
-<td>{$MAXIMUM_NUMBER_RETRANSMISSIONS}</td><td>1</td>
+<td>{$MAXIMUM_NUMBER_RETRANSMISSIONS}</td><td>5</td>
 </tr>
 <tr>
 <td>{$MAX_NTP_OFFSET_MS}</td><td>100</td>
@@ -77,6 +77,9 @@
 <table class="pretty">
 <tr>
 <th>Name</th><th>Description</th><th>Priority</th><th>Expression</th><th>Dependencies</th>
+</tr>
+<tr>
+<td>90% of possible file descriptors reached</td><td></td><td style="background-color:#FF0000;">Average</td><td><tt>{Custom - OS - Linux:vfs.file.regexp[/proc/sys/fs/file-nr,"([0-9]+)\s+([0-9]+)\s+([0-9]+)",,1,2,\1].last()} &gt; (0.9 * {Custom - OS - Linux:kernel.maxfiles.last()})</tt></td><td><tt></tt></td>
 </tr>
 <tr>
 <td>90% of possible processes reached</td><td></td><td style="background-color:#FF0000;">Average</td><td><tt>({Custom - OS - Linux:kernel.maxproc.last()} * 0.9) &lt; {Custom - OS - Linux:proc.num[].last()}</tt></td><td><tt></tt></td>
@@ -117,7 +120,7 @@
 <td>MTA Mailq Total Messages</td><td></td><td style="background-color:#FFFF00;">Warning</td><td><tt>{Custom - OS - Linux:mailq.count.general.avg(1200)}&gt;1500 and ({Custom - OS - Linux:mailq.count.general.avg(1200)}&gt;{Custom - OS - Linux:mailq.count.general.avg(2400)})</tt></td><td><tt></tt></td>
 </tr>
 <tr>
-<td>NFS Retransmissions &gt; {$MAXIMUM_NUMBER_RETRANSMISSIONS}</td><td></td><td style="background-color:#FFFF00;">Information</td><td><tt>{Custom - OS - Linux:nfs.rpc.retransmits.last()}&gt;{$MAXIMUM_NUMBER_RETRANSMISSIONS}</tt></td><td><tt></tt></td>
+<td>NFS Retransmissions - {ITEM.VALUE1} &gt; {$MAXIMUM_NUMBER_RETRANSMISSIONS}</td><td></td><td style="background-color:#FFFF00;">Information</td><td><tt>{Custom - OS - Linux:nfs.rpc.retransmits.last()}&gt;{$MAXIMUM_NUMBER_RETRANSMISSIONS}</tt></td><td><tt></tt></td>
 </tr>
 <tr>
 <td>NTP Absolute RMS Time Offset &gt;  {$MAX_NTP_OFFSET_MS} ms</td><td>Time difference between the host and the active ntp peer is greater than {$MAX_NTP_OFFSET}</td><td style="background-color:#FFFF00;">Warning</td><td><tt>{Custom - OS - Linux:ntpd.primarypeer.stats[offset].last()} &gt; {$MAX_NTP_OFFSET_MS} or ((-1 * {Custom - OS - Linux:ntpd.primarypeer.stats[offset].last()}) &gt; {$MAX_NTP_OFFSET_MS})</tt></td><td><tt>NTP Absolute Time RMS Offset no data<br>
@@ -180,7 +183,7 @@ Remove the flagfile if you decide that no reboot is required (/var/run/reboot-re
 <th>Name</th><th>Elements</th>
 </tr>
 <tr>
-<td>CPU Context Switches per Second</td><td><tt>system.cpu.switches<br>
+<td>CPU Context Switches</td><td><tt>system.cpu.switches<br>
 </tt></td>
 </tr>
 <tr>
@@ -189,6 +192,10 @@ Remove the flagfile if you decide that no reboot is required (/var/run/reboot-re
 </tr>
 <tr>
 <td>CPU Times AVG</td><td><tt>system.cpu.util[,system,avg1]<br>system.cpu.util[,user,avg1]<br>system.cpu.util[,interrupt,avg1]<br>system.cpu.util[,iowait,avg1]<br>system.cpu.util[,nice,avg1]<br>system.cpu.util[,softirq,avg1]<br>system.cpu.util[,steal,avg1]<br>
+</tt></td>
+</tr>
+<tr>
+<td>File descriptors</td><td><tt>vfs.file.regexp[/proc/sys/fs/file-nr,"([0-9]+)\s+([0-9]+)\s+([0-9]+)",,1,2,\1]<br>kernel.maxfiles<br>
 </tt></td>
 </tr>
 <tr>
@@ -239,6 +246,11 @@ Remove the flagfile if you decide that no reboot is required (/var/run/reboot-re
 <td>
 <p class="desc">Simple check</p>
 </td><td>ICMP Ping</td><td><tt>icmpping[,1,,,]</tt></td><td></td><td>2m</td><td>1w</td><td>365d</td>
+</tr>
+<tr>
+<td>
+<p class="desc">Zabbix Agent (active)</p>
+</td><td>Number of maximum open file descriptors</td><td><tt>kernel.maxfiles</tt></td><td></td><td>1h</td><td>1d</td><td>14d</td>
 </tr>
 <tr>
 <td>
@@ -435,6 +447,11 @@ A man with one watch knows what time it is. A man with two watches is never sure
 <tr>
 <td>
 <p class="desc">Zabbix Agent (active)</p>
+</td><td>Number of current open file descriptors</td><td><tt>vfs.file.regexp[/proc/sys/fs/file-nr,"([0-9]+)\s+([0-9]+)\s+([0-9]+)",,1,2,\1]</tt></td><td></td><td>240</td><td>3d</td><td>14d</td>
+</tr>
+<tr>
+<td>
+<p class="desc">Zabbix Agent (active)</p>
 </td><td>MD Raid synchronous activity</td><td><tt>vfs.file.regmatch[/proc/mdstat,"finish",,]</tt></td><td>See /proc/mdstat&#13;
 &#13;
 Manual Check: &#13;
@@ -512,6 +529,9 @@ md1 : active raid1 sdb2[2] sda2[0]&#13;
 </tr>
 <tr>
 <td>Interface {#IFNAME} errors : {ITEM.LASTVALUE1}/{ITEM.LASTVALUE2} (in/out)</td><td>There are interface errors, check your network equipment</td><td style="background-color:#FFFF00;">Warning</td><td><tt>(({Custom - OS - Linux:net.if.in[{#IFNAME},errors].last(0)}&gt;0) or ({Custom - OS - Linux:net.if.out[{#IFNAME},errors].last(0)}&gt;0))</tt></td><td><tt></tt></td>
+</tr>
+<tr>
+<td>Interface {#IFNAME} errors : {ITEM.LASTVALUE1}/{ITEM.LASTVALUE2} (in/out)</td><td>There are interface errors, check your network equipment</td><td style="background-color:#FFFF00;">Warning</td><td><tt>(({Custom - OS - Linux:net.if.in[{#IFNAME},errors].last(0)}&gt;0) or ({Custom - OS - Linux:net.if.out[{#IFNAME},errors].last(0)}&gt;{$MAX_NETWORK_ERRORS_PERIOD}))</tt></td><td><tt></tt></td>
 </tr>
 </table>
 <h2>Graph Overview</h2>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
     <version>3.4</version>
-    <date>2018-08-04T15:49:05Z</date>
+    <date>2018-08-29T18:16:52Z</date>
     <groups>
         <group>
             <name>Templates</name>
@@ -1015,7 +1015,7 @@
             <correlation_tag/>
             <url/>
             <status>0</status>
-            <priority>0</priority>
+            <priority>2</priority>
             <description/>
             <type>0</type>
             <manual_close>0</manual_close>
@@ -1031,7 +1031,7 @@
             <correlation_tag/>
             <url/>
             <status>0</status>
-            <priority>0</priority>
+            <priority>2</priority>
             <description>Trigger if Puppet Agent Process is not running or has no data for 1h</description>
             <type>0</type>
             <manual_close>0</manual_close>
@@ -1047,7 +1047,7 @@
             <correlation_tag/>
             <url/>
             <status>0</status>
-            <priority>0</priority>
+            <priority>2</priority>
             <description/>
             <type>0</type>
             <manual_close>0</manual_close>
@@ -1063,7 +1063,7 @@
             <correlation_tag/>
             <url/>
             <status>0</status>
-            <priority>0</priority>
+            <priority>2</priority>
             <description/>
             <type>0</type>
             <manual_close>0</manual_close>
@@ -1079,7 +1079,7 @@
             <correlation_tag/>
             <url/>
             <status>0</status>
-            <priority>0</priority>
+            <priority>2</priority>
             <description/>
             <type>0</type>
             <manual_close>0</manual_close>
@@ -1095,7 +1095,7 @@
             <correlation_tag/>
             <url/>
             <status>0</status>
-            <priority>0</priority>
+            <priority>2</priority>
             <description/>
             <type>0</type>
             <manual_close>0</manual_close>
@@ -1111,7 +1111,7 @@
             <correlation_tag/>
             <url/>
             <status>0</status>
-            <priority>0</priority>
+            <priority>2</priority>
             <description/>
             <type>0</type>
             <manual_close>0</manual_close>
@@ -1127,11 +1127,17 @@
             <correlation_tag/>
             <url/>
             <status>0</status>
-            <priority>0</priority>
+            <priority>2</priority>
             <description/>
             <type>0</type>
             <manual_close>0</manual_close>
-            <dependencies/>
+            <dependencies>
+                <dependency>
+                    <name>Puppet disabled</name>
+                    <expression>{Custom - OS - Puppet:puppet[disabled].str(&quot;NOT DISABLED&quot;)}=0</expression>
+                    <recovery_expression/>
+                </dependency>
+            </dependencies>
             <tags/>
         </trigger>
     </triggers>
