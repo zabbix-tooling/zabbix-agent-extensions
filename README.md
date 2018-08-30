@@ -22,9 +22,11 @@ This package provides the following capabilities:
    * monitor the maximum and minimum of processes
    * automatic discovery
       * filesystems: inode and space measures<BR>
-        (the amount of discovered devices can be limited by a configuration file on the monitored host)
+        (the amount of discovered filesystems can be limited by a configuration file on the monitored host)
       * network interfaces: packets and transferrates per second
       * storage devices: operations per second
+        (the amount of discovered devices can be limited by a configuration file on the monitored host)
+      * network interfaces: packets and transferrates per second
    * number of processes
  * monitor ICMP ping 
  * monitor the MTA mailqueue
@@ -129,38 +131,31 @@ A quick is provided by the following files:
 # How to configure discovery for zabbix agent
  
  * Configure disk device discovery
-    * Create file: /etc/zabbix/item_zabbix_device_discovery.json<BR>
+    * Create files: 
       (if the file does not exist, the default is used)
+       * /etc/zabbix/item_zabbix_device_discovery.json<BR>
+       * /etc/zabbix/item_zabbix_discovery_filesystems.json<BR>
     * Add content to include/exclude devices<BR>
       (what it does: include all devices and hardware models, after that filter out all devices and models which match to one of the python regexes) 
       ```
-      {
-        "regex_includes_name": [
-          ".*"
-        ],
-        "regex_includes_model": [
-          ".*"
-        ],
-        "regex_excludes_name": [
-          "loop.*", "fd.*", "sr.*", "dm.*", "ram.*"
-        ]
-        "regex_excludes_model": [
-          ".*PERC.*"
-        ]
-      }
+      /usr/bin/zabbix_discovery_devices --help
+      /usr/bin/zabbix_discovery_filesystems --help
       ```
-    * Test
+     * Test
       ```
       zabbix_agentd -t "vfs.dev.discovery"
       /usr/bin/zabbix_discovery_devices --config /etc/zabbix/item_zabbix_discovery_devices.json --debug
+
+      zabbix_agentd -t "vfs.fs.discovery"
+      /usr/bin/zabbix_discovery_filesystems --config /etc/zabbix/item_zabbix_discovery_filesystems.json --debug
       ```
  * Configure generic discovery
    * Decide to use a appname consiting of the following characters: a-zA-Z0-9. (Alphanumeric and dot characters)
    * Add file snippes to /var/run/zabbix-generic-discovery/ which look like <appname>-<anything>.json
      ```
      {
-        "{#FSNAME}":"\/",
-        "{#FSTYPE}":"rootfs"
+        "{#FOOOO}":"fooservice",
+        "{#BAR}":"footype"
      },
      ```
    * Test the disovery by
@@ -168,9 +163,7 @@ A quick is provided by the following files:
       zabbix_agentd -t "generic.discovery[appname]"
      ```
 
-# How to configure the zabbix server
-
-The templates will work on zabbix 2.2 and above.
+# How to configure the zabbix server/templates
 
  * Open Zabbix web frontend
  * Open "Configuration" => "Templates"
@@ -178,16 +171,25 @@ The templates will work on zabbix 2.2 and above.
  * Activate Linux template
    * Load "zabbix_templates/3.4/Custom - OS - Linux.xml"
    * Open template "Custom - OS - Linux" and modify the default values defined in the macros
-     * {$DISK_USAGE_PERCENT_ALARM}: percentage of storage usage to send alarms 
-     * {$MAXIMUM_NUMBER_RETRANSMISSIONS}: alert if that number of nfs retransmits appears in one monitoring cycle
-     * {$MONITOR_LOAD_WARNING_MULT} : multiplying factor
+     * Devices
+       * {$DISK_HIGH_READ_IOPS_LIMIT} : alert limit for read iops/sec
+       * {$DISK_HIGH_WRITE_IOPS_LIMIT} : alert limit for read iops/sec
+       * {$DISK_IOPS_LIMIT_MEASURES} : how many measures need to be above the configured limits before alerting
+     * Filesystems
+       * {$DISK_USAGE_ABOVE_1TB_MINFREE_GBYTES} : how many gigagbytes should be free for filesystem above 1TB
+       * {$DISK_USAGE_PERCENT_ALARM} : send alarm for filesystems below 1 TB on prcentage
+       * {$DISK_USAGE_PERCENT_WARN} : send warning for filesystems below 1 TB on prcentage
+     * {$MAXIMUM_NUMBER_RETRANSMISSIONS} : how many nfs retransmissions are ok on every measurement cycle
+     * NTP
+       * {$MAX_NTP_OFFSET_MS} : the maximum offset limit in milliseconds
+       * {$MIN_NTP_SERVER_COUNT} : how many good ntp sources should be avaiilable, it is istrongly recommended to change the default to 2
+     * {$MONITOR_LOAD_WARNING_MULT} : a multiplicator with the number of cpus for load monitoring 
      * {$MONITOR_TIMEOUT} : amount of time to complain if hosts does not provide values anymore
    * Assign template "Custom - OS - Linux" to the desired hosts and modify the default values to host specific settings
  * Activate Apache template
    * Load "zabbix_templates/Custom - Service - Apache.xml"
    * Open template "Custom - Service - Apache" and modify the default values defined in the macros
    * Assign template "Custom - Service - Apache" to the desired hosts and modify the default values to host specific settings
- * ...
    
 # Licence and Authors
 

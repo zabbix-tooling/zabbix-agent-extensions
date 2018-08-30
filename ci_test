@@ -67,7 +67,7 @@ pkill tail
 assertSuccess STOP_ON_ERROR "zabbix_get -s 127.0.0.1 -k linux.dmesg | tee /dev/stderr | grep -q -P 'OK: ALL OK|ERROR:'" # Without sudo
 assertSuccess STOP_ON_ERROR "zabbix_get -s 127.0.0.1 -k linux.dmesg | tee /dev/stderr | grep -q -P 'OK: ALL OK|ERROR:'" # Without sudo
 assertSuccess STOP_ON_ERROR "zabbix_get -s 127.0.0.1 -k linux.multipath | tee /dev/stderr | grep -q 'OK:'" # With sudo
-assertSuccess STOP_ON_ERROR "zabbix_get -s 127.0.0.1 -k vfs.dev.discovery | tee /dev/stderr | grep -q '#BLOCKDEVICE'" # With sudo
+
 assertSuccess STOP_ON_ERROR "zabbix_get -s 127.0.0.1 -k 'custom.process[zabbix_agentd,minage]'|tee /dev/stderr | grep -q -P '^\d+$'"
 assertSuccess STOP_ON_ERROR "zabbix_get -s 127.0.0.1 -k 'custom.process[zabbix_agentd,maxage]'|tee /dev/stderr | grep -q -P '^\d+$'"
 assertSuccess STOP_ON_ERROR "zabbix_get -s 127.0.0.1 -k 'custom.process[nosuchprocess,maxage]'|tee /dev/stderr | grep -q -P '^\d+$'"
@@ -75,6 +75,10 @@ assertSuccess STOP_ON_ERROR "zabbix_get -s 127.0.0.1 -k 'zabbix.agent_extensions
 assertSuccess STOP_ON_ERROR "zabbix_get -s 127.0.0.1 -k 'puppet[state]'|tee /dev/stderr | grep -q -P '^OK: puppetrun successful, no changes$'"
 assertSuccess STOP_ON_ERROR "zabbix_get -s 127.0.0.1 -k 'puppet[changes,total]'|tee /dev/stderr | grep -q -P '^\d+$'"
 assertSuccess STOP_ON_ERROR "zabbix_get -s 127.0.0.1 -k 'puppet[environment]'|tee /dev/stderr | grep -q -P '^production$'"
+
+assertSuccess STOP_ON_ERROR "zabbix_get -s 127.0.0.1 -k vfs.dev.discovery | tee /dev/stderr | grep -q '#BLOCKDEVICE'"
+assertSuccess STOP_ON_ERROR "zabbix_get -s 127.0.0.1 -k vfs.fs.discovery|grep -v /proc"
+
 assertSuccess STOP_ON_ERROR 'sudo dpkg -P zabbix-agent-extensions'
 
 echo

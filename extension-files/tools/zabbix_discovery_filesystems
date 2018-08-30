@@ -1,0 +1,196 @@
+#!/usr/bin/env python3
+#
+#   This program is free software; you can redistribute it and/or modify
+#   it under the terms of the GNU General Public License as published by
+#   the Free Software Foundation; either version 2 of the License, or
+#   (at your option) any later version.
+#
+#   This program is distributed in the hope that it will be useful,
+#   but WITHOUT ANY WARRANTY; without even the implied warranty of
+#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#   GNU General Public License for more details.
+#
+#   You should have received a copy of the GNU General Public License along
+#   with this program; if not, write to the Free Software Foundation, Inc.,
+#   51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+
+# Marc Schoechlin <ms@256bit.org>
+
+import argparse
+import glob
+import json
+import os
+import re
+import sys
+
+####################################################################################
+
+config_default = {
+    "regex_includes_name": [".*"],
+    "regex_includes_type": [".*"],
+    "regex_excludes_name": [],
+    "regex_excludes_type": ["nfs", "nfs4", "cifs", "autofs", "binfmt_misc", "cgroup", "cgroup2", "configfs", "debugfs",
+                            "devpts", "devtmpfs", "efivarfs", "fusectl", "fuse.gvfsd-fuse", "hugetlbfs", "mqueue",
+                            "proc", "pstore", "securityfs", "sysfs", "tmpfs", "vfat"],
+}
+
+
+####################################################################################
+#### HELPERS
+
+def check_match(matchfor, filesystem_name, regexes):
+    ret = False
+    for regex in regexes:
+        regex = regex.strip()
+        if re.match(r"^%s$" % regex, filesystem_name):
+            if args.debug:
+                sys.stderr.write("%s match: %s with %s\n" % (matchfor, filesystem_name, regex))
+            ret = True
+    return ret
+
+
+def read_config(config_file):
+    config = config_default
+    if os.path.exists(config_file):
+        if args.debug:
+            sys.stderr.write("reading config file %s\n" % config_file)
+        try:
+            fh = open(config_file, 'r')
+            content = fh.read()
+
+            # Remove multiline comments
+            content = re.sub('^\s*/\*.*?\*/\s*', '', content, 0, re.DOTALL | re.MULTILINE)
+            # Remove single line comments
+            content = re.sub('^\s*//.*$\n', '', content, 0, re.MULTILINE)
+
+            config = json.loads(content)
+
+            fh.close()
+        except FileNotFoundError:
+            sys.stderr.write("Config file does not exist\n")
+        except PermissionError:
+            sys.stderr.write("Could not read config file\n")
+        except json.decoder.JSONDecodeError:
+            sys.stderr.write("Could not parse JSON config file\n")
+        except:
+            sys.stderr.write("An unexpected error occured while reading config file\n")
+
+    return config
+
+
+####################################################################################
+#### MAIN
+
+
+parser = argparse.ArgumentParser(
+    description='perform filesystem disovery for zabbix',
+    formatter_class=argparse.RawTextHelpFormatter,
+    epilog='''Example json configuration file:
+
+i.e. /etc/zabbix/item_zabbix_filesystem_discovery.json:
+---
+{
+  "regex_includes_name": [
+    ".*"
+  ],
+  "regex_includes_type": [
+    ".*"
+  ],
+  "regex_excludes_name": [
+    "nfs", "nfs4", "cifs", "autofs", "binfmt_misc", "cgroup", "cgroup2", "configfs", "debugfs",
+                            "devpts", "devtmpfs", "efivarfs", "fusectl", "fuse.gvfsd-fuse", "hugetlbfs", "mqueue",
+                            "proc", "pstore", "securityfs", "sysfs", "tmpfs", "vfat"
+  ],
+  "regex_excludes_type": [
+  ],
+}
+---
+
+Options are evaluated like this:
+- stage 1: include the following filesystems by regex
+- stage 2: exclude the following filesystems from step 1 by regex
+
+    '''
+)
+parser.add_argument(
+    '--debug',
+    help='Output debug information',
+    action='store_true',
+)
+
+parser.add_argument(
+    '--smart',
+    help='Discovery for smartctl',
+    action='store_true',
+)
+
+parser.add_argument(
+    '--only_rawdisk',
+    help='Output only hardware filesystems',
+    action='store_true',
+)
+
+parser.add_argument(
+    '--config',
+    nargs='?',
+    type=str,
+    help='configuration file',
+    default=None,
+    required=False,
+)
+
+args = parser.parse_args()
+
+filesystems_discovered = {'data': []}
+
+# read the config
+if args.config is not None:
+    config = read_config(args.config)
+else:
+    config = config_default
+
+if args.debug:
+    sys.stderr.write("** Effective config:\n%s\n" % json.dumps(config, indent=2))
+
+# perform discovery
+
+with open("/proc/mounts", "r") as mounts:
+    for line in mounts:
+
+        m = re.match("^([^ ]+) ([^ ]+) ([^ ]+) .*$", line)
+        if not m:
+            continue
+
+        filesystem_name = m.group(2)
+        filesystem_type = m.group(3)
+        if args.debug:
+            sys.stderr.write("** filesystem %s / type %s\n" % (filesystem_name, filesystem_type))
+
+        # Check matched filesystems
+        if not check_match("include", filesystem_name, config["regex_includes_name"]):
+            continue
+
+        if not check_match("include", filesystem_type, config["regex_includes_type"]):
+            continue
+
+        # Check excluded filesystems
+        if check_match("exclude", filesystem_name, config["regex_excludes_name"]):
+            continue
+
+        if check_match("exclude", filesystem_type, config["regex_excludes_type"]):
+            continue
+
+        else:
+            # {"data":[{"{#FSNAME}":"/sys","{#FSTYPE}":"sysfs"},{.....
+            filesystem = {}
+            filesystem['{#FSNAME}'] = filesystem_name
+            filesystem['{#FSTYPE}'] = filesystem_type
+
+            filesystems_discovered['data'].append(filesystem)
+
+if args.debug:
+    print(json.dumps(filesystems_discovered, sort_keys=True, indent=2))
+else:
+    print(json.dumps(filesystems_discovered, sort_keys=True))
+
+# vim: ai et ts=2 shiftwidth=2 expandtab
