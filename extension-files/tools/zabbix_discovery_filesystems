@@ -29,8 +29,9 @@ config_default = {
     "regex_includes_name": [".*"],
     "regex_includes_type": [".*"],
     "regex_excludes_name": [],
-    "regex_excludes_type": ["nfs", "nfs4", "cifs", "autofs", "binfmt_misc", "cgroup", "cgroup2", "configfs", "debugfs",
+    "regex_excludes_type": ["nfs", "nfs4", "nfsd", "cifs", "autofs", "binfmt_misc", "cgroup", "cgroup2", "configfs", "debugfs",
                             "devpts", "devtmpfs", "efivarfs", "fusectl", "fuse.gvfsd-fuse", "hugetlbfs", "mqueue",
+                            "fuse.lxcfs", "xenfs", "rpc_pipefs", "efivarfs", "tracefs",
                             "proc", "pstore", "securityfs", "sysfs", "tmpfs", "vfat"],
 }
 
