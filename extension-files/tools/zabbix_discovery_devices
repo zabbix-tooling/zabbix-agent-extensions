@@ -103,7 +103,7 @@ i.e. /etc/zabbix/item_zabbix_device_discovery.json:
     ".*"
   ],
   "regex_excludes_name": [
-    "loop.*", "fd.*", "sr.*" "md.*"
+    "loop.*", "fd.*", "sr.*", "dm.*", "ram.*"
   ],
   "regex_excludes_model": [
   ],

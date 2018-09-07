@@ -89,7 +89,7 @@ parser = argparse.ArgumentParser(
     formatter_class=argparse.RawTextHelpFormatter,
     epilog='''Example json configuration file:
 
-i.e. /etc/zabbix/item_zabbix_filesystem_discovery.json:
+i.e. /etc/zabbix/item_zabbix_discovery_filesystems.json
 ---
 {
   "regex_includes_name": [
@@ -98,13 +98,11 @@ i.e. /etc/zabbix/item_zabbix_filesystem_discovery.json:
   "regex_includes_type": [
     ".*"
   ],
-  "regex_excludes_name": [
-    "nfs", "nfs4", "cifs", "autofs", "binfmt_misc", "cgroup", "cgroup2", "configfs", "debugfs",
+  "regex_excludes_type": ["nfs", "nfs4", "nfsd", "cifs", "autofs", "binfmt_misc", "cgroup", "cgroup2", "configfs",
+                            "debugfs",
                             "devpts", "devtmpfs", "efivarfs", "fusectl", "fuse.gvfsd-fuse", "hugetlbfs", "mqueue",
-                            "proc", "pstore", "securityfs", "sysfs", "tmpfs", "vfat"
-  ],
-  "regex_excludes_type": [
-  ],
+                            "fuse.lxcfs", "xenfs", "rpc_pipefs", "efivarfs", "tracefs",
+                            "proc", "pstore", "securityfs", "sysfs", "tmpfs", "vfat"],
 }
 ---
 
@@ -123,12 +121,6 @@ parser.add_argument(
 parser.add_argument(
     '--smart',
     help='Discovery for smartctl',
-    action='store_true',
-)
-
-parser.add_argument(
-    '--only_rawdisk',
-    help='Output only hardware filesystems',
     action='store_true',
 )
 
