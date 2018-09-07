@@ -78,7 +78,7 @@ assertSuccess STOP_ON_ERROR "zabbix_get -s 127.0.0.1 -k 'puppet[environment]'|te
 
 assertSuccess STOP_ON_ERROR "zabbix_get -s 127.0.0.1 -k vfs.dev.discovery | tee /dev/stderr | grep -q '#BLOCKDEVICE'"
 assertSuccess STOP_ON_ERROR "zabbix_get -s 127.0.0.1 -k vfs.fs.discovery|grep -v /proc"
-
+assertSuccess STOP_ON_ERROR "zabbix_get -s 127.0.0.1 -k nfs.rpc.calls|grep -P '^0$'"
 assertSuccess STOP_ON_ERROR 'sudo dpkg -P zabbix-agent-extensions'
 
 echo
