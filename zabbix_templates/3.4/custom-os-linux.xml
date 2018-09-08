@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
     <version>3.4</version>
-    <date>2018-08-29T18:15:56Z</date>
+    <date>2018-09-08T07:37:38Z</date>
     <groups>
         <group>
             <name>Templates</name>
@@ -3656,6 +3656,10 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
                 <macro>
                     <macro>{$MAXIMUM_NUMBER_RETRANSMISSIONS}</macro>
                     <value>5</value>
+                </macro>
+                <macro>
+                    <macro>{$MAX_NETWORK_ERRORS_PERIOD}</macro>
+                    <value>1</value>
                 </macro>
                 <macro>
                     <macro>{$MAX_NTP_OFFSET_MS}</macro>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
     <version>3.4</version>
-    <date>2018-03-07T20:39:24Z</date>
+    <date>2018-09-08T07:38:11Z</date>
     <groups>
         <group>
             <name>Templates</name>
@@ -409,7 +409,7 @@
                             <type>7</type>
                             <snmp_community/>
                             <snmp_oid/>
-                            <key>hardware.disk.smart.info[{#BLOCKDEVICE},Device Model]</key>
+                            <key>hardware.disk.smart.infos[{#BLOCKDEVICE},Device Model]</key>
                             <delay>1d</delay>
                             <history>90d</history>
                             <trends>0</trends>
@@ -451,7 +451,7 @@
                             <type>7</type>
                             <snmp_community/>
                             <snmp_oid/>
-                            <key>hardware.disk.smart.info[{#BLOCKDEVICE},Serial Number]</key>
+                            <key>hardware.disk.smart.infos[{#BLOCKDEVICE},Serial Number]</key>
                             <delay>1d</delay>
                             <history>90d</history>
                             <trends>0</trends>
@@ -491,7 +491,7 @@
                     </item_prototypes>
                     <trigger_prototypes>
                         <trigger_prototype>
-                            <expression>{Custom - OS - Linux - Hardware:hardware.disk.health[{#BLOCKDEVICE}].str(PASSED)}=0</expression>
+                            <expression>{Custom - OS - Linux - Hardware:hardware.disk.health[{#BLOCKDEVICE}].regexp(PASSED|OK,)}=0</expression>
                             <recovery_mode>0</recovery_mode>
                             <recovery_expression/>
                             <name>Smart Disk Health {#BLOCKDEVICE}</name>

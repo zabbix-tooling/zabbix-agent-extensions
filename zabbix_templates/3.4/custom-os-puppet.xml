@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
     <version>3.4</version>
-    <date>2018-08-29T18:16:52Z</date>
+    <date>2018-09-08T07:38:55Z</date>
     <groups>
         <group>
             <name>Templates</name>
@@ -1007,10 +1007,10 @@
     </templates>
     <triggers>
         <trigger>
-            <expression>{Custom - OS - Puppet:puppet[events,failure].last()}&gt;0</expression>
+            <expression>{Custom - OS - Puppet:puppet[state].str(&quot;ERROR&quot;)}=1</expression>
             <recovery_mode>0</recovery_mode>
             <recovery_expression/>
-            <name>Last Puppet Run failed</name>
+            <name>Last puppet run failed</name>
             <correlation_mode>0</correlation_mode>
             <correlation_tag/>
             <url/>
@@ -1023,10 +1023,10 @@
             <tags/>
         </trigger>
         <trigger>
-            <expression>({Custom - OS - Puppet:proc.num[,root,,.*ruby.*puppet agent.*$].last()}&lt;1) or ({Custom - OS - Puppet:proc.num[,root,,.*ruby.*puppet agent.*$].nodata(3600)}=1)</expression>
+            <expression>({Custom - OS - Puppet:proc.num[,root,,.*ruby.*puppet agent.*$].last()}&lt;1) or ({Custom - OS - Puppet:proc.num[,root,,.*ruby.*puppet agent.*$].nodata(3700)}=1)</expression>
             <recovery_mode>0</recovery_mode>
             <recovery_expression/>
-            <name>Puppet Agent Process</name>
+            <name>Puppet Agent Process not  active for one hour</name>
             <correlation_mode>0</correlation_mode>
             <correlation_tag/>
             <url/>
@@ -1103,23 +1103,7 @@
             <tags/>
         </trigger>
         <trigger>
-            <expression>{Custom - OS - Puppet:puppet[state].str(&quot;ERROR&quot;)}=1</expression>
-            <recovery_mode>0</recovery_mode>
-            <recovery_expression/>
-            <name>Puppet run failed</name>
-            <correlation_mode>0</correlation_mode>
-            <correlation_tag/>
-            <url/>
-            <status>0</status>
-            <priority>2</priority>
-            <description/>
-            <type>0</type>
-            <manual_close>0</manual_close>
-            <dependencies/>
-            <tags/>
-        </trigger>
-        <trigger>
-            <expression>{Custom - OS - Puppet:puppet[time,last_run].fuzzytime(3600)}=0</expression>
+            <expression>{Custom - OS - Puppet:puppet[time,last_run].fuzzytime(3700)}=0</expression>
             <recovery_mode>0</recovery_mode>
             <recovery_expression/>
             <name>Puppet Run older than one hour</name>
