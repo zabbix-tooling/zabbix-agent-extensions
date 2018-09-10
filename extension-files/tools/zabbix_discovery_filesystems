@@ -33,7 +33,7 @@ config_default = {
                             "debugfs",
                             "devpts", "devtmpfs", "efivarfs", "fusectl", "fuse.gvfsd-fuse", "hugetlbfs", "mqueue",
                             "fuse.lxcfs", "xenfs", "rpc_pipefs", "efivarfs", "tracefs",
-                            "proc", "pstore", "securityfs", "sysfs", "tmpfs", "vfat"],
+                            "proc", "pstore", "securityfs", "sysfs", "tmpfs", "vfat", "iso9660" ],
 }
 
 
@@ -102,7 +102,7 @@ i.e. /etc/zabbix/item_zabbix_discovery_filesystems.json
                             "debugfs",
                             "devpts", "devtmpfs", "efivarfs", "fusectl", "fuse.gvfsd-fuse", "hugetlbfs", "mqueue",
                             "fuse.lxcfs", "xenfs", "rpc_pipefs", "efivarfs", "tracefs",
-                            "proc", "pstore", "securityfs", "sysfs", "tmpfs", "vfat"],
+                            "proc", "pstore", "securityfs", "sysfs", "tmpfs", "vfat", "iso9660" ],
 }
 ---
 
