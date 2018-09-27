@@ -28,7 +28,7 @@ import sys
 config_default = {
     "regex_includes_name": [".*"],
     "regex_includes_model": [".*"],
-    "regex_excludes_name": ["loop.*", "fd.*", "sr.*", "dm.*", "ram.*" ],
+    "regex_excludes_name": ["loop.*", "fd.*", "sr.*", "dm.*", "ram.*"],
     "regex_excludes_model": [],
     "smartctl_subdevices": {},
 }
@@ -84,6 +84,7 @@ def is_real_hardware_device(device):
     else:
         return False
 
+
 ####################################################################################
 #### MAIN
 
@@ -134,21 +135,19 @@ parser.add_argument(
     action='store_true',
 )
 
-
 parser.add_argument(
     '--only_rawdisk',
     help='Output only hardware devices',
     action='store_true',
 )
 
-
 parser.add_argument(
-   '--config',
-   nargs='?',
-   type=str,
-   help='configuration file',
-   default=None,
-   required=False,
+    '--config',
+    nargs='?',
+    type=str,
+    help='configuration file',
+    default=None,
+    required=False,
 )
 
 args = parser.parse_args()
@@ -164,8 +163,6 @@ else:
 if args.debug:
     sys.stderr.write("** Effective config:\n%s\n" % json.dumps(config, indent=2))
 
-
-
 # perform discovery
 for filename in glob.glob('/sys/block/*'):
     if not os.path.islink(filename):
@@ -174,23 +171,13 @@ for filename in glob.glob('/sys/block/*'):
 
     device_model_file = "/sys/block/%s/device/model" % device_name
     device_model = "UNDEFINED"
-    
+
     if os.path.isfile(device_model_file):
         with open(device_model_file) as f_model:
-                device_model = f_model.readline()
-
-    device_size_file = "/sys/block/%s/size" % device_name 
-    device_size = 0
-    if os.path.isfile(device_size_file):
-        with open(device_size_file) as f_size:
-               device_size = int(f_size.readline().strip())
-    if device_size == 0:
-        if args.debug:
-             sys.stderr.write("ignoring device %s, its size is 0\n" % device_name)
-        continue
+            device_model = f_model.readline()
 
     if args.debug:
-        sys.stderr.write("** DEVICE %s / MODEL %s\n" % (device_name,device_model))
+        sys.stderr.write("** DEVICE %s / MODEL %s\n" % (device_name, device_model))
 
     # Check matched devices
     if not check_match("include", device_name, config["regex_includes_name"]):
@@ -209,17 +196,25 @@ for filename in glob.glob('/sys/block/*'):
     if args.only_rawdisk and not is_real_hardware_device(device_name):
         continue
 
+    device_size_file = "/sys/block/%s/size" % device_name
+    device_size = 0
+    if os.path.isfile(device_size_file):
+        with open(device_size_file) as f_size:
+            device_size = int(f_size.readline().strip())
+    if device_size == 0:
+        if args.debug:
+            sys.stderr.write("ignoring device %s, its size is 0\n" % device_name)
+        continue
+
     if args.smart and device_name in config["smartctl_subdevices"]:
         for smartarg in config["smartctl_subdevices"][device_name]:
             device = {}
-            device['{#BLOCKDEVICE}'] = device_name +  " " + smartarg
+            device['{#BLOCKDEVICE}'] = device_name + " " + smartarg
             devices_discovered['data'].append(device)
     else:
         device = {}
         device['{#BLOCKDEVICE}'] = device_name
         devices_discovered['data'].append(device)
-
-
 
 if args.debug:
     print(json.dumps(devices_discovered, sort_keys=True, indent=2))
