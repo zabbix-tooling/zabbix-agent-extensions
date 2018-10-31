@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
     <version>3.4</version>
-    <date>2018-09-08T07:37:38Z</date>
+    <date>2018-10-31T10:25:12Z</date>
     <groups>
         <group>
             <name>Templates</name>
@@ -311,7 +311,7 @@
                     <delay>5m</delay>
                     <history>2w</history>
                     <trends>0</trends>
-                    <status>0</status>
+                    <status>1</status>
                     <value_type>4</value_type>
                     <allowed_hosts/>
                     <units/>
@@ -807,6 +807,52 @@ A man with one watch knows what time it is. A man with two watches is never sure
                     <valuemap/>
                     <logtimefmt/>
                     <preprocessing/>
+                    <jmx_endpoint/>
+                    <master_item/>
+                </item>
+                <item>
+                    <name>Memory in userspace percentage</name>
+                    <type>15</type>
+                    <snmp_community/>
+                    <snmp_oid/>
+                    <key>os.linux.memory.userspace.percent</key>
+                    <delay>2m</delay>
+                    <history>2w</history>
+                    <trends>365d</trends>
+                    <status>0</status>
+                    <value_type>0</value_type>
+                    <allowed_hosts/>
+                    <units>%</units>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <params>(last(&quot;vm.memory.size[total]&quot;) - last(&quot;vm.memory.size[available]&quot;))  / last(&quot;vm.memory.size[total]&quot;)</params>
+                    <ipmi_sensor/>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description/>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>OS - Memory</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                    <preprocessing>
+                        <step>
+                            <type>1</type>
+                            <params>100</params>
+                        </step>
+                    </preprocessing>
                     <jmx_endpoint/>
                     <master_item/>
                 </item>
@@ -3039,7 +3085,7 @@ md1 : active raid1 sdb2[2] sda2[0]&#13;
                     <snmp_community/>
                     <snmp_oid/>
                     <key>vfs.fs.discovery</key>
-                    <delay>1h</delay>
+                    <delay>10m</delay>
                     <status>0</status>
                     <allowed_hosts/>
                     <snmpv3_contextname/>
@@ -3135,6 +3181,48 @@ md1 : active raid1 sdb2[2] sda2[0]&#13;
                             <snmpv3_privprotocol>0</snmpv3_privprotocol>
                             <snmpv3_privpassphrase/>
                             <params/>
+                            <ipmi_sensor/>
+                            <authtype>0</authtype>
+                            <username/>
+                            <password/>
+                            <publickey/>
+                            <privatekey/>
+                            <port/>
+                            <description/>
+                            <inventory_link>0</inventory_link>
+                            <applications>
+                                <application>
+                                    <name>OS - Storage</name>
+                                </application>
+                            </applications>
+                            <valuemap/>
+                            <logtimefmt/>
+                            <preprocessing/>
+                            <jmx_endpoint/>
+                            <application_prototypes/>
+                            <master_item_prototype/>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Disk {#FSNAME} space remaining time (3 days)</name>
+                            <type>15</type>
+                            <snmp_community/>
+                            <snmp_oid/>
+                            <key>vfs.fs.inode[{#FSNAME},remaining_time]</key>
+                            <delay>8h</delay>
+                            <history>7d</history>
+                            <trends>365d</trends>
+                            <status>0</status>
+                            <value_type>3</value_type>
+                            <allowed_hosts/>
+                            <units>s</units>
+                            <snmpv3_contextname/>
+                            <snmpv3_securityname/>
+                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                            <snmpv3_authpassphrase/>
+                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                            <snmpv3_privpassphrase/>
+                            <params>timeleft(&quot;vfs.fs.size[{#FSNAME},free]&quot;,3d,,0)</params>
                             <ipmi_sensor/>
                             <authtype>0</authtype>
                             <username/>
@@ -3498,7 +3586,7 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
                             <yaxismax>100.0000</yaxismax>
                             <show_work_period>1</show_work_period>
                             <show_triggers>1</show_triggers>
-                            <type>1</type>
+                            <type>0</type>
                             <show_legend>1</show_legend>
                             <show_3d>0</show_3d>
                             <percent_left>0.0000</percent_left>
@@ -3511,8 +3599,8 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
                                 <graph_item>
                                     <sortorder>0</sortorder>
                                     <drawtype>0</drawtype>
-                                    <color>C800C8</color>
-                                    <yaxisside>1</yaxisside>
+                                    <color>DD00DD</color>
+                                    <yaxisside>0</yaxisside>
                                     <calc_fnc>4</calc_fnc>
                                     <type>0</type>
                                     <item>
@@ -3523,19 +3611,19 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
                                 <graph_item>
                                     <sortorder>1</sortorder>
                                     <drawtype>0</drawtype>
-                                    <color>0000C8</color>
-                                    <yaxisside>1</yaxisside>
+                                    <color>2774A4</color>
+                                    <yaxisside>0</yaxisside>
                                     <calc_fnc>4</calc_fnc>
                                     <type>0</type>
                                     <item>
                                         <host>Custom - OS - Linux</host>
-                                        <key>vfs.fs.inode[{#FSNAME},free]</key>
+                                        <key>vfs.fs.inode[{#FSNAME},total]</key>
                                     </item>
                                 </graph_item>
                             </graph_items>
                         </graph_prototype>
                         <graph_prototype>
-                            <name>Filesystem {#FSNAME} percentages</name>
+                            <name>Filesystem {#FSNAME} prediction</name>
                             <width>900</width>
                             <height>200</height>
                             <yaxismin>0.0000</yaxismin>
@@ -3567,13 +3655,25 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
                                 <graph_item>
                                     <sortorder>1</sortorder>
                                     <drawtype>0</drawtype>
-                                    <color>009999</color>
+                                    <color>00CC00</color>
                                     <yaxisside>0</yaxisside>
                                     <calc_fnc>4</calc_fnc>
                                     <type>0</type>
                                     <item>
                                         <host>Custom - OS - Linux</host>
                                         <key>vfs.fs.size[{#FSNAME},pused]</key>
+                                    </item>
+                                </graph_item>
+                                <graph_item>
+                                    <sortorder>2</sortorder>
+                                    <drawtype>2</drawtype>
+                                    <color>2774A4</color>
+                                    <yaxisside>1</yaxisside>
+                                    <calc_fnc>4</calc_fnc>
+                                    <type>0</type>
+                                    <item>
+                                        <host>Custom - OS - Linux</host>
+                                        <key>vfs.fs.inode[{#FSNAME},remaining_time]</key>
                                     </item>
                                 </graph_item>
                             </graph_items>
@@ -3586,7 +3686,7 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
                             <yaxismax>100.0000</yaxismax>
                             <show_work_period>1</show_work_period>
                             <show_triggers>1</show_triggers>
-                            <type>1</type>
+                            <type>0</type>
                             <show_legend>1</show_legend>
                             <show_3d>0</show_3d>
                             <percent_left>0.0000</percent_left>
@@ -3600,7 +3700,7 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
                                     <sortorder>0</sortorder>
                                     <drawtype>0</drawtype>
                                     <color>C800C8</color>
-                                    <yaxisside>1</yaxisside>
+                                    <yaxisside>0</yaxisside>
                                     <calc_fnc>4</calc_fnc>
                                     <type>0</type>
                                     <item>
@@ -3611,13 +3711,13 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
                                 <graph_item>
                                     <sortorder>1</sortorder>
                                     <drawtype>0</drawtype>
-                                    <color>0000C8</color>
-                                    <yaxisside>1</yaxisside>
+                                    <color>2774A4</color>
+                                    <yaxisside>0</yaxisside>
                                     <calc_fnc>4</calc_fnc>
                                     <type>0</type>
                                     <item>
                                         <host>Custom - OS - Linux</host>
-                                        <key>vfs.fs.size[{#FSNAME},free]</key>
+                                        <key>vfs.fs.size[{#FSNAME},total]</key>
                                     </item>
                                 </graph_item>
                             </graph_items>
@@ -3651,11 +3751,11 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
                 </macro>
                 <macro>
                     <macro>{$DISK_USAGE_PERCENT_WARN}</macro>
-                    <value>90</value>
+                    <value>95</value>
                 </macro>
                 <macro>
                     <macro>{$MAXIMUM_NUMBER_RETRANSMISSIONS}</macro>
-                    <value>5</value>
+                    <value>1</value>
                 </macro>
                 <macro>
                     <macro>{$MAX_NETWORK_ERRORS_PERIOD}</macro>
@@ -3664,6 +3764,10 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
                 <macro>
                     <macro>{$MAX_NTP_OFFSET_MS}</macro>
                     <value>100</value>
+                </macro>
+                <macro>
+                    <macro>{$MEMORY_USERSPACE_USAGE_LIMIT}</macro>
+                    <value>96</value>
                 </macro>
                 <macro>
                     <macro>{$MIN_NTP_SERVER_COUNT}</macro>
@@ -3796,7 +3900,7 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
                             <dynamic>0</dynamic>
                             <sort_triggers>0</sort_triggers>
                             <resource>
-                                <name>Filesystem {#FSNAME} percentages</name>
+                                <name>Filesystem {#FSNAME} prediction</name>
                                 <host>Custom - OS - Linux</host>
                             </resource>
                             <max_columns>1</max_columns>
@@ -3807,7 +3911,7 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
                 <screen>
                     <name>Custom - OS - Linux - General</name>
                     <hsize>1</hsize>
-                    <vsize>13</vsize>
+                    <vsize>15</vsize>
                     <screen_items>
                         <screen_item>
                             <resourcetype>0</resourcetype>
@@ -3913,7 +4017,7 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
                             <dynamic>0</dynamic>
                             <sort_triggers>0</sort_triggers>
                             <resource>
-                                <name>Memory Usage</name>
+                                <name>Memory Usage by Userspace</name>
                                 <host>Custom - OS - Linux</host>
                             </resource>
                             <max_columns>3</max_columns>
@@ -3935,7 +4039,7 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
                             <dynamic>0</dynamic>
                             <sort_triggers>0</sort_triggers>
                             <resource>
-                                <name>Swap Usage</name>
+                                <name>Memory Usage</name>
                                 <host>Custom - OS - Linux</host>
                             </resource>
                             <max_columns>3</max_columns>
@@ -3957,7 +4061,7 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
                             <dynamic>0</dynamic>
                             <sort_triggers>0</sort_triggers>
                             <resource>
-                                <name>System Load</name>
+                                <name>Swap Usage</name>
                                 <host>Custom - OS - Linux</host>
                             </resource>
                             <max_columns>3</max_columns>
@@ -3979,7 +4083,7 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
                             <dynamic>0</dynamic>
                             <sort_triggers>0</sort_triggers>
                             <resource>
-                                <name>NTP  Sychronisation</name>
+                                <name>System Load</name>
                                 <host>Custom - OS - Linux</host>
                             </resource>
                             <max_columns>3</max_columns>
@@ -4001,6 +4105,28 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
                             <dynamic>0</dynamic>
                             <sort_triggers>0</sort_triggers>
                             <resource>
+                                <name>NTP  Sychronisation</name>
+                                <host>Custom - OS - Linux</host>
+                            </resource>
+                            <max_columns>3</max_columns>
+                            <application/>
+                        </screen_item>
+                        <screen_item>
+                            <resourcetype>0</resourcetype>
+                            <width>900</width>
+                            <height>300</height>
+                            <x>0</x>
+                            <y>9</y>
+                            <colspan>1</colspan>
+                            <rowspan>1</rowspan>
+                            <elements>0</elements>
+                            <valign>0</valign>
+                            <halign>0</halign>
+                            <style>0</style>
+                            <url/>
+                            <dynamic>0</dynamic>
+                            <sort_triggers>0</sort_triggers>
+                            <resource>
                                 <name>MTA Mailqueue</name>
                                 <host>Custom - OS - Linux</host>
                             </resource>
@@ -4012,7 +4138,7 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
                             <width>900</width>
                             <height>200</height>
                             <x>0</x>
-                            <y>9</y>
+                            <y>10</y>
                             <colspan>1</colspan>
                             <rowspan>1</rowspan>
                             <elements>0</elements>
@@ -4034,7 +4160,7 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
                             <width>900</width>
                             <height>300</height>
                             <x>0</x>
-                            <y>10</y>
+                            <y>11</y>
                             <colspan>1</colspan>
                             <rowspan>1</rowspan>
                             <elements>0</elements>
@@ -4056,7 +4182,7 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
                             <width>900</width>
                             <height>300</height>
                             <x>0</x>
-                            <y>11</y>
+                            <y>12</y>
                             <colspan>1</colspan>
                             <rowspan>1</rowspan>
                             <elements>0</elements>
@@ -4078,7 +4204,7 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
                             <width>900</width>
                             <height>300</height>
                             <x>0</x>
-                            <y>12</y>
+                            <y>13</y>
                             <colspan>1</colspan>
                             <rowspan>1</rowspan>
                             <elements>0</elements>
@@ -4090,6 +4216,28 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
                             <sort_triggers>0</sort_triggers>
                             <resource>
                                 <name>File descriptors</name>
+                                <host>Custom - OS - Linux</host>
+                            </resource>
+                            <max_columns>3</max_columns>
+                            <application/>
+                        </screen_item>
+                        <screen_item>
+                            <resourcetype>0</resourcetype>
+                            <width>900</width>
+                            <height>300</height>
+                            <x>0</x>
+                            <y>14</y>
+                            <colspan>1</colspan>
+                            <rowspan>1</rowspan>
+                            <elements>0</elements>
+                            <valign>0</valign>
+                            <halign>0</halign>
+                            <style>0</style>
+                            <url/>
+                            <dynamic>0</dynamic>
+                            <sort_triggers>0</sort_triggers>
+                            <resource>
+                                <name>Swap Usage</name>
                                 <host>Custom - OS - Linux</host>
                             </resource>
                             <max_columns>3</max_columns>
@@ -4340,6 +4488,23 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
             <tags/>
         </trigger>
         <trigger>
+            <expression>{Custom - OS - Linux:os.linux.memory.userspace.percent.last()}&gt;{$MEMORY_USERSPACE_USAGE_LIMIT}</expression>
+            <recovery_mode>0</recovery_mode>
+            <recovery_expression/>
+            <name>Memory consumption  {ITEM.VALUE1} &gt;  {$MEMORY_USERSPACE_USAGE_LIMIT} %</name>
+            <correlation_mode>0</correlation_mode>
+            <correlation_tag/>
+            <url/>
+            <status>0</status>
+            <priority>1</priority>
+            <description>Memory usage should exceeded {$MEMORY_USERSPACE_USAGE_LIMIT}.&#13;
+If memory usage of userspace processes is too high, this typically leads to bad application performance because no filesystem cache is available.</description>
+            <type>0</type>
+            <manual_close>0</manual_close>
+            <dependencies/>
+            <tags/>
+        </trigger>
+        <trigger>
             <expression>{Custom - OS - Linux:mailq.count.general.avg(1200)}&gt;1500 and ({Custom - OS - Linux:mailq.count.general.avg(1200)}&gt;{Custom - OS - Linux:mailq.count.general.avg(2400)})</expression>
             <recovery_mode>0</recovery_mode>
             <recovery_expression/>
@@ -4520,7 +4685,7 @@ Remove the flagfile if you decide that no reboot is required (/var/run/reboot-re
             <tags/>
         </trigger>
         <trigger>
-            <expression>{Custom - OS - Linux:system.swap.size[,pused].last(0)}&gt;90</expression>
+            <expression>{Custom - OS - Linux:system.swap.size[,pused].last(0)}&gt;3</expression>
             <recovery_mode>0</recovery_mode>
             <recovery_expression/>
             <name>Swap usage &gt; 3%</name>
@@ -4532,7 +4697,13 @@ Remove the flagfile if you decide that no reboot is required (/var/run/reboot-re
             <description>System is in 3% swap. Memory usage is higher than available physical memory.</description>
             <type>0</type>
             <manual_close>0</manual_close>
-            <dependencies/>
+            <dependencies>
+                <dependency>
+                    <name>Swap usage &gt; 60%</name>
+                    <expression>{Custom - OS - Linux:system.swap.size[,pused].last(0)}&gt;60</expression>
+                    <recovery_expression/>
+                </dependency>
+            </dependencies>
             <tags/>
         </trigger>
         <trigger>
@@ -4548,13 +4719,7 @@ Remove the flagfile if you decide that no reboot is required (/var/run/reboot-re
             <description>System is in 90% swap. Memory usage is higher than available physical memory.</description>
             <type>0</type>
             <manual_close>0</manual_close>
-            <dependencies>
-                <dependency>
-                    <name>Swap usage &gt; 3%</name>
-                    <expression>{Custom - OS - Linux:system.swap.size[,pused].last(0)}&gt;90</expression>
-                    <recovery_expression/>
-                </dependency>
-            </dependencies>
+            <dependencies/>
             <tags/>
         </trigger>
         <trigger>
@@ -4969,6 +5134,38 @@ Remove the flagfile if you decide that no reboot is required (/var/run/reboot-re
                     <item>
                         <host>Custom - OS - Linux</host>
                         <key>vm.memory.size[free]</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <name>Memory Usage by Userspace</name>
+            <width>900</width>
+            <height>300</height>
+            <yaxismin>0.0000</yaxismin>
+            <yaxismax>100.0000</yaxismax>
+            <show_work_period>1</show_work_period>
+            <show_triggers>1</show_triggers>
+            <type>0</type>
+            <show_legend>1</show_legend>
+            <show_3d>0</show_3d>
+            <percent_left>0.0000</percent_left>
+            <percent_right>0.0000</percent_right>
+            <ymin_type_1>0</ymin_type_1>
+            <ymax_type_1>0</ymax_type_1>
+            <ymin_item_1>0</ymin_item_1>
+            <ymax_item_1>0</ymax_item_1>
+            <graph_items>
+                <graph_item>
+                    <sortorder>0</sortorder>
+                    <drawtype>0</drawtype>
+                    <color>BB00BB</color>
+                    <yaxisside>0</yaxisside>
+                    <calc_fnc>2</calc_fnc>
+                    <type>0</type>
+                    <item>
+                        <host>Custom - OS - Linux</host>
+                        <key>os.linux.memory.userspace.percent</key>
                     </item>
                 </graph_item>
             </graph_items>
