@@ -55,7 +55,7 @@ kernel_problems = {}
 kernel_problems["general protection fault"] = re.compile("^.*general protection fault.*$")
 kernel_problems["bug"] = re.compile(".*(kernel BUG at|double fault:|Badness at|[Uu]nable to handle kernel|" +
                                     "sysctl table check failed|------------[ cut here ]------------|Oops:).*$")
-kernel_problems["oom"] = re.compile(".*(Out of memory: Kill process|Memory .* out of memory: Kill process).*")
+kernel_problems["oom"] = re.compile(".*(Out of memory: Kill process).*")
 kernel_problems["userland_kill"] = re.compile(".*killed by.*")
 kernel_problems["ioerror"] = re.compile(r".*(end_request: I/O error, dev ..*, sector ..*|error on device ..*, logical block ..*|Buffer I/O error on dev).*")
 
