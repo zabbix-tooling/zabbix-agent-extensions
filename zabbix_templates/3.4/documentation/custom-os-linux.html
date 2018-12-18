@@ -54,10 +54,13 @@
 <td>{$DISK_USAGE_PERCENT_ALARM}</td><td>97</td>
 </tr>
 <tr>
-<td>{$DISK_USAGE_PERCENT_WARN}</td><td>90</td>
+<td>{$DISK_USAGE_PERCENT_WARN}</td><td>95</td>
 </tr>
 <tr>
-<td>{$MAXIMUM_NUMBER_RETRANSMISSIONS}</td><td>5</td>
+<td>{$IOWAIT_ALERT_LIMIT}</td><td>20</td>
+</tr>
+<tr>
+<td>{$MAXIMUM_NUMBER_RETRANSMISSIONS}</td><td>1</td>
 </tr>
 <tr>
 <td>{$MAX_NETWORK_ERRORS_PERIOD}</td><td>1</td>
@@ -66,7 +69,10 @@
 <td>{$MAX_NTP_OFFSET_MS}</td><td>100</td>
 </tr>
 <tr>
-<td>{$MIN_NTP_SERVER_COUNT}</td><td>1</td>
+<td>{$MEMORY_USERSPACE_USAGE_LIMIT}</td><td>98</td>
+</tr>
+<tr>
+<td>{$MIN_NTP_SERVER_COUNT}</td><td>3</td>
 </tr>
 <tr>
 <td>{$MONITOR_LOAD_WARNING_MULT}</td><td>5</td>
@@ -100,13 +106,13 @@
  B: Number of failed paths</td><td style="background-color:#FF0000;">Average</td><td><tt>{Custom - OS - Linux:linux.multipath.str(ERROR)}&lt;&gt;0</tt></td><td><tt></tt></td>
 </tr>
 <tr>
-<td>CPU Usage &gt; 90%</td><td>The average of system + user + iowait cpu time is higher than 90%</td><td style="background-color:#FFFF00;">Warning</td><td><tt>({Custom - OS - Linux:system.cpu.util[,user,avg1].avg(1h)}+{Custom - OS - Linux:system.cpu.util[,system,avg1].avg(1h)}+{Custom - OS - Linux:system.cpu.util[,iowait,avg1].avg(1h)})&gt;90</tt></td><td><tt></tt></td>
+<td>CPU Usage IO Wait &gt; {$IOWAIT_ALERT_LIMIT}% = {ITEM.VALUE1}</td><td>The average of a one hour iowait cpu time is higher than 20%</td><td style="background-color:#FFFF00;">Warning</td><td><tt>({Custom - OS - Linux:system.cpu.util[,iowait,avg1].avg(1h)})&gt;{$IOWAIT_ALERT_LIMIT}</tt></td><td><tt></tt></td>
 </tr>
 <tr>
 <td>Cron Daemon</td><td>SMTP Daemon is not running.</td><td style="background-color:#FF0000;">Average</td><td><tt>({Custom - OS - Linux:proc.num[crond,,,].last(0)}=0) and ({Custom - OS - Linux:proc.num[cron,,,].last(0)}=0)</tt></td><td><tt></tt></td>
 </tr>
 <tr>
-<td>ICMP Ping</td><td>Host is not reachable by a icmp-echo request for the last three measures or not measurement data arrived in the last 900 seconds(15min).</td><td style="background-color:#FF0000;">High</td><td><tt>{Custom - OS - Linux:icmpping[,1,,,].count(#3,0,"eq")}=3</tt></td><td><tt>ICMP Ping no data for {$MONITOR_TIMEOUT} seconds<br>
+<td>ICMP Ping failed 3 times</td><td>Host is not reachable by a icmp-echo request for the last three measures or not measurement data arrived in the last 900 seconds(15min).</td><td style="background-color:#FF0000;">High</td><td><tt>{Custom - OS - Linux:icmpping[,1,,,].count(#3,0,"eq")}=3</tt></td><td><tt>ICMP Ping no data for {$MONITOR_TIMEOUT} seconds<br>
 </tt></td>
 </tr>
 <tr>
@@ -120,6 +126,10 @@
 </tt></td>
 </tr>
 <tr>
+<td>Memory consumption  {ITEM.VALUE1} &gt;  {$MEMORY_USERSPACE_USAGE_LIMIT} %</td><td>Memory usage should exceeded {$MEMORY_USERSPACE_USAGE_LIMIT}.&#13;
+If memory usage of userspace processes is too high, this typically leads to bad application performance because no filesystem cache is available.</td><td style="background-color:#FFFF00;">Information</td><td><tt>{Custom - OS - Linux:os.linux.memory.userspace.percent.last()}&gt;{$MEMORY_USERSPACE_USAGE_LIMIT}</tt></td><td><tt></tt></td>
+</tr>
+<tr>
 <td>MTA Mailq Total Messages</td><td></td><td style="background-color:#FFFF00;">Warning</td><td><tt>{Custom - OS - Linux:mailq.count.general.avg(1200)}&gt;1500 and ({Custom - OS - Linux:mailq.count.general.avg(1200)}&gt;{Custom - OS - Linux:mailq.count.general.avg(2400)})</tt></td><td><tt></tt></td>
 </tr>
 <tr>
@@ -130,11 +140,12 @@
 </tt></td>
 </tr>
 <tr>
-<td>NTP Absolute Time RMS Offset no data</td><td>No ntp time information</td><td style="background-color:#FFFF00;">Warning</td><td><tt>{Custom - OS - Linux:ntpd.primarypeer.stats[offset].nodata(3600)}=1</tt></td><td><tt>ICMP Ping<br>
+<td>NTP Absolute Time RMS Offset no data</td><td>No ntp time information</td><td style="background-color:#FFFF00;">Warning</td><td><tt>{Custom - OS - Linux:ntpd.primarypeer.stats[offset].nodata(3600)}=1</tt></td><td><tt>ICMP Ping failed 3 times<br>
 </tt></td>
 </tr>
 <tr>
-<td>Number of good NTP peers &lt;= {$MIN_NTP_SERVER_COUNT}</td><td></td><td style="background-color:#FFFF00;">Warning</td><td><tt>{Custom - OS - Linux:ntpd.peers.goodcount.last()}&lt;= {$MIN_NTP_SERVER_COUNT}</tt></td><td><tt></tt></td>
+<td>Number of good NTP peers &lt; {$MIN_NTP_SERVER_COUNT}</td><td></td><td style="background-color:#FFFF00;">Warning</td><td><tt>{Custom - OS - Linux:ntpd.peers.goodcount.last()} &lt; {$MIN_NTP_SERVER_COUNT}</tt></td><td><tt>NTP Absolute Time RMS Offset no data<br>
+</tt></td>
 </tr>
 <tr>
 <td>OS Kernel - {ITEM.VALUE1}</td><td>A kernel problem occurred.&#13;
@@ -160,11 +171,11 @@ Remove the flagfile if you decide that no reboot is required (/var/run/reboot-re
 <td>SSH server</td><td></td><td style="background-color:#FF0000;">Average</td><td><tt>{Custom - OS - Linux:net.tcp.service[ssh,,22].count(#3,0,"eq")}=3</tt></td><td><tt></tt></td>
 </tr>
 <tr>
-<td>Swap usage &gt; 3%</td><td>System is in 3% swap. Memory usage is higher than available physical memory.</td><td style="background-color:#FFFF00;">Information</td><td><tt>{Custom - OS - Linux:system.swap.size[,pused].last(0)}&gt;90</tt></td><td><tt></tt></td>
+<td>Swap usage &gt; 3%</td><td>System is in 3% swap. Memory usage is higher than available physical memory.</td><td style="background-color:#FFFF00;">Information</td><td><tt>{Custom - OS - Linux:system.swap.size[,pused].last(0)}&gt;3</tt></td><td><tt>Swap usage &gt; 60%<br>
+</tt></td>
 </tr>
 <tr>
-<td>Swap usage &gt; 60%</td><td>System is in 90% swap. Memory usage is higher than available physical memory.</td><td style="background-color:#FF0000;">Average</td><td><tt>{Custom - OS - Linux:system.swap.size[,pused].last(0)}&gt;60</tt></td><td><tt>Swap usage &gt; 3%<br>
-</tt></td>
+<td>Swap usage &gt; 60%</td><td>System is in 90% swap. Memory usage is higher than available physical memory.</td><td style="background-color:#FF0000;">Average</td><td><tt>{Custom - OS - Linux:system.swap.size[,pused].last(0)}&gt;60</tt></td><td><tt></tt></td>
 </tr>
 <tr>
 <td>System Load, {ITEM.LASTVALUE1}</td><td>For systems with 1 or 2 CPUs send alerts by a 5-min Load greater 15.&#13;
@@ -172,11 +183,11 @@ Remove the flagfile if you decide that no reboot is required (/var/run/reboot-re
 </tr>
 <tr>
 <td>Zabbix Agent Ping</td><td>Zabbix agent does not respond to a ping request in the last two calls or no information about &#13;
- agent-status is received in the last 30 minutes.</td><td style="background-color:#FF0000;">High</td><td><tt>{Custom - OS - Linux:agent.ping.count(#3,0,"eq")}=3</tt></td><td><tt>ICMP Ping<br>
+ agent-status is received in the last 30 minutes.</td><td style="background-color:#FF0000;">High</td><td><tt>{Custom - OS - Linux:agent.ping.count(#3,0,"eq")}=3</tt></td><td><tt>ICMP Ping failed 3 times<br>
 </tt></td>
 </tr>
 <tr>
-<td>Zabbix Agent Ping no data for {$MONITOR_TIMEOUT} seconds</td><td>No measurement information about agent-status is received in the last {$AGENT_TIMEOUT} seconds</td><td style="background-color:#FF0000;">Average</td><td><tt>{Custom - OS - Linux:agent.ping.nodata({$MONITOR_TIMEOUT})}=1</tt></td><td><tt>ICMP Ping<br>
+<td>Zabbix Agent Ping no data for {$MONITOR_TIMEOUT} seconds</td><td>No measurement information about agent-status is received in the last {$AGENT_TIMEOUT} seconds</td><td style="background-color:#FF0000;">Average</td><td><tt>{Custom - OS - Linux:agent.ping.nodata({$MONITOR_TIMEOUT})}=1</tt></td><td><tt>ICMP Ping failed 3 times<br>
 </tt></td>
 </tr>
 </table>
@@ -203,6 +214,10 @@ Remove the flagfile if you decide that no reboot is required (/var/run/reboot-re
 </tr>
 <tr>
 <td>Memory Usage</td><td><tt>os.linux.memory.userspace<br>vm.memory.size[buffers]<br>vm.memory.size[cached]<br>vm.memory.size[free]<br>
+</tt></td>
+</tr>
+<tr>
+<td>Memory Usage by Userspace</td><td><tt>os.linux.memory.userspace.percent<br>
 </tt></td>
 </tr>
 <tr>
@@ -326,6 +341,11 @@ A man with one watch knows what time it is. A man with two watches is never sure
 <td>
 <p class="desc">Calculated</p>
 </td><td>Memory in Userspace</td><td><tt>os.linux.memory.userspace</tt></td><td></td><td>2m</td><td>2w</td><td>365d</td>
+</tr>
+<tr>
+<td>
+<p class="desc">Calculated</p>
+</td><td>Memory in userspace percentage</td><td><tt>os.linux.memory.userspace.percent</tt></td><td></td><td>2m</td><td>2w</td><td>365d</td>
 </tr>
 <tr>
 <td>
@@ -680,7 +700,7 @@ md1 : active raid1 sdb2[2] sda2[0]&#13;
 </td>
 </tr>
 <tr>
-<td>Delay</td><td>1h</td>
+<td>Delay</td><td>10m</td>
 </tr>
 </table>
 <h2>Trigger Overview</h2>
@@ -716,15 +736,15 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
 <th>Name</th><th>Elements</th>
 </tr>
 <tr>
-<td>Filesystem {#FSNAME} inode usage</td><td><tt>vfs.fs.inode[{#FSNAME},used]<br>vfs.fs.inode[{#FSNAME},free]<br>
+<td>Filesystem {#FSNAME} inode usage</td><td><tt>vfs.fs.inode[{#FSNAME},used]<br>vfs.fs.inode[{#FSNAME},total]<br>
 </tt></td>
 </tr>
 <tr>
-<td>Filesystem {#FSNAME} percentages</td><td><tt>vfs.fs.inode[{#FSNAME},pused]<br>vfs.fs.size[{#FSNAME},pused]<br>
+<td>Filesystem {#FSNAME} prediction</td><td><tt>vfs.fs.inode[{#FSNAME},pused]<br>vfs.fs.size[{#FSNAME},pused]<br>vfs.fs.inode[{#FSNAME},remaining_time]<br>
 </tt></td>
 </tr>
 <tr>
-<td>Filesystem {#FSNAME} space usage</td><td><tt>vfs.fs.size[{#FSNAME},used]<br>vfs.fs.size[{#FSNAME},free]<br>
+<td>Filesystem {#FSNAME} space usage</td><td><tt>vfs.fs.size[{#FSNAME},used]<br>vfs.fs.size[{#FSNAME},total]<br>
 </tt></td>
 </tr>
 </table>
@@ -742,6 +762,11 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
 <td>
 <p class="desc">Zabbix Agent (active)</p>
 </td><td>Disk {#FSNAME} inode use percentage</td><td><tt>vfs.fs.inode[{#FSNAME},pused]</tt></td><td></td><td>600s</td><td>7d</td><td>365d</td>
+</tr>
+<tr>
+<td>
+<p class="desc">Calculated</p>
+</td><td>Disk {#FSNAME} space remaining time (3 days)</td><td><tt>vfs.fs.inode[{#FSNAME},remaining_time]</tt></td><td></td><td>8h</td><td>7d</td><td>365d</td>
 </tr>
 <tr>
 <td>
