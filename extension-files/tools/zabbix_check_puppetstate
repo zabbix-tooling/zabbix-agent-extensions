@@ -34,6 +34,17 @@ possible_disable_check_files = [
 ]
 
 
+# Workaround for antique puppet releases
+def identifiy_trim_spaces(file_name):
+    spaces_o_trim = 0
+    with open(file_name, 'r') as stream:
+        for line in stream:
+            if not line.startswith("---"):
+                m = re.match("^(\s*)[^ ]", line)
+                if m:
+                    return m.group(1)
+
+
 # Q: Why the not the "yaml" module?
 # A: We do not want to install extra module only because of a simple file read on all monitored systems
 
@@ -41,8 +52,14 @@ def read_puppet_yaml(file_name):
     read_dict = {}
     key = None
 
+    spaces_to_trim = identifiy_trim_spaces(file_name)
+
     with open(file_name, 'r') as stream:
         for line in stream:
+
+            # Workaround for antique puppet releases
+            line = re.sub("^" + spaces_to_trim, '', line)
+
             m = re.match("^([^ ]+):", line)
             if m:
                 key = m.group(1)
@@ -59,6 +76,7 @@ def read_puppet_yaml(file_name):
 
 dict_state = {}
 dict_state["state"] = "ERROR: no puppet here"
+
 for state_file in possible_state_files:
     if os.path.exists(state_file):
         try:
@@ -87,7 +105,6 @@ if "resources" in dict_state:
     else:
         dict_state["state"] = "OK: puppetrun successful, no changes"
 
-
 for run_report_file in possible_run_report:
     if os.path.exists(run_report_file):
         try:
@@ -101,7 +118,6 @@ for run_report_file in possible_run_report:
             dict_state["environment"] = "unknown"
             pass
         break
-
 
 if len(sys.argv) == 2:
     print(dict_state[sys.argv[1]])
