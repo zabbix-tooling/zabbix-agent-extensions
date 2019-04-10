@@ -1,0 +1,46 @@
+#!/usr/bin/env python3
+# 
+#   This program is free software; you can redistribute it and/or modify
+#   it under the terms of the GNU General Public License as published by
+#   the Free Software Foundation; either version 2 of the License, or
+#   (at your option) any later version.
+#
+#   This program is distributed in the hope that it will be useful,
+#   but WITHOUT ANY WARRANTY; without even the implied warranty of
+#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#   GNU General Public License for more details.
+#
+#   You should have received a copy of the GNU General Public License along
+#   with this program; if not, write to the Free Software Foundation, Inc.,
+#   51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+
+import sys
+import urllib.request
+import json
+
+if len(sys.argv) < 2:
+    print(sys.argv[0] + " discovery <uri> <tag>")
+    print(sys.argv[0] + " get <uri>")
+    sys.exit(1)
+
+
+if sys.argv[1] == "discovery":
+    discovered = {'data': []}
+    resource = urllib.request.urlopen(sys.argv[2])
+    content =  resource.read().decode(resource.headers.get_content_charset())
+    data = json.loads(content)
+    for elem in data['availableTags']:
+        if elem['tag'] == sys.argv[3]:
+            for item in elem['values']:
+                discovered_item = {}
+                discovered_item['{#'+sys.argv[3].upper()+'}'] = item
+                discovered['data'].append(discovered_item)
+    print(json.dumps(discovered, sort_keys=True))
+elif sys.argv[1] == "get":
+    get = {}
+    resource = urllib.request.urlopen(sys.argv[2])
+    content =  resource.read().decode(resource.headers.get_content_charset())
+    data = json.loads(content)
+    for item in data['measurements']:
+        get[item['statistic']] = str(item['value'])
+    print(json.dumps(get, sort_keys=True))
