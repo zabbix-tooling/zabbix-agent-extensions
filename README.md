@@ -3,10 +3,10 @@ zabbix-agent-extensions
 
 # Overview
 
-A set of zabbix UserParameter scripts and a monitoring template for linux systems.
+A set of zabbix UserParameter scripts and production ready monitoring templates for linux systems.
 
  * this project ist originated on: https://github.com/scoopex/zabbix-agent-extensions
- * this project is presented at zabbix share: https://share.zabbix.com/operating-systems/zabbix-agent-extensions
+ * this project is published at zabbix share: https://share.zabbix.com/operating-systems/zabbix-agent-extensions
  * the ci is located at: https://travis-ci.org/scoopex/zabbix-agent-extensions
 
 # Monitoring details
