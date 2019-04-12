@@ -38,9 +38,12 @@ if sys.argv[1] == "discovery":
     print(json.dumps(discovered, sort_keys=True))
 elif sys.argv[1] == "get":
     get = {}
-    resource = urllib.request.urlopen(sys.argv[2]+"?"+sys.argv[3])
-    content =  resource.read().decode(resource.headers.get_content_charset())
-    data = json.loads(content)
-    for item in data['measurements']:
-        get[item['statistic']] = str(item['value'])
+    try:
+       resource = urllib.request.urlopen(sys.argv[2]+"?"+sys.argv[3])
+       content =  resource.read().decode(resource.headers.get_content_charset())
+       data = json.loads(content)
+       for item in data['measurements']:
+           get[item['statistic']] = str(item['value'])
+    except:
+       get['fail'] = 'request failed'
     print(json.dumps(get, sort_keys=True))

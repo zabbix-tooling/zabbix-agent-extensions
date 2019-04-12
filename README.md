@@ -54,6 +54,8 @@ This package provides the following capabilities:
  * Check smart state of disks and gather statistics
  * Discover network devices and monitor performance and error behavior
  * Zabbix agent version 
+ * Monitor springboot servers
+   (beta, monitoring is still rudimentary)
 
 
 Almost all measures are integrated in graphs which are displayed on the various host screens.
