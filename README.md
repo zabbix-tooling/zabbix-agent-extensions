@@ -55,7 +55,8 @@ This package provides the following capabilities:
  * Discover network devices and monitor performance and error behavior
  * Zabbix agent version 
  * Monitor springboot servers
-   (beta, monitoring is still rudimentary)
+    * beta, monitoring is still rudimentary
+    * contributions are very welcome
 
 
 Almost all measures are integrated in graphs which are displayed on the various host screens.
@@ -77,6 +78,7 @@ A quick is provided by the following files:
  * [custom-service-nginx-logstats](http://htmlpreview.github.io/?https://github.com/scoopex/zabbix-agent-extensions/blob/master/zabbix_templates/3.4/documentation/custom-service-nginx-logstats.html)
  * [custom-service-redis](http://htmlpreview.github.io/?https://github.com/scoopex/zabbix-agent-extensions/blob/master/zabbix_templates/3.4/documentation/custom-service-redis.html)
  * [custom-service-varnish](http://htmlpreview.github.io/?https://github.com/scoopex/zabbix-agent-extensions/blob/master/zabbix_templates/3.4/documentation/custom-service-varnish.html)
+ * [custom-service-springboot](http://htmlpreview.github.io/?https://github.com/scoopex/zabbix-agent-extensions/blob/master/zabbix_templates/3.4/documentation/custom-service-springboot.html)
 
 
 # How to test and debug
