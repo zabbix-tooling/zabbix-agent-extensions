@@ -27,7 +27,8 @@ assertSuccess(){
 
 
 echo "*** CLEANUP"
-REL="3.2.10-1+xenial"
+REL="3.4.15-1+bionic"
+
 set -x
 sudo dpkg -P zabbix-agent-extensions zabbix-agent
 sudo rm -rf /etc/zabbix_* /var/log/zabbix /var/run/zabbix zabbix-agent_*.deb zabbix-get_*.deb
