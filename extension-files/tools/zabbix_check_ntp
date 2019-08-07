@@ -22,7 +22,7 @@ import os
 os.environ["PATH"] = "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/sbin:/usr/X11R6/bin"
 
 
-cmd = "ntpq -c peers"
+cmd = "ntpq -n -c peers"
 
 if len(sys.argv) != 2:
     print(sys.argv[0] + " offset|jitter|delay|count")
