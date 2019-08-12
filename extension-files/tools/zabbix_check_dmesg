@@ -57,7 +57,7 @@ kernel_problems["bug"] = re.compile(".*(kernel BUG at|double fault:|Badness at|[
                                     "sysctl table check failed|------------[ cut here ]------------|Oops:).*$")
 kernel_problems["oom"] = re.compile(".*(Out of memory: Kill process).*")
 kernel_problems["userland_kill"] = re.compile(".*killed by.*")
-kernel_problems["ioerror"] = re.compile(r".*(end_request: I/O error, dev ..*, sector ..*|error on device ..*, logical block ..*|Buffer I/O error on dev).*")
+kernel_problems["ioerror"] = re.compile(r".*(print_req_error: I/O error, dev ..*|end_request: I/O error, dev ..*, sector ..*|error on device ..*, logical block ..*|Buffer I/O error on dev).*")
 
 # [80508.690871] kauditd_printk_skb: 2 callbacks suppressed
 parse_dmesg = re.compile(r"\[\s*(?P<timestamp>\d+\.\d+)\] (?P<msg>.*)$")
