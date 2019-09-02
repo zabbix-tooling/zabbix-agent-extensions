@@ -102,7 +102,7 @@
 <th>Name</th><th>Description</th><th>Priority</th><th>Expression</th><th>Dependencies</th>
 </tr>
 <tr>
-<td>Smart Disk Health {#BLOCKDEVICE}</td><td>A disk failed or is going to fail in the next 24 hours. Watch zabbix agent log to get details.</td><td style="background-color:#FF0000;">Average</td><td><tt>{Custom - OS - Linux - Hardware:hardware.disk.health[{#BLOCKDEVICE}].str(PASSED)}=0</tt></td><td><tt></tt></td>
+<td>Smart Disk Health {#BLOCKDEVICE}</td><td>A disk failed or is going to fail in the next 24 hours. Watch zabbix agent log to get details.</td><td style="background-color:#FF0000;">Average</td><td><tt>{Custom - OS - Linux - Hardware:hardware.disk.health[{#BLOCKDEVICE}].regexp(PASSED|OK,)}=0</tt></td><td><tt></tt></td>
 </tr>
 </table>
 <h2>Graph Overview</h2>
@@ -167,12 +167,12 @@
 <tr>
 <td>
 <p class="desc">Zabbix Agent (active)</p>
-</td><td>{#BLOCKDEVICE} Device model</td><td><tt>hardware.disk.smart.info[{#BLOCKDEVICE},Device Model]</tt></td><td></td><td>1d</td><td>90d</td><td>0</td>
+</td><td>{#BLOCKDEVICE} Device model</td><td><tt>hardware.disk.smart.infos[{#BLOCKDEVICE},Device Model]</tt></td><td></td><td>1d</td><td>90d</td><td>0</td>
 </tr>
 <tr>
 <td>
 <p class="desc">Zabbix Agent (active)</p>
-</td><td>{#BLOCKDEVICE} Serial Number</td><td><tt>hardware.disk.smart.info[{#BLOCKDEVICE},Serial Number]</tt></td><td></td><td>1d</td><td>90d</td><td>0</td>
+</td><td>{#BLOCKDEVICE} Serial Number</td><td><tt>hardware.disk.smart.infos[{#BLOCKDEVICE},Serial Number]</tt></td><td></td><td>1d</td><td>90d</td><td>0</td>
 </tr>
 </table>
 </body>

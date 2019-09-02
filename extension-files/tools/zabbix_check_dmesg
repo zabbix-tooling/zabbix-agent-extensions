@@ -34,10 +34,7 @@ def get_status_data(statusfile):
     if os.path.exists(statusfile):
         mtime_statusfile = os.stat(statusfile).st_mtime
         mtime_kmsg = os.stat("/dev/kmsg").st_mtime
-        if mtime_statusfile < mtime_kmsg:
-           sys.stderr.write("Skipping load of old status data, old status file from "+
-                            "before last boot detected (/proc/kmsg younger than %s)" % statusfile)
-        else:
+        if not mtime_statusfile < mtime_kmsg:
            try:
                data = pickle.load(open(statusfile, "rb"))
            except:
@@ -58,9 +55,9 @@ kernel_problems = {}
 kernel_problems["general protection fault"] = re.compile("^.*general protection fault.*$")
 kernel_problems["bug"] = re.compile(".*(kernel BUG at|double fault:|Badness at|[Uu]nable to handle kernel|" +
                                     "sysctl table check failed|------------[ cut here ]------------|Oops:).*$")
-kernel_problems["oom"] = re.compile(".*Out of memory: Kill process.*")
+kernel_problems["oom"] = re.compile(".*(Out of memory: Kill process).*")
 kernel_problems["userland_kill"] = re.compile(".*killed by.*")
-kernel_problems["ioerror"] = re.compile(r".*(end_request: I/O error, dev ..*, sector ..*|error on device ..*, logical block ..*).*")
+kernel_problems["ioerror"] = re.compile(r".*(print_req_error: I/O error, dev ..*|end_request: I/O error, dev ..*, sector ..*|error on device ..*, logical block ..*|Buffer I/O error on dev).*")
 
 # [80508.690871] kauditd_printk_skb: 2 callbacks suppressed
 parse_dmesg = re.compile(r"\[\s*(?P<timestamp>\d+\.\d+)\] (?P<msg>.*)$")
@@ -73,17 +70,19 @@ latest_time_stamp = status_data["timestamp"]
 status = "OK"
 matched = []
 
-lines = 0
+total_lines = 0
+valid_lines = 0
 while True:
     line_str = dmesg.readline()
     if not (line_str):
         break
 
+    total_lines += 1
     m = parse_dmesg.match(line_str)
     if not m:
         continue
 
-    lines += 1
+    valid_lines += 1
     current_time_stamp = float(m.group("timestamp"))
     msg = m.group("msg")
 
@@ -97,10 +96,14 @@ while True:
 
 status_data["timestamp"] = latest_time_stamp
 
-if len(matched) == 0:
+if len(matched) == 0 and valid_lines > 0:
     matched.append("ALL OK (%s)" % latest_time_stamp)
 
-if lines <= 0:
+if total_lines == 0:
+    status = "OK"
+    matched = []
+    matched.append("dmesg was cleared / it is completely empty")
+elif valid_lines <= 0:
     status = "ERROR"
     matched = []
     matched.append("parsing failed")

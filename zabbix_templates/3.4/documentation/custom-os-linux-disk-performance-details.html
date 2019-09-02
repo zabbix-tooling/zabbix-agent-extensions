@@ -94,15 +94,15 @@
 </tt></td>
 </tr>
 <tr>
+<td>Disk {#DEVICENAME} - IO Queue</td><td><tt>custom.vfs.dev.io.active[{#DEVICENAME}]<br>custom.vfs.dev.queue_depth[{#DEVICENAME}]<br>
+</tt></td>
+</tr>
+<tr>
 <td>Disk {#DEVICENAME} - Merged</td><td><tt>custom.vfs.dev.read.merged[{#DEVICENAME}]<br>custom.vfs.dev.write.merged[{#DEVICENAME}]<br>
 </tt></td>
 </tr>
 <tr>
 <td>Disk {#DEVICENAME} - Ops/second</td><td><tt>custom.vfs.dev.read.ops[{#DEVICENAME}]<br>custom.vfs.dev.write.ops[{#DEVICENAME}]<br>
-</tt></td>
-</tr>
-<tr>
-<td>Disk {#DEVICENAME} - Overview</td><td><tt>custom.vfs.dev.io.active[{#DEVICENAME}]<br>custom.vfs.dev.read.sectors[{#DEVICENAME}]<br>custom.vfs.dev.read.merged[{#DEVICENAME}]<br>custom.vfs.dev.read.ops[{#DEVICENAME}]<br>custom.vfs.dev.write.sectors[{#DEVICENAME}]<br>custom.vfs.dev.write.merged[{#DEVICENAME}]<br>custom.vfs.dev.write.ops[{#DEVICENAME}]<br>
 </tt></td>
 </tr>
 </table>
@@ -123,6 +123,13 @@ The only field that should go to zero. Incremented as requests are given to appr
 <p class="desc">Zabbix Agent (active)</p>
 </td><td>$1:IO:ms</td><td><tt>custom.vfs.dev.io.ms[{#DEVICENAME}]</tt></td><td>Field #13&#13;
 Number of milliseconds spent doing I/Os. This field increases so long as field #12 (custom.vfs.dev.io.active) is nonzero.</td><td>60</td><td>7d</td><td>182d</td>
+</tr>
+<tr>
+<td>
+<p class="desc">Zabbix Agent (active)</p>
+</td><td>$1:IO:Queue Depth</td><td><tt>custom.vfs.dev.queue_depth[{#DEVICENAME}]</tt></td><td>Field #12&#13;
+Number of I/Os currently in progress.&#13;
+The only field that should go to zero. Incremented as requests are given to appropriate struct request_queue and decremented as they finish.</td><td>60</td><td>7d</td><td>182d</td>
 </tr>
 <tr>
 <td>
@@ -182,36 +189,6 @@ This is the total number of writes completed successfully.</td><td>60</td><td>7d
 <p class="desc">Zabbix Agent (active)</p>
 </td><td>$1:Write:Bytes/sec</td><td><tt>custom.vfs.dev.write.sectors[{#DEVICENAME}]</tt></td><td>Field #10&#13;
 This is the total number of sectors written successfully.</td><td>60</td><td>7d</td><td>182d</td>
-</tr>
-<tr>
-<td>
-<p class="desc">Zabbix Agent (active)</p>
-</td><td>$1:Read:Ops per second [z]</td><td><tt>vfs.dev.read[{#DEVICENAME},operations]</tt></td><td>This is the total number of reads completed successfully.</td><td>60</td><td>7d</td><td>182d</td>
-</tr>
-<tr>
-<td>
-<p class="desc">Zabbix Agent (active)</p>
-</td><td>$1:Read:ms [z]</td><td><tt>vfs.dev.read[{#DEVICENAME},ops]</tt></td><td>This is the total number of milliseconds spent by all reads (as measured from __make_request() to end_that_request_last()).</td><td>60</td><td>7d</td><td>182d</td>
-</tr>
-<tr>
-<td>
-<p class="desc">Zabbix Agent (active)</p>
-</td><td>$1:Read:Bytes/sec [z]</td><td><tt>vfs.dev.read[{#DEVICENAME},sectors]</tt></td><td>This is the total number of sectors read successfully.</td><td>60</td><td>7d</td><td>182d</td>
-</tr>
-<tr>
-<td>
-<p class="desc">Zabbix Agent (active)</p>
-</td><td>$1:Write:Ops per second [z]</td><td><tt>vfs.dev.write[{#DEVICENAME},operations]</tt></td><td>This is the total number of reads completed successfully.</td><td>60</td><td>7d</td><td>182d</td>
-</tr>
-<tr>
-<td>
-<p class="desc">Zabbix Agent (active)</p>
-</td><td>$1:Write:ms [z]</td><td><tt>vfs.dev.write[{#DEVICENAME},ops]</tt></td><td>This is the total number of milliseconds spent by all reads (as measured from __make_request() to end_that_request_last()).</td><td>60</td><td>7d</td><td>182d</td>
-</tr>
-<tr>
-<td>
-<p class="desc">Zabbix Agent (active)</p>
-</td><td>$1:Write:Bytes/sec [z]</td><td><tt>vfs.dev.write[{#DEVICENAME},sectors]</tt></td><td>This is the total number of sectors read successfully.</td><td>60</td><td>7d</td><td>182d</td>
 </tr>
 </table>
 </body>

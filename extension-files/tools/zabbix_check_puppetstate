@@ -1,4 +1,4 @@
-#!/usr/bin/env ruby
+#!/usr/bin/env python3
 #
 #   This program is free software; you can redistribute it and/or modify
 #   it under the terms of the GNU General Public License as published by
@@ -14,18 +14,114 @@
 #   with this program; if not, write to the Free Software Foundation, Inc.,
 #   51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
-require 'yaml'
+import json
+import os
+import sys
+import re
 
-puppet_state = YAML.load_file('/var/lib/puppet/state/last_run_summary.yaml')
+possible_state_files = [
+    "/opt/puppetlabs/puppet/cache/state/last_run_summary.yaml",
+    "/var/lib/puppet/state/last_run_summary.yaml"
+]
 
-value = nil
+possible_run_report = [
+    "/opt/puppetlabs/puppet/cache/state/last_run_report.yaml",
+    "/var/lib/puppet/state/last_run_report.yaml"
+]
+possible_disable_check_files = [
+    "/opt/puppetlabs/puppet/cache/state/agent_disabled.lock",
+    "/var/lib/puppet/state/agent_disabled.lock"
+]
 
-ARGV.each do |arg|
-  if value == nil
-    value = puppet_state.fetch(arg)
-  else
-    value = value.fetch(arg)
-  end
-end
 
-print "#{value}"
+# Workaround for antique puppet releases
+def identifiy_trim_spaces(file_name):
+    spaces_o_trim = 0
+    with open(file_name, 'r') as stream:
+        for line in stream:
+            if not line.startswith("---"):
+                m = re.match("^(\s*)[^ ]", line)
+                if m:
+                    return m.group(1)
+
+
+# Q: Why the not the "yaml" module?
+# A: We do not want to install extra module only because of a simple file read on all monitored systems
+
+def read_puppet_yaml(file_name):
+    read_dict = {}
+    key = None
+
+    spaces_to_trim = identifiy_trim_spaces(file_name)
+
+    with open(file_name, 'r') as stream:
+        for line in stream:
+
+            # Workaround for antique puppet releases
+            line = re.sub("^" + spaces_to_trim, '', line)
+
+            m = re.match("^([^ ]+):", line)
+            if m:
+                key = m.group(1)
+                read_dict[key] = {}
+                continue
+            m = re.match("^[ ]+([^ ]+): (.+)$", line)
+            if m:
+                read_dict[key][m.group(1)] = m.group(2)
+
+    if key is None:
+        raise Exception("broken yaml puppet format")
+    return read_dict
+
+
+dict_state = {}
+dict_state["state"] = "ERROR: no puppet here"
+
+for state_file in possible_state_files:
+    if os.path.exists(state_file):
+        try:
+            dict_state = read_puppet_yaml(state_file)
+        except Exception as e:
+            dict_state["state_file"] = "ERROR: unable to load : %s / %s " % (str(e), state_file)
+        break
+
+dict_state["disabled"] = "NOT DISABLED"
+
+for disable_file in possible_disable_check_files:
+    if os.path.exists(disable_file):
+        try:
+            with open(disable_file) as json_data:
+                dict_state["disabled"] = "YES: " + json.load(json_data)["disabled_message"]
+        except Exception as e:
+            dict_state["disabled"] = "ERROR: unable to load %s / %s " % (str(e), disable_file)
+            pass
+        break
+
+if "resources" in dict_state:
+    if int(dict_state["resources"]["failed"]) > 0:
+        dict_state["state"] = "ERROR: puppetrun failed"
+    elif int(dict_state["resources"]["changed"]) > 0:
+        dict_state["state"] = "OK: puppetrun successful, %s changes" % dict_state["resources"]["changed"]
+    else:
+        dict_state["state"] = "OK: puppetrun successful, no changes"
+
+for run_report_file in possible_run_report:
+    if os.path.exists(run_report_file):
+        try:
+            with open(run_report_file) as report_data:
+                for line in report_data:
+                    m = re.match("^environment: (.+)$", line)
+                    if m:
+                        dict_state["environment"] = m.group(1)
+                        break
+        except Exception as e:
+            dict_state["environment"] = "unknown"
+            pass
+        break
+
+if len(sys.argv) == 2:
+    print(dict_state[sys.argv[1]])
+elif len(sys.argv) == 3:
+    print(dict_state[sys.argv[1]][sys.argv[2]])
+else:
+    print(json.dumps(dict_state, ensure_ascii=False, indent=4))

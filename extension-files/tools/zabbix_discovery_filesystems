@@ -27,23 +27,26 @@ import sys
 
 config_default = {
     "regex_includes_name": [".*"],
-    "regex_includes_model": [".*"],
-    "regex_excludes_name": ["loop.*", "fd.*", "sr.*", "dm.*", "ram.*"],
-    "regex_excludes_model": [],
-    "smartctl_subdevices": {},
+    "regex_includes_type": [".*"],
+    "regex_excludes_name": [],
+    "regex_excludes_type": ["nfs", "nfs4", "nfsd", "cifs", "autofs", "binfmt_misc", "cgroup", "cgroup2", "configfs",
+                            "debugfs",
+                            "devpts", "devtmpfs", "efivarfs", "fusectl", "fuse.gvfsd-fuse", "hugetlbfs", "mqueue",
+                            "fuse.lxcfs", "xenfs", "rpc_pipefs", "efivarfs", "tracefs",
+                            "proc", "pstore", "securityfs", "sysfs", "tmpfs", "vfat", "iso9660" ],
 }
 
 
 ####################################################################################
 #### HELPERS
 
-def check_match(matchfor, device_name, regexes):
+def check_match(matchfor, filesystem_name, regexes):
     ret = False
     for regex in regexes:
         regex = regex.strip()
-        if re.match(r"^%s$" % regex, device_name):
+        if re.match(r"^%s$" % regex, filesystem_name):
             if args.debug:
-                sys.stderr.write("%s match: %s with %s\n" % (matchfor, device_name, regex))
+                sys.stderr.write("%s match: %s with %s\n" % (matchfor, filesystem_name, regex))
             ret = True
     return ret
 
@@ -74,15 +77,7 @@ def read_config(config_file):
         except:
             sys.stderr.write("An unexpected error occured while reading config file\n")
 
-    config.setdefault("smartctl_subdevices", {})
     return config
-
-
-def is_real_hardware_device(device):
-    if os.path.exists("/sys/block/%s/device/vendor" % device):
-        return True
-    else:
-        return False
 
 
 ####################################################################################
@@ -90,36 +85,30 @@ def is_real_hardware_device(device):
 
 
 parser = argparse.ArgumentParser(
-    description='perform device disovery for zabbix',
+    description='perform filesystem disovery for zabbix',
     formatter_class=argparse.RawTextHelpFormatter,
     epilog='''Example json configuration file:
 
-i.e. /etc/zabbix/item_zabbix_device_discovery.json:
+i.e. /etc/zabbix/item_zabbix_discovery_filesystems.json
 ---
 {
   "regex_includes_name": [
     ".*"
   ],
-  "regex_includes_model": [
+  "regex_includes_type": [
     ".*"
   ],
-  "regex_excludes_name": [
-    "loop.*", "fd.*", "sr.*", "dm.*", "ram.*"
-  ],
-  "regex_excludes_model": [
-  ],
-  "smartctl_subdevices": {
-    "sda": [
-      "-d megaraid,0",
-      "-d megaraid,1"
-    ]
-  }
+  "regex_excludes_type": ["nfs", "nfs4", "nfsd", "cifs", "autofs", "binfmt_misc", "cgroup", "cgroup2", "configfs",
+                            "debugfs",
+                            "devpts", "devtmpfs", "efivarfs", "fusectl", "fuse.gvfsd-fuse", "hugetlbfs", "mqueue",
+                            "fuse.lxcfs", "xenfs", "rpc_pipefs", "efivarfs", "tracefs",
+                            "proc", "pstore", "securityfs", "sysfs", "tmpfs", "vfat", "iso9660" ],
 }
 ---
 
 Options are evaluated like this:
-- stage 1: include the following devices by regex
-- stage 2: exclude the following devices from step 1 by regex
+- stage 1: include the following filesystems by regex
+- stage 2: exclude the following filesystems from step 1 by regex
 
     '''
 )
@@ -136,12 +125,6 @@ parser.add_argument(
 )
 
 parser.add_argument(
-    '--only_rawdisk',
-    help='Output only hardware devices',
-    action='store_true',
-)
-
-parser.add_argument(
     '--config',
     nargs='?',
     type=str,
@@ -152,7 +135,7 @@ parser.add_argument(
 
 args = parser.parse_args()
 
-devices_discovered = {'data': []}
+filesystems_discovered = {'data': []}
 
 # read the config
 if args.config is not None:
@@ -164,61 +147,44 @@ if args.debug:
     sys.stderr.write("** Effective config:\n%s\n" % json.dumps(config, indent=2))
 
 # perform discovery
-for filename in glob.glob('/sys/block/*'):
-    if not os.path.islink(filename):
-        continue
-    device_name = os.path.basename(filename)
 
-    device_model_file = "/sys/block/%s/device/model" % device_name
-    device_model = "UNDEFINED"
+with open("/proc/mounts", "r") as mounts:
+    for line in mounts:
 
-    if os.path.isfile(device_model_file):
-        with open(device_model_file) as f_model:
-            device_model = f_model.readline()
+        m = re.match("^([^ ]+) ([^ ]+) ([^ ]+) .*$", line)
+        if not m:
+            continue
 
-    if args.debug:
-        sys.stderr.write("** DEVICE %s / MODEL %s\n" % (device_name, device_model))
-
-    # Check matched devices
-    if not check_match("include", device_name, config["regex_includes_name"]):
-        continue
-
-    if not check_match("include", device_model, config["regex_includes_model"]):
-        continue
-
-    # Check excluded devices
-    if check_match("exclude", device_name, config["regex_excludes_name"]):
-        continue
-
-    if check_match("exclude", device_model, config["regex_excludes_model"]):
-        continue
-
-    if args.only_rawdisk and not is_real_hardware_device(device_name):
-        continue
-
-    device_size_file = "/sys/block/%s/size" % device_name
-    device_size = 0
-    if os.path.isfile(device_size_file):
-        with open(device_size_file) as f_size:
-            device_size = int(f_size.readline().strip())
-    if device_size == 0:
+        filesystem_name = m.group(2)
+        filesystem_type = m.group(3)
         if args.debug:
-            sys.stderr.write("ignoring device %s, its size is 0\n" % device_name)
-        continue
+            sys.stderr.write("** filesystem %s / type %s\n" % (filesystem_name, filesystem_type))
 
-    if args.smart and device_name in config["smartctl_subdevices"]:
-        for smartarg in config["smartctl_subdevices"][device_name]:
-            device = {}
-            device['{#BLOCKDEVICE}'] = device_name + " " + smartarg
-            devices_discovered['data'].append(device)
-    else:
-        device = {}
-        device['{#BLOCKDEVICE}'] = device_name
-        devices_discovered['data'].append(device)
+        # Check matched filesystems
+        if not check_match("include", filesystem_name, config["regex_includes_name"]):
+            continue
+
+        if not check_match("include", filesystem_type, config["regex_includes_type"]):
+            continue
+
+        # Check excluded filesystems
+        if check_match("exclude", filesystem_name, config["regex_excludes_name"]):
+            continue
+
+        if check_match("exclude", filesystem_type, config["regex_excludes_type"]):
+            continue
+
+        else:
+            # {"data":[{"{#FSNAME}":"/sys","{#FSTYPE}":"sysfs"},{.....
+            filesystem = {}
+            filesystem['{#FSNAME}'] = filesystem_name
+            filesystem['{#FSTYPE}'] = filesystem_type
+
+            filesystems_discovered['data'].append(filesystem)
 
 if args.debug:
-    print(json.dumps(devices_discovered, sort_keys=True, indent=2))
+    print(json.dumps(filesystems_discovered, sort_keys=True, indent=2))
 else:
-    print(json.dumps(devices_discovered, sort_keys=True))
+    print(json.dumps(filesystems_discovered, sort_keys=True))
 
 # vim: ai et ts=2 shiftwidth=2 expandtab

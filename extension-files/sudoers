@@ -1,6 +1,8 @@
-
 Defaults:zabbix !syslog
+Defaults:zabbix !requiretty
+
 zabbix ALL=(ALL) NOPASSWD: /usr/bin/zabbix_check_multipath
 zabbix ALL=(ALL) NOPASSWD: /usr/bin/zabbix_check_smartmontools
 zabbix ALL=(ALL) NOPASSWD: /usr/bin/mailq
 zabbix ALL=(ALL) NOPASSWD: /usr/bin/zabbix_check_dmesg
+zabbix ALL=(ALL) NOPASSWD: /usr/bin/zabbix_check_puppetstate

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
     <version>3.4</version>
-    <date>2018-02-04T19:50:07Z</date>
+    <date>2018-12-18T12:28:20Z</date>
     <groups>
         <group>
             <name>Templates</name>
@@ -180,6 +180,47 @@
                     <master_item/>
                 </item>
                 <item>
+                    <name>Number of maximum open file descriptors</name>
+                    <type>7</type>
+                    <snmp_community/>
+                    <snmp_oid/>
+                    <key>kernel.maxfiles</key>
+                    <delay>1h</delay>
+                    <history>1d</history>
+                    <trends>14d</trends>
+                    <status>0</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts/>
+                    <units>files</units>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description/>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>OS - Health</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                    <preprocessing/>
+                    <jmx_endpoint/>
+                    <master_item/>
+                </item>
+                <item>
                     <name>Maximum number of processes</name>
                     <type>7</type>
                     <snmp_community/>
@@ -270,7 +311,7 @@
                     <delay>5m</delay>
                     <history>2w</history>
                     <trends>0</trends>
-                    <status>0</status>
+                    <status>1</status>
                     <value_type>4</value_type>
                     <allowed_hosts/>
                     <units/>
@@ -611,7 +652,7 @@ A man with one watch knows what time it is. A man with two watches is never sure
                     <snmp_community/>
                     <snmp_oid/>
                     <key>ntpd.primarypeer.stats[delay]</key>
-                    <delay>90s</delay>
+                    <delay>120s</delay>
                     <history>5d</history>
                     <trends>90d</trends>
                     <status>0</status>
@@ -652,7 +693,7 @@ A man with one watch knows what time it is. A man with two watches is never sure
                     <snmp_community/>
                     <snmp_oid/>
                     <key>ntpd.primarypeer.stats[jitter]</key>
-                    <delay>90s</delay>
+                    <delay>120s</delay>
                     <history>5d</history>
                     <trends>90d</trends>
                     <status>0</status>
@@ -693,7 +734,7 @@ A man with one watch knows what time it is. A man with two watches is never sure
                     <snmp_community/>
                     <snmp_oid/>
                     <key>ntpd.primarypeer.stats[offset]</key>
-                    <delay>90s</delay>
+                    <delay>120s</delay>
                     <history>5d</history>
                     <trends>90d</trends>
                     <status>0</status>
@@ -766,6 +807,52 @@ A man with one watch knows what time it is. A man with two watches is never sure
                     <valuemap/>
                     <logtimefmt/>
                     <preprocessing/>
+                    <jmx_endpoint/>
+                    <master_item/>
+                </item>
+                <item>
+                    <name>Memory in userspace percentage</name>
+                    <type>15</type>
+                    <snmp_community/>
+                    <snmp_oid/>
+                    <key>os.linux.memory.userspace.percent</key>
+                    <delay>2m</delay>
+                    <history>2w</history>
+                    <trends>365d</trends>
+                    <status>0</status>
+                    <value_type>0</value_type>
+                    <allowed_hosts/>
+                    <units>%</units>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <params>(last(&quot;vm.memory.size[total]&quot;) - last(&quot;vm.memory.size[available]&quot;))  / last(&quot;vm.memory.size[total]&quot;)</params>
+                    <ipmi_sensor/>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description/>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>OS - Memory</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                    <preprocessing>
+                        <step>
+                            <type>1</type>
+                            <params>100</params>
+                        </step>
+                    </preprocessing>
                     <jmx_endpoint/>
                     <master_item/>
                 </item>
@@ -1774,6 +1861,47 @@ A man with one watch knows what time it is. A man with two watches is never sure
                     <master_item/>
                 </item>
                 <item>
+                    <name>Number of current open file descriptors</name>
+                    <type>7</type>
+                    <snmp_community/>
+                    <snmp_oid/>
+                    <key>vfs.file.regexp[/proc/sys/fs/file-nr,&quot;([0-9]+)\s+([0-9]+)\s+([0-9]+)&quot;,,1,2,\1]</key>
+                    <delay>240</delay>
+                    <history>3d</history>
+                    <trends>14d</trends>
+                    <status>0</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts/>
+                    <units>files</units>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description/>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>OS - Health</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                    <preprocessing/>
+                    <jmx_endpoint/>
+                    <master_item/>
+                </item>
+                <item>
                     <name>MD Raid synchronous activity</name>
                     <type>7</type>
                     <snmp_community/>
@@ -1825,7 +1953,7 @@ Recovery:&#13;
                     <type>7</type>
                     <snmp_community/>
                     <snmp_oid/>
-                    <key>vfs.file.regmatch[/proc/mdstat,&quot;\[UU*\]&quot;,,]</key>
+                    <key>vfs.file.regmatch[/proc/mdstat,&quot;\[.*_.*\]&quot;,,]</key>
                     <delay>5m</delay>
                     <history>30d</history>
                     <trends>0</trends>
@@ -2121,7 +2249,7 @@ md1 : active raid1 sdb2[2] sda2[0]&#13;
                     <snmp_community/>
                     <snmp_oid/>
                     <key>net.if.discovery</key>
-                    <delay>10m</delay>
+                    <delay>1h</delay>
                     <status>0</status>
                     <allowed_hosts/>
                     <snmpv3_contextname/>
@@ -2145,17 +2273,17 @@ md1 : active raid1 sdb2[2] sda2[0]&#13;
                         <conditions>
                             <condition>
                                 <macro>{#IFNAME}</macro>
-                                <value>^(eth|bond|vlan|em)</value>
+                                <value>^(eth|bond|xapi|enp|eno|vlan|em)</value>
                                 <operator>8</operator>
                                 <formulaid>A</formulaid>
                             </condition>
                         </conditions>
                     </filter>
-                    <lifetime>1w</lifetime>
+                    <lifetime>3d</lifetime>
                     <description>Discovery of network interfaces</description>
                     <item_prototypes>
                         <item_prototype>
-                            <name>Interface {#IFNAME} Bits Inbound</name>
+                            <name>Net {#IFNAME} Bits In</name>
                             <type>7</type>
                             <snmp_community/>
                             <snmp_oid/>
@@ -2206,7 +2334,7 @@ md1 : active raid1 sdb2[2] sda2[0]&#13;
                             <master_item_prototype/>
                         </item_prototype>
                         <item_prototype>
-                            <name>Interface $1 Errors Inbound</name>
+                            <name>Net $1 Errors In</name>
                             <type>7</type>
                             <snmp_community/>
                             <snmp_oid/>
@@ -2217,7 +2345,7 @@ md1 : active raid1 sdb2[2] sda2[0]&#13;
                             <status>0</status>
                             <value_type>3</value_type>
                             <allowed_hosts/>
-                            <units>errors/sec</units>
+                            <units>e/sec</units>
                             <snmpv3_contextname/>
                             <snmpv3_securityname/>
                             <snmpv3_securitylevel>0</snmpv3_securitylevel>
@@ -2253,7 +2381,7 @@ md1 : active raid1 sdb2[2] sda2[0]&#13;
                             <master_item_prototype/>
                         </item_prototype>
                         <item_prototype>
-                            <name>Interface {#IFNAME} Packets Inbound</name>
+                            <name>Net {#IFNAME} Packets In</name>
                             <type>7</type>
                             <snmp_community/>
                             <snmp_oid/>
@@ -2300,7 +2428,7 @@ md1 : active raid1 sdb2[2] sda2[0]&#13;
                             <master_item_prototype/>
                         </item_prototype>
                         <item_prototype>
-                            <name>Interface {#IFNAME} Bits Outbound</name>
+                            <name>Net {#IFNAME} Bits Out</name>
                             <type>7</type>
                             <snmp_community/>
                             <snmp_oid/>
@@ -2351,7 +2479,7 @@ md1 : active raid1 sdb2[2] sda2[0]&#13;
                             <master_item_prototype/>
                         </item_prototype>
                         <item_prototype>
-                            <name>Interface $1 Errors Outbound</name>
+                            <name>Net $1 Errors Out</name>
                             <type>7</type>
                             <snmp_community/>
                             <snmp_oid/>
@@ -2362,7 +2490,7 @@ md1 : active raid1 sdb2[2] sda2[0]&#13;
                             <status>0</status>
                             <value_type>3</value_type>
                             <allowed_hosts/>
-                            <units>errors/sec</units>
+                            <units>e/sec</units>
                             <snmpv3_contextname/>
                             <snmpv3_securityname/>
                             <snmpv3_securitylevel>0</snmpv3_securitylevel>
@@ -2398,7 +2526,7 @@ md1 : active raid1 sdb2[2] sda2[0]&#13;
                             <master_item_prototype/>
                         </item_prototype>
                         <item_prototype>
-                            <name>Interface {#IFNAME} Packets Outbound</name>
+                            <name>Net {#IFNAME} Packets Out</name>
                             <type>7</type>
                             <snmp_community/>
                             <snmp_oid/>
@@ -2450,7 +2578,23 @@ md1 : active raid1 sdb2[2] sda2[0]&#13;
                             <expression>(({Custom - OS - Linux:net.if.in[{#IFNAME},errors].last(0)}&gt;0) or ({Custom - OS - Linux:net.if.out[{#IFNAME},errors].last(0)}&gt;0))</expression>
                             <recovery_mode>0</recovery_mode>
                             <recovery_expression/>
-                            <name>Interface {#IFNAME} errors</name>
+                            <name>Interface {#IFNAME} errors : {ITEM.LASTVALUE1}/{ITEM.LASTVALUE2} (in/out)</name>
+                            <correlation_mode>0</correlation_mode>
+                            <correlation_tag/>
+                            <url/>
+                            <status>0</status>
+                            <priority>2</priority>
+                            <description>There are interface errors, check your network equipment</description>
+                            <type>0</type>
+                            <manual_close>0</manual_close>
+                            <dependencies/>
+                            <tags/>
+                        </trigger_prototype>
+                        <trigger_prototype>
+                            <expression>(({Custom - OS - Linux:net.if.in[{#IFNAME},errors].last(0)}&gt;0) or ({Custom - OS - Linux:net.if.out[{#IFNAME},errors].last(0)}&gt;{$MAX_NETWORK_ERRORS_PERIOD}))</expression>
+                            <recovery_mode>0</recovery_mode>
+                            <recovery_expression/>
+                            <name>Interface {#IFNAME} errors : {ITEM.LASTVALUE1}/{ITEM.LASTVALUE2} (in/out)</name>
                             <correlation_mode>0</correlation_mode>
                             <correlation_tag/>
                             <url/>
@@ -2636,7 +2780,7 @@ md1 : active raid1 sdb2[2] sda2[0]&#13;
                             </condition>
                         </conditions>
                     </filter>
-                    <lifetime>1w</lifetime>
+                    <lifetime>3d</lifetime>
                     <description>Discovery of disks.</description>
                     <item_prototypes>
                         <item_prototype>
@@ -2813,11 +2957,11 @@ md1 : active raid1 sdb2[2] sda2[0]&#13;
                             <expression>{Custom - OS - Linux:vfs.dev.read[{#BLOCKDEVICE},ops,avg1].avg({$DISK_IOPS_LIMIT_MEASURES})}&gt; {$DISK_HIGH_READ_IOPS_LIMIT}</expression>
                             <recovery_mode>1</recovery_mode>
                             <recovery_expression>{Custom - OS - Linux:vfs.dev.write[{#BLOCKDEVICE},ops,avg1].avg({$DISK_IOPS_LIMIT_MEASURES})}&lt;(0.25* {$DISK_HIGH_READ_IOPS_LIMIT})</recovery_expression>
-                            <name>Blockdevice {#BLOCKDEVICE} read limit {$DISK_HIGH_READ_IOPS_LIMIT}/sec reached, currently {ITEM.VALUE1}/sec</name>
+                            <name>Blockdevice {#BLOCKDEVICE} read limit {$DISK_HIGH_READ_IOPS_LIMIT}/sec reached, currently {ITEM.LASTVALUE1}/sec</name>
                             <correlation_mode>0</correlation_mode>
                             <correlation_tag/>
                             <url/>
-                            <status>1</status>
+                            <status>0</status>
                             <priority>1</priority>
                             <description>This trigger alerts disks which are consuming more than the configured IOPs limit. You can use this to discover systems high high read rates.</description>
                             <type>0</type>
@@ -2829,11 +2973,11 @@ md1 : active raid1 sdb2[2] sda2[0]&#13;
                             <expression>{Custom - OS - Linux:vfs.dev.write[{#BLOCKDEVICE},ops,avg1].avg({$DISK_IOPS_LIMIT_MEASURES})}&gt; {$DISK_HIGH_WRITE_IOPS_LIMIT}</expression>
                             <recovery_mode>1</recovery_mode>
                             <recovery_expression>{Custom - OS - Linux:vfs.dev.write[{#BLOCKDEVICE},ops,avg1].avg({$DISK_IOPS_LIMIT_MEASURES})}&lt;(0.25* {$DISK_HIGH_WRITE_IOPS_LIMIT})</recovery_expression>
-                            <name>Blockdevice {#BLOCKDEVICE} write limit {$DISK_HIGH_WRITE_IOPS_LIMIT}/sec reached, currently {ITEM.VALUE1}/sec</name>
+                            <name>Blockdevice {#BLOCKDEVICE} write limit {$DISK_HIGH_WRITE_IOPS_LIMIT}/sec reached, currently {ITEM.LASTVALUE1}/sec</name>
                             <correlation_mode>0</correlation_mode>
                             <correlation_tag/>
                             <url/>
-                            <status>1</status>
+                            <status>0</status>
                             <priority>1</priority>
                             <description>This trigger alerts disks which are consuming more than the configured IOPs limit. You can use this to discover systems high high write rates.</description>
                             <type>0</type>
@@ -2941,7 +3085,7 @@ md1 : active raid1 sdb2[2] sda2[0]&#13;
                     <snmp_community/>
                     <snmp_oid/>
                     <key>vfs.fs.discovery</key>
-                    <delay>1h</delay>
+                    <delay>10m</delay>
                     <status>0</status>
                     <allowed_hosts/>
                     <snmpv3_contextname/>
@@ -2971,17 +3115,59 @@ md1 : active raid1 sdb2[2] sda2[0]&#13;
                             </condition>
                         </conditions>
                     </filter>
-                    <lifetime>1w</lifetime>
+                    <lifetime>3d</lifetime>
                     <description>Discovery of filesystems</description>
                     <item_prototypes>
+                        <item_prototype>
+                            <name>Disk {#FSNAME} inode free</name>
+                            <type>7</type>
+                            <snmp_community/>
+                            <snmp_oid/>
+                            <key>vfs.fs.inode[{#FSNAME},free]</key>
+                            <delay>600s</delay>
+                            <history>7d</history>
+                            <trends>365d</trends>
+                            <status>0</status>
+                            <value_type>3</value_type>
+                            <allowed_hosts/>
+                            <units>i</units>
+                            <snmpv3_contextname/>
+                            <snmpv3_securityname/>
+                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                            <snmpv3_authpassphrase/>
+                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                            <snmpv3_privpassphrase/>
+                            <params/>
+                            <ipmi_sensor/>
+                            <authtype>0</authtype>
+                            <username/>
+                            <password/>
+                            <publickey/>
+                            <privatekey/>
+                            <port/>
+                            <description/>
+                            <inventory_link>0</inventory_link>
+                            <applications>
+                                <application>
+                                    <name>OS - Storage</name>
+                                </application>
+                            </applications>
+                            <valuemap/>
+                            <logtimefmt/>
+                            <preprocessing/>
+                            <jmx_endpoint/>
+                            <application_prototypes/>
+                            <master_item_prototype/>
+                        </item_prototype>
                         <item_prototype>
                             <name>Disk {#FSNAME} inode use percentage</name>
                             <type>7</type>
                             <snmp_community/>
                             <snmp_oid/>
                             <key>vfs.fs.inode[{#FSNAME},pused]</key>
-                            <delay>5m</delay>
-                            <history>90d</history>
+                            <delay>600s</delay>
+                            <history>7d</history>
                             <trends>365d</trends>
                             <status>0</status>
                             <value_type>0</value_type>
@@ -3017,13 +3203,55 @@ md1 : active raid1 sdb2[2] sda2[0]&#13;
                             <master_item_prototype/>
                         </item_prototype>
                         <item_prototype>
+                            <name>Disk {#FSNAME} space remaining time (3 days)</name>
+                            <type>15</type>
+                            <snmp_community/>
+                            <snmp_oid/>
+                            <key>vfs.fs.inode[{#FSNAME},remaining_time]</key>
+                            <delay>8h</delay>
+                            <history>7d</history>
+                            <trends>365d</trends>
+                            <status>0</status>
+                            <value_type>3</value_type>
+                            <allowed_hosts/>
+                            <units>s</units>
+                            <snmpv3_contextname/>
+                            <snmpv3_securityname/>
+                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                            <snmpv3_authpassphrase/>
+                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                            <snmpv3_privpassphrase/>
+                            <params>timeleft(&quot;vfs.fs.size[{#FSNAME},free]&quot;,3d,,0)</params>
+                            <ipmi_sensor/>
+                            <authtype>0</authtype>
+                            <username/>
+                            <password/>
+                            <publickey/>
+                            <privatekey/>
+                            <port/>
+                            <description/>
+                            <inventory_link>0</inventory_link>
+                            <applications>
+                                <application>
+                                    <name>OS - Storage</name>
+                                </application>
+                            </applications>
+                            <valuemap/>
+                            <logtimefmt/>
+                            <preprocessing/>
+                            <jmx_endpoint/>
+                            <application_prototypes/>
+                            <master_item_prototype/>
+                        </item_prototype>
+                        <item_prototype>
                             <name>Disk {#FSNAME} inode total</name>
                             <type>7</type>
                             <snmp_community/>
                             <snmp_oid/>
                             <key>vfs.fs.inode[{#FSNAME},total]</key>
                             <delay>1h</delay>
-                            <history>90d</history>
+                            <history>2d</history>
                             <trends>365d</trends>
                             <status>0</status>
                             <value_type>3</value_type>
@@ -3064,8 +3292,8 @@ md1 : active raid1 sdb2[2] sda2[0]&#13;
                             <snmp_community/>
                             <snmp_oid/>
                             <key>vfs.fs.inode[{#FSNAME},used]</key>
-                            <delay>5m</delay>
-                            <history>90d</history>
+                            <delay>600s</delay>
+                            <history>7d</history>
                             <trends>365d</trends>
                             <status>0</status>
                             <value_type>3</value_type>
@@ -3101,13 +3329,55 @@ md1 : active raid1 sdb2[2] sda2[0]&#13;
                             <master_item_prototype/>
                         </item_prototype>
                         <item_prototype>
+                            <name>Disk {#FSNAME} space free</name>
+                            <type>7</type>
+                            <snmp_community/>
+                            <snmp_oid/>
+                            <key>vfs.fs.size[{#FSNAME},free]</key>
+                            <delay>600s</delay>
+                            <history>7d</history>
+                            <trends>365d</trends>
+                            <status>0</status>
+                            <value_type>3</value_type>
+                            <allowed_hosts/>
+                            <units>B</units>
+                            <snmpv3_contextname/>
+                            <snmpv3_securityname/>
+                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                            <snmpv3_authpassphrase/>
+                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                            <snmpv3_privpassphrase/>
+                            <params/>
+                            <ipmi_sensor/>
+                            <authtype>0</authtype>
+                            <username/>
+                            <password/>
+                            <publickey/>
+                            <privatekey/>
+                            <port/>
+                            <description/>
+                            <inventory_link>0</inventory_link>
+                            <applications>
+                                <application>
+                                    <name>OS - Storage</name>
+                                </application>
+                            </applications>
+                            <valuemap/>
+                            <logtimefmt/>
+                            <preprocessing/>
+                            <jmx_endpoint/>
+                            <application_prototypes/>
+                            <master_item_prototype/>
+                        </item_prototype>
+                        <item_prototype>
                             <name>Disk {#FSNAME} size use percentage</name>
                             <type>7</type>
                             <snmp_community/>
                             <snmp_oid/>
                             <key>vfs.fs.size[{#FSNAME},pused]</key>
-                            <delay>5m</delay>
-                            <history>90d</history>
+                            <delay>600s</delay>
+                            <history>7d</history>
                             <trends>365d</trends>
                             <status>0</status>
                             <value_type>0</value_type>
@@ -3149,7 +3419,7 @@ md1 : active raid1 sdb2[2] sda2[0]&#13;
                             <snmp_oid/>
                             <key>vfs.fs.size[{#FSNAME},total]</key>
                             <delay>1h</delay>
-                            <history>90d</history>
+                            <history>2d</history>
                             <trends>365d</trends>
                             <status>0</status>
                             <value_type>3</value_type>
@@ -3190,8 +3460,8 @@ md1 : active raid1 sdb2[2] sda2[0]&#13;
                             <snmp_community/>
                             <snmp_oid/>
                             <key>vfs.fs.size[{#FSNAME},used]</key>
-                            <delay>5m</delay>
-                            <history>90d</history>
+                            <delay>600s</delay>
+                            <history>7d</history>
                             <trends>365d</trends>
                             <status>0</status>
                             <value_type>3</value_type>
@@ -3232,7 +3502,7 @@ md1 : active raid1 sdb2[2] sda2[0]&#13;
                             <expression>{Custom - OS - Linux:vfs.fs.inode[{#FSNAME},pused].last(0)}&gt;{$DISK_USAGE_PERCENT_ALARM}</expression>
                             <recovery_mode>0</recovery_mode>
                             <recovery_expression/>
-                            <name>Filesystem inode usage for {#FSNAME} &gt; {$DISK_USAGE_PERCENT_ALARM}% =&gt;  {ITEM.VALUE1}</name>
+                            <name>Filesystem inode usage for {#FSNAME} &gt; {$DISK_USAGE_PERCENT_ALARM}% =&gt;  {ITEM.LASTVALUE1}</name>
                             <correlation_mode>0</correlation_mode>
                             <correlation_tag/>
                             <url/>
@@ -3241,15 +3511,56 @@ md1 : active raid1 sdb2[2] sda2[0]&#13;
                             <description>Partition is running out of inodes. The volume contains to much files. Please increase volume size, delete unnecessary files and inform application owner.</description>
                             <type>0</type>
                             <manual_close>0</manual_close>
+                            <dependencies>
+                                <dependency>
+                                    <name>Filesystem inode WARNING usage for {#FSNAME} &gt; {$DISK_USAGE_PERCENT_WARN}% =&gt;  {ITEM.LASTVALUE1}</name>
+                                    <expression>{Custom - OS - Linux:vfs.fs.inode[{#FSNAME},pused].last(0)}&gt;{$DISK_USAGE_PERCENT_WARN}</expression>
+                                    <recovery_expression/>
+                                </dependency>
+                            </dependencies>
+                            <tags/>
+                        </trigger_prototype>
+                        <trigger_prototype>
+                            <expression>{Custom - OS - Linux:vfs.fs.inode[{#FSNAME},pused].last(0)}&gt;{$DISK_USAGE_PERCENT_WARN}</expression>
+                            <recovery_mode>0</recovery_mode>
+                            <recovery_expression/>
+                            <name>Filesystem inode WARNING usage for {#FSNAME} &gt; {$DISK_USAGE_PERCENT_WARN}% =&gt;  {ITEM.LASTVALUE1}</name>
+                            <correlation_mode>0</correlation_mode>
+                            <correlation_tag/>
+                            <url/>
+                            <status>0</status>
+                            <priority>2</priority>
+                            <description>Partition is running out of inodes. The volume contains to much files. Please increase volume size, delete unnecessary files and inform application owner.</description>
+                            <type>0</type>
+                            <manual_close>0</manual_close>
                             <dependencies/>
                             <tags/>
                         </trigger_prototype>
                         <trigger_prototype>
-                            <expression>({Custom - OS - Linux:vfs.fs.size[{#FSNAME},pused].last(0)}&gt;{$DISK_USAGE_PERCENT_ALARM} and {Custom - OS - Linux:vfs.fs.size[{#FSNAME},total].last(0)}&lt;109951162777) or&#13;
-({Custom - OS - Linux:vfs.fs.size[{#FSNAME},total].last(0)}&gt;=109951162777 and ({Custom - OS - Linux:vfs.fs.size[{#FSNAME},total].last(0)}-{Custom - OS - Linux:vfs.fs.size[{#FSNAME},used].last(0)}) &lt; ({$DISK_USAGE_ABOVE_1TB_MINFREE_GBYTES} * 107374182))</expression>
+                            <expression>({Custom - OS - Linux:vfs.fs.size[{#FSNAME},free].last(0)} &lt;  ({$DISK_USAGE_ABOVE_1TB_MINFREE_GBYTES} * 1073741824)) and ({Custom - OS - Linux:vfs.fs.size[{#FSNAME},total].last(0)}&gt;=1099511627776)</expression>
                             <recovery_mode>0</recovery_mode>
                             <recovery_expression/>
-                            <name>Filesystem space usage for {#FSNAME} &gt; {$DISK_USAGE_PERCENT_ALARM}% or free space &lt; {$DISK_USAGE_ABOVE_1TB_MINFREE_GBYTES}GB =&gt; {ITEM.VALUE1}</name>
+                            <name>Filesystem space {#FSNAME} free space &lt;  {$DISK_USAGE_ABOVE_1TB_MINFREE_GBYTES}GB ({#FSNAME} &gt; 1TB) =&gt; {ITEM.LASTVALUE1}  free</name>
+                            <correlation_mode>0</correlation_mode>
+                            <correlation_tag/>
+                            <url/>
+                            <status>0</status>
+                            <priority>3</priority>
+                            <description>Partition is running out of space. The volume contains to much data. Please increase volume size, delete unnecessary files or inform application owner.&#13;
+&#13;
+Filesystem smaller than 1TB are alarmed if the precentage specified by {$DISK_USAGE_PERCENT_ALARM} is reached.&#13;
+&#13;
+Filesystem greater that 1TB are alarmed if the free space of the partion is lower than {$DISK_USAGE_ABOVE_1TB_MINFREE_GBYTES} gigagbytes.</description>
+                            <type>0</type>
+                            <manual_close>0</manual_close>
+                            <dependencies/>
+                            <tags/>
+                        </trigger_prototype>
+                        <trigger_prototype>
+                            <expression>({Custom - OS - Linux:vfs.fs.size[{#FSNAME},pused].last(0)}&gt;{$DISK_USAGE_PERCENT_ALARM} and {Custom - OS - Linux:vfs.fs.size[{#FSNAME},total].last(0)}&lt;1099511627776)</expression>
+                            <recovery_mode>0</recovery_mode>
+                            <recovery_expression/>
+                            <name>Filesystem space {#FSNAME} usage &gt; {$DISK_USAGE_PERCENT_ALARM}% ({#FSNAME} &lt; 1TB) =&gt;  {ITEM.LASTVALUE1}</name>
                             <correlation_mode>0</correlation_mode>
                             <correlation_tag/>
                             <url/>
@@ -3280,7 +3591,7 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
                             <show_3d>0</show_3d>
                             <percent_left>0.0000</percent_left>
                             <percent_right>0.0000</percent_right>
-                            <ymin_type_1>1</ymin_type_1>
+                            <ymin_type_1>0</ymin_type_1>
                             <ymax_type_1>0</ymax_type_1>
                             <ymin_item_1>0</ymin_item_1>
                             <ymax_item_1>0</ymax_item_1>
@@ -3288,7 +3599,51 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
                                 <graph_item>
                                     <sortorder>0</sortorder>
                                     <drawtype>0</drawtype>
-                                    <color>00BBBB</color>
+                                    <color>DD00DD</color>
+                                    <yaxisside>0</yaxisside>
+                                    <calc_fnc>4</calc_fnc>
+                                    <type>0</type>
+                                    <item>
+                                        <host>Custom - OS - Linux</host>
+                                        <key>vfs.fs.inode[{#FSNAME},used]</key>
+                                    </item>
+                                </graph_item>
+                                <graph_item>
+                                    <sortorder>1</sortorder>
+                                    <drawtype>0</drawtype>
+                                    <color>2774A4</color>
+                                    <yaxisside>0</yaxisside>
+                                    <calc_fnc>4</calc_fnc>
+                                    <type>0</type>
+                                    <item>
+                                        <host>Custom - OS - Linux</host>
+                                        <key>vfs.fs.inode[{#FSNAME},total]</key>
+                                    </item>
+                                </graph_item>
+                            </graph_items>
+                        </graph_prototype>
+                        <graph_prototype>
+                            <name>Filesystem {#FSNAME} prediction</name>
+                            <width>900</width>
+                            <height>200</height>
+                            <yaxismin>0.0000</yaxismin>
+                            <yaxismax>100.0000</yaxismax>
+                            <show_work_period>1</show_work_period>
+                            <show_triggers>1</show_triggers>
+                            <type>0</type>
+                            <show_legend>1</show_legend>
+                            <show_3d>0</show_3d>
+                            <percent_left>0.0000</percent_left>
+                            <percent_right>0.0000</percent_right>
+                            <ymin_type_1>0</ymin_type_1>
+                            <ymax_type_1>0</ymax_type_1>
+                            <ymin_item_1>0</ymin_item_1>
+                            <ymax_item_1>0</ymax_item_1>
+                            <graph_items>
+                                <graph_item>
+                                    <sortorder>0</sortorder>
+                                    <drawtype>0</drawtype>
+                                    <color>CC00CC</color>
                                     <yaxisside>0</yaxisside>
                                     <calc_fnc>4</calc_fnc>
                                     <type>0</type>
@@ -3300,25 +3655,25 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
                                 <graph_item>
                                     <sortorder>1</sortorder>
                                     <drawtype>0</drawtype>
-                                    <color>0000C8</color>
-                                    <yaxisside>1</yaxisside>
+                                    <color>00CC00</color>
+                                    <yaxisside>0</yaxisside>
                                     <calc_fnc>4</calc_fnc>
                                     <type>0</type>
                                     <item>
                                         <host>Custom - OS - Linux</host>
-                                        <key>vfs.fs.inode[{#FSNAME},total]</key>
+                                        <key>vfs.fs.size[{#FSNAME},pused]</key>
                                     </item>
                                 </graph_item>
                                 <graph_item>
                                     <sortorder>2</sortorder>
-                                    <drawtype>0</drawtype>
-                                    <color>C800C8</color>
+                                    <drawtype>2</drawtype>
+                                    <color>2774A4</color>
                                     <yaxisside>1</yaxisside>
                                     <calc_fnc>4</calc_fnc>
                                     <type>0</type>
                                     <item>
                                         <host>Custom - OS - Linux</host>
-                                        <key>vfs.fs.inode[{#FSNAME},used]</key>
+                                        <key>vfs.fs.inode[{#FSNAME},remaining_time]</key>
                                     </item>
                                 </graph_item>
                             </graph_items>
@@ -3336,7 +3691,7 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
                             <show_3d>0</show_3d>
                             <percent_left>0.0000</percent_left>
                             <percent_right>0.0000</percent_right>
-                            <ymin_type_1>1</ymin_type_1>
+                            <ymin_type_1>0</ymin_type_1>
                             <ymax_type_1>0</ymax_type_1>
                             <ymin_item_1>0</ymin_item_1>
                             <ymax_item_1>0</ymax_item_1>
@@ -3344,37 +3699,25 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
                                 <graph_item>
                                     <sortorder>0</sortorder>
                                     <drawtype>0</drawtype>
-                                    <color>00BBBB</color>
+                                    <color>C800C8</color>
                                     <yaxisside>0</yaxisside>
                                     <calc_fnc>4</calc_fnc>
                                     <type>0</type>
                                     <item>
                                         <host>Custom - OS - Linux</host>
-                                        <key>vfs.fs.size[{#FSNAME},pused]</key>
+                                        <key>vfs.fs.size[{#FSNAME},used]</key>
                                     </item>
                                 </graph_item>
                                 <graph_item>
                                     <sortorder>1</sortorder>
                                     <drawtype>0</drawtype>
-                                    <color>0000C8</color>
-                                    <yaxisside>1</yaxisside>
+                                    <color>2774A4</color>
+                                    <yaxisside>0</yaxisside>
                                     <calc_fnc>4</calc_fnc>
                                     <type>0</type>
                                     <item>
                                         <host>Custom - OS - Linux</host>
                                         <key>vfs.fs.size[{#FSNAME},total]</key>
-                                    </item>
-                                </graph_item>
-                                <graph_item>
-                                    <sortorder>2</sortorder>
-                                    <drawtype>0</drawtype>
-                                    <color>C800C8</color>
-                                    <yaxisside>1</yaxisside>
-                                    <calc_fnc>4</calc_fnc>
-                                    <type>0</type>
-                                    <item>
-                                        <host>Custom - OS - Linux</host>
-                                        <key>vfs.fs.size[{#FSNAME},used]</key>
                                     </item>
                                 </graph_item>
                             </graph_items>
@@ -3392,7 +3735,7 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
                 </macro>
                 <macro>
                     <macro>{$DISK_HIGH_WRITE_IOPS_LIMIT}</macro>
-                    <value>500</value>
+                    <value>10000</value>
                 </macro>
                 <macro>
                     <macro>{$DISK_IOPS_LIMIT_MEASURES}</macro>
@@ -3400,14 +3743,26 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
                 </macro>
                 <macro>
                     <macro>{$DISK_USAGE_ABOVE_1TB_MINFREE_GBYTES}</macro>
-                    <value>100</value>
+                    <value>50</value>
                 </macro>
                 <macro>
                     <macro>{$DISK_USAGE_PERCENT_ALARM}</macro>
                     <value>97</value>
                 </macro>
                 <macro>
+                    <macro>{$DISK_USAGE_PERCENT_WARN}</macro>
+                    <value>95</value>
+                </macro>
+                <macro>
+                    <macro>{$IOWAIT_ALERT_LIMIT}</macro>
+                    <value>20</value>
+                </macro>
+                <macro>
                     <macro>{$MAXIMUM_NUMBER_RETRANSMISSIONS}</macro>
+                    <value>1</value>
+                </macro>
+                <macro>
+                    <macro>{$MAX_NETWORK_ERRORS_PERIOD}</macro>
                     <value>1</value>
                 </macro>
                 <macro>
@@ -3415,8 +3770,12 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
                     <value>100</value>
                 </macro>
                 <macro>
+                    <macro>{$MEMORY_USERSPACE_USAGE_LIMIT}</macro>
+                    <value>98</value>
+                </macro>
+                <macro>
                     <macro>{$MIN_NTP_SERVER_COUNT}</macro>
-                    <value>1</value>
+                    <value>3</value>
                 </macro>
                 <macro>
                     <macro>{$MONITOR_LOAD_WARNING_MULT}</macro>
@@ -3424,7 +3783,7 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
                 </macro>
                 <macro>
                     <macro>{$MONITOR_TIMEOUT}</macro>
-                    <value>14400</value>
+                    <value>900</value>
                 </macro>
             </macros>
             <templates/>
@@ -3482,7 +3841,7 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
                 </screen>
                 <screen>
                     <name>Custom - OS - Linux - Filesystems</name>
-                    <hsize>2</hsize>
+                    <hsize>3</hsize>
                     <vsize>1</vsize>
                     <screen_items>
                         <screen_item>
@@ -3529,18 +3888,11 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
                             <max_columns>1</max_columns>
                             <application/>
                         </screen_item>
-                    </screen_items>
-                </screen>
-                <screen>
-                    <name>Custom - OS - Linux - General</name>
-                    <hsize>1</hsize>
-                    <vsize>11</vsize>
-                    <screen_items>
                         <screen_item>
-                            <resourcetype>0</resourcetype>
-                            <width>900</width>
-                            <height>300</height>
-                            <x>0</x>
+                            <resourcetype>20</resourcetype>
+                            <width>500</width>
+                            <height>200</height>
+                            <x>2</x>
                             <y>0</y>
                             <colspan>1</colspan>
                             <rowspan>1</rowspan>
@@ -3552,106 +3904,25 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
                             <dynamic>0</dynamic>
                             <sort_triggers>0</sort_triggers>
                             <resource>
-                                <name>CPU Times</name>
+                                <name>Filesystem {#FSNAME} prediction</name>
                                 <host>Custom - OS - Linux</host>
                             </resource>
-                            <max_columns>3</max_columns>
+                            <max_columns>1</max_columns>
                             <application/>
                         </screen_item>
+                    </screen_items>
+                </screen>
+                <screen>
+                    <name>Custom - OS - Linux - General</name>
+                    <hsize>1</hsize>
+                    <vsize>15</vsize>
+                    <screen_items>
                         <screen_item>
-                            <resourcetype>1</resourcetype>
+                            <resourcetype>0</resourcetype>
                             <width>900</width>
                             <height>300</height>
                             <x>0</x>
                             <y>1</y>
-                            <colspan>1</colspan>
-                            <rowspan>1</rowspan>
-                            <elements>0</elements>
-                            <valign>0</valign>
-                            <halign>0</halign>
-                            <style>0</style>
-                            <url/>
-                            <dynamic>0</dynamic>
-                            <sort_triggers>0</sort_triggers>
-                            <resource>
-                                <key>system.cpu.intr</key>
-                                <host>Custom - OS - Linux</host>
-                            </resource>
-                            <max_columns>3</max_columns>
-                            <application/>
-                        </screen_item>
-                        <screen_item>
-                            <resourcetype>0</resourcetype>
-                            <width>900</width>
-                            <height>300</height>
-                            <x>0</x>
-                            <y>2</y>
-                            <colspan>1</colspan>
-                            <rowspan>1</rowspan>
-                            <elements>0</elements>
-                            <valign>0</valign>
-                            <halign>0</halign>
-                            <style>0</style>
-                            <url/>
-                            <dynamic>0</dynamic>
-                            <sort_triggers>0</sort_triggers>
-                            <resource>
-                                <name>CPU Context Switches per Second</name>
-                                <host>Custom - OS - Linux</host>
-                            </resource>
-                            <max_columns>3</max_columns>
-                            <application/>
-                        </screen_item>
-                        <screen_item>
-                            <resourcetype>0</resourcetype>
-                            <width>900</width>
-                            <height>300</height>
-                            <x>0</x>
-                            <y>3</y>
-                            <colspan>1</colspan>
-                            <rowspan>1</rowspan>
-                            <elements>0</elements>
-                            <valign>0</valign>
-                            <halign>0</halign>
-                            <style>0</style>
-                            <url/>
-                            <dynamic>0</dynamic>
-                            <sort_triggers>0</sort_triggers>
-                            <resource>
-                                <name>Memory Usage</name>
-                                <host>Custom - OS - Linux</host>
-                            </resource>
-                            <max_columns>3</max_columns>
-                            <application/>
-                        </screen_item>
-                        <screen_item>
-                            <resourcetype>0</resourcetype>
-                            <width>900</width>
-                            <height>300</height>
-                            <x>0</x>
-                            <y>4</y>
-                            <colspan>1</colspan>
-                            <rowspan>1</rowspan>
-                            <elements>0</elements>
-                            <valign>0</valign>
-                            <halign>0</halign>
-                            <style>0</style>
-                            <url/>
-                            <dynamic>0</dynamic>
-                            <sort_triggers>0</sort_triggers>
-                            <resource>
-                                <name>Swap Usage</name>
-                                <host>Custom - OS - Linux</host>
-                            </resource>
-                            <max_columns>3</max_columns>
-                            <application/>
-                        </screen_item>
-                        <screen_item>
-                            <resourcetype>0</resourcetype>
-                            <width>900</width>
-                            <height>300</height>
-                            <x>0</x>
-                            <y>5</y>
                             <colspan>1</colspan>
                             <rowspan>1</rowspan>
                             <elements>0</elements>
@@ -3673,6 +3944,94 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
                             <width>900</width>
                             <height>300</height>
                             <x>0</x>
+                            <y>2</y>
+                            <colspan>1</colspan>
+                            <rowspan>1</rowspan>
+                            <elements>0</elements>
+                            <valign>0</valign>
+                            <halign>0</halign>
+                            <style>0</style>
+                            <url/>
+                            <dynamic>0</dynamic>
+                            <sort_triggers>0</sort_triggers>
+                            <resource>
+                                <name>CPU Times</name>
+                                <host>Custom - OS - Linux</host>
+                            </resource>
+                            <max_columns>3</max_columns>
+                            <application/>
+                        </screen_item>
+                        <screen_item>
+                            <resourcetype>1</resourcetype>
+                            <width>900</width>
+                            <height>300</height>
+                            <x>0</x>
+                            <y>3</y>
+                            <colspan>1</colspan>
+                            <rowspan>1</rowspan>
+                            <elements>0</elements>
+                            <valign>0</valign>
+                            <halign>0</halign>
+                            <style>0</style>
+                            <url/>
+                            <dynamic>0</dynamic>
+                            <sort_triggers>0</sort_triggers>
+                            <resource>
+                                <key>system.cpu.intr</key>
+                                <host>Custom - OS - Linux</host>
+                            </resource>
+                            <max_columns>3</max_columns>
+                            <application/>
+                        </screen_item>
+                        <screen_item>
+                            <resourcetype>0</resourcetype>
+                            <width>900</width>
+                            <height>300</height>
+                            <x>0</x>
+                            <y>4</y>
+                            <colspan>1</colspan>
+                            <rowspan>1</rowspan>
+                            <elements>0</elements>
+                            <valign>0</valign>
+                            <halign>0</halign>
+                            <style>0</style>
+                            <url/>
+                            <dynamic>0</dynamic>
+                            <sort_triggers>0</sort_triggers>
+                            <resource>
+                                <name>CPU Context Switches</name>
+                                <host>Custom - OS - Linux</host>
+                            </resource>
+                            <max_columns>3</max_columns>
+                            <application/>
+                        </screen_item>
+                        <screen_item>
+                            <resourcetype>0</resourcetype>
+                            <width>900</width>
+                            <height>300</height>
+                            <x>0</x>
+                            <y>5</y>
+                            <colspan>1</colspan>
+                            <rowspan>1</rowspan>
+                            <elements>0</elements>
+                            <valign>0</valign>
+                            <halign>0</halign>
+                            <style>0</style>
+                            <url/>
+                            <dynamic>0</dynamic>
+                            <sort_triggers>0</sort_triggers>
+                            <resource>
+                                <name>Memory Usage by Userspace</name>
+                                <host>Custom - OS - Linux</host>
+                            </resource>
+                            <max_columns>3</max_columns>
+                            <application/>
+                        </screen_item>
+                        <screen_item>
+                            <resourcetype>0</resourcetype>
+                            <width>900</width>
+                            <height>300</height>
+                            <x>0</x>
                             <y>6</y>
                             <colspan>1</colspan>
                             <rowspan>1</rowspan>
@@ -3684,7 +4043,7 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
                             <dynamic>0</dynamic>
                             <sort_triggers>0</sort_triggers>
                             <resource>
-                                <name>NTP  Sychronisation</name>
+                                <name>Memory Usage</name>
                                 <host>Custom - OS - Linux</host>
                             </resource>
                             <max_columns>3</max_columns>
@@ -3706,6 +4065,50 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
                             <dynamic>0</dynamic>
                             <sort_triggers>0</sort_triggers>
                             <resource>
+                                <name>Swap Usage</name>
+                                <host>Custom - OS - Linux</host>
+                            </resource>
+                            <max_columns>3</max_columns>
+                            <application/>
+                        </screen_item>
+                        <screen_item>
+                            <resourcetype>0</resourcetype>
+                            <width>900</width>
+                            <height>300</height>
+                            <x>0</x>
+                            <y>8</y>
+                            <colspan>1</colspan>
+                            <rowspan>1</rowspan>
+                            <elements>0</elements>
+                            <valign>0</valign>
+                            <halign>0</halign>
+                            <style>0</style>
+                            <url/>
+                            <dynamic>0</dynamic>
+                            <sort_triggers>0</sort_triggers>
+                            <resource>
+                                <name>NTP  Sychronisation</name>
+                                <host>Custom - OS - Linux</host>
+                            </resource>
+                            <max_columns>3</max_columns>
+                            <application/>
+                        </screen_item>
+                        <screen_item>
+                            <resourcetype>0</resourcetype>
+                            <width>900</width>
+                            <height>300</height>
+                            <x>0</x>
+                            <y>9</y>
+                            <colspan>1</colspan>
+                            <rowspan>1</rowspan>
+                            <elements>0</elements>
+                            <valign>0</valign>
+                            <halign>0</halign>
+                            <style>0</style>
+                            <url/>
+                            <dynamic>0</dynamic>
+                            <sort_triggers>0</sort_triggers>
+                            <resource>
                                 <name>MTA Mailqueue</name>
                                 <host>Custom - OS - Linux</host>
                             </resource>
@@ -3717,7 +4120,7 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
                             <width>900</width>
                             <height>200</height>
                             <x>0</x>
-                            <y>8</y>
+                            <y>10</y>
                             <colspan>1</colspan>
                             <rowspan>1</rowspan>
                             <elements>0</elements>
@@ -3739,7 +4142,7 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
                             <width>900</width>
                             <height>300</height>
                             <x>0</x>
-                            <y>9</y>
+                            <y>11</y>
                             <colspan>1</colspan>
                             <rowspan>1</rowspan>
                             <elements>0</elements>
@@ -3761,7 +4164,7 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
                             <width>900</width>
                             <height>300</height>
                             <x>0</x>
-                            <y>10</y>
+                            <y>12</y>
                             <colspan>1</colspan>
                             <rowspan>1</rowspan>
                             <elements>0</elements>
@@ -3773,6 +4176,50 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
                             <sort_triggers>0</sort_triggers>
                             <resource>
                                 <name>Processes</name>
+                                <host>Custom - OS - Linux</host>
+                            </resource>
+                            <max_columns>3</max_columns>
+                            <application/>
+                        </screen_item>
+                        <screen_item>
+                            <resourcetype>0</resourcetype>
+                            <width>900</width>
+                            <height>300</height>
+                            <x>0</x>
+                            <y>13</y>
+                            <colspan>1</colspan>
+                            <rowspan>1</rowspan>
+                            <elements>0</elements>
+                            <valign>0</valign>
+                            <halign>0</halign>
+                            <style>0</style>
+                            <url/>
+                            <dynamic>0</dynamic>
+                            <sort_triggers>0</sort_triggers>
+                            <resource>
+                                <name>File descriptors</name>
+                                <host>Custom - OS - Linux</host>
+                            </resource>
+                            <max_columns>3</max_columns>
+                            <application/>
+                        </screen_item>
+                        <screen_item>
+                            <resourcetype>0</resourcetype>
+                            <width>900</width>
+                            <height>300</height>
+                            <x>0</x>
+                            <y>14</y>
+                            <colspan>1</colspan>
+                            <rowspan>1</rowspan>
+                            <elements>0</elements>
+                            <valign>0</valign>
+                            <halign>0</halign>
+                            <style>0</style>
+                            <url/>
+                            <dynamic>0</dynamic>
+                            <sort_triggers>0</sort_triggers>
+                            <resource>
+                                <name>Swap Usage</name>
                                 <host>Custom - OS - Linux</host>
                             </resource>
                             <max_columns>3</max_columns>
@@ -3804,7 +4251,7 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
                                 <name>Interface {#IFNAME} bits</name>
                                 <host>Custom - OS - Linux</host>
                             </resource>
-                            <max_columns>3</max_columns>
+                            <max_columns>1</max_columns>
                             <application/>
                         </screen_item>
                         <screen_item>
@@ -3858,6 +4305,22 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
     </templates>
     <triggers>
         <trigger>
+            <expression>{Custom - OS - Linux:vfs.file.regexp[/proc/sys/fs/file-nr,&quot;([0-9]+)\s+([0-9]+)\s+([0-9]+)&quot;,,1,2,\1].last()} &gt; (0.9 * {Custom - OS - Linux:kernel.maxfiles.last()})</expression>
+            <recovery_mode>0</recovery_mode>
+            <recovery_expression/>
+            <name>90% of possible file descriptors reached</name>
+            <correlation_mode>0</correlation_mode>
+            <correlation_tag/>
+            <url/>
+            <status>0</status>
+            <priority>3</priority>
+            <description/>
+            <type>0</type>
+            <manual_close>0</manual_close>
+            <dependencies/>
+            <tags/>
+        </trigger>
+        <trigger>
             <expression>({Custom - OS - Linux:kernel.maxproc.last()} * 0.9) &lt; {Custom - OS - Linux:proc.num[].last()}</expression>
             <recovery_mode>0</recovery_mode>
             <recovery_expression/>
@@ -3899,16 +4362,16 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
             <tags/>
         </trigger>
         <trigger>
-            <expression>({Custom - OS - Linux:system.cpu.util[,user,avg1].avg(#10)}+{Custom - OS - Linux:system.cpu.util[,system,avg1].avg(#10)})&gt;90</expression>
+            <expression>({Custom - OS - Linux:system.cpu.util[,iowait,avg1].avg(1h)})&gt;{$IOWAIT_ALERT_LIMIT}</expression>
             <recovery_mode>0</recovery_mode>
             <recovery_expression/>
-            <name>CPU Usage &gt; 90%</name>
+            <name>CPU Usage IO Wait &gt; {$IOWAIT_ALERT_LIMIT}% = {ITEM.VALUE1}</name>
             <correlation_mode>0</correlation_mode>
             <correlation_tag/>
             <url/>
             <status>0</status>
             <priority>2</priority>
-            <description>The average of system and user cpu time is higher than 90%</description>
+            <description>The average of a one hour iowait cpu time is higher than 20%</description>
             <type>0</type>
             <manual_close>0</manual_close>
             <dependencies/>
@@ -3934,7 +4397,7 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
             <expression>{Custom - OS - Linux:icmpping[,1,,,].count(#3,0,&quot;eq&quot;)}=3</expression>
             <recovery_mode>0</recovery_mode>
             <recovery_expression/>
-            <name>ICMP Ping</name>
+            <name>ICMP Ping failed 3 times</name>
             <correlation_mode>0</correlation_mode>
             <correlation_tag/>
             <url/>
@@ -3969,26 +4432,7 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
             <tags/>
         </trigger>
         <trigger>
-            <expression>{Custom - OS - Linux:linux.dmesg.str(ERROR:)}=1</expression>
-            <recovery_mode>2</recovery_mode>
-            <recovery_expression/>
-            <name>Linux Kernel Problems - {ITEM.VALUE1}</name>
-            <correlation_mode>0</correlation_mode>
-            <correlation_tag/>
-            <url/>
-            <status>0</status>
-            <priority>2</priority>
-            <description>A kernel problem occurred.&#13;
-Review dmesg with the timestamps listed in the item.&#13;
-&#13;
-This trigger does not recover automatically, to get rid of this trigger, you have to use the &quot;Close problem&quot;</description>
-            <type>0</type>
-            <manual_close>1</manual_close>
-            <dependencies/>
-            <tags/>
-        </trigger>
-        <trigger>
-            <expression>{Custom - OS - Linux:vfs.file.regmatch[/proc/mdstat,&quot;\[UU*\]&quot;,,].last()}=0</expression>
+            <expression>{Custom - OS - Linux:vfs.file.regmatch[/proc/mdstat,&quot;\[.*_.*\]&quot;,,].last()}=1</expression>
             <recovery_mode>0</recovery_mode>
             <recovery_expression/>
             <name>MD Raid inconsistent devices</name>
@@ -4019,10 +4463,27 @@ This trigger does not recover automatically, to get rid of this trigger, you hav
             <dependencies>
                 <dependency>
                     <name>MD Raid inconsistent devices</name>
-                    <expression>{Custom - OS - Linux:vfs.file.regmatch[/proc/mdstat,&quot;\[UU*\]&quot;,,].last()}=0</expression>
+                    <expression>{Custom - OS - Linux:vfs.file.regmatch[/proc/mdstat,&quot;\[.*_.*\]&quot;,,].last()}=1</expression>
                     <recovery_expression/>
                 </dependency>
             </dependencies>
+            <tags/>
+        </trigger>
+        <trigger>
+            <expression>{Custom - OS - Linux:os.linux.memory.userspace.percent.last()}&gt;{$MEMORY_USERSPACE_USAGE_LIMIT}</expression>
+            <recovery_mode>1</recovery_mode>
+            <recovery_expression>{Custom - OS - Linux:os.linux.memory.userspace.percent.last()} &lt; ({$MEMORY_USERSPACE_USAGE_LIMIT} - 0.5)</recovery_expression>
+            <name>Memory consumption  {ITEM.VALUE1} &gt;  {$MEMORY_USERSPACE_USAGE_LIMIT} %</name>
+            <correlation_mode>0</correlation_mode>
+            <correlation_tag/>
+            <url/>
+            <status>0</status>
+            <priority>1</priority>
+            <description>Memory usage should exceeded {$MEMORY_USERSPACE_USAGE_LIMIT}.&#13;
+If memory usage of userspace processes is too high, this typically leads to bad application performance because no filesystem cache is available.</description>
+            <type>0</type>
+            <manual_close>0</manual_close>
+            <dependencies/>
             <tags/>
         </trigger>
         <trigger>
@@ -4045,7 +4506,7 @@ This trigger does not recover automatically, to get rid of this trigger, you hav
             <expression>{Custom - OS - Linux:nfs.rpc.retransmits.last()}&gt;{$MAXIMUM_NUMBER_RETRANSMISSIONS}</expression>
             <recovery_mode>0</recovery_mode>
             <recovery_expression/>
-            <name>NFS Retransmissions &gt; {$MAXIMUM_NUMBER_RETRANSMISSIONS}</name>
+            <name>NFS Retransmissions - {ITEM.VALUE1} &gt; {$MAXIMUM_NUMBER_RETRANSMISSIONS}</name>
             <correlation_mode>0</correlation_mode>
             <correlation_tag/>
             <url/>
@@ -4094,7 +4555,7 @@ This trigger does not recover automatically, to get rid of this trigger, you hav
             <manual_close>0</manual_close>
             <dependencies>
                 <dependency>
-                    <name>ICMP Ping</name>
+                    <name>ICMP Ping failed 3 times</name>
                     <expression>{Custom - OS - Linux:icmpping[,1,,,].count(#3,0,&quot;eq&quot;)}=3</expression>
                     <recovery_expression/>
                 </dependency>
@@ -4102,10 +4563,10 @@ This trigger does not recover automatically, to get rid of this trigger, you hav
             <tags/>
         </trigger>
         <trigger>
-            <expression>{Custom - OS - Linux:ntpd.peers.goodcount.last()}&lt;= {$MIN_NTP_SERVER_COUNT}</expression>
+            <expression>{Custom - OS - Linux:ntpd.peers.goodcount.last()} &lt; {$MIN_NTP_SERVER_COUNT}</expression>
             <recovery_mode>0</recovery_mode>
             <recovery_expression/>
-            <name>Number of good NTP peers &lt;= {$MIN_NTP_SERVER_COUNT}</name>
+            <name>Number of good NTP peers &lt; {$MIN_NTP_SERVER_COUNT}</name>
             <correlation_mode>0</correlation_mode>
             <correlation_tag/>
             <url/>
@@ -4114,6 +4575,31 @@ This trigger does not recover automatically, to get rid of this trigger, you hav
             <description/>
             <type>0</type>
             <manual_close>0</manual_close>
+            <dependencies>
+                <dependency>
+                    <name>NTP Absolute Time RMS Offset no data</name>
+                    <expression>{Custom - OS - Linux:ntpd.primarypeer.stats[offset].nodata(3600)}=1</expression>
+                    <recovery_expression/>
+                </dependency>
+            </dependencies>
+            <tags/>
+        </trigger>
+        <trigger>
+            <expression>{Custom - OS - Linux:linux.dmesg.str(ERROR:)}=1</expression>
+            <recovery_mode>2</recovery_mode>
+            <recovery_expression/>
+            <name>OS Kernel - {ITEM.VALUE1}</name>
+            <correlation_mode>0</correlation_mode>
+            <correlation_tag/>
+            <url/>
+            <status>0</status>
+            <priority>2</priority>
+            <description>A kernel problem occurred.&#13;
+Review dmesg with the timestamps listed in the item.&#13;
+&#13;
+This trigger does not recover automatically, to get rid of this trigger, you have to use the &quot;Close problem&quot;</description>
+            <type>0</type>
+            <manual_close>1</manual_close>
             <dependencies/>
             <tags/>
         </trigger>
@@ -4128,6 +4614,9 @@ This trigger does not recover automatically, to get rid of this trigger, you hav
             <status>0</status>
             <priority>1</priority>
             <description>This trigger fires if a reboot is required after a system uddate.&#13;
+&#13;
+Rebooting the system is a good idea, bcause this improves security and fixes bug in installed components which cannot be reloaded by a service restart.&#13;
+(livbc-updates, kernel, ...)&#13;
 &#13;
 Remove the flagfile if you decide that no reboot is required (/var/run/reboot-required).</description>
             <type>0</type>
@@ -4184,7 +4673,7 @@ Remove the flagfile if you decide that no reboot is required (/var/run/reboot-re
             <tags/>
         </trigger>
         <trigger>
-            <expression>{Custom - OS - Linux:system.swap.size[,pused].last(0)}&gt;90</expression>
+            <expression>{Custom - OS - Linux:system.swap.size[,pused].last(0)}&gt;3</expression>
             <recovery_mode>0</recovery_mode>
             <recovery_expression/>
             <name>Swap usage &gt; 3%</name>
@@ -4196,7 +4685,13 @@ Remove the flagfile if you decide that no reboot is required (/var/run/reboot-re
             <description>System is in 3% swap. Memory usage is higher than available physical memory.</description>
             <type>0</type>
             <manual_close>0</manual_close>
-            <dependencies/>
+            <dependencies>
+                <dependency>
+                    <name>Swap usage &gt; 60%</name>
+                    <expression>{Custom - OS - Linux:system.swap.size[,pused].last(0)}&gt;60</expression>
+                    <recovery_expression/>
+                </dependency>
+            </dependencies>
             <tags/>
         </trigger>
         <trigger>
@@ -4212,20 +4707,14 @@ Remove the flagfile if you decide that no reboot is required (/var/run/reboot-re
             <description>System is in 90% swap. Memory usage is higher than available physical memory.</description>
             <type>0</type>
             <manual_close>0</manual_close>
-            <dependencies>
-                <dependency>
-                    <name>Swap usage &gt; 3%</name>
-                    <expression>{Custom - OS - Linux:system.swap.size[,pused].last(0)}&gt;90</expression>
-                    <recovery_expression/>
-                </dependency>
-            </dependencies>
+            <dependencies/>
             <tags/>
         </trigger>
         <trigger>
             <expression>({Custom - OS - Linux:system.cpu.load[,avg5].last(0)}&gt;15 and {Custom - OS - Linux:system.cpu.num.last(0)}&lt;3) or ({Custom - OS - Linux:system.cpu.num.last(0)}&gt;2 and ({Custom - OS - Linux:system.cpu.load[,avg5].last(0)}&gt;{Custom - OS - Linux:system.cpu.num.last(0)}*{$MONITOR_LOAD_WARNING_MULT}))</expression>
             <recovery_mode>0</recovery_mode>
             <recovery_expression/>
-            <name>System Load, {ITEM.VALUE1}</name>
+            <name>System Load, {ITEM.LASTVALUE1}</name>
             <correlation_mode>0</correlation_mode>
             <correlation_tag/>
             <url/>
@@ -4254,7 +4743,7 @@ Remove the flagfile if you decide that no reboot is required (/var/run/reboot-re
             <manual_close>0</manual_close>
             <dependencies>
                 <dependency>
-                    <name>ICMP Ping</name>
+                    <name>ICMP Ping failed 3 times</name>
                     <expression>{Custom - OS - Linux:icmpping[,1,,,].count(#3,0,&quot;eq&quot;)}=3</expression>
                     <recovery_expression/>
                 </dependency>
@@ -4274,13 +4763,19 @@ Remove the flagfile if you decide that no reboot is required (/var/run/reboot-re
             <description>No measurement information about agent-status is received in the last {$AGENT_TIMEOUT} seconds</description>
             <type>0</type>
             <manual_close>0</manual_close>
-            <dependencies/>
+            <dependencies>
+                <dependency>
+                    <name>ICMP Ping failed 3 times</name>
+                    <expression>{Custom - OS - Linux:icmpping[,1,,,].count(#3,0,&quot;eq&quot;)}=3</expression>
+                    <recovery_expression/>
+                </dependency>
+            </dependencies>
             <tags/>
         </trigger>
     </triggers>
     <graphs>
         <graph>
-            <name>CPU Context Switches per Second</name>
+            <name>CPU Context Switches</name>
             <width>900</width>
             <height>300</height>
             <yaxismin>0.0000</yaxismin>
@@ -4416,6 +4911,154 @@ Remove the flagfile if you decide that no reboot is required (/var/run/reboot-re
             </graph_items>
         </graph>
         <graph>
+            <name>CPU Times AVG</name>
+            <width>900</width>
+            <height>300</height>
+            <yaxismin>0.0000</yaxismin>
+            <yaxismax>105.0000</yaxismax>
+            <show_work_period>0</show_work_period>
+            <show_triggers>0</show_triggers>
+            <type>0</type>
+            <show_legend>1</show_legend>
+            <show_3d>0</show_3d>
+            <percent_left>0.0000</percent_left>
+            <percent_right>0.0000</percent_right>
+            <ymin_type_1>1</ymin_type_1>
+            <ymax_type_1>0</ymax_type_1>
+            <ymin_item_1>0</ymin_item_1>
+            <ymax_item_1>0</ymax_item_1>
+            <graph_items>
+                <graph_item>
+                    <sortorder>0</sortorder>
+                    <drawtype>0</drawtype>
+                    <color>DD0000</color>
+                    <yaxisside>0</yaxisside>
+                    <calc_fnc>2</calc_fnc>
+                    <type>0</type>
+                    <item>
+                        <host>Custom - OS - Linux</host>
+                        <key>system.cpu.util[,system,avg1]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <drawtype>0</drawtype>
+                    <color>00AA00</color>
+                    <yaxisside>0</yaxisside>
+                    <calc_fnc>2</calc_fnc>
+                    <type>0</type>
+                    <item>
+                        <host>Custom - OS - Linux</host>
+                        <key>system.cpu.util[,user,avg1]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>2</sortorder>
+                    <drawtype>0</drawtype>
+                    <color>CC00CC</color>
+                    <yaxisside>0</yaxisside>
+                    <calc_fnc>2</calc_fnc>
+                    <type>0</type>
+                    <item>
+                        <host>Custom - OS - Linux</host>
+                        <key>system.cpu.util[,interrupt,avg1]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>3</sortorder>
+                    <drawtype>0</drawtype>
+                    <color>00BBBB</color>
+                    <yaxisside>0</yaxisside>
+                    <calc_fnc>2</calc_fnc>
+                    <type>0</type>
+                    <item>
+                        <host>Custom - OS - Linux</host>
+                        <key>system.cpu.util[,iowait,avg1]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>4</sortorder>
+                    <drawtype>0</drawtype>
+                    <color>0000DD</color>
+                    <yaxisside>0</yaxisside>
+                    <calc_fnc>2</calc_fnc>
+                    <type>0</type>
+                    <item>
+                        <host>Custom - OS - Linux</host>
+                        <key>system.cpu.util[,nice,avg1]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>5</sortorder>
+                    <drawtype>0</drawtype>
+                    <color>FF00FF</color>
+                    <yaxisside>0</yaxisside>
+                    <calc_fnc>2</calc_fnc>
+                    <type>0</type>
+                    <item>
+                        <host>Custom - OS - Linux</host>
+                        <key>system.cpu.util[,softirq,avg1]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>6</sortorder>
+                    <drawtype>0</drawtype>
+                    <color>777777</color>
+                    <yaxisside>0</yaxisside>
+                    <calc_fnc>2</calc_fnc>
+                    <type>0</type>
+                    <item>
+                        <host>Custom - OS - Linux</host>
+                        <key>system.cpu.util[,steal,avg1]</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <name>File descriptors</name>
+            <width>900</width>
+            <height>300</height>
+            <yaxismin>0.0000</yaxismin>
+            <yaxismax>100.0000</yaxismax>
+            <show_work_period>1</show_work_period>
+            <show_triggers>1</show_triggers>
+            <type>0</type>
+            <show_legend>1</show_legend>
+            <show_3d>0</show_3d>
+            <percent_left>0.0000</percent_left>
+            <percent_right>0.0000</percent_right>
+            <ymin_type_1>1</ymin_type_1>
+            <ymax_type_1>0</ymax_type_1>
+            <ymin_item_1>0</ymin_item_1>
+            <ymax_item_1>0</ymax_item_1>
+            <graph_items>
+                <graph_item>
+                    <sortorder>0</sortorder>
+                    <drawtype>0</drawtype>
+                    <color>1A7C11</color>
+                    <yaxisside>0</yaxisside>
+                    <calc_fnc>4</calc_fnc>
+                    <type>0</type>
+                    <item>
+                        <host>Custom - OS - Linux</host>
+                        <key>vfs.file.regexp[/proc/sys/fs/file-nr,&quot;([0-9]+)\s+([0-9]+)\s+([0-9]+)&quot;,,1,2,\1]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <drawtype>0</drawtype>
+                    <color>F63100</color>
+                    <yaxisside>0</yaxisside>
+                    <calc_fnc>4</calc_fnc>
+                    <type>0</type>
+                    <item>
+                        <host>Custom - OS - Linux</host>
+                        <key>kernel.maxfiles</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
             <name>Memory Usage</name>
             <width>900</width>
             <height>300</height>
@@ -4479,6 +5122,38 @@ Remove the flagfile if you decide that no reboot is required (/var/run/reboot-re
                     <item>
                         <host>Custom - OS - Linux</host>
                         <key>vm.memory.size[free]</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <name>Memory Usage by Userspace</name>
+            <width>900</width>
+            <height>300</height>
+            <yaxismin>0.0000</yaxismin>
+            <yaxismax>100.0000</yaxismax>
+            <show_work_period>1</show_work_period>
+            <show_triggers>1</show_triggers>
+            <type>0</type>
+            <show_legend>1</show_legend>
+            <show_3d>0</show_3d>
+            <percent_left>0.0000</percent_left>
+            <percent_right>0.0000</percent_right>
+            <ymin_type_1>0</ymin_type_1>
+            <ymax_type_1>0</ymax_type_1>
+            <ymin_item_1>0</ymin_item_1>
+            <ymax_item_1>0</ymax_item_1>
+            <graph_items>
+                <graph_item>
+                    <sortorder>0</sortorder>
+                    <drawtype>0</drawtype>
+                    <color>BB00BB</color>
+                    <yaxisside>0</yaxisside>
+                    <calc_fnc>2</calc_fnc>
+                    <type>0</type>
+                    <item>
+                        <host>Custom - OS - Linux</host>
+                        <key>os.linux.memory.userspace.percent</key>
                     </item>
                 </graph_item>
             </graph_items>

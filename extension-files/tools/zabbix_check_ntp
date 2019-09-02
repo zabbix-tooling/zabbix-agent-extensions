@@ -21,7 +21,8 @@ import os
 
 os.environ["PATH"] = "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/sbin:/usr/X11R6/bin"
 
-cmd = "ntpq -c peers"
+
+cmd = "ntpq -n -c peers"
 
 if len(sys.argv) != 2:
     print(sys.argv[0] + " offset|jitter|delay|count")
@@ -36,12 +37,13 @@ out, err = process.communicate()
 
 for line in out.decode('utf8').splitlines():
     m = re.match(
-        r"^(?P<mode>\*|\+|\o\|x|\.|\#)(.+?)\s+.*(?P<delay>-?\d+\.?\d*)\s+(?P<offset>-?\d+\.?\d*)\s+(?P<jitter>-?\d+\.?\d*)$",
+        r"^(?P<mode>\*|\+|o|x|\.|\#)(.+?)\s+.*(?P<delay>-?\d+\.?\d*)\s+(?P<offset>-?\d+\.?\d*)\s+(?P<jitter>-?\d+\.?\d*)$",
         line)
     if not m:
         continue
 
-    sys.stderr.write("match:%s\n" % line.rstrip())
+    if sys.stderr.isatty():
+        sys.stderr.write("match:%s\n" % line.rstrip())
     server_count += 1
 
     if what in ["offset", "jitter", "delay"] and m.group("mode") == "*":

@@ -27,19 +27,25 @@ assertSuccess(){
 
 
 echo "*** CLEANUP"
-REL="3.2.10-1+xenial"
+REL="3.4.15-1+bionic"
+
+set -x
 sudo dpkg -P zabbix-agent-extensions zabbix-agent
 sudo rm -rf /etc/zabbix_* /var/log/zabbix /var/run/zabbix zabbix-agent_*.deb zabbix-get_*.deb
-wget -c "http://repo.zabbix.com/zabbix/3.2/ubuntu/pool/main/z/zabbix/zabbix-agent_${REL}_amd64.deb"
-wget -c "http://repo.zabbix.com/zabbix/3.2/ubuntu/pool/main/z/zabbix/zabbix-get_${REL}_amd64.deb"
+wget -c "http://repo.zabbix.com/zabbix/3.4/ubuntu/pool/main/z/zabbix/zabbix-agent_${REL}_amd64.deb"
+wget -c "http://repo.zabbix.com/zabbix/3.4/ubuntu/pool/main/z/zabbix/zabbix-get_${REL}_amd64.deb"
 sudo killall -KILL zabbix_agentd
 sudo dpkg -i zabbix-agent_*.deb zabbix-get_*.deb 
 sudo sed  -i '~s,# DebugLevel.*,DebugLevel=2,' /etc/zabbix/zabbix_agentd.conf
-sudo sed  -i '~s,^Server=.*,Server=127.0.0.1' /etc/zabbix/zabbix_agentd.conf
+sudo sed  -i '~s,^Server=.*,Server=127.0.0.1,' /etc/zabbix/zabbix_agentd.conf
+sudo mkdir -m 755  -p /opt/puppetlabs/puppet/cache/state/
+sudo cp extension-files/tools/test/puppet_last_run_summary.yaml /opt/puppetlabs/puppet/cache/state/last_run_summary.yaml
+sudo cp extension-files/tools/test/puppet_last_run_report.yaml /opt/puppetlabs/puppet/cache/state/last_run_report.yaml
+set +x
 
 echo "*** VALIDATIONS"
 COMPILEDIR="$(mktemp -d /tmp/pycompile-XXXXXX)"
-for SCRIPT in $(grep -l "#!/usr/bin/env python3" extension-files/tools/*|sort -u|xargs);
+for SCRIPT in $(grep -l "#!/usr/bin/env python3" extension-files/tools/zabbix_*|sort -u|xargs);
 do
    cp $SCRIPT $COMPILEDIR/
    assertSuccess STOP_ON_ERROR "python3 -m py_compile ${COMPILEDIR}/$(basename $SCRIPT)"
@@ -62,11 +68,18 @@ pkill tail
 assertSuccess STOP_ON_ERROR "zabbix_get -s 127.0.0.1 -k linux.dmesg | tee /dev/stderr | grep -q -P 'OK: ALL OK|ERROR:'" # Without sudo
 assertSuccess STOP_ON_ERROR "zabbix_get -s 127.0.0.1 -k linux.dmesg | tee /dev/stderr | grep -q -P 'OK: ALL OK|ERROR:'" # Without sudo
 assertSuccess STOP_ON_ERROR "zabbix_get -s 127.0.0.1 -k linux.multipath | tee /dev/stderr | grep -q 'OK:'" # With sudo
-assertSuccess STOP_ON_ERROR "zabbix_get -s 127.0.0.1 -k vfs.dev.discovery | tee /dev/stderr | grep -q '#BLOCKDEVICE'" # With sudo
+
 assertSuccess STOP_ON_ERROR "zabbix_get -s 127.0.0.1 -k 'custom.process[zabbix_agentd,minage]'|tee /dev/stderr | grep -q -P '^\d+$'"
 assertSuccess STOP_ON_ERROR "zabbix_get -s 127.0.0.1 -k 'custom.process[zabbix_agentd,maxage]'|tee /dev/stderr | grep -q -P '^\d+$'"
 assertSuccess STOP_ON_ERROR "zabbix_get -s 127.0.0.1 -k 'custom.process[nosuchprocess,maxage]'|tee /dev/stderr | grep -q -P '^\d+$'"
 assertSuccess STOP_ON_ERROR "zabbix_get -s 127.0.0.1 -k 'zabbix.agent_extensions.version'|tee /dev/stderr | grep -q -P '^\d+'"
+assertSuccess STOP_ON_ERROR "zabbix_get -s 127.0.0.1 -k 'puppet[state]'|tee /dev/stderr | grep -q -P '^OK: puppetrun successful, no changes$'"
+assertSuccess STOP_ON_ERROR "zabbix_get -s 127.0.0.1 -k 'puppet[changes,total]'|tee /dev/stderr | grep -q -P '^\d+$'"
+assertSuccess STOP_ON_ERROR "zabbix_get -s 127.0.0.1 -k 'puppet[environment]'|tee /dev/stderr | grep -q -P '^production$'"
+
+assertSuccess STOP_ON_ERROR "zabbix_get -s 127.0.0.1 -k vfs.dev.discovery | tee /dev/stderr | grep -q '#BLOCKDEVICE'"
+assertSuccess STOP_ON_ERROR "zabbix_get -s 127.0.0.1 -k vfs.fs.discovery|grep -v /proc"
+assertSuccess STOP_ON_ERROR "zabbix_get -s 127.0.0.1 -k nfs.rpc.calls|grep -P '^0$'"
 assertSuccess STOP_ON_ERROR 'sudo dpkg -P zabbix-agent-extensions'
 
 echo

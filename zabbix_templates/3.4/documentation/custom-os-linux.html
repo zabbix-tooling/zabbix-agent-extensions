@@ -42,31 +42,43 @@
 <td>{$DISK_HIGH_READ_IOPS_LIMIT}</td><td>10000</td>
 </tr>
 <tr>
-<td>{$DISK_HIGH_WRITE_IOPS_LIMIT}</td><td>500</td>
+<td>{$DISK_HIGH_WRITE_IOPS_LIMIT}</td><td>10000</td>
 </tr>
 <tr>
 <td>{$DISK_IOPS_LIMIT_MEASURES}</td><td>5</td>
 </tr>
 <tr>
-<td>{$DISK_USAGE_ABOVE_1TB_MINFREE_GBYTES}</td><td>100</td>
+<td>{$DISK_USAGE_ABOVE_1TB_MINFREE_GBYTES}</td><td>50</td>
 </tr>
 <tr>
 <td>{$DISK_USAGE_PERCENT_ALARM}</td><td>97</td>
 </tr>
 <tr>
+<td>{$DISK_USAGE_PERCENT_WARN}</td><td>95</td>
+</tr>
+<tr>
+<td>{$IOWAIT_ALERT_LIMIT}</td><td>20</td>
+</tr>
+<tr>
 <td>{$MAXIMUM_NUMBER_RETRANSMISSIONS}</td><td>1</td>
+</tr>
+<tr>
+<td>{$MAX_NETWORK_ERRORS_PERIOD}</td><td>1</td>
 </tr>
 <tr>
 <td>{$MAX_NTP_OFFSET_MS}</td><td>100</td>
 </tr>
 <tr>
-<td>{$MIN_NTP_SERVER_COUNT}</td><td>1</td>
+<td>{$MEMORY_USERSPACE_USAGE_LIMIT}</td><td>98</td>
+</tr>
+<tr>
+<td>{$MIN_NTP_SERVER_COUNT}</td><td>3</td>
 </tr>
 <tr>
 <td>{$MONITOR_LOAD_WARNING_MULT}</td><td>5</td>
 </tr>
 <tr>
-<td>{$MONITOR_TIMEOUT}</td><td>14400</td>
+<td>{$MONITOR_TIMEOUT}</td><td>900</td>
 </tr>
 </table>
 <h1>Static Elements</h1>
@@ -74,6 +86,9 @@
 <table class="pretty">
 <tr>
 <th>Name</th><th>Description</th><th>Priority</th><th>Expression</th><th>Dependencies</th>
+</tr>
+<tr>
+<td>90% of possible file descriptors reached</td><td></td><td style="background-color:#FF0000;">Average</td><td><tt>{Custom - OS - Linux:vfs.file.regexp[/proc/sys/fs/file-nr,"([0-9]+)\s+([0-9]+)\s+([0-9]+)",,1,2,\1].last()} &gt; (0.9 * {Custom - OS - Linux:kernel.maxfiles.last()})</tt></td><td><tt></tt></td>
 </tr>
 <tr>
 <td>90% of possible processes reached</td><td></td><td style="background-color:#FF0000;">Average</td><td><tt>({Custom - OS - Linux:kernel.maxproc.last()} * 0.9) &lt; {Custom - OS - Linux:proc.num[].last()}</tt></td><td><tt></tt></td>
@@ -91,50 +106,58 @@
  B: Number of failed paths</td><td style="background-color:#FF0000;">Average</td><td><tt>{Custom - OS - Linux:linux.multipath.str(ERROR)}&lt;&gt;0</tt></td><td><tt></tt></td>
 </tr>
 <tr>
-<td>CPU Usage &gt; 90%</td><td>The average of system and user cpu time is higher than 90%</td><td style="background-color:#FFFF00;">Warning</td><td><tt>({Custom - OS - Linux:system.cpu.util[,user,avg1].avg(#10)}+{Custom - OS - Linux:system.cpu.util[,system,avg1].avg(#10)})&gt;90</tt></td><td><tt></tt></td>
+<td>CPU Usage IO Wait &gt; {$IOWAIT_ALERT_LIMIT}% = {ITEM.VALUE1}</td><td>The average of a one hour iowait cpu time is higher than 20%</td><td style="background-color:#FFFF00;">Warning</td><td><tt>({Custom - OS - Linux:system.cpu.util[,iowait,avg1].avg(1h)})&gt;{$IOWAIT_ALERT_LIMIT}</tt></td><td><tt></tt></td>
 </tr>
 <tr>
 <td>Cron Daemon</td><td>SMTP Daemon is not running.</td><td style="background-color:#FF0000;">Average</td><td><tt>({Custom - OS - Linux:proc.num[crond,,,].last(0)}=0) and ({Custom - OS - Linux:proc.num[cron,,,].last(0)}=0)</tt></td><td><tt></tt></td>
 </tr>
 <tr>
-<td>ICMP Ping</td><td>Host is not reachable by a icmp-echo request for the last three measures or not measurement data arrived in the last 900 seconds(15min).</td><td style="background-color:#FF0000;">High</td><td><tt>{Custom - OS - Linux:icmpping[,1,,,].count(#3,0,"eq")}=3</tt></td><td><tt>ICMP Ping no data for {$MONITOR_TIMEOUT} seconds<br>
+<td>ICMP Ping failed 3 times</td><td>Host is not reachable by a icmp-echo request for the last three measures or not measurement data arrived in the last 900 seconds(15min).</td><td style="background-color:#FF0000;">High</td><td><tt>{Custom - OS - Linux:icmpping[,1,,,].count(#3,0,"eq")}=3</tt></td><td><tt>ICMP Ping no data for {$MONITOR_TIMEOUT} seconds<br>
 </tt></td>
 </tr>
 <tr>
 <td>ICMP Ping no data for {$MONITOR_TIMEOUT} seconds</td><td>Host is not reachable by a icmp-echo request for the last three measures or not measurement.</td><td style="background-color:#FF0000;">Average</td><td><tt>{Custom - OS - Linux:icmpping[,1,,,].nodata({$MONITOR_TIMEOUT})}=1</tt></td><td><tt></tt></td>
 </tr>
 <tr>
-<td>Linux Kernel Problems - {ITEM.VALUE1}</td><td>A kernel problem occurred.&#13;
-Review dmesg with the timestamps listed in the item.&#13;
-&#13;
-This trigger does not recover automatically, to get rid of this trigger, you have to use the "Close problem"</td><td style="background-color:#FFFF00;">Warning</td><td><tt>{Custom - OS - Linux:linux.dmesg.str(ERROR:)}=1</tt></td><td><tt></tt></td>
-</tr>
-<tr>
-<td>MD Raid inconsistent devices</td><td>There are inconsistent devices</td><td style="background-color:#FF0000;">Average</td><td><tt>{Custom - OS - Linux:vfs.file.regmatch[/proc/mdstat,"\[UU*\]",,].last()}=0</tt></td><td><tt></tt></td>
+<td>MD Raid inconsistent devices</td><td>There are inconsistent devices</td><td style="background-color:#FF0000;">Average</td><td><tt>{Custom - OS - Linux:vfs.file.regmatch[/proc/mdstat,"\[.*_.*\]",,].last()}=1</tt></td><td><tt></tt></td>
 </tr>
 <tr>
 <td>MD Raid synchronous activity</td><td>Sequential raid activity in progress</td><td style="background-color:#FFFF00;">Information</td><td><tt>{Custom - OS - Linux:vfs.file.regmatch[/proc/mdstat,"finish",,].last()}=1</tt></td><td><tt>MD Raid inconsistent devices<br>
 </tt></td>
 </tr>
 <tr>
+<td>Memory consumption  {ITEM.VALUE1} &gt;  {$MEMORY_USERSPACE_USAGE_LIMIT} %</td><td>Memory usage should exceeded {$MEMORY_USERSPACE_USAGE_LIMIT}.&#13;
+If memory usage of userspace processes is too high, this typically leads to bad application performance because no filesystem cache is available.</td><td style="background-color:#FFFF00;">Information</td><td><tt>{Custom - OS - Linux:os.linux.memory.userspace.percent.last()}&gt;{$MEMORY_USERSPACE_USAGE_LIMIT}</tt></td><td><tt></tt></td>
+</tr>
+<tr>
 <td>MTA Mailq Total Messages</td><td></td><td style="background-color:#FFFF00;">Warning</td><td><tt>{Custom - OS - Linux:mailq.count.general.avg(1200)}&gt;1500 and ({Custom - OS - Linux:mailq.count.general.avg(1200)}&gt;{Custom - OS - Linux:mailq.count.general.avg(2400)})</tt></td><td><tt></tt></td>
 </tr>
 <tr>
-<td>NFS Retransmissions &gt; {$MAXIMUM_NUMBER_RETRANSMISSIONS}</td><td></td><td style="background-color:#FFFF00;">Information</td><td><tt>{Custom - OS - Linux:nfs.rpc.retransmits.last()}&gt;{$MAXIMUM_NUMBER_RETRANSMISSIONS}</tt></td><td><tt></tt></td>
+<td>NFS Retransmissions - {ITEM.VALUE1} &gt; {$MAXIMUM_NUMBER_RETRANSMISSIONS}</td><td></td><td style="background-color:#FFFF00;">Information</td><td><tt>{Custom - OS - Linux:nfs.rpc.retransmits.last()}&gt;{$MAXIMUM_NUMBER_RETRANSMISSIONS}</tt></td><td><tt></tt></td>
 </tr>
 <tr>
 <td>NTP Absolute RMS Time Offset &gt;  {$MAX_NTP_OFFSET_MS} ms</td><td>Time difference between the host and the active ntp peer is greater than {$MAX_NTP_OFFSET}</td><td style="background-color:#FFFF00;">Warning</td><td><tt>{Custom - OS - Linux:ntpd.primarypeer.stats[offset].last()} &gt; {$MAX_NTP_OFFSET_MS} or ((-1 * {Custom - OS - Linux:ntpd.primarypeer.stats[offset].last()}) &gt; {$MAX_NTP_OFFSET_MS})</tt></td><td><tt>NTP Absolute Time RMS Offset no data<br>
 </tt></td>
 </tr>
 <tr>
-<td>NTP Absolute Time RMS Offset no data</td><td>No ntp time information</td><td style="background-color:#FFFF00;">Warning</td><td><tt>{Custom - OS - Linux:ntpd.primarypeer.stats[offset].nodata(3600)}=1</tt></td><td><tt>ICMP Ping<br>
+<td>NTP Absolute Time RMS Offset no data</td><td>No ntp time information</td><td style="background-color:#FFFF00;">Warning</td><td><tt>{Custom - OS - Linux:ntpd.primarypeer.stats[offset].nodata(3600)}=1</tt></td><td><tt>ICMP Ping failed 3 times<br>
 </tt></td>
 </tr>
 <tr>
-<td>Number of good NTP peers &lt;= {$MIN_NTP_SERVER_COUNT}</td><td></td><td style="background-color:#FFFF00;">Warning</td><td><tt>{Custom - OS - Linux:ntpd.peers.goodcount.last()}&lt;= {$MIN_NTP_SERVER_COUNT}</tt></td><td><tt></tt></td>
+<td>Number of good NTP peers &lt; {$MIN_NTP_SERVER_COUNT}</td><td></td><td style="background-color:#FFFF00;">Warning</td><td><tt>{Custom - OS - Linux:ntpd.peers.goodcount.last()} &lt; {$MIN_NTP_SERVER_COUNT}</tt></td><td><tt>NTP Absolute Time RMS Offset no data<br>
+</tt></td>
+</tr>
+<tr>
+<td>OS Kernel - {ITEM.VALUE1}</td><td>A kernel problem occurred.&#13;
+Review dmesg with the timestamps listed in the item.&#13;
+&#13;
+This trigger does not recover automatically, to get rid of this trigger, you have to use the "Close problem"</td><td style="background-color:#FFFF00;">Warning</td><td><tt>{Custom - OS - Linux:linux.dmesg.str(ERROR:)}=1</tt></td><td><tt></tt></td>
 </tr>
 <tr>
 <td>Reboot required</td><td>This trigger fires if a reboot is required after a system uddate.&#13;
+&#13;
+Rebooting the system is a good idea, bcause this improves security and fixes bug in installed components which cannot be reloaded by a service restart.&#13;
+(livbc-updates, kernel, ...)&#13;
 &#13;
 Remove the flagfile if you decide that no reboot is required (/var/run/reboot-required).</td><td style="background-color:#FFFF00;">Information</td><td><tt>{Custom - OS - Linux:vfs.file.exists[/var/run/reboot-required].last()}=1</tt></td><td><tt></tt></td>
 </tr>
@@ -148,23 +171,24 @@ Remove the flagfile if you decide that no reboot is required (/var/run/reboot-re
 <td>SSH server</td><td></td><td style="background-color:#FF0000;">Average</td><td><tt>{Custom - OS - Linux:net.tcp.service[ssh,,22].count(#3,0,"eq")}=3</tt></td><td><tt></tt></td>
 </tr>
 <tr>
-<td>Swap usage &gt; 3%</td><td>System is in 3% swap. Memory usage is higher than available physical memory.</td><td style="background-color:#FFFF00;">Information</td><td><tt>{Custom - OS - Linux:system.swap.size[,pused].last(0)}&gt;90</tt></td><td><tt></tt></td>
-</tr>
-<tr>
-<td>Swap usage &gt; 60%</td><td>System is in 90% swap. Memory usage is higher than available physical memory.</td><td style="background-color:#FF0000;">Average</td><td><tt>{Custom - OS - Linux:system.swap.size[,pused].last(0)}&gt;60</tt></td><td><tt>Swap usage &gt; 3%<br>
+<td>Swap usage &gt; 3%</td><td>System is in 3% swap. Memory usage is higher than available physical memory.</td><td style="background-color:#FFFF00;">Information</td><td><tt>{Custom - OS - Linux:system.swap.size[,pused].last(0)}&gt;3</tt></td><td><tt>Swap usage &gt; 60%<br>
 </tt></td>
 </tr>
 <tr>
-<td>System Load, {ITEM.VALUE1}</td><td>For systems with 1 or 2 CPUs send alerts by a 5-min Load greater 15.&#13;
+<td>Swap usage &gt; 60%</td><td>System is in 90% swap. Memory usage is higher than available physical memory.</td><td style="background-color:#FF0000;">Average</td><td><tt>{Custom - OS - Linux:system.swap.size[,pused].last(0)}&gt;60</tt></td><td><tt></tt></td>
+</tr>
+<tr>
+<td>System Load, {ITEM.LASTVALUE1}</td><td>For systems with 1 or 2 CPUs send alerts by a 5-min Load greater 15.&#13;
  For systems with more than 2 CPUS send alerts by a 5-min Load greater than numer_of_cpus*{$MONITOR_LOAD_WARNING_MULT}</td><td style="background-color:#FFFF00;">Warning</td><td><tt>({Custom - OS - Linux:system.cpu.load[,avg5].last(0)}&gt;15 and {Custom - OS - Linux:system.cpu.num.last(0)}&lt;3) or ({Custom - OS - Linux:system.cpu.num.last(0)}&gt;2 and ({Custom - OS - Linux:system.cpu.load[,avg5].last(0)}&gt;{Custom - OS - Linux:system.cpu.num.last(0)}*{$MONITOR_LOAD_WARNING_MULT}))</tt></td><td><tt></tt></td>
 </tr>
 <tr>
 <td>Zabbix Agent Ping</td><td>Zabbix agent does not respond to a ping request in the last two calls or no information about &#13;
- agent-status is received in the last 30 minutes.</td><td style="background-color:#FF0000;">High</td><td><tt>{Custom - OS - Linux:agent.ping.count(#3,0,"eq")}=3</tt></td><td><tt>ICMP Ping<br>
+ agent-status is received in the last 30 minutes.</td><td style="background-color:#FF0000;">High</td><td><tt>{Custom - OS - Linux:agent.ping.count(#3,0,"eq")}=3</tt></td><td><tt>ICMP Ping failed 3 times<br>
 </tt></td>
 </tr>
 <tr>
-<td>Zabbix Agent Ping no data for {$MONITOR_TIMEOUT} seconds</td><td>No measurement information about agent-status is received in the last {$AGENT_TIMEOUT} seconds</td><td style="background-color:#FF0000;">Average</td><td><tt>{Custom - OS - Linux:agent.ping.nodata({$MONITOR_TIMEOUT})}=1</tt></td><td><tt></tt></td>
+<td>Zabbix Agent Ping no data for {$MONITOR_TIMEOUT} seconds</td><td>No measurement information about agent-status is received in the last {$AGENT_TIMEOUT} seconds</td><td style="background-color:#FF0000;">Average</td><td><tt>{Custom - OS - Linux:agent.ping.nodata({$MONITOR_TIMEOUT})}=1</tt></td><td><tt>ICMP Ping failed 3 times<br>
+</tt></td>
 </tr>
 </table>
 <h2>Graph Overview</h2>
@@ -173,7 +197,7 @@ Remove the flagfile if you decide that no reboot is required (/var/run/reboot-re
 <th>Name</th><th>Elements</th>
 </tr>
 <tr>
-<td>CPU Context Switches per Second</td><td><tt>system.cpu.switches<br>
+<td>CPU Context Switches</td><td><tt>system.cpu.switches<br>
 </tt></td>
 </tr>
 <tr>
@@ -181,7 +205,19 @@ Remove the flagfile if you decide that no reboot is required (/var/run/reboot-re
 </tt></td>
 </tr>
 <tr>
+<td>CPU Times AVG</td><td><tt>system.cpu.util[,system,avg1]<br>system.cpu.util[,user,avg1]<br>system.cpu.util[,interrupt,avg1]<br>system.cpu.util[,iowait,avg1]<br>system.cpu.util[,nice,avg1]<br>system.cpu.util[,softirq,avg1]<br>system.cpu.util[,steal,avg1]<br>
+</tt></td>
+</tr>
+<tr>
+<td>File descriptors</td><td><tt>vfs.file.regexp[/proc/sys/fs/file-nr,"([0-9]+)\s+([0-9]+)\s+([0-9]+)",,1,2,\1]<br>kernel.maxfiles<br>
+</tt></td>
+</tr>
+<tr>
 <td>Memory Usage</td><td><tt>os.linux.memory.userspace<br>vm.memory.size[buffers]<br>vm.memory.size[cached]<br>vm.memory.size[free]<br>
+</tt></td>
+</tr>
+<tr>
+<td>Memory Usage by Userspace</td><td><tt>os.linux.memory.userspace.percent<br>
 </tt></td>
 </tr>
 <tr>
@@ -228,6 +264,11 @@ Remove the flagfile if you decide that no reboot is required (/var/run/reboot-re
 <td>
 <p class="desc">Simple check</p>
 </td><td>ICMP Ping</td><td><tt>icmpping[,1,,,]</tt></td><td></td><td>2m</td><td>1w</td><td>365d</td>
+</tr>
+<tr>
+<td>
+<p class="desc">Zabbix Agent (active)</p>
+</td><td>Number of maximum open file descriptors</td><td><tt>kernel.maxfiles</tt></td><td></td><td>1h</td><td>1d</td><td>14d</td>
 </tr>
 <tr>
 <td>
@@ -284,22 +325,27 @@ A man with one watch knows what time it is. A man with two watches is never sure
 <tr>
 <td>
 <p class="desc">Zabbix Agent (active)</p>
-</td><td>NTP Primary Peer Delay</td><td><tt>ntpd.primarypeer.stats[delay]</tt></td><td>Round trip communication delay to the remote peer or server (milliseconds)</td><td>90s</td><td>5d</td><td>90d</td>
+</td><td>NTP Primary Peer Delay</td><td><tt>ntpd.primarypeer.stats[delay]</tt></td><td>Round trip communication delay to the remote peer or server (milliseconds)</td><td>120s</td><td>5d</td><td>90d</td>
 </tr>
 <tr>
 <td>
 <p class="desc">Zabbix Agent (active)</p>
-</td><td>NTP Primary Peer RMS Jitter</td><td><tt>ntpd.primarypeer.stats[jitter]</tt></td><td>Mean deviation (jitter) in the time reported for that remote peer or server (RMS of difference of multiple time samples, milliseconds)</td><td>90s</td><td>5d</td><td>90d</td>
+</td><td>NTP Primary Peer RMS Jitter</td><td><tt>ntpd.primarypeer.stats[jitter]</tt></td><td>Mean deviation (jitter) in the time reported for that remote peer or server (RMS of difference of multiple time samples, milliseconds)</td><td>120s</td><td>5d</td><td>90d</td>
 </tr>
 <tr>
 <td>
 <p class="desc">Zabbix Agent (active)</p>
-</td><td>NTP Primary Peer RMS Offset</td><td><tt>ntpd.primarypeer.stats[offset]</tt></td><td>Mean offset (phase) in the times reported between this local host and the remote peer or server (RMS, milliseconds)</td><td>90s</td><td>5d</td><td>90d</td>
+</td><td>NTP Primary Peer RMS Offset</td><td><tt>ntpd.primarypeer.stats[offset]</tt></td><td>Mean offset (phase) in the times reported between this local host and the remote peer or server (RMS, milliseconds)</td><td>120s</td><td>5d</td><td>90d</td>
 </tr>
 <tr>
 <td>
 <p class="desc">Calculated</p>
 </td><td>Memory in Userspace</td><td><tt>os.linux.memory.userspace</tt></td><td></td><td>2m</td><td>2w</td><td>365d</td>
+</tr>
+<tr>
+<td>
+<p class="desc">Calculated</p>
+</td><td>Memory in userspace percentage</td><td><tt>os.linux.memory.userspace.percent</tt></td><td></td><td>2m</td><td>2w</td><td>365d</td>
 </tr>
 <tr>
 <td>
@@ -424,6 +470,11 @@ A man with one watch knows what time it is. A man with two watches is never sure
 <tr>
 <td>
 <p class="desc">Zabbix Agent (active)</p>
+</td><td>Number of current open file descriptors</td><td><tt>vfs.file.regexp[/proc/sys/fs/file-nr,"([0-9]+)\s+([0-9]+)\s+([0-9]+)",,1,2,\1]</tt></td><td></td><td>240</td><td>3d</td><td>14d</td>
+</tr>
+<tr>
+<td>
+<p class="desc">Zabbix Agent (active)</p>
 </td><td>MD Raid synchronous activity</td><td><tt>vfs.file.regmatch[/proc/mdstat,"finish",,]</tt></td><td>See /proc/mdstat&#13;
 &#13;
 Manual Check: &#13;
@@ -435,7 +486,7 @@ Recovery:&#13;
 <tr>
 <td>
 <p class="desc">Zabbix Agent (active)</p>
-</td><td>MD Raid Inconsistent Devices</td><td><tt>vfs.file.regmatch[/proc/mdstat,"\[UU*\]",,]</tt></td><td>There are inconsistent devices.&#13;
+</td><td>MD Raid Inconsistent Devices</td><td><tt>vfs.file.regmatch[/proc/mdstat,"\[.*_.*\]",,]</tt></td><td>There are inconsistent devices.&#13;
 &#13;
 This looks like this:&#13;
 &#13;
@@ -491,7 +542,7 @@ md1 : active raid1 sdb2[2] sda2[0]&#13;
 </td>
 </tr>
 <tr>
-<td>Delay</td><td>10m</td>
+<td>Delay</td><td>1h</td>
 </tr>
 </table>
 <h2>Trigger Overview</h2>
@@ -500,7 +551,10 @@ md1 : active raid1 sdb2[2] sda2[0]&#13;
 <th>Name</th><th>Description</th><th>Priority</th><th>Expression</th><th>Dependencies</th>
 </tr>
 <tr>
-<td>Interface {#IFNAME} errors</td><td>There are interface errors, check your network equipment</td><td style="background-color:#FFFF00;">Warning</td><td><tt>(({Custom - OS - Linux:net.if.in[{#IFNAME},errors].last(0)}&gt;0) or ({Custom - OS - Linux:net.if.out[{#IFNAME},errors].last(0)}&gt;0))</tt></td><td><tt></tt></td>
+<td>Interface {#IFNAME} errors : {ITEM.LASTVALUE1}/{ITEM.LASTVALUE2} (in/out)</td><td>There are interface errors, check your network equipment</td><td style="background-color:#FFFF00;">Warning</td><td><tt>(({Custom - OS - Linux:net.if.in[{#IFNAME},errors].last(0)}&gt;0) or ({Custom - OS - Linux:net.if.out[{#IFNAME},errors].last(0)}&gt;0))</tt></td><td><tt></tt></td>
+</tr>
+<tr>
+<td>Interface {#IFNAME} errors : {ITEM.LASTVALUE1}/{ITEM.LASTVALUE2} (in/out)</td><td>There are interface errors, check your network equipment</td><td style="background-color:#FFFF00;">Warning</td><td><tt>(({Custom - OS - Linux:net.if.in[{#IFNAME},errors].last(0)}&gt;0) or ({Custom - OS - Linux:net.if.out[{#IFNAME},errors].last(0)}&gt;{$MAX_NETWORK_ERRORS_PERIOD}))</tt></td><td><tt></tt></td>
 </tr>
 </table>
 <h2>Graph Overview</h2>
@@ -529,32 +583,32 @@ md1 : active raid1 sdb2[2] sda2[0]&#13;
 <tr>
 <td>
 <p class="desc">Zabbix Agent (active)</p>
-</td><td>Interface {#IFNAME} Bits Inbound</td><td><tt>net.if.in[{#IFNAME},bytes]</tt></td><td></td><td>5m</td><td>30d</td><td>365d</td>
+</td><td>Net {#IFNAME} Bits In</td><td><tt>net.if.in[{#IFNAME},bytes]</tt></td><td></td><td>5m</td><td>30d</td><td>365d</td>
 </tr>
 <tr>
 <td>
 <p class="desc">Zabbix Agent (active)</p>
-</td><td>Interface $1 Errors Inbound</td><td><tt>net.if.in[{#IFNAME},errors]</tt></td><td></td><td>5m</td><td>90d</td><td>365d</td>
+</td><td>Net $1 Errors In</td><td><tt>net.if.in[{#IFNAME},errors]</tt></td><td></td><td>5m</td><td>90d</td><td>365d</td>
 </tr>
 <tr>
 <td>
 <p class="desc">Zabbix Agent (active)</p>
-</td><td>Interface {#IFNAME} Packets Inbound</td><td><tt>net.if.in[{#IFNAME},packets]</tt></td><td></td><td>5m</td><td>30d</td><td>365d</td>
+</td><td>Net {#IFNAME} Packets In</td><td><tt>net.if.in[{#IFNAME},packets]</tt></td><td></td><td>5m</td><td>30d</td><td>365d</td>
 </tr>
 <tr>
 <td>
 <p class="desc">Zabbix Agent (active)</p>
-</td><td>Interface {#IFNAME} Bits Outbound</td><td><tt>net.if.out[{#IFNAME},bytes]</tt></td><td></td><td>5m</td><td>30d</td><td>365d</td>
+</td><td>Net {#IFNAME} Bits Out</td><td><tt>net.if.out[{#IFNAME},bytes]</tt></td><td></td><td>5m</td><td>30d</td><td>365d</td>
 </tr>
 <tr>
 <td>
 <p class="desc">Zabbix Agent (active)</p>
-</td><td>Interface $1 Errors Outbound</td><td><tt>net.if.out[{#IFNAME},errors]</tt></td><td></td><td>5m</td><td>90d</td><td>365d</td>
+</td><td>Net $1 Errors Out</td><td><tt>net.if.out[{#IFNAME},errors]</tt></td><td></td><td>5m</td><td>90d</td><td>365d</td>
 </tr>
 <tr>
 <td>
 <p class="desc">Zabbix Agent (active)</p>
-</td><td>Interface {#IFNAME} Packets Outbound</td><td><tt>net.if.out[{#IFNAME},packets]</tt></td><td></td><td>5m</td><td>30d</td><td>365d</td>
+</td><td>Net {#IFNAME} Packets Out</td><td><tt>net.if.out[{#IFNAME},packets]</tt></td><td></td><td>5m</td><td>30d</td><td>365d</td>
 </tr>
 </table>
 <h1>Discovery rule "Block Device discovery"</h1>
@@ -583,10 +637,10 @@ md1 : active raid1 sdb2[2] sda2[0]&#13;
 <th>Name</th><th>Description</th><th>Priority</th><th>Expression</th><th>Dependencies</th>
 </tr>
 <tr>
-<td>Blockdevice {#BLOCKDEVICE} read limit {$DISK_HIGH_READ_IOPS_LIMIT}/sec reached, currently {ITEM.VALUE1}/sec</td><td>This trigger alerts disks which are consuming more than the configured IOPs limit. You can use this to discover systems high high read rates.</td><td style="background-color:#FFFF00;">Information</td><td><tt>{Custom - OS - Linux:vfs.dev.read[{#BLOCKDEVICE},ops,avg1].avg({$DISK_IOPS_LIMIT_MEASURES})}&gt; {$DISK_HIGH_READ_IOPS_LIMIT}</tt></td><td><tt></tt></td>
+<td>Blockdevice {#BLOCKDEVICE} read limit {$DISK_HIGH_READ_IOPS_LIMIT}/sec reached, currently {ITEM.LASTVALUE1}/sec</td><td>This trigger alerts disks which are consuming more than the configured IOPs limit. You can use this to discover systems high high read rates.</td><td style="background-color:#FFFF00;">Information</td><td><tt>{Custom - OS - Linux:vfs.dev.read[{#BLOCKDEVICE},ops,avg1].avg({$DISK_IOPS_LIMIT_MEASURES})}&gt; {$DISK_HIGH_READ_IOPS_LIMIT}</tt></td><td><tt></tt></td>
 </tr>
 <tr>
-<td>Blockdevice {#BLOCKDEVICE} write limit {$DISK_HIGH_WRITE_IOPS_LIMIT}/sec reached, currently {ITEM.VALUE1}/sec</td><td>This trigger alerts disks which are consuming more than the configured IOPs limit. You can use this to discover systems high high write rates.</td><td style="background-color:#FFFF00;">Information</td><td><tt>{Custom - OS - Linux:vfs.dev.write[{#BLOCKDEVICE},ops,avg1].avg({$DISK_IOPS_LIMIT_MEASURES})}&gt; {$DISK_HIGH_WRITE_IOPS_LIMIT}</tt></td><td><tt></tt></td>
+<td>Blockdevice {#BLOCKDEVICE} write limit {$DISK_HIGH_WRITE_IOPS_LIMIT}/sec reached, currently {ITEM.LASTVALUE1}/sec</td><td>This trigger alerts disks which are consuming more than the configured IOPs limit. You can use this to discover systems high high write rates.</td><td style="background-color:#FFFF00;">Information</td><td><tt>{Custom - OS - Linux:vfs.dev.write[{#BLOCKDEVICE},ops,avg1].avg({$DISK_IOPS_LIMIT_MEASURES})}&gt; {$DISK_HIGH_WRITE_IOPS_LIMIT}</tt></td><td><tt></tt></td>
 </tr>
 </table>
 <h2>Graph Overview</h2>
@@ -646,7 +700,7 @@ md1 : active raid1 sdb2[2] sda2[0]&#13;
 </td>
 </tr>
 <tr>
-<td>Delay</td><td>1h</td>
+<td>Delay</td><td>10m</td>
 </tr>
 </table>
 <h2>Trigger Overview</h2>
@@ -655,15 +709,25 @@ md1 : active raid1 sdb2[2] sda2[0]&#13;
 <th>Name</th><th>Description</th><th>Priority</th><th>Expression</th><th>Dependencies</th>
 </tr>
 <tr>
-<td>Filesystem inode usage for {#FSNAME} &gt; {$DISK_USAGE_PERCENT_ALARM}% =&gt;  {ITEM.VALUE1}</td><td>Partition is running out of inodes. The volume contains to much files. Please increase volume size, delete unnecessary files and inform application owner.</td><td style="background-color:#FF0000;">Average</td><td><tt>{Custom - OS - Linux:vfs.fs.inode[{#FSNAME},pused].last(0)}&gt;{$DISK_USAGE_PERCENT_ALARM}</tt></td><td><tt></tt></td>
+<td>Filesystem inode usage for {#FSNAME} &gt; {$DISK_USAGE_PERCENT_ALARM}% =&gt;  {ITEM.LASTVALUE1}</td><td>Partition is running out of inodes. The volume contains to much files. Please increase volume size, delete unnecessary files and inform application owner.</td><td style="background-color:#FF0000;">Average</td><td><tt>{Custom - OS - Linux:vfs.fs.inode[{#FSNAME},pused].last(0)}&gt;{$DISK_USAGE_PERCENT_ALARM}</tt></td><td><tt>Filesystem inode WARNING usage for {#FSNAME} &gt; {$DISK_USAGE_PERCENT_WARN}% =&gt;  {ITEM.LASTVALUE1}<br>
+</tt></td>
 </tr>
 <tr>
-<td>Filesystem space usage for {#FSNAME} &gt; {$DISK_USAGE_PERCENT_ALARM}% or free space &lt; {$DISK_USAGE_ABOVE_1TB_MINFREE_GBYTES}GB =&gt; {ITEM.VALUE1}</td><td>Partition is running out of space. The volume contains to much data. Please increase volume size, delete unnecessary files or inform application owner.&#13;
+<td>Filesystem inode WARNING usage for {#FSNAME} &gt; {$DISK_USAGE_PERCENT_WARN}% =&gt;  {ITEM.LASTVALUE1}</td><td>Partition is running out of inodes. The volume contains to much files. Please increase volume size, delete unnecessary files and inform application owner.</td><td style="background-color:#FFFF00;">Warning</td><td><tt>{Custom - OS - Linux:vfs.fs.inode[{#FSNAME},pused].last(0)}&gt;{$DISK_USAGE_PERCENT_WARN}</tt></td><td><tt></tt></td>
+</tr>
+<tr>
+<td>Filesystem space {#FSNAME} free space &lt;  {$DISK_USAGE_ABOVE_1TB_MINFREE_GBYTES}GB ({#FSNAME} &gt; 1TB) =&gt; {ITEM.LASTVALUE1}  free</td><td>Partition is running out of space. The volume contains to much data. Please increase volume size, delete unnecessary files or inform application owner.&#13;
 &#13;
 Filesystem smaller than 1TB are alarmed if the precentage specified by {$DISK_USAGE_PERCENT_ALARM} is reached.&#13;
 &#13;
-Filesystem greater that 1TB are alarmed if the free space of the partion is lower than {$DISK_USAGE_ABOVE_1TB_MINFREE_GBYTES} gigagbytes.</td><td style="background-color:#FF0000;">Average</td><td><tt>({Custom - OS - Linux:vfs.fs.size[{#FSNAME},pused].last(0)}&gt;{$DISK_USAGE_PERCENT_ALARM} and {Custom - OS - Linux:vfs.fs.size[{#FSNAME},total].last(0)}&lt;109951162777) or&#13;
-({Custom - OS - Linux:vfs.fs.size[{#FSNAME},total].last(0)}&gt;=109951162777 and ({Custom - OS - Linux:vfs.fs.size[{#FSNAME},total].last(0)}-{Custom - OS - Linux:vfs.fs.size[{#FSNAME},used].last(0)}) &lt; ({$DISK_USAGE_ABOVE_1TB_MINFREE_GBYTES} * 107374182))</tt></td><td><tt></tt></td>
+Filesystem greater that 1TB are alarmed if the free space of the partion is lower than {$DISK_USAGE_ABOVE_1TB_MINFREE_GBYTES} gigagbytes.</td><td style="background-color:#FF0000;">Average</td><td><tt>({Custom - OS - Linux:vfs.fs.size[{#FSNAME},free].last(0)} &lt;  ({$DISK_USAGE_ABOVE_1TB_MINFREE_GBYTES} * 1073741824)) and ({Custom - OS - Linux:vfs.fs.size[{#FSNAME},total].last(0)}&gt;=1099511627776)</tt></td><td><tt></tt></td>
+</tr>
+<tr>
+<td>Filesystem space {#FSNAME} usage &gt; {$DISK_USAGE_PERCENT_ALARM}% ({#FSNAME} &lt; 1TB) =&gt;  {ITEM.LASTVALUE1}</td><td>Partition is running out of space. The volume contains to much data. Please increase volume size, delete unnecessary files or inform application owner.&#13;
+&#13;
+Filesystem smaller than 1TB are alarmed if the precentage specified by {$DISK_USAGE_PERCENT_ALARM} is reached.&#13;
+&#13;
+Filesystem greater that 1TB are alarmed if the free space of the partion is lower than {$DISK_USAGE_ABOVE_1TB_MINFREE_GBYTES} gigagbytes.</td><td style="background-color:#FF0000;">Average</td><td><tt>({Custom - OS - Linux:vfs.fs.size[{#FSNAME},pused].last(0)}&gt;{$DISK_USAGE_PERCENT_ALARM} and {Custom - OS - Linux:vfs.fs.size[{#FSNAME},total].last(0)}&lt;1099511627776)</tt></td><td><tt></tt></td>
 </tr>
 </table>
 <h2>Graph Overview</h2>
@@ -672,11 +736,15 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
 <th>Name</th><th>Elements</th>
 </tr>
 <tr>
-<td>Filesystem {#FSNAME} inode usage</td><td><tt>vfs.fs.inode[{#FSNAME},pused]<br>vfs.fs.inode[{#FSNAME},total]<br>vfs.fs.inode[{#FSNAME},used]<br>
+<td>Filesystem {#FSNAME} inode usage</td><td><tt>vfs.fs.inode[{#FSNAME},used]<br>vfs.fs.inode[{#FSNAME},total]<br>
 </tt></td>
 </tr>
 <tr>
-<td>Filesystem {#FSNAME} space usage</td><td><tt>vfs.fs.size[{#FSNAME},pused]<br>vfs.fs.size[{#FSNAME},total]<br>vfs.fs.size[{#FSNAME},used]<br>
+<td>Filesystem {#FSNAME} prediction</td><td><tt>vfs.fs.inode[{#FSNAME},pused]<br>vfs.fs.size[{#FSNAME},pused]<br>vfs.fs.inode[{#FSNAME},remaining_time]<br>
+</tt></td>
+</tr>
+<tr>
+<td>Filesystem {#FSNAME} space usage</td><td><tt>vfs.fs.size[{#FSNAME},used]<br>vfs.fs.size[{#FSNAME},total]<br>
 </tt></td>
 </tr>
 </table>
@@ -688,32 +756,47 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
 <tr>
 <td>
 <p class="desc">Zabbix Agent (active)</p>
-</td><td>Disk {#FSNAME} inode use percentage</td><td><tt>vfs.fs.inode[{#FSNAME},pused]</tt></td><td></td><td>5m</td><td>90d</td><td>365d</td>
+</td><td>Disk {#FSNAME} inode free</td><td><tt>vfs.fs.inode[{#FSNAME},free]</tt></td><td></td><td>600s</td><td>7d</td><td>365d</td>
 </tr>
 <tr>
 <td>
 <p class="desc">Zabbix Agent (active)</p>
-</td><td>Disk {#FSNAME} inode total</td><td><tt>vfs.fs.inode[{#FSNAME},total]</tt></td><td></td><td>1h</td><td>90d</td><td>365d</td>
+</td><td>Disk {#FSNAME} inode use percentage</td><td><tt>vfs.fs.inode[{#FSNAME},pused]</tt></td><td></td><td>600s</td><td>7d</td><td>365d</td>
+</tr>
+<tr>
+<td>
+<p class="desc">Calculated</p>
+</td><td>Disk {#FSNAME} space remaining time (3 days)</td><td><tt>vfs.fs.inode[{#FSNAME},remaining_time]</tt></td><td></td><td>8h</td><td>7d</td><td>365d</td>
 </tr>
 <tr>
 <td>
 <p class="desc">Zabbix Agent (active)</p>
-</td><td>Disk {#FSNAME} inode usage</td><td><tt>vfs.fs.inode[{#FSNAME},used]</tt></td><td></td><td>5m</td><td>90d</td><td>365d</td>
+</td><td>Disk {#FSNAME} inode total</td><td><tt>vfs.fs.inode[{#FSNAME},total]</tt></td><td></td><td>1h</td><td>2d</td><td>365d</td>
 </tr>
 <tr>
 <td>
 <p class="desc">Zabbix Agent (active)</p>
-</td><td>Disk {#FSNAME} size use percentage</td><td><tt>vfs.fs.size[{#FSNAME},pused]</tt></td><td></td><td>5m</td><td>90d</td><td>365d</td>
+</td><td>Disk {#FSNAME} inode usage</td><td><tt>vfs.fs.inode[{#FSNAME},used]</tt></td><td></td><td>600s</td><td>7d</td><td>365d</td>
 </tr>
 <tr>
 <td>
 <p class="desc">Zabbix Agent (active)</p>
-</td><td>Disk {#FSNAME} space total</td><td><tt>vfs.fs.size[{#FSNAME},total]</tt></td><td></td><td>1h</td><td>90d</td><td>365d</td>
+</td><td>Disk {#FSNAME} space free</td><td><tt>vfs.fs.size[{#FSNAME},free]</tt></td><td></td><td>600s</td><td>7d</td><td>365d</td>
 </tr>
 <tr>
 <td>
 <p class="desc">Zabbix Agent (active)</p>
-</td><td>Disk {#FSNAME} space usage</td><td><tt>vfs.fs.size[{#FSNAME},used]</tt></td><td></td><td>5m</td><td>90d</td><td>365d</td>
+</td><td>Disk {#FSNAME} size use percentage</td><td><tt>vfs.fs.size[{#FSNAME},pused]</tt></td><td></td><td>600s</td><td>7d</td><td>365d</td>
+</tr>
+<tr>
+<td>
+<p class="desc">Zabbix Agent (active)</p>
+</td><td>Disk {#FSNAME} space total</td><td><tt>vfs.fs.size[{#FSNAME},total]</tt></td><td></td><td>1h</td><td>2d</td><td>365d</td>
+</tr>
+<tr>
+<td>
+<p class="desc">Zabbix Agent (active)</p>
+</td><td>Disk {#FSNAME} space usage</td><td><tt>vfs.fs.size[{#FSNAME},used]</tt></td><td></td><td>600s</td><td>7d</td><td>365d</td>
 </tr>
 </table>
 </body>
