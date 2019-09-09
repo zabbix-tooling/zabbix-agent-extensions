@@ -103,7 +103,7 @@ A quick is provided by the following files:
 
  * Install FPM
    ```
-   sudo apt-get install ruby-dev build-essential debhelper devscripts rpm
+   sudo apt-get install ruby-dev build-essential debhelper devscripts rpm xalan
    gem install fpm --user
    ```
  * Get the repo 
