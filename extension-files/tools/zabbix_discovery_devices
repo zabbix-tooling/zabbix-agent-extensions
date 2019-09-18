@@ -37,8 +37,14 @@ config_default = {
 ####################################################################################
 #### HELPERS
 
-def check_match(matchfor, device_name, regexes):
+def check_match(matchfor, device_name, config, key):
     ret = False
+
+    if key in config:
+          regexes = config[key]
+    else:
+          regexes = []
+
     for regex in regexes:
         regex = regex.strip()
         if re.match(r"^%s$" % regex, device_name):
@@ -180,17 +186,17 @@ for filename in glob.glob('/sys/block/*'):
         sys.stderr.write("** DEVICE %s / MODEL %s\n" % (device_name, device_model))
 
     # Check matched devices
-    if not check_match("include", device_name, config["regex_includes_name"]):
+    if not check_match("include", device_name, config, "regex_includes_name"):
         continue
 
-    if not check_match("include", device_model, config["regex_includes_model"]):
+    if not check_match("include", device_model, config, "regex_includes_model"):
         continue
 
     # Check excluded devices
-    if check_match("exclude", device_name, config["regex_excludes_name"]):
+    if check_match("exclude", device_name, config, "regex_excludes_name"):
         continue
 
-    if check_match("exclude", device_model, config["regex_excludes_model"]):
+    if check_match("exclude", device_model, config, "regex_excludes_model"):
         continue
 
     if args.only_rawdisk and not is_real_hardware_device(device_name):

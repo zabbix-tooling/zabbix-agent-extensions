@@ -30,9 +30,9 @@ config_default = {
     "regex_includes_type": [".*"],
     "regex_excludes_name": [],
     "regex_excludes_type": ["nfs", "nfs4", "nfsd", "cifs", "autofs", "binfmt_misc", "cgroup", "cgroup2", "configfs",
-                            "debugfs",
+                            "debugfs", "overlay", "systemd-1", "nsfs", "lxcfs", 
                             "devpts", "devtmpfs", "efivarfs", "fusectl", "fuse.gvfsd-fuse", "hugetlbfs", "mqueue",
-                            "fuse.lxcfs", "xenfs", "rpc_pipefs", "efivarfs", "tracefs",
+                            "fuse.lxcfs", "xenfs", "rpc_pipefs", "efivarfs", "tracefs", "squashfs",
                             "proc", "pstore", "securityfs", "sysfs", "tmpfs", "vfat", "iso9660" ],
 }
 
@@ -40,8 +40,14 @@ config_default = {
 ####################################################################################
 #### HELPERS
 
-def check_match(matchfor, filesystem_name, regexes):
+def check_match(matchfor, filesystem_name, config, key):
     ret = False
+
+    if key in config:
+        regexes = config[key]
+    else: 
+        regexes = []
+
     for regex in regexes:
         regex = regex.strip()
         if re.match(r"^%s$" % regex, filesystem_name):
@@ -91,26 +97,14 @@ parser = argparse.ArgumentParser(
 
 i.e. /etc/zabbix/item_zabbix_discovery_filesystems.json
 ---
-{
-  "regex_includes_name": [
-    ".*"
-  ],
-  "regex_includes_type": [
-    ".*"
-  ],
-  "regex_excludes_type": ["nfs", "nfs4", "nfsd", "cifs", "autofs", "binfmt_misc", "cgroup", "cgroup2", "configfs",
-                            "debugfs",
-                            "devpts", "devtmpfs", "efivarfs", "fusectl", "fuse.gvfsd-fuse", "hugetlbfs", "mqueue",
-                            "fuse.lxcfs", "xenfs", "rpc_pipefs", "efivarfs", "tracefs",
-                            "proc", "pstore", "securityfs", "sysfs", "tmpfs", "vfat", "iso9660" ],
-}
+%s
 ---
 
 Options are evaluated like this:
 - stage 1: include the following filesystems by regex
 - stage 2: exclude the following filesystems from step 1 by regex
 
-    '''
+    ''' % json.dumps(config_default, indent=3 ),
 )
 parser.add_argument(
     '--debug',
@@ -161,17 +155,17 @@ with open("/proc/mounts", "r") as mounts:
             sys.stderr.write("** filesystem %s / type %s\n" % (filesystem_name, filesystem_type))
 
         # Check matched filesystems
-        if not check_match("include", filesystem_name, config["regex_includes_name"]):
+        if not check_match("include", filesystem_name, config, "regex_includes_name"):
             continue
 
-        if not check_match("include", filesystem_type, config["regex_includes_type"]):
+        if not check_match("include", filesystem_type, config, "regex_includes_type"):
             continue
 
         # Check excluded filesystems
-        if check_match("exclude", filesystem_name, config["regex_excludes_name"]):
+        if check_match("exclude", filesystem_name, config, "regex_excludes_name"):
             continue
 
-        if check_match("exclude", filesystem_type, config["regex_excludes_type"]):
+        if check_match("exclude", filesystem_type, config, "regex_excludes_type"):
             continue
 
         else:
