@@ -26,7 +26,7 @@ prepare(){
    fi
 
 	mkdir -p -m 755 ${TMPDIR}/usr/share/zabbix-agent-extensions/include.d/
-	cp -av ${SDIR}/agent-config/* ${TMPDIR}/usr/share/zabbix-agent-extensions/include.d/
+	cp -av ${SDIR}/agent-config/zabbix_* ${TMPDIR}/usr/share/zabbix-agent-extensions/include.d/
    sed -i "~s,VERSION TO BE REPLACED,${VERSION}," ${TMPDIR}/usr/share/zabbix-agent-extensions/include.d/zabbix_agent_extensions.conf
 	chmod 644 ${TMPDIR}/usr/share/zabbix-agent-extensions/include.d/*
 
