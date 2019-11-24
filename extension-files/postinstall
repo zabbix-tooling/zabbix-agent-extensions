@@ -23,12 +23,11 @@ if ( (grep -q "Ubuntu" /etc/os-release) || (grep -q "Debian" /etc/os-release) ||
   
    if (which systemctl >/dev/null 2>&1);then
       echo "Restarting with systemctl"
-      systemctl restart zabbix-agent
+      systemctl restart zabbix-agent.service
    else
       echo "Restarting with /etc/init.d/zabbix-agent"
       /etc/init.d/zabbix-agent restart
    fi
-
 else
    echo "Notice: no postinstall implemented for you distribution, contributions and merge requests are very welcome ;-)"
 fi
