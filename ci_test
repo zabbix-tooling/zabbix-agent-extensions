@@ -53,6 +53,7 @@ done
 
 echo "*** TESTS"
 assertSuccess STOP_ON_ERROR "sudo dpkg -i zabbix-agent-extensions_*.deb"
+sleep 3
 sudo tail -f /var/log/zabbix/zabbix_agentd.log &
 for i in `seq 1 30`;do
    nc -vvv -w 1 127.0.0.1 10050

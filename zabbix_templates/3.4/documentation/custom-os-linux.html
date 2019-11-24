@@ -39,13 +39,13 @@
 <th>Name</th><th>Default</th>
 </tr>
 <tr>
-<td>{$DISK_HIGH_READ_IOPS_LIMIT}</td><td>10000</td>
+<td>{$DISK_HIGH_READ_IOPS_LIMIT}</td><td>2000</td>
 </tr>
 <tr>
-<td>{$DISK_HIGH_WRITE_IOPS_LIMIT}</td><td>10000</td>
+<td>{$DISK_HIGH_WRITE_IOPS_LIMIT}</td><td>2000</td>
 </tr>
 <tr>
-<td>{$DISK_IOPS_LIMIT_MEASURES}</td><td>5</td>
+<td>{$DISK_IOPS_LIMIT_MEASURES}</td><td>600</td>
 </tr>
 <tr>
 <td>{$DISK_USAGE_ABOVE_1TB_MINFREE_GBYTES}</td><td>50</td>
@@ -80,6 +80,12 @@
 <tr>
 <td>{$MONITOR_TIMEOUT}</td><td>900</td>
 </tr>
+<tr>
+<td>{$REBOOT_INFORMATION}</td><td>24h</td>
+</tr>
+<tr>
+<td>{$STEAL_TIME_ALERT_LIMIT}</td><td>5</td>
+</tr>
 </table>
 <h1>Static Elements</h1>
 <h2>Trigger Overview</h2>
@@ -104,6 +110,9 @@
  L: Number of LUNS&#13;
  P: Number of paths&#13;
  B: Number of failed paths</td><td style="background-color:#FF0000;">Average</td><td><tt>{Custom - OS - Linux:linux.multipath.str(ERROR)}&lt;&gt;0</tt></td><td><tt></tt></td>
+</tr>
+<tr>
+<td>CPU Steal Time &gt; {$STEAL_TIME_ALERT_LIMIT}% = {ITEM.VALUE1}</td><td>The average of a one hour iowait cpu time is higher than 20%</td><td style="background-color:#FFFF00;">Warning</td><td><tt>({Custom - OS - Linux:system.cpu.util[,steal,avg1].avg(10m)})&gt;{$STEAL_TIME_ALERT_LIMIT}</tt></td><td><tt></tt></td>
 </tr>
 <tr>
 <td>CPU Usage IO Wait &gt; {$IOWAIT_ALERT_LIMIT}% = {ITEM.VALUE1}</td><td>The average of a one hour iowait cpu time is higher than 20%</td><td style="background-color:#FFFF00;">Warning</td><td><tt>({Custom - OS - Linux:system.cpu.util[,iowait,avg1].avg(1h)})&gt;{$IOWAIT_ALERT_LIMIT}</tt></td><td><tt></tt></td>
@@ -140,11 +149,11 @@ If memory usage of userspace processes is too high, this typically leads to bad 
 </tt></td>
 </tr>
 <tr>
-<td>NTP Absolute Time RMS Offset no data</td><td>No ntp time information</td><td style="background-color:#FFFF00;">Warning</td><td><tt>{Custom - OS - Linux:ntpd.primarypeer.stats[offset].nodata(3600)}=1</tt></td><td><tt>ICMP Ping failed 3 times<br>
+<td>NTP Absolute Time RMS Offset no data</td><td>No ntp time information</td><td style="background-color:#FFFF00;">Warning</td><td><tt>{Custom - OS - Linux:ntpd.primarypeer.stats[offset].nodata(3600)}=1 and {Custom - OS - Linux:system.uptime.last()}&gt;900</tt></td><td><tt>Zabbix Agent Ping no data for {$MONITOR_TIMEOUT} seconds<br>
 </tt></td>
 </tr>
 <tr>
-<td>Number of good NTP peers &lt; {$MIN_NTP_SERVER_COUNT}</td><td></td><td style="background-color:#FFFF00;">Warning</td><td><tt>{Custom - OS - Linux:ntpd.peers.goodcount.last()} &lt; {$MIN_NTP_SERVER_COUNT}</tt></td><td><tt>NTP Absolute Time RMS Offset no data<br>
+<td>Number of good NTP peers &lt; {$MIN_NTP_SERVER_COUNT}</td><td></td><td style="background-color:#FFFF00;">Warning</td><td><tt>{Custom - OS - Linux:ntpd.peers.goodcount.last()} &lt; {$MIN_NTP_SERVER_COUNT} and  {Custom - OS - Linux:system.uptime.last()}&gt;900</tt></td><td><tt>NTP Absolute Time RMS Offset no data<br>
 </tt></td>
 </tr>
 <tr>
@@ -159,7 +168,7 @@ This trigger does not recover automatically, to get rid of this trigger, you hav
 Rebooting the system is a good idea, bcause this improves security and fixes bug in installed components which cannot be reloaded by a service restart.&#13;
 (livbc-updates, kernel, ...)&#13;
 &#13;
-Remove the flagfile if you decide that no reboot is required (/var/run/reboot-required).</td><td style="background-color:#FFFF00;">Information</td><td><tt>{Custom - OS - Linux:vfs.file.exists[/var/run/reboot-required].last()}=1</tt></td><td><tt></tt></td>
+Remove the flagfile if you decide that no reboot is required (/var/run/reboot-required).</td><td style="background-color:#FFFF00;">Information</td><td><tt>{Custom - OS - Linux:vfs.file.exists[/var/run/reboot-required].min({$REBOOT_INFORMATION})}=1</tt></td><td><tt></tt></td>
 </tr>
 <tr>
 <td>Server booted</td><td>Server booted</td><td style="background-color:#FFFF00;">Information</td><td><tt>{Custom - OS - Linux:system.uptime.last(#1)}&lt;{Custom - OS - Linux:system.uptime.last(#2)}</tt></td><td><tt></tt></td>
@@ -233,7 +242,7 @@ Remove the flagfile if you decide that no reboot is required (/var/run/reboot-re
 </tt></td>
 </tr>
 <tr>
-<td>Processes</td><td><tt>proc.num[]<br>proc.num[,,run]<br>proc.num[,,zomb]<br>
+<td>Processes</td><td><tt>proc.num[]<br>proc.num[,,run]<br>proc.num[,,zomb]<br>custom.process_threads[]<br>
 </tt></td>
 </tr>
 <tr>
@@ -259,6 +268,11 @@ Remove the flagfile if you decide that no reboot is required (/var/run/reboot-re
 <td>
 <p class="desc">Zabbix Agent (active)</p>
 </td><td>Zabbix Agent Release</td><td><tt>agent.version</tt></td><td>The release of the zabbix agent</td><td>60m</td><td>8d</td><td>0</td>
+</tr>
+<tr>
+<td>
+<p class="desc">Zabbix Agent (active)</p>
+</td><td>Number of process threads</td><td><tt>custom.process_threads[]</tt></td><td>Total number of processes in any state.</td><td>1m</td><td>1w</td><td>365d</td>
 </tr>
 <tr>
 <td>
@@ -345,7 +359,7 @@ A man with one watch knows what time it is. A man with two watches is never sure
 <tr>
 <td>
 <p class="desc">Calculated</p>
-</td><td>Memory in userspace percentage</td><td><tt>os.linux.memory.userspace.percent</tt></td><td></td><td>2m</td><td>2w</td><td>365d</td>
+</td><td>Memory in userspace percentage</td><td><tt>os.linux.memory.userspace.percent</tt></td><td></td><td>2m</td><td>2w</td><td>120d</td>
 </tr>
 <tr>
 <td>
