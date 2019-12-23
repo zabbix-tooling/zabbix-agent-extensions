@@ -93,8 +93,11 @@ create_package(){
 create_docu(){
    cd $SDIR/../zabbix_templates/3.2-outdated
  ./create_template_documentation
- cd $SDIR/../zabbix_templates/3.4
+ cd $SDIR/../zabbix_templates/3.4-outdated
  ./create_template_documentation
+ cd $SDIR/../zabbix_templates/4.4
+ ./create_template_documentation
+
 }
 
 ######################################################################
