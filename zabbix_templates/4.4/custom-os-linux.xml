@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
     <version>4.4</version>
-    <date>2019-12-23T14:20:03Z</date>
+    <date>2020-02-13T14:53:27Z</date>
     <groups>
         <group>
             <name>Templates</name>
@@ -844,22 +844,22 @@ If memory usage of userspace processes is too high, this typically leads to bad 
                     <request_method>POST</request_method>
                     <triggers>
                         <trigger>
-                            <expression>{last(0)}&gt;3</expression>
-                            <name>Swap usage &gt; 3%</name>
+                            <expression>{last(0)}&gt;60</expression>
+                            <name>Swap usage &gt; 60%</name>
+                            <priority>AVERAGE</priority>
+                            <description>System is in 90% swap. Memory usage is higher than available physical memory.</description>
+                        </trigger>
+                        <trigger>
+                            <expression>{last(0)}&gt;{$SWAP_NOTIFY_LIMIT}</expression>
+                            <name>Swap usage &gt; {$SWAP_NOTIFY_LIMIT}% = {ITEM.LASTVALUE1}%</name>
                             <priority>INFO</priority>
-                            <description>System is in 3% swap. Memory usage is higher than available physical memory.</description>
+                            <description>System is over {$SWAP_NOTIFY_LIMIT}% swap usage. Memory usage is higher than available physical memory.</description>
                             <dependencies>
                                 <dependency>
                                     <name>Swap usage &gt; 60%</name>
                                     <expression>{Custom - OS - Linux:system.swap.size[,pused].last(0)}&gt;60</expression>
                                 </dependency>
                             </dependencies>
-                        </trigger>
-                        <trigger>
-                            <expression>{last(0)}&gt;60</expression>
-                            <name>Swap usage &gt; 60%</name>
-                            <priority>AVERAGE</priority>
-                            <description>System is in 90% swap. Memory usage is higher than available physical memory.</description>
                         </trigger>
                     </triggers>
                 </item>
@@ -1716,6 +1716,7 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
                         <graph_prototype>
                             <name>Filesystem {#FSNAME} prediction</name>
                             <height>300</height>
+                            <show_triggers>NO</show_triggers>
                             <graph_items>
                                 <graph_item>
                                     <color>CC00CC</color>
@@ -1855,6 +1856,10 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
                     <description>Steal time percentage warning limit</description>
                 </macro>
                 <macro>
+                    <macro>{$SWAP_NOTIFY_LIMIT}</macro>
+                    <value>5</value>
+                </macro>
+                <macro>
                     <macro>{$ZABBIX_AGENT_EXTENSIONS_RELEASE}</macro>
                     <value>2.4.35</value>
                     <description>The baseline for the zabbix-agent-extension-release</description>
@@ -1980,8 +1985,8 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
                             <colspan>1</colspan>
                             <rowspan>1</rowspan>
                             <elements>0</elements>
-                            <valign>0</valign>
-                            <halign>0</halign>
+                            <valign>1</valign>
+                            <halign>1</halign>
                             <dynamic>0</dynamic>
                             <sort_triggers>0</sort_triggers>
                             <url/>
