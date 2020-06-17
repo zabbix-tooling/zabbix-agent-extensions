@@ -18,8 +18,8 @@ if (grep -q -P "Ubuntu|Debian|Centos|Raspbian" /etc/os-release);then
    usermod -G adm -a zabbix 
 
    chown -R zabbix:zabbix /var/cache/zabbix
-   mkdir -m 755 -p /var/run/zabbix-generic-discovery/
-   chown zabbix:zabbix /var/run/zabbix-generic-discovery/
+   mkdir -m 755 -p /etc/zabbix/zabbix-discovery-generic
+   chown zabbix:zabbix /etc/zabbix/zabbix-discovery-generic
   
    if (which systemctl >/dev/null 2>&1);then
       echo "Restarting with systemctl"
@@ -31,4 +31,3 @@ if (grep -q -P "Ubuntu|Debian|Centos|Raspbian" /etc/os-release);then
 else
    echo "Notice: no postinstall implemented for you distribution, contributions and merge requests are very welcome ;-)"
 fi
-

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
     <version>4.4</version>
-    <date>2020-02-13T14:53:27Z</date>
+    <date>2020-06-08T08:59:47Z</date>
     <groups>
         <group>
             <name>Templates</name>
@@ -125,6 +125,7 @@
                     <name>Number of process threads</name>
                     <type>ZABBIX_ACTIVE</type>
                     <key>custom.process_threads[]</key>
+                    <delay>3m</delay>
                     <history>1w</history>
                     <description>Total number of processes in any state.</description>
                     <applications>
@@ -262,8 +263,8 @@ This trigger does not recover automatically, to get rid of this trigger, you hav
                     <type>ZABBIX_ACTIVE</type>
                     <key>mailq.count.frozen</key>
                     <delay>5m</delay>
-                    <history>30d</history>
-                    <trends>90d</trends>
+                    <history>14d</history>
+                    <trends>0</trends>
                     <units>messages</units>
                     <applications>
                         <application>
@@ -277,9 +278,8 @@ This trigger does not recover automatically, to get rid of this trigger, you hav
                     <type>ZABBIX_ACTIVE</type>
                     <key>mailq.count.general</key>
                     <delay>5m</delay>
-                    <history>30d</history>
-                    <trends>90d</trends>
-                    <allowed_hosts>localhost</allowed_hosts>
+                    <history>14d</history>
+                    <trends>0</trends>
                     <units>messages</units>
                     <applications>
                         <application>
@@ -289,9 +289,10 @@ This trigger does not recover automatically, to get rid of this trigger, you hav
                     <request_method>POST</request_method>
                     <triggers>
                         <trigger>
-                            <expression>{avg(1200)}&gt;1500 and ({avg(1200)}&gt;{avg(2400)})</expression>
+                            <expression>{avg(2h)}&gt;{$MTA_MESSAGE_LIMIT} or ({min(4h)}&gt;{min(4h,2h)})</expression>
                             <name>MTA Mailq Total Messages</name>
                             <priority>WARNING</priority>
+                            <description>The local mail transfer agent exeeded the number of {$MTA_MESSAGE_LIMIT} pending messages or the queue is growing the last 8 hours</description>
                         </trigger>
                     </triggers>
                 </item>
@@ -526,6 +527,7 @@ If memory usage of userspace processes is too high, this typically leads to bad 
                     <name>Number of running processes</name>
                     <type>ZABBIX_ACTIVE</type>
                     <key>proc.num[,,run]</key>
+                    <delay>2m</delay>
                     <history>1w</history>
                     <description>Number of processes in running state.</description>
                     <applications>
@@ -1827,7 +1829,7 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
                 </macro>
                 <macro>
                     <macro>{$MEMORY_USERSPACE_USAGE_LIMIT}</macro>
-                    <value>98</value>
+                    <value>98.5</value>
                     <description>Altert if this percentage of memory usage is reached</description>
                 </macro>
                 <macro>
@@ -1844,6 +1846,11 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
                     <macro>{$MONITOR_TIMEOUT}</macro>
                     <value>900</value>
                     <description>Seconds to wait for agent data</description>
+                </macro>
+                <macro>
+                    <macro>{$MTA_MESSAGE_LIMIT}</macro>
+                    <value>100</value>
+                    <description>Number of messages pending on local MTA</description>
                 </macro>
                 <macro>
                     <macro>{$REBOOT_INFORMATION}</macro>
