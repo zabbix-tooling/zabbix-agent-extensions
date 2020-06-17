@@ -66,8 +66,7 @@ done
 echo
 pkill tail
 
-echo '{ "{#FOO}" : "BAR" }' >/etc/zabbix/zabbix-discovery-generic/foo-bar.json
-
+echo '{ "{#FOO}" : "BAR" }' | sudo tee /etc/zabbix/zabbix-discovery-generic/foo-bar.json
 
 assertSuccess STOP_ON_ERROR "ls -l /etc/zabbix/zabbix-discovery-generic/foo-bar.json"
 assertSuccess STOP_ON_ERROR "zabbix_get -s 127.0.0.1 -k 'generic.discovery[foo,json]' | tee /dev/stderr | grep -q -P 'BAR'" # Without sudo
