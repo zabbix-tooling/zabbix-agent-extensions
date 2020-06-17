@@ -1,0 +1,54 @@
+--- !ruby/object:Puppet::Transaction::Report
+host: fuzzy-001
+time: '2020-06-17T21:14:27.086488678+02:00'
+configuration_version: '081501b9ace9f5cf1d7e8d8b9609bfba75a893c6'
+transaction_uuid: 7c37ecf6-eceb-43a4-b935-5e045aa80a4a
+report_format: 10
+puppet_version: 5.5.16
+status: unchanged
+transaction_completed: true
+noop: false
+noop_pending: false
+environment: production_master
+logs:
+- level: notice
+  message: Applied catalog in 9.26 seconds
+  source: Puppet
+  tags:
+  - notice
+  time: '2020-06-17T21:14:46.829396599+02:00'
+  file: 
+  line: 
+metrics:
+  resources:
+    name: resources
+    label: Resources
+    values:
+    - - total
+      - Total
+      - 550
+    - - skipped
+      - Skipped
+      - 0
+    - - failed
+      - Failed
+      - 0
+    - - failed_to_restart
+      - Failed to restart
+      - 0
+    - - restarted
+      - Restarted
+      - 0
+    - - changed
+      - Changed
+      - 0
+    - - out_of_sync
+      - Out of sync
+      - 0
+    - - scheduled
+      - Scheduled
+      - 0
+    - - corrective_change
+      - Corrective change
+      - 0
+
