@@ -69,7 +69,7 @@
 <td>{$MAX_NTP_OFFSET_MS}</td><td>100</td>
 </tr>
 <tr>
-<td>{$MEMORY_USERSPACE_USAGE_LIMIT}</td><td>98</td>
+<td>{$MEMORY_USERSPACE_USAGE_LIMIT}</td><td>98.5</td>
 </tr>
 <tr>
 <td>{$MIN_NTP_SERVER_COUNT}</td><td>3</td>
@@ -79,6 +79,9 @@
 </tr>
 <tr>
 <td>{$MONITOR_TIMEOUT}</td><td>900</td>
+</tr>
+<tr>
+<td>{$MTA_MESSAGE_LIMIT}</td><td>100</td>
 </tr>
 <tr>
 <td>{$REBOOT_INFORMATION}</td><td>24h</td>
@@ -190,7 +193,7 @@
 <td>ZABBIX_ACTIVE</td><td>Zabbix Agent Release</td><td><tt>agent.version</tt></td><td>The release of the zabbix agent</td><td>60m</td><td>8d</td><td>0</td>
 </tr>
 <tr>
-<td>ZABBIX_ACTIVE</td><td>Number of process threads</td><td><tt>custom.process_threads[]</tt></td><td>Total number of processes in any state.</td><td></td><td>1w</td><td></td>
+<td>ZABBIX_ACTIVE</td><td>Number of process threads</td><td><tt>custom.process_threads[]</tt></td><td>Total number of processes in any state.</td><td>3m</td><td>1w</td><td></td>
 </tr>
 <tr>
 <td>SIMPLE</td><td>ICMP Ping</td><td><tt>icmpping[,1,,,]</tt></td><td></td><td>2m</td><td>1w</td><td></td>
@@ -208,10 +211,10 @@
 <td>ZABBIX_ACTIVE</td><td>Multipathing Device Mapping</td><td><tt>linux.multipath</tt></td><td></td><td>5m</td><td>2w</td><td>0</td>
 </tr>
 <tr>
-<td>ZABBIX_ACTIVE</td><td>MTA Queue Total number of frozen messages</td><td><tt>mailq.count.frozen</tt></td><td></td><td>5m</td><td>30d</td><td>90d</td>
+<td>ZABBIX_ACTIVE</td><td>MTA Queue Total number of frozen messages</td><td><tt>mailq.count.frozen</tt></td><td></td><td>5m</td><td>14d</td><td>0</td>
 </tr>
 <tr>
-<td>ZABBIX_ACTIVE</td><td>MTA Queue Total number of messages</td><td><tt>mailq.count.general</tt></td><td></td><td>5m</td><td>30d</td><td>90d</td>
+<td>ZABBIX_ACTIVE</td><td>MTA Queue Total number of messages</td><td><tt>mailq.count.general</tt></td><td></td><td>5m</td><td>14d</td><td>0</td>
 </tr>
 <tr>
 <td>ZABBIX_ACTIVE</td><td>SMTP Server</td><td><tt>net.tcp.service[smtp,,25]</tt></td><td></td><td>10m</td><td></td><td>90d</td>
@@ -246,7 +249,7 @@ A man with one watch knows what time it is. A man with two watches is never sure
 <td>CALCULATED</td><td>Memory in userspace percentage</td><td><tt>os.linux.memory.userspace.percent</tt></td><td></td><td>2m</td><td>2w</td><td>120d</td>
 </tr>
 <tr>
-<td>ZABBIX_ACTIVE</td><td>Number of running processes</td><td><tt>proc.num[,,run]</tt></td><td>Number of processes in running state.</td><td></td><td>1w</td><td></td>
+<td>ZABBIX_ACTIVE</td><td>Number of running processes</td><td><tt>proc.num[,,run]</tt></td><td>Number of processes in running state.</td><td>2m</td><td>1w</td><td></td>
 </tr>
 <tr>
 <td>ZABBIX_ACTIVE</td><td>Number of zombie processes</td><td><tt>proc.num[,,zomb]</tt></td><td>Number of processes in running state.</td><td></td><td>1w</td><td></td>

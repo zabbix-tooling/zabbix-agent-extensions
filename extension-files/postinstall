@@ -17,7 +17,9 @@ if (grep -q -P "Ubuntu|Debian|Centos|Raspbian" /etc/os-release);then
 
    usermod -G adm -a zabbix 
 
+   mkdir -m 755 /var/cache/zabbix
    chown -R zabbix:zabbix /var/cache/zabbix
+
    mkdir -m 755 -p /etc/zabbix/zabbix-discovery-generic
    chown zabbix:zabbix /etc/zabbix/zabbix-discovery-generic
   

@@ -54,7 +54,6 @@ done
 echo "*** TESTS"
 assertSuccess STOP_ON_ERROR "sudo dpkg -i zabbix-agent-extensions_*.deb"
 sleep 3
-echo '{ "{#FOO}" : "BAR" }' > /etc/zabbix/zabbix-discovery-generic/foo-bar.json
 sudo tail -f /var/log/zabbix/zabbix_agentd.log &
 for i in `seq 1 30`;do
    nc -vvv -w 1 127.0.0.1 10050
@@ -67,6 +66,10 @@ done
 echo
 pkill tail
 
+echo '{ "{#FOO}" : "BAR" }' >/etc/zabbix/zabbix-discovery-generic/foo-bar.json
+
+
+assertSuccess STOP_ON_ERROR "ls -l /etc/zabbix/zabbix-discovery-generic/foo-bar.json"
 assertSuccess STOP_ON_ERROR "zabbix_get -s 127.0.0.1 -k 'generic.discovery[foo,json]' | tee /dev/stderr | grep -q -P 'BAR'" # Without sudo
 assertSuccess STOP_ON_ERROR "zabbix_get -s 127.0.0.1 -k linux.dmesg | tee /dev/stderr | grep -q -P 'OK: ALL OK|ERROR:'" # Without sudo
 assertSuccess STOP_ON_ERROR "zabbix_get -s 127.0.0.1 -k linux.dmesg | tee /dev/stderr | grep -q -P 'OK: ALL OK|ERROR:'" # Without sudo
