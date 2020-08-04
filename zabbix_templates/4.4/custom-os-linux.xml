@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
     <version>4.4</version>
-    <date>2020-06-08T08:59:47Z</date>
+    <date>2020-08-04T06:22:05Z</date>
     <groups>
         <group>
             <name>Templates</name>
@@ -115,7 +115,7 @@
                     <triggers>
                         <trigger>
                             <expression>{str({$ZABBIX_AGENT_RELEASE})}=0</expression>
-                            <name>Zabbix agent release {$ZABBIX_AGENT_RELEASE} &lt;&gt; {ITEM.LASTVALUE1}</name>
+                            <name>Zabbix agent release {$ZABBIX_AGENT_RELEASE} not correct</name>
                             <status>DISABLED</status>
                             <priority>INFO</priority>
                         </trigger>
@@ -215,7 +215,7 @@
                         <trigger>
                             <expression>{str(ERROR:)}=1</expression>
                             <recovery_mode>NONE</recovery_mode>
-                            <name>OS Kernel - {ITEM.VALUE1}</name>
+                            <name>OS Kernel problem occurred</name>
                             <priority>WARNING</priority>
                             <description>A kernel problem occurred.&#13;
 Review dmesg with the timestamps listed in the item.&#13;
@@ -386,7 +386,7 @@ This trigger does not recover automatically, to get rid of this trigger, you hav
                     <triggers>
                         <trigger>
                             <expression>{last()}&gt;{$MAXIMUM_NUMBER_RETRANSMISSIONS}</expression>
-                            <name>NFS Retransmissions - {ITEM.VALUE1} &gt; {$MAXIMUM_NUMBER_RETRANSMISSIONS}</name>
+                            <name>NFS Retransmissions &gt; {$MAXIMUM_NUMBER_RETRANSMISSIONS}</name>
                             <priority>INFO</priority>
                         </trigger>
                     </triggers>
@@ -516,7 +516,7 @@ A man with one watch knows what time it is. A man with two watches is never sure
                             <expression>{last()}&gt;{$MEMORY_USERSPACE_USAGE_LIMIT}</expression>
                             <recovery_mode>RECOVERY_EXPRESSION</recovery_mode>
                             <recovery_expression>{last()} &lt; ({$MEMORY_USERSPACE_USAGE_LIMIT} - 0.5)</recovery_expression>
-                            <name>Memory consumption  {ITEM.VALUE1} &gt;  {$MEMORY_USERSPACE_USAGE_LIMIT} %</name>
+                            <name>Memory consumption  &gt;  {$MEMORY_USERSPACE_USAGE_LIMIT}%</name>
                             <priority>INFO</priority>
                             <description>Memory usage should exceeded {$MEMORY_USERSPACE_USAGE_LIMIT}.&#13;
 If memory usage of userspace processes is too high, this typically leads to bad application performance because no filesystem cache is available.</description>
@@ -702,7 +702,7 @@ If memory usage of userspace processes is too high, this typically leads to bad 
                     <triggers>
                         <trigger>
                             <expression>({avg(1h)})&gt;{$IOWAIT_ALERT_LIMIT}</expression>
-                            <name>CPU Usage IO Wait &gt; {$IOWAIT_ALERT_LIMIT}% = {ITEM.LASTVALUE1}</name>
+                            <name>CPU Usage IO Wait &gt; {$IOWAIT_ALERT_LIMIT}%</name>
                             <priority>WARNING</priority>
                             <description>The average of a one hour iowait cpu time is higher than 20%</description>
                         </trigger>
@@ -752,7 +752,7 @@ If memory usage of userspace processes is too high, this typically leads to bad 
                     <triggers>
                         <trigger>
                             <expression>({avg(10m)})&gt;{$STEAL_TIME_ALERT_LIMIT}</expression>
-                            <name>CPU Steal Time &gt; {$STEAL_TIME_ALERT_LIMIT}% = {ITEM.LASTVALUE1}</name>
+                            <name>CPU Steal Time &gt; {$STEAL_TIME_ALERT_LIMIT}%</name>
                             <priority>WARNING</priority>
                             <description>The average of a one hour iowait cpu time is higher than 20%</description>
                         </trigger>
@@ -853,7 +853,7 @@ If memory usage of userspace processes is too high, this typically leads to bad 
                         </trigger>
                         <trigger>
                             <expression>{last(0)}&gt;{$SWAP_NOTIFY_LIMIT}</expression>
-                            <name>Swap usage &gt; {$SWAP_NOTIFY_LIMIT}% = {ITEM.LASTVALUE1}%</name>
+                            <name>Swap usage &gt; {$SWAP_NOTIFY_LIMIT}%</name>
                             <priority>INFO</priority>
                             <description>System is over {$SWAP_NOTIFY_LIMIT}% swap usage. Memory usage is higher than available physical memory.</description>
                             <dependencies>
@@ -1108,7 +1108,7 @@ md1 : active raid1 sdb2[2] sda2[0]&#13;
                     <triggers>
                         <trigger>
                             <expression>{str({$ZABBIX_AGENT_EXTENSIONS_RELEASE})}&lt;&gt;1</expression>
-                            <name>Zabbix agent extensions release {$ZABBIX_AGENT_EXTENSIONS_RELEASE} &lt;&gt; {ITEM.LASTVALUE1}</name>
+                            <name>Zabbix agent extensions release {$ZABBIX_AGENT_EXTENSIONS_RELEASE} not correct</name>
                             <status>DISABLED</status>
                             <priority>INFO</priority>
                         </trigger>
@@ -1262,14 +1262,14 @@ md1 : active raid1 sdb2[2] sda2[0]&#13;
                     </item_prototypes>
                     <trigger_prototypes>
                         <trigger_prototype>
-                            <expression>(({Custom - OS - Linux:net.if.in[{#IFNAME},errors].last(0)}&gt;0) or ({Custom - OS - Linux:net.if.out[{#IFNAME},errors].last(0)}&gt;0))</expression>
-                            <name>Interface {#IFNAME} errors : {ITEM.LASTVALUE1}/{ITEM.LASTVALUE2} (in/out)</name>
+                            <expression>(({Custom - OS - Linux:net.if.in[{#IFNAME},errors].last(0)}&gt;0) or ({Custom - OS - Linux:net.if.out[{#IFNAME},errors].last(0)}&gt;{$MAX_NETWORK_ERRORS_PERIOD}))</expression>
+                            <name>Interface {#IFNAME} errors occured</name>
                             <priority>WARNING</priority>
                             <description>There are interface errors, check your network equipment</description>
                         </trigger_prototype>
                         <trigger_prototype>
-                            <expression>(({Custom - OS - Linux:net.if.in[{#IFNAME},errors].last(0)}&gt;0) or ({Custom - OS - Linux:net.if.out[{#IFNAME},errors].last(0)}&gt;{$MAX_NETWORK_ERRORS_PERIOD}))</expression>
-                            <name>Interface {#IFNAME} errors : {ITEM.LASTVALUE1}/{ITEM.LASTVALUE2} (in/out)</name>
+                            <expression>(({Custom - OS - Linux:net.if.in[{#IFNAME},errors].last(0)}&gt;0) or ({Custom - OS - Linux:net.if.out[{#IFNAME},errors].last(0)}&gt;0))</expression>
+                            <name>Interface {#IFNAME} errors occurred</name>
                             <priority>WARNING</priority>
                             <description>There are interface errors, check your network equipment</description>
                         </trigger_prototype>
@@ -1416,7 +1416,7 @@ md1 : active raid1 sdb2[2] sda2[0]&#13;
                                     <expression>{avg({$DISK_IOPS_LIMIT_MEASURES})}&gt; {$DISK_HIGH_WRITE_IOPS_LIMIT}</expression>
                                     <recovery_mode>RECOVERY_EXPRESSION</recovery_mode>
                                     <recovery_expression>{avg({$DISK_IOPS_LIMIT_MEASURES})}&lt;(0.75* {$DISK_HIGH_WRITE_IOPS_LIMIT})</recovery_expression>
-                                    <name>Blockdevice {#BLOCKDEVICE} write limit {$DISK_HIGH_WRITE_IOPS_LIMIT}/sec reached, currently {ITEM.LASTVALUE1}/sec</name>
+                                    <name>Blockdevice {#BLOCKDEVICE} write limit {$DISK_HIGH_WRITE_IOPS_LIMIT}/sec reached</name>
                                     <priority>INFO</priority>
                                     <description>This trigger alerts disks which are consuming more than the configured IOPs limit. You can use this to discover systems high high write rates.</description>
                                 </trigger_prototype>
@@ -1443,7 +1443,7 @@ md1 : active raid1 sdb2[2] sda2[0]&#13;
                             <expression>{Custom - OS - Linux:vfs.dev.read[{#BLOCKDEVICE},ops,avg1].avg({$DISK_IOPS_LIMIT_MEASURES})}&gt; {$DISK_HIGH_READ_IOPS_LIMIT}</expression>
                             <recovery_mode>RECOVERY_EXPRESSION</recovery_mode>
                             <recovery_expression>{Custom - OS - Linux:vfs.dev.write[{#BLOCKDEVICE},ops,avg1].avg({$DISK_IOPS_LIMIT_MEASURES})}&lt;(0.75* {$DISK_HIGH_READ_IOPS_LIMIT})</recovery_expression>
-                            <name>Blockdevice {#BLOCKDEVICE} read limit {$DISK_HIGH_READ_IOPS_LIMIT}/sec reached, currently {ITEM.LASTVALUE1}/sec</name>
+                            <name>Blockdevice {#BLOCKDEVICE} read limit {$DISK_HIGH_READ_IOPS_LIMIT}/sec reached</name>
                             <priority>INFO</priority>
                             <description>This trigger alerts disks which are consuming more than the configured IOPs limit. You can use this to discover systems high high read rates.</description>
                         </trigger_prototype>
@@ -1550,38 +1550,23 @@ md1 : active raid1 sdb2[2] sda2[0]&#13;
                             <trigger_prototypes>
                                 <trigger_prototype>
                                     <expression>{last(0)}&gt;{$DISK_USAGE_PERCENT_ALARM}</expression>
-                                    <name>Filesystem inode usage for {#FSNAME} &gt; {$DISK_USAGE_PERCENT_ALARM}% =&gt;  {ITEM.LASTVALUE1}</name>
+                                    <name>Filesystem inode usage for {#FSNAME} &gt; {$DISK_USAGE_PERCENT_ALARM}%</name>
                                     <priority>AVERAGE</priority>
                                     <description>Partition is running out of inodes. The volume contains to much files. Please increase volume size, delete unnecessary files and inform application owner.</description>
-                                    <dependencies>
-                                        <dependency>
-                                            <name>Filesystem inode WARNING usage for {#FSNAME} &gt; {$DISK_USAGE_PERCENT_WARN}% =&gt;  {ITEM.LASTVALUE1}</name>
-                                            <expression>{Custom - OS - Linux:vfs.fs.inode[{#FSNAME},pused].last(0)}&gt;{$DISK_USAGE_PERCENT_WARN}</expression>
-                                        </dependency>
-                                    </dependencies>
                                 </trigger_prototype>
                                 <trigger_prototype>
                                     <expression>{last(0)}&gt;{$DISK_USAGE_PERCENT_WARN}</expression>
-                                    <name>Filesystem inode WARNING usage for {#FSNAME} &gt; {$DISK_USAGE_PERCENT_WARN}% =&gt;  {ITEM.LASTVALUE1}</name>
+                                    <name>Filesystem inode WARNING usage for {#FSNAME} &gt; {$DISK_USAGE_PERCENT_WARN}%</name>
                                     <priority>WARNING</priority>
                                     <description>Partition is running out of inodes. The volume contains to much files. Please increase volume size, delete unnecessary files and inform application owner.</description>
+                                    <dependencies>
+                                        <dependency>
+                                            <name>Filesystem inode usage for {#FSNAME} &gt; {$DISK_USAGE_PERCENT_ALARM}%</name>
+                                            <expression>{Custom - OS - Linux:vfs.fs.inode[{#FSNAME},pused].last(0)}&gt;{$DISK_USAGE_PERCENT_ALARM}</expression>
+                                        </dependency>
+                                    </dependencies>
                                 </trigger_prototype>
                             </trigger_prototypes>
-                        </item_prototype>
-                        <item_prototype>
-                            <name>Disk {#FSNAME} space remaining time (3 days)</name>
-                            <type>CALCULATED</type>
-                            <key>vfs.fs.inode[{#FSNAME},remaining_time]</key>
-                            <delay>8h</delay>
-                            <history>7d</history>
-                            <units>s</units>
-                            <params>timeleft(&quot;vfs.fs.size[{#FSNAME},free]&quot;,3d,,0)</params>
-                            <applications>
-                                <application>
-                                    <name>OS - Storage</name>
-                                </application>
-                            </applications>
-                            <request_method>POST</request_method>
                         </item_prototype>
                         <item_prototype>
                             <name>Disk {#FSNAME} inode total</name>
@@ -1641,6 +1626,29 @@ md1 : active raid1 sdb2[2] sda2[0]&#13;
                             <request_method>POST</request_method>
                         </item_prototype>
                         <item_prototype>
+                            <name>Disk {#FSNAME} space remaining time (2 days)</name>
+                            <type>CALCULATED</type>
+                            <key>vfs.fs.size[{#FSNAME},remaining_time]</key>
+                            <delay>8h</delay>
+                            <history>7d</history>
+                            <units>s</units>
+                            <params>timeleft(&quot;vfs.fs.size[{#FSNAME},free]&quot;,2d,,0)</params>
+                            <applications>
+                                <application>
+                                    <name>OS - Storage</name>
+                                </application>
+                            </applications>
+                            <request_method>POST</request_method>
+                            <trigger_prototypes>
+                                <trigger_prototype>
+                                    <expression>{last()} &lt; 86400*3</expression>
+                                    <name>Filesystem space {#FSNAME}  - full in 3 days</name>
+                                    <priority>INFO</priority>
+                                    <description>According to the growth of the last two days the disk will be full in 3 days</description>
+                                </trigger_prototype>
+                            </trigger_prototypes>
+                        </item_prototype>
+                        <item_prototype>
                             <name>Disk {#FSNAME} space total</name>
                             <type>ZABBIX_ACTIVE</type>
                             <key>vfs.fs.size[{#FSNAME},total]</key>
@@ -1671,8 +1679,8 @@ md1 : active raid1 sdb2[2] sda2[0]&#13;
                     </item_prototypes>
                     <trigger_prototypes>
                         <trigger_prototype>
-                            <expression>({Custom - OS - Linux:vfs.fs.size[{#FSNAME},free].last(0)} &lt;  ({$DISK_USAGE_ABOVE_1TB_MINFREE_GBYTES} * 1073741824)) and ({Custom - OS - Linux:vfs.fs.size[{#FSNAME},total].last(0)}&gt;=1099511627776)</expression>
-                            <name>Filesystem space {#FSNAME} free space &lt;  {$DISK_USAGE_ABOVE_1TB_MINFREE_GBYTES}GB ({#FSNAME} &gt; 1TB) =&gt; {ITEM.LASTVALUE1}  free</name>
+                            <expression>({Custom - OS - Linux:vfs.fs.size[{#FSNAME},free].last(0)} &lt;  ({$DISK_USAGE_ABOVE_1TB_MINFREE_GBYTES_ALARM} * 1073741824)) and ({Custom - OS - Linux:vfs.fs.size[{#FSNAME},total].last(0)}&gt;=1099511627776)</expression>
+                            <name>Filesystem space {#FSNAME} free space &lt;  {$DISK_USAGE_ABOVE_1TB_MINFREE_GBYTES_ALARM}GB ({#FSNAME} &gt; 1TB)</name>
                             <priority>AVERAGE</priority>
                             <description>Partition is running out of space. The volume contains to much data. Please increase volume size, delete unnecessary files or inform application owner.&#13;
 &#13;
@@ -1681,14 +1689,46 @@ Filesystem smaller than 1TB are alarmed if the precentage specified by {$DISK_US
 Filesystem greater that 1TB are alarmed if the free space of the partion is lower than {$DISK_USAGE_ABOVE_1TB_MINFREE_GBYTES} gigagbytes.</description>
                         </trigger_prototype>
                         <trigger_prototype>
+                            <expression>({Custom - OS - Linux:vfs.fs.size[{#FSNAME},free].last(0)} &lt;  ({$DISK_USAGE_ABOVE_1TB_MINFREE_GBYTES_WARN} * 1073741824)) and ({Custom - OS - Linux:vfs.fs.size[{#FSNAME},total].last(0)}&gt;=1099511627776)</expression>
+                            <name>Filesystem space {#FSNAME} free space &lt;  {$DISK_USAGE_ABOVE_1TB_MINFREE_GBYTES_WARN}GB ({#FSNAME} &gt; 1TB)  free</name>
+                            <priority>WARNING</priority>
+                            <description>Partition is running out of space. The volume contains to much data. Please increase volume size, delete unnecessary files or inform application owner.&#13;
+&#13;
+Filesystem smaller than 1TB are alarmed if the precentage specified by {$DISK_USAGE_PERCENT_ALARM} is reached.&#13;
+&#13;
+Filesystem greater that 1TB are alarmed if the free space of the partion is lower than {$DISK_USAGE_ABOVE_1TB_MINFREE_GBYTES} gigagbytes.</description>
+                            <dependencies>
+                                <dependency>
+                                    <name>Filesystem space {#FSNAME} free space &lt;  {$DISK_USAGE_ABOVE_1TB_MINFREE_GBYTES_ALARM}GB ({#FSNAME} &gt; 1TB)</name>
+                                    <expression>({Custom - OS - Linux:vfs.fs.size[{#FSNAME},free].last(0)} &lt;  ({$DISK_USAGE_ABOVE_1TB_MINFREE_GBYTES_ALARM} * 1073741824)) and ({Custom - OS - Linux:vfs.fs.size[{#FSNAME},total].last(0)}&gt;=1099511627776)</expression>
+                                </dependency>
+                            </dependencies>
+                        </trigger_prototype>
+                        <trigger_prototype>
                             <expression>({Custom - OS - Linux:vfs.fs.size[{#FSNAME},pused].last(0)}&gt;{$DISK_USAGE_PERCENT_ALARM} and {Custom - OS - Linux:vfs.fs.size[{#FSNAME},total].last(0)}&lt;1099511627776)</expression>
-                            <name>Filesystem space {#FSNAME} usage &gt; {$DISK_USAGE_PERCENT_ALARM}% ({#FSNAME} &lt; 1TB) =&gt;  {ITEM.LASTVALUE1}</name>
+                            <name>Filesystem space {#FSNAME} usage &gt; {$DISK_USAGE_PERCENT_ALARM}% ({#FSNAME} &lt; 1TB)</name>
                             <priority>AVERAGE</priority>
                             <description>Partition is running out of space. The volume contains to much data. Please increase volume size, delete unnecessary files or inform application owner.&#13;
 &#13;
 Filesystem smaller than 1TB are alarmed if the precentage specified by {$DISK_USAGE_PERCENT_ALARM} is reached.&#13;
 &#13;
 Filesystem greater that 1TB are alarmed if the free space of the partion is lower than {$DISK_USAGE_ABOVE_1TB_MINFREE_GBYTES} gigagbytes.</description>
+                        </trigger_prototype>
+                        <trigger_prototype>
+                            <expression>({Custom - OS - Linux:vfs.fs.size[{#FSNAME},pused].last(0)}&gt;{$DISK_USAGE_PERCENT_WARN} and {Custom - OS - Linux:vfs.fs.size[{#FSNAME},total].last(0)}&lt;1099511627776)</expression>
+                            <name>Filesystem space {#FSNAME} usage &gt; {$DISK_USAGE_PERCENT_WARN}% ({#FSNAME} &lt; 1TB)</name>
+                            <priority>WARNING</priority>
+                            <description>Partition is running out of space. The volume contains to much data. Please increase volume size, delete unnecessary files or inform application owner.&#13;
+&#13;
+Filesystem smaller than 1TB are alarmed if the precentage specified by {$DISK_USAGE_PERCENT_ALARM} is reached.&#13;
+&#13;
+Filesystem greater that 1TB are alarmed if the free space of the partion is lower than {$DISK_USAGE_ABOVE_1TB_MINFREE_GBYTES} gigagbytes.</description>
+                            <dependencies>
+                                <dependency>
+                                    <name>Filesystem space {#FSNAME} usage &gt; {$DISK_USAGE_PERCENT_ALARM}% ({#FSNAME} &lt; 1TB)</name>
+                                    <expression>({Custom - OS - Linux:vfs.fs.size[{#FSNAME},pused].last(0)}&gt;{$DISK_USAGE_PERCENT_ALARM} and {Custom - OS - Linux:vfs.fs.size[{#FSNAME},total].last(0)}&lt;1099511627776)</expression>
+                                </dependency>
+                            </dependencies>
                         </trigger_prototype>
                     </trigger_prototypes>
                     <graph_prototypes>
@@ -1745,7 +1785,7 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
                                     <calc_fnc>MAX</calc_fnc>
                                     <item>
                                         <host>Custom - OS - Linux</host>
-                                        <key>vfs.fs.inode[{#FSNAME},remaining_time]</key>
+                                        <key>vfs.fs.size[{#FSNAME},remaining_time]</key>
                                     </item>
                                 </graph_item>
                             </graph_items>
@@ -1793,8 +1833,13 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
                     <value>600</value>
                 </macro>
                 <macro>
-                    <macro>{$DISK_USAGE_ABOVE_1TB_MINFREE_GBYTES}</macro>
+                    <macro>{$DISK_USAGE_ABOVE_1TB_MINFREE_GBYTES_ALARM}</macro>
                     <value>50</value>
+                    <description>Minimum amount of disk space before alerting, overrides percentage.</description>
+                </macro>
+                <macro>
+                    <macro>{$DISK_USAGE_ABOVE_1TB_MINFREE_GBYTES_WARN}</macro>
+                    <value>100</value>
                     <description>Minimum amount of disk space before alerting, overrides percentage.</description>
                 </macro>
                 <macro>
@@ -1809,7 +1854,7 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
                 </macro>
                 <macro>
                     <macro>{$IOWAIT_ALERT_LIMIT}</macro>
-                    <value>20</value>
+                    <value>30</value>
                     <description>Percentage of iowait to accept</description>
                 </macro>
                 <macro>
@@ -2435,7 +2480,7 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
         </trigger>
         <trigger>
             <expression>({Custom - OS - Linux:system.cpu.load[,avg5].last(0)}&gt;15 and {Custom - OS - Linux:system.cpu.num.last(0)}&lt;3) or ({Custom - OS - Linux:system.cpu.num.last(0)}&gt;2 and ({Custom - OS - Linux:system.cpu.load[,avg5].last(0)}&gt;{Custom - OS - Linux:system.cpu.num.last(0)}*{$MONITOR_LOAD_WARNING_MULT}))</expression>
-            <name>System Load, {ITEM.LASTVALUE1}</name>
+            <name>System Load too high</name>
             <priority>WARNING</priority>
             <description>For systems with 1 or 2 CPUs send alerts by a 5-min Load greater 15.&#13;
  For systems with more than 2 CPUS send alerts by a 5-min Load greater than numer_of_cpus*{$MONITOR_LOAD_WARNING_MULT}</description>
