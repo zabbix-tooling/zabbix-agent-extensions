@@ -81,58 +81,68 @@ A quick is provided by the following files:
  * [custom-service-springboot](http://htmlpreview.github.io/?https://github.com/scoopex/zabbix-agent-extensions/blob/master/zabbix_templates/3.4/documentation/custom-service-springboot.html)
 
 
-# How to test and debug
+**For development, debugging and contribution, please have a look for the [development document](DEVELOPMENT.md).**
 
- * Install the packages on the zabbix agent host
- * Test the agent on the agent machine
- 
-   ```
-   zabbix_agentd  -t linux.dmesg
-   zabbix_agentd --print
-   ```
- * Test the agent on the server machine
- 
-   ```
-   apt-get install zabbix-get
-   zabbix_get -s 127.0.0.1 -k linux.dmesg
-   ```
+# Installation and usage
 
-# How to release and/or install the userparameter scripts
+Install the agent extensions
+-----------------------------
 
-   Adpoted from: https://www.digitalocean.com/community/tutorials/how-to-use-fpm-to-easily-create-packages-in-multiple-formats
+ * Install the zabbix-agent according to the description at [zabbix download page](https://www.zabbix.com/download)
+ * Download a package suitable for your distribution using the [releases section](https://github.com/scoopex/zabbix-agent-extensions/releases)</br>
+   (or build your own package as described in [development document](DEVELOPMENT.md))
+ * Configure the most important configuration values for your zabbix agent
+   * "Server=..." and/or "ServerActive=..."
+   * "Hostname=" - your hostname
+ * Install the distribution package of the zabbix-agent-extensions using the package management utils or a configuration management systems
+   ```
+   rpm -Uvh zabbix-agent-extensions-<release number>.noarch.rpm
+   dpkg -i zabbix-agent-extensions-<release number>.noarch.rpm
+   ```
+   This adds a include statement for /usr/share/zabbix-agent-extensions/include.d and restart the zabbix agent automatically.
 
- * Install FPM
-   ```
-   sudo apt-get install ruby-dev build-essential debhelper devscripts rpm xalan
-   gem install fpm --user
-   ```
- * Get the repo 
-   ```
-   git clone https://github.com/scoopex/zabbix-agent-extensions
-   cd zabbix-agent-extensions
-   ```
- * Release only: Edit this file (README.md) and describe the new feature
- * Create packages
-   ```
-   git commit ....
-   ./create_packages
-   ```
- * Install the rpm or debian archive on as an addition to your zabbix-agent:
- 
-   ```
-   rpm -Uvh noarch/zabbix-agent-extensions-<version>.noarch.rpm
-   dpkg -i zabbix-agent-extensions_<version>_all.deb
-   ```
- * Push release
-   ```
-   git tag <release-number>
-   ./create_packages
-   git push
-   git push --tags
-   ```
- * TravisCI builds and tests the release and uploads it to github
+How to configure the zabbix server/templates
+--------------------------------------------
 
-# How to configure discovery for zabbix agent
+ * Open Zabbix web frontend
+ * Create a host 
+   * Configuration -> Hosts -> Create host
+   * Add the name ds "Host name" efined in the first step of this section
+   * Define a agent interface with the correct fully qualified hostname and the ip address
+ * Open "Configuration" => "Templates"
+   * Press button "Import"
+   * Activate Linux template
+     * Load "zabbix_templates/4.4/Custom - OS - Linux.xml" (also works for higher versions)
+     * Open template "Custom - OS - Linux" and modify the default values defined in the macros (if neccessary)
+       * Devices
+         * {$DISK_HIGH_READ_IOPS_LIMIT} : alert limit for read iops/sec
+         * {$DISK_HIGH_WRITE_IOPS_LIMIT} : alert limit for read iops/sec
+         * {$DISK_IOPS_LIMIT_MEASURES} : how many measures need to be above the configured limits before alerting
+       * Filesystems
+         * {$DISK_USAGE_ABOVE_1TB_MINFREE_GBYTES} : how many gigagbytes should be free for filesystem above 1TB
+         * {$DISK_USAGE_PERCENT_ALARM} : send alarm for filesystems below 1 TB on prcentage
+         * {$DISK_USAGE_PERCENT_WARN} : send warning for filesystems below 1 TB on prcentage
+       * {$MAXIMUM_NUMBER_RETRANSMISSIONS} : how many nfs retransmissions are ok on every measurement cycle
+       * NTP
+         * {$MAX_NTP_OFFSET_MS} : the maximum offset limit in milliseconds
+         * {$MIN_NTP_SERVER_COUNT} : how many good ntp sources should be avaiilable, it is istrongly recommended to change the default to 2
+       * {$MONITOR_LOAD_WARNING_MULT} : a multiplicator with the number of cpus for load monitoring 
+       * {$MONITOR_TIMEOUT} : amount of time to complain if hosts does not provide values anymore
+     * Assign template "Custom - OS - Linux" to the desired hosts and modify the default values to host specific settings
+   * Activate Apache template
+     * Load "zabbix_templates/*/Custom - Service - Apache.xml"
+     * Open template "Custom - Service - Apache" and modify the default values defined in the macros
+     * Assign template "Custom - Service - Apache" to the desired hosts and modify the default values to host specific settings
+   * Activate and configure other templates
+ * Check the function
+   * Have a look at Monitoring -> Hosts -> Latest data
+     * Check: "Show items without data"
+     * Check: "Show details"
+     * Press "Apply"
+   * Check dashboards at Monitoring -> Hosts -> Dashboards
+
+How to configure discovery for zabbix agent
+-------------------------------------------
  
  * Configure disk device discovery
     * Create files: 
@@ -145,7 +155,7 @@ A quick is provided by the following files:
       /usr/bin/zabbix_discovery_devices --help
       /usr/bin/zabbix_discovery_filesystems --help
       ```
-     * Test
+    * Test
       ```
       zabbix_agentd -t "vfs.dev.discovery"
       /usr/bin/zabbix_discovery_devices --config /etc/zabbix/item_zabbix_discovery_devices.json --debug
@@ -164,43 +174,15 @@ A quick is provided by the following files:
      ```
    * Test the disovery by
      ```
-      zabbix_agentd -t "generic.discovery[appname]"
+     zabbix_agentd -t "generic.discovery[appname]"
      ```
 
-# How to configure the zabbix server/templates
-
- * Open Zabbix web frontend
- * Open "Configuration" => "Templates"
- * Press button "Import"
- * Activate Linux template
-   * Load "zabbix_templates/3.4/Custom - OS - Linux.xml"
-   * Open template "Custom - OS - Linux" and modify the default values defined in the macros
-     * Devices
-       * {$DISK_HIGH_READ_IOPS_LIMIT} : alert limit for read iops/sec
-       * {$DISK_HIGH_WRITE_IOPS_LIMIT} : alert limit for read iops/sec
-       * {$DISK_IOPS_LIMIT_MEASURES} : how many measures need to be above the configured limits before alerting
-     * Filesystems
-       * {$DISK_USAGE_ABOVE_1TB_MINFREE_GBYTES} : how many gigagbytes should be free for filesystem above 1TB
-       * {$DISK_USAGE_PERCENT_ALARM} : send alarm for filesystems below 1 TB on prcentage
-       * {$DISK_USAGE_PERCENT_WARN} : send warning for filesystems below 1 TB on prcentage
-     * {$MAXIMUM_NUMBER_RETRANSMISSIONS} : how many nfs retransmissions are ok on every measurement cycle
-     * NTP
-       * {$MAX_NTP_OFFSET_MS} : the maximum offset limit in milliseconds
-       * {$MIN_NTP_SERVER_COUNT} : how many good ntp sources should be avaiilable, it is istrongly recommended to change the default to 2
-     * {$MONITOR_LOAD_WARNING_MULT} : a multiplicator with the number of cpus for load monitoring 
-     * {$MONITOR_TIMEOUT} : amount of time to complain if hosts does not provide values anymore
-   * Assign template "Custom - OS - Linux" to the desired hosts and modify the default values to host specific settings
- * Activate Apache template
-   * Load "zabbix_templates/Custom - Service - Apache.xml"
-   * Open template "Custom - Service - Apache" and modify the default values defined in the macros
-   * Assign template "Custom - Service - Apache" to the desired hosts and modify the default values to host specific settings
-   
 # Licence and Authors
 
 Additional authors are very welcome - just submit your patches as pull requests.
 
   * Marc Schoechlin <ms@256bit.org>
-  * Marc Schoechlin <marc.schoechlin@vico-research.com>
+  * Marc Schoechlin <marc.schoechlin@vico-research.com> (not active anymore)
   * Marc Schoechlin <marc.schoechlin@breuninger.de> (not active anymore)
  
 This software is licensed by GPLv2 - review file "LICENSE"
