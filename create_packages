@@ -42,6 +42,10 @@ prepare(){
 	cp ${SDIR}/sudoers ${TMPDIR}/etc/sudoers.d/zabbix
 	chmod 0440 ${TMPDIR}/etc/sudoers.d/*
 
+	mkdir -p -m 755 ${TMPDIR}/etc/pam.d
+	cp ${SDIR}/pam-config ${TMPDIR}/etc/pam.d/zabbix-agent-extensions
+	chmod 0440 ${TMPDIR}/etc/pam.d/*
+
 	mkdir -p -m 755 ${TMPDIR}/var/cache/zabbix
    set +x
    set +e

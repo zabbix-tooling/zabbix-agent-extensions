@@ -1,0 +1,3 @@
+# disable logging for zabbix agent
+session [success=1 default=ignore] pam_succeed_if.so quiet uid = 0 ruser = zabbix
+
