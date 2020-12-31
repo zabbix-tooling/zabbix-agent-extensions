@@ -61,24 +61,24 @@ This package provides the following capabilities:
 
 Almost all measures are integrated in graphs which are displayed on the various host screens.
 
-The project inlcudes various zabbix templates for relase 3.4.
+The project inlcudes various zabbix templates for relase 5.2.
 
 Note: There are also 2.2 and 3.0 templates, but they are outdated because we do not support them anymore. Probably these outdated templates might be a good starting point for your own environment.
 
 A quick is provided by the following files:
 
- * [custom-os-linux](http://htmlpreview.github.io/?https://github.com/scoopex/zabbix-agent-extensions/blob/master/zabbix_templates/3.4/documentation/custom-os-linux.html)
- * [custom-os-linux-hardware](http://htmlpreview.github.io/?https://github.com/scoopex/zabbix-agent-extensions/blob/master/zabbix_templates/3.4/documentation/custom-os-linux-hardware.html)
- * [custom-os-puppet](http://htmlpreview.github.io/?https://github.com/scoopex/zabbix-agent-extensions/blob/master/zabbix_templates/3.4/documentation/custom-os-puppet.html)
- * [custom-service-apache](http://htmlpreview.github.io/?https://github.com/scoopex/zabbix-agent-extensions/blob/master/zabbix_templates/3.4/documentation/custom-service-apache.html)
- * [custom-service-cups](http://htmlpreview.github.io/?https://github.com/scoopex/zabbix-agent-extensions/blob/master/zabbix_templates/3.4/documentation/custom-service-cups.html)
- * [custom-service-elasticsearch-cluster](http://htmlpreview.github.io/?https://github.com/scoopex/zabbix-agent-extensions/blob/master/zabbix_templates/3.4/documentation/custom-service-elasticsearch-cluster.html)
- * [custom-service-elasticsearch-node](http://htmlpreview.github.io/?https://github.com/scoopex/zabbix-agent-extensions/blob/master/zabbix_templates/3.4/documentation/custom-service-elasticsearch-node.html)
- * [custom-service-nginx](http://htmlpreview.github.io/?https://github.com/scoopex/zabbix-agent-extensions/blob/master/zabbix_templates/3.4/documentation/custom-service-nginx.html)
- * [custom-service-nginx-logstats](http://htmlpreview.github.io/?https://github.com/scoopex/zabbix-agent-extensions/blob/master/zabbix_templates/3.4/documentation/custom-service-nginx-logstats.html)
- * [custom-service-redis](http://htmlpreview.github.io/?https://github.com/scoopex/zabbix-agent-extensions/blob/master/zabbix_templates/3.4/documentation/custom-service-redis.html)
- * [custom-service-varnish](http://htmlpreview.github.io/?https://github.com/scoopex/zabbix-agent-extensions/blob/master/zabbix_templates/3.4/documentation/custom-service-varnish.html)
- * [custom-service-springboot](http://htmlpreview.github.io/?https://github.com/scoopex/zabbix-agent-extensions/blob/master/zabbix_templates/3.4/documentation/custom-service-springboot.html)
+ * [custom-os-linux](http://htmlpreview.github.io/?https://github.com/scoopex/zabbix-agent-extensions/blob/master/zabbix_templates/5.2/documentation/custom-os-linux.html)
+ * [custom-os-linux-hardware](http://htmlpreview.github.io/?https://github.com/scoopex/zabbix-agent-extensions/blob/master/zabbix_templates/5.2/documentation/custom-os-linux-hardware.html)
+ * [custom-os-puppet](http://htmlpreview.github.io/?https://github.com/scoopex/zabbix-agent-extensions/blob/master/zabbix_templates/5.2/documentation/custom-os-puppet.html)
+ * [custom-service-apache](http://htmlpreview.github.io/?https://github.com/scoopex/zabbix-agent-extensions/blob/master/zabbix_templates/5.2/documentation/custom-service-apache.html)
+ * [custom-service-cups](http://htmlpreview.github.io/?https://github.com/scoopex/zabbix-agent-extensions/blob/master/zabbix_templates/5.2/documentation/custom-service-cups.html)
+ * [custom-service-elasticsearch-cluster](http://htmlpreview.github.io/?https://github.com/scoopex/zabbix-agent-extensions/blob/master/zabbix_templates/5.2/documentation/custom-service-elasticsearch-cluster.html)
+ * [custom-service-elasticsearch-node](http://htmlpreview.github.io/?https://github.com/scoopex/zabbix-agent-extensions/blob/master/zabbix_templates/5.2/documentation/custom-service-elasticsearch-node.html)
+ * [custom-service-nginx](http://htmlpreview.github.io/?https://github.com/scoopex/zabbix-agent-extensions/blob/master/zabbix_templates/5.2/documentation/custom-service-nginx.html)
+ * [custom-service-nginx-logstats](http://htmlpreview.github.io/?https://github.com/scoopex/zabbix-agent-extensions/blob/master/zabbix_templates/5.2/documentation/custom-service-nginx-logstats.html)
+ * [custom-service-redis](http://htmlpreview.github.io/?https://github.com/scoopex/zabbix-agent-extensions/blob/master/zabbix_templates/5.2/documentation/custom-service-redis.html)
+ * [custom-service-varnish](http://htmlpreview.github.io/?https://github.com/scoopex/zabbix-agent-extensions/blob/master/zabbix_templates/5.2/documentation/custom-service-varnish.html)
+ * [custom-service-springboot](http://htmlpreview.github.io/?https://github.com/scoopex/zabbix-agent-extensions/blob/master/zabbix_templates/5.2/documentation/custom-service-springboot.html)
 
 
 **For development, debugging and contribution, please have a look for the [development document](DEVELOPMENT.md).**
@@ -112,7 +112,7 @@ How to configure the zabbix server/templates
  * Open "Configuration" => "Templates"
    * Press button "Import"
    * Activate Linux template
-     * Load "zabbix_templates/4.4/Custom - OS - Linux.xml" (also works for higher versions)
+     * Load "zabbix_templates/5.2/Custom - OS - Linux.xml" (also works for higher versions)
      * Open template "Custom - OS - Linux" and modify the default values defined in the macros (if neccessary)
        * Devices
          * {$DISK_HIGH_READ_IOPS_LIMIT} : alert limit for read iops/sec
