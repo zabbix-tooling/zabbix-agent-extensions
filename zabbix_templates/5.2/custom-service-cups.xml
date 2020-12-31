@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
-    <version>4.4</version>
-    <date>2019-12-23T10:41:40Z</date>
+    <version>5.2</version>
+    <date>2020-12-31T16:06:59Z</date>
     <groups>
         <group>
             <name>Templates</name>
@@ -89,37 +89,33 @@
                     </steps>
                 </httptest>
             </httptests>
-            <screens>
-                <screen>
+            <dashboards>
+                <dashboard>
                     <name>Custom - Service - Cups</name>
-                    <hsize>1</hsize>
-                    <vsize>1</vsize>
-                    <screen_items>
-                        <screen_item>
-                            <resourcetype>1</resourcetype>
-                            <style>0</style>
-                            <resource>
-                                <key>proc.num[cupsd]</key>
-                                <host>Custom - Service - Cups</host>
-                            </resource>
-                            <width>900</width>
-                            <height>300</height>
-                            <x>0</x>
-                            <y>0</y>
-                            <colspan>1</colspan>
-                            <rowspan>1</rowspan>
-                            <elements>0</elements>
-                            <valign>0</valign>
-                            <halign>0</halign>
-                            <dynamic>0</dynamic>
-                            <sort_triggers>0</sort_triggers>
-                            <url/>
-                            <application/>
-                            <max_columns>3</max_columns>
-                        </screen_item>
-                    </screen_items>
-                </screen>
-            </screens>
+                    <widgets>
+                        <widget>
+                            <type>GRAPH_CLASSIC</type>
+                            <width>24</width>
+                            <height>7</height>
+                            <fields>
+                                <field>
+                                    <type>INTEGER</type>
+                                    <name>source_type</name>
+                                    <value>1</value>
+                                </field>
+                                <field>
+                                    <type>ITEM</type>
+                                    <name>itemid</name>
+                                    <value>
+                                        <key>proc.num[cupsd]</key>
+                                        <host>Custom - Service - Cups</host>
+                                    </value>
+                                </field>
+                            </fields>
+                        </widget>
+                    </widgets>
+                </dashboard>
+            </dashboards>
         </template>
     </templates>
     <value_maps>

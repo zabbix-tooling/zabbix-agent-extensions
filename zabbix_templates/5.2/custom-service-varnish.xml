@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
-    <version>4.4</version>
-    <date>2019-12-23T10:47:36Z</date>
+    <version>5.2</version>
+    <date>2020-12-31T16:08:55Z</date>
     <groups>
         <group>
             <name>Templates</name>
@@ -60,9 +60,12 @@
                     <preprocessing>
                         <step>
                             <type>MULTIPLIER</type>
-                            <params>100</params>
+                            <parameters>
+                                <parameter>100</parameter>
+                            </parameters>
                         </step>
                     </preprocessing>
+                    <request_method>POST</request_method>
                 </item>
                 <item>
                     <name>Backend conn. too many</name>
@@ -82,9 +85,12 @@
                     <preprocessing>
                         <step>
                             <type>CHANGE_PER_SECOND</type>
-                            <params/>
+                            <parameters>
+                                <parameter/>
+                            </parameters>
                         </step>
                     </preprocessing>
+                    <request_method>POST</request_method>
                 </item>
                 <item>
                     <name>Backend conn. success</name>
@@ -104,9 +110,12 @@
                     <preprocessing>
                         <step>
                             <type>CHANGE_PER_SECOND</type>
-                            <params/>
+                            <parameters>
+                                <parameter/>
+                            </parameters>
                         </step>
                     </preprocessing>
+                    <request_method>POST</request_method>
                 </item>
                 <item>
                     <name>Backend conn. failures</name>
@@ -126,9 +135,12 @@
                     <preprocessing>
                         <step>
                             <type>CHANGE_PER_SECOND</type>
-                            <params/>
+                            <parameters>
+                                <parameter/>
+                            </parameters>
                         </step>
                     </preprocessing>
+                    <request_method>POST</request_method>
                 </item>
                 <item>
                     <name>Backend conn. recycles</name>
@@ -148,9 +160,12 @@
                     <preprocessing>
                         <step>
                             <type>CHANGE_PER_SECOND</type>
-                            <params/>
+                            <parameters>
+                                <parameter/>
+                            </parameters>
                         </step>
                     </preprocessing>
+                    <request_method>POST</request_method>
                 </item>
                 <item>
                     <name>Backend requests made</name>
@@ -170,9 +185,12 @@
                     <preprocessing>
                         <step>
                             <type>CHANGE_PER_SECOND</type>
-                            <params/>
+                            <parameters>
+                                <parameter/>
+                            </parameters>
                         </step>
                     </preprocessing>
+                    <request_method>POST</request_method>
                 </item>
                 <item>
                     <name>Backend conn. reuses</name>
@@ -192,9 +210,12 @@
                     <preprocessing>
                         <step>
                             <type>CHANGE_PER_SECOND</type>
-                            <params/>
+                            <parameters>
+                                <parameter/>
+                            </parameters>
                         </step>
                     </preprocessing>
+                    <request_method>POST</request_method>
                 </item>
                 <item>
                     <name>Backend conn. was closed</name>
@@ -214,9 +235,12 @@
                     <preprocessing>
                         <step>
                             <type>CHANGE_PER_SECOND</type>
-                            <params/>
+                            <parameters>
+                                <parameter/>
+                            </parameters>
                         </step>
                     </preprocessing>
+                    <request_method>POST</request_method>
                 </item>
                 <item>
                     <name>Backend conn. not attempted</name>
@@ -236,9 +260,12 @@
                     <preprocessing>
                         <step>
                             <type>CHANGE_PER_SECOND</type>
-                            <params/>
+                            <parameters>
+                                <parameter/>
+                            </parameters>
                         </step>
                     </preprocessing>
+                    <request_method>POST</request_method>
                 </item>
                 <item>
                     <name>Backend conn. unused</name>
@@ -258,9 +285,12 @@
                     <preprocessing>
                         <step>
                             <type>CHANGE_PER_SECOND</type>
-                            <params/>
+                            <parameters>
+                                <parameter/>
+                            </parameters>
                         </step>
                     </preprocessing>
+                    <request_method>POST</request_method>
                 </item>
                 <item>
                     <name>Cache hitpass</name>
@@ -280,9 +310,12 @@
                     <preprocessing>
                         <step>
                             <type>CHANGE_PER_SECOND</type>
-                            <params/>
+                            <parameters>
+                                <parameter/>
+                            </parameters>
                         </step>
                     </preprocessing>
+                    <request_method>POST</request_method>
                 </item>
                 <item>
                     <name>Cache hits</name>
@@ -302,9 +335,12 @@
                     <preprocessing>
                         <step>
                             <type>CHANGE_PER_SECOND</type>
-                            <params/>
+                            <parameters>
+                                <parameter/>
+                            </parameters>
                         </step>
                     </preprocessing>
+                    <request_method>POST</request_method>
                 </item>
                 <item>
                     <name>Cache cache_miss</name>
@@ -324,9 +360,12 @@
                     <preprocessing>
                         <step>
                             <type>CHANGE_PER_SECOND</type>
-                            <params/>
+                            <parameters>
+                                <parameter/>
+                            </parameters>
                         </step>
                     </preprocessing>
+                    <request_method>POST</request_method>
                 </item>
                 <item>
                     <name>Client connections accepted</name>
@@ -347,9 +386,12 @@
                     <preprocessing>
                         <step>
                             <type>CHANGE_PER_SECOND</type>
-                            <params/>
+                            <parameters>
+                                <parameter/>
+                            </parameters>
                         </step>
                     </preprocessing>
+                    <request_method>POST</request_method>
                 </item>
                 <item>
                     <name>Connection dropped, no sess/wrk</name>
@@ -369,9 +411,12 @@
                     <preprocessing>
                         <step>
                             <type>CHANGE_PER_SECOND</type>
-                            <params/>
+                            <parameters>
+                                <parameter/>
+                            </parameters>
                         </step>
                     </preprocessing>
+                    <request_method>POST</request_method>
                 </item>
                 <item>
                     <name>Connection dropped late</name>
@@ -391,9 +436,12 @@
                     <preprocessing>
                         <step>
                             <type>CHANGE_PER_SECOND</type>
-                            <params/>
+                            <parameters>
+                                <parameter/>
+                            </parameters>
                         </step>
                     </preprocessing>
+                    <request_method>POST</request_method>
                 </item>
                 <item>
                     <name>Client requests received</name>
@@ -413,9 +461,12 @@
                     <preprocessing>
                         <step>
                             <type>CHANGE_PER_SECOND</type>
-                            <params/>
+                            <parameters>
+                                <parameter/>
+                            </parameters>
                         </step>
                     </preprocessing>
+                    <request_method>POST</request_method>
                 </item>
                 <item>
                     <name>ESI parse errors (unlock)</name>
@@ -435,9 +486,12 @@
                     <preprocessing>
                         <step>
                             <type>CHANGE_PER_SECOND</type>
-                            <params/>
+                            <parameters>
+                                <parameter/>
+                            </parameters>
                         </step>
                     </preprocessing>
+                    <request_method>POST</request_method>
                 </item>
                 <item>
                     <name>ESI parse warnings (unlock)</name>
@@ -457,9 +511,12 @@
                     <preprocessing>
                         <step>
                             <type>CHANGE_PER_SECOND</type>
-                            <params/>
+                            <parameters>
+                                <parameter/>
+                            </parameters>
                         </step>
                     </preprocessing>
+                    <request_method>POST</request_method>
                 </item>
                 <item>
                     <name>Fetch had bad headers</name>
@@ -479,9 +536,12 @@
                     <preprocessing>
                         <step>
                             <type>CHANGE_PER_SECOND</type>
-                            <params/>
+                            <parameters>
+                                <parameter/>
+                            </parameters>
                         </step>
                     </preprocessing>
+                    <request_method>POST</request_method>
                 </item>
                 <item>
                     <name>Fetch chunked</name>
@@ -501,9 +561,12 @@
                     <preprocessing>
                         <step>
                             <type>CHANGE_PER_SECOND</type>
-                            <params/>
+                            <parameters>
+                                <parameter/>
+                            </parameters>
                         </step>
                     </preprocessing>
+                    <request_method>POST</request_method>
                 </item>
                 <item>
                     <name>Fetch wanted close</name>
@@ -523,9 +586,12 @@
                     <preprocessing>
                         <step>
                             <type>CHANGE_PER_SECOND</type>
-                            <params/>
+                            <parameters>
+                                <parameter/>
+                            </parameters>
                         </step>
                     </preprocessing>
+                    <request_method>POST</request_method>
                 </item>
                 <item>
                     <name>Fetch EOF</name>
@@ -545,9 +611,12 @@
                     <preprocessing>
                         <step>
                             <type>CHANGE_PER_SECOND</type>
-                            <params/>
+                            <parameters>
+                                <parameter/>
+                            </parameters>
                         </step>
                     </preprocessing>
+                    <request_method>POST</request_method>
                 </item>
                 <item>
                     <name>Fetch failed</name>
@@ -567,9 +636,12 @@
                     <preprocessing>
                         <step>
                             <type>CHANGE_PER_SECOND</type>
-                            <params/>
+                            <parameters>
+                                <parameter/>
+                            </parameters>
                         </step>
                     </preprocessing>
+                    <request_method>POST</request_method>
                 </item>
                 <item>
                     <name>Fetch head</name>
@@ -589,9 +661,12 @@
                     <preprocessing>
                         <step>
                             <type>CHANGE_PER_SECOND</type>
-                            <params/>
+                            <parameters>
+                                <parameter/>
+                            </parameters>
                         </step>
                     </preprocessing>
+                    <request_method>POST</request_method>
                 </item>
                 <item>
                     <name>Fetch with Length</name>
@@ -611,9 +686,12 @@
                     <preprocessing>
                         <step>
                             <type>CHANGE_PER_SECOND</type>
-                            <params/>
+                            <parameters>
+                                <parameter/>
+                            </parameters>
                         </step>
                     </preprocessing>
+                    <request_method>POST</request_method>
                 </item>
                 <item>
                     <name>Fetch pre HTTP/1.1 closed</name>
@@ -633,9 +711,12 @@
                     <preprocessing>
                         <step>
                             <type>CHANGE_PER_SECOND</type>
-                            <params/>
+                            <parameters>
+                                <parameter/>
+                            </parameters>
                         </step>
                     </preprocessing>
+                    <request_method>POST</request_method>
                 </item>
                 <item>
                     <name>Fetch zero len</name>
@@ -655,9 +736,12 @@
                     <preprocessing>
                         <step>
                             <type>CHANGE_PER_SECOND</type>
-                            <params/>
+                            <parameters>
+                                <parameter/>
+                            </parameters>
                         </step>
                     </preprocessing>
+                    <request_method>POST</request_method>
                 </item>
                 <item>
                     <name>N expired objects</name>
@@ -667,9 +751,12 @@
                     <preprocessing>
                         <step>
                             <type>CHANGE_PER_SECOND</type>
-                            <params/>
+                            <parameters>
+                                <parameter/>
+                            </parameters>
                         </step>
                     </preprocessing>
+                    <request_method>POST</request_method>
                 </item>
                 <item>
                     <name>N LRU moved objects</name>
@@ -679,9 +766,12 @@
                     <preprocessing>
                         <step>
                             <type>CHANGE_PER_SECOND</type>
-                            <params/>
+                            <parameters>
+                                <parameter/>
+                            </parameters>
                         </step>
                     </preprocessing>
+                    <request_method>POST</request_method>
                 </item>
                 <item>
                     <name>N LRU nuked objects</name>
@@ -691,24 +781,30 @@
                     <preprocessing>
                         <step>
                             <type>CHANGE_PER_SECOND</type>
-                            <params/>
+                            <parameters>
+                                <parameter/>
+                            </parameters>
                         </step>
                     </preprocessing>
+                    <request_method>POST</request_method>
                 </item>
                 <item>
                     <name>N struct objectcore</name>
                     <key>varnish.stat[n_objectcore]</key>
                     <delay>60</delay>
+                    <request_method>POST</request_method>
                 </item>
                 <item>
                     <name>N struct objecthead</name>
                     <key>varnish.stat[n_objecthead]</key>
                     <delay>60</delay>
+                    <request_method>POST</request_method>
                 </item>
                 <item>
                     <name>N struct object</name>
                     <key>varnish.stat[n_object]</key>
                     <delay>60</delay>
+                    <request_method>POST</request_method>
                 </item>
                 <item>
                     <name>Objects overflowing workspace</name>
@@ -728,9 +824,12 @@
                     <preprocessing>
                         <step>
                             <type>CHANGE_PER_SECOND</type>
-                            <params/>
+                            <parameters>
+                                <parameter/>
+                            </parameters>
                         </step>
                     </preprocessing>
+                    <request_method>POST</request_method>
                 </item>
                 <item>
                     <name>Objects sent with sendfile</name>
@@ -750,9 +849,12 @@
                     <preprocessing>
                         <step>
                             <type>CHANGE_PER_SECOND</type>
-                            <params/>
+                            <parameters>
+                                <parameter/>
+                            </parameters>
                         </step>
                     </preprocessing>
+                    <request_method>POST</request_method>
                 </item>
                 <item>
                     <name>Objects sent with write</name>
@@ -772,14 +874,18 @@
                     <preprocessing>
                         <step>
                             <type>CHANGE_PER_SECOND</type>
-                            <params/>
+                            <parameters>
+                                <parameter/>
+                            </parameters>
                         </step>
                     </preprocessing>
+                    <request_method>POST</request_method>
                 </item>
                 <item>
                     <name>N unresurrected objects</name>
                     <key>varnish.stat[n_vampireobject]</key>
                     <delay>60</delay>
+                    <request_method>POST</request_method>
                 </item>
                 <item>
                     <name>N worker threads</name>
@@ -795,6 +901,7 @@
                             <name>Custom - Service - Varnish Workers</name>
                         </application>
                     </applications>
+                    <request_method>POST</request_method>
                 </item>
                 <item>
                     <name>N worker threads created</name>
@@ -810,6 +917,7 @@
                             <name>Custom - Service - Varnish Workers</name>
                         </application>
                     </applications>
+                    <request_method>POST</request_method>
                 </item>
                 <item>
                     <name>N dropped work requests</name>
@@ -825,6 +933,7 @@
                             <name>Custom - Service - Varnish Workers</name>
                         </application>
                     </applications>
+                    <request_method>POST</request_method>
                 </item>
                 <item>
                     <name>N worker threads not created</name>
@@ -840,6 +949,7 @@
                             <name>Custom - Service - Varnish Workers</name>
                         </application>
                     </applications>
+                    <request_method>POST</request_method>
                 </item>
                 <item>
                     <name>N worker threads limited</name>
@@ -855,6 +965,7 @@
                             <name>Custom - Service - Varnish Workers</name>
                         </application>
                     </applications>
+                    <request_method>POST</request_method>
                 </item>
                 <item>
                     <name>N overflowed work requests</name>
@@ -870,6 +981,7 @@
                             <name>Custom - Service - Varnish Workers</name>
                         </application>
                     </applications>
+                    <request_method>POST</request_method>
                 </item>
                 <item>
                     <name>N queued work requests</name>
@@ -885,6 +997,7 @@
                             <name>Custom - Service - Varnish Workers</name>
                         </application>
                     </applications>
+                    <request_method>POST</request_method>
                 </item>
                 <item>
                     <name>Session Closed</name>
@@ -904,9 +1017,12 @@
                     <preprocessing>
                         <step>
                             <type>CHANGE_PER_SECOND</type>
-                            <params/>
+                            <parameters>
+                                <parameter/>
+                            </parameters>
                         </step>
                     </preprocessing>
+                    <request_method>POST</request_method>
                 </item>
                 <item>
                     <name>Session herd</name>
@@ -926,9 +1042,12 @@
                     <preprocessing>
                         <step>
                             <type>CHANGE_PER_SECOND</type>
-                            <params/>
+                            <parameters>
+                                <parameter/>
+                            </parameters>
                         </step>
                     </preprocessing>
+                    <request_method>POST</request_method>
                 </item>
                 <item>
                     <name>Session Linger</name>
@@ -948,9 +1067,12 @@
                     <preprocessing>
                         <step>
                             <type>CHANGE_PER_SECOND</type>
-                            <params/>
+                            <parameters>
+                                <parameter/>
+                            </parameters>
                         </step>
                     </preprocessing>
+                    <request_method>POST</request_method>
                 </item>
                 <item>
                     <name>Session Pipeline</name>
@@ -970,9 +1092,12 @@
                     <preprocessing>
                         <step>
                             <type>CHANGE_PER_SECOND</type>
-                            <params/>
+                            <parameters>
+                                <parameter/>
+                            </parameters>
                         </step>
                     </preprocessing>
+                    <request_method>POST</request_method>
                 </item>
                 <item>
                     <name>Session Read Ahead</name>
@@ -992,9 +1117,12 @@
                     <preprocessing>
                         <step>
                             <type>CHANGE_PER_SECOND</type>
-                            <params/>
+                            <parameters>
+                                <parameter/>
+                            </parameters>
                         </step>
                     </preprocessing>
+                    <request_method>POST</request_method>
                 </item>
                 <item>
                     <name>Varnish Loadbalancer Health Check</name>
@@ -1008,6 +1136,7 @@
                             <name>Custom - Service - Varnish</name>
                         </application>
                     </applications>
+                    <request_method>POST</request_method>
                     <triggers>
                         <trigger>
                             <expression>{last()}=0</expression>
@@ -1031,213 +1160,156 @@
                     <value>/e/lbstatus.html</value>
                 </macro>
             </macros>
-            <screens>
-                <screen>
+            <dashboards>
+                <dashboard>
                     <name>Custom - Service - Varnish</name>
-                    <hsize>1</hsize>
-                    <vsize>9</vsize>
-                    <screen_items>
-                        <screen_item>
-                            <resourcetype>0</resourcetype>
-                            <style>0</style>
-                            <resource>
-                                <name>Varnish Object handling</name>
-                                <host>Custom - Service - Varnish</host>
-                            </resource>
-                            <width>900</width>
-                            <height>300</height>
-                            <x>0</x>
-                            <y>0</y>
-                            <colspan>1</colspan>
-                            <rowspan>1</rowspan>
-                            <elements>0</elements>
-                            <valign>0</valign>
-                            <halign>0</halign>
-                            <dynamic>0</dynamic>
-                            <sort_triggers>0</sort_triggers>
-                            <url/>
-                            <application/>
-                            <max_columns>3</max_columns>
-                        </screen_item>
-                        <screen_item>
-                            <resourcetype>0</resourcetype>
-                            <style>0</style>
-                            <resource>
-                                <name>Varnish Cache</name>
-                                <host>Custom - Service - Varnish</host>
-                            </resource>
-                            <width>900</width>
-                            <height>300</height>
-                            <x>0</x>
-                            <y>1</y>
-                            <colspan>1</colspan>
-                            <rowspan>1</rowspan>
-                            <elements>0</elements>
-                            <valign>0</valign>
-                            <halign>0</halign>
-                            <dynamic>0</dynamic>
-                            <sort_triggers>0</sort_triggers>
-                            <url/>
-                            <application/>
-                            <max_columns>3</max_columns>
-                        </screen_item>
-                        <screen_item>
-                            <resourcetype>0</resourcetype>
-                            <style>0</style>
-                            <resource>
-                                <name>Varnish Backend Connections</name>
-                                <host>Custom - Service - Varnish</host>
-                            </resource>
-                            <width>900</width>
-                            <height>300</height>
-                            <x>0</x>
-                            <y>2</y>
-                            <colspan>1</colspan>
-                            <rowspan>1</rowspan>
-                            <elements>0</elements>
-                            <valign>0</valign>
-                            <halign>0</halign>
-                            <dynamic>0</dynamic>
-                            <sort_triggers>0</sort_triggers>
-                            <url/>
-                            <application/>
-                            <max_columns>3</max_columns>
-                        </screen_item>
-                        <screen_item>
-                            <resourcetype>0</resourcetype>
-                            <style>0</style>
-                            <resource>
-                                <name>Varnish Client Connections</name>
-                                <host>Custom - Service - Varnish</host>
-                            </resource>
-                            <width>900</width>
-                            <height>300</height>
-                            <x>0</x>
-                            <y>3</y>
-                            <colspan>1</colspan>
-                            <rowspan>1</rowspan>
-                            <elements>0</elements>
-                            <valign>0</valign>
-                            <halign>0</halign>
-                            <dynamic>0</dynamic>
-                            <sort_triggers>0</sort_triggers>
-                            <url/>
-                            <application/>
-                            <max_columns>3</max_columns>
-                        </screen_item>
-                        <screen_item>
-                            <resourcetype>0</resourcetype>
-                            <style>0</style>
-                            <resource>
-                                <name>Varnish  Workers</name>
-                                <host>Custom - Service - Varnish</host>
-                            </resource>
-                            <width>900</width>
-                            <height>300</height>
-                            <x>0</x>
-                            <y>4</y>
-                            <colspan>1</colspan>
-                            <rowspan>1</rowspan>
-                            <elements>0</elements>
-                            <valign>0</valign>
-                            <halign>0</halign>
-                            <dynamic>0</dynamic>
-                            <sort_triggers>0</sort_triggers>
-                            <url/>
-                            <application/>
-                            <max_columns>3</max_columns>
-                        </screen_item>
-                        <screen_item>
-                            <resourcetype>0</resourcetype>
-                            <style>0</style>
-                            <resource>
-                                <name>Varnish Fetch</name>
-                                <host>Custom - Service - Varnish</host>
-                            </resource>
-                            <width>900</width>
-                            <height>300</height>
-                            <x>0</x>
-                            <y>5</y>
-                            <colspan>1</colspan>
-                            <rowspan>1</rowspan>
-                            <elements>0</elements>
-                            <valign>0</valign>
-                            <halign>0</halign>
-                            <dynamic>0</dynamic>
-                            <sort_triggers>0</sort_triggers>
-                            <url/>
-                            <application/>
-                            <max_columns>3</max_columns>
-                        </screen_item>
-                        <screen_item>
-                            <resourcetype>0</resourcetype>
-                            <style>0</style>
-                            <resource>
-                                <name>Varnish  Sessions</name>
-                                <host>Custom - Service - Varnish</host>
-                            </resource>
-                            <width>900</width>
-                            <height>300</height>
-                            <x>0</x>
-                            <y>6</y>
-                            <colspan>1</colspan>
-                            <rowspan>1</rowspan>
-                            <elements>0</elements>
-                            <valign>0</valign>
-                            <halign>0</halign>
-                            <dynamic>0</dynamic>
-                            <sort_triggers>0</sort_triggers>
-                            <url/>
-                            <application/>
-                            <max_columns>3</max_columns>
-                        </screen_item>
-                        <screen_item>
-                            <resourcetype>0</resourcetype>
-                            <style>0</style>
-                            <resource>
-                                <name>Varnish  ESI</name>
-                                <host>Custom - Service - Varnish</host>
-                            </resource>
-                            <width>900</width>
-                            <height>300</height>
-                            <x>0</x>
+                    <widgets>
+                        <widget>
+                            <type>GRAPH_CLASSIC</type>
+                            <y>14</y>
+                            <width>24</width>
+                            <height>7</height>
+                            <fields>
+                                <field>
+                                    <type>GRAPH</type>
+                                    <name>graphid</name>
+                                    <value>
+                                        <name>Varnish Backend Connections</name>
+                                        <host>Custom - Service - Varnish</host>
+                                    </value>
+                                </field>
+                            </fields>
+                        </widget>
+                        <widget>
+                            <type>GRAPH_CLASSIC</type>
+                            <y>21</y>
+                            <width>24</width>
+                            <height>7</height>
+                            <fields>
+                                <field>
+                                    <type>GRAPH</type>
+                                    <name>graphid</name>
+                                    <value>
+                                        <name>Varnish Client Connections</name>
+                                        <host>Custom - Service - Varnish</host>
+                                    </value>
+                                </field>
+                            </fields>
+                        </widget>
+                        <widget>
+                            <type>GRAPH_CLASSIC</type>
+                            <y>28</y>
+                            <width>24</width>
+                            <height>7</height>
+                            <fields>
+                                <field>
+                                    <type>GRAPH</type>
+                                    <name>graphid</name>
+                                    <value>
+                                        <name>Varnish  Workers</name>
+                                        <host>Custom - Service - Varnish</host>
+                                    </value>
+                                </field>
+                            </fields>
+                        </widget>
+                        <widget>
+                            <type>GRAPH_CLASSIC</type>
+                            <y>35</y>
+                            <width>24</width>
+                            <height>7</height>
+                            <fields>
+                                <field>
+                                    <type>GRAPH</type>
+                                    <name>graphid</name>
+                                    <value>
+                                        <name>Varnish Fetch</name>
+                                        <host>Custom - Service - Varnish</host>
+                                    </value>
+                                </field>
+                            </fields>
+                        </widget>
+                        <widget>
+                            <type>GRAPH_CLASSIC</type>
                             <y>7</y>
-                            <colspan>1</colspan>
-                            <rowspan>1</rowspan>
-                            <elements>0</elements>
-                            <valign>0</valign>
-                            <halign>0</halign>
-                            <dynamic>0</dynamic>
-                            <sort_triggers>0</sort_triggers>
-                            <url/>
-                            <application/>
-                            <max_columns>3</max_columns>
-                        </screen_item>
-                        <screen_item>
-                            <resourcetype>0</resourcetype>
-                            <style>0</style>
-                            <resource>
-                                <name>Varnish Objects</name>
-                                <host>Custom - Service - Varnish</host>
-                            </resource>
-                            <width>900</width>
-                            <height>300</height>
-                            <x>0</x>
-                            <y>8</y>
-                            <colspan>1</colspan>
-                            <rowspan>1</rowspan>
-                            <elements>0</elements>
-                            <valign>0</valign>
-                            <halign>0</halign>
-                            <dynamic>0</dynamic>
-                            <sort_triggers>0</sort_triggers>
-                            <url/>
-                            <application/>
-                            <max_columns>3</max_columns>
-                        </screen_item>
-                    </screen_items>
-                </screen>
-            </screens>
+                            <width>24</width>
+                            <height>7</height>
+                            <fields>
+                                <field>
+                                    <type>GRAPH</type>
+                                    <name>graphid</name>
+                                    <value>
+                                        <name>Varnish Cache</name>
+                                        <host>Custom - Service - Varnish</host>
+                                    </value>
+                                </field>
+                            </fields>
+                        </widget>
+                        <widget>
+                            <type>GRAPH_CLASSIC</type>
+                            <y>42</y>
+                            <width>24</width>
+                            <height>7</height>
+                            <fields>
+                                <field>
+                                    <type>GRAPH</type>
+                                    <name>graphid</name>
+                                    <value>
+                                        <name>Varnish  Sessions</name>
+                                        <host>Custom - Service - Varnish</host>
+                                    </value>
+                                </field>
+                            </fields>
+                        </widget>
+                        <widget>
+                            <type>GRAPH_CLASSIC</type>
+                            <y>49</y>
+                            <width>24</width>
+                            <height>7</height>
+                            <fields>
+                                <field>
+                                    <type>GRAPH</type>
+                                    <name>graphid</name>
+                                    <value>
+                                        <name>Varnish  ESI</name>
+                                        <host>Custom - Service - Varnish</host>
+                                    </value>
+                                </field>
+                            </fields>
+                        </widget>
+                        <widget>
+                            <type>GRAPH_CLASSIC</type>
+                            <width>24</width>
+                            <height>7</height>
+                            <fields>
+                                <field>
+                                    <type>GRAPH</type>
+                                    <name>graphid</name>
+                                    <value>
+                                        <name>Varnish Object handling</name>
+                                        <host>Custom - Service - Varnish</host>
+                                    </value>
+                                </field>
+                            </fields>
+                        </widget>
+                        <widget>
+                            <type>GRAPH_CLASSIC</type>
+                            <y>56</y>
+                            <width>24</width>
+                            <height>7</height>
+                            <fields>
+                                <field>
+                                    <type>GRAPH</type>
+                                    <name>graphid</name>
+                                    <value>
+                                        <name>Varnish Objects</name>
+                                        <host>Custom - Service - Varnish</host>
+                                    </value>
+                                </field>
+                            </fields>
+                        </widget>
+                    </widgets>
+                </dashboard>
+            </dashboards>
         </template>
     </templates>
     <triggers>

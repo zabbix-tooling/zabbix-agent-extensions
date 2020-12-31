@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
-    <version>4.4</version>
-    <date>2019-12-23T10:42:28Z</date>
+    <version>5.2</version>
+    <date>2020-12-31T16:07:14Z</date>
     <groups>
         <group>
             <name>Templates</name>
@@ -75,7 +75,9 @@
                     <preprocessing>
                         <step>
                             <type>CHANGE_PER_SECOND</type>
-                            <params/>
+                            <parameters>
+                                <parameter/>
+                            </parameters>
                         </step>
                     </preprocessing>
                 </item>
@@ -193,81 +195,79 @@
                     </applications>
                 </item>
             </items>
-            <screens>
-                <screen>
+            <dashboards>
+                <dashboard>
                     <name>Custom - Service - Elasticsearch Cluster</name>
-                    <hsize>1</hsize>
-                    <vsize>3</vsize>
-                    <screen_items>
-                        <screen_item>
-                            <resourcetype>3</resourcetype>
-                            <style>0</style>
-                            <resource>
-                                <key>elasticsearch[cluster,status]</key>
-                                <host>Custom - Service - Elasticsearch Cluster</host>
-                            </resource>
-                            <width>500</width>
-                            <height>100</height>
-                            <x>0</x>
-                            <y>0</y>
-                            <colspan>1</colspan>
-                            <rowspan>1</rowspan>
-                            <elements>5</elements>
-                            <valign>0</valign>
-                            <halign>0</halign>
-                            <dynamic>0</dynamic>
-                            <sort_triggers>0</sort_triggers>
-                            <url/>
-                            <application/>
-                            <max_columns>3</max_columns>
-                        </screen_item>
-                        <screen_item>
-                            <resourcetype>0</resourcetype>
-                            <style>0</style>
-                            <resource>
-                                <name>ELK Shards</name>
-                                <host>Custom - Service - Elasticsearch Cluster</host>
-                            </resource>
-                            <width>900</width>
-                            <height>300</height>
-                            <x>0</x>
-                            <y>1</y>
-                            <colspan>1</colspan>
-                            <rowspan>1</rowspan>
-                            <elements>0</elements>
-                            <valign>0</valign>
-                            <halign>0</halign>
-                            <dynamic>0</dynamic>
-                            <sort_triggers>0</sort_triggers>
-                            <url/>
-                            <application/>
-                            <max_columns>3</max_columns>
-                        </screen_item>
-                        <screen_item>
-                            <resourcetype>0</resourcetype>
-                            <style>0</style>
-                            <resource>
-                                <name>ELK Usage</name>
-                                <host>Custom - Service - Elasticsearch Cluster</host>
-                            </resource>
-                            <width>900</width>
-                            <height>300</height>
-                            <x>0</x>
+                    <widgets>
+                        <widget>
+                            <type>PLAIN_TEXT</type>
+                            <width>24</width>
+                            <fields>
+                                <field>
+                                    <type>INTEGER</type>
+                                    <name>show_as_html</name>
+                                    <value>0</value>
+                                </field>
+                                <field>
+                                    <type>INTEGER</type>
+                                    <name>show_lines</name>
+                                    <value>5</value>
+                                </field>
+                                <field>
+                                    <type>ITEM</type>
+                                    <name>itemids</name>
+                                    <value>
+                                        <key>elasticsearch[cluster,status]</key>
+                                        <host>Custom - Service - Elasticsearch Cluster</host>
+                                    </value>
+                                </field>
+                            </fields>
+                        </widget>
+                        <widget>
+                            <type>GRAPH_CLASSIC</type>
                             <y>2</y>
-                            <colspan>1</colspan>
-                            <rowspan>1</rowspan>
-                            <elements>0</elements>
-                            <valign>0</valign>
-                            <halign>0</halign>
-                            <dynamic>0</dynamic>
-                            <sort_triggers>0</sort_triggers>
-                            <url/>
-                            <application/>
-                            <max_columns>3</max_columns>
-                        </screen_item>
-                    </screen_items>
-                </screen>
-            </screens>
+                            <width>24</width>
+                            <height>7</height>
+                            <fields>
+                                <field>
+                                    <type>INTEGER</type>
+                                    <name>source_type</name>
+                                    <value>0</value>
+                                </field>
+                                <field>
+                                    <type>GRAPH</type>
+                                    <name>graphid</name>
+                                    <value>
+                                        <name>ELK Shards</name>
+                                        <host>Custom - Service - Elasticsearch Cluster</host>
+                                    </value>
+                                </field>
+                            </fields>
+                        </widget>
+                        <widget>
+                            <type>GRAPH_CLASSIC</type>
+                            <y>9</y>
+                            <width>24</width>
+                            <height>7</height>
+                            <fields>
+                                <field>
+                                    <type>INTEGER</type>
+                                    <name>source_type</name>
+                                    <value>0</value>
+                                </field>
+                                <field>
+                                    <type>GRAPH</type>
+                                    <name>graphid</name>
+                                    <value>
+                                        <name>ELK Usage</name>
+                                        <host>Custom - Service - Elasticsearch Cluster</host>
+                                    </value>
+                                </field>
+                            </fields>
+                        </widget>
+                    </widgets>
+                </dashboard>
+            </dashboards>
         </template>
     </templates>
     <graphs>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
-    <version>4.4</version>
-    <date>2019-12-23T10:38:10Z</date>
+    <version>5.2</version>
+    <date>2020-12-31T16:06:25Z</date>
     <groups>
         <group>
             <name>Templates</name>
@@ -65,7 +65,9 @@
                     <preprocessing>
                         <step>
                             <type>JSONPATH</type>
-                            <params>$.changes.total</params>
+                            <parameters>
+                                <parameter>$.changes.total</parameter>
+                            </parameters>
                         </step>
                     </preprocessing>
                     <master_item>
@@ -89,7 +91,9 @@
                     <preprocessing>
                         <step>
                             <type>JSONPATH</type>
-                            <params>$.disabled</params>
+                            <parameters>
+                                <parameter>$.disabled</parameter>
+                            </parameters>
                         </step>
                     </preprocessing>
                     <master_item>
@@ -120,7 +124,9 @@
                     <preprocessing>
                         <step>
                             <type>JSONPATH</type>
-                            <params>$.environment</params>
+                            <parameters>
+                                <parameter>$.environment</parameter>
+                            </parameters>
                         </step>
                     </preprocessing>
                     <master_item>
@@ -150,7 +156,9 @@
                     <preprocessing>
                         <step>
                             <type>JSONPATH</type>
-                            <params>$.events.failure</params>
+                            <parameters>
+                                <parameter>$.events.failure</parameter>
+                            </parameters>
                         </step>
                     </preprocessing>
                     <master_item>
@@ -173,7 +181,9 @@
                     <preprocessing>
                         <step>
                             <type>JSONPATH</type>
-                            <params>$.events.success</params>
+                            <parameters>
+                                <parameter>$.events.success</parameter>
+                            </parameters>
                         </step>
                     </preprocessing>
                     <master_item>
@@ -196,7 +206,9 @@
                     <preprocessing>
                         <step>
                             <type>JSONPATH</type>
-                            <params>$.events.total</params>
+                            <parameters>
+                                <parameter>$.events.total</parameter>
+                            </parameters>
                         </step>
                     </preprocessing>
                     <master_item>
@@ -219,7 +231,9 @@
                     <preprocessing>
                         <step>
                             <type>JSONPATH</type>
-                            <params>$.resources.changed</params>
+                            <parameters>
+                                <parameter>$.resources.changed</parameter>
+                            </parameters>
                         </step>
                     </preprocessing>
                     <master_item>
@@ -242,7 +256,9 @@
                     <preprocessing>
                         <step>
                             <type>JSONPATH</type>
-                            <params>$.resources.failed_to_restart</params>
+                            <parameters>
+                                <parameter>$.resources.failed_to_restart</parameter>
+                            </parameters>
                         </step>
                     </preprocessing>
                     <master_item>
@@ -265,7 +281,9 @@
                     <preprocessing>
                         <step>
                             <type>JSONPATH</type>
-                            <params>$.resources.out_of_sync</params>
+                            <parameters>
+                                <parameter>$.resources.out_of_sync</parameter>
+                            </parameters>
                         </step>
                     </preprocessing>
                     <master_item>
@@ -288,7 +306,9 @@
                     <preprocessing>
                         <step>
                             <type>JSONPATH</type>
-                            <params>$.resources.restarted</params>
+                            <parameters>
+                                <parameter>$.resources.restarted</parameter>
+                            </parameters>
                         </step>
                     </preprocessing>
                     <master_item>
@@ -311,7 +331,9 @@
                     <preprocessing>
                         <step>
                             <type>JSONPATH</type>
-                            <params>$.resources.scheduled</params>
+                            <parameters>
+                                <parameter>$.resources.scheduled</parameter>
+                            </parameters>
                         </step>
                     </preprocessing>
                     <master_item>
@@ -334,7 +356,9 @@
                     <preprocessing>
                         <step>
                             <type>JSONPATH</type>
-                            <params>$.resources.skipped</params>
+                            <parameters>
+                                <parameter>$.resources.skipped</parameter>
+                            </parameters>
                         </step>
                     </preprocessing>
                     <master_item>
@@ -357,7 +381,9 @@
                     <preprocessing>
                         <step>
                             <type>JSONPATH</type>
-                            <params>$.resources.total</params>
+                            <parameters>
+                                <parameter>$.resources.total</parameter>
+                            </parameters>
                         </step>
                     </preprocessing>
                     <master_item>
@@ -381,7 +407,9 @@
                     <preprocessing>
                         <step>
                             <type>JSONPATH</type>
-                            <params>$.state</params>
+                            <parameters>
+                                <parameter>$.state</parameter>
+                            </parameters>
                         </step>
                     </preprocessing>
                     <master_item>
@@ -413,7 +441,9 @@
                     <preprocessing>
                         <step>
                             <type>JSONPATH</type>
-                            <params>$.time.config_retrieval</params>
+                            <parameters>
+                                <parameter>$.time.config_retrieval</parameter>
+                            </parameters>
                         </step>
                     </preprocessing>
                     <master_item>
@@ -442,7 +472,9 @@
                     <preprocessing>
                         <step>
                             <type>JSONPATH</type>
-                            <params>$.time.last_run</params>
+                            <parameters>
+                                <parameter>$.time.last_run</parameter>
+                            </parameters>
                         </step>
                     </preprocessing>
                     <master_item>
@@ -480,7 +512,9 @@
                     <preprocessing>
                         <step>
                             <type>JSONPATH</type>
-                            <params>$.time.total</params>
+                            <parameters>
+                                <parameter>$.time.total</parameter>
+                            </parameters>
                         </step>
                     </preprocessing>
                     <master_item>
@@ -525,81 +559,75 @@
                     </triggers>
                 </item>
             </items>
-            <screens>
-                <screen>
+            <dashboards>
+                <dashboard>
                     <name>Custom - OS - Puppet</name>
-                    <hsize>1</hsize>
-                    <vsize>3</vsize>
-                    <screen_items>
-                        <screen_item>
-                            <resourcetype>0</resourcetype>
-                            <style>0</style>
-                            <resource>
-                                <name>Puppet Execution Time</name>
-                                <host>Custom - OS - Puppet</host>
-                            </resource>
-                            <width>900</width>
-                            <height>300</height>
-                            <x>0</x>
-                            <y>0</y>
-                            <colspan>1</colspan>
-                            <rowspan>1</rowspan>
-                            <elements>0</elements>
-                            <valign>0</valign>
-                            <halign>0</halign>
-                            <dynamic>0</dynamic>
-                            <sort_triggers>0</sort_triggers>
-                            <url/>
-                            <application/>
-                            <max_columns>3</max_columns>
-                        </screen_item>
-                        <screen_item>
-                            <resourcetype>0</resourcetype>
-                            <style>0</style>
-                            <resource>
-                                <name>Puppet Resources</name>
-                                <host>Custom - OS - Puppet</host>
-                            </resource>
-                            <width>900</width>
-                            <height>300</height>
-                            <x>0</x>
-                            <y>1</y>
-                            <colspan>1</colspan>
-                            <rowspan>1</rowspan>
-                            <elements>0</elements>
-                            <valign>0</valign>
-                            <halign>0</halign>
-                            <dynamic>0</dynamic>
-                            <sort_triggers>0</sort_triggers>
-                            <url/>
-                            <application/>
-                            <max_columns>3</max_columns>
-                        </screen_item>
-                        <screen_item>
-                            <resourcetype>0</resourcetype>
-                            <style>0</style>
-                            <resource>
-                                <name>Puppet Events</name>
-                                <host>Custom - OS - Puppet</host>
-                            </resource>
-                            <width>900</width>
-                            <height>300</height>
-                            <x>0</x>
-                            <y>2</y>
-                            <colspan>1</colspan>
-                            <rowspan>1</rowspan>
-                            <elements>0</elements>
-                            <valign>0</valign>
-                            <halign>0</halign>
-                            <dynamic>0</dynamic>
-                            <sort_triggers>0</sort_triggers>
-                            <url/>
-                            <application/>
-                            <max_columns>3</max_columns>
-                        </screen_item>
-                    </screen_items>
-                </screen>
-            </screens>
+                    <widgets>
+                        <widget>
+                            <type>GRAPH_CLASSIC</type>
+                            <width>24</width>
+                            <height>7</height>
+                            <fields>
+                                <field>
+                                    <type>INTEGER</type>
+                                    <name>source_type</name>
+                                    <value>0</value>
+                                </field>
+                                <field>
+                                    <type>GRAPH</type>
+                                    <name>graphid</name>
+                                    <value>
+                                        <name>Puppet Execution Time</name>
+                                        <host>Custom - OS - Puppet</host>
+                                    </value>
+                                </field>
+                            </fields>
+                        </widget>
+                        <widget>
+                            <type>GRAPH_CLASSIC</type>
+                            <y>7</y>
+                            <width>24</width>
+                            <height>7</height>
+                            <fields>
+                                <field>
+                                    <type>INTEGER</type>
+                                    <name>source_type</name>
+                                    <value>0</value>
+                                </field>
+                                <field>
+                                    <type>GRAPH</type>
+                                    <name>graphid</name>
+                                    <value>
+                                        <name>Puppet Resources</name>
+                                        <host>Custom - OS - Puppet</host>
+                                    </value>
+                                </field>
+                            </fields>
+                        </widget>
+                        <widget>
+                            <type>GRAPH_CLASSIC</type>
+                            <y>14</y>
+                            <width>24</width>
+                            <height>7</height>
+                            <fields>
+                                <field>
+                                    <type>INTEGER</type>
+                                    <name>source_type</name>
+                                    <value>0</value>
+                                </field>
+                                <field>
+                                    <type>GRAPH</type>
+                                    <name>graphid</name>
+                                    <value>
+                                        <name>Puppet Events</name>
+                                        <host>Custom - OS - Puppet</host>
+                                    </value>
+                                </field>
+                            </fields>
+                        </widget>
+                    </widgets>
+                </dashboard>
+            </dashboards>
         </template>
     </templates>
     <graphs>
