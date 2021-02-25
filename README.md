@@ -1,6 +1,8 @@
 zabbix-agent-extensions
 =======================
 
+***THIS PROJECT IS FOR REFERENCE HERE, REVIEW THE ORIGINAL PROJECT AT https://github.com/zabbix-tooling/zabbix-agent-extensions***
+
 # Overview
 
 A set of zabbix UserParameter scripts and production ready monitoring templates for linux systems.
