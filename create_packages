@@ -99,7 +99,7 @@ create_docu(){
  ./create_template_documentation
  cd $SDIR/../zabbix_templates/3.4-outdated
  ./create_template_documentation
- cd $SDIR/../zabbix_templates/4.4
+ cd $SDIR/../zabbix_templates/4.4-outdated
  ./create_template_documentation
 
 }
