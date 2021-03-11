@@ -2,7 +2,7 @@
 
 THE_INCLUDE="Include=/usr/share/zabbix-agent-extensions/include.d/"
 
-if (grep -q -P "Ubuntu|Debian|Centos|Raspbian" /etc/os-release);then
+if (grep -q -P "Ubuntu|Debian|CentOS|Raspbian" /etc/os-release);then
 
    if [ -e "/etc/zabbix/zabbix_agentd.d/zabbix-agent-extensions" ];
    then
