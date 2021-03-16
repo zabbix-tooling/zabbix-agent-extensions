@@ -1,0 +1,41 @@
+kind: DaemonSet
+metadata:
+  name: zabbix-daemonset-agent.yaml
+spec:
+  template:
+    metadata:
+      labels:
+        name: zabbix-agent
+    spec:
+      hostPID: true
+      hostIPC: true
+      hostNetwork: false
+      containers:
+        - resources:
+            requests:
+              cpu: 150m
+              memory: 128M
+            limits:
+              cpu: 200m
+              memory: 128m
+          securityContext:
+            privileged: true
+          env:
+            - name: ZA_Server
+              value: "zabbix-server"
+            - name: ZA_ServerActive
+              value: "zabbix-server"
+          image: scoopex666/zabbix-agent-with-agent-extensions:latest
+          name: zabbix-agent
+          volumeMounts:
+            - name: rootfs
+              mountPath: /rootfs
+            - name: run
+              mountPath: /var/run/
+      volumes:
+        - name: rootfs
+          hostPath:
+              path: /
+        - name: run
+          hostPath:
+              path: /var/run/
