@@ -62,7 +62,11 @@ kernel_problems["ioerror"] = re.compile(r".*(print_req_error: I/O error, dev ..*
 # [80508.690871] kauditd_printk_skb: 2 callbacks suppressed
 parse_dmesg = re.compile(r"\[\s*(?P<timestamp>\d+\.\d+)\] (?P<msg>.*)$")
 
-status_file = "/var/run/zabbix/%s_%s.pickle" % (EXECUTABLE, os.getuid())
+if os.path.exists('/var/run/zabbix'):
+    status_file = "/var/run/zabbix/%s_%s.pickle" % (EXECUTABLE, os.getuid())
+else:
+    status_file = "/tmp/%s_%s.pickle" % (EXECUTABLE, os.getuid())
+
 status_data = get_status_data(status_file)
 
 latest_time_stamp = status_data["timestamp"]

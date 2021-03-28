@@ -6,7 +6,7 @@ apt-get autoremove -y
 source /etc/lsb-release
 
 apt-get update 
-apt-get install curl vim-tiny sudo jq -y
+apt-get install curl vim-tiny sudo jq python3 -y
 apt-get upgrade -y
 apt-get dist-upgrade -y
 apt-get autoremove -y
