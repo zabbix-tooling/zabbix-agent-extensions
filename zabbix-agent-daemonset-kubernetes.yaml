@@ -30,6 +30,8 @@ spec:
           securityContext:
             privileged: true
           env:
+            - name: ZBX_METADATA
+              value: "kubernetes-node"
             - name: ZBX_HOSTNAME
               valueFrom:
                 fieldRef:
@@ -37,14 +39,17 @@ spec:
             - name: ZBX_ACTIVESERVERS
               value: "zabbix-proxy"
             - name: ZBX_PASSIVESERVERS
-              value: "zabbix-proxy"
+              value: "127.0.0.1,zabbix-proxy"
           image: scoopex666/zabbix-agent-with-agent-extensions:latest
+          imagePullPolicy: Always
           name: zabbix-agent
           volumeMounts:
             - name: rootfs
               mountPath: /rootfs
             - name: run
               mountPath: /var/run/
+            - name: zabbix-agent-extensions-include
+              mountPath: /etc/zabbix/zabbix_agentd.d
       volumes:
         - name: rootfs
           hostPath:
@@ -52,3 +57,18 @@ spec:
         - name: run
           hostPath:
               path: /var/run/
+        - name: zabbix-agent-extensions-include
+          configMap:
+            name: zabbix-agent-extensions-include
+            defaultMode: 0755
+
+---
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: zabbix-agent-extensions-include
+  namespace: "infra-zabbix-proxy"
+data:
+  "zabbix-agent-extensions-include.conf": |
+       Include=/usr/share/zabbix-agent-extensions/include.d/*.conf

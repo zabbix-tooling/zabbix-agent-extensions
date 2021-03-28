@@ -3,8 +3,8 @@
 set -eux
 
 apt-get update
-apt-get upgrade
-apt-get dist-upgrade
+apt-get upgrade -y
+apt-get dist-upgrade -y
 
 apt-get autoremove -y
 rm -rf /var/lib/apt/lists/*
