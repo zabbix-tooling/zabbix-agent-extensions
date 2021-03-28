@@ -2,7 +2,11 @@ apiVersion: apps/v1
 kind: DaemonSet
 metadata:
   name: zabbix-agent
+  namespace: "infra-zabbix-proxy"
 spec:
+  selector:
+    matchLabels:
+      name: zabbix-agent
   template:
     metadata:
       labels:
@@ -22,14 +26,18 @@ spec:
               memory: 128M
             limits:
               cpu: 200m
-              memory: 128m
+              memory: 128M
           securityContext:
             privileged: true
           env:
-            - name: ZA_Server
-              value: "zabbix-server"
-            - name: ZA_ServerActive
-              value: "zabbix-server"
+            - name: ZBX_HOSTNAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: spec.nodeName
+            - name: ZBX_ACTIVESERVERS
+              value: "zabbix-proxy"
+            - name: ZBX_PASSIVESERVERS
+              value: "zabbix-proxy"
           image: scoopex666/zabbix-agent-with-agent-extensions:latest
           name: zabbix-agent
           volumeMounts:
