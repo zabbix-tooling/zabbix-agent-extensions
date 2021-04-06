@@ -1,8 +1,15 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: infra-zabbix-agent
+
+---
+
 apiVersion: apps/v1
 kind: DaemonSet
 metadata:
   name: zabbix-agent
-  namespace: "infra-zabbix-proxy"
+  namespace: "infra-zabbix-agent"
 spec:
   selector:
     matchLabels:
@@ -68,7 +75,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: zabbix-agent-extensions-include
-  namespace: "infra-zabbix-proxy"
+  namespace: "infra-zabbix-agent"
 data:
   "zabbix-agent-extensions-include.conf": |
        Include=/usr/share/zabbix-agent-extensions/include.d/*.conf
