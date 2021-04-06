@@ -1,0 +1,81 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: infra-zabbix-agent
+
+---
+
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: zabbix-agent
+  namespace: "infra-zabbix-agent"
+spec:
+  selector:
+    matchLabels:
+      name: zabbix-agent
+  template:
+    metadata:
+      labels:
+        name: zabbix-agent
+    spec:
+      # this toleration is to have the daemonset runnable on master nodes
+      # tolerations:
+      #   - key: node-role.kubernetes.io/master
+      #     effect: NoSchedule
+      hostPID: true
+      hostIPC: true
+      hostNetwork: false
+      containers:
+        - resources:
+            requests:
+              cpu: 150m
+              memory: 128M
+            limits:
+              cpu: 200m
+              memory: 128M
+          securityContext:
+            privileged: true
+          env:
+            - name: ZBX_METADATA
+              value: "kubernetes-node"
+            - name: ZBX_HOSTNAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: spec.nodeName
+            - name: ZBX_ACTIVESERVERS
+              value: "zabbix-proxy"
+            - name: ZBX_PASSIVESERVERS
+              value: "127.0.0.1,zabbix-proxy"
+          image: scoopex666/zabbix-agent-with-agent-extensions:latest
+          imagePullPolicy: Always
+          name: zabbix-agent
+          volumeMounts:
+            - name: rootfs
+              mountPath: /rootfs
+            - name: run
+              mountPath: /var/run/
+            - name: zabbix-agent-extensions-include
+              mountPath: /etc/zabbix/zabbix_agentd.d
+      volumes:
+        - name: rootfs
+          hostPath:
+              path: /
+        - name: run
+          hostPath:
+              path: /var/run/
+        - name: zabbix-agent-extensions-include
+          configMap:
+            name: zabbix-agent-extensions-include
+            defaultMode: 0755
+
+---
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: zabbix-agent-extensions-include
+  namespace: "infra-zabbix-agent"
+data:
+  "zabbix-agent-extensions-include.conf": |
+       Include=/usr/share/zabbix-agent-extensions/include.d/*.conf

@@ -18,10 +18,10 @@
 
    Adpoted from: https://www.digitalocean.com/community/tutorials/how-to-use-fpm-to-easily-create-packages-in-multiple-formats
 
- * Install FPM
+ * Install FPM : https://fpm.readthedocs.io/en/latest/installing.html
    ```
    sudo apt-get install ruby-dev build-essential debhelper devscripts rpm xalan
-   gem install fpm --user
+   gem install --no-document fpm
    ```
  * Get the repo 
    ```
