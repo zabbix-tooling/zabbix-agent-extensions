@@ -123,7 +123,7 @@ This procedure deploy zabbix agents on all worker nodes of your kubernetes clust
    * Download [kubernetes yaml file](https://raw.githubusercontent.com/scoopex/zabbix-agent-extensions/master/zabbix-agent-daemonset-kubernetes.yaml) 
    * Adapt the file to your own needs
     * Configure `ZBX_ACTIVESERVER`
-    * Configure `ZBX_PASSIVESERVERS
+    * Configure `ZBX_PASSIVESERVERS`
     * Configure the version of the image [check dockerhub](https://hub.docker.com/repository/docker/scoopex666/zabbix-agent-with-agent-extensions)
    * Apply deployment
      ```
