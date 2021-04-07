@@ -80,14 +80,15 @@ A quick is provided by the following files:
  * [custom-service-redis](http://htmlpreview.github.io/?https://github.com/scoopex/zabbix-agent-extensions/blob/master/zabbix_templates/5.2/documentation/custom-service-redis.html)
  * [custom-service-varnish](http://htmlpreview.github.io/?https://github.com/scoopex/zabbix-agent-extensions/blob/master/zabbix_templates/5.2/documentation/custom-service-varnish.html)
  * [custom-service-springboot](http://htmlpreview.github.io/?https://github.com/scoopex/zabbix-agent-extensions/blob/master/zabbix_templates/5.2/documentation/custom-service-springboot.html)
+ * [custom-os-kubernetes-node](http://htmlpreview.github.io/?https://github.com/scoopex/zabbix-agent-extensions/blob/master/zabbix_templates/5.2/documentation/custom-os-kubernetes-node.html)
 
 
 **For development, debugging and contribution, please have a look for the [development document](DEVELOPMENT.md).**
 
 # Installation and usage
 
-Install the agent extensions
------------------------------
+Install the agent extensions on linux systems
+---------------------------------------------
 
  * Install the zabbix-agent according to the description at [zabbix download page](https://www.zabbix.com/download)
  * Download a package suitable for your distribution using the [releases section](https://github.com/scoopex/zabbix-agent-extensions/releases)</br>
@@ -101,6 +102,36 @@ Install the agent extensions
    dpkg -i zabbix-agent-extensions-<release number>.noarch.rpm
    ```
    This adds a include statement for /usr/share/zabbix-agent-extensions/include.d and restart the zabbix agent automatically.
+
+Install the agent extensions on kubernetes nodes
+---------------------------------------------
+
+This procedure deploy zabbix agents on all worker nodes of your kubernetes cluster and provides autodiscovery for all nodes
+
+ * Make zabbix available to the deployed agent, i.e. by deploying a zabbix proxy in k8s
+ * Import template [custom-os-kubernetes-node.xml](http://htmlpreview.github.io/?https://github.com/scoopex/zabbix-agent-extensions/blob/master/zabbix_templates/5.2/documentation/custom-os-kubernetes-node.html)
+ * Define a automatic discovery:
+   * Configuration -> Actions -> "Autoregistration actions"
+   * Add conditions:
+      * "Host metadata contains kubernetes-node"
+      * "Proxy equals infra-app-dev"
+   * Add operations:
+      * "Add host"
+      * "Add to host groups: [DEVELOPMENT]"
+      * "Link to templates: Custom - OS - Kubernetes Node"
+ * Configure deployment
+   * Download [kubernetes yaml file](https://raw.githubusercontent.com/scoopex/zabbix-agent-extensions/master/zabbix-agent-daemonset-kubernetes.yaml) 
+   * Adapt the file to your own needs
+    * Configure `ZBX_ACTIVESERVER`
+    * Configure `ZBX_PASSIVESERVERS
+    * Configure the version of the image [check dockerhub](https://hub.docker.com/repository/docker/scoopex666/zabbix-agent-with-agent-extensions)
+   * Apply deployment
+     ```
+     kubectl apply -f zabbix-agent-daemonset-kubernetes.yaml
+     kubectl describe -n infra-zabbix-agent daemonsets.apps zabbix-agent
+     kubectl logs -n infra-zabbix-agent zabbix-agent-8n4ss -f
+     ```
+
 
 How to configure the zabbix server/templates
 --------------------------------------------
