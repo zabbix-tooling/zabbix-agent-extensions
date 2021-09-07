@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
     <version>5.2</version>
-    <date>2020-12-31T15:32:39Z</date>
+    <date>2021-09-07T14:56:57Z</date>
     <groups>
         <group>
             <name>Templates</name>
@@ -2140,6 +2140,11 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
                             <fields>
                                 <field>
                                     <type>INTEGER</type>
+                                    <name>source_type</name>
+                                    <value>2</value>
+                                </field>
+                                <field>
+                                    <type>INTEGER</type>
                                     <name>columns</name>
                                     <value>1</value>
                                 </field>
@@ -2147,11 +2152,6 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
                                     <type>INTEGER</type>
                                     <name>rows</name>
                                     <value>1</value>
-                                </field>
-                                <field>
-                                    <type>INTEGER</type>
-                                    <name>source_type</name>
-                                    <value>2</value>
                                 </field>
                                 <field>
                                     <type>GRAPH_PROTOTYPE</type>
@@ -2171,34 +2171,8 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
                         <widget>
                             <type>GRAPH_CLASSIC</type>
                             <width>24</width>
-                            <height>4</height>
+                            <height>8</height>
                             <fields>
-                                <field>
-                                    <type>INTEGER</type>
-                                    <name>source_type</name>
-                                    <value>0</value>
-                                </field>
-                                <field>
-                                    <type>GRAPH</type>
-                                    <name>graphid</name>
-                                    <value>
-                                        <name>System Load</name>
-                                        <host>Custom - OS - Linux</host>
-                                    </value>
-                                </field>
-                            </fields>
-                        </widget>
-                        <widget>
-                            <type>GRAPH_CLASSIC</type>
-                            <y>4</y>
-                            <width>24</width>
-                            <height>4</height>
-                            <fields>
-                                <field>
-                                    <type>INTEGER</type>
-                                    <name>source_type</name>
-                                    <value>0</value>
-                                </field>
                                 <field>
                                     <type>GRAPH</type>
                                     <name>graphid</name>
@@ -2211,9 +2185,59 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
                         </widget>
                         <widget>
                             <type>GRAPH_CLASSIC</type>
+                            <x>12</x>
                             <y>8</y>
-                            <width>24</width>
-                            <height>4</height>
+                            <width>12</width>
+                            <height>7</height>
+                            <fields>
+                                <field>
+                                    <type>GRAPH</type>
+                                    <name>graphid</name>
+                                    <value>
+                                        <name>CPU Context Switches</name>
+                                        <host>Custom - OS - Linux</host>
+                                    </value>
+                                </field>
+                            </fields>
+                        </widget>
+                        <widget>
+                            <type>GRAPH_CLASSIC</type>
+                            <y>8</y>
+                            <width>12</width>
+                            <height>7</height>
+                            <fields>
+                                <field>
+                                    <type>GRAPH</type>
+                                    <name>graphid</name>
+                                    <value>
+                                        <name>System Load</name>
+                                        <host>Custom - OS - Linux</host>
+                                    </value>
+                                </field>
+                            </fields>
+                        </widget>
+                        <widget>
+                            <type>GRAPH_CLASSIC</type>
+                            <x>12</x>
+                            <y>15</y>
+                            <width>12</width>
+                            <height>7</height>
+                            <fields>
+                                <field>
+                                    <type>GRAPH</type>
+                                    <name>graphid</name>
+                                    <value>
+                                        <name>Memory Usage</name>
+                                        <host>Custom - OS - Linux</host>
+                                    </value>
+                                </field>
+                            </fields>
+                        </widget>
+                        <widget>
+                            <type>GRAPH_CLASSIC</type>
+                            <y>15</y>
+                            <width>12</width>
+                            <height>7</height>
                             <fields>
                                 <field>
                                     <type>INTEGER</type>
@@ -2232,183 +2256,11 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
                         </widget>
                         <widget>
                             <type>GRAPH_CLASSIC</type>
-                            <y>12</y>
-                            <width>24</width>
-                            <height>4</height>
+                            <x>12</x>
+                            <y>22</y>
+                            <width>12</width>
+                            <height>7</height>
                             <fields>
-                                <field>
-                                    <type>INTEGER</type>
-                                    <name>source_type</name>
-                                    <value>0</value>
-                                </field>
-                                <field>
-                                    <type>GRAPH</type>
-                                    <name>graphid</name>
-                                    <value>
-                                        <name>CPU Context Switches</name>
-                                        <host>Custom - OS - Linux</host>
-                                    </value>
-                                </field>
-                            </fields>
-                        </widget>
-                        <widget>
-                            <type>GRAPH_CLASSIC</type>
-                            <y>16</y>
-                            <width>24</width>
-                            <height>4</height>
-                            <fields>
-                                <field>
-                                    <type>INTEGER</type>
-                                    <name>source_type</name>
-                                    <value>0</value>
-                                </field>
-                                <field>
-                                    <type>GRAPH</type>
-                                    <name>graphid</name>
-                                    <value>
-                                        <name>Memory Usage by Userspace</name>
-                                        <host>Custom - OS - Linux</host>
-                                    </value>
-                                </field>
-                            </fields>
-                        </widget>
-                        <widget>
-                            <type>GRAPH_CLASSIC</type>
-                            <y>20</y>
-                            <width>24</width>
-                            <height>4</height>
-                            <fields>
-                                <field>
-                                    <type>INTEGER</type>
-                                    <name>source_type</name>
-                                    <value>0</value>
-                                </field>
-                                <field>
-                                    <type>GRAPH</type>
-                                    <name>graphid</name>
-                                    <value>
-                                        <name>Memory Usage</name>
-                                        <host>Custom - OS - Linux</host>
-                                    </value>
-                                </field>
-                            </fields>
-                        </widget>
-                        <widget>
-                            <type>GRAPH_CLASSIC</type>
-                            <y>24</y>
-                            <width>24</width>
-                            <height>5</height>
-                            <fields>
-                                <field>
-                                    <type>INTEGER</type>
-                                    <name>source_type</name>
-                                    <value>0</value>
-                                </field>
-                                <field>
-                                    <type>GRAPH</type>
-                                    <name>graphid</name>
-                                    <value>
-                                        <name>Swap Usage</name>
-                                        <host>Custom - OS - Linux</host>
-                                    </value>
-                                </field>
-                            </fields>
-                        </widget>
-                        <widget>
-                            <type>GRAPH_CLASSIC</type>
-                            <y>29</y>
-                            <width>24</width>
-                            <height>5</height>
-                            <fields>
-                                <field>
-                                    <type>INTEGER</type>
-                                    <name>source_type</name>
-                                    <value>0</value>
-                                </field>
-                                <field>
-                                    <type>GRAPH</type>
-                                    <name>graphid</name>
-                                    <value>
-                                        <name>NTP  Sychronisation</name>
-                                        <host>Custom - OS - Linux</host>
-                                    </value>
-                                </field>
-                            </fields>
-                        </widget>
-                        <widget>
-                            <type>GRAPH_CLASSIC</type>
-                            <y>34</y>
-                            <width>24</width>
-                            <height>5</height>
-                            <fields>
-                                <field>
-                                    <type>INTEGER</type>
-                                    <name>source_type</name>
-                                    <value>0</value>
-                                </field>
-                                <field>
-                                    <type>GRAPH</type>
-                                    <name>graphid</name>
-                                    <value>
-                                        <name>MTA Mailqueue</name>
-                                        <host>Custom - OS - Linux</host>
-                                    </value>
-                                </field>
-                            </fields>
-                        </widget>
-                        <widget>
-                            <type>GRAPH_CLASSIC</type>
-                            <y>39</y>
-                            <width>24</width>
-                            <height>5</height>
-                            <fields>
-                                <field>
-                                    <type>INTEGER</type>
-                                    <name>source_type</name>
-                                    <value>0</value>
-                                </field>
-                                <field>
-                                    <type>GRAPH</type>
-                                    <name>graphid</name>
-                                    <value>
-                                        <name>NFS RPC Operations</name>
-                                        <host>Custom - OS - Linux</host>
-                                    </value>
-                                </field>
-                            </fields>
-                        </widget>
-                        <widget>
-                            <type>GRAPH_CLASSIC</type>
-                            <y>44</y>
-                            <width>24</width>
-                            <height>5</height>
-                            <fields>
-                                <field>
-                                    <type>INTEGER</type>
-                                    <name>source_type</name>
-                                    <value>1</value>
-                                </field>
-                                <field>
-                                    <type>ITEM</type>
-                                    <name>itemid</name>
-                                    <value>
-                                        <key>system.users.num</key>
-                                        <host>Custom - OS - Linux</host>
-                                    </value>
-                                </field>
-                            </fields>
-                        </widget>
-                        <widget>
-                            <type>GRAPH_CLASSIC</type>
-                            <y>49</y>
-                            <width>24</width>
-                            <height>5</height>
-                            <fields>
-                                <field>
-                                    <type>INTEGER</type>
-                                    <name>source_type</name>
-                                    <value>0</value>
-                                </field>
                                 <field>
                                     <type>GRAPH</type>
                                     <name>graphid</name>
@@ -2421,15 +2273,60 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
                         </widget>
                         <widget>
                             <type>GRAPH_CLASSIC</type>
-                            <y>54</y>
-                            <width>24</width>
-                            <height>5</height>
+                            <y>22</y>
+                            <width>12</width>
+                            <height>7</height>
                             <fields>
                                 <field>
-                                    <type>INTEGER</type>
-                                    <name>source_type</name>
-                                    <value>0</value>
+                                    <type>GRAPH</type>
+                                    <name>graphid</name>
+                                    <value>
+                                        <name>Memory Usage by Userspace</name>
+                                        <host>Custom - OS - Linux</host>
+                                    </value>
                                 </field>
+                            </fields>
+                        </widget>
+                        <widget>
+                            <type>GRAPH_CLASSIC</type>
+                            <x>12</x>
+                            <y>29</y>
+                            <width>12</width>
+                            <height>7</height>
+                            <fields>
+                                <field>
+                                    <type>GRAPH</type>
+                                    <name>graphid</name>
+                                    <value>
+                                        <name>NFS RPC Operations</name>
+                                        <host>Custom - OS - Linux</host>
+                                    </value>
+                                </field>
+                            </fields>
+                        </widget>
+                        <widget>
+                            <type>GRAPH_CLASSIC</type>
+                            <y>29</y>
+                            <width>12</width>
+                            <height>7</height>
+                            <fields>
+                                <field>
+                                    <type>GRAPH</type>
+                                    <name>graphid</name>
+                                    <value>
+                                        <name>Swap Usage</name>
+                                        <host>Custom - OS - Linux</host>
+                                    </value>
+                                </field>
+                            </fields>
+                        </widget>
+                        <widget>
+                            <type>GRAPH_CLASSIC</type>
+                            <x>12</x>
+                            <y>36</y>
+                            <width>12</width>
+                            <height>6</height>
+                            <fields>
                                 <field>
                                     <type>GRAPH</type>
                                     <name>graphid</name>
@@ -2442,20 +2339,53 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
                         </widget>
                         <widget>
                             <type>GRAPH_CLASSIC</type>
-                            <y>59</y>
-                            <width>24</width>
-                            <height>5</height>
+                            <y>36</y>
+                            <width>12</width>
+                            <height>6</height>
                             <fields>
-                                <field>
-                                    <type>INTEGER</type>
-                                    <name>source_type</name>
-                                    <value>0</value>
-                                </field>
                                 <field>
                                     <type>GRAPH</type>
                                     <name>graphid</name>
                                     <value>
-                                        <name>Swap Usage</name>
+                                        <name>NTP  Sychronisation</name>
+                                        <host>Custom - OS - Linux</host>
+                                    </value>
+                                </field>
+                            </fields>
+                        </widget>
+                        <widget>
+                            <type>GRAPH_CLASSIC</type>
+                            <y>42</y>
+                            <width>12</width>
+                            <height>6</height>
+                            <fields>
+                                <field>
+                                    <type>GRAPH</type>
+                                    <name>graphid</name>
+                                    <value>
+                                        <name>MTA Mailqueue</name>
+                                        <host>Custom - OS - Linux</host>
+                                    </value>
+                                </field>
+                            </fields>
+                        </widget>
+                        <widget>
+                            <type>GRAPH_CLASSIC</type>
+                            <x>12</x>
+                            <y>42</y>
+                            <width>12</width>
+                            <height>6</height>
+                            <fields>
+                                <field>
+                                    <type>INTEGER</type>
+                                    <name>source_type</name>
+                                    <value>1</value>
+                                </field>
+                                <field>
+                                    <type>ITEM</type>
+                                    <name>itemid</name>
+                                    <value>
+                                        <key>system.users.num</key>
                                         <host>Custom - OS - Linux</host>
                                     </value>
                                 </field>
