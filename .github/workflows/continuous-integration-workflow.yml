@@ -9,7 +9,7 @@ jobs:
       - name: Setup
         run: sudo apt-get install ruby-dev build-essential debhelper devscripts rpm xalan wget -y
       - name: Install FPM
-        run: gem install fpm
+        run: gem install fpm --user
       - name: Build Package
         run: ./create_packages
       - name: Test Package
