@@ -1,15 +1,22 @@
 name: Build package and test
-on: [push]
-
+on:
+  push:
+    branches:
+      - master
 jobs:
   build:
     name: CI
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.ADMIN_GITHUB_TOKEN }}
       - name: Setup
-        run: sudo apt-get install ruby-dev build-essential debhelper devscripts rpm xalan wget -y
-      - name: Install FPM
-        run: gem install fpm --user
+        run: |
+          sudo apt-get install ruby-dev build-essential debhelper devscripts rpm xalan wget -y
+          sudo gem install fpm
       - name: Build Package
         run: ./create_packages
       - name: Test Package
