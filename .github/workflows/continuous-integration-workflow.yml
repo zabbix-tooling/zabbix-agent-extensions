@@ -8,6 +8,7 @@ jobs:
     steps:
       - name: Setup
         run: sudo apt-get install ruby-dev build-essential debhelper devscripts rpm xalan wget -y
+      - name: Install FPM
         run: gem install fpm
       - name: Build Package
         run: ./create_packages
