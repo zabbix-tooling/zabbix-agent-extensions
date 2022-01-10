@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zabbix_export>
+    <version>5.2</version>
+    <date>2020-12-31T16:08:15Z</date>
+    <groups>
+        <group>
+            <name>Templates</name>
+        </group>
+    </groups>
+    <templates>
+        <template>
+            <template>Custom - Service - NGINX Logstats</template>
+            <name>Custom - Service - NGINX Logstats</name>
+            <groups>
+                <group>
+                    <name>Templates</name>
+                </group>
+            </groups>
+            <applications>
+                <application>
+                    <name>Service - NGINX - Cache</name>
+                </application>
+            </applications>
+            <discovery_rules>
+                <discovery_rule>
+                    <name>Configured Logstat VHost</name>
+                    <key>generic.discovery[nginx]</key>
+                    <delay>3600</delay>
+                    <description>nginx vhosts which have been configured to be have their cache statistics monitored by logstats</description>
+                    <item_prototypes>
+                        <item_prototype>
+                            <name>NGINX Cache Bypass {#NAME}</name>
+                            <type>TRAP</type>
+                            <key>nginx.cache.bypass[{#NAME}]</key>
+                            <delay>0</delay>
+                            <history>14d</history>
+                            <trends>0</trends>
+                            <status>DISABLED</status>
+                            <units>req/sec</units>
+                            <applications>
+                                <application>
+                                    <name>Service - NGINX - Cache</name>
+                                </application>
+                            </applications>
+                            <preprocessing>
+                                <step>
+                                    <type>CHANGE_PER_SECOND</type>
+                                    <parameters>
+                                        <parameter/>
+                                    </parameters>
+                                </step>
+                            </preprocessing>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>NGINX Cache Expires {#NAME}</name>
+                            <type>TRAP</type>
+                            <key>nginx.cache.expires[{#NAME}]</key>
+                            <delay>0</delay>
+                            <history>14d</history>
+                            <trends>0</trends>
+                            <status>DISABLED</status>
+                            <units>req/sec</units>
+                            <applications>
+                                <application>
+                                    <name>Service - NGINX - Cache</name>
+                                </application>
+                            </applications>
+                            <preprocessing>
+                                <step>
+                                    <type>CHANGE_PER_SECOND</type>
+                                    <parameters>
+                                        <parameter/>
+                                    </parameters>
+                                </step>
+                            </preprocessing>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>NGINX Cache Hit {#NAME}</name>
+                            <type>TRAP</type>
+                            <key>nginx.cache.hit[{#NAME}]</key>
+                            <delay>0</delay>
+                            <history>14d</history>
+                            <trends>0</trends>
+                            <status>DISABLED</status>
+                            <units>req/sec</units>
+                            <applications>
+                                <application>
+                                    <name>Service - NGINX - Cache</name>
+                                </application>
+                            </applications>
+                            <preprocessing>
+                                <step>
+                                    <type>CHANGE_PER_SECOND</type>
+                                    <parameters>
+                                        <parameter/>
+                                    </parameters>
+                                </step>
+                            </preprocessing>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>NGINX Cache Misses {#NAME}</name>
+                            <type>TRAP</type>
+                            <key>nginx.cache.misses[{#NAME}]</key>
+                            <delay>0</delay>
+                            <history>14d</history>
+                            <trends>0</trends>
+                            <status>DISABLED</status>
+                            <units>req/sec</units>
+                            <applications>
+                                <application>
+                                    <name>Service - NGINX - Cache</name>
+                                </application>
+                            </applications>
+                            <preprocessing>
+                                <step>
+                                    <type>CHANGE_PER_SECOND</type>
+                                    <parameters>
+                                        <parameter/>
+                                    </parameters>
+                                </step>
+                            </preprocessing>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>NGINX Cache Revalidates {#NAME}</name>
+                            <type>TRAP</type>
+                            <key>nginx.cache.revalidates[{#NAME}]</key>
+                            <delay>0</delay>
+                            <history>14d</history>
+                            <trends>0</trends>
+                            <status>DISABLED</status>
+                            <units>req/sec</units>
+                            <applications>
+                                <application>
+                                    <name>Service - NGINX - Cache</name>
+                                </application>
+                            </applications>
+                            <preprocessing>
+                                <step>
+                                    <type>CHANGE_PER_SECOND</type>
+                                    <parameters>
+                                        <parameter/>
+                                    </parameters>
+                                </step>
+                            </preprocessing>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>NGINX Cache Stales {#NAME}</name>
+                            <type>TRAP</type>
+                            <key>nginx.cache.stales[{#NAME}]</key>
+                            <delay>0</delay>
+                            <history>14d</history>
+                            <trends>0</trends>
+                            <status>DISABLED</status>
+                            <units>req/sec</units>
+                            <applications>
+                                <application>
+                                    <name>Service - NGINX - Cache</name>
+                                </application>
+                            </applications>
+                            <preprocessing>
+                                <step>
+                                    <type>CHANGE_PER_SECOND</type>
+                                    <parameters>
+                                        <parameter/>
+                                    </parameters>
+                                </step>
+                            </preprocessing>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>NGINX Cache Updates {#NAME}</name>
+                            <type>TRAP</type>
+                            <key>nginx.cache.updates[{#NAME}]</key>
+                            <delay>0</delay>
+                            <history>14d</history>
+                            <trends>0</trends>
+                            <status>DISABLED</status>
+                            <units>req/sec</units>
+                            <applications>
+                                <application>
+                                    <name>Service - NGINX - Cache</name>
+                                </application>
+                            </applications>
+                            <preprocessing>
+                                <step>
+                                    <type>CHANGE_PER_SECOND</type>
+                                    <parameters>
+                                        <parameter/>
+                                    </parameters>
+                                </step>
+                            </preprocessing>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>NGINX Cache Without_Cache {#NAME}</name>
+                            <type>TRAP</type>
+                            <key>nginx.cache.without_cache[{#NAME}]</key>
+                            <delay>0</delay>
+                            <history>14d</history>
+                            <trends>0</trends>
+                            <status>DISABLED</status>
+                            <units>req/sec</units>
+                            <applications>
+                                <application>
+                                    <name>Service - NGINX - Cache</name>
+                                </application>
+                            </applications>
+                            <preprocessing>
+                                <step>
+                                    <type>CHANGE_PER_SECOND</type>
+                                    <parameters>
+                                        <parameter/>
+                                    </parameters>
+                                </step>
+                            </preprocessing>
+                        </item_prototype>
+                    </item_prototypes>
+                </discovery_rule>
+            </discovery_rules>
+            <macros>
+                <macro>
+                    <macro>{$NGINX_HTTP_PORT}</macro>
+                    <value>80</value>
+                </macro>
+                <macro>
+                    <macro>{$NGINX_LOADBALANCER_CHECK}</macro>
+                    <value>/e/lbstatus.html</value>
+                </macro>
+                <macro>
+                    <macro>{$NGINX_MAX_CLIENTS}</macro>
+                    <value>1280</value>
+                </macro>
+            </macros>
+            <dashboards>
+                <dashboard>
+                    <name>Custom - Service - NGINX - Cache</name>
+                </dashboard>
+            </dashboards>
+        </template>
+    </templates>
+</zabbix_export>

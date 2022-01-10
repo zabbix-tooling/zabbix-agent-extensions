@@ -1,0 +1,68 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<style type="text/css">
+
+   p.desc{
+     white-space:nowrap;
+   }
+
+   table.pretty {
+    margin: 1em 1em 1em 2em;
+    background: whitesmoke;
+    border-collapse: collapse;
+   }
+
+   table.pretty th, table.pretty td {
+    border: 1px gainsboro solid;
+    padding: 0.2em;
+   }
+
+   table.pretty th {
+    background: gainsboro;
+    text-align: left;
+   }
+
+   table.pretty caption {
+    margin-left: inherit;
+    margin-right: inherit;
+    white-space:nowrap;
+   }
+  </style>
+<body>
+<h2>Macro Overview</h2>
+
+  The following macros can be overloaded on host level.
+  <table class="pretty">
+<tr>
+<th>Name</th><th>Default</th>
+</tr>
+</table>
+<h1>Static Elements</h1>
+<h2>Trigger Overview</h2>
+<table class="pretty">
+<tr>
+<th>Name</th><th>Description</th><th>Priority</th><th>Expression</th><th>Dependencies</th>
+</tr>
+</table>
+<h2>Graph Overview</h2>
+<table class="pretty">
+<tr>
+<th>Name</th><th>Elements</th>
+</tr>
+</table>
+<h2>Item Overview</h2>
+<table class="pretty">
+<tr>
+<th>Type</th><th>Name</th><th>Key</th><th>Description</th><th>Interval (sec)</th><th>History Days</th><th>Trend Days</th>
+</tr>
+<tr>
+<td></td><td>CUPS TCP port $1 listening state</td><td><tt>net.tcp.listen[631]</tt></td><td></td><td>60</td><td>7d</td><td>0</td>
+</tr>
+<tr>
+<td></td><td>Number of $1 processes</td><td><tt>proc.num[cupsd]</tt></td><td></td><td>60</td><td>7d</td><td></td>
+</tr>
+</table>
+</body>
+</html>

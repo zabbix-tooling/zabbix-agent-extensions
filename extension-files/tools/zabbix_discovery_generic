@@ -16,7 +16,7 @@
 
 APPNAME="$1"
 TYPE="$2"
-DIR="/var/run/zabbix-generic-discovery/"
+DIR="/etc/zabbix/zabbix-discovery-generic"
 
 # Checks
 if [ -z "$APPNAME" ];then

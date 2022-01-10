@@ -1,0 +1,36 @@
+#!/usr/bin/env python3
+
+import re
+import json
+import sys
+
+units = {
+    "kB": 1024,
+    "mB": 1024*1024,
+    "gB": 1024*1024*1024,
+    "tB": 1024*1024*1024*1024,
+        }
+result = {}
+with open("/proc/meminfo") as f_mem:
+    for line in f_mem.readlines():
+        m = re.match("(.+):\s+(\d+)\s+(.+)",line)
+        if not m:
+            continue
+        name = m.group(1)
+        amount = int(m.group(2))
+        unit = m.group(3)
+
+        if unit not in units:
+            print("ERROR : unit %s not known" % unit)
+            sys.exit(1)
+        result[name] = amount * units[unit]
+
+# https://blog.famzah.net/2014/09/22/know-your-linux-memory-usage/
+# https://linuxwiki.de/proc/meminfo
+# MemTotal = MemFree + (Buffers + Cached + SwapCached) + AnonPages + ((SReclaimable + SUnreclaim) + PageTables + KernelStack)
+
+result["CalculatedUserSpace"] = result["Active(anon)"] - result["SwapCached"]
+result["CalculatedKernelSpace"] = result["MemTotal"] - result["CalculatedUserSpace"]
+
+
+print(json.dumps(result,indent=True))

@@ -1,0 +1,22 @@
+#!/bin/bash
+
+IMAGE_REPO="scoopex666"
+IMAGE_NAME="zabbix-agent-with-agent-extensions"
+VERSION="${2:-$(git describe --abbrev=0 --tags)}"
+
+if [ "$1" = "build" ];then
+   docker build -t ${IMAGE_NAME}:${VERSION} -f Dockerfile .
+elif [ "$1" = "inspect" ];then
+   docker run -ti ${IMAGE_NAME}:${VERSION} /bin/bash
+elif [ "$1" = "publish" ];then
+   docker tag ${IMAGE_NAME}:${VERSION} ${IMAGE_REPO}/${IMAGE_NAME}:${VERSION}
+   docker push ${IMAGE_REPO}/${IMAGE_NAME}:${VERSION}
+   docker tag ${IMAGE_NAME}:${VERSION} ${IMAGE_REPO}/${IMAGE_NAME}:latest
+   docker push ${IMAGE_REPO}/${IMAGE_NAME}:latest
+elif [ "$1" = "test" ];then
+   docker run ${IMAGE_NAME}:${VERSION}
+else
+   echo "$0 build|inspect|publish|run"
+fi
+
+

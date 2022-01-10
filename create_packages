@@ -26,7 +26,7 @@ prepare(){
    fi
 
 	mkdir -p -m 755 ${TMPDIR}/usr/share/zabbix-agent-extensions/include.d/
-	cp -av ${SDIR}/agent-config/* ${TMPDIR}/usr/share/zabbix-agent-extensions/include.d/
+	cp -av ${SDIR}/agent-config/zabbix_* ${TMPDIR}/usr/share/zabbix-agent-extensions/include.d/
    sed -i "~s,VERSION TO BE REPLACED,${VERSION}," ${TMPDIR}/usr/share/zabbix-agent-extensions/include.d/zabbix_agent_extensions.conf
 	chmod 644 ${TMPDIR}/usr/share/zabbix-agent-extensions/include.d/*
 
@@ -41,6 +41,10 @@ prepare(){
 	mkdir -p -m 755 ${TMPDIR}/etc/sudoers.d
 	cp ${SDIR}/sudoers ${TMPDIR}/etc/sudoers.d/zabbix
 	chmod 0440 ${TMPDIR}/etc/sudoers.d/*
+
+	mkdir -p -m 755 ${TMPDIR}/etc/pam.d
+	cp ${SDIR}/pam-config ${TMPDIR}/etc/pam.d/zabbix-agent-extensions
+	chmod 0440 ${TMPDIR}/etc/pam.d/*
 
 	mkdir -p -m 755 ${TMPDIR}/var/cache/zabbix
    set +x
@@ -93,8 +97,11 @@ create_package(){
 create_docu(){
    cd $SDIR/../zabbix_templates/3.2-outdated
  ./create_template_documentation
- cd $SDIR/../zabbix_templates/3.4
+ cd $SDIR/../zabbix_templates/3.4-outdated
  ./create_template_documentation
+ cd $SDIR/../zabbix_templates/4.4-outdated
+ ./create_template_documentation
+
 }
 
 ######################################################################

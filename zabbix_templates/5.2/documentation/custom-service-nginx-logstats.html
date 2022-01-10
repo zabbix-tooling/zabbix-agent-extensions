@@ -1,0 +1,131 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<style type="text/css">
+
+   p.desc{
+     white-space:nowrap;
+   }
+
+   table.pretty {
+    margin: 1em 1em 1em 2em;
+    background: whitesmoke;
+    border-collapse: collapse;
+   }
+
+   table.pretty th, table.pretty td {
+    border: 1px gainsboro solid;
+    padding: 0.2em;
+   }
+
+   table.pretty th {
+    background: gainsboro;
+    text-align: left;
+   }
+
+   table.pretty caption {
+    margin-left: inherit;
+    margin-right: inherit;
+    white-space:nowrap;
+   }
+  </style>
+<body>
+<h2>Macro Overview</h2>
+
+  The following macros can be overloaded on host level.
+  <table class="pretty">
+<tr>
+<th>Name</th><th>Default</th>
+</tr>
+<tr>
+<td>{$NGINX_HTTP_PORT}</td><td>80</td>
+</tr>
+<tr>
+<td>{$NGINX_LOADBALANCER_CHECK}</td><td>/e/lbstatus.html</td>
+</tr>
+<tr>
+<td>{$NGINX_MAX_CLIENTS}</td><td>1280</td>
+</tr>
+</table>
+<h1>Static Elements</h1>
+<h2>Trigger Overview</h2>
+<table class="pretty">
+<tr>
+<th>Name</th><th>Description</th><th>Priority</th><th>Expression</th><th>Dependencies</th>
+</tr>
+</table>
+<h2>Graph Overview</h2>
+<table class="pretty">
+<tr>
+<th>Name</th><th>Elements</th>
+</tr>
+</table>
+<h2>Item Overview</h2>
+<table class="pretty">
+<tr>
+<th>Type</th><th>Name</th><th>Key</th><th>Description</th><th>Interval (sec)</th><th>History Days</th><th>Trend Days</th>
+</tr>
+</table>
+<h1>Discovery rule "Configured Logstat VHost"</h1>
+<table class="pretty">
+<tr>
+<th>Name</th><th>Value</th>
+</tr>
+<tr>
+<td>Name</td><td>Configured Logstat VHost</td>
+</tr>
+<tr>
+<td>Key</td><td>generic.discovery[nginx]</td>
+</tr>
+<tr>
+<td>Type</td><td></td>
+</tr>
+<tr>
+<td>Delay</td><td>3600</td>
+</tr>
+</table>
+<h2>Trigger Overview</h2>
+<table class="pretty">
+<tr>
+<th>Name</th><th>Description</th><th>Priority</th><th>Expression</th><th>Dependencies</th>
+</tr>
+</table>
+<h2>Graph Overview</h2>
+<table class="pretty">
+<tr>
+<th>Name</th><th>Elements</th>
+</tr>
+</table>
+<h2>Item Overview</h2>
+<table class="pretty">
+<tr>
+<th>Type</th><th>Name</th><th>Key</th><th>Description</th><th>Interval (sec)</th><th>History Days</th><th>Trend Days</th>
+</tr>
+<tr>
+<td>TRAP</td><td>NGINX Cache Bypass {#NAME}</td><td><tt>nginx.cache.bypass[{#NAME}]</tt></td><td></td><td>0</td><td>14d</td><td>0</td>
+</tr>
+<tr>
+<td>TRAP</td><td>NGINX Cache Expires {#NAME}</td><td><tt>nginx.cache.expires[{#NAME}]</tt></td><td></td><td>0</td><td>14d</td><td>0</td>
+</tr>
+<tr>
+<td>TRAP</td><td>NGINX Cache Hit {#NAME}</td><td><tt>nginx.cache.hit[{#NAME}]</tt></td><td></td><td>0</td><td>14d</td><td>0</td>
+</tr>
+<tr>
+<td>TRAP</td><td>NGINX Cache Misses {#NAME}</td><td><tt>nginx.cache.misses[{#NAME}]</tt></td><td></td><td>0</td><td>14d</td><td>0</td>
+</tr>
+<tr>
+<td>TRAP</td><td>NGINX Cache Revalidates {#NAME}</td><td><tt>nginx.cache.revalidates[{#NAME}]</tt></td><td></td><td>0</td><td>14d</td><td>0</td>
+</tr>
+<tr>
+<td>TRAP</td><td>NGINX Cache Stales {#NAME}</td><td><tt>nginx.cache.stales[{#NAME}]</tt></td><td></td><td>0</td><td>14d</td><td>0</td>
+</tr>
+<tr>
+<td>TRAP</td><td>NGINX Cache Updates {#NAME}</td><td><tt>nginx.cache.updates[{#NAME}]</tt></td><td></td><td>0</td><td>14d</td><td>0</td>
+</tr>
+<tr>
+<td>TRAP</td><td>NGINX Cache Without_Cache {#NAME}</td><td><tt>nginx.cache.without_cache[{#NAME}]</tt></td><td></td><td>0</td><td>14d</td><td>0</td>
+</tr>
+</table>
+</body>
+</html>

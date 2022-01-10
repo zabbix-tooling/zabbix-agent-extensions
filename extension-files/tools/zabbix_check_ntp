@@ -37,7 +37,7 @@ out, err = process.communicate()
 
 for line in out.decode('utf8').splitlines():
     m = re.match(
-        r"^(?P<mode>\*|\+|o|x|\.|\#)(.+?)\s+.*(?P<delay>-?\d+\.?\d*)\s+(?P<offset>-?\d+\.?\d*)\s+(?P<jitter>-?\d+\.?\d*)$",
+        r"^(?P<mode>\*|\+|o|x|\.|\#)(.+?)\s+.*(?P<delay>[-+]?\d+\.?\d*)\s+(?P<offset>[-+]?\d+\.?\d*)\s+(?P<jitter>[-+]?\d+\.?\d*)$",
         line)
     if not m:
         continue

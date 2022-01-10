@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zabbix_export>
+    <version>5.2</version>
+    <date>2020-12-31T16:08:41Z</date>
+    <groups>
+        <group>
+            <name>Templates</name>
+        </group>
+    </groups>
+    <templates>
+        <template>
+            <template>Custom - Service - Springboot</template>
+            <name>Custom - Service - Springboot</name>
+            <groups>
+                <group>
+                    <name>Templates</name>
+                </group>
+            </groups>
+            <applications>
+                <application>
+                    <name>Springboot Http Request Performance</name>
+                </application>
+            </applications>
+            <discovery_rules>
+                <discovery_rule>
+                    <name>Metric http.server.requests by uri</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>springboot.discovery[{$SPRINGBOOT_BASE_URI}/metrics/http.server.requests,uri]</key>
+                    <delay>10m</delay>
+                    <lifetime>2d</lifetime>
+                    <item_prototypes>
+                        <item_prototype>
+                            <name>Performance HTTP {#URI} Data</name>
+                            <type>ZABBIX_ACTIVE</type>
+                            <key>springboot.get[{$SPRINGBOOT_BASE_URI}/metrics/http.server.requests,tag=uri:{#URI}]</key>
+                            <delay>3m</delay>
+                            <history>2h</history>
+                            <trends>0</trends>
+                            <value_type>TEXT</value_type>
+                            <applications>
+                                <application>
+                                    <name>Springboot Http Request Performance</name>
+                                </application>
+                            </applications>
+                            <request_method>POST</request_method>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>{#URI} Average Request Time</name>
+                            <type>CALCULATED</type>
+                            <key>springboot.uri[{#URI},average_responsetime]</key>
+                            <history>14d</history>
+                            <trends>90d</trends>
+                            <value_type>FLOAT</value_type>
+                            <units>s</units>
+                            <params>last(&quot;springboot.uri[{#URI},time]&quot;)/last(&quot;springboot.uri[{#URI},requests]&quot;)</params>
+                            <applications>
+                                <application>
+                                    <name>Springboot Http Request Performance</name>
+                                </application>
+                            </applications>
+                            <request_method>POST</request_method>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>{#URI} Requests</name>
+                            <type>DEPENDENT</type>
+                            <key>springboot.uri[{#URI},requests]</key>
+                            <delay>0</delay>
+                            <history>7d</history>
+                            <trends>90d</trends>
+                            <units>req</units>
+                            <applications>
+                                <application>
+                                    <name>Springboot Http Request Performance</name>
+                                </application>
+                            </applications>
+                            <preprocessing>
+                                <step>
+                                    <type>JSONPATH</type>
+                                    <parameters>
+                                        <parameter>$['COUNT']</parameter>
+                                    </parameters>
+                                </step>
+                                <step>
+                                    <type>SIMPLE_CHANGE</type>
+                                    <parameters>
+                                        <parameter/>
+                                    </parameters>
+                                </step>
+                            </preprocessing>
+                            <master_item>
+                                <key>springboot.get[{$SPRINGBOOT_BASE_URI}/metrics/http.server.requests,tag=uri:{#URI}]</key>
+                            </master_item>
+                            <request_method>POST</request_method>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>{#URI} Requests/sec</name>
+                            <type>DEPENDENT</type>
+                            <key>springboot.uri[{#URI},requests_per_second]</key>
+                            <delay>0</delay>
+                            <history>7d</history>
+                            <trends>90d</trends>
+                            <value_type>FLOAT</value_type>
+                            <units>req/s</units>
+                            <applications>
+                                <application>
+                                    <name>Springboot Http Request Performance</name>
+                                </application>
+                            </applications>
+                            <preprocessing>
+                                <step>
+                                    <type>JSONPATH</type>
+                                    <parameters>
+                                        <parameter>$['COUNT']</parameter>
+                                    </parameters>
+                                </step>
+                                <step>
+                                    <type>CHANGE_PER_SECOND</type>
+                                    <parameters>
+                                        <parameter/>
+                                    </parameters>
+                                </step>
+                            </preprocessing>
+                            <master_item>
+                                <key>springboot.get[{$SPRINGBOOT_BASE_URI}/metrics/http.server.requests,tag=uri:{#URI}]</key>
+                            </master_item>
+                            <request_method>POST</request_method>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>{#URI} Time</name>
+                            <type>DEPENDENT</type>
+                            <key>springboot.uri[{#URI},time]</key>
+                            <delay>0</delay>
+                            <history>7d</history>
+                            <trends>90d</trends>
+                            <value_type>FLOAT</value_type>
+                            <units>s</units>
+                            <applications>
+                                <application>
+                                    <name>Springboot Http Request Performance</name>
+                                </application>
+                            </applications>
+                            <preprocessing>
+                                <step>
+                                    <type>JSONPATH</type>
+                                    <parameters>
+                                        <parameter>$['TOTAL_TIME']</parameter>
+                                    </parameters>
+                                </step>
+                                <step>
+                                    <type>SIMPLE_CHANGE</type>
+                                    <parameters>
+                                        <parameter/>
+                                    </parameters>
+                                </step>
+                            </preprocessing>
+                            <master_item>
+                                <key>springboot.get[{$SPRINGBOOT_BASE_URI}/metrics/http.server.requests,tag=uri:{#URI}]</key>
+                            </master_item>
+                            <request_method>POST</request_method>
+                        </item_prototype>
+                    </item_prototypes>
+                    <graph_prototypes>
+                        <graph_prototype>
+                            <name>Performance HTTP {#URI}</name>
+                            <height>300</height>
+                            <ymin_type_1>FIXED</ymin_type_1>
+                            <graph_items>
+                                <graph_item>
+                                    <color>F63100</color>
+                                    <yaxisside>RIGHT</yaxisside>
+                                    <calc_fnc>MAX</calc_fnc>
+                                    <item>
+                                        <host>Custom - Service - Springboot</host>
+                                        <key>springboot.uri[{#URI},requests_per_second]</key>
+                                    </item>
+                                </graph_item>
+                                <graph_item>
+                                    <sortorder>1</sortorder>
+                                    <color>2774A4</color>
+                                    <calc_fnc>MAX</calc_fnc>
+                                    <item>
+                                        <host>Custom - Service - Springboot</host>
+                                        <key>springboot.uri[{#URI},average_responsetime]</key>
+                                    </item>
+                                </graph_item>
+                            </graph_items>
+                        </graph_prototype>
+                    </graph_prototypes>
+                    <request_method>POST</request_method>
+                </discovery_rule>
+            </discovery_rules>
+            <macros>
+                <macro>
+                    <macro>{$SPRINGBOOT_BASE_URI}</macro>
+                    <value>http://127.0.0.1:6001/actuator</value>
+                </macro>
+            </macros>
+            <dashboards>
+                <dashboard>
+                    <name>Custom - Service - Springboot - HTTP Performance</name>
+                    <widgets>
+                        <widget>
+                            <type>GRAPH_PROTOTYPE</type>
+                            <width>24</width>
+                            <height>7</height>
+                            <fields>
+                                <field>
+                                    <type>INTEGER</type>
+                                    <name>columns</name>
+                                    <value>1</value>
+                                </field>
+                                <field>
+                                    <type>INTEGER</type>
+                                    <name>rows</name>
+                                    <value>1</value>
+                                </field>
+                                <field>
+                                    <type>INTEGER</type>
+                                    <name>source_type</name>
+                                    <value>2</value>
+                                </field>
+                                <field>
+                                    <type>GRAPH_PROTOTYPE</type>
+                                    <name>graphid</name>
+                                    <value>
+                                        <name>Performance HTTP {#URI}</name>
+                                        <host>Custom - Service - Springboot</host>
+                                    </value>
+                                </field>
+                            </fields>
+                        </widget>
+                    </widgets>
+                </dashboard>
+            </dashboards>
+        </template>
+    </templates>
+</zabbix_export>

@@ -2,13 +2,10 @@
 
 THE_INCLUDE="Include=/usr/share/zabbix-agent-extensions/include.d/"
 
-if ( (grep -q "Ubuntu" /etc/os-release) || (grep -q "Debian" /etc/os-release) || (grep -qi "Centos" /etc/os-release) );then
-
-   if [ -e "/etc/zabbix/zabbix_agentd.d/zabbix-agent-extensions" ];
-   then
+if (grep -q -P "Ubuntu|Debian|CentOS|Raspbian" /etc/os-release);then
+   if [ -e "/etc/zabbix/zabbix_agentd.d/zabbix-agent-extensions" ];then
      echo "Notice: /etc/zabbix/zabbix_agentd.d/zabbix-agent-extensions already exists, no need to add the Include to /etc/zabbix/zabbix_agentd.conf"
-   elif ! (grep -q "$THE_INCLUDE" /etc/zabbix/zabbix_agentd.conf);
-   then  
+   elif ! (grep -q "$THE_INCLUDE" /etc/zabbix/zabbix_agentd.conf);then  
      echo "" >> /etc/zabbix/zabbix_agentd.conf
      echo "#################################################################" >> /etc/zabbix/zabbix_agentd.conf
      echo "# Added by postinstall of package zabbix-agent-extensions" >> /etc/zabbix/zabbix_agentd.conf
@@ -17,19 +14,21 @@ if ( (grep -q "Ubuntu" /etc/os-release) || (grep -q "Debian" /etc/os-release) ||
 
    usermod -G adm -a zabbix 
 
+   mkdir -m 755 -p /var/cache/zabbix
    chown -R zabbix:zabbix /var/cache/zabbix
-   mkdir -m 755 -p /var/run/zabbix-generic-discovery/
-   chown zabbix:zabbix /var/run/zabbix-generic-discovery/
+
+   mkdir -m 755 -p /etc/zabbix/zabbix-discovery-generic
+   chown zabbix:zabbix /etc/zabbix/zabbix-discovery-generic
   
    if (which systemctl >/dev/null 2>&1);then
       echo "Restarting with systemctl"
-      systemctl restart zabbix-agent
-   else
+      systemctl restart zabbix-agent.service
+   elif [ -f /etc/init.d/zabbix-agent ];then
       echo "Restarting with /etc/init.d/zabbix-agent"
       /etc/init.d/zabbix-agent restart
+   else
+      echo "no known init method"
    fi
-
 else
    echo "Notice: no postinstall implemented for you distribution, contributions and merge requests are very welcome ;-)"
 fi
-

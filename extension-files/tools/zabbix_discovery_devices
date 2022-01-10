@@ -37,8 +37,14 @@ config_default = {
 ####################################################################################
 #### HELPERS
 
-def check_match(matchfor, device_name, regexes):
+def check_match(matchfor, device_name, config, key):
     ret = False
+
+    if key in config:
+          regexes = config[key]
+    else:
+          regexes = []
+
     for regex in regexes:
         regex = regex.strip()
         if re.match(r"^%s$" % regex, device_name):
@@ -136,6 +142,13 @@ parser.add_argument(
 )
 
 parser.add_argument(
+    '--software_raid',
+    help='Discovery for software_raid',
+    action='store_true',
+)
+
+
+parser.add_argument(
     '--only_rawdisk',
     help='Output only hardware devices',
     action='store_true',
@@ -180,23 +193,24 @@ for filename in glob.glob('/sys/block/*'):
         sys.stderr.write("** DEVICE %s / MODEL %s\n" % (device_name, device_model))
 
     # Check matched devices
-    if not check_match("include", device_name, config["regex_includes_name"]):
+    if not check_match("include", device_name, config, "regex_includes_name"):
         continue
 
-    if not check_match("include", device_model, config["regex_includes_model"]):
+    if not check_match("include", device_model, config, "regex_includes_model"):
         continue
 
     # Check excluded devices
-    if check_match("exclude", device_name, config["regex_excludes_name"]):
+    if check_match("exclude", device_name, config, "regex_excludes_name"):
         continue
 
-    if check_match("exclude", device_model, config["regex_excludes_model"]):
+    if check_match("exclude", device_model, config, "regex_excludes_model"):
         continue
 
     if args.only_rawdisk and not is_real_hardware_device(device_name):
         continue
 
     device_size_file = "/sys/block/%s/size" % device_name
+
     device_size = 0
     if os.path.isfile(device_size_file):
         with open(device_size_file) as f_size:
@@ -206,10 +220,22 @@ for filename in glob.glob('/sys/block/*'):
             sys.stderr.write("ignoring device %s, its size is 0\n" % device_name)
         continue
 
+    raid_disks_level_file = "/sys/block/%s/md/level" % device_name
+    raid_disks_level = None
+    if os.path.isfile(raid_disks_level_file):
+        with open(raid_disks_level_file) as f_raid:
+            raid_disks_level = str(f_raid.readline().strip())
+
     if args.smart and device_name in config["smartctl_subdevices"]:
         for smartarg in config["smartctl_subdevices"][device_name]:
             device = {}
             device['{#BLOCKDEVICE}'] = device_name + " " + smartarg
+            devices_discovered['data'].append(device)
+    elif args.software_raid:
+        if raid_disks_level:
+            device = {}
+            device['{#BLOCKDEVICE}'] = device_name
+            device['{#RAIDLEVEL}'] = raid_disks_level.upper()
             devices_discovered['data'].append(device)
     else:
         device = {}

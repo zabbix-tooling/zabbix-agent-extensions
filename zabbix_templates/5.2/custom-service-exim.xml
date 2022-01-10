@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zabbix_export>
+    <version>5.2</version>
+    <date>2020-12-31T16:07:38Z</date>
+    <groups>
+        <group>
+            <name>Templates</name>
+        </group>
+    </groups>
+    <templates>
+        <template>
+            <template>Custom - Service - Exim</template>
+            <name>Custom - Service - Exim</name>
+            <groups>
+                <group>
+                    <name>Templates</name>
+                </group>
+            </groups>
+            <applications>
+                <application>
+                    <name>Service - Exim</name>
+                </application>
+            </applications>
+            <items>
+                <item>
+                    <name>Rejected Mails</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>log.count[{$EXIM_LOGFILE},&quot;: Rejected&quot;,,100,skip,]</key>
+                    <history>2w</history>
+                    <trends>90d</trends>
+                    <units>msg</units>
+                    <applications>
+                        <application>
+                            <name>Service - Exim</name>
+                        </application>
+                    </applications>
+                </item>
+                <item>
+                    <name>Accepted Spam Mails</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>log.count[{$EXIM_LOGFILE},&quot;Action: flagged as Spam but accepted:&quot;,,100,skip,]</key>
+                    <history>2w</history>
+                    <trends>90d</trends>
+                    <units>msg</units>
+                    <applications>
+                        <application>
+                            <name>Service - Exim</name>
+                        </application>
+                    </applications>
+                </item>
+                <item>
+                    <name>Completed Mails</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>log.count[{$EXIM_LOGFILE},&quot; Completed$&quot;,,100,skip,]</key>
+                    <history>2w</history>
+                    <trends>90d</trends>
+                    <units>msg</units>
+                    <applications>
+                        <application>
+                            <name>Service - Exim</name>
+                        </application>
+                    </applications>
+                </item>
+            </items>
+            <macros>
+                <macro>
+                    <macro>{$EXIM_LOGFILE}</macro>
+                    <value>/var/log/exim4/mainlog</value>
+                </macro>
+            </macros>
+            <dashboards>
+                <dashboard>
+                    <name>Custom - Service - Exim</name>
+                    <widgets>
+                        <widget>
+                            <type>GRAPH_CLASSIC</type>
+                            <width>24</width>
+                            <height>7</height>
+                            <fields>
+                                <field>
+                                    <type>INTEGER</type>
+                                    <name>source_type</name>
+                                    <value>0</value>
+                                </field>
+                                <field>
+                                    <type>GRAPH</type>
+                                    <name>graphid</name>
+                                    <value>
+                                        <name>Service - Exim - Overview</name>
+                                        <host>Custom - Service - Exim</host>
+                                    </value>
+                                </field>
+                            </fields>
+                        </widget>
+                        <widget>
+                            <type>GRAPH_CLASSIC</type>
+                            <y>7</y>
+                            <width>24</width>
+                            <height>7</height>
+                            <fields>
+                                <field>
+                                    <type>INTEGER</type>
+                                    <name>source_type</name>
+                                    <value>0</value>
+                                </field>
+                                <field>
+                                    <type>GRAPH</type>
+                                    <name>graphid</name>
+                                    <value>
+                                        <name>Service - Exim - Details</name>
+                                        <host>Custom - Service - Exim</host>
+                                    </value>
+                                </field>
+                            </fields>
+                        </widget>
+                    </widgets>
+                </dashboard>
+            </dashboards>
+        </template>
+    </templates>
+    <graphs>
+        <graph>
+            <name>Service - Exim - Details</name>
+            <height>300</height>
+            <ymin_type_1>FIXED</ymin_type_1>
+            <graph_items>
+                <graph_item>
+                    <color>2774A4</color>
+                    <item>
+                        <host>Custom - Service - Exim</host>
+                        <key>log.count[{$EXIM_LOGFILE},&quot;Action: flagged as Spam but accepted:&quot;,,100,skip,]</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <name>Service - Exim - Overview</name>
+            <height>300</height>
+            <ymin_type_1>FIXED</ymin_type_1>
+            <graph_items>
+                <graph_item>
+                    <color>1A7C11</color>
+                    <calc_fnc>MAX</calc_fnc>
+                    <item>
+                        <host>Custom - Service - Exim</host>
+                        <key>log.count[{$EXIM_LOGFILE},&quot; Completed$&quot;,,100,skip,]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <color>F63100</color>
+                    <calc_fnc>MAX</calc_fnc>
+                    <item>
+                        <host>Custom - Service - Exim</host>
+                        <key>log.count[{$EXIM_LOGFILE},&quot;: Rejected&quot;,,100,skip,]</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+    </graphs>
+</zabbix_export>

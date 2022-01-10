@@ -1,9 +1,8 @@
 language: bash
-dist: bionic
+dist: focal
 sudo: required
 before_install:
 - sudo apt-get update
-- sudo apt-get upgrade
 - sudo apt-get install ruby-dev build-essential debhelper devscripts rpm xalan wget -y
 script:
 - set -e
