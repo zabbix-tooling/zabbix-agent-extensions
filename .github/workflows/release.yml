@@ -11,7 +11,19 @@ jobs:
     permissions:
       contents: write
     steps:
-    - uses: actions/checkout@v2
-    - uses: ncipollo/release-action@v1
-      with:
-        artifacts: "*.deb,*.rpm"
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          ref: refs/heads/master
+      - name: Setup
+        run: |
+          sudo apt-get install ruby-dev build-essential debhelper devscripts rpm xalan wget -y
+          sudo gem install fpm
+      - name: Build Package
+        run: ./create_packages
+      - name: Test Package
+        run: sudo ./ci_test
+      - uses: ncipollo/release-action@v1
+        with:
+          artifacts: "*.deb,*.rpm"
