@@ -20,4 +20,4 @@ jobs:
       - name: Build Package
         run: ./create_packages
       - name: Test Package
-        run: ./ci_test
+        run: sudo ./ci_test
