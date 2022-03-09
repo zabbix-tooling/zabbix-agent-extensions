@@ -3,7 +3,11 @@
 
 ######################################################################
 
-VERSION="${1:-$(git describe --abbrev=0 --tags)}"
+VERSION="$(git describe --abbrev=0 --tags)"
+if [ -z "$VERSION" ];then
+   echo "ERROR: unable to find a tag"
+   exit 100
+fi
 
 ######################################################################
 ### HELPERS
