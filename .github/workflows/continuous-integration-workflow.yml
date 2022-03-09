@@ -11,8 +11,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
         with:
-          fetch-depth: 0
-          token: ${{ secrets.ADMIN_GITHUB_TOKEN }}
+          ref: refs/heads/master
       - name: Setup
         run: |
           sudo apt-get install ruby-dev build-essential debhelper devscripts rpm xalan wget -y
