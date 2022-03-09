@@ -36,8 +36,6 @@ wget -c "https://repo.zabbix.com/zabbix/5.4/ubuntu/pool/main/z/zabbix-release/za
 sudo dpkg -i zabbix-release_5.4-1+ubuntu20.04_all.deb
 sudo apt-get update -y
 sudo apt-get install zabbix-agent zabbix-get -y
-sudo killall -KILL zabbix_agentd
-sudo dpkg -i zabbix-agent_*.deb zabbix-get_*.deb 
 sudo sed  -i '~s,# DebugLevel.*,DebugLevel=2,' /etc/zabbix/zabbix_agentd.conf
 sudo sed  -i '~s,^Server=.*,Server=127.0.0.1,' /etc/zabbix/zabbix_agentd.conf
 set +e
