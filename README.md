@@ -1,6 +1,9 @@
 zabbix-agent-extensions
 =======================
 
+[![Build package and test](https://github.com/scoopex/zabbix-agent-extensions/actions/workflows/continuous-integration-workflow.yml/badge.svg)](https://github.com/scoopex/zabbix-agent-extensions/actions/workflows/continuous-integration-workflow.yml)
+[![Releases](https://github.com/scoopex/zabbix-agent-extensions/actions/workflows/release.yml/badge.svg)](https://github.com/scoopex/zabbix-agent-extensions/actions/workflows/release.yml)
+
 # Overview
 
 A set of zabbix UserParameter scripts and production ready monitoring templates for linux systems.
