@@ -30,7 +30,7 @@ config_default = {
     "regex_includes_type": [".*"],
     "regex_excludes_name": [],
     "regex_excludes_type": ["nfs", "nfs4", "nfsd", "cifs", "autofs", "binfmt_misc", "cgroup", "cgroup2", "configfs",
-                            "debugfs", "overlay", "systemd-1", "nsfs", "lxcfs", 
+                            "debugfs", "overlay", "overlay2","systemd-1", "nsfs", "lxcfs", 
                             "devpts", "devtmpfs", "efivarfs", "fusectl", "fuse.gvfsd-fuse", "hugetlbfs", "mqueue",
                             "fuse.lxcfs", "xenfs", "rpc_pipefs", "efivarfs", "tracefs", "squashfs",
                             "proc", "pstore", "securityfs", "sysfs", "tmpfs", "vfat", "iso9660" ],
