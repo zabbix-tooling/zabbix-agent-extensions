@@ -3,7 +3,7 @@
 THE_INCLUDE="Include=/usr/share/zabbix-agent-extensions/include.d/"
 
 if (grep -q -P "Ubuntu|Debian|CentOS|Raspbian" /etc/os-release);then
-   if [ -e "/etc/zabbix/zabbix_agentd.d/zabbix-agent-extensions" ];then
+   if [ -e "/etc/zabbix/zabbix_agentd.d/zabbix-agent-extensions" ] || [ -e "/etc/zabbix/zabbix_agentd.d/zabbix-agent-extensions.conf" ];then
      echo "Notice: /etc/zabbix/zabbix_agentd.d/zabbix-agent-extensions already exists, no need to add the Include to /etc/zabbix/zabbix_agentd.conf"
    elif ! (grep -q "$THE_INCLUDE" /etc/zabbix/zabbix_agentd.conf);then  
      echo "" >> /etc/zabbix/zabbix_agentd.conf
