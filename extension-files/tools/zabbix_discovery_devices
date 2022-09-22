@@ -142,7 +142,7 @@ parser.add_argument(
 )
 
 parser.add_argument(
-    '--check_devdev',
+    '--check_not_devdev',
     help='Check fpr a device at /dev',
     action='store_true',
 )
@@ -194,7 +194,7 @@ for filename in glob.glob('/sys/block/*'):
     device_model_file = "/sys/block/%s/device/model" % device_name
     device_model = "UNDEFINED"
 
-    if args.check_devdev and not os.path.exists("/dev/%s" % device_name):
+    if not args.check_not_devdev and not os.path.exists("/dev/%s" % device_name):
        continue
 
     if os.path.isfile(device_model_file):
