@@ -3,7 +3,11 @@
 
 ######################################################################
 
-VERSION="${1:-$(git describe --abbrev=0 --tags)}"
+VERSION="$(git describe --abbrev=0 --tags)"
+if [ -z "$VERSION" ];then
+   echo "ERROR: unable to find a tag"
+   exit 100
+fi
 
 ######################################################################
 ### HELPERS
@@ -68,6 +72,7 @@ create_package(){
    fpm -s dir -t $TYPE \
 		-n "zabbix-agent-extensions$SUFFIX" \
       --license GPLv2 \
+      --verbose \
       -a all \
 	   --deb-no-default-config-files \
       --deb-group root \
@@ -78,7 +83,7 @@ create_package(){
       -m "Marc Schoechlin <ms-zabbix-agent-extensions@256bit.org>" \
       --url "https://github.com/scoopex/zabbix-agent-extensions" \
       --after-install ${SDIR}/postinstall \
-      -v $VERSION -C $TMPDIR --verbose
+      -v $VERSION -C $TMPDIR
    set +x
 
    if [ "$TYPE" = "deb" ];then

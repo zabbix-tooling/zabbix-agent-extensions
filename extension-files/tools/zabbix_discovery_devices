@@ -142,6 +142,13 @@ parser.add_argument(
 )
 
 parser.add_argument(
+    '--check_not_devdev',
+    help='Check fpr a device at /dev',
+    action='store_true',
+)
+
+
+parser.add_argument(
     '--software_raid',
     help='Discovery for software_raid',
     action='store_true',
@@ -176,14 +183,19 @@ else:
 if args.debug:
     sys.stderr.write("** Effective config:\n%s\n" % json.dumps(config, indent=2))
 
+
 # perform discovery
 for filename in glob.glob('/sys/block/*'):
     if not os.path.islink(filename):
         continue
+
     device_name = os.path.basename(filename)
 
     device_model_file = "/sys/block/%s/device/model" % device_name
     device_model = "UNDEFINED"
+
+    if not args.check_not_devdev and not os.path.exists("/dev/%s" % device_name):
+       continue
 
     if os.path.isfile(device_model_file):
         with open(device_model_file) as f_model:
@@ -219,6 +231,7 @@ for filename in glob.glob('/sys/block/*'):
         if args.debug:
             sys.stderr.write("ignoring device %s, its size is 0\n" % device_name)
         continue
+
 
     raid_disks_level_file = "/sys/block/%s/md/level" % device_name
     raid_disks_level = None

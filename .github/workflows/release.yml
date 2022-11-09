@@ -1,18 +1,20 @@
-name: Build package and test
-on:
+name: Releases
+
+on: 
   push:
-    branches:
-      - master
+    tags:
+    - '*'
+
 jobs:
   build:
-    name: CI
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
-          ref: refs/heads/master
       - name: Setup
         run: |
           sudo apt-get install ruby-dev build-essential debhelper devscripts rpm xalan wget -y
@@ -21,3 +23,6 @@ jobs:
         run: ./create_packages
       - name: Test Package
         run: sudo ./ci_test
+      - uses: ncipollo/release-action@v1
+        with:
+          artifacts: " zabbix-agent-extensions*.deb,zabbix-agent-extensions-*.rpm"
