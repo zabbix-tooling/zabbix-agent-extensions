@@ -1,15 +1,24 @@
 #!/bin/bash
 
 THE_INCLUDE="Include=/usr/share/zabbix-agent-extensions/include.d/"
+if [ -e /etc/zabbix/zabbix_agent2.conf ]; then
+ AGENT=zabbix-agent2
+ AGENT_INCLUDE=zabbix_agent2.d
+ AGENT_CONF=zabbix_agent2.conf
+else
+ AGENT=zabbix-agent
+ AGENT_INCLUDE=zabbix_agentd.d
+ AGENT_CONF=zabbix_agentd.conf
+fi
 
 if (grep -q -P "Ubuntu|Debian|CentOS|Raspbian" /etc/os-release);then
-   if [ -e "/etc/zabbix/zabbix_agentd.d/zabbix-agent-extensions" ] || [ -e "/etc/zabbix/zabbix_agentd.d/zabbix-agent-extensions.conf" ];then
-     echo "Notice: /etc/zabbix/zabbix_agentd.d/zabbix-agent-extensions already exists, no need to add the Include to /etc/zabbix/zabbix_agentd.conf"
-   elif ! (grep -q "$THE_INCLUDE" /etc/zabbix/zabbix_agentd.conf);then  
-     echo "" >> /etc/zabbix/zabbix_agentd.conf
-     echo "#################################################################" >> /etc/zabbix/zabbix_agentd.conf
-     echo "# Added by postinstall of package zabbix-agent-extensions" >> /etc/zabbix/zabbix_agentd.conf
-     echo "$THE_INCLUDE" >> /etc/zabbix/zabbix_agentd.conf
+   if [ -e "/etc/zabbix/$AGENT_INCLUDE/zabbix-agent-extensions" ] || [ -e "/etc/zabbix/$AGENT_INCLUDE/zabbix-agent-extensions.conf" ];then
+     echo "Notice: /etc/zabbix/$AGENT_INCLUDE/zabbix-agent-extensions already exists, no need to add the Include to /etc/zabbix/$AGENT_CONF"
+   elif ! (grep -q "$THE_INCLUDE" /etc/zabbix/$AGENT_CONF);then  
+     echo "" >> /etc/zabbix/$AGENT_CONF
+     echo "#################################################################" >> /etc/zabbix/$AGENT_CONF
+     echo "# Added by postinstall of package zabbix-agent-extensions" >> /etc/zabbix/$AGENT_CONF
+     echo "$THE_INCLUDE" >> /etc/zabbix/$AGENT_CONF_CONF
    fi
 
    usermod -G adm -a zabbix 
@@ -22,10 +31,10 @@ if (grep -q -P "Ubuntu|Debian|CentOS|Raspbian" /etc/os-release);then
   
    if (which systemctl >/dev/null 2>&1);then
       echo "Restarting with systemctl"
-      systemctl restart zabbix-agent.service
-   elif [ -f /etc/init.d/zabbix-agent ];then
-      echo "Restarting with /etc/init.d/zabbix-agent"
-      /etc/init.d/zabbix-agent restart
+      systemctl restart $AGENT.service
+   elif [ -f /etc/init.d/$AGENT ];then
+      echo "Restarting with /etc/init.d/$AGENT"
+      /etc/init.d/$AGENT restart
    else
       echo "no known init method"
    fi
