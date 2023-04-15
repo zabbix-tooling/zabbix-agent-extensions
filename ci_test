@@ -32,8 +32,8 @@ set -x
 set -e
 sudo dpkg -P zabbix-agent-extensions zabbix-agent
 sudo rm -rf /etc/zabbix_* /var/log/zabbix /var/run/zabbix zabbix-agent_*.deb zabbix-get_*.deb
-wget -c "https://repo.zabbix.com/zabbix/6.2/ubuntu/pool/main/z/zabbix-release/zabbix-release_6.2-4+ubuntu20.04_all.deb"
-sudo dpkg -i zabbix-release_6.2-4+ubuntu20.04_all.deb
+wget -c "https://repo.zabbix.com/zabbix/6.4/ubuntu/pool/main/z/zabbix-release/zabbix-release_6.4-1+ubuntu22.04_all.deb"
+sudo dpkg -i zabbix-release_6.4-1+ubuntu22.04_all.deb
 sudo apt-get update -y
 sudo apt-get install zabbix-agent zabbix-get -y
 sudo sed  -i '~s,# DebugLevel.*,DebugLevel=2,' /etc/zabbix/zabbix_agentd.conf
