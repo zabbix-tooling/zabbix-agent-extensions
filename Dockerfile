@@ -1,4 +1,4 @@
-FROM zabbix/zabbix-agent:ubuntu-6.0-latest
+FROM zabbix/zabbix-agent:ubuntu-6.4-latest
 MAINTAINER operations@flipapp.de
 
 USER 0

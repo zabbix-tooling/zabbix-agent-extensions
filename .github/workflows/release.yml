@@ -25,4 +25,4 @@ jobs:
         run: sudo ./ci_test
       - uses: ncipollo/release-action@v1
         with:
-          artifacts: " zabbix-agent-extensions*.deb,zabbix-agent-extensions-*.rpm"
+          artifacts: "zabbix-agent-extensions*.deb,zabbix-agent-extensions-*.rpm"
