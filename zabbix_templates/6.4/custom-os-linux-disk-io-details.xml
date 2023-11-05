@@ -27,9 +27,9 @@
                     <item_prototypes>
                         <item_prototype>
                             <uuid>719fff215425430ea1473b25fe96cbf8</uuid>
-                            <name>{#DEVICENAME} - IO: Currently Active</name>
+                            <name>{#BLOCKDEVICE} - IO: Currently Active</name>
                             <type>ZABBIX_ACTIVE</type>
-                            <key>custom.vfs.dev.io.active[{#DEVICENAME}]</key>
+                            <key>custom.vfs.dev.io.active[{#BLOCKDEVICE}]</key>
                             <units>op</units>
                             <description>Number of I/Os currently in progress.
 The only field that should go to zero. Incremented as requests are given to appropriate struct request_queue and decremented as they finish.</description>
@@ -42,9 +42,11 @@ The only field that should go to zero. Incremented as requests are given to appr
                         </item_prototype>
                         <item_prototype>
                             <uuid>baea2a5834da41418c095c093668ae5f</uuid>
-                            <name>{#DEVICENAME} - IO: Milleseconds spend in IO</name>
+                            <name>{#BLOCKDEVICE} - IO: Milleseconds spend in IO</name>
                             <type>ZABBIX_ACTIVE</type>
-                            <key>custom.vfs.dev.io.ms[{#DEVICENAME}]</key>
+                            <key>custom.vfs.dev.io.ms[{#BLOCKDEVICE}]</key>
+                            <status>DISABLED</status>
+                            <discover>NO_DISCOVER</discover>
                             <units>io</units>
                             <description>Number of milliseconds spent doing I/Os. This field increases so long as field #12 (custom.vfs.dev.io.active) is nonzero.</description>
                             <preprocessing>
@@ -70,9 +72,9 @@ The only field that should go to zero. Incremented as requests are given to appr
                         </item_prototype>
                         <item_prototype>
                             <uuid>45a9028a831d4eaa803b1de08dbb798b</uuid>
-                            <name>{#DEVICENAME} - IO:Queue Depth</name>
+                            <name>{#BLOCKDEVICE} - IO:Queue Depth</name>
                             <type>ZABBIX_ACTIVE</type>
-                            <key>custom.vfs.dev.queue_depth[{#DEVICENAME}]</key>
+                            <key>custom.vfs.dev.queue_depth[{#BLOCKDEVICE}]</key>
                             <units>io</units>
                             <description>Number of I/Os currently in progress.&amp;#13;
 The only field that should go to zero. Incremented as requests are given to appropriate struct request_queue and decremented as they finish.</description>
@@ -85,9 +87,9 @@ The only field that should go to zero. Incremented as requests are given to appr
                         </item_prototype>
                         <item_prototype>
                             <uuid>3737f363783d40db8335e62e4444c97e</uuid>
-                            <name>{#DEVICENAME} - IO: Merged Reads</name>
+                            <name>{#BLOCKDEVICE} - IO: Merged Reads</name>
                             <type>ZABBIX_ACTIVE</type>
-                            <key>custom.vfs.dev.read.merged[{#DEVICENAME}]</key>
+                            <key>custom.vfs.dev.read.merged[{#BLOCKDEVICE}]</key>
                             <units>op</units>
                             <description>Number of reads merged.
 Reads and writes which are adjacent to each other may be merged for efficiency. Thus two 4K reads may become one 8K read before it is ultimately handed to the disk, and so it will be counted (and queued) as only one I/O.  This field lets you know how often this was done.</description>
@@ -100,9 +102,9 @@ Reads and writes which are adjacent to each other may be merged for efficiency. 
                         </item_prototype>
                         <item_prototype>
                             <uuid>cc26c76167b24a039c4dc17c4eadcdfe</uuid>
-                            <name>{#DEVICENAME} - IO: Milleseconds spend in Read IO</name>
+                            <name>{#BLOCKDEVICE} - IO: Milleseconds spend in Read IO</name>
                             <type>ZABBIX_ACTIVE</type>
-                            <key>custom.vfs.dev.read.ms[{#DEVICENAME}]</key>
+                            <key>custom.vfs.dev.read.ms[{#BLOCKDEVICE}]</key>
                             <units>io</units>
                             <description>Number of milliseconds spent reading.
 This is the total number of milliseconds spent by all reads (as measured from __make_request() to end_that_request_last()).</description>
@@ -129,9 +131,9 @@ This is the total number of milliseconds spent by all reads (as measured from __
                         </item_prototype>
                         <item_prototype>
                             <uuid>cc63a3cbb94648c4a441651838bb5926</uuid>
-                            <name>{#DEVICENAME} - IO: Ops Read</name>
+                            <name>{#BLOCKDEVICE} - IO: Ops Read</name>
                             <type>ZABBIX_ACTIVE</type>
-                            <key>custom.vfs.dev.read.ops[{#DEVICENAME}]</key>
+                            <key>custom.vfs.dev.read.ops[{#BLOCKDEVICE}]</key>
                             <units>io</units>
                             <description>This is the total number of reads completed successfully.</description>
                             <tags>
@@ -143,9 +145,9 @@ This is the total number of milliseconds spent by all reads (as measured from __
                         </item_prototype>
                         <item_prototype>
                             <uuid>b55d1ba0fe424031af61b73d73b86fad</uuid>
-                            <name>{#DEVICENAME} - IO Transfer Read</name>
+                            <name>{#BLOCKDEVICE} - IO Transfer Read</name>
                             <type>ZABBIX_ACTIVE</type>
-                            <key>custom.vfs.dev.read.sectors[{#DEVICENAME}]</key>
+                            <key>custom.vfs.dev.read.sectors[{#BLOCKDEVICE}]</key>
                             <units>B</units>
                             <description>This is the total number of sectors read successfully.</description>
                             <preprocessing>
@@ -171,9 +173,11 @@ This is the total number of milliseconds spent by all reads (as measured from __
                         </item_prototype>
                         <item_prototype>
                             <uuid>32daedf380b443a699f30d4c75a3fa96</uuid>
-                            <name>{#DEVICENAME} - IO: Milleseconds weighted spend in IO</name>
+                            <name>{#BLOCKDEVICE} - IO: Milleseconds weighted spend in IO</name>
                             <type>ZABBIX_ACTIVE</type>
-                            <key>custom.vfs.dev.weight.io.ms[{#DEVICENAME}]</key>
+                            <key>custom.vfs.dev.weight.io.ms[{#BLOCKDEVICE}]</key>
+                            <status>DISABLED</status>
+                            <discover>NO_DISCOVER</discover>
                             <units>io</units>
                             <description>Weighted number of milliseconds spent doing I/Os.
 
@@ -201,9 +205,9 @@ This field is incremented at each I/O start, I/O completion, I/O merge, or read 
                         </item_prototype>
                         <item_prototype>
                             <uuid>4b6bffab45aa4565a7ecf122eae6947b</uuid>
-                            <name>{#DEVICENAME} - IO: Merged Writes</name>
+                            <name>{#BLOCKDEVICE} - IO: Merged Writes</name>
                             <type>ZABBIX_ACTIVE</type>
-                            <key>custom.vfs.dev.write.merged[{#DEVICENAME}]</key>
+                            <key>custom.vfs.dev.write.merged[{#BLOCKDEVICE}]</key>
                             <units>op</units>
                             <description>Number of writes merged.
 Reads and writes which are adjacent to each other may be merged for efficiency. Thus two 4K reads may become one 8K read before it is ultimately handed to the disk, and so it will be counted (and queued) as only one I/O.  This field lets you know how often this was done.</description>
@@ -216,9 +220,9 @@ Reads and writes which are adjacent to each other may be merged for efficiency. 
                         </item_prototype>
                         <item_prototype>
                             <uuid>5e021d69690f4ea4ba71f767d58efe7b</uuid>
-                            <name>{#DEVICENAME} - IO: Milleseconds spend in Write IO</name>
+                            <name>{#BLOCKDEVICE} - IO: Milleseconds spend in Write IO</name>
                             <type>ZABBIX_ACTIVE</type>
-                            <key>custom.vfs.dev.write.ms[{#DEVICENAME}]</key>
+                            <key>custom.vfs.dev.write.ms[{#BLOCKDEVICE}]</key>
                             <units>io</units>
                             <description>Number of milliseconds spent writing.&amp;#13;
 This is the total number of milliseconds spent by all writes (as measured from __make_request() to end_that_request_last()).</description>
@@ -245,9 +249,9 @@ This is the total number of milliseconds spent by all writes (as measured from _
                         </item_prototype>
                         <item_prototype>
                             <uuid>c00fec47f5ad42d78f9e47ae3743e0de</uuid>
-                            <name>{#DEVICENAME} - IO: Ops Write</name>
+                            <name>{#BLOCKDEVICE} - IO: Ops Write</name>
                             <type>ZABBIX_ACTIVE</type>
-                            <key>custom.vfs.dev.write.ops[{#DEVICENAME}]</key>
+                            <key>custom.vfs.dev.write.ops[{#BLOCKDEVICE}]</key>
                             <units>io</units>
                             <description>This is the total number of reads completed successfully.</description>
                             <tags>
@@ -259,9 +263,9 @@ This is the total number of milliseconds spent by all writes (as measured from _
                         </item_prototype>
                         <item_prototype>
                             <uuid>3e83a1274ee3435a8cdcc30d9148d3b0</uuid>
-                            <name>{#DEVICENAME} - IO Transfer Write</name>
+                            <name>{#BLOCKDEVICE} - IO Transfer Write</name>
                             <type>ZABBIX_ACTIVE</type>
-                            <key>custom.vfs.dev.write.sectors[{#DEVICENAME}]</key>
+                            <key>custom.vfs.dev.write.sectors[{#BLOCKDEVICE}]</key>
                             <units>B</units>
                             <description>This is the total number of sectors write successfully.</description>
                             <preprocessing>
@@ -286,8 +290,247 @@ This is the total number of milliseconds spent by all writes (as measured from _
                             </tags>
                         </item_prototype>
                     </item_prototypes>
+                    <graph_prototypes>
+                        <graph_prototype>
+                            <uuid>ba194591d061451b9a9f6000785a8536</uuid>
+                            <name>IO: Activities</name>
+                            <ymin_type_1>FIXED</ymin_type_1>
+                            <graph_items>
+                                <graph_item>
+                                    <color>1A7C11</color>
+                                    <calc_fnc>ALL</calc_fnc>
+                                    <item>
+                                        <host>Custom - OS - Linux - Disk IO Details</host>
+                                        <key>custom.vfs.dev.io.active[{#BLOCKDEVICE}]</key>
+                                    </item>
+                                </graph_item>
+                                <graph_item>
+                                    <sortorder>1</sortorder>
+                                    <drawtype>DASHED_LINE</drawtype>
+                                    <color>274482</color>
+                                    <yaxisside>RIGHT</yaxisside>
+                                    <calc_fnc>ALL</calc_fnc>
+                                    <item>
+                                        <host>Custom - OS - Linux - Disk IO Details</host>
+                                        <key>custom.vfs.dev.queue_depth[{#BLOCKDEVICE}]</key>
+                                    </item>
+                                </graph_item>
+                            </graph_items>
+                        </graph_prototype>
+                        <graph_prototype>
+                            <uuid>7c51f03210dc4361b220fdb3dbbdce0d</uuid>
+                            <name>IO: Merged Operations</name>
+                            <type>STACKED</type>
+                            <ymin_type_1>FIXED</ymin_type_1>
+                            <graph_items>
+                                <graph_item>
+                                    <color>1A7C11</color>
+                                    <calc_fnc>MIN</calc_fnc>
+                                    <item>
+                                        <host>Custom - OS - Linux - Disk IO Details</host>
+                                        <key>custom.vfs.dev.read.merged[{#BLOCKDEVICE}]</key>
+                                    </item>
+                                </graph_item>
+                                <graph_item>
+                                    <sortorder>1</sortorder>
+                                    <color>274482</color>
+                                    <calc_fnc>MIN</calc_fnc>
+                                    <item>
+                                        <host>Custom - OS - Linux - Disk IO Details</host>
+                                        <key>custom.vfs.dev.write.merged[{#BLOCKDEVICE}]</key>
+                                    </item>
+                                </graph_item>
+                            </graph_items>
+                        </graph_prototype>
+                        <graph_prototype>
+                            <uuid>08eeb7b780c745eeae8eda01459ad448</uuid>
+                            <name>IO: Milleseconds spend in IO</name>
+                            <type>STACKED</type>
+                            <ymin_type_1>FIXED</ymin_type_1>
+                            <graph_items>
+                                <graph_item>
+                                    <color>274482</color>
+                                    <calc_fnc>MIN</calc_fnc>
+                                    <item>
+                                        <host>Custom - OS - Linux - Disk IO Details</host>
+                                        <key>custom.vfs.dev.read.ms[{#BLOCKDEVICE}]</key>
+                                    </item>
+                                </graph_item>
+                                <graph_item>
+                                    <sortorder>1</sortorder>
+                                    <color>F63100</color>
+                                    <calc_fnc>MIN</calc_fnc>
+                                    <item>
+                                        <host>Custom - OS - Linux - Disk IO Details</host>
+                                        <key>custom.vfs.dev.write.ms[{#BLOCKDEVICE}]</key>
+                                    </item>
+                                </graph_item>
+                                <graph_item>
+                                    <sortorder>2</sortorder>
+                                    <color>1A7C11</color>
+                                    <calc_fnc>MIN</calc_fnc>
+                                    <item>
+                                        <host>Custom - OS - Linux - Disk IO Details</host>
+                                        <key>custom.vfs.dev.io.ms[{#BLOCKDEVICE}]</key>
+                                    </item>
+                                </graph_item>
+                                <graph_item>
+                                    <sortorder>3</sortorder>
+                                    <color>9C27B0</color>
+                                    <calc_fnc>MIN</calc_fnc>
+                                    <item>
+                                        <host>Custom - OS - Linux - Disk IO Details</host>
+                                        <key>custom.vfs.dev.weight.io.ms[{#BLOCKDEVICE}]</key>
+                                    </item>
+                                </graph_item>
+                            </graph_items>
+                        </graph_prototype>
+                        <graph_prototype>
+                            <uuid>3dfff828350942e596ad1f7a6502b1e4</uuid>
+                            <name>IO: Ops</name>
+                            <type>STACKED</type>
+                            <ymin_type_1>FIXED</ymin_type_1>
+                            <graph_items>
+                                <graph_item>
+                                    <color>1A7C11</color>
+                                    <calc_fnc>MIN</calc_fnc>
+                                    <item>
+                                        <host>Custom - OS - Linux - Disk IO Details</host>
+                                        <key>custom.vfs.dev.read.ops[{#BLOCKDEVICE}]</key>
+                                    </item>
+                                </graph_item>
+                                <graph_item>
+                                    <sortorder>1</sortorder>
+                                    <color>274482</color>
+                                    <calc_fnc>MIN</calc_fnc>
+                                    <item>
+                                        <host>Custom - OS - Linux - Disk IO Details</host>
+                                        <key>custom.vfs.dev.write.ops[{#BLOCKDEVICE}]</key>
+                                    </item>
+                                </graph_item>
+                            </graph_items>
+                        </graph_prototype>
+                        <graph_prototype>
+                            <uuid>300f87f6a21e462d9358d0ba7f92201f</uuid>
+                            <name>IO: Transfer</name>
+                            <type>STACKED</type>
+                            <ymin_type_1>FIXED</ymin_type_1>
+                            <graph_items>
+                                <graph_item>
+                                    <color>1A7C11</color>
+                                    <calc_fnc>MIN</calc_fnc>
+                                    <item>
+                                        <host>Custom - OS - Linux - Disk IO Details</host>
+                                        <key>custom.vfs.dev.read.sectors[{#BLOCKDEVICE}]</key>
+                                    </item>
+                                </graph_item>
+                                <graph_item>
+                                    <sortorder>1</sortorder>
+                                    <color>274482</color>
+                                    <calc_fnc>MIN</calc_fnc>
+                                    <item>
+                                        <host>Custom - OS - Linux - Disk IO Details</host>
+                                        <key>custom.vfs.dev.write.sectors[{#BLOCKDEVICE}]</key>
+                                    </item>
+                                </graph_item>
+                            </graph_items>
+                        </graph_prototype>
+                    </graph_prototypes>
                 </discovery_rule>
             </discovery_rules>
+            <dashboards>
+                <dashboard>
+                    <uuid>1db4cdbf79744561a76487dd13c747e4</uuid>
+                    <name>Custom - OS - Linux - Disk IO Details</name>
+                    <display_period>3600</display_period>
+                    <auto_start>NO</auto_start>
+                    <pages>
+                        <page>
+                            <widgets>
+                                <widget>
+                                    <type>graphprototype</type>
+                                    <width>24</width>
+                                    <height>6</height>
+                                    <fields>
+                                        <field>
+                                            <type>GRAPH_PROTOTYPE</type>
+                                            <name>graphid</name>
+                                            <value>
+                                                <host>Custom - OS - Linux - Disk IO Details</host>
+                                                <name>IO: Activities</name>
+                                            </value>
+                                        </field>
+                                    </fields>
+                                </widget>
+                                <widget>
+                                    <type>graphprototype</type>
+                                    <y>6</y>
+                                    <width>24</width>
+                                    <height>7</height>
+                                    <fields>
+                                        <field>
+                                            <type>GRAPH_PROTOTYPE</type>
+                                            <name>graphid</name>
+                                            <value>
+                                                <host>Custom - OS - Linux - Disk IO Details</host>
+                                                <name>IO: Ops</name>
+                                            </value>
+                                        </field>
+                                    </fields>
+                                </widget>
+                                <widget>
+                                    <type>graphprototype</type>
+                                    <y>13</y>
+                                    <width>24</width>
+                                    <height>8</height>
+                                    <fields>
+                                        <field>
+                                            <type>GRAPH_PROTOTYPE</type>
+                                            <name>graphid</name>
+                                            <value>
+                                                <host>Custom - OS - Linux - Disk IO Details</host>
+                                                <name>IO: Merged Operations</name>
+                                            </value>
+                                        </field>
+                                    </fields>
+                                </widget>
+                                <widget>
+                                    <type>graphprototype</type>
+                                    <y>21</y>
+                                    <width>24</width>
+                                    <height>7</height>
+                                    <fields>
+                                        <field>
+                                            <type>GRAPH_PROTOTYPE</type>
+                                            <name>graphid</name>
+                                            <value>
+                                                <host>Custom - OS - Linux - Disk IO Details</host>
+                                                <name>IO: Transfer</name>
+                                            </value>
+                                        </field>
+                                    </fields>
+                                </widget>
+                                <widget>
+                                    <type>graphprototype</type>
+                                    <y>28</y>
+                                    <width>24</width>
+                                    <height>7</height>
+                                    <fields>
+                                        <field>
+                                            <type>GRAPH_PROTOTYPE</type>
+                                            <name>graphid</name>
+                                            <value>
+                                                <host>Custom - OS - Linux - Disk IO Details</host>
+                                                <name>IO: Milleseconds spend in IO</name>
+                                            </value>
+                                        </field>
+                                    </fields>
+                                </widget>
+                            </widgets>
+                        </page>
+                    </pages>
+                </dashboard>
+            </dashboards>
         </template>
     </templates>
 </zabbix_export>
