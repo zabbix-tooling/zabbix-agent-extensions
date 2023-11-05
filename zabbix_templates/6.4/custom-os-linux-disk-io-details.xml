@@ -293,7 +293,7 @@ This is the total number of milliseconds spent by all writes (as measured from _
                     <graph_prototypes>
                         <graph_prototype>
                             <uuid>ba194591d061451b9a9f6000785a8536</uuid>
-                            <name>IO: Activities</name>
+                            <name>{#BLOCKDEVICE} - IO: Activities</name>
                             <ymin_type_1>FIXED</ymin_type_1>
                             <graph_items>
                                 <graph_item>
@@ -319,7 +319,7 @@ This is the total number of milliseconds spent by all writes (as measured from _
                         </graph_prototype>
                         <graph_prototype>
                             <uuid>7c51f03210dc4361b220fdb3dbbdce0d</uuid>
-                            <name>IO: Merged Operations</name>
+                            <name>{#BLOCKDEVICE} - IO: Merged Operations</name>
                             <type>STACKED</type>
                             <ymin_type_1>FIXED</ymin_type_1>
                             <graph_items>
@@ -344,7 +344,7 @@ This is the total number of milliseconds spent by all writes (as measured from _
                         </graph_prototype>
                         <graph_prototype>
                             <uuid>08eeb7b780c745eeae8eda01459ad448</uuid>
-                            <name>IO: Milleseconds spend in IO</name>
+                            <name>{#BLOCKDEVICE} - IO: Milleseconds spend in IO</name>
                             <type>STACKED</type>
                             <ymin_type_1>FIXED</ymin_type_1>
                             <graph_items>
@@ -387,7 +387,7 @@ This is the total number of milliseconds spent by all writes (as measured from _
                         </graph_prototype>
                         <graph_prototype>
                             <uuid>3dfff828350942e596ad1f7a6502b1e4</uuid>
-                            <name>IO: Ops</name>
+                            <name>{#BLOCKDEVICE} - IO: Ops</name>
                             <type>STACKED</type>
                             <ymin_type_1>FIXED</ymin_type_1>
                             <graph_items>
@@ -412,7 +412,7 @@ This is the total number of milliseconds spent by all writes (as measured from _
                         </graph_prototype>
                         <graph_prototype>
                             <uuid>300f87f6a21e462d9358d0ba7f92201f</uuid>
-                            <name>IO: Transfer</name>
+                            <name>{#BLOCKDEVICE} -  IO: Transfer</name>
                             <type>STACKED</type>
                             <ymin_type_1>FIXED</ymin_type_1>
                             <graph_items>
@@ -457,7 +457,7 @@ This is the total number of milliseconds spent by all writes (as measured from _
                                             <name>graphid</name>
                                             <value>
                                                 <host>Custom - OS - Linux - Disk IO Details</host>
-                                                <name>IO: Activities</name>
+                                                <name>{#BLOCKDEVICE} - IO: Activities</name>
                                             </value>
                                         </field>
                                     </fields>
@@ -473,7 +473,7 @@ This is the total number of milliseconds spent by all writes (as measured from _
                                             <name>graphid</name>
                                             <value>
                                                 <host>Custom - OS - Linux - Disk IO Details</host>
-                                                <name>IO: Ops</name>
+                                                <name>{#BLOCKDEVICE} - IO: Ops</name>
                                             </value>
                                         </field>
                                     </fields>
@@ -489,7 +489,7 @@ This is the total number of milliseconds spent by all writes (as measured from _
                                             <name>graphid</name>
                                             <value>
                                                 <host>Custom - OS - Linux - Disk IO Details</host>
-                                                <name>IO: Merged Operations</name>
+                                                <name>{#BLOCKDEVICE} - IO: Merged Operations</name>
                                             </value>
                                         </field>
                                     </fields>
@@ -505,7 +505,7 @@ This is the total number of milliseconds spent by all writes (as measured from _
                                             <name>graphid</name>
                                             <value>
                                                 <host>Custom - OS - Linux - Disk IO Details</host>
-                                                <name>IO: Transfer</name>
+                                                <name>{#BLOCKDEVICE} -  IO: Transfer</name>
                                             </value>
                                         </field>
                                     </fields>
@@ -521,7 +521,7 @@ This is the total number of milliseconds spent by all writes (as measured from _
                                             <name>graphid</name>
                                             <value>
                                                 <host>Custom - OS - Linux - Disk IO Details</host>
-                                                <name>IO: Milleseconds spend in IO</name>
+                                                <name>{#BLOCKDEVICE} - IO: Milleseconds spend in IO</name>
                                             </value>
                                         </field>
                                     </fields>
