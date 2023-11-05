@@ -1,1 +1,148 @@
-
+<?xml version="1.0" encoding="UTF-8"?>
+<zabbix_export>
+    <version>6.4</version>
+    <template_groups>
+        <template_group>
+            <uuid>7df96b18c230490a9a0a9e2307226338</uuid>
+            <name>Templates</name>
+        </template_group>
+    </template_groups>
+    <templates>
+        <template>
+            <uuid>fa2fc4bf0a2e4960a61726765ed5369b</uuid>
+            <template>Custom - Service - Cups</template>
+            <name>Custom - Service - Cups</name>
+            <groups>
+                <group>
+                    <name>Templates</name>
+                </group>
+            </groups>
+            <items>
+                <item>
+                    <uuid>c4f8d840de474a3db67dbf227486d2de</uuid>
+                    <name>CUPS TCP port $1 listening state</name>
+                    <key>net.tcp.listen[631]</key>
+                    <delay>60</delay>
+                    <history>7d</history>
+                    <trends>0</trends>
+                    <valuemap>
+                        <name>Service state</name>
+                    </valuemap>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Custom - Service - Cups</value>
+                        </tag>
+                    </tags>
+                    <triggers>
+                        <trigger>
+                            <uuid>1cc25a665032482a80ea9e7bb4b0223f</uuid>
+                            <expression>last(/Custom - Service - Cups/net.tcp.listen[631])=0</expression>
+                            <name>CUPS port not listening</name>
+                            <priority>AVERAGE</priority>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <uuid>eec8697ea53e4badac960aab0d7a7d47</uuid>
+                    <name>Number of $1 processes</name>
+                    <key>proc.num[cupsd]</key>
+                    <delay>60</delay>
+                    <history>7d</history>
+                    <units>proc</units>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Custom - Service - Cups</value>
+                        </tag>
+                    </tags>
+                    <triggers>
+                        <trigger>
+                            <uuid>bd447fd0cc4641ed99afdad2d42c745d</uuid>
+                            <expression>last(/Custom - Service - Cups/proc.num[cupsd])=0</expression>
+                            <name>No cupsd process running</name>
+                            <priority>AVERAGE</priority>
+                            <dependencies>
+                                <dependency>
+                                    <name>CUPS port not listening</name>
+                                    <expression>last(/Custom - Service - Cups/net.tcp.listen[631])=0</expression>
+                                </dependency>
+                            </dependencies>
+                        </trigger>
+                    </triggers>
+                </item>
+            </items>
+            <httptests>
+                <httptest>
+                    <uuid>94c368f670fb4dff9dced06b4098cf23</uuid>
+                    <name>Check Admin Interface</name>
+                    <delay>300</delay>
+                    <agent>Mozilla/5.0 (X11; Linux i686; rv:8.0) Gecko/20100101 Firefox/8.0</agent>
+                    <steps>
+                        <step>
+                            <name>Admin Interface Frontpage</name>
+                            <url>http://{HOST.DNS1}:631/</url>
+                            <timeout>30</timeout>
+                            <required>Apple Inc.</required>
+                            <status_codes>200</status_codes>
+                        </step>
+                    </steps>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Custom - Service - Cups</value>
+                        </tag>
+                    </tags>
+                </httptest>
+            </httptests>
+            <dashboards>
+                <dashboard>
+                    <uuid>592447c63c354c6a9d3b6e2e0b767711</uuid>
+                    <name>Custom - Service - Cups</name>
+                    <pages>
+                        <page>
+                            <widgets>
+                                <widget>
+                                    <type>graph</type>
+                                    <width>24</width>
+                                    <height>7</height>
+                                    <fields>
+                                        <field>
+                                            <type>ITEM</type>
+                                            <name>itemid</name>
+                                            <value>
+                                                <host>Custom - Service - Cups</host>
+                                                <key>proc.num[cupsd]</key>
+                                            </value>
+                                        </field>
+                                        <field>
+                                            <type>INTEGER</type>
+                                            <name>source_type</name>
+                                            <value>1</value>
+                                        </field>
+                                    </fields>
+                                </widget>
+                            </widgets>
+                        </page>
+                    </pages>
+                </dashboard>
+            </dashboards>
+            <valuemaps>
+                <valuemap>
+                    <uuid>34bc4e14b51540c29b335b607e5d6901</uuid>
+                    <name>Service state</name>
+                    <mappings>
+                        <mapping>
+                            <value>0</value>
+                            <newvalue>Down</newvalue>
+                        </mapping>
+                        <mapping>
+                            <value>1</value>
+                            <newvalue>Up</newvalue>
+                        </mapping>
+                    </mappings>
+                </valuemap>
+            </valuemaps>
+        </template>
+    </templates>
+</zabbix_export>

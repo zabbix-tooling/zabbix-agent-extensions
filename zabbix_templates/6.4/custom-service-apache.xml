@@ -1,1 +1,717 @@
-
+<?xml version="1.0" encoding="UTF-8"?>
+<zabbix_export>
+    <version>6.4</version>
+    <template_groups>
+        <template_group>
+            <uuid>7df96b18c230490a9a0a9e2307226338</uuid>
+            <name>Templates</name>
+        </template_group>
+    </template_groups>
+    <templates>
+        <template>
+            <uuid>7cf5b615d304498b9e654833dddd177a</uuid>
+            <template>Custom - Service - Apache</template>
+            <name>Custom - Service - Apache</name>
+            <groups>
+                <group>
+                    <name>Templates</name>
+                </group>
+            </groups>
+            <items>
+                <item>
+                    <uuid>25f1d2c8d9024527938a154f247455a7</uuid>
+                    <name>Apache Total Accesses</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>apache.accesses[{$HTTP_PORT}]</key>
+                    <delay>2m</delay>
+                    <history>2w</history>
+                    <units>req/sec</units>
+                    <preprocessing>
+                        <step>
+                            <type>CHANGE_PER_SECOND</type>
+                            <parameters>
+                                <parameter/>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Service - Apache</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>5960351c33d249ef8963bba5261732e1</uuid>
+                    <name>Apache Mod Jk Activated</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>apache.jk.act</key>
+                    <delay>5m</delay>
+                    <history>2w</history>
+                    <trends>0</trends>
+                    <status>DISABLED</status>
+                    <units>backends</units>
+                    <description>Activated Backends</description>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Service - Apache</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>fa4f4a3eed6d403da95f489e5a4386c6</uuid>
+                    <name>Apache Mod Jk Disabled</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>apache.jk.dis</key>
+                    <delay>5m</delay>
+                    <history>2w</history>
+                    <trends>0</trends>
+                    <status>DISABLED</status>
+                    <units>backends</units>
+                    <description>Disabled Backends, no new sessions</description>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Service - Apache</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>2efaa4a3f27249d680bb024f768d7d9d</uuid>
+                    <name>Apache Mod Jk Stopped</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>apache.jk.stp</key>
+                    <delay>5m</delay>
+                    <history>2w</history>
+                    <trends>0</trends>
+                    <status>DISABLED</status>
+                    <units>backends</units>
+                    <description>Stopped Backends, no request processing</description>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Service - Apache</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>987fe195310f44659bf5c8b466eb8738</uuid>
+                    <name>Apache Total Bytes</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>apache.kbytes[{$HTTP_PORT}]</key>
+                    <delay>2m</delay>
+                    <history>2w</history>
+                    <units>bit/sec</units>
+                    <preprocessing>
+                        <step>
+                            <type>CHANGE_PER_SECOND</type>
+                            <parameters>
+                                <parameter/>
+                            </parameters>
+                        </step>
+                        <step>
+                            <type>MULTIPLIER</type>
+                            <parameters>
+                                <parameter>8192</parameter>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Service - Apache</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>b3a629566b47402eb7a4ccf6935add0b</uuid>
+                    <name>Apache Clients Keepalive</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>apache.keepalive[{$HTTP_PORT}]</key>
+                    <history>2w</history>
+                    <trends>30d</trends>
+                    <units>tasks</units>
+                    <description>Apache workers which are currently in keepalive state</description>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Service - Apache</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>d32c7b8b26bc404c8295b61feb95402f</uuid>
+                    <name>Apache Clients Reader</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>apache.reader[{$HTTP_PORT}]</key>
+                    <history>2w</history>
+                    <trends>30d</trends>
+                    <units>tasks</units>
+                    <description>Apache workers which are currently reading a request.</description>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Service - Apache</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>1437dbdfcbf749dda754c8f7724fe9cf</uuid>
+                    <name>Apache Memory Average Process</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>apache.rss.memory.average</key>
+                    <delay>4m</delay>
+                    <history>2w</history>
+                    <trends>30d</trends>
+                    <units>bytes</units>
+                    <description>Average RSS memory used by apache process</description>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Service - Apache</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>630345d4048c4c1296db4765e66e69de</uuid>
+                    <name>Apache Memory Biggest Process</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>apache.rss.memory.biggest</key>
+                    <delay>4m</delay>
+                    <history>2w</history>
+                    <trends>30d</trends>
+                    <units>bytes</units>
+                    <description>Biggest RSS memory used by apache process</description>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Service - Apache</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>5bdc06df4b474e488bb1abc3a669b681</uuid>
+                    <name>Apache Memory Smallest Process</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>apache.rss.memory.smallest</key>
+                    <delay>4m</delay>
+                    <history>2w</history>
+                    <trends>30d</trends>
+                    <units>bytes</units>
+                    <description>Smallest RSS memory used by apache process</description>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Service - Apache</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>abdb3c2e7c32413290c8754b47f6bd71</uuid>
+                    <name>Apache Memory Total</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>apache.rss.memory.total</key>
+                    <delay>4m</delay>
+                    <history>2w</history>
+                    <trends>30d</trends>
+                    <units>bytes</units>
+                    <description>Total RSS memory used by apache</description>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Service - Apache</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>d26949af4be6495aa3bf7f15f9d356df</uuid>
+                    <name>Apache Clients ServerLimit</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>apache.total[{$HTTP_PORT}]</key>
+                    <delay>15m</delay>
+                    <history>2w</history>
+                    <trends>0</trends>
+                    <units>tasks</units>
+                    <description>Total amout of possible apache workers.</description>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Service - Apache</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>1a1ed28fabc44a51a01f04b90c34f3b2</uuid>
+                    <name>Apache Clients Writer</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>apache.writer[{$HTTP_PORT}]</key>
+                    <history>2w</history>
+                    <trends>30d</trends>
+                    <units>tasks</units>
+                    <description>Apache workers which are currently a request result writing to a client.</description>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Service - Apache</value>
+                        </tag>
+                    </tags>
+                    <triggers>
+                        <trigger>
+                            <uuid>fac504f0e8e54f8d8a8b6d94f829ac6f</uuid>
+                            <expression>last(/Custom - Service - Apache/apache.writer[{$HTTP_PORT}])&gt;800</expression>
+                            <name>Apache Writer &gt; 800</name>
+                            <priority>AVERAGE</priority>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <uuid>565fd1574188421aaeb6ef57d4f2fb34</uuid>
+                    <name>TCP Connect Local</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>net.tcp.port[127.0.0.1,{$HTTP_PORT}]</key>
+                    <delay>2m</delay>
+                    <history>2w</history>
+                    <trends>30d</trends>
+                    <value_type>FLOAT</value_type>
+                    <valuemap>
+                        <name>Service state</name>
+                    </valuemap>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Service - Apache</value>
+                        </tag>
+                    </tags>
+                    <triggers>
+                        <trigger>
+                            <uuid>a1090215762443819f10673390025a87</uuid>
+                            <expression>sum(/Custom - Service - Apache/net.tcp.port[127.0.0.1,{$HTTP_PORT}],#2)=0</expression>
+                            <name>HTTP not reachable on port {$HTTP_PORT} from localhost</name>
+                            <priority>AVERAGE</priority>
+                            <description>Apache was not reachable on {$HTTP_PORT} in the last two monitoring cycles.</description>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <uuid>5feadfba13eb4f52be70704f76607430</uuid>
+                    <name>Get /e/lbstatus.html response time</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>web.page.perf[127.0.0.1,{$LOADBALANCER_CHECK},{$HTTP_PORT}]</key>
+                    <delay>2m</delay>
+                    <history>2w</history>
+                    <trends>30d</trends>
+                    <value_type>FLOAT</value_type>
+                    <units>sec</units>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Service - Apache</value>
+                        </tag>
+                    </tags>
+                    <triggers>
+                        <trigger>
+                            <uuid>d67e085a0e124e2996fed1370d32d74d</uuid>
+                            <expression>(avg(/Custom - Service - Apache/web.page.perf[127.0.0.1,{$LOADBALANCER_CHECK},{$HTTP_PORT}],300s)=0 or avg(/Custom - Service - Apache/web.page.perf[127.0.0.1,{$LOADBALANCER_CHECK},{$HTTP_PORT}],300s)&gt;30)</expression>
+                            <name>Get LB_Check HTTP Local on port {$HTTP_PORT} &gt; 30sec</name>
+                            <priority>AVERAGE</priority>
+                            <description>Apache did not deliver the standard loadbalancer checkfile within 3 seconds.</description>
+                            <dependencies>
+                                <dependency>
+                                    <name>HTTP not reachable on port {$HTTP_PORT} from localhost</name>
+                                    <expression>sum(/Custom - Service - Apache/net.tcp.port[127.0.0.1,{$HTTP_PORT}],#2)=0</expression>
+                                </dependency>
+                            </dependencies>
+                        </trigger>
+                    </triggers>
+                </item>
+            </items>
+            <macros>
+                <macro>
+                    <macro>{$HTTP_PORT}</macro>
+                    <value>80</value>
+                </macro>
+                <macro>
+                    <macro>{$LOADBALANCER_CHECK}</macro>
+                    <value>/e/lbstatus.html</value>
+                </macro>
+            </macros>
+            <dashboards>
+                <dashboard>
+                    <uuid>3cb003df404e4acda3f58c6f0d33d352</uuid>
+                    <name>Custom - Service - Apache</name>
+                    <pages>
+                        <page>
+                            <widgets>
+                                <widget>
+                                    <type>graph</type>
+                                    <width>24</width>
+                                    <height>7</height>
+                                    <fields>
+                                        <field>
+                                            <type>GRAPH</type>
+                                            <name>graphid</name>
+                                            <value>
+                                                <host>Custom - Service - Apache</host>
+                                                <name>Apache Traffic</name>
+                                            </value>
+                                        </field>
+                                        <field>
+                                            <type>INTEGER</type>
+                                            <name>source_type</name>
+                                            <value>0</value>
+                                        </field>
+                                    </fields>
+                                </widget>
+                                <widget>
+                                    <type>graph</type>
+                                    <y>7</y>
+                                    <width>24</width>
+                                    <height>7</height>
+                                    <fields>
+                                        <field>
+                                            <type>GRAPH</type>
+                                            <name>graphid</name>
+                                            <value>
+                                                <host>Custom - Service - Apache</host>
+                                                <name>Apache Maxclient Usage</name>
+                                            </value>
+                                        </field>
+                                        <field>
+                                            <type>INTEGER</type>
+                                            <name>source_type</name>
+                                            <value>0</value>
+                                        </field>
+                                    </fields>
+                                </widget>
+                                <widget>
+                                    <type>graph</type>
+                                    <y>14</y>
+                                    <width>24</width>
+                                    <height>7</height>
+                                    <fields>
+                                        <field>
+                                            <type>ITEM</type>
+                                            <name>itemid</name>
+                                            <value>
+                                                <host>Custom - Service - Apache</host>
+                                                <key>web.page.perf[127.0.0.1,{$LOADBALANCER_CHECK},{$HTTP_PORT}]</key>
+                                            </value>
+                                        </field>
+                                        <field>
+                                            <type>INTEGER</type>
+                                            <name>source_type</name>
+                                            <value>1</value>
+                                        </field>
+                                    </fields>
+                                </widget>
+                                <widget>
+                                    <type>graph</type>
+                                    <y>21</y>
+                                    <width>24</width>
+                                    <height>7</height>
+                                    <fields>
+                                        <field>
+                                            <type>ITEM</type>
+                                            <name>itemid</name>
+                                            <value>
+                                                <host>Custom - Service - Apache</host>
+                                                <key>apache.total[{$HTTP_PORT}]</key>
+                                            </value>
+                                        </field>
+                                        <field>
+                                            <type>INTEGER</type>
+                                            <name>source_type</name>
+                                            <value>1</value>
+                                        </field>
+                                    </fields>
+                                </widget>
+                                <widget>
+                                    <type>graph</type>
+                                    <y>28</y>
+                                    <width>24</width>
+                                    <height>7</height>
+                                    <fields>
+                                        <field>
+                                            <type>ITEM</type>
+                                            <name>itemid</name>
+                                            <value>
+                                                <host>Custom - Service - Apache</host>
+                                                <key>net.tcp.port[127.0.0.1,{$HTTP_PORT}]</key>
+                                            </value>
+                                        </field>
+                                        <field>
+                                            <type>INTEGER</type>
+                                            <name>source_type</name>
+                                            <value>1</value>
+                                        </field>
+                                    </fields>
+                                </widget>
+                                <widget>
+                                    <type>graph</type>
+                                    <y>35</y>
+                                    <width>24</width>
+                                    <height>7</height>
+                                    <fields>
+                                        <field>
+                                            <type>GRAPH</type>
+                                            <name>graphid</name>
+                                            <value>
+                                                <host>Custom - Service - Apache</host>
+                                                <name>Apache Memory Usage</name>
+                                            </value>
+                                        </field>
+                                        <field>
+                                            <type>INTEGER</type>
+                                            <name>source_type</name>
+                                            <value>0</value>
+                                        </field>
+                                    </fields>
+                                </widget>
+                                <widget>
+                                    <type>graph</type>
+                                    <y>42</y>
+                                    <width>24</width>
+                                    <height>7</height>
+                                    <fields>
+                                        <field>
+                                            <type>GRAPH</type>
+                                            <name>graphid</name>
+                                            <value>
+                                                <host>Custom - Service - Apache</host>
+                                                <name>Apache Mod Jk</name>
+                                            </value>
+                                        </field>
+                                        <field>
+                                            <type>INTEGER</type>
+                                            <name>source_type</name>
+                                            <value>0</value>
+                                        </field>
+                                    </fields>
+                                </widget>
+                            </widgets>
+                        </page>
+                    </pages>
+                </dashboard>
+            </dashboards>
+            <valuemaps>
+                <valuemap>
+                    <uuid>86ce554bfe4d4cc6ac0093eef7f5a8b4</uuid>
+                    <name>Service state</name>
+                    <mappings>
+                        <mapping>
+                            <value>0</value>
+                            <newvalue>Down</newvalue>
+                        </mapping>
+                        <mapping>
+                            <value>1</value>
+                            <newvalue>Up</newvalue>
+                        </mapping>
+                    </mappings>
+                </valuemap>
+            </valuemaps>
+        </template>
+    </templates>
+    <triggers>
+        <trigger>
+            <uuid>d83322e699a54ebbb266fe264eeb9a72</uuid>
+            <expression>(last(/Custom - Service - Apache/apache.total[{$HTTP_PORT}]) * 0.60) &lt; (last(/Custom - Service - Apache/apache.reader[{$HTTP_PORT}]) + last(/Custom - Service - Apache/apache.writer[{$HTTP_PORT}]) + last(/Custom - Service - Apache/apache.keepalive[{$HTTP_PORT}]))</expression>
+            <name>Apache Maxclient Usage &gt; 60%</name>
+            <priority>WARNING</priority>
+            <description>The available maxclient slots are consumed by 60% by reader/writer processes.</description>
+            <dependencies>
+                <dependency>
+                    <name>Apache Maxclient Usage &gt; 80%</name>
+                    <expression>(last(/Custom - Service - Apache/apache.total[{$HTTP_PORT}]) * 0.80) &lt; (last(/Custom - Service - Apache/apache.reader[{$HTTP_PORT}]) + last(/Custom - Service - Apache/apache.writer[{$HTTP_PORT}]) + last(/Custom - Service - Apache/apache.keepalive[{$HTTP_PORT}]))</expression>
+                </dependency>
+            </dependencies>
+        </trigger>
+        <trigger>
+            <uuid>98997d5819fe46a9937c7e3cb39575b6</uuid>
+            <expression>(last(/Custom - Service - Apache/apache.total[{$HTTP_PORT}]) * 0.80) &lt; (last(/Custom - Service - Apache/apache.reader[{$HTTP_PORT}]) + last(/Custom - Service - Apache/apache.writer[{$HTTP_PORT}]) + last(/Custom - Service - Apache/apache.keepalive[{$HTTP_PORT}]))</expression>
+            <name>Apache Maxclient Usage &gt; 80%</name>
+            <priority>AVERAGE</priority>
+            <description>The available maxclient slots are consumed by 80% by reader/writer processes.</description>
+        </trigger>
+        <trigger>
+            <uuid>5cdd4e74fcd347fbb26c25503399fa06</uuid>
+            <expression>(nodata(/Custom - Service - Apache/apache.reader[{$HTTP_PORT}],200s) or nodata(/Custom - Service - Apache/apache.writer[{$HTTP_PORT}],200s) or nodata(/Custom - Service - Apache/apache.keepalive[{$HTTP_PORT}],200s))</expression>
+            <name>Apache Maxclient Usage no data</name>
+            <priority>AVERAGE</priority>
+            <description>Unable to gather maxlclient usage, webserver is probably already dead!</description>
+        </trigger>
+        <trigger>
+            <uuid>42e76d1136ef44f8bbad7d020a4509d6</uuid>
+            <expression>(last(/Custom - Service - Apache/apache.jk.dis) +last(/Custom - Service - Apache/apache.jk.stp) ) &gt; 6</expression>
+            <name>Apache Mod Jk &gt; 6 Inactive Backends</name>
+            <priority>AVERAGE</priority>
+        </trigger>
+        <trigger>
+            <uuid>e0ee151eb6d54a5798257185865c607c</uuid>
+            <expression>(last(/Custom - Service - Apache/apache.jk.dis) +last(/Custom - Service - Apache/apache.jk.stp) )&gt;0</expression>
+            <name>Apache Mod Jk Disabled Backends &gt; 0</name>
+            <priority>INFO</priority>
+        </trigger>
+        <trigger>
+            <uuid>1acfd873796c4d3093f543768d99d4fc</uuid>
+            <expression>(last(/Custom - Service - Apache/apache.jk.dis) +last(/Custom - Service - Apache/apache.jk.stp) ) &gt; ((last(/Custom - Service - Apache/apache.jk.dis) + last(/Custom - Service - Apache/apache.jk.stp) + last(/Custom - Service - Apache/apache.jk.act)) * 0.20)</expression>
+            <name>Apache Mod Jk Inactive Backends &gt; 20%</name>
+            <priority>WARNING</priority>
+        </trigger>
+    </triggers>
+    <graphs>
+        <graph>
+            <uuid>91aac8502418427a9bda58d91f4e451e</uuid>
+            <name>Apache Maxclient Usage</name>
+            <height>300</height>
+            <show_work_period>NO</show_work_period>
+            <type>STACKED</type>
+            <ymin_type_1>FIXED</ymin_type_1>
+            <graph_items>
+                <graph_item>
+                    <color>00BB00</color>
+                    <calc_fnc>MAX</calc_fnc>
+                    <item>
+                        <host>Custom - Service - Apache</host>
+                        <key>apache.reader[{$HTTP_PORT}]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <color>CC0000</color>
+                    <calc_fnc>MAX</calc_fnc>
+                    <item>
+                        <host>Custom - Service - Apache</host>
+                        <key>apache.writer[{$HTTP_PORT}]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>2</sortorder>
+                    <color>CC00CC</color>
+                    <calc_fnc>MAX</calc_fnc>
+                    <item>
+                        <host>Custom - Service - Apache</host>
+                        <key>apache.keepalive[{$HTTP_PORT}]</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <uuid>b9feba1b19a149ddb5f98921b56e65b5</uuid>
+            <name>Apache Memory Usage</name>
+            <height>300</height>
+            <graph_items>
+                <graph_item>
+                    <color>00C800</color>
+                    <calc_fnc>MAX</calc_fnc>
+                    <item>
+                        <host>Custom - Service - Apache</host>
+                        <key>apache.rss.memory.biggest</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <color>C80000</color>
+                    <calc_fnc>MAX</calc_fnc>
+                    <item>
+                        <host>Custom - Service - Apache</host>
+                        <key>apache.rss.memory.average</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>2</sortorder>
+                    <color>0000C8</color>
+                    <calc_fnc>MAX</calc_fnc>
+                    <item>
+                        <host>Custom - Service - Apache</host>
+                        <key>apache.rss.memory.smallest</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>3</sortorder>
+                    <drawtype>DASHED_LINE</drawtype>
+                    <color>C800C8</color>
+                    <yaxisside>RIGHT</yaxisside>
+                    <calc_fnc>MAX</calc_fnc>
+                    <item>
+                        <host>Custom - Service - Apache</host>
+                        <key>apache.rss.memory.total</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <uuid>cab83b91a58d4b4bbae62b4aae3d66c6</uuid>
+            <name>Apache Mod Jk</name>
+            <show_work_period>NO</show_work_period>
+            <type>STACKED</type>
+            <ymin_type_1>FIXED</ymin_type_1>
+            <graph_items>
+                <graph_item>
+                    <color>00BB00</color>
+                    <item>
+                        <host>Custom - Service - Apache</host>
+                        <key>apache.jk.act</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <color>CC00CC</color>
+                    <item>
+                        <host>Custom - Service - Apache</host>
+                        <key>apache.jk.dis</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>2</sortorder>
+                    <color>DD0000</color>
+                    <item>
+                        <host>Custom - Service - Apache</host>
+                        <key>apache.jk.stp</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <uuid>37e43faf5a694d9da0635e465814064c</uuid>
+            <name>Apache Traffic</name>
+            <height>300</height>
+            <ymin_type_1>FIXED</ymin_type_1>
+            <graph_items>
+                <graph_item>
+                    <color>C80000</color>
+                    <yaxisside>RIGHT</yaxisside>
+                    <calc_fnc>MAX</calc_fnc>
+                    <item>
+                        <host>Custom - Service - Apache</host>
+                        <key>apache.accesses[{$HTTP_PORT}]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <color>00BB00</color>
+                    <calc_fnc>MAX</calc_fnc>
+                    <item>
+                        <host>Custom - Service - Apache</host>
+                        <key>apache.kbytes[{$HTTP_PORT}]</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+    </graphs>
+</zabbix_export>

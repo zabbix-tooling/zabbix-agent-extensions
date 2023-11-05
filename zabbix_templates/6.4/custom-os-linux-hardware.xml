@@ -1,1 +1,384 @@
-
+<?xml version="1.0" encoding="UTF-8"?>
+<zabbix_export>
+    <version>6.4</version>
+    <template_groups>
+        <template_group>
+            <uuid>7df96b18c230490a9a0a9e2307226338</uuid>
+            <name>Templates</name>
+        </template_group>
+    </template_groups>
+    <templates>
+        <template>
+            <uuid>6d4e9146f1a54f1f8fd275578a01784b</uuid>
+            <template>Custom - OS - Linux - Hardware</template>
+            <name>Custom - OS - Linux - Hardware</name>
+            <description>Monitor important linux parameters</description>
+            <groups>
+                <group>
+                    <name>Templates</name>
+                </group>
+            </groups>
+            <discovery_rules>
+                <discovery_rule>
+                    <uuid>841fe680e6cc4f1c9b6e7065ca044ffe</uuid>
+                    <name>Hard Disk discovery</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>vfs.dev.discovery.rawdisks</key>
+                    <delay>15m</delay>
+                    <filter>
+                        <conditions>
+                            <condition>
+                                <macro>{#BLOCKDEVICE}</macro>
+                                <value>.*</value>
+                                <formulaid>A</formulaid>
+                            </condition>
+                        </conditions>
+                    </filter>
+                    <lifetime>1w</lifetime>
+                    <description>Discovery of physical disks.</description>
+                    <item_prototypes>
+                        <item_prototype>
+                            <uuid>0e814f1df048402e97490d9eb09325c7</uuid>
+                            <name>{#BLOCKDEVICE} Smart Health Status</name>
+                            <type>ZABBIX_ACTIVE</type>
+                            <key>hardware.disk.health[{#BLOCKDEVICE}]</key>
+                            <delay>10m</delay>
+                            <history>60d</history>
+                            <trends>0</trends>
+                            <value_type>TEXT</value_type>
+                            <request_method>POST</request_method>
+                            <tags>
+                                <tag>
+                                    <tag>Application</tag>
+                                    <value>OS - Hardware - Disks</value>
+                                </tag>
+                            </tags>
+                            <trigger_prototypes>
+                                <trigger_prototype>
+                                    <uuid>48e9bc1dc10342029516eae3293cfef2</uuid>
+                                    <expression>find(/Custom - OS - Linux - Hardware/hardware.disk.health[{#BLOCKDEVICE}],,&quot;like&quot;,&quot;PASSED&quot;)=0</expression>
+                                    <name>Smart Disk Health {#BLOCKDEVICE}</name>
+                                    <priority>AVERAGE</priority>
+                                    <description>A disk failed or is going to fail in the next 24 hours. Watch zabbix agent log to get details.</description>
+                                </trigger_prototype>
+                            </trigger_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <uuid>6dcfb7cbc3974792bf2663c0951dc964</uuid>
+                            <name>{#BLOCKDEVICE}: ID 197 Current_Pending_Sector</name>
+                            <type>ZABBIX_ACTIVE</type>
+                            <key>hardware.disk.smart.attributes[{#BLOCKDEVICE},Current_Pending_Sector]</key>
+                            <delay>2h</delay>
+                            <history>1w</history>
+                            <trends>0</trends>
+                            <request_method>POST</request_method>
+                            <tags>
+                                <tag>
+                                    <tag>Application</tag>
+                                    <value>OS - Hardware - Disks</value>
+                                </tag>
+                            </tags>
+                        </item_prototype>
+                        <item_prototype>
+                            <uuid>97608e3152d24a97844e144fbb9f688f</uuid>
+                            <name>{#BLOCKDEVICE}: ID 198 Offline_Uncorrectable</name>
+                            <type>ZABBIX_ACTIVE</type>
+                            <key>hardware.disk.smart.attributes[{#BLOCKDEVICE},Offline_Uncorrectable]</key>
+                            <delay>2h</delay>
+                            <history>1w</history>
+                            <trends>0</trends>
+                            <request_method>POST</request_method>
+                            <tags>
+                                <tag>
+                                    <tag>Application</tag>
+                                    <value>OS - Hardware - Disks</value>
+                                </tag>
+                            </tags>
+                        </item_prototype>
+                        <item_prototype>
+                            <uuid>f5b6f65337624cbc988d7eacc0c5fac0</uuid>
+                            <name>{#BLOCKDEVICE}: ID 9 Power On Hours</name>
+                            <type>ZABBIX_ACTIVE</type>
+                            <key>hardware.disk.smart.attributes[{#BLOCKDEVICE},Power_On_Hours]</key>
+                            <delay>2h</delay>
+                            <history>1w</history>
+                            <trends>0</trends>
+                            <units>s</units>
+                            <preprocessing>
+                                <step>
+                                    <type>MULTIPLIER</type>
+                                    <parameters>
+                                        <parameter>3600</parameter>
+                                    </parameters>
+                                </step>
+                            </preprocessing>
+                            <request_method>POST</request_method>
+                            <tags>
+                                <tag>
+                                    <tag>Application</tag>
+                                    <value>OS - Hardware - Disks</value>
+                                </tag>
+                            </tags>
+                        </item_prototype>
+                        <item_prototype>
+                            <uuid>3f31f535028a4fe8a16f3a9a48065caa</uuid>
+                            <name>{#BLOCKDEVICE}: ID 5 Reallocated Sectors Count</name>
+                            <type>ZABBIX_ACTIVE</type>
+                            <key>hardware.disk.smart.attributes[{#BLOCKDEVICE},Reallocated_Sector_Ct]</key>
+                            <delay>2h</delay>
+                            <history>1w</history>
+                            <trends>0</trends>
+                            <request_method>POST</request_method>
+                            <tags>
+                                <tag>
+                                    <tag>Application</tag>
+                                    <value>OS - Hardware - Disks</value>
+                                </tag>
+                            </tags>
+                        </item_prototype>
+                        <item_prototype>
+                            <uuid>6a96f1bc37f14bd392ce96155c3d293d</uuid>
+                            <name>{#BLOCKDEVICE}: ID 10 Spin_Retry_Count</name>
+                            <type>ZABBIX_ACTIVE</type>
+                            <key>hardware.disk.smart.attributes[{#BLOCKDEVICE},Spin_Retry_Count]</key>
+                            <delay>2h</delay>
+                            <history>1w</history>
+                            <trends>0</trends>
+                            <request_method>POST</request_method>
+                            <tags>
+                                <tag>
+                                    <tag>Application</tag>
+                                    <value>OS - Hardware - Disks</value>
+                                </tag>
+                            </tags>
+                        </item_prototype>
+                        <item_prototype>
+                            <uuid>87da8104148b41aca1eaa724659e4590</uuid>
+                            <name>{#BLOCKDEVICE}: ID 194 Temperature</name>
+                            <type>ZABBIX_ACTIVE</type>
+                            <key>hardware.disk.smart.attributes[{#BLOCKDEVICE},Temperature_Celsius]</key>
+                            <delay>10m</delay>
+                            <history>1w</history>
+                            <trends>90d</trends>
+                            <units>C</units>
+                            <request_method>POST</request_method>
+                            <tags>
+                                <tag>
+                                    <tag>Application</tag>
+                                    <value>OS - Hardware - Disks</value>
+                                </tag>
+                            </tags>
+                        </item_prototype>
+                        <item_prototype>
+                            <uuid>eb1d29cb073f4db992ce21f9f63d7b57</uuid>
+                            <name>{#BLOCKDEVICE}: ID 199 UDMA_CRC_Error</name>
+                            <type>ZABBIX_ACTIVE</type>
+                            <key>hardware.disk.smart.attributes[{#BLOCKDEVICE},UDMA_CRC_Error_Count]</key>
+                            <delay>2h</delay>
+                            <history>1w</history>
+                            <request_method>POST</request_method>
+                            <tags>
+                                <tag>
+                                    <tag>Application</tag>
+                                    <value>OS - Hardware - Disks</value>
+                                </tag>
+                            </tags>
+                        </item_prototype>
+                        <item_prototype>
+                            <uuid>b9af7e686e17455284ef3e00a4ba23ed</uuid>
+                            <name>{#BLOCKDEVICE} Device model</name>
+                            <type>ZABBIX_ACTIVE</type>
+                            <key>hardware.disk.smart.info[{#BLOCKDEVICE},Device Model]</key>
+                            <delay>1d</delay>
+                            <trends>0</trends>
+                            <value_type>CHAR</value_type>
+                            <request_method>POST</request_method>
+                            <tags>
+                                <tag>
+                                    <tag>Application</tag>
+                                    <value>OS - Hardware - Disks</value>
+                                </tag>
+                            </tags>
+                        </item_prototype>
+                        <item_prototype>
+                            <uuid>97ea888480e148cea37c744dbf89256c</uuid>
+                            <name>{#BLOCKDEVICE} Serial Number</name>
+                            <type>ZABBIX_ACTIVE</type>
+                            <key>hardware.disk.smart.info[{#BLOCKDEVICE},Serial Number]</key>
+                            <delay>1d</delay>
+                            <trends>0</trends>
+                            <value_type>CHAR</value_type>
+                            <request_method>POST</request_method>
+                            <tags>
+                                <tag>
+                                    <tag>Application</tag>
+                                    <value>OS - Hardware - Disks</value>
+                                </tag>
+                            </tags>
+                        </item_prototype>
+                    </item_prototypes>
+                    <graph_prototypes>
+                        <graph_prototype>
+                            <uuid>203308b846ce4e5e8ae643f92b969e94</uuid>
+                            <name>Disk {#BLOCKDEVICE} - Errors</name>
+                            <height>300</height>
+                            <type>STACKED</type>
+                            <ymin_type_1>FIXED</ymin_type_1>
+                            <graph_items>
+                                <graph_item>
+                                    <color>6C59DC</color>
+                                    <calc_fnc>MAX</calc_fnc>
+                                    <item>
+                                        <host>Custom - OS - Linux - Hardware</host>
+                                        <key>hardware.disk.smart.attributes[{#BLOCKDEVICE},Reallocated_Sector_Ct]</key>
+                                    </item>
+                                </graph_item>
+                                <graph_item>
+                                    <sortorder>1</sortorder>
+                                    <color>AC8C14</color>
+                                    <calc_fnc>MAX</calc_fnc>
+                                    <item>
+                                        <host>Custom - OS - Linux - Hardware</host>
+                                        <key>hardware.disk.smart.attributes[{#BLOCKDEVICE},Spin_Retry_Count]</key>
+                                    </item>
+                                </graph_item>
+                                <graph_item>
+                                    <sortorder>2</sortorder>
+                                    <color>611F27</color>
+                                    <calc_fnc>MAX</calc_fnc>
+                                    <item>
+                                        <host>Custom - OS - Linux - Hardware</host>
+                                        <key>hardware.disk.smart.attributes[{#BLOCKDEVICE},Current_Pending_Sector]</key>
+                                    </item>
+                                </graph_item>
+                                <graph_item>
+                                    <sortorder>3</sortorder>
+                                    <color>F230E0</color>
+                                    <calc_fnc>MAX</calc_fnc>
+                                    <item>
+                                        <host>Custom - OS - Linux - Hardware</host>
+                                        <key>hardware.disk.smart.attributes[{#BLOCKDEVICE},Offline_Uncorrectable]</key>
+                                    </item>
+                                </graph_item>
+                                <graph_item>
+                                    <sortorder>4</sortorder>
+                                    <color>5CCD18</color>
+                                    <calc_fnc>MAX</calc_fnc>
+                                    <item>
+                                        <host>Custom - OS - Linux - Hardware</host>
+                                        <key>hardware.disk.smart.attributes[{#BLOCKDEVICE},UDMA_CRC_Error_Count]</key>
+                                    </item>
+                                </graph_item>
+                            </graph_items>
+                        </graph_prototype>
+                        <graph_prototype>
+                            <uuid>e8b50e35104747398d87d22a31d93c8f</uuid>
+                            <name>Disk {#BLOCKDEVICE} - Lifetime</name>
+                            <height>300</height>
+                            <graph_items>
+                                <graph_item>
+                                    <color>2774A4</color>
+                                    <yaxisside>RIGHT</yaxisside>
+                                    <calc_fnc>MAX</calc_fnc>
+                                    <item>
+                                        <host>Custom - OS - Linux - Hardware</host>
+                                        <key>hardware.disk.smart.attributes[{#BLOCKDEVICE},Power_On_Hours]</key>
+                                    </item>
+                                </graph_item>
+                                <graph_item>
+                                    <sortorder>1</sortorder>
+                                    <color>A54F10</color>
+                                    <calc_fnc>MAX</calc_fnc>
+                                    <item>
+                                        <host>Custom - OS - Linux - Hardware</host>
+                                        <key>hardware.disk.smart.attributes[{#BLOCKDEVICE},Temperature_Celsius]</key>
+                                    </item>
+                                </graph_item>
+                            </graph_items>
+                        </graph_prototype>
+                    </graph_prototypes>
+                    <request_method>POST</request_method>
+                </discovery_rule>
+            </discovery_rules>
+            <macros>
+                <macro>
+                    <macro>{$DISK_USAGE_PERCENT_ALARM}</macro>
+                    <value>97</value>
+                </macro>
+                <macro>
+                    <macro>{$MAXIMUM_NUMBER_RETRANSMISSIONS}</macro>
+                    <value>1</value>
+                </macro>
+                <macro>
+                    <macro>{$MAX_NTP_OFFSET_MS}</macro>
+                    <value>100</value>
+                </macro>
+                <macro>
+                    <macro>{$MIN_NTP_SERVER_COUNT}</macro>
+                    <value>2</value>
+                </macro>
+                <macro>
+                    <macro>{$MONITOR_LOAD_WARNING_MULT}</macro>
+                    <value>5</value>
+                </macro>
+                <macro>
+                    <macro>{$MONITOR_TIMEOUT}</macro>
+                    <value>14400</value>
+                </macro>
+            </macros>
+            <dashboards>
+                <dashboard>
+                    <uuid>1efbc5fb2ea545e89f66b961db84b4c5</uuid>
+                    <name>Custom - OS - Linux - Hardware - Disks</name>
+                    <pages>
+                        <page>
+                            <widgets>
+                                <widget>
+                                    <type>graphprototype</type>
+                                    <width>12</width>
+                                    <height>7</height>
+                                    <fields>
+                                        <field>
+                                            <type>INTEGER</type>
+                                            <name>columns</name>
+                                            <value>1</value>
+                                        </field>
+                                        <field>
+                                            <type>GRAPH_PROTOTYPE</type>
+                                            <name>graphid</name>
+                                            <value>
+                                                <host>Custom - OS - Linux - Hardware</host>
+                                                <name>Disk {#BLOCKDEVICE} - Errors</name>
+                                            </value>
+                                        </field>
+                                    </fields>
+                                </widget>
+                                <widget>
+                                    <type>graphprototype</type>
+                                    <x>12</x>
+                                    <width>12</width>
+                                    <height>7</height>
+                                    <fields>
+                                        <field>
+                                            <type>INTEGER</type>
+                                            <name>columns</name>
+                                            <value>1</value>
+                                        </field>
+                                        <field>
+                                            <type>GRAPH_PROTOTYPE</type>
+                                            <name>graphid</name>
+                                            <value>
+                                                <host>Custom - OS - Linux - Hardware</host>
+                                                <name>Disk {#BLOCKDEVICE} - Lifetime</name>
+                                            </value>
+                                        </field>
+                                    </fields>
+                                </widget>
+                            </widgets>
+                        </page>
+                    </pages>
+                </dashboard>
+            </dashboards>
+        </template>
+    </templates>
+</zabbix_export>

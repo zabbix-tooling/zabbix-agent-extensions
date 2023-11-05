@@ -1,1 +1,824 @@
-
+<?xml version="1.0" encoding="UTF-8"?>
+<zabbix_export>
+    <version>6.4</version>
+    <template_groups>
+        <template_group>
+            <uuid>7df96b18c230490a9a0a9e2307226338</uuid>
+            <name>Templates</name>
+        </template_group>
+    </template_groups>
+    <templates>
+        <template>
+            <uuid>37ccca5158814236bf691937a9997582</uuid>
+            <template>Custom - OS - Puppet</template>
+            <name>Custom - OS - Puppet</name>
+            <groups>
+                <group>
+                    <name>Templates</name>
+                </group>
+            </groups>
+            <items>
+                <item>
+                    <uuid>28a4b46ea1b549e0a6dc4cd8bb8878c8</uuid>
+                    <name>Puppet Agent Process</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>proc.num[,root,,.*ruby.*puppet agent.*$]</key>
+                    <delay>300</delay>
+                    <valuemap>
+                        <name>Service state</name>
+                    </valuemap>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>OS - Puppet</value>
+                        </tag>
+                    </tags>
+                    <triggers>
+                        <trigger>
+                            <uuid>7a55804dc92f44dfa3f280508a72428d</uuid>
+                            <expression>(last(/Custom - OS - Puppet/proc.num[,root,,.*ruby.*puppet agent.*$])&lt;1) or (nodata(/Custom - OS - Puppet/proc.num[,root,,.*ruby.*puppet agent.*$],3700s)=1)</expression>
+                            <name>Puppet Agent Process not  active for one hour</name>
+                            <priority>WARNING</priority>
+                            <description>Trigger if Puppet Agent Process is not running or has no data for 1h</description>
+                            <dependencies>
+                                <dependency>
+                                    <name>Puppet disabled</name>
+                                    <expression>find(/Custom - OS - Puppet/puppet[disabled],,&quot;like&quot;,&quot;NOT DISABLED&quot;)=0</expression>
+                                </dependency>
+                            </dependencies>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <uuid>0c6e806a1053490bb0f4a31277e4e87c</uuid>
+                    <name>Puppet Changes Total</name>
+                    <type>DEPENDENT</type>
+                    <key>puppet[changes,total]</key>
+                    <delay>0</delay>
+                    <history>30d</history>
+                    <preprocessing>
+                        <step>
+                            <type>JSONPATH</type>
+                            <parameters>
+                                <parameter>$.changes.total</parameter>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>puppet[]</key>
+                    </master_item>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>OS - Puppet</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>8991eea0ab7249558a1324fb6b4fd927</uuid>
+                    <name>Puppet Disabled</name>
+                    <type>DEPENDENT</type>
+                    <key>puppet[disabled]</key>
+                    <delay>0</delay>
+                    <history>30d</history>
+                    <trends>0</trends>
+                    <value_type>TEXT</value_type>
+                    <preprocessing>
+                        <step>
+                            <type>JSONPATH</type>
+                            <parameters>
+                                <parameter>$.disabled</parameter>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>puppet[]</key>
+                    </master_item>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>OS - Puppet</value>
+                        </tag>
+                    </tags>
+                    <triggers>
+                        <trigger>
+                            <uuid>a8b5e31888fc4684a4f93b4180d856e7</uuid>
+                            <expression>find(/Custom - OS - Puppet/puppet[disabled],,&quot;like&quot;,&quot;NOT DISABLED&quot;)=0</expression>
+                            <name>Puppet disabled</name>
+                            <priority>WARNING</priority>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <uuid>ee5c20e65c5f4ceb9ccd36b909826b18</uuid>
+                    <name>Puppet Environment</name>
+                    <type>DEPENDENT</type>
+                    <key>puppet[environment]</key>
+                    <delay>0</delay>
+                    <history>30d</history>
+                    <trends>0</trends>
+                    <value_type>TEXT</value_type>
+                    <preprocessing>
+                        <step>
+                            <type>JSONPATH</type>
+                            <parameters>
+                                <parameter>$.environment</parameter>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>puppet[]</key>
+                    </master_item>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>OS - Puppet</value>
+                        </tag>
+                    </tags>
+                    <triggers>
+                        <trigger>
+                            <uuid>102b0d53cecc4e409deec043523a5f3a</uuid>
+                            <expression>last(/Custom - OS - Puppet/puppet[environment],#1)=last(/Custom - OS - Puppet/puppet[environment],#2)</expression>
+                            <name>Puppet environment changed from {ITEM.VALUE1} to  {ITEM.VALUE2}</name>
+                            <priority>WARNING</priority>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <uuid>d3d89503e9a7481eaf1b332d0af60627</uuid>
+                    <name>Puppet Events Failure</name>
+                    <type>DEPENDENT</type>
+                    <key>puppet[events,failure]</key>
+                    <delay>0</delay>
+                    <history>30d</history>
+                    <units>events</units>
+                    <preprocessing>
+                        <step>
+                            <type>JSONPATH</type>
+                            <parameters>
+                                <parameter>$.events.failure</parameter>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>puppet[]</key>
+                    </master_item>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>OS - Puppet</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>27973aa296ff46d6ad5901da6aac88f7</uuid>
+                    <name>Puppet Events Success</name>
+                    <type>DEPENDENT</type>
+                    <key>puppet[events,success]</key>
+                    <delay>0</delay>
+                    <history>30d</history>
+                    <units>events</units>
+                    <preprocessing>
+                        <step>
+                            <type>JSONPATH</type>
+                            <parameters>
+                                <parameter>$.events.success</parameter>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>puppet[]</key>
+                    </master_item>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>OS - Puppet</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>67f7d4545919478da93c669857769345</uuid>
+                    <name>Puppet Events Total</name>
+                    <type>DEPENDENT</type>
+                    <key>puppet[events,total]</key>
+                    <delay>0</delay>
+                    <history>30d</history>
+                    <units>events</units>
+                    <preprocessing>
+                        <step>
+                            <type>JSONPATH</type>
+                            <parameters>
+                                <parameter>$.events.total</parameter>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>puppet[]</key>
+                    </master_item>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>OS - Puppet</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>a89a9296e8494bac985f869df6e8e495</uuid>
+                    <name>Puppet resources changed</name>
+                    <type>DEPENDENT</type>
+                    <key>puppet[resources,changed]</key>
+                    <delay>0</delay>
+                    <history>30d</history>
+                    <units>res</units>
+                    <preprocessing>
+                        <step>
+                            <type>JSONPATH</type>
+                            <parameters>
+                                <parameter>$.resources.changed</parameter>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>puppet[]</key>
+                    </master_item>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>OS - Puppet</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>018e0c5a63d74015be3c803ecbfce14d</uuid>
+                    <name>Puppet resources failed_to_restart</name>
+                    <type>DEPENDENT</type>
+                    <key>puppet[resources,failed_to_restart]</key>
+                    <delay>0</delay>
+                    <history>30d</history>
+                    <units>res</units>
+                    <preprocessing>
+                        <step>
+                            <type>JSONPATH</type>
+                            <parameters>
+                                <parameter>$.resources.failed_to_restart</parameter>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>puppet[]</key>
+                    </master_item>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>OS - Puppet</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>12234ed31b5f47ea9264dfebd337fdee</uuid>
+                    <name>Puppet resources out_of_sync</name>
+                    <type>DEPENDENT</type>
+                    <key>puppet[resources,out_of_sync]</key>
+                    <delay>0</delay>
+                    <history>30d</history>
+                    <units>res</units>
+                    <preprocessing>
+                        <step>
+                            <type>JSONPATH</type>
+                            <parameters>
+                                <parameter>$.resources.out_of_sync</parameter>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>puppet[]</key>
+                    </master_item>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>OS - Puppet</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>1e62a25fd7744e0e8957b10d8f181fab</uuid>
+                    <name>Puppet resources restarted</name>
+                    <type>DEPENDENT</type>
+                    <key>puppet[resources,restarted]</key>
+                    <delay>0</delay>
+                    <history>30d</history>
+                    <units>res</units>
+                    <preprocessing>
+                        <step>
+                            <type>JSONPATH</type>
+                            <parameters>
+                                <parameter>$.resources.restarted</parameter>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>puppet[]</key>
+                    </master_item>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>OS - Puppet</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>c0999586af684182a9cccb066208a1e6</uuid>
+                    <name>Puppet resources scheduled</name>
+                    <type>DEPENDENT</type>
+                    <key>puppet[resources,scheduled]</key>
+                    <delay>0</delay>
+                    <history>30d</history>
+                    <units>res</units>
+                    <preprocessing>
+                        <step>
+                            <type>JSONPATH</type>
+                            <parameters>
+                                <parameter>$.resources.scheduled</parameter>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>puppet[]</key>
+                    </master_item>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>OS - Puppet</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>c34cad2202b54e99b7b79683110b0013</uuid>
+                    <name>Puppet resources skipped</name>
+                    <type>DEPENDENT</type>
+                    <key>puppet[resources,skipped]</key>
+                    <delay>0</delay>
+                    <history>30d</history>
+                    <units>res</units>
+                    <preprocessing>
+                        <step>
+                            <type>JSONPATH</type>
+                            <parameters>
+                                <parameter>$.resources.skipped</parameter>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>puppet[]</key>
+                    </master_item>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>OS - Puppet</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>78051d70d4754f309283ecbdcf854896</uuid>
+                    <name>Puppet resources total</name>
+                    <type>DEPENDENT</type>
+                    <key>puppet[resources,total]</key>
+                    <delay>0</delay>
+                    <history>30d</history>
+                    <units>res</units>
+                    <preprocessing>
+                        <step>
+                            <type>JSONPATH</type>
+                            <parameters>
+                                <parameter>$.resources.total</parameter>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>puppet[]</key>
+                    </master_item>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>OS - Puppet</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>1a2aa12016154813ba75e8dbc308aa7e</uuid>
+                    <name>Puppet State</name>
+                    <type>DEPENDENT</type>
+                    <key>puppet[state]</key>
+                    <delay>0</delay>
+                    <history>30d</history>
+                    <trends>0</trends>
+                    <value_type>TEXT</value_type>
+                    <preprocessing>
+                        <step>
+                            <type>JSONPATH</type>
+                            <parameters>
+                                <parameter>$.state</parameter>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>puppet[]</key>
+                    </master_item>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>OS - Puppet</value>
+                        </tag>
+                    </tags>
+                    <triggers>
+                        <trigger>
+                            <uuid>17bfb14b2e8044baba55c415ab79f477</uuid>
+                            <expression>find(/Custom - OS - Puppet/puppet[state],,&quot;like&quot;,&quot;ERROR&quot;)=1</expression>
+                            <name>Last puppet run failed</name>
+                            <priority>WARNING</priority>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <uuid>8318303c36864ed7a5f4fadac395cbb5</uuid>
+                    <name>Puppet time config_retrieval</name>
+                    <type>DEPENDENT</type>
+                    <key>puppet[time,config_retrieval]</key>
+                    <delay>0</delay>
+                    <history>14d</history>
+                    <trends>90d</trends>
+                    <value_type>FLOAT</value_type>
+                    <units>s</units>
+                    <preprocessing>
+                        <step>
+                            <type>JSONPATH</type>
+                            <parameters>
+                                <parameter>$.time.config_retrieval</parameter>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>puppet[]</key>
+                    </master_item>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>OS - Puppet</value>
+                        </tag>
+                    </tags>
+                    <triggers>
+                        <trigger>
+                            <uuid>68e8c602cac34d08beaaaa60eac2b71e</uuid>
+                            <expression>last(/Custom - OS - Puppet/puppet[time,config_retrieval])&gt;60</expression>
+                            <name>Puppet Retrieve Catalog took &gt; 60 sec</name>
+                            <priority>WARNING</priority>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <uuid>5c3209baa3844645856545d505f6052b</uuid>
+                    <name>Puppet time last_run</name>
+                    <type>DEPENDENT</type>
+                    <key>puppet[time,last_run]</key>
+                    <delay>0</delay>
+                    <history>30d</history>
+                    <preprocessing>
+                        <step>
+                            <type>JSONPATH</type>
+                            <parameters>
+                                <parameter>$.time.last_run</parameter>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>puppet[]</key>
+                    </master_item>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>OS - Puppet</value>
+                        </tag>
+                    </tags>
+                    <triggers>
+                        <trigger>
+                            <uuid>17c6ac81bb65408eafe66fcd1ebfb284</uuid>
+                            <expression>fuzzytime(/Custom - OS - Puppet/puppet[time,last_run],3700s)=0</expression>
+                            <name>Puppet Run older than one hour</name>
+                            <priority>WARNING</priority>
+                            <dependencies>
+                                <dependency>
+                                    <name>Puppet disabled</name>
+                                    <expression>find(/Custom - OS - Puppet/puppet[disabled],,&quot;like&quot;,&quot;NOT DISABLED&quot;)=0</expression>
+                                </dependency>
+                            </dependencies>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <uuid>b275de6a66e441a7b22c8175d6c4dd57</uuid>
+                    <name>Puppet time total</name>
+                    <type>DEPENDENT</type>
+                    <key>puppet[time,total]</key>
+                    <delay>0</delay>
+                    <history>14d</history>
+                    <trends>90d</trends>
+                    <value_type>FLOAT</value_type>
+                    <units>s</units>
+                    <preprocessing>
+                        <step>
+                            <type>JSONPATH</type>
+                            <parameters>
+                                <parameter>$.time.total</parameter>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>puppet[]</key>
+                    </master_item>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>OS - Puppet</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>16020f5294a2482fb5e56ba5f11bafdd</uuid>
+                    <name>Puppet Global JSON State</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>puppet[]</key>
+                    <delay>30m</delay>
+                    <history>3d</history>
+                    <trends>0</trends>
+                    <value_type>TEXT</value_type>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>OS - Puppet</value>
+                        </tag>
+                    </tags>
+                    <triggers>
+                        <trigger>
+                            <uuid>501d5c10b5fa48fbafd049f9448da8dc</uuid>
+                            <expression>nodata(/Custom - OS - Puppet/puppet[],4000s)=1</expression>
+                            <name>Puppet nodata</name>
+                            <priority>WARNING</priority>
+                            <dependencies>
+                                <dependency>
+                                    <name>Last puppet run failed</name>
+                                    <expression>find(/Custom - OS - Puppet/puppet[state],,&quot;like&quot;,&quot;ERROR&quot;)=1</expression>
+                                </dependency>
+                                <dependency>
+                                    <name>Puppet Agent Process not  active for one hour</name>
+                                    <expression>(last(/Custom - OS - Puppet/proc.num[,root,,.*ruby.*puppet agent.*$])&lt;1) or (nodata(/Custom - OS - Puppet/proc.num[,root,,.*ruby.*puppet agent.*$],3700s)=1)</expression>
+                                </dependency>
+                                <dependency>
+                                    <name>Puppet Run older than one hour</name>
+                                    <expression>fuzzytime(/Custom - OS - Puppet/puppet[time,last_run],3700s)=0</expression>
+                                </dependency>
+                            </dependencies>
+                        </trigger>
+                    </triggers>
+                </item>
+            </items>
+            <dashboards>
+                <dashboard>
+                    <uuid>716c2e461fc340bbaf82de2659ebc34b</uuid>
+                    <name>Custom - OS - Puppet</name>
+                    <pages>
+                        <page>
+                            <widgets>
+                                <widget>
+                                    <type>graph</type>
+                                    <width>24</width>
+                                    <height>7</height>
+                                    <fields>
+                                        <field>
+                                            <type>GRAPH</type>
+                                            <name>graphid</name>
+                                            <value>
+                                                <host>Custom - OS - Puppet</host>
+                                                <name>Puppet Execution Time</name>
+                                            </value>
+                                        </field>
+                                        <field>
+                                            <type>INTEGER</type>
+                                            <name>source_type</name>
+                                            <value>0</value>
+                                        </field>
+                                    </fields>
+                                </widget>
+                                <widget>
+                                    <type>graph</type>
+                                    <y>7</y>
+                                    <width>24</width>
+                                    <height>7</height>
+                                    <fields>
+                                        <field>
+                                            <type>GRAPH</type>
+                                            <name>graphid</name>
+                                            <value>
+                                                <host>Custom - OS - Puppet</host>
+                                                <name>Puppet Resources</name>
+                                            </value>
+                                        </field>
+                                        <field>
+                                            <type>INTEGER</type>
+                                            <name>source_type</name>
+                                            <value>0</value>
+                                        </field>
+                                    </fields>
+                                </widget>
+                                <widget>
+                                    <type>graph</type>
+                                    <y>14</y>
+                                    <width>24</width>
+                                    <height>7</height>
+                                    <fields>
+                                        <field>
+                                            <type>GRAPH</type>
+                                            <name>graphid</name>
+                                            <value>
+                                                <host>Custom - OS - Puppet</host>
+                                                <name>Puppet Events</name>
+                                            </value>
+                                        </field>
+                                        <field>
+                                            <type>INTEGER</type>
+                                            <name>source_type</name>
+                                            <value>0</value>
+                                        </field>
+                                    </fields>
+                                </widget>
+                            </widgets>
+                        </page>
+                    </pages>
+                </dashboard>
+            </dashboards>
+            <valuemaps>
+                <valuemap>
+                    <uuid>f03f79d270604b79b9df746f05f3b779</uuid>
+                    <name>Service state</name>
+                    <mappings>
+                        <mapping>
+                            <value>0</value>
+                            <newvalue>Down</newvalue>
+                        </mapping>
+                        <mapping>
+                            <value>1</value>
+                            <newvalue>Up</newvalue>
+                        </mapping>
+                    </mappings>
+                </valuemap>
+            </valuemaps>
+        </template>
+    </templates>
+    <graphs>
+        <graph>
+            <uuid>a2a55dd0c25f4392a19655ffd425b9cb</uuid>
+            <name>Puppet Events</name>
+            <height>300</height>
+            <ymin_type_1>FIXED</ymin_type_1>
+            <graph_items>
+                <graph_item>
+                    <color>DD0000</color>
+                    <item>
+                        <host>Custom - OS - Puppet</host>
+                        <key>puppet[events,failure]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <color>00AA00</color>
+                    <item>
+                        <host>Custom - OS - Puppet</host>
+                        <key>puppet[events,success]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>2</sortorder>
+                    <color>2774A4</color>
+                    <item>
+                        <host>Custom - OS - Puppet</host>
+                        <key>puppet[events,total]</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <uuid>e8e9e8ef3e3444758cffa66c7e85a704</uuid>
+            <name>Puppet Execution Time</name>
+            <height>300</height>
+            <ymin_type_1>FIXED</ymin_type_1>
+            <graph_items>
+                <graph_item>
+                    <color>BB00BB</color>
+                    <calc_fnc>MAX</calc_fnc>
+                    <item>
+                        <host>Custom - OS - Puppet</host>
+                        <key>puppet[time,config_retrieval]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <drawtype>GRADIENT_LINE</drawtype>
+                    <color>00BB00</color>
+                    <calc_fnc>MAX</calc_fnc>
+                    <item>
+                        <host>Custom - OS - Puppet</host>
+                        <key>puppet[time,total]</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <uuid>5b54daa9d96f41a986c644c4d5940b52</uuid>
+            <name>Puppet Resources</name>
+            <height>300</height>
+            <ymin_type_1>FIXED</ymin_type_1>
+            <graph_items>
+                <graph_item>
+                    <color>C80000</color>
+                    <calc_fnc>MAX</calc_fnc>
+                    <item>
+                        <host>Custom - OS - Puppet</host>
+                        <key>puppet[resources,total]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <color>00C800</color>
+                    <calc_fnc>MAX</calc_fnc>
+                    <item>
+                        <host>Custom - OS - Puppet</host>
+                        <key>puppet[resources,changed]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>2</sortorder>
+                    <color>0000C8</color>
+                    <calc_fnc>MAX</calc_fnc>
+                    <item>
+                        <host>Custom - OS - Puppet</host>
+                        <key>puppet[resources,failed_to_restart]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>3</sortorder>
+                    <color>C800C8</color>
+                    <calc_fnc>MAX</calc_fnc>
+                    <item>
+                        <host>Custom - OS - Puppet</host>
+                        <key>puppet[resources,out_of_sync]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>4</sortorder>
+                    <color>00C8C8</color>
+                    <calc_fnc>MAX</calc_fnc>
+                    <item>
+                        <host>Custom - OS - Puppet</host>
+                        <key>puppet[resources,restarted]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>5</sortorder>
+                    <color>C8C800</color>
+                    <calc_fnc>MAX</calc_fnc>
+                    <item>
+                        <host>Custom - OS - Puppet</host>
+                        <key>puppet[resources,scheduled]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>6</sortorder>
+                    <color>C8C8C8</color>
+                    <calc_fnc>MAX</calc_fnc>
+                    <item>
+                        <host>Custom - OS - Puppet</host>
+                        <key>puppet[resources,skipped]</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+    </graphs>
+</zabbix_export>

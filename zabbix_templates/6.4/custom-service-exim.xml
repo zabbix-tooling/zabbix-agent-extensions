@@ -1,1 +1,170 @@
-
+<?xml version="1.0" encoding="UTF-8"?>
+<zabbix_export>
+    <version>6.4</version>
+    <template_groups>
+        <template_group>
+            <uuid>7df96b18c230490a9a0a9e2307226338</uuid>
+            <name>Templates</name>
+        </template_group>
+    </template_groups>
+    <templates>
+        <template>
+            <uuid>212b47dad32649239e3be4f1d733b9e0</uuid>
+            <template>Custom - Service - Exim</template>
+            <name>Custom - Service - Exim</name>
+            <groups>
+                <group>
+                    <name>Templates</name>
+                </group>
+            </groups>
+            <items>
+                <item>
+                    <uuid>d429faa42dad42f6bbbd0c7eca355801</uuid>
+                    <name>Rejected Mails</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>log.count[{$EXIM_LOGFILE},&quot;: Rejected&quot;,,100,skip,]</key>
+                    <history>2w</history>
+                    <trends>90d</trends>
+                    <units>msg</units>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Service - Exim</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>8900217f44e64ed28669fa10d654cdcd</uuid>
+                    <name>Accepted Spam Mails</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>log.count[{$EXIM_LOGFILE},&quot;Action: flagged as Spam but accepted:&quot;,,100,skip,]</key>
+                    <history>2w</history>
+                    <trends>90d</trends>
+                    <units>msg</units>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Service - Exim</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>f850be63ef7445358980e1e10e79988a</uuid>
+                    <name>Completed Mails</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>log.count[{$EXIM_LOGFILE},&quot; Completed$&quot;,,100,skip,]</key>
+                    <history>2w</history>
+                    <trends>90d</trends>
+                    <units>msg</units>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Service - Exim</value>
+                        </tag>
+                    </tags>
+                </item>
+            </items>
+            <macros>
+                <macro>
+                    <macro>{$EXIM_LOGFILE}</macro>
+                    <value>/var/log/exim4/mainlog</value>
+                </macro>
+            </macros>
+            <dashboards>
+                <dashboard>
+                    <uuid>cbdd1fffcb1e43f7af48e116e6c2cde4</uuid>
+                    <name>Custom - Service - Exim</name>
+                    <pages>
+                        <page>
+                            <widgets>
+                                <widget>
+                                    <type>graph</type>
+                                    <width>24</width>
+                                    <height>7</height>
+                                    <fields>
+                                        <field>
+                                            <type>GRAPH</type>
+                                            <name>graphid</name>
+                                            <value>
+                                                <host>Custom - Service - Exim</host>
+                                                <name>Service - Exim - Overview</name>
+                                            </value>
+                                        </field>
+                                        <field>
+                                            <type>INTEGER</type>
+                                            <name>source_type</name>
+                                            <value>0</value>
+                                        </field>
+                                    </fields>
+                                </widget>
+                                <widget>
+                                    <type>graph</type>
+                                    <y>7</y>
+                                    <width>24</width>
+                                    <height>7</height>
+                                    <fields>
+                                        <field>
+                                            <type>GRAPH</type>
+                                            <name>graphid</name>
+                                            <value>
+                                                <host>Custom - Service - Exim</host>
+                                                <name>Service - Exim - Details</name>
+                                            </value>
+                                        </field>
+                                        <field>
+                                            <type>INTEGER</type>
+                                            <name>source_type</name>
+                                            <value>0</value>
+                                        </field>
+                                    </fields>
+                                </widget>
+                            </widgets>
+                        </page>
+                    </pages>
+                </dashboard>
+            </dashboards>
+        </template>
+    </templates>
+    <graphs>
+        <graph>
+            <uuid>228c5b72e6ed440da7f60a82bd57985e</uuid>
+            <name>Service - Exim - Details</name>
+            <height>300</height>
+            <ymin_type_1>FIXED</ymin_type_1>
+            <graph_items>
+                <graph_item>
+                    <color>2774A4</color>
+                    <item>
+                        <host>Custom - Service - Exim</host>
+                        <key>log.count[{$EXIM_LOGFILE},&quot;Action: flagged as Spam but accepted:&quot;,,100,skip,]</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <uuid>11056e15164b44a4af91682d098253bd</uuid>
+            <name>Service - Exim - Overview</name>
+            <height>300</height>
+            <ymin_type_1>FIXED</ymin_type_1>
+            <graph_items>
+                <graph_item>
+                    <color>1A7C11</color>
+                    <calc_fnc>MAX</calc_fnc>
+                    <item>
+                        <host>Custom - Service - Exim</host>
+                        <key>log.count[{$EXIM_LOGFILE},&quot; Completed$&quot;,,100,skip,]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <color>F63100</color>
+                    <calc_fnc>MAX</calc_fnc>
+                    <item>
+                        <host>Custom - Service - Exim</host>
+                        <key>log.count[{$EXIM_LOGFILE},&quot;: Rejected&quot;,,100,skip,]</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+    </graphs>
+</zabbix_export>

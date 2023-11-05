@@ -1,1 +1,399 @@
-
+<?xml version="1.0" encoding="UTF-8"?>
+<zabbix_export>
+    <version>6.4</version>
+    <template_groups>
+        <template_group>
+            <uuid>7df96b18c230490a9a0a9e2307226338</uuid>
+            <name>Templates</name>
+        </template_group>
+    </template_groups>
+    <templates>
+        <template>
+            <uuid>273d3c20eece4d1cb2c349c236640611</uuid>
+            <template>Custom - Service - Elasticsearch Cluster</template>
+            <name>Custom - Service - Elasticsearch Cluster</name>
+            <groups>
+                <group>
+                    <name>Templates</name>
+                </group>
+            </groups>
+            <items>
+                <item>
+                    <uuid>e639d0931e8e41f0b02b1cc8ea2e91bc</uuid>
+                    <name>Number of active primary shards</name>
+                    <key>elasticsearch[cluster,active_primary_shards]</key>
+                    <delay>600</delay>
+                    <history>14d</history>
+                    <trends>90d</trends>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Elasticsearch Cluster</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>3f659a6478be4131bb55d39fb20a2cf3</uuid>
+                    <name>Number of active shards</name>
+                    <key>elasticsearch[cluster,active_shards]</key>
+                    <delay>600</delay>
+                    <history>14d</history>
+                    <trends>90d</trends>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Elasticsearch Cluster</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>0eaa84a501d84ef3b621786aa417d75f</uuid>
+                    <name>Total number of records</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>elasticsearch[cluster,count]</key>
+                    <delay>300</delay>
+                    <history>14d</history>
+                    <trends>90d</trends>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Elasticsearch Cluster</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>43fe5d0400e04bd1ad2239f9d87c928e</uuid>
+                    <name>Cluster-wide records indexed per second</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>elasticsearch[cluster,index_total]</key>
+                    <delay>300</delay>
+                    <history>14d</history>
+                    <trends>90d</trends>
+                    <value_type>FLOAT</value_type>
+                    <preprocessing>
+                        <step>
+                            <type>CHANGE_PER_SECOND</type>
+                            <parameters>
+                                <parameter/>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Elasticsearch Cluster</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>7cf6240cb2db4b37be5602041f69932b</uuid>
+                    <name>Number of initializing shards</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>elasticsearch[cluster,initializing_shards]</key>
+                    <delay>300</delay>
+                    <history>14d</history>
+                    <trends>90d</trends>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Elasticsearch Cluster</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>8efabd41d3414aa8bd26e165f56eccc2</uuid>
+                    <name>Number of data nodes</name>
+                    <key>elasticsearch[cluster,number_of_data_nodes]</key>
+                    <delay>600</delay>
+                    <history>14d</history>
+                    <trends>90d</trends>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Elasticsearch Cluster</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>8f761134b01b4f48b8fdc10e9193df39</uuid>
+                    <name>Number of nodes</name>
+                    <key>elasticsearch[cluster,number_of_nodes]</key>
+                    <delay>600</delay>
+                    <history>14d</history>
+                    <trends>90d</trends>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Elasticsearch Cluster</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>ac16646d8a404ac597338072e9650eb9</uuid>
+                    <name>Number of relocating shards</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>elasticsearch[cluster,relocating_shards]</key>
+                    <delay>300</delay>
+                    <history>14d</history>
+                    <trends>90d</trends>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Elasticsearch Cluster</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>c28d1c43763c427d957f9ac34a405bc3</uuid>
+                    <name>Cluster-wide storage size</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>elasticsearch[cluster,size_in_bytes]</key>
+                    <delay>300</delay>
+                    <history>14d</history>
+                    <trends>90d</trends>
+                    <units>B</units>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Elasticsearch Cluster</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>5a465f6cac2a47f2989a955aec43576d</uuid>
+                    <name>ElasticSearch Cluster Status</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>elasticsearch[cluster,status]</key>
+                    <delay>300</delay>
+                    <history>14d</history>
+                    <trends>90d</trends>
+                    <valuemap>
+                        <name>ES Cluster State</name>
+                    </valuemap>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Elasticsearch Cluster</value>
+                        </tag>
+                    </tags>
+                    <triggers>
+                        <trigger>
+                            <uuid>bd2864fab74e413a8b12b9edadd57c0f</uuid>
+                            <expression>last(/Custom - Service - Elasticsearch Cluster/elasticsearch[cluster,status])=1</expression>
+                            <name>Elasticsearch Cluster in {ITEM.LASTVALUE} state</name>
+                            <priority>AVERAGE</priority>
+                            <description>The cluster health status is: green, yellow or red. On the shard level, a red status indicates that the specific shard is not allocated in the cluster, yellow means that the primary shard is allocated but replicas are not, and green means that all shards are allocated. The index level status is controlled by the worst shard status. The cluster status is controlled by the worst index status.</description>
+                            <dependencies>
+                                <dependency>
+                                    <name>Elasticsearch Cluster in {ITEM.LASTVALUE} state</name>
+                                    <expression>last(/Custom - Service - Elasticsearch Cluster/elasticsearch[cluster,status])=2</expression>
+                                </dependency>
+                            </dependencies>
+                        </trigger>
+                        <trigger>
+                            <uuid>f28a6a7b2000422eb849e3483f01110c</uuid>
+                            <expression>last(/Custom - Service - Elasticsearch Cluster/elasticsearch[cluster,status])=2</expression>
+                            <name>Elasticsearch Cluster in {ITEM.LASTVALUE} state</name>
+                            <priority>HIGH</priority>
+                            <description>The cluster health status is: green, yellow or red. On the shard level, a red status indicates that the specific shard is not allocated in the cluster, yellow means that the primary shard is allocated but replicas are not, and green means that all shards are allocated. The index level status is controlled by the worst shard status. The cluster status is controlled by the worst index status.</description>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <uuid>9b451f89dece436984a03c40d61b8444</uuid>
+                    <name>Number of unassigned shards</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>elasticsearch[cluster,unassigned_shards]</key>
+                    <delay>300</delay>
+                    <history>14d</history>
+                    <trends>90d</trends>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Elasticsearch Cluster</value>
+                        </tag>
+                    </tags>
+                </item>
+            </items>
+            <dashboards>
+                <dashboard>
+                    <uuid>fd0cc4282d4c43a19ab2d47dd8840bd5</uuid>
+                    <name>Custom - Service - Elasticsearch Cluster</name>
+                    <pages>
+                        <page>
+                            <widgets>
+                                <widget>
+                                    <type>plaintext</type>
+                                    <width>24</width>
+                                    <fields>
+                                        <field>
+                                            <type>ITEM</type>
+                                            <name>itemids</name>
+                                            <value>
+                                                <host>Custom - Service - Elasticsearch Cluster</host>
+                                                <key>elasticsearch[cluster,status]</key>
+                                            </value>
+                                        </field>
+                                        <field>
+                                            <type>INTEGER</type>
+                                            <name>show_as_html</name>
+                                            <value>0</value>
+                                        </field>
+                                        <field>
+                                            <type>INTEGER</type>
+                                            <name>show_lines</name>
+                                            <value>5</value>
+                                        </field>
+                                    </fields>
+                                </widget>
+                                <widget>
+                                    <type>graph</type>
+                                    <y>2</y>
+                                    <width>24</width>
+                                    <height>7</height>
+                                    <fields>
+                                        <field>
+                                            <type>GRAPH</type>
+                                            <name>graphid</name>
+                                            <value>
+                                                <host>Custom - Service - Elasticsearch Cluster</host>
+                                                <name>ELK Shards</name>
+                                            </value>
+                                        </field>
+                                        <field>
+                                            <type>INTEGER</type>
+                                            <name>source_type</name>
+                                            <value>0</value>
+                                        </field>
+                                    </fields>
+                                </widget>
+                                <widget>
+                                    <type>graph</type>
+                                    <y>9</y>
+                                    <width>24</width>
+                                    <height>7</height>
+                                    <fields>
+                                        <field>
+                                            <type>GRAPH</type>
+                                            <name>graphid</name>
+                                            <value>
+                                                <host>Custom - Service - Elasticsearch Cluster</host>
+                                                <name>ELK Usage</name>
+                                            </value>
+                                        </field>
+                                        <field>
+                                            <type>INTEGER</type>
+                                            <name>source_type</name>
+                                            <value>0</value>
+                                        </field>
+                                    </fields>
+                                </widget>
+                            </widgets>
+                        </page>
+                    </pages>
+                </dashboard>
+            </dashboards>
+            <valuemaps>
+                <valuemap>
+                    <uuid>6ca11e7a63324cbb9c53a90eb2e11d06</uuid>
+                    <name>ES Cluster State</name>
+                    <mappings>
+                        <mapping>
+                            <value>0</value>
+                            <newvalue>Green</newvalue>
+                        </mapping>
+                        <mapping>
+                            <value>1</value>
+                            <newvalue>Yellow</newvalue>
+                        </mapping>
+                        <mapping>
+                            <value>2</value>
+                            <newvalue>Red</newvalue>
+                        </mapping>
+                    </mappings>
+                </valuemap>
+            </valuemaps>
+        </template>
+    </templates>
+    <graphs>
+        <graph>
+            <uuid>ff7731e27376467490678447a444e527</uuid>
+            <name>ELK Shards</name>
+            <height>300</height>
+            <ymin_type_1>FIXED</ymin_type_1>
+            <graph_items>
+                <graph_item>
+                    <color>C80000</color>
+                    <calc_fnc>MAX</calc_fnc>
+                    <item>
+                        <host>Custom - Service - Elasticsearch Cluster</host>
+                        <key>elasticsearch[cluster,active_primary_shards]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <color>00C800</color>
+                    <calc_fnc>MAX</calc_fnc>
+                    <item>
+                        <host>Custom - Service - Elasticsearch Cluster</host>
+                        <key>elasticsearch[cluster,active_shards]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>2</sortorder>
+                    <color>0000C8</color>
+                    <calc_fnc>MAX</calc_fnc>
+                    <item>
+                        <host>Custom - Service - Elasticsearch Cluster</host>
+                        <key>elasticsearch[cluster,initializing_shards]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>3</sortorder>
+                    <color>C800C8</color>
+                    <item>
+                        <host>Custom - Service - Elasticsearch Cluster</host>
+                        <key>elasticsearch[cluster,relocating_shards]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>4</sortorder>
+                    <color>00C8C8</color>
+                    <calc_fnc>MAX</calc_fnc>
+                    <item>
+                        <host>Custom - Service - Elasticsearch Cluster</host>
+                        <key>elasticsearch[cluster,unassigned_shards]</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <uuid>9609d73765354c5d8933c3cf1b30f4b9</uuid>
+            <name>ELK Usage</name>
+            <height>300</height>
+            <ymin_type_1>FIXED</ymin_type_1>
+            <graph_items>
+                <graph_item>
+                    <drawtype>GRADIENT_LINE</drawtype>
+                    <color>C80000</color>
+                    <yaxisside>RIGHT</yaxisside>
+                    <calc_fnc>MAX</calc_fnc>
+                    <item>
+                        <host>Custom - Service - Elasticsearch Cluster</host>
+                        <key>elasticsearch[cluster,size_in_bytes]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <drawtype>GRADIENT_LINE</drawtype>
+                    <color>00C800</color>
+                    <calc_fnc>MAX</calc_fnc>
+                    <item>
+                        <host>Custom - Service - Elasticsearch Cluster</host>
+                        <key>elasticsearch[cluster,count]</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+    </graphs>
+</zabbix_export>

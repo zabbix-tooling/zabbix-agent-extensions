@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zabbix_export>
+    <version>6.4</version>
+    <template_groups>
+        <template_group>
+            <uuid>7df96b18c230490a9a0a9e2307226338</uuid>
+            <name>Templates</name>
+        </template_group>
+    </template_groups>
+    <templates>
+        <template>
+            <uuid>94c91be150dc442c87268bef1742150e</uuid>
+            <template>Custom - OS - Linux - Disk IO Details</template>
+            <name>Custom - OS - Linux - Disk IO Details</name>
+            <groups>
+                <group>
+                    <name>Templates</name>
+                </group>
+            </groups>
+            <discovery_rules>
+                <discovery_rule>
+                    <uuid>6e50927ae08242c0a136e53e23500428</uuid>
+                    <name>Disk IO detail discovery</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>vfs.dev.discovery.detail</key>
+                    <lifetime>14d</lifetime>
+                    <item_prototypes>
+                        <item_prototype>
+                            <uuid>719fff215425430ea1473b25fe96cbf8</uuid>
+                            <name>{#DEVICENAME} - IO: Currently Active</name>
+                            <type>ZABBIX_ACTIVE</type>
+                            <key>custom.vfs.dev.io.active[{#DEVICENAME}]</key>
+                            <units>op</units>
+                            <description>Number of I/Os currently in progress.
+The only field that should go to zero. Incremented as requests are given to appropriate struct request_queue and decremented as they finish.</description>
+                            <tags>
+                                <tag>
+                                    <tag>Application</tag>
+                                    <value>OS - Disk IO Details</value>
+                                </tag>
+                            </tags>
+                        </item_prototype>
+                        <item_prototype>
+                            <uuid>baea2a5834da41418c095c093668ae5f</uuid>
+                            <name>{#DEVICENAME} - IO: Milleseconds spend in IO</name>
+                            <type>ZABBIX_ACTIVE</type>
+                            <key>custom.vfs.dev.io.ms[{#DEVICENAME}]</key>
+                            <units>io</units>
+                            <description>Number of milliseconds spent doing I/Os. This field increases so long as field #12 (custom.vfs.dev.io.active) is nonzero.</description>
+                            <preprocessing>
+                                <step>
+                                    <type>MULTIPLIER</type>
+                                    <parameters>
+                                        <parameter>0.001</parameter>
+                                    </parameters>
+                                </step>
+                                <step>
+                                    <type>CHANGE_PER_SECOND</type>
+                                    <parameters>
+                                        <parameter/>
+                                    </parameters>
+                                </step>
+                            </preprocessing>
+                            <tags>
+                                <tag>
+                                    <tag>Application</tag>
+                                    <value>OS - Disk IO Details</value>
+                                </tag>
+                            </tags>
+                        </item_prototype>
+                        <item_prototype>
+                            <uuid>45a9028a831d4eaa803b1de08dbb798b</uuid>
+                            <name>{#DEVICENAME} - IO:Queue Depth</name>
+                            <type>ZABBIX_ACTIVE</type>
+                            <key>custom.vfs.dev.queue_depth[{#DEVICENAME}]</key>
+                            <units>io</units>
+                            <description>Number of I/Os currently in progress.&amp;#13;
+The only field that should go to zero. Incremented as requests are given to appropriate struct request_queue and decremented as they finish.</description>
+                            <tags>
+                                <tag>
+                                    <tag>Application</tag>
+                                    <value>OS - Disk IO Details</value>
+                                </tag>
+                            </tags>
+                        </item_prototype>
+                        <item_prototype>
+                            <uuid>3737f363783d40db8335e62e4444c97e</uuid>
+                            <name>{#DEVICENAME} - IO: Merged Reads</name>
+                            <type>ZABBIX_ACTIVE</type>
+                            <key>custom.vfs.dev.read.merged[{#DEVICENAME}]</key>
+                            <units>op</units>
+                            <description>Number of reads merged.
+Reads and writes which are adjacent to each other may be merged for efficiency. Thus two 4K reads may become one 8K read before it is ultimately handed to the disk, and so it will be counted (and queued) as only one I/O.  This field lets you know how often this was done.</description>
+                            <tags>
+                                <tag>
+                                    <tag>Application</tag>
+                                    <value>OS - Disk IO Details</value>
+                                </tag>
+                            </tags>
+                        </item_prototype>
+                        <item_prototype>
+                            <uuid>cc26c76167b24a039c4dc17c4eadcdfe</uuid>
+                            <name>{#DEVICENAME} - IO: Milleseconds spend in Read IO</name>
+                            <type>ZABBIX_ACTIVE</type>
+                            <key>custom.vfs.dev.read.ms[{#DEVICENAME}]</key>
+                            <units>io</units>
+                            <description>Number of milliseconds spent reading.
+This is the total number of milliseconds spent by all reads (as measured from __make_request() to end_that_request_last()).</description>
+                            <preprocessing>
+                                <step>
+                                    <type>MULTIPLIER</type>
+                                    <parameters>
+                                        <parameter>0.001</parameter>
+                                    </parameters>
+                                </step>
+                                <step>
+                                    <type>CHANGE_PER_SECOND</type>
+                                    <parameters>
+                                        <parameter/>
+                                    </parameters>
+                                </step>
+                            </preprocessing>
+                            <tags>
+                                <tag>
+                                    <tag>Application</tag>
+                                    <value>OS - Disk IO Details</value>
+                                </tag>
+                            </tags>
+                        </item_prototype>
+                        <item_prototype>
+                            <uuid>cc63a3cbb94648c4a441651838bb5926</uuid>
+                            <name>{#DEVICENAME} - IO: Ops Read</name>
+                            <type>ZABBIX_ACTIVE</type>
+                            <key>custom.vfs.dev.read.ops[{#DEVICENAME}]</key>
+                            <units>io</units>
+                            <description>This is the total number of reads completed successfully.</description>
+                            <tags>
+                                <tag>
+                                    <tag>Application</tag>
+                                    <value>OS - Disk IO Details</value>
+                                </tag>
+                            </tags>
+                        </item_prototype>
+                        <item_prototype>
+                            <uuid>b55d1ba0fe424031af61b73d73b86fad</uuid>
+                            <name>{#DEVICENAME} - IO Transfer Read</name>
+                            <type>ZABBIX_ACTIVE</type>
+                            <key>custom.vfs.dev.read.sectors[{#DEVICENAME}]</key>
+                            <units>B</units>
+                            <description>This is the total number of sectors read successfully.</description>
+                            <preprocessing>
+                                <step>
+                                    <type>MULTIPLIER</type>
+                                    <parameters>
+                                        <parameter>512</parameter>
+                                    </parameters>
+                                </step>
+                                <step>
+                                    <type>CHANGE_PER_SECOND</type>
+                                    <parameters>
+                                        <parameter/>
+                                    </parameters>
+                                </step>
+                            </preprocessing>
+                            <tags>
+                                <tag>
+                                    <tag>Application</tag>
+                                    <value>OS - Disk IO Details</value>
+                                </tag>
+                            </tags>
+                        </item_prototype>
+                        <item_prototype>
+                            <uuid>32daedf380b443a699f30d4c75a3fa96</uuid>
+                            <name>{#DEVICENAME} - IO: Milleseconds weighted spend in IO</name>
+                            <type>ZABBIX_ACTIVE</type>
+                            <key>custom.vfs.dev.weight.io.ms[{#DEVICENAME}]</key>
+                            <units>io</units>
+                            <description>Weighted number of milliseconds spent doing I/Os.
+
+This field is incremented at each I/O start, I/O completion, I/O merge, or read of these stats by the number of I/Os in progress (field 12) times the number of milliseconds spent doing I/O since the last update of this field.  This can provide an easy measure of both I/O completion time and the backlog that may be accumulating</description>
+                            <preprocessing>
+                                <step>
+                                    <type>MULTIPLIER</type>
+                                    <parameters>
+                                        <parameter>0.001</parameter>
+                                    </parameters>
+                                </step>
+                                <step>
+                                    <type>CHANGE_PER_SECOND</type>
+                                    <parameters>
+                                        <parameter/>
+                                    </parameters>
+                                </step>
+                            </preprocessing>
+                            <tags>
+                                <tag>
+                                    <tag>Application</tag>
+                                    <value>OS - Disk IO Details</value>
+                                </tag>
+                            </tags>
+                        </item_prototype>
+                        <item_prototype>
+                            <uuid>4b6bffab45aa4565a7ecf122eae6947b</uuid>
+                            <name>{#DEVICENAME} - IO: Merged Writes</name>
+                            <type>ZABBIX_ACTIVE</type>
+                            <key>custom.vfs.dev.write.merged[{#DEVICENAME}]</key>
+                            <units>op</units>
+                            <description>Number of writes merged.
+Reads and writes which are adjacent to each other may be merged for efficiency. Thus two 4K reads may become one 8K read before it is ultimately handed to the disk, and so it will be counted (and queued) as only one I/O.  This field lets you know how often this was done.</description>
+                            <tags>
+                                <tag>
+                                    <tag>Application</tag>
+                                    <value>OS - Disk IO Details</value>
+                                </tag>
+                            </tags>
+                        </item_prototype>
+                        <item_prototype>
+                            <uuid>5e021d69690f4ea4ba71f767d58efe7b</uuid>
+                            <name>{#DEVICENAME} - IO: Milleseconds spend in Write IO</name>
+                            <type>ZABBIX_ACTIVE</type>
+                            <key>custom.vfs.dev.write.ms[{#DEVICENAME}]</key>
+                            <units>io</units>
+                            <description>Number of milliseconds spent writing.&amp;#13;
+This is the total number of milliseconds spent by all writes (as measured from __make_request() to end_that_request_last()).</description>
+                            <preprocessing>
+                                <step>
+                                    <type>MULTIPLIER</type>
+                                    <parameters>
+                                        <parameter>0.001</parameter>
+                                    </parameters>
+                                </step>
+                                <step>
+                                    <type>CHANGE_PER_SECOND</type>
+                                    <parameters>
+                                        <parameter/>
+                                    </parameters>
+                                </step>
+                            </preprocessing>
+                            <tags>
+                                <tag>
+                                    <tag>Application</tag>
+                                    <value>OS - Disk IO Details</value>
+                                </tag>
+                            </tags>
+                        </item_prototype>
+                        <item_prototype>
+                            <uuid>c00fec47f5ad42d78f9e47ae3743e0de</uuid>
+                            <name>{#DEVICENAME} - IO: Ops Write</name>
+                            <type>ZABBIX_ACTIVE</type>
+                            <key>custom.vfs.dev.write.ops[{#DEVICENAME}]</key>
+                            <units>io</units>
+                            <description>This is the total number of reads completed successfully.</description>
+                            <tags>
+                                <tag>
+                                    <tag>Application</tag>
+                                    <value>OS - Disk IO Details</value>
+                                </tag>
+                            </tags>
+                        </item_prototype>
+                        <item_prototype>
+                            <uuid>3e83a1274ee3435a8cdcc30d9148d3b0</uuid>
+                            <name>{#DEVICENAME} - IO Transfer Write</name>
+                            <type>ZABBIX_ACTIVE</type>
+                            <key>custom.vfs.dev.write.sectors[{#DEVICENAME}]</key>
+                            <units>B</units>
+                            <description>This is the total number of sectors write successfully.</description>
+                            <preprocessing>
+                                <step>
+                                    <type>MULTIPLIER</type>
+                                    <parameters>
+                                        <parameter>512</parameter>
+                                    </parameters>
+                                </step>
+                                <step>
+                                    <type>CHANGE_PER_SECOND</type>
+                                    <parameters>
+                                        <parameter/>
+                                    </parameters>
+                                </step>
+                            </preprocessing>
+                            <tags>
+                                <tag>
+                                    <tag>Application</tag>
+                                    <value>OS - Disk IO Details</value>
+                                </tag>
+                            </tags>
+                        </item_prototype>
+                    </item_prototypes>
+                </discovery_rule>
+            </discovery_rules>
+        </template>
+    </templates>
+</zabbix_export>

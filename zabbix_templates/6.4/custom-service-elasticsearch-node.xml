@@ -1,1 +1,751 @@
-
+<?xml version="1.0" encoding="UTF-8"?>
+<zabbix_export>
+    <version>6.4</version>
+    <template_groups>
+        <template_group>
+            <uuid>7df96b18c230490a9a0a9e2307226338</uuid>
+            <name>Templates</name>
+        </template_group>
+    </template_groups>
+    <templates>
+        <template>
+            <uuid>5b2de1ee266d43628d1c802b9e3eddba</uuid>
+            <template>Custom - Service - Elasticsearch Node</template>
+            <name>Custom - Service - Elasticsearch Node</name>
+            <groups>
+                <group>
+                    <name>Templates</name>
+                </group>
+            </groups>
+            <items>
+                <item>
+                    <uuid>feae943bea4f42cebecd0c413c5db128</uuid>
+                    <name>Records indexed per second</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>elasticsearch[{$NODENAME},index_total]</key>
+                    <delay>90</delay>
+                    <history>30d</history>
+                    <trends>90d</trends>
+                    <value_type>FLOAT</value_type>
+                    <preprocessing>
+                        <step>
+                            <type>CHANGE_PER_SECOND</type>
+                            <parameters>
+                                <parameter/>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Elasticsearch Node</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>bbc50dd593904a32a1ca8157ca6371ec</uuid>
+                    <name>Node Storage Size</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>elasticsearch[{$NODENAME},size_in_bytes]</key>
+                    <delay>30</delay>
+                    <history>30d</history>
+                    <trends>90d</trends>
+                    <units>B</units>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Elasticsearch Node</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>0daad322020442b3a9285e1a505aba11</uuid>
+                    <name>JVM Heap Pool Old Percentage</name>
+                    <type>CALCULATED</type>
+                    <key>es.node.jvm.pool.old</key>
+                    <delay>30</delay>
+                    <history>30d</history>
+                    <trends>90d</trends>
+                    <value_type>FLOAT</value_type>
+                    <units>%</units>
+                    <params>last(//nodestats[{$NODENAME},jvm.mem.pools.old.used_in_bytes]) / last(//nodestats[{$NODENAME},jvm.mem.pools.old.max_in_bytes])</params>
+                    <preprocessing>
+                        <step>
+                            <type>MULTIPLIER</type>
+                            <parameters>
+                                <parameter>100</parameter>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Elasticsearch Node</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>f3aa2622dc39440d9224944192c293ab</uuid>
+                    <name>JVM Heap Pool Survivor Percentage</name>
+                    <type>CALCULATED</type>
+                    <key>es.node.jvm.pool.survivor</key>
+                    <delay>30</delay>
+                    <history>30d</history>
+                    <trends>90d</trends>
+                    <value_type>FLOAT</value_type>
+                    <units>%</units>
+                    <params>last(//nodestats[{$NODENAME},jvm.mem.pools.survivor.used_in_bytes]) / last(//nodestats[{$NODENAME},jvm.mem.pools.survivor.max_in_bytes])</params>
+                    <preprocessing>
+                        <step>
+                            <type>MULTIPLIER</type>
+                            <parameters>
+                                <parameter>100</parameter>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Elasticsearch Node</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>6afe4ab0f5814b33ab57c4ff2ddbe363</uuid>
+                    <name>JVM Heap Pool Young Percentage</name>
+                    <type>CALCULATED</type>
+                    <key>es.node.jvm.pool.young</key>
+                    <delay>30</delay>
+                    <history>30d</history>
+                    <trends>90d</trends>
+                    <value_type>FLOAT</value_type>
+                    <units>%</units>
+                    <params>last(//nodestats[{$NODENAME},jvm.mem.pools.young.used_in_bytes]) / last(//nodestats[{$NODENAME},jvm.mem.pools.young.max_in_bytes])</params>
+                    <preprocessing>
+                        <step>
+                            <type>MULTIPLIER</type>
+                            <parameters>
+                                <parameter>100</parameter>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Elasticsearch Node</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>e0bfeec711684341a6323913360edfd4</uuid>
+                    <name>JVM GC Collection Count Old</name>
+                    <key>nodestats[{$NODENAME},jvm.gc.collectors.old.collection_count]</key>
+                    <delay>30</delay>
+                    <history>30d</history>
+                    <trends>90d</trends>
+                    <preprocessing>
+                        <step>
+                            <type>SIMPLE_CHANGE</type>
+                            <parameters>
+                                <parameter/>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Elasticsearch Node</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>d1505f3db67940b5be0f065c3daa9252</uuid>
+                    <name>JVM GC Collection Time Old</name>
+                    <key>nodestats[{$NODENAME},jvm.gc.collectors.old.collection_time_in_millis]</key>
+                    <delay>30</delay>
+                    <history>30d</history>
+                    <trends>90d</trends>
+                    <units>ms</units>
+                    <preprocessing>
+                        <step>
+                            <type>SIMPLE_CHANGE</type>
+                            <parameters>
+                                <parameter/>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Elasticsearch Node</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>9ed567b4d9cb4aff8f142946727eec8a</uuid>
+                    <name>JVM GC Collection Count Young</name>
+                    <key>nodestats[{$NODENAME},jvm.gc.collectors.young.collection_count]</key>
+                    <delay>30</delay>
+                    <history>30d</history>
+                    <trends>90d</trends>
+                    <preprocessing>
+                        <step>
+                            <type>SIMPLE_CHANGE</type>
+                            <parameters>
+                                <parameter/>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Elasticsearch Node</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>dd3172c4cc3e461c89a5a4b0f5cf3024</uuid>
+                    <name>JVM GC Collection Time Young</name>
+                    <key>nodestats[{$NODENAME},jvm.gc.collectors.young.collection_time_in_millis]</key>
+                    <delay>30</delay>
+                    <history>30d</history>
+                    <trends>90d</trends>
+                    <units>ms</units>
+                    <preprocessing>
+                        <step>
+                            <type>SIMPLE_CHANGE</type>
+                            <parameters>
+                                <parameter/>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Elasticsearch Node</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>1a00b53c158547638bb0372bf22f9c51</uuid>
+                    <name>JVM Heap Max</name>
+                    <key>nodestats[{$NODENAME},jvm.mem.heap_max_in_bytes]</key>
+                    <delay>30</delay>
+                    <history>30d</history>
+                    <trends>90d</trends>
+                    <units>B</units>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Elasticsearch Node</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>ea0620478317413a837724474aceadcf</uuid>
+                    <name>JVM Heap Used</name>
+                    <key>nodestats[{$NODENAME},jvm.mem.heap_used_in_bytes]</key>
+                    <delay>30</delay>
+                    <history>30d</history>
+                    <trends>90d</trends>
+                    <units>B</units>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Elasticsearch Node</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>342083da736f42a1996b02214edab7e5</uuid>
+                    <name>JVM Heap Percentage</name>
+                    <key>nodestats[{$NODENAME},jvm.mem.heap_used_percent]</key>
+                    <delay>30</delay>
+                    <history>30d</history>
+                    <trends>90d</trends>
+                    <value_type>FLOAT</value_type>
+                    <units>%</units>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Elasticsearch Node</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>f6f9929caca34ed3a7c70cb67df738fd</uuid>
+                    <name>JVM Heap Pool Old Max</name>
+                    <key>nodestats[{$NODENAME},jvm.mem.pools.old.max_in_bytes]</key>
+                    <delay>30</delay>
+                    <history>30d</history>
+                    <trends>90d</trends>
+                    <units>B</units>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Elasticsearch Node</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>c7517da6128c487e852be024e2fb320e</uuid>
+                    <name>JVM Heap Pool Old Used</name>
+                    <key>nodestats[{$NODENAME},jvm.mem.pools.old.used_in_bytes]</key>
+                    <delay>30</delay>
+                    <history>30d</history>
+                    <trends>90d</trends>
+                    <units>B</units>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Elasticsearch Node</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>77bd153ba53b4e718f9668c4a24aecf2</uuid>
+                    <name>JVM Heap Pool Survivor Max</name>
+                    <key>nodestats[{$NODENAME},jvm.mem.pools.survivor.max_in_bytes]</key>
+                    <delay>30</delay>
+                    <history>30d</history>
+                    <trends>90d</trends>
+                    <units>B</units>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Elasticsearch Node</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>9fad3aaf608a4c04aa3bd02bc4516405</uuid>
+                    <name>JVM Heap Pool Survivor Used</name>
+                    <key>nodestats[{$NODENAME},jvm.mem.pools.survivor.used_in_bytes]</key>
+                    <delay>30</delay>
+                    <history>30d</history>
+                    <trends>90d</trends>
+                    <units>B</units>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Elasticsearch Node</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>d06d3c0dc402477fa460169905e8bc04</uuid>
+                    <name>JVM Heap Pool Young Max</name>
+                    <key>nodestats[{$NODENAME},jvm.mem.pools.young.max_in_bytes]</key>
+                    <delay>30</delay>
+                    <history>30d</history>
+                    <trends>90d</trends>
+                    <units>B</units>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Elasticsearch Node</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>ce3b92ff77bb4adeaa8f49a6ec059409</uuid>
+                    <name>JVM Heap Pool Young Used</name>
+                    <key>nodestats[{$NODENAME},jvm.mem.pools.young.used_in_bytes]</key>
+                    <delay>30</delay>
+                    <history>30d</history>
+                    <trends>90d</trends>
+                    <units>B</units>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Elasticsearch Node</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>91858f34c69e4ed1a3d94fe427d8cda2</uuid>
+                    <name>JVM Threads</name>
+                    <key>nodestats[{$NODENAME},jvm.threads.count]</key>
+                    <delay>30</delay>
+                    <history>30d</history>
+                    <trends>90d</trends>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Elasticsearch Node</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>aad57d9e867d49e5a5fef100e3bd5c78</uuid>
+                    <name>Process Max Open File Descriptors</name>
+                    <key>nodestats[{$NODENAME},process.max_file_descriptors]</key>
+                    <delay>30</delay>
+                    <history>30d</history>
+                    <trends>90d</trends>
+                    <status>DISABLED</status>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Elasticsearch Node</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>4010afa8f4f64f83a83bf22d8089df14</uuid>
+                    <name>Process Open File Descriptors</name>
+                    <key>nodestats[{$NODENAME},process.open_file_descriptors]</key>
+                    <delay>30</delay>
+                    <history>30d</history>
+                    <trends>90d</trends>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Elasticsearch Node</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>06abe5f7423d4e57896d0a566c4b9717</uuid>
+                    <name>Elasticsearch Service Status</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>proc.num[,elasticsearch,,/usr/lib/jvm/java-7-openjdk-amd64//bin/java]</key>
+                    <delay>30</delay>
+                    <history>30d</history>
+                    <trends>90d</trends>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Elasticsearch Node</value>
+                        </tag>
+                    </tags>
+                    <triggers>
+                        <trigger>
+                            <uuid>f1063dbeb672419abafe0d12d719464c</uuid>
+                            <expression>last(/Custom - Service - Elasticsearch Node/proc.num[,elasticsearch,,/usr/lib/jvm/java-7-openjdk-amd64//bin/java])=0</expression>
+                            <name>Elasticsearch Service Status</name>
+                            <priority>HIGH</priority>
+                            <description>Elasticsearch status is 0 value if ES service is running and 1 if ES service is down</description>
+                        </trigger>
+                    </triggers>
+                </item>
+            </items>
+            <dashboards>
+                <dashboard>
+                    <uuid>7c3acd3b12104c1e887cd160b9fe4e21</uuid>
+                    <name>Custom - Service - Elasticsearch Node Database</name>
+                    <pages>
+                        <page>
+                            <widgets>
+                                <widget>
+                                    <type>plaintext</type>
+                                    <width>24</width>
+                                    <fields>
+                                        <field>
+                                            <type>ITEM</type>
+                                            <name>itemids</name>
+                                            <value>
+                                                <host>Custom - Service - Elasticsearch Node</host>
+                                                <key>proc.num[,elasticsearch,,/usr/lib/jvm/java-7-openjdk-amd64//bin/java]</key>
+                                            </value>
+                                        </field>
+                                        <field>
+                                            <type>INTEGER</type>
+                                            <name>show_as_html</name>
+                                            <value>0</value>
+                                        </field>
+                                        <field>
+                                            <type>INTEGER</type>
+                                            <name>show_lines</name>
+                                            <value>5</value>
+                                        </field>
+                                    </fields>
+                                </widget>
+                                <widget>
+                                    <type>graph</type>
+                                    <y>2</y>
+                                    <width>24</width>
+                                    <height>7</height>
+                                    <fields>
+                                        <field>
+                                            <type>ITEM</type>
+                                            <name>itemid</name>
+                                            <value>
+                                                <host>Custom - Service - Elasticsearch Node</host>
+                                                <key>elasticsearch[{$NODENAME},size_in_bytes]</key>
+                                            </value>
+                                        </field>
+                                        <field>
+                                            <type>INTEGER</type>
+                                            <name>source_type</name>
+                                            <value>1</value>
+                                        </field>
+                                    </fields>
+                                </widget>
+                                <widget>
+                                    <type>graph</type>
+                                    <y>9</y>
+                                    <width>24</width>
+                                    <height>7</height>
+                                    <fields>
+                                        <field>
+                                            <type>ITEM</type>
+                                            <name>itemid</name>
+                                            <value>
+                                                <host>Custom - Service - Elasticsearch Node</host>
+                                                <key>elasticsearch[{$NODENAME},index_total]</key>
+                                            </value>
+                                        </field>
+                                        <field>
+                                            <type>INTEGER</type>
+                                            <name>source_type</name>
+                                            <value>1</value>
+                                        </field>
+                                    </fields>
+                                </widget>
+                            </widgets>
+                        </page>
+                    </pages>
+                </dashboard>
+                <dashboard>
+                    <uuid>6b147aaa911646028bb8b1128680c185</uuid>
+                    <name>Custom - Service - Elasticsearch Node Memory</name>
+                    <pages>
+                        <page>
+                            <widgets>
+                                <widget>
+                                    <type>graph</type>
+                                    <width>24</width>
+                                    <height>7</height>
+                                    <fields>
+                                        <field>
+                                            <type>GRAPH</type>
+                                            <name>graphid</name>
+                                            <value>
+                                                <host>Custom - Service - Elasticsearch Node</host>
+                                                <name>JVM Heap</name>
+                                            </value>
+                                        </field>
+                                        <field>
+                                            <type>INTEGER</type>
+                                            <name>source_type</name>
+                                            <value>0</value>
+                                        </field>
+                                    </fields>
+                                </widget>
+                                <widget>
+                                    <type>graph</type>
+                                    <y>7</y>
+                                    <width>24</width>
+                                    <height>7</height>
+                                    <fields>
+                                        <field>
+                                            <type>GRAPH</type>
+                                            <name>graphid</name>
+                                            <value>
+                                                <host>Custom - Service - Elasticsearch Node</host>
+                                                <name>JVM Heap Detailed</name>
+                                            </value>
+                                        </field>
+                                        <field>
+                                            <type>INTEGER</type>
+                                            <name>source_type</name>
+                                            <value>0</value>
+                                        </field>
+                                    </fields>
+                                </widget>
+                                <widget>
+                                    <type>graph</type>
+                                    <y>14</y>
+                                    <width>24</width>
+                                    <height>7</height>
+                                    <fields>
+                                        <field>
+                                            <type>GRAPH</type>
+                                            <name>graphid</name>
+                                            <value>
+                                                <host>Custom - Service - Elasticsearch Node</host>
+                                                <name>JVM Heap Detailed Percentage</name>
+                                            </value>
+                                        </field>
+                                        <field>
+                                            <type>INTEGER</type>
+                                            <name>source_type</name>
+                                            <value>0</value>
+                                        </field>
+                                    </fields>
+                                </widget>
+                            </widgets>
+                        </page>
+                    </pages>
+                </dashboard>
+            </dashboards>
+        </template>
+    </templates>
+    <graphs>
+        <graph>
+            <uuid>6d823edd45b44959a04a2ed45b42fc3b</uuid>
+            <name>Elasticsearch Idx per Sec</name>
+            <graph_items>
+                <graph_item>
+                    <color>C80000</color>
+                    <item>
+                        <host>Custom - Service - Elasticsearch Node</host>
+                        <key>elasticsearch[{$NODENAME},index_total]</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <uuid>980829ddd12d482fb624926368fc29b6</uuid>
+            <name>JVM Heap</name>
+            <ymin_type_1>ITEM</ymin_type_1>
+            <ymin_item_1>
+                <host>Custom - Service - Elasticsearch Node</host>
+                <key>nodestats[{$NODENAME},jvm.mem.heap_max_in_bytes]</key>
+            </ymin_item_1>
+            <graph_items>
+                <graph_item>
+                    <drawtype>FILLED_REGION</drawtype>
+                    <color>00C800</color>
+                    <calc_fnc>MAX</calc_fnc>
+                    <item>
+                        <host>Custom - Service - Elasticsearch Node</host>
+                        <key>nodestats[{$NODENAME},jvm.mem.heap_max_in_bytes]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <drawtype>FILLED_REGION</drawtype>
+                    <color>C80000</color>
+                    <calc_fnc>MAX</calc_fnc>
+                    <item>
+                        <host>Custom - Service - Elasticsearch Node</host>
+                        <key>nodestats[{$NODENAME},jvm.mem.heap_used_in_bytes]</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <uuid>e7e3a0f7f15940269e927d21527f702a</uuid>
+            <name>JVM Heap Detailed</name>
+            <ymax_type_1>ITEM</ymax_type_1>
+            <ymax_item_1>
+                <host>Custom - Service - Elasticsearch Node</host>
+                <key>nodestats[{$NODENAME},jvm.mem.heap_max_in_bytes]</key>
+            </ymax_item_1>
+            <graph_items>
+                <graph_item>
+                    <drawtype>FILLED_REGION</drawtype>
+                    <color>00C800</color>
+                    <calc_fnc>MAX</calc_fnc>
+                    <item>
+                        <host>Custom - Service - Elasticsearch Node</host>
+                        <key>nodestats[{$NODENAME},jvm.mem.heap_used_in_bytes]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <drawtype>FILLED_REGION</drawtype>
+                    <color>C80000</color>
+                    <calc_fnc>MAX</calc_fnc>
+                    <item>
+                        <host>Custom - Service - Elasticsearch Node</host>
+                        <key>nodestats[{$NODENAME},jvm.mem.pools.old.used_in_bytes]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>2</sortorder>
+                    <drawtype>FILLED_REGION</drawtype>
+                    <color>0000C8</color>
+                    <calc_fnc>MAX</calc_fnc>
+                    <item>
+                        <host>Custom - Service - Elasticsearch Node</host>
+                        <key>nodestats[{$NODENAME},jvm.mem.pools.survivor.used_in_bytes]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>3</sortorder>
+                    <drawtype>FILLED_REGION</drawtype>
+                    <color>C800C8</color>
+                    <calc_fnc>MAX</calc_fnc>
+                    <item>
+                        <host>Custom - Service - Elasticsearch Node</host>
+                        <key>nodestats[{$NODENAME},jvm.mem.pools.young.used_in_bytes]</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <uuid>5090995aeafa4e93b2623bd90cefa22c</uuid>
+            <name>JVM Heap Detailed Percentage</name>
+            <ymin_type_1>FIXED</ymin_type_1>
+            <ymax_type_1>FIXED</ymax_type_1>
+            <graph_items>
+                <graph_item>
+                    <color>C80000</color>
+                    <calc_fnc>MAX</calc_fnc>
+                    <item>
+                        <host>Custom - Service - Elasticsearch Node</host>
+                        <key>nodestats[{$NODENAME},jvm.mem.heap_used_percent]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <color>0000C8</color>
+                    <calc_fnc>MAX</calc_fnc>
+                    <item>
+                        <host>Custom - Service - Elasticsearch Node</host>
+                        <key>es.node.jvm.pool.survivor</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>2</sortorder>
+                    <color>C800C8</color>
+                    <calc_fnc>MAX</calc_fnc>
+                    <item>
+                        <host>Custom - Service - Elasticsearch Node</host>
+                        <key>es.node.jvm.pool.young</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>3</sortorder>
+                    <color>00C800</color>
+                    <calc_fnc>MAX</calc_fnc>
+                    <item>
+                        <host>Custom - Service - Elasticsearch Node</host>
+                        <key>es.node.jvm.pool.old</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <uuid>84de841e0768498f918a29ec264170b8</uuid>
+            <name>JVM Open File Descriptors</name>
+            <graph_items>
+                <graph_item>
+                    <color>00C800</color>
+                    <calc_fnc>MAX</calc_fnc>
+                    <item>
+                        <host>Custom - Service - Elasticsearch Node</host>
+                        <key>nodestats[{$NODENAME},process.open_file_descriptors]</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <uuid>245230b622df4fafba8bed65c4a25a09</uuid>
+            <name>JVM Threads</name>
+            <graph_items>
+                <graph_item>
+                    <color>00C800</color>
+                    <calc_fnc>MAX</calc_fnc>
+                    <item>
+                        <host>Custom - Service - Elasticsearch Node</host>
+                        <key>nodestats[{$NODENAME},jvm.threads.count]</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+    </graphs>
+</zabbix_export>

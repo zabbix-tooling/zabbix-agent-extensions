@@ -1,1 +1,1911 @@
-
+<?xml version="1.0" encoding="UTF-8"?>
+<zabbix_export>
+    <version>6.4</version>
+    <template_groups>
+        <template_group>
+            <uuid>7df96b18c230490a9a0a9e2307226338</uuid>
+            <name>Templates</name>
+        </template_group>
+    </template_groups>
+    <templates>
+        <template>
+            <uuid>b372fee937f54dc4bd830e1561419033</uuid>
+            <template>Custom - Service - Varnish</template>
+            <name>Custom - Service - Varnish</name>
+            <groups>
+                <group>
+                    <name>Templates</name>
+                </group>
+            </groups>
+            <items>
+                <item>
+                    <uuid>b94843454df3487e97aed2cd513d10d9</uuid>
+                    <name>Varnish Hitrate</name>
+                    <type>CALCULATED</type>
+                    <key>varnish.hitrate</key>
+                    <delay>90</delay>
+                    <trends>0</trends>
+                    <value_type>FLOAT</value_type>
+                    <units>%</units>
+                    <params>(last(//varnish.stat[cache_hit]) / ( last(//varnish.stat[cache_miss]) + last(//varnish.stat[cache_hit])))</params>
+                    <preprocessing>
+                        <step>
+                            <type>MULTIPLIER</type>
+                            <parameters>
+                                <parameter>100</parameter>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Custom - Service - Varnish</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>2ddbc43190aa443bbca95e0fe9e1bea8</uuid>
+                    <name>Backend conn. too many</name>
+                    <key>varnish.stat[backend_busy]</key>
+                    <delay>90</delay>
+                    <history>14d</history>
+                    <trends>90d</trends>
+                    <units>ops/sec</units>
+                    <preprocessing>
+                        <step>
+                            <type>CHANGE_PER_SECOND</type>
+                            <parameters>
+                                <parameter/>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Custom - Service - Varnish</value>
+                        </tag>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Custom - Service - Varnish Backend</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>a3c8c4c573484df4b472b476f5d343bf</uuid>
+                    <name>Backend conn. success</name>
+                    <key>varnish.stat[backend_conn]</key>
+                    <delay>90</delay>
+                    <history>14d</history>
+                    <trends>90d</trends>
+                    <units>ops/sec</units>
+                    <preprocessing>
+                        <step>
+                            <type>CHANGE_PER_SECOND</type>
+                            <parameters>
+                                <parameter/>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Custom - Service - Varnish</value>
+                        </tag>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Custom - Service - Varnish Backend</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>923016210ef04830882ba9ef5c033946</uuid>
+                    <name>Backend conn. failures</name>
+                    <key>varnish.stat[backend_fail]</key>
+                    <delay>90</delay>
+                    <history>14d</history>
+                    <trends>90d</trends>
+                    <units>ops/sec</units>
+                    <preprocessing>
+                        <step>
+                            <type>CHANGE_PER_SECOND</type>
+                            <parameters>
+                                <parameter/>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Custom - Service - Varnish</value>
+                        </tag>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Custom - Service - Varnish Backend</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>1ce7cd515ad444e680d122630332a8f8</uuid>
+                    <name>Backend conn. recycles</name>
+                    <key>varnish.stat[backend_recycle]</key>
+                    <delay>90</delay>
+                    <history>14d</history>
+                    <trends>90d</trends>
+                    <units>ops/sec</units>
+                    <preprocessing>
+                        <step>
+                            <type>CHANGE_PER_SECOND</type>
+                            <parameters>
+                                <parameter/>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Custom - Service - Varnish</value>
+                        </tag>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Custom - Service - Varnish Backend</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>5544afbd3e044d399927e7844728d059</uuid>
+                    <name>Backend requests made</name>
+                    <key>varnish.stat[backend_req]</key>
+                    <delay>90</delay>
+                    <history>14d</history>
+                    <trends>90d</trends>
+                    <units>ops/sec</units>
+                    <preprocessing>
+                        <step>
+                            <type>CHANGE_PER_SECOND</type>
+                            <parameters>
+                                <parameter/>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Custom - Service - Varnish</value>
+                        </tag>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Custom - Service - Varnish Backend</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>f415852a394a46bb98ac21f23773c92c</uuid>
+                    <name>Backend conn. reuses</name>
+                    <key>varnish.stat[backend_reuse]</key>
+                    <delay>90</delay>
+                    <history>14d</history>
+                    <trends>90d</trends>
+                    <units>ops/sec</units>
+                    <preprocessing>
+                        <step>
+                            <type>CHANGE_PER_SECOND</type>
+                            <parameters>
+                                <parameter/>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Custom - Service - Varnish</value>
+                        </tag>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Custom - Service - Varnish Backend</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>9aca1501533e4de5aa31581e52c795bd</uuid>
+                    <name>Backend conn. was closed</name>
+                    <key>varnish.stat[backend_toolate]</key>
+                    <delay>90</delay>
+                    <history>14d</history>
+                    <trends>90d</trends>
+                    <units>ops/sec</units>
+                    <preprocessing>
+                        <step>
+                            <type>CHANGE_PER_SECOND</type>
+                            <parameters>
+                                <parameter/>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Custom - Service - Varnish</value>
+                        </tag>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Custom - Service - Varnish Backend</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>72eee2d8421846aebca994771d120322</uuid>
+                    <name>Backend conn. not attempted</name>
+                    <key>varnish.stat[backend_unhealthy]</key>
+                    <delay>90</delay>
+                    <history>14d</history>
+                    <trends>90d</trends>
+                    <units>ops/sec</units>
+                    <preprocessing>
+                        <step>
+                            <type>CHANGE_PER_SECOND</type>
+                            <parameters>
+                                <parameter/>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Custom - Service - Varnish</value>
+                        </tag>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Custom - Service - Varnish Backend</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>d2922ffea36147a39584efe723dad063</uuid>
+                    <name>Backend conn. unused</name>
+                    <key>varnish.stat[backend_unused]</key>
+                    <delay>90</delay>
+                    <history>14d</history>
+                    <trends>90d</trends>
+                    <units>ops/sec</units>
+                    <preprocessing>
+                        <step>
+                            <type>CHANGE_PER_SECOND</type>
+                            <parameters>
+                                <parameter/>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Custom - Service - Varnish</value>
+                        </tag>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Custom - Service - Varnish Backend</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>7d4722af9bfc4b6caab48b74a54923c7</uuid>
+                    <name>Cache hitpass</name>
+                    <key>varnish.stat[cache_hitpass]</key>
+                    <delay>90</delay>
+                    <history>14d</history>
+                    <trends>90d</trends>
+                    <units>ops/sec</units>
+                    <preprocessing>
+                        <step>
+                            <type>CHANGE_PER_SECOND</type>
+                            <parameters>
+                                <parameter/>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Custom - Service - Varnish</value>
+                        </tag>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Custom - Service - Varnish Cache</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>78a7a95ceeba4a819fe3041ae8763239</uuid>
+                    <name>Cache hits</name>
+                    <key>varnish.stat[cache_hit]</key>
+                    <delay>90</delay>
+                    <history>14d</history>
+                    <trends>90d</trends>
+                    <units>ops/sec</units>
+                    <preprocessing>
+                        <step>
+                            <type>CHANGE_PER_SECOND</type>
+                            <parameters>
+                                <parameter/>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Custom - Service - Varnish</value>
+                        </tag>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Custom - Service - Varnish Cache</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>558d6e8b3f5f49858bf1fa30de9d0385</uuid>
+                    <name>Cache cache_miss</name>
+                    <key>varnish.stat[cache_miss]</key>
+                    <delay>90</delay>
+                    <history>14d</history>
+                    <trends>90d</trends>
+                    <units>ops/sec</units>
+                    <preprocessing>
+                        <step>
+                            <type>CHANGE_PER_SECOND</type>
+                            <parameters>
+                                <parameter/>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Custom - Service - Varnish</value>
+                        </tag>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Custom - Service - Varnish Cache</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>50c18974b23c4d4ca0c0471e9de33ed2</uuid>
+                    <name>Client connections accepted</name>
+                    <key>varnish.stat[client_conn]</key>
+                    <delay>90</delay>
+                    <history>14d</history>
+                    <trends>90d</trends>
+                    <value_type>FLOAT</value_type>
+                    <units>ops/sec</units>
+                    <preprocessing>
+                        <step>
+                            <type>CHANGE_PER_SECOND</type>
+                            <parameters>
+                                <parameter/>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Custom - Service - Varnish</value>
+                        </tag>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Custom - Service - Varnish Connections</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>45bee01afb8c449292d9fe86065fdf3c</uuid>
+                    <name>Connection dropped, no sess/wrk</name>
+                    <key>varnish.stat[client_drop]</key>
+                    <delay>90</delay>
+                    <history>14d</history>
+                    <trends>90d</trends>
+                    <units>ops/sec</units>
+                    <preprocessing>
+                        <step>
+                            <type>CHANGE_PER_SECOND</type>
+                            <parameters>
+                                <parameter/>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Custom - Service - Varnish</value>
+                        </tag>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Custom - Service - Varnish Connections</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>bc27eae2c5804327a32ae16f5967149a</uuid>
+                    <name>Connection dropped late</name>
+                    <key>varnish.stat[client_drop_late]</key>
+                    <delay>90</delay>
+                    <history>14d</history>
+                    <trends>90d</trends>
+                    <units>ops/sec</units>
+                    <preprocessing>
+                        <step>
+                            <type>CHANGE_PER_SECOND</type>
+                            <parameters>
+                                <parameter/>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Custom - Service - Varnish</value>
+                        </tag>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Custom - Service - Varnish Connections</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>2732f7c74195448db16dfb4e27fd3b87</uuid>
+                    <name>Client requests received</name>
+                    <key>varnish.stat[client_req]</key>
+                    <delay>90</delay>
+                    <history>14d</history>
+                    <trends>90d</trends>
+                    <units>ops/sec</units>
+                    <preprocessing>
+                        <step>
+                            <type>CHANGE_PER_SECOND</type>
+                            <parameters>
+                                <parameter/>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Custom - Service - Varnish</value>
+                        </tag>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Custom - Service - Varnish Connections</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>8fa107d9da9543c88961fcaa90cf938f</uuid>
+                    <name>ESI parse errors (unlock)</name>
+                    <key>varnish.stat[esi_errors]</key>
+                    <delay>90</delay>
+                    <history>14d</history>
+                    <trends>90d</trends>
+                    <units>ops/sec</units>
+                    <preprocessing>
+                        <step>
+                            <type>CHANGE_PER_SECOND</type>
+                            <parameters>
+                                <parameter/>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Custom - Service - Varnish</value>
+                        </tag>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Custom - Service - Varnish ESI</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>cc472ee53bd341b78d3e8222a81aadd3</uuid>
+                    <name>ESI parse warnings (unlock)</name>
+                    <key>varnish.stat[esi_warnings]</key>
+                    <delay>90</delay>
+                    <history>14d</history>
+                    <trends>90d</trends>
+                    <units>ops/sec</units>
+                    <preprocessing>
+                        <step>
+                            <type>CHANGE_PER_SECOND</type>
+                            <parameters>
+                                <parameter/>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Custom - Service - Varnish</value>
+                        </tag>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Custom - Service - Varnish ESI</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>e395044b3de147e29b3f419e8d74b603</uuid>
+                    <name>Fetch had bad headers</name>
+                    <key>varnish.stat[fetch_bad]</key>
+                    <delay>90</delay>
+                    <history>14d</history>
+                    <trends>90d</trends>
+                    <units>ops/sec</units>
+                    <preprocessing>
+                        <step>
+                            <type>CHANGE_PER_SECOND</type>
+                            <parameters>
+                                <parameter/>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Custom - Service - Varnish</value>
+                        </tag>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Custom - Service - Varnish Fetch</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>9dfc49d22d7e46a9a9000de953ebac69</uuid>
+                    <name>Fetch chunked</name>
+                    <key>varnish.stat[fetch_chunked]</key>
+                    <delay>90</delay>
+                    <history>14d</history>
+                    <trends>90d</trends>
+                    <units>ops/sec</units>
+                    <preprocessing>
+                        <step>
+                            <type>CHANGE_PER_SECOND</type>
+                            <parameters>
+                                <parameter/>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Custom - Service - Varnish</value>
+                        </tag>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Custom - Service - Varnish Fetch</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>1de3436fba8044cd9573b9933be4f4a6</uuid>
+                    <name>Fetch wanted close</name>
+                    <key>varnish.stat[fetch_close]</key>
+                    <delay>90</delay>
+                    <history>14d</history>
+                    <trends>90d</trends>
+                    <units>ops/sec</units>
+                    <preprocessing>
+                        <step>
+                            <type>CHANGE_PER_SECOND</type>
+                            <parameters>
+                                <parameter/>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Custom - Service - Varnish</value>
+                        </tag>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Custom - Service - Varnish Fetch</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>dd0ed0070ccd47a4bb9f8d4dbc0b5060</uuid>
+                    <name>Fetch EOF</name>
+                    <key>varnish.stat[fetch_eof]</key>
+                    <delay>90</delay>
+                    <history>14d</history>
+                    <trends>90d</trends>
+                    <units>ops/sec</units>
+                    <preprocessing>
+                        <step>
+                            <type>CHANGE_PER_SECOND</type>
+                            <parameters>
+                                <parameter/>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Custom - Service - Varnish</value>
+                        </tag>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Custom - Service - Varnish Fetch</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>c927d1db39d348e5a5fc0c17f980090d</uuid>
+                    <name>Fetch failed</name>
+                    <key>varnish.stat[fetch_failed]</key>
+                    <delay>90</delay>
+                    <history>14d</history>
+                    <trends>90d</trends>
+                    <units>ops/sec</units>
+                    <preprocessing>
+                        <step>
+                            <type>CHANGE_PER_SECOND</type>
+                            <parameters>
+                                <parameter/>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Custom - Service - Varnish</value>
+                        </tag>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Custom - Service - Varnish Fetch</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>1f98a38d41584a06bd7064bbb74d2e4d</uuid>
+                    <name>Fetch head</name>
+                    <key>varnish.stat[fetch_head]</key>
+                    <delay>90</delay>
+                    <history>14d</history>
+                    <trends>90d</trends>
+                    <units>ops/sec</units>
+                    <preprocessing>
+                        <step>
+                            <type>CHANGE_PER_SECOND</type>
+                            <parameters>
+                                <parameter/>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Custom - Service - Varnish</value>
+                        </tag>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Custom - Service - Varnish Fetch</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>6eb26416409f472a81666bb4879942fd</uuid>
+                    <name>Fetch with Length</name>
+                    <key>varnish.stat[fetch_length]</key>
+                    <delay>90</delay>
+                    <history>14d</history>
+                    <trends>90d</trends>
+                    <units>ops/sec</units>
+                    <preprocessing>
+                        <step>
+                            <type>CHANGE_PER_SECOND</type>
+                            <parameters>
+                                <parameter/>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Custom - Service - Varnish</value>
+                        </tag>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Custom - Service - Varnish Fetch</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>81ba5c2b4cbd40c39f1b46d6d68cde04</uuid>
+                    <name>Fetch pre HTTP/1.1 closed</name>
+                    <key>varnish.stat[fetch_oldhttp]</key>
+                    <delay>90</delay>
+                    <history>14d</history>
+                    <trends>90d</trends>
+                    <units>ops/sec</units>
+                    <preprocessing>
+                        <step>
+                            <type>CHANGE_PER_SECOND</type>
+                            <parameters>
+                                <parameter/>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Custom - Service - Varnish</value>
+                        </tag>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Custom - Service - Varnish Fetch</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>68f4b7e3cff54342986d3199d1ffa70f</uuid>
+                    <name>Fetch zero len</name>
+                    <key>varnish.stat[fetch_zero]</key>
+                    <delay>90</delay>
+                    <history>14d</history>
+                    <trends>90d</trends>
+                    <units>ops/sec</units>
+                    <preprocessing>
+                        <step>
+                            <type>CHANGE_PER_SECOND</type>
+                            <parameters>
+                                <parameter/>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Custom - Service - Varnish</value>
+                        </tag>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Custom - Service - Varnish Fetch</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>b4b0e26747e541bb99480dba23e34834</uuid>
+                    <name>N expired objects</name>
+                    <key>varnish.stat[n_expired]</key>
+                    <delay>60</delay>
+                    <allowed_hosts>localhost</allowed_hosts>
+                    <preprocessing>
+                        <step>
+                            <type>CHANGE_PER_SECOND</type>
+                            <parameters>
+                                <parameter/>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <request_method>POST</request_method>
+                </item>
+                <item>
+                    <uuid>6b33d0cd1ce242298d6de19fea75d328</uuid>
+                    <name>N LRU moved objects</name>
+                    <key>varnish.stat[n_lru_moved]</key>
+                    <delay>60</delay>
+                    <allowed_hosts>localhost</allowed_hosts>
+                    <preprocessing>
+                        <step>
+                            <type>CHANGE_PER_SECOND</type>
+                            <parameters>
+                                <parameter/>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <request_method>POST</request_method>
+                </item>
+                <item>
+                    <uuid>5ddef535ffef4b4690505f7c220efa1d</uuid>
+                    <name>N LRU nuked objects</name>
+                    <key>varnish.stat[n_lru_nuked]</key>
+                    <delay>60</delay>
+                    <allowed_hosts>localhost</allowed_hosts>
+                    <preprocessing>
+                        <step>
+                            <type>CHANGE_PER_SECOND</type>
+                            <parameters>
+                                <parameter/>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <request_method>POST</request_method>
+                </item>
+                <item>
+                    <uuid>468eedb8338c4150888119b7c735dbd7</uuid>
+                    <name>N struct objectcore</name>
+                    <key>varnish.stat[n_objectcore]</key>
+                    <delay>60</delay>
+                    <request_method>POST</request_method>
+                </item>
+                <item>
+                    <uuid>84baae82571849a09f949dc02c0f8de3</uuid>
+                    <name>N struct objecthead</name>
+                    <key>varnish.stat[n_objecthead]</key>
+                    <delay>60</delay>
+                    <request_method>POST</request_method>
+                </item>
+                <item>
+                    <uuid>79e02e3508284073938a13cb7b0f372b</uuid>
+                    <name>N struct object</name>
+                    <key>varnish.stat[n_object]</key>
+                    <delay>60</delay>
+                    <request_method>POST</request_method>
+                </item>
+                <item>
+                    <uuid>ff94bc53aac04f829677c2371ba5032a</uuid>
+                    <name>Objects overflowing workspace</name>
+                    <key>varnish.stat[n_objoverflow]</key>
+                    <delay>90</delay>
+                    <history>14d</history>
+                    <trends>90d</trends>
+                    <units>ops/sec</units>
+                    <preprocessing>
+                        <step>
+                            <type>CHANGE_PER_SECOND</type>
+                            <parameters>
+                                <parameter/>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Custom - Service - Varnish</value>
+                        </tag>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Custom - Service - Varnish Sessions</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>78610ad51385441f8639c3c6522fdfd0</uuid>
+                    <name>Objects sent with sendfile</name>
+                    <key>varnish.stat[n_objsendfile]</key>
+                    <delay>90</delay>
+                    <history>14d</history>
+                    <trends>90d</trends>
+                    <units>ops/sec</units>
+                    <preprocessing>
+                        <step>
+                            <type>CHANGE_PER_SECOND</type>
+                            <parameters>
+                                <parameter/>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Custom - Service - Varnish</value>
+                        </tag>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Custom - Service - Varnish Sessions</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>b4d49c83c59a48eba94673d2ffcfefc5</uuid>
+                    <name>Objects sent with write</name>
+                    <key>varnish.stat[n_objwrite]</key>
+                    <delay>90</delay>
+                    <history>14d</history>
+                    <trends>90d</trends>
+                    <units>ops/sec</units>
+                    <preprocessing>
+                        <step>
+                            <type>CHANGE_PER_SECOND</type>
+                            <parameters>
+                                <parameter/>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Custom - Service - Varnish</value>
+                        </tag>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Custom - Service - Varnish Sessions</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>e2924f6ba66f43e883f96fd81478dfc8</uuid>
+                    <name>N unresurrected objects</name>
+                    <key>varnish.stat[n_vampireobject]</key>
+                    <delay>60</delay>
+                    <request_method>POST</request_method>
+                </item>
+                <item>
+                    <uuid>dadc546246064b15bb8a3a269325ba3b</uuid>
+                    <name>N worker threads</name>
+                    <key>varnish.stat[n_wrk]</key>
+                    <delay>90</delay>
+                    <history>14d</history>
+                    <trends>90d</trends>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Custom - Service - Varnish</value>
+                        </tag>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Custom - Service - Varnish Workers</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>91adf73d9d9f4c21b832b0921aa45b93</uuid>
+                    <name>N worker threads created</name>
+                    <key>varnish.stat[n_wrk_create]</key>
+                    <delay>90</delay>
+                    <history>14d</history>
+                    <trends>90d</trends>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Custom - Service - Varnish</value>
+                        </tag>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Custom - Service - Varnish Workers</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>8701c76a90c5498c91747bbc9ff3ab99</uuid>
+                    <name>N dropped work requests</name>
+                    <key>varnish.stat[n_wrk_drop]</key>
+                    <delay>90</delay>
+                    <history>14d</history>
+                    <trends>90d</trends>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Custom - Service - Varnish</value>
+                        </tag>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Custom - Service - Varnish Workers</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>2c66e3900ade4c6eae2009dfa41cedcb</uuid>
+                    <name>N worker threads not created</name>
+                    <key>varnish.stat[n_wrk_failed]</key>
+                    <delay>90</delay>
+                    <history>14d</history>
+                    <trends>90d</trends>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Custom - Service - Varnish</value>
+                        </tag>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Custom - Service - Varnish Workers</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>0bcf4352c4464031ab9fd0f8965fe20a</uuid>
+                    <name>N worker threads limited</name>
+                    <key>varnish.stat[n_wrk_max]</key>
+                    <delay>90</delay>
+                    <history>14d</history>
+                    <trends>90d</trends>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Custom - Service - Varnish</value>
+                        </tag>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Custom - Service - Varnish Workers</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>6198911441354e6cb96826e543176fa6</uuid>
+                    <name>N overflowed work requests</name>
+                    <key>varnish.stat[n_wrk_overflow]</key>
+                    <delay>90</delay>
+                    <history>14d</history>
+                    <trends>90d</trends>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Custom - Service - Varnish</value>
+                        </tag>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Custom - Service - Varnish Workers</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>c7d3f6259a524fb480313682ace1790c</uuid>
+                    <name>N queued work requests</name>
+                    <key>varnish.stat[n_wrk_queue]</key>
+                    <delay>90</delay>
+                    <history>14d</history>
+                    <trends>90d</trends>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Custom - Service - Varnish</value>
+                        </tag>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Custom - Service - Varnish Workers</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>4085e748bb5a4f969df6a936ef4c7f47</uuid>
+                    <name>Session Closed</name>
+                    <key>varnish.stat[sess_closed]</key>
+                    <delay>90</delay>
+                    <history>14d</history>
+                    <trends>90d</trends>
+                    <units>ops/sec</units>
+                    <preprocessing>
+                        <step>
+                            <type>CHANGE_PER_SECOND</type>
+                            <parameters>
+                                <parameter/>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Custom - Service - Varnish</value>
+                        </tag>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Custom - Service - Varnish Sessions</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>1dd6ef3c7281450db0c99342aebc277f</uuid>
+                    <name>Session herd</name>
+                    <key>varnish.stat[sess_herd]</key>
+                    <delay>90</delay>
+                    <history>14d</history>
+                    <trends>90d</trends>
+                    <units>ops/sec</units>
+                    <preprocessing>
+                        <step>
+                            <type>CHANGE_PER_SECOND</type>
+                            <parameters>
+                                <parameter/>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Custom - Service - Varnish</value>
+                        </tag>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Custom - Service - Varnish Sessions</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>3ad96d626571447d8cc06d37b8beb187</uuid>
+                    <name>Session Linger</name>
+                    <key>varnish.stat[sess_linger]</key>
+                    <delay>90</delay>
+                    <history>14d</history>
+                    <trends>90d</trends>
+                    <units>ops/sec</units>
+                    <preprocessing>
+                        <step>
+                            <type>CHANGE_PER_SECOND</type>
+                            <parameters>
+                                <parameter/>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Custom - Service - Varnish</value>
+                        </tag>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Custom - Service - Varnish Sessions</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>fc6a66e2540542f7bb545be647ab8b60</uuid>
+                    <name>Session Pipeline</name>
+                    <key>varnish.stat[sess_pipeline]</key>
+                    <delay>90</delay>
+                    <history>14d</history>
+                    <trends>90d</trends>
+                    <units>ops/sec</units>
+                    <preprocessing>
+                        <step>
+                            <type>CHANGE_PER_SECOND</type>
+                            <parameters>
+                                <parameter/>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Custom - Service - Varnish</value>
+                        </tag>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Custom - Service - Varnish Sessions</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>147f124bb1b14fac88a927fb75f6a69f</uuid>
+                    <name>Session Read Ahead</name>
+                    <key>varnish.stat[sess_readahead]</key>
+                    <delay>90</delay>
+                    <history>14d</history>
+                    <trends>90d</trends>
+                    <units>ops/sec</units>
+                    <preprocessing>
+                        <step>
+                            <type>CHANGE_PER_SECOND</type>
+                            <parameters>
+                                <parameter/>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Custom - Service - Varnish</value>
+                        </tag>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Custom - Service - Varnish Sessions</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>20c875b7d3614224911e7119aaa83d07</uuid>
+                    <name>Varnish Loadbalancer Health Check</name>
+                    <key>web.page.perf[127.0.0.1,{$LOADBALANCER_CHECK_VARNISH},{$HTTP_PORT_VARNISH}]</key>
+                    <delay>60</delay>
+                    <history>14d</history>
+                    <trends>0</trends>
+                    <value_type>FLOAT</value_type>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Custom - Service - Varnish</value>
+                        </tag>
+                    </tags>
+                    <triggers>
+                        <trigger>
+                            <uuid>16e949b074404d26982b3bd3edd704ec</uuid>
+                            <expression>last(/Custom - Service - Varnish/web.page.perf[127.0.0.1,{$LOADBALANCER_CHECK_VARNISH},{$HTTP_PORT_VARNISH}])=0</expression>
+                            <name>Loadbalancer Health Check Varnish</name>
+                            <priority>AVERAGE</priority>
+                        </trigger>
+                    </triggers>
+                </item>
+            </items>
+            <macros>
+                <macro>
+                    <macro>{$HITRATE_PERCENTAGE}</macro>
+                    <value>20</value>
+                </macro>
+                <macro>
+                    <macro>{$HTTP_PORT_VARNISH}</macro>
+                    <value>6081</value>
+                </macro>
+                <macro>
+                    <macro>{$LOADBALANCER_CHECK_VARNISH}</macro>
+                    <value>/e/lbstatus.html</value>
+                </macro>
+            </macros>
+            <dashboards>
+                <dashboard>
+                    <uuid>63f3c064ace5481c8f1b7f36ffb0ba49</uuid>
+                    <name>Custom - Service - Varnish</name>
+                    <pages>
+                        <page>
+                            <widgets>
+                                <widget>
+                                    <type>graph</type>
+                                    <width>24</width>
+                                    <height>7</height>
+                                    <fields>
+                                        <field>
+                                            <type>GRAPH</type>
+                                            <name>graphid</name>
+                                            <value>
+                                                <host>Custom - Service - Varnish</host>
+                                                <name>Varnish Object handling</name>
+                                            </value>
+                                        </field>
+                                    </fields>
+                                </widget>
+                                <widget>
+                                    <type>graph</type>
+                                    <y>7</y>
+                                    <width>24</width>
+                                    <height>7</height>
+                                    <fields>
+                                        <field>
+                                            <type>GRAPH</type>
+                                            <name>graphid</name>
+                                            <value>
+                                                <host>Custom - Service - Varnish</host>
+                                                <name>Varnish Cache</name>
+                                            </value>
+                                        </field>
+                                    </fields>
+                                </widget>
+                                <widget>
+                                    <type>graph</type>
+                                    <y>14</y>
+                                    <width>24</width>
+                                    <height>7</height>
+                                    <fields>
+                                        <field>
+                                            <type>GRAPH</type>
+                                            <name>graphid</name>
+                                            <value>
+                                                <host>Custom - Service - Varnish</host>
+                                                <name>Varnish Backend Connections</name>
+                                            </value>
+                                        </field>
+                                    </fields>
+                                </widget>
+                                <widget>
+                                    <type>graph</type>
+                                    <y>21</y>
+                                    <width>24</width>
+                                    <height>7</height>
+                                    <fields>
+                                        <field>
+                                            <type>GRAPH</type>
+                                            <name>graphid</name>
+                                            <value>
+                                                <host>Custom - Service - Varnish</host>
+                                                <name>Varnish Client Connections</name>
+                                            </value>
+                                        </field>
+                                    </fields>
+                                </widget>
+                                <widget>
+                                    <type>graph</type>
+                                    <y>28</y>
+                                    <width>24</width>
+                                    <height>7</height>
+                                    <fields>
+                                        <field>
+                                            <type>GRAPH</type>
+                                            <name>graphid</name>
+                                            <value>
+                                                <host>Custom - Service - Varnish</host>
+                                                <name>Varnish  Workers</name>
+                                            </value>
+                                        </field>
+                                    </fields>
+                                </widget>
+                                <widget>
+                                    <type>graph</type>
+                                    <y>35</y>
+                                    <width>24</width>
+                                    <height>7</height>
+                                    <fields>
+                                        <field>
+                                            <type>GRAPH</type>
+                                            <name>graphid</name>
+                                            <value>
+                                                <host>Custom - Service - Varnish</host>
+                                                <name>Varnish Fetch</name>
+                                            </value>
+                                        </field>
+                                    </fields>
+                                </widget>
+                                <widget>
+                                    <type>graph</type>
+                                    <y>42</y>
+                                    <width>24</width>
+                                    <height>7</height>
+                                    <fields>
+                                        <field>
+                                            <type>GRAPH</type>
+                                            <name>graphid</name>
+                                            <value>
+                                                <host>Custom - Service - Varnish</host>
+                                                <name>Varnish  Sessions</name>
+                                            </value>
+                                        </field>
+                                    </fields>
+                                </widget>
+                                <widget>
+                                    <type>graph</type>
+                                    <y>49</y>
+                                    <width>24</width>
+                                    <height>7</height>
+                                    <fields>
+                                        <field>
+                                            <type>GRAPH</type>
+                                            <name>graphid</name>
+                                            <value>
+                                                <host>Custom - Service - Varnish</host>
+                                                <name>Varnish  ESI</name>
+                                            </value>
+                                        </field>
+                                    </fields>
+                                </widget>
+                                <widget>
+                                    <type>graph</type>
+                                    <y>56</y>
+                                    <width>24</width>
+                                    <height>7</height>
+                                    <fields>
+                                        <field>
+                                            <type>GRAPH</type>
+                                            <name>graphid</name>
+                                            <value>
+                                                <host>Custom - Service - Varnish</host>
+                                                <name>Varnish Objects</name>
+                                            </value>
+                                        </field>
+                                    </fields>
+                                </widget>
+                            </widgets>
+                        </page>
+                    </pages>
+                </dashboard>
+            </dashboards>
+        </template>
+    </templates>
+    <triggers>
+        <trigger>
+            <uuid>119344def71147429976202de6bc379f</uuid>
+            <expression>((sum(/Custom - Service - Varnish/varnish.stat[cache_hit],#5) / (sum(/Custom - Service - Varnish/varnish.stat[cache_miss],#5) + sum(/Custom - Service - Varnish/varnish.stat[cache_hit],#5)))) &lt; ({$HITRATE_PERCENTAGE}/100)</expression>
+            <name>Varnish Hitrate &lt; {$HITRATE_PERCENTAGE}%</name>
+            <priority>WARNING</priority>
+        </trigger>
+    </triggers>
+    <graphs>
+        <graph>
+            <uuid>ed92b845d3c84a5e9dd3d5c76d7385c1</uuid>
+            <name>Varnish Backend Connections</name>
+            <height>300</height>
+            <graph_items>
+                <graph_item>
+                    <color>C80000</color>
+                    <item>
+                        <host>Custom - Service - Varnish</host>
+                        <key>varnish.stat[backend_fail]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <color>00C800</color>
+                    <item>
+                        <host>Custom - Service - Varnish</host>
+                        <key>varnish.stat[backend_unhealthy]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>2</sortorder>
+                    <color>0000C8</color>
+                    <item>
+                        <host>Custom - Service - Varnish</host>
+                        <key>varnish.stat[backend_recycle]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>3</sortorder>
+                    <color>C800C8</color>
+                    <item>
+                        <host>Custom - Service - Varnish</host>
+                        <key>varnish.stat[backend_reuse]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>4</sortorder>
+                    <color>00C8C8</color>
+                    <item>
+                        <host>Custom - Service - Varnish</host>
+                        <key>varnish.stat[backend_conn]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>5</sortorder>
+                    <color>C8C800</color>
+                    <item>
+                        <host>Custom - Service - Varnish</host>
+                        <key>varnish.stat[backend_busy]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>6</sortorder>
+                    <color>C8C8C8</color>
+                    <item>
+                        <host>Custom - Service - Varnish</host>
+                        <key>varnish.stat[backend_unused]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>7</sortorder>
+                    <color>960000</color>
+                    <item>
+                        <host>Custom - Service - Varnish</host>
+                        <key>varnish.stat[backend_toolate]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>8</sortorder>
+                    <item>
+                        <host>Custom - Service - Varnish</host>
+                        <key>varnish.stat[backend_req]</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <uuid>f94f5fd976244b04b3de72556e044ed6</uuid>
+            <name>Varnish Cache</name>
+            <height>300</height>
+            <ymin_type_1>FIXED</ymin_type_1>
+            <graph_items>
+                <graph_item>
+                    <color>C80000</color>
+                    <calc_fnc>MAX</calc_fnc>
+                    <item>
+                        <host>Custom - Service - Varnish</host>
+                        <key>varnish.stat[cache_miss]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <color>00C800</color>
+                    <calc_fnc>MAX</calc_fnc>
+                    <item>
+                        <host>Custom - Service - Varnish</host>
+                        <key>varnish.stat[cache_hitpass]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>2</sortorder>
+                    <color>0000C8</color>
+                    <calc_fnc>MAX</calc_fnc>
+                    <item>
+                        <host>Custom - Service - Varnish</host>
+                        <key>varnish.stat[cache_hit]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>3</sortorder>
+                    <drawtype>GRADIENT_LINE</drawtype>
+                    <color>FFCCCC</color>
+                    <yaxisside>RIGHT</yaxisside>
+                    <calc_fnc>MAX</calc_fnc>
+                    <item>
+                        <host>Custom - Service - Varnish</host>
+                        <key>varnish.hitrate</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <uuid>596611bf0ec247b6a9cc30d04cbde6cc</uuid>
+            <name>Varnish Client Connections</name>
+            <height>300</height>
+            <graph_items>
+                <graph_item>
+                    <color>C80000</color>
+                    <item>
+                        <host>Custom - Service - Varnish</host>
+                        <key>varnish.stat[client_conn]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <color>00C800</color>
+                    <item>
+                        <host>Custom - Service - Varnish</host>
+                        <key>varnish.stat[client_req]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>2</sortorder>
+                    <color>0000C8</color>
+                    <item>
+                        <host>Custom - Service - Varnish</host>
+                        <key>varnish.stat[client_drop]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>3</sortorder>
+                    <color>C800C8</color>
+                    <item>
+                        <host>Custom - Service - Varnish</host>
+                        <key>varnish.stat[client_drop_late]</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <uuid>1c8432f327974d9a84c2c6136bb4ddf5</uuid>
+            <name>Varnish  ESI</name>
+            <height>300</height>
+            <graph_items>
+                <graph_item>
+                    <color>C80000</color>
+                    <item>
+                        <host>Custom - Service - Varnish</host>
+                        <key>varnish.stat[esi_errors]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <color>0000C8</color>
+                    <item>
+                        <host>Custom - Service - Varnish</host>
+                        <key>varnish.stat[esi_warnings]</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <uuid>0bcecf6e90b840c9916ff27a0827369f</uuid>
+            <name>Varnish Fetch</name>
+            <height>300</height>
+            <graph_items>
+                <graph_item>
+                    <color>C80000</color>
+                    <item>
+                        <host>Custom - Service - Varnish</host>
+                        <key>varnish.stat[fetch_chunked]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <color>00C800</color>
+                    <item>
+                        <host>Custom - Service - Varnish</host>
+                        <key>varnish.stat[fetch_eof]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>2</sortorder>
+                    <color>0000C8</color>
+                    <item>
+                        <host>Custom - Service - Varnish</host>
+                        <key>varnish.stat[fetch_failed]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>3</sortorder>
+                    <color>C800C8</color>
+                    <item>
+                        <host>Custom - Service - Varnish</host>
+                        <key>varnish.stat[fetch_bad]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>4</sortorder>
+                    <color>00C8C8</color>
+                    <item>
+                        <host>Custom - Service - Varnish</host>
+                        <key>varnish.stat[fetch_head]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>5</sortorder>
+                    <color>C8C800</color>
+                    <item>
+                        <host>Custom - Service - Varnish</host>
+                        <key>varnish.stat[fetch_oldhttp]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>6</sortorder>
+                    <color>C8C8C8</color>
+                    <item>
+                        <host>Custom - Service - Varnish</host>
+                        <key>varnish.stat[fetch_close]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>7</sortorder>
+                    <color>960000</color>
+                    <item>
+                        <host>Custom - Service - Varnish</host>
+                        <key>varnish.stat[fetch_length]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>8</sortorder>
+                    <item>
+                        <host>Custom - Service - Varnish</host>
+                        <key>varnish.stat[fetch_zero]</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <uuid>0964c46aee4e4fc6afc4627e4058ea51</uuid>
+            <name>Varnish Object handling</name>
+            <height>300</height>
+            <ymin_type_1>FIXED</ymin_type_1>
+            <graph_items>
+                <graph_item>
+                    <color>C80000</color>
+                    <calc_fnc>MAX</calc_fnc>
+                    <item>
+                        <host>Custom - Service - Varnish</host>
+                        <key>varnish.stat[n_expired]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <color>00C800</color>
+                    <calc_fnc>MAX</calc_fnc>
+                    <item>
+                        <host>Custom - Service - Varnish</host>
+                        <key>varnish.stat[n_lru_moved]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>2</sortorder>
+                    <color>0000C8</color>
+                    <calc_fnc>MAX</calc_fnc>
+                    <item>
+                        <host>Custom - Service - Varnish</host>
+                        <key>varnish.stat[n_lru_nuked]</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <uuid>dbdba495f9ee4af983d9f9a65025ff41</uuid>
+            <name>Varnish Objects</name>
+            <height>300</height>
+            <ymin_type_1>FIXED</ymin_type_1>
+            <graph_items>
+                <graph_item>
+                    <color>C80000</color>
+                    <calc_fnc>MAX</calc_fnc>
+                    <item>
+                        <host>Custom - Service - Varnish</host>
+                        <key>varnish.stat[n_object]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <color>00C800</color>
+                    <calc_fnc>MAX</calc_fnc>
+                    <item>
+                        <host>Custom - Service - Varnish</host>
+                        <key>varnish.stat[n_objectcore]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>2</sortorder>
+                    <color>0000C8</color>
+                    <calc_fnc>MAX</calc_fnc>
+                    <item>
+                        <host>Custom - Service - Varnish</host>
+                        <key>varnish.stat[n_objecthead]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>3</sortorder>
+                    <color>C800C8</color>
+                    <calc_fnc>MAX</calc_fnc>
+                    <item>
+                        <host>Custom - Service - Varnish</host>
+                        <key>varnish.stat[n_vampireobject]</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <uuid>19f919ec85424a7aad466b52e3817675</uuid>
+            <name>Varnish  Sessions</name>
+            <height>300</height>
+            <graph_items>
+                <graph_item>
+                    <color>C80000</color>
+                    <item>
+                        <host>Custom - Service - Varnish</host>
+                        <key>varnish.stat[n_objoverflow]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <color>00C800</color>
+                    <item>
+                        <host>Custom - Service - Varnish</host>
+                        <key>varnish.stat[n_objsendfile]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>2</sortorder>
+                    <color>0000C8</color>
+                    <item>
+                        <host>Custom - Service - Varnish</host>
+                        <key>varnish.stat[n_objwrite]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>3</sortorder>
+                    <color>C800C8</color>
+                    <item>
+                        <host>Custom - Service - Varnish</host>
+                        <key>varnish.stat[sess_closed]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>4</sortorder>
+                    <color>00C8C8</color>
+                    <item>
+                        <host>Custom - Service - Varnish</host>
+                        <key>varnish.stat[sess_herd]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>5</sortorder>
+                    <color>C8C800</color>
+                    <item>
+                        <host>Custom - Service - Varnish</host>
+                        <key>varnish.stat[sess_linger]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>6</sortorder>
+                    <color>C8C8C8</color>
+                    <item>
+                        <host>Custom - Service - Varnish</host>
+                        <key>varnish.stat[sess_pipeline]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>7</sortorder>
+                    <color>960000</color>
+                    <item>
+                        <host>Custom - Service - Varnish</host>
+                        <key>varnish.stat[sess_readahead]</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <uuid>5f3d5650e2bf4262a97af70b416661b4</uuid>
+            <name>Varnish  Workers</name>
+            <height>300</height>
+            <graph_items>
+                <graph_item>
+                    <color>C80000</color>
+                    <item>
+                        <host>Custom - Service - Varnish</host>
+                        <key>varnish.stat[n_wrk_drop]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <color>00C800</color>
+                    <item>
+                        <host>Custom - Service - Varnish</host>
+                        <key>varnish.stat[n_wrk_overflow]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>2</sortorder>
+                    <color>0000C8</color>
+                    <item>
+                        <host>Custom - Service - Varnish</host>
+                        <key>varnish.stat[n_wrk_queue]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>3</sortorder>
+                    <color>C800C8</color>
+                    <item>
+                        <host>Custom - Service - Varnish</host>
+                        <key>varnish.stat[n_wrk]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>4</sortorder>
+                    <color>00C8C8</color>
+                    <item>
+                        <host>Custom - Service - Varnish</host>
+                        <key>varnish.stat[n_wrk_create]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>5</sortorder>
+                    <color>C8C800</color>
+                    <item>
+                        <host>Custom - Service - Varnish</host>
+                        <key>varnish.stat[n_wrk_max]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>6</sortorder>
+                    <color>C8C8C8</color>
+                    <item>
+                        <host>Custom - Service - Varnish</host>
+                        <key>varnish.stat[n_wrk_failed]</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+    </graphs>
+</zabbix_export>
