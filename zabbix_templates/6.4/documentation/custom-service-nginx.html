@@ -60,10 +60,10 @@
 accepts
     The total number of accepted client connections. 
 handled
-    The total number of handled connections. Generally, the parameter value is the same as accepts unless some resource limits have been reached (for example, the worker_connections limit).</td><td style="background-color:#FFFF00;">Warning</td><td><tt>{Custom - Service - NGINX:nginx.accepts[{$NGINX_HTTP_PORT}].min(360)} - {Custom - Service - NGINX:nginx.handled[{$NGINX_HTTP_PORT}].min(360)} &gt; 10</tt></td><td><tt></tt></td>
+    The total number of handled connections. Generally, the parameter value is the same as accepts unless some resource limits have been reached (for example, the worker_connections limit).</td><td style="background-color:#FFFF00;">Warning</td><td><tt>min(/Custom - Service - NGINX/nginx.accepts[{$NGINX_HTTP_PORT}],360s) - min(/Custom - Service - NGINX/nginx.handled[{$NGINX_HTTP_PORT}],360s) &gt; 10</tt></td><td><tt></tt></td>
 </tr>
 <tr>
-<td>NGINX Maxclient Usage &gt; 80%</td><td>The available maxclient slots are consumed by 80% by reader/writer processes.</td><td style="background-color:#FFFF00;">Warning</td><td><tt>({$NGINX_MAX_CLIENTS} * 0.80) &lt; ({Custom - Service - NGINX:nginx.reader[{$NGINX_HTTP_PORT}].last(0)} + {Custom - Service - NGINX:nginx.writer[{$NGINX_HTTP_PORT}].last(0)} + {Custom - Service - NGINX:nginx.keepalive[{$NGINX_HTTP_PORT}].last(0)})</tt></td><td><tt></tt></td>
+<td>NGINX Maxclient Usage &gt; 80%</td><td>The available maxclient slots are consumed by 80% by reader/writer processes.</td><td style="background-color:#FFFF00;">Warning</td><td><tt>({$NGINX_MAX_CLIENTS} * 0.80) &lt; (last(/Custom - Service - NGINX/nginx.reader[{$NGINX_HTTP_PORT}]) + last(/Custom - Service - NGINX/nginx.writer[{$NGINX_HTTP_PORT}]) + last(/Custom - Service - NGINX/nginx.keepalive[{$NGINX_HTTP_PORT}]))</tt></td><td><tt></tt></td>
 </tr>
 </table>
 <h2>Graph Overview</h2>

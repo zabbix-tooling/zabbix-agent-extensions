@@ -52,23 +52,23 @@
 <th>Name</th><th>Description</th><th>Priority</th><th>Expression</th><th>Dependencies</th>
 </tr>
 <tr>
-<td>Apache Maxclient Usage &gt; 60%</td><td>The available maxclient slots are consumed by 60% by reader/writer processes.</td><td style="background-color:#FFFF00;">Warning</td><td><tt>({Custom - Service - Apache:apache.total[{$HTTP_PORT}].last(0)} * 0.60) &lt; ({Custom - Service - Apache:apache.reader[{$HTTP_PORT}].last(0)} + {Custom - Service - Apache:apache.writer[{$HTTP_PORT}].last(0)} + {Custom - Service - Apache:apache.keepalive[{$HTTP_PORT}].last(0)})</tt></td><td><tt>Apache Maxclient Usage &gt; 80%<br>
+<td>Apache Maxclient Usage &gt; 60%</td><td>The available maxclient slots are consumed by 60% by reader/writer processes.</td><td style="background-color:#FFFF00;">Warning</td><td><tt>(last(/Custom - Service - Apache/apache.total[{$HTTP_PORT}]) * 0.60) &lt; (last(/Custom - Service - Apache/apache.reader[{$HTTP_PORT}]) + last(/Custom - Service - Apache/apache.writer[{$HTTP_PORT}]) + last(/Custom - Service - Apache/apache.keepalive[{$HTTP_PORT}]))</tt></td><td><tt>Apache Maxclient Usage &gt; 80%<br>
 </tt></td>
 </tr>
 <tr>
-<td>Apache Maxclient Usage &gt; 80%</td><td>The available maxclient slots are consumed by 80% by reader/writer processes.</td><td style="background-color:#FF0000;">Average</td><td><tt>({Custom - Service - Apache:apache.total[{$HTTP_PORT}].last(0)} * 0.80) &lt; ({Custom - Service - Apache:apache.reader[{$HTTP_PORT}].last(0)} + {Custom - Service - Apache:apache.writer[{$HTTP_PORT}].last(0)} + {Custom - Service - Apache:apache.keepalive[{$HTTP_PORT}].last(0)})</tt></td><td><tt></tt></td>
+<td>Apache Maxclient Usage &gt; 80%</td><td>The available maxclient slots are consumed by 80% by reader/writer processes.</td><td style="background-color:#FF0000;">Average</td><td><tt>(last(/Custom - Service - Apache/apache.total[{$HTTP_PORT}]) * 0.80) &lt; (last(/Custom - Service - Apache/apache.reader[{$HTTP_PORT}]) + last(/Custom - Service - Apache/apache.writer[{$HTTP_PORT}]) + last(/Custom - Service - Apache/apache.keepalive[{$HTTP_PORT}]))</tt></td><td><tt></tt></td>
 </tr>
 <tr>
-<td>Apache Maxclient Usage no data</td><td>Unable to gather maxlclient usage, webserver is probably already dead!</td><td style="background-color:#FF0000;">Average</td><td><tt>({Custom - Service - Apache:apache.reader[{$HTTP_PORT}].nodata(200)} or {Custom - Service - Apache:apache.writer[{$HTTP_PORT}].nodata(200)} or {Custom - Service - Apache:apache.keepalive[{$HTTP_PORT}].nodata(200)})</tt></td><td><tt></tt></td>
+<td>Apache Maxclient Usage no data</td><td>Unable to gather maxlclient usage, webserver is probably already dead!</td><td style="background-color:#FF0000;">Average</td><td><tt>(nodata(/Custom - Service - Apache/apache.reader[{$HTTP_PORT}],200s) or nodata(/Custom - Service - Apache/apache.writer[{$HTTP_PORT}],200s) or nodata(/Custom - Service - Apache/apache.keepalive[{$HTTP_PORT}],200s))</tt></td><td><tt></tt></td>
 </tr>
 <tr>
-<td>Apache Mod Jk &gt; 6 Inactive Backends</td><td></td><td style="background-color:#FF0000;">Average</td><td><tt>({Custom - Service - Apache:apache.jk.dis.last()} +{Custom - Service - Apache:apache.jk.stp.last()} ) &gt; 6</tt></td><td><tt></tt></td>
+<td>Apache Mod Jk &gt; 6 Inactive Backends</td><td></td><td style="background-color:#FF0000;">Average</td><td><tt>(last(/Custom - Service - Apache/apache.jk.dis) +last(/Custom - Service - Apache/apache.jk.stp) ) &gt; 6</tt></td><td><tt></tt></td>
 </tr>
 <tr>
-<td>Apache Mod Jk Disabled Backends &gt; 0</td><td></td><td>NOT CLASSIFIED</td><td><tt>({Custom - Service - Apache:apache.jk.dis.last()} +{Custom - Service - Apache:apache.jk.stp.last()} )&gt;0</tt></td><td><tt></tt></td>
+<td>Apache Mod Jk Disabled Backends &gt; 0</td><td></td><td>NOT CLASSIFIED</td><td><tt>(last(/Custom - Service - Apache/apache.jk.dis) +last(/Custom - Service - Apache/apache.jk.stp) )&gt;0</tt></td><td><tt></tt></td>
 </tr>
 <tr>
-<td>Apache Mod Jk Inactive Backends &gt; 20%</td><td></td><td style="background-color:#FFFF00;">Warning</td><td><tt>({Custom - Service - Apache:apache.jk.dis.last()} +{Custom - Service - Apache:apache.jk.stp.last()} ) &gt; (({Custom - Service - Apache:apache.jk.dis.last()} + {Custom - Service - Apache:apache.jk.stp.last()} + {Custom - Service - Apache:apache.jk.act.last()}) * 0.20)</tt></td><td><tt></tt></td>
+<td>Apache Mod Jk Inactive Backends &gt; 20%</td><td></td><td style="background-color:#FFFF00;">Warning</td><td><tt>(last(/Custom - Service - Apache/apache.jk.dis) +last(/Custom - Service - Apache/apache.jk.stp) ) &gt; ((last(/Custom - Service - Apache/apache.jk.dis) + last(/Custom - Service - Apache/apache.jk.stp) + last(/Custom - Service - Apache/apache.jk.act)) * 0.20)</tt></td><td><tt></tt></td>
 </tr>
 </table>
 <h2>Graph Overview</h2>

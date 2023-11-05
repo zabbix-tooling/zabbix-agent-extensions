@@ -55,7 +55,7 @@
 <th>Name</th><th>Description</th><th>Priority</th><th>Expression</th><th>Dependencies</th>
 </tr>
 <tr>
-<td>Varnish Hitrate &lt; {$HITRATE_PERCENTAGE}%</td><td></td><td style="background-color:#FFFF00;">Warning</td><td><tt>(({Custom - Service - Varnish:varnish.stat[cache_hit].sum(#5)} / ({Custom - Service - Varnish:varnish.stat[cache_miss].sum(#5)} + {Custom - Service - Varnish:varnish.stat[cache_hit].sum(#5)}))) &lt; ({$HITRATE_PERCENTAGE}/100)</tt></td><td><tt></tt></td>
+<td>Varnish Hitrate &lt; {$HITRATE_PERCENTAGE}%</td><td></td><td style="background-color:#FFFF00;">Warning</td><td><tt>((sum(/Custom - Service - Varnish/varnish.stat[cache_hit],#5) / (sum(/Custom - Service - Varnish/varnish.stat[cache_miss],#5) + sum(/Custom - Service - Varnish/varnish.stat[cache_hit],#5)))) &lt; ({$HITRATE_PERCENTAGE}/100)</tt></td><td><tt></tt></td>
 </tr>
 </table>
 <h2>Graph Overview</h2>
