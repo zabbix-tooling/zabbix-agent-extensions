@@ -23,6 +23,7 @@
                     <name>Disk IO detail discovery</name>
                     <type>ZABBIX_ACTIVE</type>
                     <key>vfs.dev.discovery.detail</key>
+                    <delay>60m</delay>
                     <lifetime>14d</lifetime>
                     <item_prototypes>
                         <item_prototype>
@@ -30,6 +31,8 @@
                             <name>{#BLOCKDEVICE} - IO: Currently Active</name>
                             <type>ZABBIX_ACTIVE</type>
                             <key>custom.vfs.dev.io.active[{#BLOCKDEVICE}]</key>
+                            <history>14d</history>
+                            <trends>0</trends>
                             <units>op</units>
                             <description>Number of I/Os currently in progress.
 The only field that should go to zero. Incremented as requests are given to appropriate struct request_queue and decremented as they finish.</description>
@@ -45,6 +48,8 @@ The only field that should go to zero. Incremented as requests are given to appr
                             <name>{#BLOCKDEVICE} - IO: Milleseconds spend in IO</name>
                             <type>ZABBIX_ACTIVE</type>
                             <key>custom.vfs.dev.io.ms[{#BLOCKDEVICE}]</key>
+                            <history>14d</history>
+                            <trends>0</trends>
                             <status>DISABLED</status>
                             <discover>NO_DISCOVER</discover>
                             <units>s</units>
@@ -75,6 +80,8 @@ The only field that should go to zero. Incremented as requests are given to appr
                             <name>{#BLOCKDEVICE} - IO: Queue Depth</name>
                             <type>ZABBIX_ACTIVE</type>
                             <key>custom.vfs.dev.queue_depth[{#BLOCKDEVICE}]</key>
+                            <history>14d</history>
+                            <trends>0</trends>
                             <units>io</units>
                             <description>Number of I/Os currently in progress.&amp;#13;
 The only field that should go to zero. Incremented as requests are given to appropriate struct request_queue and decremented as they finish.</description>
@@ -90,6 +97,8 @@ The only field that should go to zero. Incremented as requests are given to appr
                             <name>{#BLOCKDEVICE} - IO: Merged Reads</name>
                             <type>ZABBIX_ACTIVE</type>
                             <key>custom.vfs.dev.read.merged[{#BLOCKDEVICE}]</key>
+                            <history>14d</history>
+                            <trends>0</trends>
                             <units>Bs</units>
                             <description>Number of reads merged.
 Reads and writes which are adjacent to each other may be merged for efficiency. Thus two 4K reads may become one 8K read before it is ultimately handed to the disk, and so it will be counted (and queued) as only one I/O.  This field lets you know how often this was done.</description>
@@ -113,6 +122,8 @@ Reads and writes which are adjacent to each other may be merged for efficiency. 
                             <name>{#BLOCKDEVICE} - IO: Milleseconds spend in Read IO</name>
                             <type>ZABBIX_ACTIVE</type>
                             <key>custom.vfs.dev.read.ms[{#BLOCKDEVICE}]</key>
+                            <history>14d</history>
+                            <trends>0</trends>
                             <units>s</units>
                             <description>Number of milliseconds spent reading.
 This is the total number of milliseconds spent by all reads (as measured from __make_request() to end_that_request_last()).</description>
@@ -142,6 +153,8 @@ This is the total number of milliseconds spent by all reads (as measured from __
                             <name>{#BLOCKDEVICE} - IO: Ops Read</name>
                             <type>ZABBIX_ACTIVE</type>
                             <key>custom.vfs.dev.read.ops[{#BLOCKDEVICE}]</key>
+                            <history>14d</history>
+                            <trends>0</trends>
                             <units>ops</units>
                             <description>This is the total number of reads completed successfully.</description>
                             <preprocessing>
@@ -164,6 +177,8 @@ This is the total number of milliseconds spent by all reads (as measured from __
                             <name>{#BLOCKDEVICE} - IO Transfer Read</name>
                             <type>ZABBIX_ACTIVE</type>
                             <key>custom.vfs.dev.read.sectors[{#BLOCKDEVICE}]</key>
+                            <history>14d</history>
+                            <trends>0</trends>
                             <units>Bs</units>
                             <description>This is the total number of sectors read successfully.</description>
                             <preprocessing>
@@ -186,6 +201,8 @@ This is the total number of milliseconds spent by all reads (as measured from __
                             <name>{#BLOCKDEVICE} - IO: Milleseconds weighted spend in IO</name>
                             <type>ZABBIX_ACTIVE</type>
                             <key>custom.vfs.dev.weight.io.ms[{#BLOCKDEVICE}]</key>
+                            <history>14d</history>
+                            <trends>0</trends>
                             <status>DISABLED</status>
                             <discover>NO_DISCOVER</discover>
                             <units>s</units>
@@ -218,6 +235,8 @@ This field is incremented at each I/O start, I/O completion, I/O merge, or read 
                             <name>{#BLOCKDEVICE} - IO: Merged Writes</name>
                             <type>ZABBIX_ACTIVE</type>
                             <key>custom.vfs.dev.write.merged[{#BLOCKDEVICE}]</key>
+                            <history>14d</history>
+                            <trends>0</trends>
                             <units>Bs</units>
                             <description>Number of writes merged.
 Reads and writes which are adjacent to each other may be merged for efficiency. Thus two 4K reads may become one 8K read before it is ultimately handed to the disk, and so it will be counted (and queued) as only one I/O.  This field lets you know how often this was done.</description>
@@ -241,6 +260,8 @@ Reads and writes which are adjacent to each other may be merged for efficiency. 
                             <name>{#BLOCKDEVICE} - IO: Milleseconds spend in Write IO</name>
                             <type>ZABBIX_ACTIVE</type>
                             <key>custom.vfs.dev.write.ms[{#BLOCKDEVICE}]</key>
+                            <history>14d</history>
+                            <trends>0</trends>
                             <units>s</units>
                             <description>Number of milliseconds spent writing.&amp;#13;
 This is the total number of milliseconds spent by all writes (as measured from __make_request() to end_that_request_last()).</description>
@@ -270,6 +291,8 @@ This is the total number of milliseconds spent by all writes (as measured from _
                             <name>{#BLOCKDEVICE} - IO: Ops Write</name>
                             <type>ZABBIX_ACTIVE</type>
                             <key>custom.vfs.dev.write.ops[{#BLOCKDEVICE}]</key>
+                            <history>14d</history>
+                            <trends>0</trends>
                             <units>ops</units>
                             <description>This is the total number of reads completed successfully.</description>
                             <preprocessing>
@@ -292,6 +315,8 @@ This is the total number of milliseconds spent by all writes (as measured from _
                             <name>{#BLOCKDEVICE} - IO Transfer Write</name>
                             <type>ZABBIX_ACTIVE</type>
                             <key>custom.vfs.dev.write.sectors[{#BLOCKDEVICE}]</key>
+                            <history>14d</history>
+                            <trends>0</trends>
                             <units>Bs</units>
                             <description>This is the total number of sectors write successfully.</description>
                             <preprocessing>
