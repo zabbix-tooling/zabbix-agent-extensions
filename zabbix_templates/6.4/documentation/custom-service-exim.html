@@ -1,0 +1,82 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<style type="text/css">
+
+   p.desc{
+     white-space:nowrap;
+   }
+
+   table.pretty {
+    margin: 1em 1em 1em 2em;
+    background: whitesmoke;
+    border-collapse: collapse;
+   }
+
+   table.pretty th, table.pretty td {
+    border: 1px gainsboro solid;
+    padding: 0.2em;
+   }
+
+   table.pretty th {
+    background: gainsboro;
+    text-align: left;
+   }
+
+   table.pretty caption {
+    margin-left: inherit;
+    margin-right: inherit;
+    white-space:nowrap;
+   }
+  </style>
+<body>
+<h2>Macro Overview</h2>
+
+  The following macros can be overloaded on host level.
+  <table class="pretty">
+<tr>
+<th>Name</th><th>Default</th>
+</tr>
+<tr>
+<td>{$EXIM_LOGFILE}</td><td>/var/log/exim4/mainlog</td>
+</tr>
+</table>
+<h1>Static Elements</h1>
+<h2>Trigger Overview</h2>
+<table class="pretty">
+<tr>
+<th>Name</th><th>Description</th><th>Priority</th><th>Expression</th><th>Dependencies</th>
+</tr>
+</table>
+<h2>Graph Overview</h2>
+<table class="pretty">
+<tr>
+<th>Name</th><th>Elements</th>
+</tr>
+<tr>
+<td>Service - Exim - Details</td><td><tt>log.count[{$EXIM_LOGFILE},"Action: flagged as Spam but accepted:",,100,skip,]<br>
+</tt></td>
+</tr>
+<tr>
+<td>Service - Exim - Overview</td><td><tt>log.count[{$EXIM_LOGFILE}," Completed$",,100,skip,]<br>log.count[{$EXIM_LOGFILE},": Rejected",,100,skip,]<br>
+</tt></td>
+</tr>
+</table>
+<h2>Item Overview</h2>
+<table class="pretty">
+<tr>
+<th>Type</th><th>Name</th><th>Key</th><th>Description</th><th>Interval (sec)</th><th>History Days</th><th>Trend Days</th>
+</tr>
+<tr>
+<td>ZABBIX_ACTIVE</td><td>Rejected Mails</td><td><tt>log.count[{$EXIM_LOGFILE},": Rejected",,100,skip,]</tt></td><td></td><td></td><td>2w</td><td>90d</td>
+</tr>
+<tr>
+<td>ZABBIX_ACTIVE</td><td>Accepted Spam Mails</td><td><tt>log.count[{$EXIM_LOGFILE},"Action: flagged as Spam but accepted:",,100,skip,]</tt></td><td></td><td></td><td>2w</td><td>90d</td>
+</tr>
+<tr>
+<td>ZABBIX_ACTIVE</td><td>Completed Mails</td><td><tt>log.count[{$EXIM_LOGFILE}," Completed$",,100,skip,]</tt></td><td></td><td></td><td>2w</td><td>90d</td>
+</tr>
+</table>
+</body>
+</html>

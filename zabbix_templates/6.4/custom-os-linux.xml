@@ -1,0 +1,3227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zabbix_export>
+    <version>6.4</version>
+    <template_groups>
+        <template_group>
+            <uuid>7df96b18c230490a9a0a9e2307226338</uuid>
+            <name>Templates</name>
+        </template_group>
+    </template_groups>
+    <templates>
+        <template>
+            <uuid>e1355a186e1c4414a8ea6969c3759400</uuid>
+            <template>Custom - OS - Linux</template>
+            <name>Custom - OS - Linux</name>
+            <description>Monitor important linux parameters</description>
+            <groups>
+                <group>
+                    <name>Templates</name>
+                </group>
+            </groups>
+            <items>
+                <item>
+                    <uuid>70b24825215f4e91b93f6f206f6b6e79</uuid>
+                    <name>Zabbix Agent Ping</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>agent.ping</key>
+                    <delay>10m</delay>
+                    <history>60d</history>
+                    <trends>0</trends>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>OS - Zabbix</value>
+                        </tag>
+                    </tags>
+                    <triggers>
+                        <trigger>
+                            <uuid>290ac57188b54fafa7bec1c2de29743f</uuid>
+                            <expression>count(/Custom - OS - Linux/agent.ping,#3,&quot;eq&quot;,&quot;0&quot;)=3</expression>
+                            <name>Zabbix Agent Ping</name>
+                            <priority>HIGH</priority>
+                            <description>Zabbix agent does not respond to a ping request in the last two calls or no information about 
+ agent-status is received in the last 30 minutes.</description>
+                        </trigger>
+                        <trigger>
+                            <uuid>682cb729000548a1a7f04b8ba5805312</uuid>
+                            <expression>nodata(/Custom - OS - Linux/agent.ping,{$MONITOR_TIMEOUT})=1</expression>
+                            <name>Zabbix Agent Ping no data for {$MONITOR_TIMEOUT} seconds</name>
+                            <priority>AVERAGE</priority>
+                            <description>No measurement information about agent-status is received in the last {$MONITOR_TIMEOUT} seconds</description>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <uuid>7cb6bc62b92144b48b087d3508de33a1</uuid>
+                    <name>Zabbix Agent Release</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>agent.version</key>
+                    <delay>60m</delay>
+                    <history>8d</history>
+                    <trends>0</trends>
+                    <value_type>TEXT</value_type>
+                    <description>The release of the zabbix agent</description>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>OS - Zabbix</value>
+                        </tag>
+                    </tags>
+                    <triggers>
+                        <trigger>
+                            <uuid>819c3cd44f1f4201b40eb104fb1c52df</uuid>
+                            <expression>find(/Custom - OS - Linux/agent.version,,&quot;like&quot;,&quot;{$ZABBIX_AGENT_RELEASE}&quot;)=0</expression>
+                            <name>Zabbix agent release {$ZABBIX_AGENT_RELEASE} &lt;&gt; {ITEM.LASTVALUE1}</name>
+                            <status>DISABLED</status>
+                            <priority>INFO</priority>
+                        </trigger>
+                        <trigger>
+                            <uuid>5b1b808dcaf14ff1969f848dd9134628</uuid>
+                            <expression>find(/Custom - OS - Linux/agent.version,,&quot;like&quot;,&quot;{$ZABBIX_AGENT_RELEASE}&quot;)=0</expression>
+                            <name>Zabbix agent release {$ZABBIX_AGENT_RELEASE} not correct</name>
+                            <status>DISABLED</status>
+                            <priority>INFO</priority>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <uuid>e69eb861330f4d919f7a44c0979bc1d9</uuid>
+                    <name>Number of process threads</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>custom.process_threads[]</key>
+                    <delay>3m</delay>
+                    <history>1w</history>
+                    <description>Total number of processes in any state.</description>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>OS - Processes</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>45470580504546579a26f2a5e61bc77c</uuid>
+                    <name>ICMP Ping</name>
+                    <type>SIMPLE</type>
+                    <key>icmpping[,1,,,]</key>
+                    <delay>2m</delay>
+                    <history>1w</history>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>OS - Health</value>
+                        </tag>
+                    </tags>
+                    <triggers>
+                        <trigger>
+                            <uuid>32028413460548499f53a40e8b7628a4</uuid>
+                            <expression>count(/Custom - OS - Linux/icmpping[,1,,,],#3,&quot;eq&quot;,&quot;0&quot;)=3</expression>
+                            <name>ICMP Ping failed 3 times</name>
+                            <priority>HIGH</priority>
+                            <description>Host is not reachable by a icmp-echo request for the last three measures or not measurement data arrived in the last 900 seconds(15min).</description>
+                            <dependencies>
+                                <dependency>
+                                    <name>ICMP Ping no data for {$MONITOR_TIMEOUT} seconds</name>
+                                    <expression>nodata(/Custom - OS - Linux/icmpping[,1,,,],{$MONITOR_TIMEOUT})=1</expression>
+                                </dependency>
+                            </dependencies>
+                        </trigger>
+                        <trigger>
+                            <uuid>36bb0e114e2f4400bea74addd40709f7</uuid>
+                            <expression>nodata(/Custom - OS - Linux/icmpping[,1,,,],{$MONITOR_TIMEOUT})=1</expression>
+                            <name>ICMP Ping no data for {$MONITOR_TIMEOUT} seconds</name>
+                            <priority>AVERAGE</priority>
+                            <description>Host is not reachable by a icmp-echo request for the last three measures or not measurement.</description>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <uuid>2f1d7af3ffb949628b24a341cb0d036e</uuid>
+                    <name>Number of maximum open file descriptors</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>kernel.maxfiles</key>
+                    <delay>1h</delay>
+                    <history>1d</history>
+                    <trends>14d</trends>
+                    <units>files</units>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>OS - Health</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>d3963f8a319f4f589fd58ff3bd38bdf0</uuid>
+                    <name>Maximum number of processes</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>kernel.maxproc</key>
+                    <delay>5m</delay>
+                    <history>1w</history>
+                    <description>Total number of possible processes.</description>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>OS - Processes</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>f3670afdf9db45e3bbee7a2ac915e817</uuid>
+                    <name>Linux Kernel Dmesg Health</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>linux.dmesg</key>
+                    <delay>5m</delay>
+                    <trends>0</trends>
+                    <value_type>TEXT</value_type>
+                    <description>Reads the output of dmesg and discovers kernel problems.</description>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>OS - Health</value>
+                        </tag>
+                    </tags>
+                    <triggers>
+                        <trigger>
+                            <uuid>f2b13663724e4bd5beba5d59af424f78</uuid>
+                            <expression>find(/Custom - OS - Linux/linux.dmesg,,&quot;like&quot;,&quot;ERROR:&quot;)=1</expression>
+                            <recovery_mode>NONE</recovery_mode>
+                            <name>OS Kernel - {ITEM.VALUE1}</name>
+                            <priority>WARNING</priority>
+                            <description>A kernel problem occurred.
+Review dmesg with the timestamps listed in the item.
+
+This trigger does not recover automatically, to get rid of this trigger, you have to use the &quot;Close problem&quot;</description>
+                            <manual_close>YES</manual_close>
+                        </trigger>
+                        <trigger>
+                            <uuid>9d755eab518e4222aaf83b2b3ee1a7c9</uuid>
+                            <expression>find(/Custom - OS - Linux/linux.dmesg,,&quot;like&quot;,&quot;ERROR:&quot;)=1</expression>
+                            <recovery_mode>NONE</recovery_mode>
+                            <name>OS Kernel problem occurred</name>
+                            <priority>WARNING</priority>
+                            <description>A kernel problem occurred.
+Review dmesg with the timestamps listed in the item.
+
+This trigger does not recover automatically, to get rid of this trigger, you have to use the &quot;Close problem&quot;</description>
+                            <manual_close>YES</manual_close>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <uuid>06642deec0f84764875313f6e0ebd89d</uuid>
+                    <name>Multipathing Device Mapping</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>linux.multipath</key>
+                    <delay>5m</delay>
+                    <history>2w</history>
+                    <trends>0</trends>
+                    <status>DISABLED</status>
+                    <value_type>TEXT</value_type>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>OS - Health</value>
+                        </tag>
+                    </tags>
+                    <triggers>
+                        <trigger>
+                            <uuid>98bbc03c3d98442cb44b39a70218bf03</uuid>
+                            <expression>find(/Custom - OS - Linux/linux.multipath,,&quot;like&quot;,&quot;ERROR&quot;)&lt;&gt;0</expression>
+                            <name>Check Multipath Maps Status</name>
+                            <priority>AVERAGE</priority>
+                            <description>Check if there are failed fiberchannel paths. Check zabbix_agent log, dmesg or &quot;multipath -ll&quot; to verify.
+ Status &quot;ERROR&quot; is reported if one or more paths are not ok.
+ 
+ example output: 
+ &quot;OK: L:6,P:15,B0&quot; 
+ &quot;ERROR: L:6,P:15,B2&quot; 
+ 
+ L: Number of LUNS
+ P: Number of paths
+ B: Number of failed paths</description>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <uuid>7d4100404b3a46629ee2a7d8b6f94174</uuid>
+                    <name>MTA Queue Total number of frozen messages</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>mailq.count.frozen</key>
+                    <delay>5m</delay>
+                    <history>14d</history>
+                    <trends>0</trends>
+                    <units>messages</units>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>OS - Misc</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>6768e1fe13bd4831aa74c2bbfb086021</uuid>
+                    <name>MTA Queue Total number of messages</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>mailq.count.general</key>
+                    <delay>5m</delay>
+                    <history>14d</history>
+                    <trends>0</trends>
+                    <units>messages</units>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>OS - Misc</value>
+                        </tag>
+                    </tags>
+                    <triggers>
+                        <trigger>
+                            <uuid>c404704351b547428fea1cdddb9f2016</uuid>
+                            <expression>avg(/Custom - OS - Linux/mailq.count.general,2h)&gt;{$MTA_MESSAGE_LIMIT} or (min(/Custom - OS - Linux/mailq.count.general,4h)&gt;min(/Custom - OS - Linux/mailq.count.general,4h:now-2h))</expression>
+                            <name>MTA Mailq Total Messages</name>
+                            <priority>WARNING</priority>
+                            <description>The local mail transfer agent exeeded the number of {$MTA_MESSAGE_LIMIT} pending messages or the queue is growing the last 8 hours</description>
+                        </trigger>
+                        <trigger>
+                            <uuid>5061037143f5483e86832329597ecbb2</uuid>
+                            <expression>avg(/Custom - OS - Linux/mailq.count.general,1200s)&gt;1500 and (avg(/Custom - OS - Linux/mailq.count.general,1200s)&gt;avg(/Custom - OS - Linux/mailq.count.general,2400s))</expression>
+                            <name>MTA Mailq Total Messages</name>
+                            <priority>WARNING</priority>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <uuid>7ab096384326498fb3164030234c82a0</uuid>
+                    <name>SMTP Server</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>net.tcp.service[smtp,,25]</key>
+                    <delay>10m</delay>
+                    <trends>90d</trends>
+                    <valuemap>
+                        <name>Service state</name>
+                    </valuemap>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>OS - Health</value>
+                        </tag>
+                    </tags>
+                    <triggers>
+                        <trigger>
+                            <uuid>6ad4a12914ac429f848ca905b8a5cfe6</uuid>
+                            <expression>count(/Custom - OS - Linux/net.tcp.service[smtp,,25],#2,&quot;eq&quot;,&quot;0&quot;)=2</expression>
+                            <name>SMTP Server</name>
+                            <priority>WARNING</priority>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <uuid>25084de2746f4ffbbd3348b08315aeb6</uuid>
+                    <name>SSH Server</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>net.tcp.service[ssh,,22]</key>
+                    <delay>5m</delay>
+                    <trends>90d</trends>
+                    <valuemap>
+                        <name>Service state</name>
+                    </valuemap>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>OS - Health</value>
+                        </tag>
+                    </tags>
+                    <triggers>
+                        <trigger>
+                            <uuid>544a4bfb93bc4d2cb11823c9ff6a2992</uuid>
+                            <expression>count(/Custom - OS - Linux/net.tcp.service[ssh,,22],#3,&quot;eq&quot;,&quot;0&quot;)=3</expression>
+                            <name>SSH server</name>
+                            <priority>AVERAGE</priority>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <uuid>3f29cf619c3140baa9c28588592a8eb6</uuid>
+                    <name>NFS RPC Calls</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>nfs.rpc.calls</key>
+                    <delay>2m</delay>
+                    <history>2w</history>
+                    <units>ops/sec</units>
+                    <description>RPC operations per second</description>
+                    <preprocessing>
+                        <step>
+                            <type>CHANGE_PER_SECOND</type>
+                            <parameters>
+                                <parameter/>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>OS - RPC/NFS</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>1b64d3c91c184734b5a88a2a4e9f5f96</uuid>
+                    <name>NFS RPC Retransmits</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>nfs.rpc.retransmits</key>
+                    <delay>2m</delay>
+                    <history>2w</history>
+                    <units>rt</units>
+                    <description>RPC retransmits in the last two minutes</description>
+                    <preprocessing>
+                        <step>
+                            <type>SIMPLE_CHANGE</type>
+                            <parameters>
+                                <parameter/>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>OS - RPC/NFS</value>
+                        </tag>
+                    </tags>
+                    <triggers>
+                        <trigger>
+                            <uuid>da08fe26cb7d4de4b4bdf4d19397abde</uuid>
+                            <expression>last(/Custom - OS - Linux/nfs.rpc.retransmits)&gt;{$MAXIMUM_NUMBER_RETRANSMISSIONS}</expression>
+                            <name>NFS Retransmissions - {ITEM.VALUE1} &gt; {$MAXIMUM_NUMBER_RETRANSMISSIONS}</name>
+                            <priority>INFO</priority>
+                        </trigger>
+                        <trigger>
+                            <uuid>8b12e95cffea4e5790598340df7fa875</uuid>
+                            <expression>last(/Custom - OS - Linux/nfs.rpc.retransmits)&gt;{$MAXIMUM_NUMBER_RETRANSMISSIONS}</expression>
+                            <name>NFS Retransmissions &gt; {$MAXIMUM_NUMBER_RETRANSMISSIONS}</name>
+                            <priority>INFO</priority>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <uuid>be2455b6235b4952a58c0df73a4e0247</uuid>
+                    <name>NTP good peer count</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>ntpd.peers.goodcount</key>
+                    <delay>10m</delay>
+                    <history>1d</history>
+                    <trends>2w</trends>
+                    <units>servers</units>
+                    <description>Number of good ntp peer servers (should be at least 3 severs).
+
+A man with one watch knows what time it is. A man with two watches is never sure.</description>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>OS - Time</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>57979f659a3d45d580713709fd07e87c</uuid>
+                    <name>NTP Primary Peer Delay</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>ntpd.primarypeer.stats[delay]</key>
+                    <delay>120s</delay>
+                    <history>5d</history>
+                    <trends>90d</trends>
+                    <value_type>FLOAT</value_type>
+                    <units>ms</units>
+                    <description>Round trip communication delay to the remote peer or server (milliseconds)</description>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>OS - Time</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>deef9d03c26e44ad8bdceca515dfd872</uuid>
+                    <name>NTP Primary Peer RMS Jitter</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>ntpd.primarypeer.stats[jitter]</key>
+                    <delay>120s</delay>
+                    <history>5d</history>
+                    <trends>90d</trends>
+                    <value_type>FLOAT</value_type>
+                    <units>ms</units>
+                    <description>Mean deviation (jitter) in the time reported for that remote peer or server (RMS of difference of multiple time samples, milliseconds)</description>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>OS - Time</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>ade169779e0a4a8c824f70c949d6447c</uuid>
+                    <name>NTP Primary Peer RMS Offset</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>ntpd.primarypeer.stats[offset]</key>
+                    <delay>120s</delay>
+                    <history>5d</history>
+                    <trends>90d</trends>
+                    <value_type>FLOAT</value_type>
+                    <units>ms</units>
+                    <description>Mean offset (phase) in the times reported between this local host and the remote peer or server (RMS, milliseconds)</description>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>OS - Time</value>
+                        </tag>
+                    </tags>
+                    <triggers>
+                        <trigger>
+                            <uuid>cce7f3012ec745109d962e57e1558c78</uuid>
+                            <expression>last(/Custom - OS - Linux/ntpd.primarypeer.stats[offset]) &gt; {$MAX_NTP_OFFSET_MS} or ((-1 * last(/Custom - OS - Linux/ntpd.primarypeer.stats[offset])) &gt; {$MAX_NTP_OFFSET_MS})</expression>
+                            <name>NTP Absolute RMS Time Offset &gt;  {$MAX_NTP_OFFSET_MS} ms</name>
+                            <priority>WARNING</priority>
+                            <description>Time difference between the host and the active ntp peer is greater than {$MAX_NTP_OFFSET}</description>
+                            <dependencies>
+                                <dependency>
+                                    <name>NTP Absolute Time RMS Offset no data</name>
+                                    <expression>nodata(/Custom - OS - Linux/ntpd.primarypeer.stats[offset],3600s)=1 and last(/Custom - OS - Linux/system.uptime)&gt;900</expression>
+                                </dependency>
+                            </dependencies>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <uuid>7f4a3f36e28a495191acb30e0377d7b0</uuid>
+                    <name>Memory in Userspace</name>
+                    <type>CALCULATED</type>
+                    <key>os.linux.memory.userspace</key>
+                    <delay>2m</delay>
+                    <history>2w</history>
+                    <units>B</units>
+                    <params>last(//vm.memory.size[total]) - last(//vm.memory.size[free]) -  last(//vm.memory.size[buffers]) - last(//vm.memory.size[cached])</params>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>OS - Memory</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>fe266c39b2364a5ab543a93490cd07b7</uuid>
+                    <name>Memory in userspace percentage</name>
+                    <type>CALCULATED</type>
+                    <key>os.linux.memory.userspace.percent</key>
+                    <delay>2m</delay>
+                    <history>2w</history>
+                    <trends>120d</trends>
+                    <value_type>FLOAT</value_type>
+                    <units>%</units>
+                    <params>(last(//vm.memory.size[total]) - last(//vm.memory.size[free]) -  last(//vm.memory.size[buffers]) - last(//vm.memory.size[cached]))  / last(//vm.memory.size[total])</params>
+                    <preprocessing>
+                        <step>
+                            <type>MULTIPLIER</type>
+                            <parameters>
+                                <parameter>100</parameter>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>OS - Memory</value>
+                        </tag>
+                    </tags>
+                    <triggers>
+                        <trigger>
+                            <uuid>aae3e30afb0044eea4130ee80a4a588b</uuid>
+                            <expression>last(/Custom - OS - Linux/os.linux.memory.userspace.percent)&gt;{$MEMORY_USERSPACE_USAGE_LIMIT}</expression>
+                            <recovery_mode>RECOVERY_EXPRESSION</recovery_mode>
+                            <recovery_expression>last(/Custom - OS - Linux/os.linux.memory.userspace.percent) &lt; ({$MEMORY_USERSPACE_USAGE_LIMIT} - 0.5)</recovery_expression>
+                            <name>Memory consumption  &gt;  {$MEMORY_USERSPACE_USAGE_LIMIT}%</name>
+                            <priority>INFO</priority>
+                            <description>Memory usage should exceeded {$MEMORY_USERSPACE_USAGE_LIMIT}.
+If memory usage of userspace processes is too high, this typically leads to bad application performance because no filesystem cache is available.</description>
+                        </trigger>
+                        <trigger>
+                            <uuid>026b26f8646e47d6b21824af13f784b4</uuid>
+                            <expression>last(/Custom - OS - Linux/os.linux.memory.userspace.percent)&gt;{$MEMORY_USERSPACE_USAGE_LIMIT}</expression>
+                            <recovery_mode>RECOVERY_EXPRESSION</recovery_mode>
+                            <recovery_expression>last(/Custom - OS - Linux/os.linux.memory.userspace.percent) &lt; ({$MEMORY_USERSPACE_USAGE_LIMIT} - 0.5)</recovery_expression>
+                            <name>Memory consumption  {ITEM.VALUE1} &gt;  {$MEMORY_USERSPACE_USAGE_LIMIT} %</name>
+                            <priority>INFO</priority>
+                            <description>Memory usage should exceeded {$MEMORY_USERSPACE_USAGE_LIMIT}.
+If memory usage of userspace processes is too high, this typically leads to bad application performance because no filesystem cache is available.</description>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <uuid>e8d2a16387654e2f96e59c0eeaa144e3</uuid>
+                    <name>Number of running processes</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>proc.num[,,run]</key>
+                    <delay>2m</delay>
+                    <history>1w</history>
+                    <description>Number of processes in running state.</description>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>OS - Processes</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>d0edfef9eef343e2b5a79d9c94ec934e</uuid>
+                    <name>Number of zombie processes</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>proc.num[,,zomb]</key>
+                    <history>1w</history>
+                    <description>Number of processes in running state.</description>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>OS - Processes</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>3e01e91d02564bb895e632e09cabbe05</uuid>
+                    <name>Cron Daemon</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>proc.num[cron,,,]</key>
+                    <delay>10m</delay>
+                    <description>Ubuntu,Debian, ...</description>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>OS - Health</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>35ca92135c814c85a793d844b1cd93b9</uuid>
+                    <name>Cron Daemon</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>proc.num[crond,,,]</key>
+                    <delay>10m</delay>
+                    <trends>0</trends>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>OS - Health</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>be97f2f8595b42099dd0c304fbaed5e8</uuid>
+                    <name>Number of processes</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>proc.num[]</key>
+                    <history>1w</history>
+                    <description>Total number of processes in any state.</description>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>OS - Processes</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>8c8bc793845b4ab99387889d2ef4ff25</uuid>
+                    <name>Interrupts per second</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>system.cpu.intr</key>
+                    <history>1w</history>
+                    <units>ips</units>
+                    <preprocessing>
+                        <step>
+                            <type>CHANGE_PER_SECOND</type>
+                            <parameters>
+                                <parameter/>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>OS - CPU Times</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>6ebf04067b1d442392994a30f838f17b</uuid>
+                    <name>System Load 5min</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>system.cpu.load[,avg5]</key>
+                    <delay>5m</delay>
+                    <value_type>FLOAT</value_type>
+                    <allowed_hosts>localhost</allowed_hosts>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>OS - Health</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>22a71708d9af4b90b4fad78d12915035</uuid>
+                    <name>CPU Count</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>system.cpu.num</key>
+                    <delay>8h</delay>
+                    <history>7d</history>
+                    <allowed_hosts>localhost</allowed_hosts>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>OS - Misc</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>dc93c1674cbe4650aac3165726c757fb</uuid>
+                    <name>CPU context switches</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>system.cpu.switches</key>
+                    <delay>5m</delay>
+                    <history>7d</history>
+                    <allowed_hosts>localhost</allowed_hosts>
+                    <units>cs/sec</units>
+                    <preprocessing>
+                        <step>
+                            <type>CHANGE_PER_SECOND</type>
+                            <parameters>
+                                <parameter/>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>OS - CPU Times</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>d9cea74cf5924c3091c1a507e41e117f</uuid>
+                    <name>CPU idle time (avg1)</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>system.cpu.util[,idle,avg1]</key>
+                    <history>7d</history>
+                    <status>DISABLED</status>
+                    <value_type>FLOAT</value_type>
+                    <units>%</units>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>OS - CPU Times</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>22f23d2a5f5848a3912d0d0ad4d55730</uuid>
+                    <name>CPU interrupt time (avg1)</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>system.cpu.util[,interrupt,avg1]</key>
+                    <history>7d</history>
+                    <value_type>FLOAT</value_type>
+                    <units>%</units>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>OS - CPU Times</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>39530c457768449f845916ae9e4984eb</uuid>
+                    <name>CPU iowait time (avg1)</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>system.cpu.util[,iowait,avg1]</key>
+                    <history>7d</history>
+                    <value_type>FLOAT</value_type>
+                    <units>%</units>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>OS - CPU Times</value>
+                        </tag>
+                    </tags>
+                    <triggers>
+                        <trigger>
+                            <uuid>d77196bd156d4a8ea11458680a8f579a</uuid>
+                            <expression>(avg(/Custom - OS - Linux/system.cpu.util[,iowait,avg1],1h))&gt;{$IOWAIT_ALERT_LIMIT}</expression>
+                            <name>CPU Usage IO Wait &gt; {$IOWAIT_ALERT_LIMIT}%</name>
+                            <priority>WARNING</priority>
+                            <description>The average of a one hour iowait cpu time is higher than 20%</description>
+                        </trigger>
+                        <trigger>
+                            <uuid>cf81b81d94984fce9e8bb7de093a541b</uuid>
+                            <expression>(avg(/Custom - OS - Linux/system.cpu.util[,iowait,avg1],1h))&gt;{$IOWAIT_ALERT_LIMIT}</expression>
+                            <name>CPU Usage IO Wait &gt; {$IOWAIT_ALERT_LIMIT}% = {ITEM.LASTVALUE1}</name>
+                            <priority>WARNING</priority>
+                            <description>The average of a one hour iowait cpu time is higher than 20%</description>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <uuid>04827643999e4a149a5cb4a8bb07b71b</uuid>
+                    <name>CPU nice time (avg1)</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>system.cpu.util[,nice,avg1]</key>
+                    <history>7d</history>
+                    <value_type>FLOAT</value_type>
+                    <units>%</units>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>OS - CPU Times</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>c8712cbdb29a4fed9e21c42339dac1d8</uuid>
+                    <name>CPU softirq time (avg1)</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>system.cpu.util[,softirq,avg1]</key>
+                    <history>7d</history>
+                    <value_type>FLOAT</value_type>
+                    <units>%</units>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>OS - CPU Times</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>2ebe8e1054e344068d6dc3a4367d08ba</uuid>
+                    <name>CPU steal time (avg1)</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>system.cpu.util[,steal,avg1]</key>
+                    <history>7d</history>
+                    <value_type>FLOAT</value_type>
+                    <units>%</units>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>OS - CPU Times</value>
+                        </tag>
+                    </tags>
+                    <triggers>
+                        <trigger>
+                            <uuid>6022a8bdf0ae4df398daa22dd9922437</uuid>
+                            <expression>(avg(/Custom - OS - Linux/system.cpu.util[,steal,avg1],10m))&gt;{$STEAL_TIME_ALERT_LIMIT}</expression>
+                            <name>CPU Steal Time &gt; {$STEAL_TIME_ALERT_LIMIT}%</name>
+                            <priority>WARNING</priority>
+                            <description>The average of a one hour iowait cpu time is higher than 20%</description>
+                        </trigger>
+                        <trigger>
+                            <uuid>0958b58453184252819cf1f7a12820bd</uuid>
+                            <expression>(avg(/Custom - OS - Linux/system.cpu.util[,steal,avg1],10m))&gt;{$STEAL_TIME_ALERT_LIMIT}</expression>
+                            <name>CPU Steal Time &gt; {$STEAL_TIME_ALERT_LIMIT}% = {ITEM.LASTVALUE1}</name>
+                            <priority>WARNING</priority>
+                            <description>The average of a one hour iowait cpu time is higher than 20%</description>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <uuid>696b684d913a4ac896ccd41f881e5282</uuid>
+                    <name>CPU system time (avg1)</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>system.cpu.util[,system,avg1]</key>
+                    <history>7d</history>
+                    <value_type>FLOAT</value_type>
+                    <units>%</units>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>OS - CPU Times</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>75f4a5ce901b4c139c5ce7d09d6b4ff7</uuid>
+                    <name>CPU user time (avg1)</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>system.cpu.util[,user,avg1]</key>
+                    <history>7d</history>
+                    <value_type>FLOAT</value_type>
+                    <units>%</units>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>OS - CPU Times</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>c21a6f8e167d40c5be0665bb0ec08c6e</uuid>
+                    <name>Swap In Pages</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>system.swap.in[,pages]</key>
+                    <delay>2m</delay>
+                    <history>2w</history>
+                    <trends>0</trends>
+                    <units>pages</units>
+                    <description>Pages moved  from SWAP to Memory</description>
+                    <preprocessing>
+                        <step>
+                            <type>SIMPLE_CHANGE</type>
+                            <parameters>
+                                <parameter/>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>OS - Memory</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>aa97f17879af409189fb08fc1c48fbd4</uuid>
+                    <name>Swap Out Pages</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>system.swap.out[,pages]</key>
+                    <delay>2m</delay>
+                    <history>2w</history>
+                    <trends>0</trends>
+                    <units>pages</units>
+                    <description>Pages moved from Memory to SWAP</description>
+                    <preprocessing>
+                        <step>
+                            <type>SIMPLE_CHANGE</type>
+                            <parameters>
+                                <parameter/>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>OS - Memory</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>c0f31f0a00894ee7a9318c3f9e816445</uuid>
+                    <name>Swap usage</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>system.swap.size[,pused]</key>
+                    <delay>5m</delay>
+                    <trends>90d</trends>
+                    <value_type>FLOAT</value_type>
+                    <units>%</units>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>OS - Memory</value>
+                        </tag>
+                    </tags>
+                    <triggers>
+                        <trigger>
+                            <uuid>92d4cc49de324c7eb792c663afeb92e4</uuid>
+                            <expression>last(/Custom - OS - Linux/system.swap.size[,pused])&gt;{$SWAP_AVERAGE_LIMIT}</expression>
+                            <name>Swap usage &gt; {$SWAP_AVERAGE_LIMIT}%</name>
+                            <priority>AVERAGE</priority>
+                            <description>System is in 90% swap. Memory usage is higher than available physical memory.</description>
+                        </trigger>
+                        <trigger>
+                            <uuid>254ff6ba0c5043e693ad23a1011f5024</uuid>
+                            <expression>last(/Custom - OS - Linux/system.swap.size[,pused])&gt;{$SWAP_WARNING_LIMIT}</expression>
+                            <name>Swap usage &gt; {$SWAP_WARNING_LIMIT}%</name>
+                            <priority>INFO</priority>
+                            <description>System is over {$SWAP_NOTIFY_LIMIT}% swap usage. Memory usage is higher than available physical memory.</description>
+                            <dependencies>
+                                <dependency>
+                                    <name>Swap usage &gt; {$SWAP_AVERAGE_LIMIT}%</name>
+                                    <expression>last(/Custom - OS - Linux/system.swap.size[,pused])&gt;{$SWAP_AVERAGE_LIMIT}</expression>
+                                </dependency>
+                            </dependencies>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <uuid>504c73f0877e47aebf2ab413cc48061b</uuid>
+                    <name>Server Uptime</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>system.uptime</key>
+                    <delay>10m</delay>
+                    <units>s</units>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>OS - Health</value>
+                        </tag>
+                    </tags>
+                    <triggers>
+                        <trigger>
+                            <uuid>095e8863acb84c64b639b199399b0320</uuid>
+                            <expression>last(/Custom - OS - Linux/system.uptime,#1)&lt;last(/Custom - OS - Linux/system.uptime,#2)</expression>
+                            <name>Server booted</name>
+                            <priority>INFO</priority>
+                            <description>Server booted</description>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <uuid>2e7d8ddd601d43fea4f1da79e74ec1ab</uuid>
+                    <name>Number of logged in users</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>system.users.num</key>
+                    <history>1w</history>
+                    <description>Number of users who are currently logged in.</description>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>OS - Misc</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>6aed6cce4e95466c9e56556038051eed</uuid>
+                    <name>Available entropy</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>vfs.file.contents[/proc/sys/kernel/random/entropy_avail]</key>
+                    <delay>5m</delay>
+                    <history>1w</history>
+                    <trends>26w</trends>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>OS - Misc</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>93b9395b3ad2494ea287fb0f86e3f952</uuid>
+                    <name>Reboot Required</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>vfs.file.exists[/var/run/reboot-required]</key>
+                    <delay>10m</delay>
+                    <trends>0</trends>
+                    <description>Indicates if a restart is required after system updates.</description>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>OS - Health</value>
+                        </tag>
+                    </tags>
+                    <triggers>
+                        <trigger>
+                            <uuid>c959496a84694c75b4ec314c786985d7</uuid>
+                            <expression>min(/Custom - OS - Linux/vfs.file.exists[/var/run/reboot-required],{$REBOOT_INFORMATION})=1</expression>
+                            <name>Reboot required</name>
+                            <priority>INFO</priority>
+                            <description>This trigger fires if a reboot is required after a system uddate.
+
+Rebooting the system is a good idea, bcause this improves security and fixes bug in installed components which cannot be reloaded by a service restart.
+(livbc-updates, kernel, ...)
+
+Remove the flagfile if you decide that no reboot is required (/var/run/reboot-required).</description>
+                            <manual_close>YES</manual_close>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <uuid>8d778ce3b8304629a5cdd3334b8028c4</uuid>
+                    <name>Number of current open file descriptors</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>vfs.file.regexp[/proc/sys/fs/file-nr,&quot;([0-9]+)\s+([0-9]+)\s+([0-9]+)&quot;,,1,2,\1]</key>
+                    <delay>240</delay>
+                    <history>3d</history>
+                    <trends>14d</trends>
+                    <units>files</units>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>OS - Health</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>53dd8aa9359a4062b2e57a9aaf0a4add</uuid>
+                    <name>Memory Available</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>vm.memory.size[available]</key>
+                    <delay>2m</delay>
+                    <history>2w</history>
+                    <units>B</units>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>OS - Memory</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>523b696d42704a0fae8f59c564911fef</uuid>
+                    <name>Memory Buffers</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>vm.memory.size[buffers]</key>
+                    <delay>2m</delay>
+                    <history>2w</history>
+                    <units>B</units>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>OS - Memory</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>e7e8bb59360041e7a16cec5170bd8b00</uuid>
+                    <name>Memory Cached</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>vm.memory.size[cached]</key>
+                    <delay>2m</delay>
+                    <history>2w</history>
+                    <units>B</units>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>OS - Memory</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>412d444ea7344438b15967146355cc81</uuid>
+                    <name>Memory Free</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>vm.memory.size[free]</key>
+                    <delay>2m</delay>
+                    <history>2w</history>
+                    <units>B</units>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>OS - Memory</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>4472f03952a644f4b79a55d362568514</uuid>
+                    <name>Memory Total</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>vm.memory.size[total]</key>
+                    <delay>10m</delay>
+                    <history>2w</history>
+                    <units>B</units>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>OS - Memory</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>2ea247b5207c4ad5b22000867232a1b4</uuid>
+                    <name>Zabbix Agent Extension Release</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>zabbix.agent_extensions.version</key>
+                    <delay>60m</delay>
+                    <history>8d</history>
+                    <trends>0</trends>
+                    <value_type>TEXT</value_type>
+                    <description>The release of the zabbix agent extensions</description>
+                    <request_method>POST</request_method>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>OS - Zabbix</value>
+                        </tag>
+                    </tags>
+                    <triggers>
+                        <trigger>
+                            <uuid>4b77f79b23a646ce8dd1b6714a67c25c</uuid>
+                            <expression>find(/Custom - OS - Linux/zabbix.agent_extensions.version,,&quot;like&quot;,&quot;{$ZABBIX_AGENT_EXTENSIONS_RELEASE}&quot;)&lt;&gt;1</expression>
+                            <name>Zabbix agent extensions release {$ZABBIX_AGENT_EXTENSIONS_RELEASE} &lt;&gt; {ITEM.LASTVALUE1}</name>
+                            <status>DISABLED</status>
+                            <priority>INFO</priority>
+                        </trigger>
+                        <trigger>
+                            <uuid>ed29608d3dfe4f9a9b3bd3ade485a559</uuid>
+                            <expression>find(/Custom - OS - Linux/zabbix.agent_extensions.version,,&quot;like&quot;,&quot;{$ZABBIX_AGENT_EXTENSIONS_RELEASE}&quot;)&lt;&gt;1</expression>
+                            <name>Zabbix agent extensions release {$ZABBIX_AGENT_EXTENSIONS_RELEASE} not correct</name>
+                            <status>DISABLED</status>
+                            <priority>INFO</priority>
+                        </trigger>
+                    </triggers>
+                </item>
+            </items>
+            <discovery_rules>
+                <discovery_rule>
+                    <uuid>d0636c9856974076bc5d48855d32970e</uuid>
+                    <name>Network interfaces discovery</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>net.if.discovery</key>
+                    <delay>1h</delay>
+                    <filter>
+                        <conditions>
+                            <condition>
+                                <macro>{#IFNAME}</macro>
+                                <value>^(eth|bond|xapi|enp|eno|vlan|em)</value>
+                                <formulaid>A</formulaid>
+                            </condition>
+                        </conditions>
+                    </filter>
+                    <lifetime>3d</lifetime>
+                    <description>Discovery of network interfaces</description>
+                    <item_prototypes>
+                        <item_prototype>
+                            <uuid>e17a6295d7f04a27aa44a0fc95bd42b5</uuid>
+                            <name>Net {#IFNAME} Bits In</name>
+                            <type>ZABBIX_ACTIVE</type>
+                            <key>net.if.in[{#IFNAME},bytes]</key>
+                            <delay>5m</delay>
+                            <history>30d</history>
+                            <units>bits/sec</units>
+                            <preprocessing>
+                                <step>
+                                    <type>CHANGE_PER_SECOND</type>
+                                    <parameters>
+                                        <parameter/>
+                                    </parameters>
+                                </step>
+                                <step>
+                                    <type>MULTIPLIER</type>
+                                    <parameters>
+                                        <parameter>8</parameter>
+                                    </parameters>
+                                </step>
+                            </preprocessing>
+                            <request_method>POST</request_method>
+                            <tags>
+                                <tag>
+                                    <tag>Application</tag>
+                                    <value>OS - Net</value>
+                                </tag>
+                            </tags>
+                        </item_prototype>
+                        <item_prototype>
+                            <uuid>2a89b0c9820d4b46b3f9df161e2fb036</uuid>
+                            <name>Net $1 Errors In</name>
+                            <type>ZABBIX_ACTIVE</type>
+                            <key>net.if.in[{#IFNAME},errors]</key>
+                            <delay>5m</delay>
+                            <units>e/sec</units>
+                            <preprocessing>
+                                <step>
+                                    <type>CHANGE_PER_SECOND</type>
+                                    <parameters>
+                                        <parameter/>
+                                    </parameters>
+                                </step>
+                            </preprocessing>
+                            <request_method>POST</request_method>
+                            <tags>
+                                <tag>
+                                    <tag>Application</tag>
+                                    <value>OS - Net</value>
+                                </tag>
+                            </tags>
+                        </item_prototype>
+                        <item_prototype>
+                            <uuid>dbb6fba43d9444869694f4417ecc2843</uuid>
+                            <name>Net {#IFNAME} Packets In</name>
+                            <type>ZABBIX_ACTIVE</type>
+                            <key>net.if.in[{#IFNAME},packets]</key>
+                            <delay>5m</delay>
+                            <history>30d</history>
+                            <units>pkg/sec</units>
+                            <preprocessing>
+                                <step>
+                                    <type>CHANGE_PER_SECOND</type>
+                                    <parameters>
+                                        <parameter/>
+                                    </parameters>
+                                </step>
+                            </preprocessing>
+                            <request_method>POST</request_method>
+                            <tags>
+                                <tag>
+                                    <tag>Application</tag>
+                                    <value>OS - Net</value>
+                                </tag>
+                            </tags>
+                        </item_prototype>
+                        <item_prototype>
+                            <uuid>8041e788388f47cab1e2a967b83504ab</uuid>
+                            <name>Net {#IFNAME} Bits Out</name>
+                            <type>ZABBIX_ACTIVE</type>
+                            <key>net.if.out[{#IFNAME},bytes]</key>
+                            <delay>5m</delay>
+                            <history>30d</history>
+                            <units>bits/sec</units>
+                            <preprocessing>
+                                <step>
+                                    <type>CHANGE_PER_SECOND</type>
+                                    <parameters>
+                                        <parameter/>
+                                    </parameters>
+                                </step>
+                                <step>
+                                    <type>MULTIPLIER</type>
+                                    <parameters>
+                                        <parameter>8</parameter>
+                                    </parameters>
+                                </step>
+                            </preprocessing>
+                            <request_method>POST</request_method>
+                            <tags>
+                                <tag>
+                                    <tag>Application</tag>
+                                    <value>OS - Net</value>
+                                </tag>
+                            </tags>
+                        </item_prototype>
+                        <item_prototype>
+                            <uuid>a1463c166cf44a86b1c7e04f85e78104</uuid>
+                            <name>Net $1 Errors Out</name>
+                            <type>ZABBIX_ACTIVE</type>
+                            <key>net.if.out[{#IFNAME},errors]</key>
+                            <delay>5m</delay>
+                            <units>e/sec</units>
+                            <preprocessing>
+                                <step>
+                                    <type>CHANGE_PER_SECOND</type>
+                                    <parameters>
+                                        <parameter/>
+                                    </parameters>
+                                </step>
+                            </preprocessing>
+                            <request_method>POST</request_method>
+                            <tags>
+                                <tag>
+                                    <tag>Application</tag>
+                                    <value>OS - Net</value>
+                                </tag>
+                            </tags>
+                        </item_prototype>
+                        <item_prototype>
+                            <uuid>1b02ed20c43e413582da78a5ef7dd238</uuid>
+                            <name>Net {#IFNAME} Packets Out</name>
+                            <type>ZABBIX_ACTIVE</type>
+                            <key>net.if.out[{#IFNAME},packets]</key>
+                            <delay>5m</delay>
+                            <history>30d</history>
+                            <units>pkg/sec</units>
+                            <preprocessing>
+                                <step>
+                                    <type>CHANGE_PER_SECOND</type>
+                                    <parameters>
+                                        <parameter/>
+                                    </parameters>
+                                </step>
+                            </preprocessing>
+                            <request_method>POST</request_method>
+                            <tags>
+                                <tag>
+                                    <tag>Application</tag>
+                                    <value>OS - Net</value>
+                                </tag>
+                            </tags>
+                        </item_prototype>
+                    </item_prototypes>
+                    <trigger_prototypes>
+                        <trigger_prototype>
+                            <uuid>2cc5dbbd939e46c9a20c7fd464bc18b3</uuid>
+                            <expression>((last(/Custom - OS - Linux/net.if.in[{#IFNAME},errors])&gt;0) or (last(/Custom - OS - Linux/net.if.out[{#IFNAME},errors])&gt;{$MAX_NETWORK_ERRORS_PERIOD}))</expression>
+                            <name>Interface {#IFNAME} errors occured</name>
+                            <priority>WARNING</priority>
+                            <description>There are interface errors, check your network equipment</description>
+                        </trigger_prototype>
+                        <trigger_prototype>
+                            <uuid>6442741bac514d11a6c4a2e0fe0aaa2b</uuid>
+                            <expression>((last(/Custom - OS - Linux/net.if.in[{#IFNAME},errors])&gt;0) or (last(/Custom - OS - Linux/net.if.out[{#IFNAME},errors])&gt;0))</expression>
+                            <name>Interface {#IFNAME} errors occurred</name>
+                            <priority>WARNING</priority>
+                            <description>There are interface errors, check your network equipment</description>
+                        </trigger_prototype>
+                    </trigger_prototypes>
+                    <graph_prototypes>
+                        <graph_prototype>
+                            <uuid>b36439ced63242acaced8260f030fc0e</uuid>
+                            <name>Interface {#IFNAME} bits</name>
+                            <type>STACKED</type>
+                            <ymin_type_1>FIXED</ymin_type_1>
+                            <graph_items>
+                                <graph_item>
+                                    <color>00BBBB</color>
+                                    <calc_fnc>MAX</calc_fnc>
+                                    <item>
+                                        <host>Custom - OS - Linux</host>
+                                        <key>net.if.in[{#IFNAME},bytes]</key>
+                                    </item>
+                                </graph_item>
+                                <graph_item>
+                                    <sortorder>1</sortorder>
+                                    <color>BB00BB</color>
+                                    <calc_fnc>MAX</calc_fnc>
+                                    <item>
+                                        <host>Custom - OS - Linux</host>
+                                        <key>net.if.out[{#IFNAME},bytes]</key>
+                                    </item>
+                                </graph_item>
+                            </graph_items>
+                        </graph_prototype>
+                        <graph_prototype>
+                            <uuid>0f435102631c472188d583771f50584f</uuid>
+                            <name>Interface {#IFNAME} errors</name>
+                            <type>STACKED</type>
+                            <ymin_type_1>FIXED</ymin_type_1>
+                            <graph_items>
+                                <graph_item>
+                                    <color>00BBBB</color>
+                                    <calc_fnc>MAX</calc_fnc>
+                                    <item>
+                                        <host>Custom - OS - Linux</host>
+                                        <key>net.if.in[{#IFNAME},errors]</key>
+                                    </item>
+                                </graph_item>
+                                <graph_item>
+                                    <sortorder>1</sortorder>
+                                    <color>BB00BB</color>
+                                    <calc_fnc>MAX</calc_fnc>
+                                    <item>
+                                        <host>Custom - OS - Linux</host>
+                                        <key>net.if.out[{#IFNAME},errors]</key>
+                                    </item>
+                                </graph_item>
+                            </graph_items>
+                        </graph_prototype>
+                        <graph_prototype>
+                            <uuid>965c7cc5135040e6842ce5d157331f03</uuid>
+                            <name>Interface {#IFNAME} packets</name>
+                            <type>STACKED</type>
+                            <ymin_type_1>FIXED</ymin_type_1>
+                            <graph_items>
+                                <graph_item>
+                                    <color>00BBBB</color>
+                                    <calc_fnc>MAX</calc_fnc>
+                                    <item>
+                                        <host>Custom - OS - Linux</host>
+                                        <key>net.if.in[{#IFNAME},packets]</key>
+                                    </item>
+                                </graph_item>
+                                <graph_item>
+                                    <sortorder>1</sortorder>
+                                    <color>BB00BB</color>
+                                    <calc_fnc>MAX</calc_fnc>
+                                    <item>
+                                        <host>Custom - OS - Linux</host>
+                                        <key>net.if.out[{#IFNAME},packets]</key>
+                                    </item>
+                                </graph_item>
+                            </graph_items>
+                        </graph_prototype>
+                    </graph_prototypes>
+                    <request_method>POST</request_method>
+                </discovery_rule>
+                <discovery_rule>
+                    <uuid>e681e16363464fbf9a7af5311fbeef11</uuid>
+                    <name>Block Device discovery</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>vfs.dev.discovery</key>
+                    <delay>1h</delay>
+                    <filter>
+                        <conditions>
+                            <condition>
+                                <macro>{#BLOCKDEVICE}</macro>
+                                <value>^.*</value>
+                                <formulaid>A</formulaid>
+                            </condition>
+                        </conditions>
+                    </filter>
+                    <lifetime>3d</lifetime>
+                    <description>Discovery of disks.</description>
+                    <item_prototypes>
+                        <item_prototype>
+                            <uuid>327ca3f691fc4fdcb591edacc5bffc22</uuid>
+                            <name>Disk {#BLOCKDEVICE} Read IOPS</name>
+                            <type>ZABBIX_ACTIVE</type>
+                            <key>vfs.dev.read[{#BLOCKDEVICE},ops,avg1]</key>
+                            <history>2w</history>
+                            <trends>90d</trends>
+                            <value_type>FLOAT</value_type>
+                            <units>iops</units>
+                            <request_method>POST</request_method>
+                            <tags>
+                                <tag>
+                                    <tag>Application</tag>
+                                    <value>OS - Disk Performance</value>
+                                </tag>
+                            </tags>
+                        </item_prototype>
+                        <item_prototype>
+                            <uuid>cc627ff39f224c0282b794665f98af67</uuid>
+                            <name>Disk {#BLOCKDEVICE} Read SPS</name>
+                            <type>ZABBIX_ACTIVE</type>
+                            <key>vfs.dev.read[{#BLOCKDEVICE},sps,avg1]</key>
+                            <history>2w</history>
+                            <trends>90d</trends>
+                            <value_type>FLOAT</value_type>
+                            <units>sps</units>
+                            <request_method>POST</request_method>
+                            <tags>
+                                <tag>
+                                    <tag>Application</tag>
+                                    <value>OS - Disk Performance</value>
+                                </tag>
+                            </tags>
+                        </item_prototype>
+                        <item_prototype>
+                            <uuid>9803cf323ddd4002a802c1ab7dd986c6</uuid>
+                            <name>Disk {#BLOCKDEVICE} Write IOPS</name>
+                            <type>ZABBIX_ACTIVE</type>
+                            <key>vfs.dev.write[{#BLOCKDEVICE},ops,avg1]</key>
+                            <history>2w</history>
+                            <trends>90d</trends>
+                            <value_type>FLOAT</value_type>
+                            <units>iops</units>
+                            <request_method>POST</request_method>
+                            <tags>
+                                <tag>
+                                    <tag>Application</tag>
+                                    <value>OS - Disk Performance</value>
+                                </tag>
+                            </tags>
+                            <trigger_prototypes>
+                                <trigger_prototype>
+                                    <uuid>2799ac0d1109447cb7cc790d967b0130</uuid>
+                                    <expression>avg(/Custom - OS - Linux/vfs.dev.write[{#BLOCKDEVICE},ops,avg1],{$DISK_IOPS_LIMIT_MEASURES})&gt; {$DISK_HIGH_WRITE_IOPS_LIMIT}</expression>
+                                    <recovery_mode>RECOVERY_EXPRESSION</recovery_mode>
+                                    <recovery_expression>avg(/Custom - OS - Linux/vfs.dev.write[{#BLOCKDEVICE},ops,avg1],{$DISK_IOPS_LIMIT_MEASURES})&lt;(0.75* {$DISK_HIGH_WRITE_IOPS_LIMIT})</recovery_expression>
+                                    <name>Blockdevice {#BLOCKDEVICE} write limit {$DISK_HIGH_WRITE_IOPS_LIMIT}/sec reached</name>
+                                    <priority>INFO</priority>
+                                    <description>This trigger alerts disks which are consuming more than the configured IOPs limit. You can use this to discover systems high high write rates.</description>
+                                </trigger_prototype>
+                            </trigger_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <uuid>ce8cacbefb3f4ea4890d1ef08552fcac</uuid>
+                            <name>Disk {#BLOCKDEVICE} Write SPS</name>
+                            <type>ZABBIX_ACTIVE</type>
+                            <key>vfs.dev.write[{#BLOCKDEVICE},sps,avg1]</key>
+                            <history>2w</history>
+                            <trends>90d</trends>
+                            <value_type>FLOAT</value_type>
+                            <units>sps</units>
+                            <request_method>POST</request_method>
+                            <tags>
+                                <tag>
+                                    <tag>Application</tag>
+                                    <value>OS - Disk Performance</value>
+                                </tag>
+                            </tags>
+                        </item_prototype>
+                    </item_prototypes>
+                    <trigger_prototypes>
+                        <trigger_prototype>
+                            <uuid>ab29cfc6b11742a6be979b92dfd82306</uuid>
+                            <expression>avg(/Custom - OS - Linux/vfs.dev.read[{#BLOCKDEVICE},ops,avg1],{$DISK_IOPS_LIMIT_MEASURES})&gt; {$DISK_HIGH_READ_IOPS_LIMIT}</expression>
+                            <recovery_mode>RECOVERY_EXPRESSION</recovery_mode>
+                            <recovery_expression>avg(/Custom - OS - Linux/vfs.dev.write[{#BLOCKDEVICE},ops,avg1],{$DISK_IOPS_LIMIT_MEASURES})&lt;(0.75* {$DISK_HIGH_READ_IOPS_LIMIT})</recovery_expression>
+                            <name>Blockdevice {#BLOCKDEVICE} read limit {$DISK_HIGH_READ_IOPS_LIMIT}/sec reached</name>
+                            <priority>INFO</priority>
+                            <description>This trigger alerts disks which are consuming more than the configured IOPs limit. You can use this to discover systems high high read rates.</description>
+                        </trigger_prototype>
+                    </trigger_prototypes>
+                    <graph_prototypes>
+                        <graph_prototype>
+                            <uuid>5d2d3611b28b4cccbf21a90f2bd69086</uuid>
+                            <name>Blockdevice {#BLOCKDEVICE} IOPS</name>
+                            <height>300</height>
+                            <type>STACKED</type>
+                            <ymin_type_1>FIXED</ymin_type_1>
+                            <graph_items>
+                                <graph_item>
+                                    <color>00C800</color>
+                                    <calc_fnc>MAX</calc_fnc>
+                                    <item>
+                                        <host>Custom - OS - Linux</host>
+                                        <key>vfs.dev.read[{#BLOCKDEVICE},ops,avg1]</key>
+                                    </item>
+                                </graph_item>
+                                <graph_item>
+                                    <sortorder>1</sortorder>
+                                    <color>C80000</color>
+                                    <calc_fnc>MAX</calc_fnc>
+                                    <item>
+                                        <host>Custom - OS - Linux</host>
+                                        <key>vfs.dev.write[{#BLOCKDEVICE},ops,avg1]</key>
+                                    </item>
+                                </graph_item>
+                            </graph_items>
+                        </graph_prototype>
+                        <graph_prototype>
+                            <uuid>34bd43f48aaf4c019967dbcd1cf236ad</uuid>
+                            <name>Blockdevice {#BLOCKDEVICE} SPS</name>
+                            <height>300</height>
+                            <type>STACKED</type>
+                            <ymin_type_1>FIXED</ymin_type_1>
+                            <graph_items>
+                                <graph_item>
+                                    <color>00C800</color>
+                                    <calc_fnc>MAX</calc_fnc>
+                                    <item>
+                                        <host>Custom - OS - Linux</host>
+                                        <key>vfs.dev.read[{#BLOCKDEVICE},sps,avg1]</key>
+                                    </item>
+                                </graph_item>
+                                <graph_item>
+                                    <sortorder>1</sortorder>
+                                    <color>DD0000</color>
+                                    <calc_fnc>MAX</calc_fnc>
+                                    <item>
+                                        <host>Custom - OS - Linux</host>
+                                        <key>vfs.dev.write[{#BLOCKDEVICE},sps,avg1]</key>
+                                    </item>
+                                </graph_item>
+                            </graph_items>
+                        </graph_prototype>
+                    </graph_prototypes>
+                    <request_method>POST</request_method>
+                </discovery_rule>
+                <discovery_rule>
+                    <uuid>90986d047269451c860d05b15d41ec42</uuid>
+                    <name>Software RAID discovery</name>
+                    <key>vfs.dev.discovery.softwareraid</key>
+                    <delay>1h</delay>
+                    <lifetime>14d</lifetime>
+                    <item_prototypes>
+                        <item_prototype>
+                            <uuid>fde7ffb203aa49dca5be0cfe8103c8a2</uuid>
+                            <name>{#RAIDLEVEL} {#BLOCKDEVICE} Degraded</name>
+                            <type>ZABBIX_ACTIVE</type>
+                            <key>vfs.file.contents[/sys/block/{#BLOCKDEVICE}/md/degraded]</key>
+                            <delay>5m</delay>
+                            <trends>0</trends>
+                            <tags>
+                                <tag>
+                                    <tag>Application</tag>
+                                    <value>OS - Disks</value>
+                                </tag>
+                            </tags>
+                            <trigger_prototypes>
+                                <trigger_prototype>
+                                    <uuid>5f92473770f144848f3a4d9e7512921e</uuid>
+                                    <expression>last(/Custom - OS - Linux/vfs.file.contents[/sys/block/{#BLOCKDEVICE}/md/degraded])&lt;&gt;0</expression>
+                                    <name>{#RAIDLEVEL} {#BLOCKDEVICE} Degraded</name>
+                                    <priority>AVERAGE</priority>
+                                </trigger_prototype>
+                            </trigger_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <uuid>818148d31ddb43109a0b44c0bdb21936</uuid>
+                            <name>{#RAIDLEVEL} {#BLOCKDEVICE} SyncAction</name>
+                            <type>ZABBIX_ACTIVE</type>
+                            <key>vfs.file.contents[/sys/block/{#BLOCKDEVICE}/md/sync_action]</key>
+                            <delay>5m</delay>
+                            <trends>0</trends>
+                            <value_type>TEXT</value_type>
+                            <tags>
+                                <tag>
+                                    <tag>Application</tag>
+                                    <value>OS - Disks</value>
+                                </tag>
+                            </tags>
+                            <trigger_prototypes>
+                                <trigger_prototype>
+                                    <uuid>13d9c6207ec64263bda7d447cc9fec3f</uuid>
+                                    <expression>find(/Custom - OS - Linux/vfs.file.contents[/sys/block/{#BLOCKDEVICE}/md/sync_action],,&quot;like&quot;,&quot;idle&quot;)&lt;&gt;1</expression>
+                                    <name>{#RAIDLEVEL} {#BLOCKDEVICE} SyncActivity in Progress</name>
+                                    <priority>INFO</priority>
+                                </trigger_prototype>
+                            </trigger_prototypes>
+                        </item_prototype>
+                    </item_prototypes>
+                </discovery_rule>
+                <discovery_rule>
+                    <uuid>af8c61192f0d4676874a2e3120bbda62</uuid>
+                    <name>Filesystems discovery</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>vfs.fs.discovery</key>
+                    <delay>10m</delay>
+                    <filter>
+                        <conditions>
+                            <condition>
+                                <macro>{#FSTYPE}</macro>
+                                <value>^(xfs|ext2|ext3|jfs|reiserfs|ext4|btrfs)</value>
+                                <formulaid>A</formulaid>
+                            </condition>
+                        </conditions>
+                    </filter>
+                    <lifetime>3d</lifetime>
+                    <description>Discovery of filesystems</description>
+                    <item_prototypes>
+                        <item_prototype>
+                            <uuid>44360a5023f64a58a5674992cb32a3cb</uuid>
+                            <name>Disk {#FSNAME} inode free</name>
+                            <type>ZABBIX_ACTIVE</type>
+                            <key>vfs.fs.inode[{#FSNAME},free]</key>
+                            <delay>600s</delay>
+                            <history>7d</history>
+                            <units>i</units>
+                            <request_method>POST</request_method>
+                            <tags>
+                                <tag>
+                                    <tag>Application</tag>
+                                    <value>OS - Storage</value>
+                                </tag>
+                            </tags>
+                        </item_prototype>
+                        <item_prototype>
+                            <uuid>7f5dbf6b9435451887ac393cae68e428</uuid>
+                            <name>Disk {#FSNAME} inode use percentage</name>
+                            <type>ZABBIX_ACTIVE</type>
+                            <key>vfs.fs.inode[{#FSNAME},pused]</key>
+                            <delay>600s</delay>
+                            <history>7d</history>
+                            <value_type>FLOAT</value_type>
+                            <units>%</units>
+                            <request_method>POST</request_method>
+                            <tags>
+                                <tag>
+                                    <tag>Application</tag>
+                                    <value>OS - Storage</value>
+                                </tag>
+                            </tags>
+                            <trigger_prototypes>
+                                <trigger_prototype>
+                                    <uuid>12342c4aeb6840218d7b4092b9d7bd06</uuid>
+                                    <expression>last(/Custom - OS - Linux/vfs.fs.inode[{#FSNAME},pused])&gt;{$DISK_USAGE_PERCENT_ALARM}</expression>
+                                    <name>Filesystem inode usage for {#FSNAME} &gt; {$DISK_USAGE_PERCENT_ALARM}%</name>
+                                    <priority>AVERAGE</priority>
+                                    <description>Partition is running out of inodes. The volume contains to much files. Please increase volume size, delete unnecessary files and inform application owner.</description>
+                                </trigger_prototype>
+                                <trigger_prototype>
+                                    <uuid>9e3f145e225e4b398be5705b79c19aa5</uuid>
+                                    <expression>last(/Custom - OS - Linux/vfs.fs.inode[{#FSNAME},pused])&gt;{$DISK_USAGE_PERCENT_WARN}</expression>
+                                    <name>Filesystem inode WARNING usage for {#FSNAME} &gt; {$DISK_USAGE_PERCENT_WARN}%</name>
+                                    <priority>WARNING</priority>
+                                    <description>Partition is running out of inodes. The volume contains to much files. Please increase volume size, delete unnecessary files and inform application owner.</description>
+                                    <dependencies>
+                                        <dependency>
+                                            <name>Filesystem inode usage for {#FSNAME} &gt; {$DISK_USAGE_PERCENT_ALARM}%</name>
+                                            <expression>last(/Custom - OS - Linux/vfs.fs.inode[{#FSNAME},pused])&gt;{$DISK_USAGE_PERCENT_ALARM}</expression>
+                                        </dependency>
+                                    </dependencies>
+                                </trigger_prototype>
+                            </trigger_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <uuid>491ec5f8c6b04aaa80e6a4b9b42afe9d</uuid>
+                            <name>Disk {#FSNAME} inode total</name>
+                            <type>ZABBIX_ACTIVE</type>
+                            <key>vfs.fs.inode[{#FSNAME},total]</key>
+                            <delay>1h</delay>
+                            <history>2d</history>
+                            <units>i</units>
+                            <request_method>POST</request_method>
+                            <tags>
+                                <tag>
+                                    <tag>Application</tag>
+                                    <value>OS - Storage</value>
+                                </tag>
+                            </tags>
+                        </item_prototype>
+                        <item_prototype>
+                            <uuid>239d9f431e244aacb289f3e8ba666ea9</uuid>
+                            <name>Disk {#FSNAME} inode usage</name>
+                            <type>ZABBIX_ACTIVE</type>
+                            <key>vfs.fs.inode[{#FSNAME},used]</key>
+                            <delay>600s</delay>
+                            <history>7d</history>
+                            <units>i</units>
+                            <request_method>POST</request_method>
+                            <tags>
+                                <tag>
+                                    <tag>Application</tag>
+                                    <value>OS - Storage</value>
+                                </tag>
+                            </tags>
+                        </item_prototype>
+                        <item_prototype>
+                            <uuid>afb54ebd694e4271b16e7223441265dc</uuid>
+                            <name>Disk {#FSNAME} space free</name>
+                            <type>ZABBIX_ACTIVE</type>
+                            <key>vfs.fs.size[{#FSNAME},free]</key>
+                            <delay>600s</delay>
+                            <history>7d</history>
+                            <units>B</units>
+                            <request_method>POST</request_method>
+                            <tags>
+                                <tag>
+                                    <tag>Application</tag>
+                                    <value>OS - Storage</value>
+                                </tag>
+                            </tags>
+                        </item_prototype>
+                        <item_prototype>
+                            <uuid>806175a36f7a45bcb258b6bf0f488f9a</uuid>
+                            <name>Disk {#FSNAME} size use percentage</name>
+                            <type>ZABBIX_ACTIVE</type>
+                            <key>vfs.fs.size[{#FSNAME},pused]</key>
+                            <delay>600s</delay>
+                            <history>7d</history>
+                            <value_type>FLOAT</value_type>
+                            <units>%</units>
+                            <request_method>POST</request_method>
+                            <tags>
+                                <tag>
+                                    <tag>Application</tag>
+                                    <value>OS - Storage</value>
+                                </tag>
+                            </tags>
+                        </item_prototype>
+                        <item_prototype>
+                            <uuid>d4ebcc491d434791bad6e75144d86ad1</uuid>
+                            <name>Disk {#FSNAME} space remaining time (2 days)</name>
+                            <type>CALCULATED</type>
+                            <key>vfs.fs.size[{#FSNAME},remaining_time]</key>
+                            <delay>8h</delay>
+                            <history>7d</history>
+                            <units>s</units>
+                            <params>timeleft(//vfs.fs.size[{#FSNAME},free],2d,0)</params>
+                            <request_method>POST</request_method>
+                            <tags>
+                                <tag>
+                                    <tag>Application</tag>
+                                    <value>OS - Storage</value>
+                                </tag>
+                            </tags>
+                            <trigger_prototypes>
+                                <trigger_prototype>
+                                    <uuid>0e1286da7d414edfbbf93ea69dbeed28</uuid>
+                                    <expression>last(/Custom - OS - Linux/vfs.fs.size[{#FSNAME},remaining_time]) &lt; 86400*3</expression>
+                                    <name>Filesystem space {#FSNAME}  - full in 3 days</name>
+                                    <priority>INFO</priority>
+                                    <description>According to the growth of the last two days the disk will be full in 3 days</description>
+                                </trigger_prototype>
+                            </trigger_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <uuid>d7259b7f74f14936bc84f3f4391cb243</uuid>
+                            <name>Disk {#FSNAME} space total</name>
+                            <type>ZABBIX_ACTIVE</type>
+                            <key>vfs.fs.size[{#FSNAME},total]</key>
+                            <delay>1h</delay>
+                            <history>2d</history>
+                            <units>B</units>
+                            <request_method>POST</request_method>
+                            <tags>
+                                <tag>
+                                    <tag>Application</tag>
+                                    <value>OS - Storage</value>
+                                </tag>
+                            </tags>
+                        </item_prototype>
+                        <item_prototype>
+                            <uuid>24a560cec8b2480da3e406554b3c3c38</uuid>
+                            <name>Disk {#FSNAME} space usage</name>
+                            <type>ZABBIX_ACTIVE</type>
+                            <key>vfs.fs.size[{#FSNAME},used]</key>
+                            <delay>600s</delay>
+                            <history>7d</history>
+                            <units>B</units>
+                            <request_method>POST</request_method>
+                            <tags>
+                                <tag>
+                                    <tag>Application</tag>
+                                    <value>OS - Storage</value>
+                                </tag>
+                            </tags>
+                        </item_prototype>
+                    </item_prototypes>
+                    <trigger_prototypes>
+                        <trigger_prototype>
+                            <uuid>71214d5d3c8d40d5ba70b71241ce5292</uuid>
+                            <expression>(last(/Custom - OS - Linux/vfs.fs.size[{#FSNAME},free]) &lt;  ({$DISK_USAGE_ABOVE_1TB_MINFREE_GBYTES_ALARM} * 1073741824)) and (last(/Custom - OS - Linux/vfs.fs.size[{#FSNAME},total])&gt;=1099511627776)</expression>
+                            <name>Filesystem space {#FSNAME} free space &lt;  {$DISK_USAGE_ABOVE_1TB_MINFREE_GBYTES_ALARM}GB ({#FSNAME} &gt; 1TB)</name>
+                            <priority>AVERAGE</priority>
+                            <description>Partition is running out of space. The volume contains to much data. Please increase volume size, delete unnecessary files or inform application owner.
+
+Filesystem smaller than 1TB are alarmed if the precentage specified by {$DISK_USAGE_PERCENT_ALARM} is reached.
+
+Filesystem greater that 1TB are alarmed if the free space of the partion is lower than {$DISK_USAGE_ABOVE_1TB_MINFREE_GBYTES} gigagbytes.</description>
+                        </trigger_prototype>
+                        <trigger_prototype>
+                            <uuid>9240071825b74423a4674852e7e3e2f7</uuid>
+                            <expression>(last(/Custom - OS - Linux/vfs.fs.size[{#FSNAME},free]) &lt;  ({$DISK_USAGE_ABOVE_1TB_MINFREE_GBYTES_WARN} * 1073741824)) and (last(/Custom - OS - Linux/vfs.fs.size[{#FSNAME},total])&gt;=1099511627776)</expression>
+                            <name>Filesystem space {#FSNAME} free space &lt;  {$DISK_USAGE_ABOVE_1TB_MINFREE_GBYTES_WARN}GB ({#FSNAME} &gt; 1TB)  free</name>
+                            <priority>WARNING</priority>
+                            <description>Partition is running out of space. The volume contains to much data. Please increase volume size, delete unnecessary files or inform application owner.
+
+Filesystem smaller than 1TB are alarmed if the precentage specified by {$DISK_USAGE_PERCENT_ALARM} is reached.
+
+Filesystem greater that 1TB are alarmed if the free space of the partion is lower than {$DISK_USAGE_ABOVE_1TB_MINFREE_GBYTES} gigagbytes.</description>
+                            <dependencies>
+                                <dependency>
+                                    <name>Filesystem space {#FSNAME} free space &lt;  {$DISK_USAGE_ABOVE_1TB_MINFREE_GBYTES_ALARM}GB ({#FSNAME} &gt; 1TB)</name>
+                                    <expression>(last(/Custom - OS - Linux/vfs.fs.size[{#FSNAME},free]) &lt;  ({$DISK_USAGE_ABOVE_1TB_MINFREE_GBYTES_ALARM} * 1073741824)) and (last(/Custom - OS - Linux/vfs.fs.size[{#FSNAME},total])&gt;=1099511627776)</expression>
+                                </dependency>
+                            </dependencies>
+                        </trigger_prototype>
+                        <trigger_prototype>
+                            <uuid>cb243f46c38441bd98bead9f9935514f</uuid>
+                            <expression>(last(/Custom - OS - Linux/vfs.fs.size[{#FSNAME},pused])&gt;{$DISK_USAGE_PERCENT_ALARM} and last(/Custom - OS - Linux/vfs.fs.size[{#FSNAME},total])&lt;1099511627776)</expression>
+                            <name>Filesystem space {#FSNAME} usage &gt; {$DISK_USAGE_PERCENT_ALARM}% ({#FSNAME} &lt; 1TB)</name>
+                            <priority>AVERAGE</priority>
+                            <description>Partition is running out of space. The volume contains to much data. Please increase volume size, delete unnecessary files or inform application owner.
+
+Filesystem smaller than 1TB are alarmed if the precentage specified by {$DISK_USAGE_PERCENT_ALARM} is reached.
+
+Filesystem greater that 1TB are alarmed if the free space of the partion is lower than {$DISK_USAGE_ABOVE_1TB_MINFREE_GBYTES} gigagbytes.</description>
+                        </trigger_prototype>
+                        <trigger_prototype>
+                            <uuid>0e21c86a89b14d479d5056ba1ca5f449</uuid>
+                            <expression>(last(/Custom - OS - Linux/vfs.fs.size[{#FSNAME},pused])&gt;{$DISK_USAGE_PERCENT_WARN} and last(/Custom - OS - Linux/vfs.fs.size[{#FSNAME},total])&lt;1099511627776)</expression>
+                            <name>Filesystem space {#FSNAME} usage &gt; {$DISK_USAGE_PERCENT_WARN}% ({#FSNAME} &lt; 1TB)</name>
+                            <priority>WARNING</priority>
+                            <description>Partition is running out of space. The volume contains to much data. Please increase volume size, delete unnecessary files or inform application owner.
+
+Filesystem smaller than 1TB are alarmed if the precentage specified by {$DISK_USAGE_PERCENT_ALARM} is reached.
+
+Filesystem greater that 1TB are alarmed if the free space of the partion is lower than {$DISK_USAGE_ABOVE_1TB_MINFREE_GBYTES} gigagbytes.</description>
+                            <dependencies>
+                                <dependency>
+                                    <name>Filesystem space {#FSNAME} usage &gt; {$DISK_USAGE_PERCENT_ALARM}% ({#FSNAME} &lt; 1TB)</name>
+                                    <expression>(last(/Custom - OS - Linux/vfs.fs.size[{#FSNAME},pused])&gt;{$DISK_USAGE_PERCENT_ALARM} and last(/Custom - OS - Linux/vfs.fs.size[{#FSNAME},total])&lt;1099511627776)</expression>
+                                </dependency>
+                            </dependencies>
+                        </trigger_prototype>
+                    </trigger_prototypes>
+                    <graph_prototypes>
+                        <graph_prototype>
+                            <uuid>c0107fae2a2f4c1fa911f74c89270fc6</uuid>
+                            <name>Filesystem {#FSNAME} inode usage</name>
+                            <height>300</height>
+                            <graph_items>
+                                <graph_item>
+                                    <color>DD00DD</color>
+                                    <calc_fnc>MAX</calc_fnc>
+                                    <item>
+                                        <host>Custom - OS - Linux</host>
+                                        <key>vfs.fs.inode[{#FSNAME},used]</key>
+                                    </item>
+                                </graph_item>
+                                <graph_item>
+                                    <sortorder>1</sortorder>
+                                    <color>2774A4</color>
+                                    <calc_fnc>MAX</calc_fnc>
+                                    <item>
+                                        <host>Custom - OS - Linux</host>
+                                        <key>vfs.fs.inode[{#FSNAME},total]</key>
+                                    </item>
+                                </graph_item>
+                            </graph_items>
+                        </graph_prototype>
+                        <graph_prototype>
+                            <uuid>9afbccde212a4d65b1b526d5cede47c0</uuid>
+                            <name>Filesystem {#FSNAME} prediction</name>
+                            <height>300</height>
+                            <show_triggers>NO</show_triggers>
+                            <graph_items>
+                                <graph_item>
+                                    <color>CC00CC</color>
+                                    <calc_fnc>MAX</calc_fnc>
+                                    <item>
+                                        <host>Custom - OS - Linux</host>
+                                        <key>vfs.fs.inode[{#FSNAME},pused]</key>
+                                    </item>
+                                </graph_item>
+                                <graph_item>
+                                    <sortorder>1</sortorder>
+                                    <color>00CC00</color>
+                                    <calc_fnc>MAX</calc_fnc>
+                                    <item>
+                                        <host>Custom - OS - Linux</host>
+                                        <key>vfs.fs.size[{#FSNAME},pused]</key>
+                                    </item>
+                                </graph_item>
+                                <graph_item>
+                                    <sortorder>2</sortorder>
+                                    <drawtype>BOLD_LINE</drawtype>
+                                    <color>2774A4</color>
+                                    <yaxisside>RIGHT</yaxisside>
+                                    <calc_fnc>MAX</calc_fnc>
+                                    <item>
+                                        <host>Custom - OS - Linux</host>
+                                        <key>vfs.fs.size[{#FSNAME},remaining_time]</key>
+                                    </item>
+                                </graph_item>
+                            </graph_items>
+                        </graph_prototype>
+                        <graph_prototype>
+                            <uuid>436b0858c48745d69ba3fa7ff6a93953</uuid>
+                            <name>Filesystem {#FSNAME} space usage</name>
+                            <height>300</height>
+                            <graph_items>
+                                <graph_item>
+                                    <color>C800C8</color>
+                                    <calc_fnc>MAX</calc_fnc>
+                                    <item>
+                                        <host>Custom - OS - Linux</host>
+                                        <key>vfs.fs.size[{#FSNAME},used]</key>
+                                    </item>
+                                </graph_item>
+                                <graph_item>
+                                    <sortorder>1</sortorder>
+                                    <color>2774A4</color>
+                                    <calc_fnc>MAX</calc_fnc>
+                                    <item>
+                                        <host>Custom - OS - Linux</host>
+                                        <key>vfs.fs.size[{#FSNAME},total]</key>
+                                    </item>
+                                </graph_item>
+                            </graph_items>
+                        </graph_prototype>
+                    </graph_prototypes>
+                    <request_method>POST</request_method>
+                </discovery_rule>
+            </discovery_rules>
+            <macros>
+                <macro>
+                    <macro>{$DISK_HIGH_READ_IOPS_LIMIT}</macro>
+                    <value>2000</value>
+                    <description>Alert if this amount of read iops is reached</description>
+                </macro>
+                <macro>
+                    <macro>{$DISK_HIGH_WRITE_IOPS_LIMIT}</macro>
+                    <value>2000</value>
+                    <description>Alert if this amount of write iops is reached</description>
+                </macro>
+                <macro>
+                    <macro>{$DISK_IOPS_LIMIT_MEASURES}</macro>
+                    <value>600</value>
+                </macro>
+                <macro>
+                    <macro>{$DISK_USAGE_ABOVE_1TB_MINFREE_GBYTES_ALARM}</macro>
+                    <value>50</value>
+                    <description>Minimum amount of disk space before alerting, overrides percentage.</description>
+                </macro>
+                <macro>
+                    <macro>{$DISK_USAGE_ABOVE_1TB_MINFREE_GBYTES_WARN}</macro>
+                    <value>100</value>
+                    <description>Minimum amount of disk space before alerting, overrides percentage.</description>
+                </macro>
+                <macro>
+                    <macro>{$DISK_USAGE_PERCENT_ALARM}</macro>
+                    <value>97</value>
+                    <description>Percentage of disk usage to accept before alert</description>
+                </macro>
+                <macro>
+                    <macro>{$DISK_USAGE_PERCENT_WARN}</macro>
+                    <value>95</value>
+                    <description>Percentage of disk usage to accept before warn</description>
+                </macro>
+                <macro>
+                    <macro>{$IOWAIT_ALERT_LIMIT}</macro>
+                    <value>30</value>
+                    <description>Percentage of iowait to accept</description>
+                </macro>
+                <macro>
+                    <macro>{$MAXIMUM_NUMBER_RETRANSMISSIONS}</macro>
+                    <value>1</value>
+                    <description>How many network bfs restransmissions to accept in one cycle</description>
+                </macro>
+                <macro>
+                    <macro>{$MAX_NETWORK_ERRORS_PERIOD}</macro>
+                    <value>1</value>
+                    <description>How many network error to accept in one cycle</description>
+                </macro>
+                <macro>
+                    <macro>{$MAX_NTP_OFFSET_MS}</macro>
+                    <value>100</value>
+                    <description>Maximum offset to accept for ntp sync</description>
+                </macro>
+                <macro>
+                    <macro>{$MEMORY_USERSPACE_USAGE_LIMIT}</macro>
+                    <value>98.5</value>
+                    <description>Altert if this percentage of memory usage is reached</description>
+                </macro>
+                <macro>
+                    <macro>{$MIN_NTP_SERVER_COUNT}</macro>
+                    <value>3</value>
+                    <description>How many ntp servers should be available before alert</description>
+                </macro>
+                <macro>
+                    <macro>{$MONITOR_LOAD_WARNING_MULT}</macro>
+                    <value>5</value>
+                    <description>Multiplicator for 5min load warning</description>
+                </macro>
+                <macro>
+                    <macro>{$MONITOR_TIMEOUT}</macro>
+                    <value>900</value>
+                    <description>Seconds to wait for agent data</description>
+                </macro>
+                <macro>
+                    <macro>{$MTA_MESSAGE_LIMIT}</macro>
+                    <value>100</value>
+                    <description>Number of messages pending on local MTA</description>
+                </macro>
+                <macro>
+                    <macro>{$REBOOT_INFORMATION}</macro>
+                    <value>24h</value>
+                    <description>How long to inform about a required reboot</description>
+                </macro>
+                <macro>
+                    <macro>{$STEAL_TIME_ALERT_LIMIT}</macro>
+                    <value>5</value>
+                    <description>Steal time percentage warning limit</description>
+                </macro>
+                <macro>
+                    <macro>{$SWAP_AVERAGE_LIMIT}</macro>
+                    <value>60</value>
+                    <description>Percentage of swap usage to raise a average event</description>
+                </macro>
+                <macro>
+                    <macro>{$SWAP_WARNING_LIMIT}</macro>
+                    <value>25</value>
+                    <description>Percentage of swap usage to raise a warning event</description>
+                </macro>
+                <macro>
+                    <macro>{$ZABBIX_AGENT_EXTENSIONS_RELEASE}</macro>
+                    <value>2.4.35</value>
+                    <description>The baseline for the zabbix-agent-extension-release</description>
+                </macro>
+                <macro>
+                    <macro>{$ZABBIX_AGENT_RELEASE}</macro>
+                    <value>4.4.3</value>
+                    <description>The baseline for the zabbix-agent-release</description>
+                </macro>
+            </macros>
+            <dashboards>
+                <dashboard>
+                    <uuid>69d3764e97134aa9b81290e75f894a4e</uuid>
+                    <name>Custom - OS - Linux - Blockdevice</name>
+                    <pages>
+                        <page>
+                            <widgets>
+                                <widget>
+                                    <type>graphprototype</type>
+                                    <width>12</width>
+                                    <height>6</height>
+                                    <fields>
+                                        <field>
+                                            <type>INTEGER</type>
+                                            <name>columns</name>
+                                            <value>1</value>
+                                        </field>
+                                        <field>
+                                            <type>GRAPH_PROTOTYPE</type>
+                                            <name>graphid</name>
+                                            <value>
+                                                <host>Custom - OS - Linux</host>
+                                                <name>Blockdevice {#BLOCKDEVICE} IOPS</name>
+                                            </value>
+                                        </field>
+                                        <field>
+                                            <type>INTEGER</type>
+                                            <name>rows</name>
+                                            <value>1</value>
+                                        </field>
+                                        <field>
+                                            <type>INTEGER</type>
+                                            <name>source_type</name>
+                                            <value>2</value>
+                                        </field>
+                                    </fields>
+                                </widget>
+                                <widget>
+                                    <type>graphprototype</type>
+                                    <x>12</x>
+                                    <width>12</width>
+                                    <height>6</height>
+                                    <fields>
+                                        <field>
+                                            <type>INTEGER</type>
+                                            <name>columns</name>
+                                            <value>1</value>
+                                        </field>
+                                        <field>
+                                            <type>GRAPH_PROTOTYPE</type>
+                                            <name>graphid</name>
+                                            <value>
+                                                <host>Custom - OS - Linux</host>
+                                                <name>Blockdevice {#BLOCKDEVICE} SPS</name>
+                                            </value>
+                                        </field>
+                                        <field>
+                                            <type>INTEGER</type>
+                                            <name>rows</name>
+                                            <value>1</value>
+                                        </field>
+                                        <field>
+                                            <type>INTEGER</type>
+                                            <name>source_type</name>
+                                            <value>2</value>
+                                        </field>
+                                    </fields>
+                                </widget>
+                            </widgets>
+                        </page>
+                    </pages>
+                </dashboard>
+                <dashboard>
+                    <uuid>3a98266de6a84901bdb3174cd5b66c3d</uuid>
+                    <name>Custom - OS - Linux - Filesystems</name>
+                    <pages>
+                        <page>
+                            <widgets>
+                                <widget>
+                                    <type>graphprototype</type>
+                                    <width>8</width>
+                                    <height>19</height>
+                                    <fields>
+                                        <field>
+                                            <type>INTEGER</type>
+                                            <name>columns</name>
+                                            <value>1</value>
+                                        </field>
+                                        <field>
+                                            <type>GRAPH_PROTOTYPE</type>
+                                            <name>graphid</name>
+                                            <value>
+                                                <host>Custom - OS - Linux</host>
+                                                <name>Filesystem {#FSNAME} space usage</name>
+                                            </value>
+                                        </field>
+                                        <field>
+                                            <type>INTEGER</type>
+                                            <name>rows</name>
+                                            <value>2</value>
+                                        </field>
+                                    </fields>
+                                </widget>
+                                <widget>
+                                    <type>graphprototype</type>
+                                    <x>8</x>
+                                    <width>8</width>
+                                    <height>19</height>
+                                    <fields>
+                                        <field>
+                                            <type>INTEGER</type>
+                                            <name>columns</name>
+                                            <value>1</value>
+                                        </field>
+                                        <field>
+                                            <type>GRAPH_PROTOTYPE</type>
+                                            <name>graphid</name>
+                                            <value>
+                                                <host>Custom - OS - Linux</host>
+                                                <name>Filesystem {#FSNAME} inode usage</name>
+                                            </value>
+                                        </field>
+                                        <field>
+                                            <type>INTEGER</type>
+                                            <name>rows</name>
+                                            <value>2</value>
+                                        </field>
+                                    </fields>
+                                </widget>
+                                <widget>
+                                    <type>graphprototype</type>
+                                    <x>16</x>
+                                    <width>8</width>
+                                    <height>19</height>
+                                    <fields>
+                                        <field>
+                                            <type>INTEGER</type>
+                                            <name>columns</name>
+                                            <value>1</value>
+                                        </field>
+                                        <field>
+                                            <type>GRAPH_PROTOTYPE</type>
+                                            <name>graphid</name>
+                                            <value>
+                                                <host>Custom - OS - Linux</host>
+                                                <name>Filesystem {#FSNAME} prediction</name>
+                                            </value>
+                                        </field>
+                                        <field>
+                                            <type>INTEGER</type>
+                                            <name>rows</name>
+                                            <value>2</value>
+                                        </field>
+                                    </fields>
+                                </widget>
+                            </widgets>
+                        </page>
+                    </pages>
+                </dashboard>
+                <dashboard>
+                    <uuid>9d38463c5ae741b994b722fdfcd52996</uuid>
+                    <name>Custom - OS - Linux - General</name>
+                    <pages>
+                        <page>
+                            <widgets>
+                                <widget>
+                                    <type>graph</type>
+                                    <width>24</width>
+                                    <height>4</height>
+                                    <fields>
+                                        <field>
+                                            <type>GRAPH</type>
+                                            <name>graphid</name>
+                                            <value>
+                                                <host>Custom - OS - Linux</host>
+                                                <name>System Load</name>
+                                            </value>
+                                        </field>
+                                        <field>
+                                            <type>INTEGER</type>
+                                            <name>source_type</name>
+                                            <value>0</value>
+                                        </field>
+                                    </fields>
+                                </widget>
+                                <widget>
+                                    <type>graph</type>
+                                    <y>4</y>
+                                    <width>24</width>
+                                    <height>4</height>
+                                    <fields>
+                                        <field>
+                                            <type>GRAPH</type>
+                                            <name>graphid</name>
+                                            <value>
+                                                <host>Custom - OS - Linux</host>
+                                                <name>CPU Times</name>
+                                            </value>
+                                        </field>
+                                        <field>
+                                            <type>INTEGER</type>
+                                            <name>source_type</name>
+                                            <value>0</value>
+                                        </field>
+                                    </fields>
+                                </widget>
+                                <widget>
+                                    <type>graph</type>
+                                    <y>8</y>
+                                    <width>24</width>
+                                    <height>4</height>
+                                    <fields>
+                                        <field>
+                                            <type>ITEM</type>
+                                            <name>itemid</name>
+                                            <value>
+                                                <host>Custom - OS - Linux</host>
+                                                <key>system.cpu.intr</key>
+                                            </value>
+                                        </field>
+                                        <field>
+                                            <type>INTEGER</type>
+                                            <name>source_type</name>
+                                            <value>1</value>
+                                        </field>
+                                    </fields>
+                                </widget>
+                                <widget>
+                                    <type>graph</type>
+                                    <y>12</y>
+                                    <width>24</width>
+                                    <height>4</height>
+                                    <fields>
+                                        <field>
+                                            <type>GRAPH</type>
+                                            <name>graphid</name>
+                                            <value>
+                                                <host>Custom - OS - Linux</host>
+                                                <name>CPU Context Switches</name>
+                                            </value>
+                                        </field>
+                                        <field>
+                                            <type>INTEGER</type>
+                                            <name>source_type</name>
+                                            <value>0</value>
+                                        </field>
+                                    </fields>
+                                </widget>
+                                <widget>
+                                    <type>graph</type>
+                                    <y>16</y>
+                                    <width>24</width>
+                                    <height>4</height>
+                                    <fields>
+                                        <field>
+                                            <type>GRAPH</type>
+                                            <name>graphid</name>
+                                            <value>
+                                                <host>Custom - OS - Linux</host>
+                                                <name>Memory Usage by Userspace</name>
+                                            </value>
+                                        </field>
+                                        <field>
+                                            <type>INTEGER</type>
+                                            <name>source_type</name>
+                                            <value>0</value>
+                                        </field>
+                                    </fields>
+                                </widget>
+                                <widget>
+                                    <type>graph</type>
+                                    <y>20</y>
+                                    <width>24</width>
+                                    <height>4</height>
+                                    <fields>
+                                        <field>
+                                            <type>GRAPH</type>
+                                            <name>graphid</name>
+                                            <value>
+                                                <host>Custom - OS - Linux</host>
+                                                <name>Memory Usage</name>
+                                            </value>
+                                        </field>
+                                        <field>
+                                            <type>INTEGER</type>
+                                            <name>source_type</name>
+                                            <value>0</value>
+                                        </field>
+                                    </fields>
+                                </widget>
+                                <widget>
+                                    <type>graph</type>
+                                    <y>24</y>
+                                    <width>24</width>
+                                    <height>5</height>
+                                    <fields>
+                                        <field>
+                                            <type>GRAPH</type>
+                                            <name>graphid</name>
+                                            <value>
+                                                <host>Custom - OS - Linux</host>
+                                                <name>Swap Usage</name>
+                                            </value>
+                                        </field>
+                                        <field>
+                                            <type>INTEGER</type>
+                                            <name>source_type</name>
+                                            <value>0</value>
+                                        </field>
+                                    </fields>
+                                </widget>
+                                <widget>
+                                    <type>graph</type>
+                                    <y>29</y>
+                                    <width>24</width>
+                                    <height>5</height>
+                                    <fields>
+                                        <field>
+                                            <type>GRAPH</type>
+                                            <name>graphid</name>
+                                            <value>
+                                                <host>Custom - OS - Linux</host>
+                                                <name>NTP  Sychronisation</name>
+                                            </value>
+                                        </field>
+                                        <field>
+                                            <type>INTEGER</type>
+                                            <name>source_type</name>
+                                            <value>0</value>
+                                        </field>
+                                    </fields>
+                                </widget>
+                                <widget>
+                                    <type>graph</type>
+                                    <y>34</y>
+                                    <width>24</width>
+                                    <height>5</height>
+                                    <fields>
+                                        <field>
+                                            <type>GRAPH</type>
+                                            <name>graphid</name>
+                                            <value>
+                                                <host>Custom - OS - Linux</host>
+                                                <name>MTA Mailqueue</name>
+                                            </value>
+                                        </field>
+                                        <field>
+                                            <type>INTEGER</type>
+                                            <name>source_type</name>
+                                            <value>0</value>
+                                        </field>
+                                    </fields>
+                                </widget>
+                                <widget>
+                                    <type>graph</type>
+                                    <y>39</y>
+                                    <width>24</width>
+                                    <height>5</height>
+                                    <fields>
+                                        <field>
+                                            <type>GRAPH</type>
+                                            <name>graphid</name>
+                                            <value>
+                                                <host>Custom - OS - Linux</host>
+                                                <name>NFS RPC Operations</name>
+                                            </value>
+                                        </field>
+                                        <field>
+                                            <type>INTEGER</type>
+                                            <name>source_type</name>
+                                            <value>0</value>
+                                        </field>
+                                    </fields>
+                                </widget>
+                                <widget>
+                                    <type>graph</type>
+                                    <y>44</y>
+                                    <width>24</width>
+                                    <height>5</height>
+                                    <fields>
+                                        <field>
+                                            <type>ITEM</type>
+                                            <name>itemid</name>
+                                            <value>
+                                                <host>Custom - OS - Linux</host>
+                                                <key>system.users.num</key>
+                                            </value>
+                                        </field>
+                                        <field>
+                                            <type>INTEGER</type>
+                                            <name>source_type</name>
+                                            <value>1</value>
+                                        </field>
+                                    </fields>
+                                </widget>
+                                <widget>
+                                    <type>graph</type>
+                                    <y>49</y>
+                                    <width>24</width>
+                                    <height>5</height>
+                                    <fields>
+                                        <field>
+                                            <type>GRAPH</type>
+                                            <name>graphid</name>
+                                            <value>
+                                                <host>Custom - OS - Linux</host>
+                                                <name>Processes</name>
+                                            </value>
+                                        </field>
+                                        <field>
+                                            <type>INTEGER</type>
+                                            <name>source_type</name>
+                                            <value>0</value>
+                                        </field>
+                                    </fields>
+                                </widget>
+                                <widget>
+                                    <type>graph</type>
+                                    <y>54</y>
+                                    <width>24</width>
+                                    <height>5</height>
+                                    <fields>
+                                        <field>
+                                            <type>GRAPH</type>
+                                            <name>graphid</name>
+                                            <value>
+                                                <host>Custom - OS - Linux</host>
+                                                <name>File descriptors</name>
+                                            </value>
+                                        </field>
+                                        <field>
+                                            <type>INTEGER</type>
+                                            <name>source_type</name>
+                                            <value>0</value>
+                                        </field>
+                                    </fields>
+                                </widget>
+                                <widget>
+                                    <type>graph</type>
+                                    <y>59</y>
+                                    <width>24</width>
+                                    <height>5</height>
+                                    <fields>
+                                        <field>
+                                            <type>GRAPH</type>
+                                            <name>graphid</name>
+                                            <value>
+                                                <host>Custom - OS - Linux</host>
+                                                <name>Swap Usage</name>
+                                            </value>
+                                        </field>
+                                        <field>
+                                            <type>INTEGER</type>
+                                            <name>source_type</name>
+                                            <value>0</value>
+                                        </field>
+                                    </fields>
+                                </widget>
+                            </widgets>
+                        </page>
+                    </pages>
+                </dashboard>
+                <dashboard>
+                    <uuid>a2318191936441f48eb252bca1e8a110</uuid>
+                    <name>Custom - OS - Linux - Network</name>
+                    <pages>
+                        <page>
+                            <widgets>
+                                <widget>
+                                    <type>graphprototype</type>
+                                    <width>8</width>
+                                    <height>6</height>
+                                    <fields>
+                                        <field>
+                                            <type>INTEGER</type>
+                                            <name>columns</name>
+                                            <value>1</value>
+                                        </field>
+                                        <field>
+                                            <type>GRAPH_PROTOTYPE</type>
+                                            <name>graphid</name>
+                                            <value>
+                                                <host>Custom - OS - Linux</host>
+                                                <name>Interface {#IFNAME} bits</name>
+                                            </value>
+                                        </field>
+                                        <field>
+                                            <type>INTEGER</type>
+                                            <name>rows</name>
+                                            <value>1</value>
+                                        </field>
+                                        <field>
+                                            <type>INTEGER</type>
+                                            <name>source_type</name>
+                                            <value>2</value>
+                                        </field>
+                                    </fields>
+                                </widget>
+                                <widget>
+                                    <type>graphprototype</type>
+                                    <x>8</x>
+                                    <width>8</width>
+                                    <height>6</height>
+                                    <fields>
+                                        <field>
+                                            <type>INTEGER</type>
+                                            <name>columns</name>
+                                            <value>1</value>
+                                        </field>
+                                        <field>
+                                            <type>GRAPH_PROTOTYPE</type>
+                                            <name>graphid</name>
+                                            <value>
+                                                <host>Custom - OS - Linux</host>
+                                                <name>Interface {#IFNAME} packets</name>
+                                            </value>
+                                        </field>
+                                        <field>
+                                            <type>INTEGER</type>
+                                            <name>rows</name>
+                                            <value>1</value>
+                                        </field>
+                                        <field>
+                                            <type>INTEGER</type>
+                                            <name>source_type</name>
+                                            <value>2</value>
+                                        </field>
+                                    </fields>
+                                </widget>
+                                <widget>
+                                    <type>graphprototype</type>
+                                    <x>16</x>
+                                    <width>8</width>
+                                    <height>6</height>
+                                    <fields>
+                                        <field>
+                                            <type>INTEGER</type>
+                                            <name>columns</name>
+                                            <value>1</value>
+                                        </field>
+                                        <field>
+                                            <type>GRAPH_PROTOTYPE</type>
+                                            <name>graphid</name>
+                                            <value>
+                                                <host>Custom - OS - Linux</host>
+                                                <name>Interface {#IFNAME} errors</name>
+                                            </value>
+                                        </field>
+                                        <field>
+                                            <type>INTEGER</type>
+                                            <name>rows</name>
+                                            <value>1</value>
+                                        </field>
+                                        <field>
+                                            <type>INTEGER</type>
+                                            <name>source_type</name>
+                                            <value>2</value>
+                                        </field>
+                                    </fields>
+                                </widget>
+                            </widgets>
+                        </page>
+                    </pages>
+                </dashboard>
+            </dashboards>
+            <valuemaps>
+                <valuemap>
+                    <uuid>daddd847008d4f07be5a13821b03ae4a</uuid>
+                    <name>Service state</name>
+                    <mappings>
+                        <mapping>
+                            <value>0</value>
+                            <newvalue>Down</newvalue>
+                        </mapping>
+                        <mapping>
+                            <value>1</value>
+                            <newvalue>Up</newvalue>
+                        </mapping>
+                    </mappings>
+                </valuemap>
+            </valuemaps>
+        </template>
+    </templates>
+    <triggers>
+        <trigger>
+            <uuid>2662f87ce68e4cf09089b5345b1da298</uuid>
+            <expression>last(/Custom - OS - Linux/vfs.file.regexp[/proc/sys/fs/file-nr,&quot;([0-9]+)\s+([0-9]+)\s+([0-9]+)&quot;,,1,2,\1]) &gt; (0.9 * last(/Custom - OS - Linux/kernel.maxfiles))</expression>
+            <name>90% of possible file descriptors reached</name>
+            <priority>AVERAGE</priority>
+        </trigger>
+        <trigger>
+            <uuid>71fb9a002d724f4e9a5c490a6d3e141d</uuid>
+            <expression>(last(/Custom - OS - Linux/kernel.maxproc) * 0.9) &lt; last(/Custom - OS - Linux/proc.num[])</expression>
+            <name>90% of possible processes reached</name>
+            <priority>AVERAGE</priority>
+        </trigger>
+        <trigger>
+            <uuid>49a6b490ef0447ea860bfff3c2a3c2ad</uuid>
+            <expression>(last(/Custom - OS - Linux/proc.num[crond,,,])=0) and (last(/Custom - OS - Linux/proc.num[cron,,,])=0)</expression>
+            <name>Cron Daemon</name>
+            <priority>AVERAGE</priority>
+            <description>SMTP Daemon is not running.</description>
+        </trigger>
+        <trigger>
+            <uuid>b48b6dad9dfb4840afa5645bc5e158c2</uuid>
+            <expression>nodata(/Custom - OS - Linux/ntpd.primarypeer.stats[offset],3600s)=1 and last(/Custom - OS - Linux/system.uptime)&gt;900</expression>
+            <name>NTP Absolute Time RMS Offset no data</name>
+            <priority>WARNING</priority>
+            <description>No ntp time information</description>
+            <dependencies>
+                <dependency>
+                    <name>Zabbix Agent Ping no data for {$MONITOR_TIMEOUT} seconds</name>
+                    <expression>nodata(/Custom - OS - Linux/agent.ping,{$MONITOR_TIMEOUT})=1</expression>
+                </dependency>
+            </dependencies>
+        </trigger>
+        <trigger>
+            <uuid>6dc225c530b241569317318a7f79c5ec</uuid>
+            <expression>last(/Custom - OS - Linux/ntpd.peers.goodcount) &lt; {$MIN_NTP_SERVER_COUNT} and  last(/Custom - OS - Linux/system.uptime)&gt;900</expression>
+            <name>Number of good NTP peers &lt; {$MIN_NTP_SERVER_COUNT}</name>
+            <priority>WARNING</priority>
+            <dependencies>
+                <dependency>
+                    <name>NTP Absolute Time RMS Offset no data</name>
+                    <expression>nodata(/Custom - OS - Linux/ntpd.primarypeer.stats[offset],3600s)=1 and last(/Custom - OS - Linux/system.uptime)&gt;900</expression>
+                </dependency>
+            </dependencies>
+        </trigger>
+        <trigger>
+            <uuid>3e0e3fbda47c4ffbb4b4249c4e676419</uuid>
+            <expression>(last(/Custom - OS - Linux/system.cpu.load[,avg5])&gt;15 and last(/Custom - OS - Linux/system.cpu.num)&lt;3) or (last(/Custom - OS - Linux/system.cpu.num)&gt;2 and (last(/Custom - OS - Linux/system.cpu.load[,avg5])&gt;last(/Custom - OS - Linux/system.cpu.num)*{$MONITOR_LOAD_WARNING_MULT}))</expression>
+            <name>System Load, {ITEM.LASTVALUE1}</name>
+            <priority>WARNING</priority>
+            <description>For systems with 1 or 2 CPUs send alerts by a 5-min Load greater 15.
+ For systems with more than 2 CPUS send alerts by a 5-min Load greater than numer_of_cpus*{$MONITOR_LOAD_WARNING_MULT}</description>
+        </trigger>
+        <trigger>
+            <uuid>86e4503134f7453bbbc9c7cc8bd6942f</uuid>
+            <expression>(last(/Custom - OS - Linux/system.cpu.load[,avg5])&gt;15 and last(/Custom - OS - Linux/system.cpu.num)&lt;3) or (last(/Custom - OS - Linux/system.cpu.num)&gt;2 and (last(/Custom - OS - Linux/system.cpu.load[,avg5])&gt;last(/Custom - OS - Linux/system.cpu.num)*{$MONITOR_LOAD_WARNING_MULT}))</expression>
+            <name>System Load too high</name>
+            <priority>WARNING</priority>
+            <description>For systems with 1 or 2 CPUs send alerts by a 5-min Load greater 15.
+ For systems with more than 2 CPUS send alerts by a 5-min Load greater than numer_of_cpus*{$MONITOR_LOAD_WARNING_MULT}</description>
+        </trigger>
+    </triggers>
+    <graphs>
+        <graph>
+            <uuid>4fbdd14e52414824a3bf9959c7519c55</uuid>
+            <name>CPU Context Switches</name>
+            <height>300</height>
+            <show_work_period>NO</show_work_period>
+            <show_triggers>NO</show_triggers>
+            <ymin_type_1>FIXED</ymin_type_1>
+            <graph_items>
+                <graph_item>
+                    <color>BB0000</color>
+                    <calc_fnc>MAX</calc_fnc>
+                    <item>
+                        <host>Custom - OS - Linux</host>
+                        <key>system.cpu.switches</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <uuid>1ef95720832c481db0bb698b697ae298</uuid>
+            <name>CPU Times</name>
+            <height>300</height>
+            <yaxismax>105</yaxismax>
+            <show_work_period>NO</show_work_period>
+            <show_triggers>NO</show_triggers>
+            <type>STACKED</type>
+            <ymin_type_1>FIXED</ymin_type_1>
+            <graph_items>
+                <graph_item>
+                    <color>DD0000</color>
+                    <calc_fnc>MAX</calc_fnc>
+                    <item>
+                        <host>Custom - OS - Linux</host>
+                        <key>system.cpu.util[,system,avg1]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <color>00AA00</color>
+                    <calc_fnc>MAX</calc_fnc>
+                    <item>
+                        <host>Custom - OS - Linux</host>
+                        <key>system.cpu.util[,user,avg1]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>2</sortorder>
+                    <color>CC00CC</color>
+                    <calc_fnc>MAX</calc_fnc>
+                    <item>
+                        <host>Custom - OS - Linux</host>
+                        <key>system.cpu.util[,interrupt,avg1]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>3</sortorder>
+                    <color>00BBBB</color>
+                    <calc_fnc>MAX</calc_fnc>
+                    <item>
+                        <host>Custom - OS - Linux</host>
+                        <key>system.cpu.util[,iowait,avg1]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>4</sortorder>
+                    <color>0000DD</color>
+                    <calc_fnc>MAX</calc_fnc>
+                    <item>
+                        <host>Custom - OS - Linux</host>
+                        <key>system.cpu.util[,nice,avg1]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>5</sortorder>
+                    <color>FF00FF</color>
+                    <calc_fnc>MAX</calc_fnc>
+                    <item>
+                        <host>Custom - OS - Linux</host>
+                        <key>system.cpu.util[,softirq,avg1]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>6</sortorder>
+                    <color>777777</color>
+                    <calc_fnc>MAX</calc_fnc>
+                    <item>
+                        <host>Custom - OS - Linux</host>
+                        <key>system.cpu.util[,steal,avg1]</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <uuid>aef190052eb642cea59bfcf9a415e7b6</uuid>
+            <name>CPU Times AVG</name>
+            <height>300</height>
+            <yaxismax>105</yaxismax>
+            <show_work_period>NO</show_work_period>
+            <show_triggers>NO</show_triggers>
+            <ymin_type_1>FIXED</ymin_type_1>
+            <graph_items>
+                <graph_item>
+                    <color>DD0000</color>
+                    <item>
+                        <host>Custom - OS - Linux</host>
+                        <key>system.cpu.util[,system,avg1]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <color>00AA00</color>
+                    <item>
+                        <host>Custom - OS - Linux</host>
+                        <key>system.cpu.util[,user,avg1]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>2</sortorder>
+                    <color>CC00CC</color>
+                    <item>
+                        <host>Custom - OS - Linux</host>
+                        <key>system.cpu.util[,interrupt,avg1]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>3</sortorder>
+                    <color>00BBBB</color>
+                    <item>
+                        <host>Custom - OS - Linux</host>
+                        <key>system.cpu.util[,iowait,avg1]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>4</sortorder>
+                    <color>0000DD</color>
+                    <item>
+                        <host>Custom - OS - Linux</host>
+                        <key>system.cpu.util[,nice,avg1]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>5</sortorder>
+                    <color>FF00FF</color>
+                    <item>
+                        <host>Custom - OS - Linux</host>
+                        <key>system.cpu.util[,softirq,avg1]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>6</sortorder>
+                    <color>777777</color>
+                    <item>
+                        <host>Custom - OS - Linux</host>
+                        <key>system.cpu.util[,steal,avg1]</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <uuid>591e0ff52b3d4586ab5052462b497cf4</uuid>
+            <name>File descriptors</name>
+            <height>300</height>
+            <ymin_type_1>FIXED</ymin_type_1>
+            <graph_items>
+                <graph_item>
+                    <color>1A7C11</color>
+                    <calc_fnc>MAX</calc_fnc>
+                    <item>
+                        <host>Custom - OS - Linux</host>
+                        <key>vfs.file.regexp[/proc/sys/fs/file-nr,&quot;([0-9]+)\s+([0-9]+)\s+([0-9]+)&quot;,,1,2,\1]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <color>F63100</color>
+                    <calc_fnc>MAX</calc_fnc>
+                    <item>
+                        <host>Custom - OS - Linux</host>
+                        <key>kernel.maxfiles</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <uuid>9da07c318e134d24b4807a52ed7af385</uuid>
+            <name>Memory Usage</name>
+            <height>300</height>
+            <yaxismax>0</yaxismax>
+            <show_work_period>NO</show_work_period>
+            <show_triggers>NO</show_triggers>
+            <type>STACKED</type>
+            <ymin_type_1>FIXED</ymin_type_1>
+            <graph_items>
+                <graph_item>
+                    <drawtype>FILLED_REGION</drawtype>
+                    <color>BB0000</color>
+                    <calc_fnc>MAX</calc_fnc>
+                    <item>
+                        <host>Custom - OS - Linux</host>
+                        <key>os.linux.memory.userspace</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <drawtype>FILLED_REGION</drawtype>
+                    <color>0000EE</color>
+                    <calc_fnc>MAX</calc_fnc>
+                    <item>
+                        <host>Custom - OS - Linux</host>
+                        <key>vm.memory.size[buffers]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>2</sortorder>
+                    <drawtype>FILLED_REGION</drawtype>
+                    <color>CC00CC</color>
+                    <calc_fnc>MAX</calc_fnc>
+                    <item>
+                        <host>Custom - OS - Linux</host>
+                        <key>vm.memory.size[cached]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>3</sortorder>
+                    <drawtype>FILLED_REGION</drawtype>
+                    <color>00BB00</color>
+                    <calc_fnc>MAX</calc_fnc>
+                    <item>
+                        <host>Custom - OS - Linux</host>
+                        <key>vm.memory.size[free]</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <uuid>70b53bb3ca4a44959803d45a8a141cfe</uuid>
+            <name>Memory Usage by Userspace</name>
+            <height>300</height>
+            <graph_items>
+                <graph_item>
+                    <color>BB00BB</color>
+                    <calc_fnc>ALL</calc_fnc>
+                    <item>
+                        <host>Custom - OS - Linux</host>
+                        <key>os.linux.memory.userspace.percent</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <uuid>db36577203df4c659c6341c0f5674e39</uuid>
+            <name>MTA Mailqueue</name>
+            <height>300</height>
+            <show_work_period>NO</show_work_period>
+            <show_triggers>NO</show_triggers>
+            <graph_items>
+                <graph_item>
+                    <color>00CC00</color>
+                    <calc_fnc>MAX</calc_fnc>
+                    <item>
+                        <host>Custom - OS - Linux</host>
+                        <key>mailq.count.general</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <color>F63100</color>
+                    <yaxisside>RIGHT</yaxisside>
+                    <calc_fnc>MAX</calc_fnc>
+                    <item>
+                        <host>Custom - OS - Linux</host>
+                        <key>mailq.count.frozen</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <uuid>f26278694b27412c9bc282f1a7c39370</uuid>
+            <name>NFS RPC Operations</name>
+            <height>300</height>
+            <ymin_type_1>FIXED</ymin_type_1>
+            <graph_items>
+                <graph_item>
+                    <color>00C800</color>
+                    <calc_fnc>MAX</calc_fnc>
+                    <item>
+                        <host>Custom - OS - Linux</host>
+                        <key>nfs.rpc.calls</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <color>C80000</color>
+                    <yaxisside>RIGHT</yaxisside>
+                    <calc_fnc>MAX</calc_fnc>
+                    <item>
+                        <host>Custom - OS - Linux</host>
+                        <key>nfs.rpc.retransmits</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <uuid>7ad7599a8c3f4df4b63d07724abfadf2</uuid>
+            <name>NTP  Sychronisation</name>
+            <height>300</height>
+            <graph_items>
+                <graph_item>
+                    <drawtype>DASHED_LINE</drawtype>
+                    <color>1A7C11</color>
+                    <calc_fnc>MAX</calc_fnc>
+                    <item>
+                        <host>Custom - OS - Linux</host>
+                        <key>ntpd.primarypeer.stats[delay]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <color>F63100</color>
+                    <yaxisside>RIGHT</yaxisside>
+                    <calc_fnc>MAX</calc_fnc>
+                    <item>
+                        <host>Custom - OS - Linux</host>
+                        <key>ntpd.primarypeer.stats[offset]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>2</sortorder>
+                    <color>2774A4</color>
+                    <yaxisside>RIGHT</yaxisside>
+                    <calc_fnc>MAX</calc_fnc>
+                    <item>
+                        <host>Custom - OS - Linux</host>
+                        <key>ntpd.primarypeer.stats[jitter]</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <uuid>b5d947cfc03b4029935fa2b7311f7acf</uuid>
+            <name>Processes</name>
+            <height>300</height>
+            <graph_items>
+                <graph_item>
+                    <color>1A7C11</color>
+                    <calc_fnc>MAX</calc_fnc>
+                    <item>
+                        <host>Custom - OS - Linux</host>
+                        <key>proc.num[]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <color>F63100</color>
+                    <yaxisside>RIGHT</yaxisside>
+                    <calc_fnc>MAX</calc_fnc>
+                    <item>
+                        <host>Custom - OS - Linux</host>
+                        <key>proc.num[,,run]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>2</sortorder>
+                    <color>2774A4</color>
+                    <yaxisside>RIGHT</yaxisside>
+                    <calc_fnc>MAX</calc_fnc>
+                    <item>
+                        <host>Custom - OS - Linux</host>
+                        <key>proc.num[,,zomb]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>3</sortorder>
+                    <color>DDDD00</color>
+                    <item>
+                        <host>Custom - OS - Linux</host>
+                        <key>custom.process_threads[]</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <uuid>8c1e5d50852e475597afd8f0466ddb1a</uuid>
+            <name>Swap Usage</name>
+            <height>300</height>
+            <ymin_type_1>FIXED</ymin_type_1>
+            <graph_items>
+                <graph_item>
+                    <color>C80000</color>
+                    <calc_fnc>MAX</calc_fnc>
+                    <item>
+                        <host>Custom - OS - Linux</host>
+                        <key>system.swap.in[,pages]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <color>00C800</color>
+                    <calc_fnc>MAX</calc_fnc>
+                    <item>
+                        <host>Custom - OS - Linux</host>
+                        <key>system.swap.out[,pages]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>2</sortorder>
+                    <drawtype>DASHED_LINE</drawtype>
+                    <color>0000C8</color>
+                    <yaxisside>RIGHT</yaxisside>
+                    <calc_fnc>MAX</calc_fnc>
+                    <item>
+                        <host>Custom - OS - Linux</host>
+                        <key>system.swap.size[,pused]</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <uuid>9bc71bd1ec79460bb27b8cdcaaffdcb4</uuid>
+            <name>System Load</name>
+            <height>300</height>
+            <show_work_period>NO</show_work_period>
+            <ymin_type_1>FIXED</ymin_type_1>
+            <graph_items>
+                <graph_item>
+                    <color>009900</color>
+                    <calc_fnc>MAX</calc_fnc>
+                    <item>
+                        <host>Custom - OS - Linux</host>
+                        <key>system.cpu.load[,avg5]</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+    </graphs>
+</zabbix_export>
