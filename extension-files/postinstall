@@ -5,7 +5,7 @@ THE_INCLUDE="Include=/usr/share/zabbix-agent-extensions/include.d/"
 if (grep -q -P "Ubuntu|Debian|CentOS|Raspbian" /etc/os-release);then
    if [ -e "/etc/zabbix/zabbix_agentd.d/zabbix-agent-extensions" ];then
      echo "Notice: /etc/zabbix/zabbix_agentd.d/zabbix-agent-extensions already exists, no need to add the Include to /etc/zabbix/zabbix_agentd.conf"
-   elif ! (grep -q "$THE_INCLUDE" /etc/zabbix/zabbix_agentd.conf);then
+   elif ( [ -e /etc/zabbix/zabbix_agentd.conf ] && ! (grep -q "$THE_INCLUDE" /etc/zabbix/zabbix_agentd.conf) );then
      echo "" >> /etc/zabbix/zabbix_agentd.conf
      echo "#################################################################" >> /etc/zabbix/zabbix_agentd.conf
      echo "# Added by postinstall of package zabbix-agent-extensions" >> /etc/zabbix/zabbix_agentd.conf
@@ -14,7 +14,7 @@ if (grep -q -P "Ubuntu|Debian|CentOS|Raspbian" /etc/os-release);then
 
    if [ -e "/etc/zabbix/zabbix_agentd2.d/zabbix-agent-extensions" ];then
      echo "Notice: /etc/zabbix/zabbix_agentd2.d/zabbix-agent-extensions already exists, no need to add the Include to /etc/zabbix/zabbix_agent2.conf"
-   elif ! (grep -q "$THE_INCLUDE" /etc/zabbix/zabbix_agent2.conf);then
+   elif ( [ -e "/etc/zabbix/zabbix_agent2.conf" ] && ! (grep -q "$THE_INCLUDE" /etc/zabbix/zabbix_agent2.conf) );then
      echo "" >> /etc/zabbix/zabbix_agent2.conf
      echo "#################################################################" >> /etc/zabbix/zabbix_agent2.conf
      echo "# Added by postinstall of package zabbix-agent-extensions" >> /etc/zabbix/zabbix_agent2.conf
