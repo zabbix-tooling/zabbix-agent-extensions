@@ -43,7 +43,7 @@ if (grep -q -P "Ubuntu|Debian|CentOS|Raspbian" /etc/os-release);then
    if ( (which systemctl >/dev/null 2>&1) && (systemctl list-unit-files zabbix-agent2.service|grep -q enabled) );then
       echo "Restarting zabbix-agent2 with systemctl"
       systemctl restart zabbix-agent2.service
-   elif [ -f /etc/init.d/zabbix-agent ];then
+   elif [ -f /etc/init.d/zabbix-agent2 ];then
       echo "Restarting with /etc/init.d/zabbix-agent2"
       /etc/init.d/zabbix-agent2 restart
    else
