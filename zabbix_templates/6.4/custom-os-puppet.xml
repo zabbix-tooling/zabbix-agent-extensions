@@ -142,8 +142,8 @@
                     <triggers>
                         <trigger>
                             <uuid>102b0d53cecc4e409deec043523a5f3a</uuid>
-                            <expression>last(/Custom - OS - Puppet/puppet[environment],#1)=last(/Custom - OS - Puppet/puppet[environment],#2)</expression>
-                            <name>Puppet environment changed from {ITEM.VALUE1} to  {ITEM.VALUE2}</name>
+                            <expression>last(/Custom - OS - Puppet/puppet[environment],#1)<>last(/Custom - OS - Puppet/puppet[environment],#2)</expression>
+                            <name>Puppet environment changed from {ITEM.VALUE1} to {ITEM.VALUE2}</name>
                             <priority>WARNING</priority>
                         </trigger>
                     </triggers>
