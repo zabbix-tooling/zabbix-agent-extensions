@@ -498,6 +498,7 @@
                     <key>puppet[time,last_run]</key>
                     <delay>0</delay>
                     <history>30d</history>
+                    <units>unixtime</units>
                     <preprocessing>
                         <step>
                             <type>JSONPATH</type>
