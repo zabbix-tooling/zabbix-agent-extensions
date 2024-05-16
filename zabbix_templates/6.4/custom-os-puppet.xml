@@ -27,7 +27,6 @@
                     <valuemap>
                         <name>Service state</name>
                     </valuemap>
-                    <request_method>POST</request_method>
                     <tags>
                         <tag>
                             <tag>Application</tag>
@@ -68,7 +67,6 @@
                     <master_item>
                         <key>puppet[]</key>
                     </master_item>
-                    <request_method>POST</request_method>
                     <tags>
                         <tag>
                             <tag>Application</tag>
@@ -96,7 +94,6 @@
                     <master_item>
                         <key>puppet[]</key>
                     </master_item>
-                    <request_method>POST</request_method>
                     <tags>
                         <tag>
                             <tag>Application</tag>
@@ -132,7 +129,6 @@
                     <master_item>
                         <key>puppet[]</key>
                     </master_item>
-                    <request_method>POST</request_method>
                     <tags>
                         <tag>
                             <tag>Application</tag>
@@ -142,7 +138,7 @@
                     <triggers>
                         <trigger>
                             <uuid>102b0d53cecc4e409deec043523a5f3a</uuid>
-                            <expression>last(/Custom - OS - Puppet/puppet[environment],#1)<>last(/Custom - OS - Puppet/puppet[environment],#2)</expression>
+                            <expression>last(/Custom - OS - Puppet/puppet[environment],#1)&lt;&gt;last(/Custom - OS - Puppet/puppet[environment],#2)</expression>
                             <name>Puppet environment changed from {ITEM.VALUE1} to {ITEM.VALUE2}</name>
                             <priority>WARNING</priority>
                         </trigger>
@@ -167,7 +163,6 @@
                     <master_item>
                         <key>puppet[]</key>
                     </master_item>
-                    <request_method>POST</request_method>
                     <tags>
                         <tag>
                             <tag>Application</tag>
@@ -194,7 +189,6 @@
                     <master_item>
                         <key>puppet[]</key>
                     </master_item>
-                    <request_method>POST</request_method>
                     <tags>
                         <tag>
                             <tag>Application</tag>
@@ -221,7 +215,6 @@
                     <master_item>
                         <key>puppet[]</key>
                     </master_item>
-                    <request_method>POST</request_method>
                     <tags>
                         <tag>
                             <tag>Application</tag>
@@ -248,7 +241,6 @@
                     <master_item>
                         <key>puppet[]</key>
                     </master_item>
-                    <request_method>POST</request_method>
                     <tags>
                         <tag>
                             <tag>Application</tag>
@@ -275,7 +267,6 @@
                     <master_item>
                         <key>puppet[]</key>
                     </master_item>
-                    <request_method>POST</request_method>
                     <tags>
                         <tag>
                             <tag>Application</tag>
@@ -302,7 +293,6 @@
                     <master_item>
                         <key>puppet[]</key>
                     </master_item>
-                    <request_method>POST</request_method>
                     <tags>
                         <tag>
                             <tag>Application</tag>
@@ -329,7 +319,6 @@
                     <master_item>
                         <key>puppet[]</key>
                     </master_item>
-                    <request_method>POST</request_method>
                     <tags>
                         <tag>
                             <tag>Application</tag>
@@ -356,7 +345,6 @@
                     <master_item>
                         <key>puppet[]</key>
                     </master_item>
-                    <request_method>POST</request_method>
                     <tags>
                         <tag>
                             <tag>Application</tag>
@@ -383,7 +371,6 @@
                     <master_item>
                         <key>puppet[]</key>
                     </master_item>
-                    <request_method>POST</request_method>
                     <tags>
                         <tag>
                             <tag>Application</tag>
@@ -410,7 +397,6 @@
                     <master_item>
                         <key>puppet[]</key>
                     </master_item>
-                    <request_method>POST</request_method>
                     <tags>
                         <tag>
                             <tag>Application</tag>
@@ -438,7 +424,6 @@
                     <master_item>
                         <key>puppet[]</key>
                     </master_item>
-                    <request_method>POST</request_method>
                     <tags>
                         <tag>
                             <tag>Application</tag>
@@ -475,7 +460,6 @@
                     <master_item>
                         <key>puppet[]</key>
                     </master_item>
-                    <request_method>POST</request_method>
                     <tags>
                         <tag>
                             <tag>Application</tag>
@@ -510,7 +494,6 @@
                     <master_item>
                         <key>puppet[]</key>
                     </master_item>
-                    <request_method>POST</request_method>
                     <tags>
                         <tag>
                             <tag>Application</tag>
@@ -553,7 +536,6 @@
                     <master_item>
                         <key>puppet[]</key>
                     </master_item>
-                    <request_method>POST</request_method>
                     <tags>
                         <tag>
                             <tag>Application</tag>
@@ -570,7 +552,6 @@
                     <history>3d</history>
                     <trends>0</trends>
                     <value_type>TEXT</value_type>
-                    <request_method>POST</request_method>
                     <tags>
                         <tag>
                             <tag>Application</tag>

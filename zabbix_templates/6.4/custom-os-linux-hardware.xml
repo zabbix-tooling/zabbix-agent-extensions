@@ -46,7 +46,6 @@
                             <history>60d</history>
                             <trends>0</trends>
                             <value_type>TEXT</value_type>
-                            <request_method>POST</request_method>
                             <tags>
                                 <tag>
                                     <tag>Application</tag>
@@ -71,7 +70,6 @@
                             <delay>2h</delay>
                             <history>1w</history>
                             <trends>0</trends>
-                            <request_method>POST</request_method>
                             <tags>
                                 <tag>
                                     <tag>Application</tag>
@@ -87,7 +85,6 @@
                             <delay>2h</delay>
                             <history>1w</history>
                             <trends>0</trends>
-                            <request_method>POST</request_method>
                             <tags>
                                 <tag>
                                     <tag>Application</tag>
@@ -112,7 +109,6 @@
                                     </parameters>
                                 </step>
                             </preprocessing>
-                            <request_method>POST</request_method>
                             <tags>
                                 <tag>
                                     <tag>Application</tag>
@@ -128,7 +124,6 @@
                             <delay>2h</delay>
                             <history>1w</history>
                             <trends>0</trends>
-                            <request_method>POST</request_method>
                             <tags>
                                 <tag>
                                     <tag>Application</tag>
@@ -144,7 +139,6 @@
                             <delay>2h</delay>
                             <history>1w</history>
                             <trends>0</trends>
-                            <request_method>POST</request_method>
                             <tags>
                                 <tag>
                                     <tag>Application</tag>
@@ -161,7 +155,6 @@
                             <history>1w</history>
                             <trends>90d</trends>
                             <units>C</units>
-                            <request_method>POST</request_method>
                             <tags>
                                 <tag>
                                     <tag>Application</tag>
@@ -176,7 +169,6 @@
                             <key>hardware.disk.smart.attributes[{#BLOCKDEVICE},UDMA_CRC_Error_Count]</key>
                             <delay>2h</delay>
                             <history>1w</history>
-                            <request_method>POST</request_method>
                             <tags>
                                 <tag>
                                     <tag>Application</tag>
@@ -192,7 +184,6 @@
                             <delay>1d</delay>
                             <trends>0</trends>
                             <value_type>CHAR</value_type>
-                            <request_method>POST</request_method>
                             <tags>
                                 <tag>
                                     <tag>Application</tag>
@@ -208,7 +199,6 @@
                             <delay>1d</delay>
                             <trends>0</trends>
                             <value_type>CHAR</value_type>
-                            <request_method>POST</request_method>
                             <tags>
                                 <tag>
                                     <tag>Application</tag>
@@ -297,7 +287,6 @@
                             </graph_items>
                         </graph_prototype>
                     </graph_prototypes>
-                    <request_method>POST</request_method>
                 </discovery_rule>
             </discovery_rules>
             <macros>

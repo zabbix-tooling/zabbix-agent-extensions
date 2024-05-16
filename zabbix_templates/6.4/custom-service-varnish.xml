@@ -36,7 +36,6 @@
                             </parameters>
                         </step>
                     </preprocessing>
-                    <request_method>POST</request_method>
                     <tags>
                         <tag>
                             <tag>Application</tag>
@@ -60,7 +59,6 @@
                             </parameters>
                         </step>
                     </preprocessing>
-                    <request_method>POST</request_method>
                     <tags>
                         <tag>
                             <tag>Application</tag>
@@ -88,7 +86,6 @@
                             </parameters>
                         </step>
                     </preprocessing>
-                    <request_method>POST</request_method>
                     <tags>
                         <tag>
                             <tag>Application</tag>
@@ -116,7 +113,6 @@
                             </parameters>
                         </step>
                     </preprocessing>
-                    <request_method>POST</request_method>
                     <tags>
                         <tag>
                             <tag>Application</tag>
@@ -144,7 +140,6 @@
                             </parameters>
                         </step>
                     </preprocessing>
-                    <request_method>POST</request_method>
                     <tags>
                         <tag>
                             <tag>Application</tag>
@@ -172,7 +167,6 @@
                             </parameters>
                         </step>
                     </preprocessing>
-                    <request_method>POST</request_method>
                     <tags>
                         <tag>
                             <tag>Application</tag>
@@ -200,7 +194,6 @@
                             </parameters>
                         </step>
                     </preprocessing>
-                    <request_method>POST</request_method>
                     <tags>
                         <tag>
                             <tag>Application</tag>
@@ -228,7 +221,6 @@
                             </parameters>
                         </step>
                     </preprocessing>
-                    <request_method>POST</request_method>
                     <tags>
                         <tag>
                             <tag>Application</tag>
@@ -256,7 +248,6 @@
                             </parameters>
                         </step>
                     </preprocessing>
-                    <request_method>POST</request_method>
                     <tags>
                         <tag>
                             <tag>Application</tag>
@@ -284,7 +275,6 @@
                             </parameters>
                         </step>
                     </preprocessing>
-                    <request_method>POST</request_method>
                     <tags>
                         <tag>
                             <tag>Application</tag>
@@ -312,7 +302,6 @@
                             </parameters>
                         </step>
                     </preprocessing>
-                    <request_method>POST</request_method>
                     <tags>
                         <tag>
                             <tag>Application</tag>
@@ -340,7 +329,6 @@
                             </parameters>
                         </step>
                     </preprocessing>
-                    <request_method>POST</request_method>
                     <tags>
                         <tag>
                             <tag>Application</tag>
@@ -368,7 +356,6 @@
                             </parameters>
                         </step>
                     </preprocessing>
-                    <request_method>POST</request_method>
                     <tags>
                         <tag>
                             <tag>Application</tag>
@@ -397,7 +384,6 @@
                             </parameters>
                         </step>
                     </preprocessing>
-                    <request_method>POST</request_method>
                     <tags>
                         <tag>
                             <tag>Application</tag>
@@ -425,7 +411,6 @@
                             </parameters>
                         </step>
                     </preprocessing>
-                    <request_method>POST</request_method>
                     <tags>
                         <tag>
                             <tag>Application</tag>
@@ -453,7 +438,6 @@
                             </parameters>
                         </step>
                     </preprocessing>
-                    <request_method>POST</request_method>
                     <tags>
                         <tag>
                             <tag>Application</tag>
@@ -481,7 +465,6 @@
                             </parameters>
                         </step>
                     </preprocessing>
-                    <request_method>POST</request_method>
                     <tags>
                         <tag>
                             <tag>Application</tag>
@@ -509,7 +492,6 @@
                             </parameters>
                         </step>
                     </preprocessing>
-                    <request_method>POST</request_method>
                     <tags>
                         <tag>
                             <tag>Application</tag>
@@ -537,7 +519,6 @@
                             </parameters>
                         </step>
                     </preprocessing>
-                    <request_method>POST</request_method>
                     <tags>
                         <tag>
                             <tag>Application</tag>
@@ -565,7 +546,6 @@
                             </parameters>
                         </step>
                     </preprocessing>
-                    <request_method>POST</request_method>
                     <tags>
                         <tag>
                             <tag>Application</tag>
@@ -593,7 +573,6 @@
                             </parameters>
                         </step>
                     </preprocessing>
-                    <request_method>POST</request_method>
                     <tags>
                         <tag>
                             <tag>Application</tag>
@@ -621,7 +600,6 @@
                             </parameters>
                         </step>
                     </preprocessing>
-                    <request_method>POST</request_method>
                     <tags>
                         <tag>
                             <tag>Application</tag>
@@ -649,7 +627,6 @@
                             </parameters>
                         </step>
                     </preprocessing>
-                    <request_method>POST</request_method>
                     <tags>
                         <tag>
                             <tag>Application</tag>
@@ -677,7 +654,6 @@
                             </parameters>
                         </step>
                     </preprocessing>
-                    <request_method>POST</request_method>
                     <tags>
                         <tag>
                             <tag>Application</tag>
@@ -705,7 +681,6 @@
                             </parameters>
                         </step>
                     </preprocessing>
-                    <request_method>POST</request_method>
                     <tags>
                         <tag>
                             <tag>Application</tag>
@@ -733,7 +708,6 @@
                             </parameters>
                         </step>
                     </preprocessing>
-                    <request_method>POST</request_method>
                     <tags>
                         <tag>
                             <tag>Application</tag>
@@ -761,7 +735,6 @@
                             </parameters>
                         </step>
                     </preprocessing>
-                    <request_method>POST</request_method>
                     <tags>
                         <tag>
                             <tag>Application</tag>
@@ -789,7 +762,6 @@
                             </parameters>
                         </step>
                     </preprocessing>
-                    <request_method>POST</request_method>
                     <tags>
                         <tag>
                             <tag>Application</tag>
@@ -806,7 +778,6 @@
                     <name>N expired objects</name>
                     <key>varnish.stat[n_expired]</key>
                     <delay>60</delay>
-                    <allowed_hosts>localhost</allowed_hosts>
                     <preprocessing>
                         <step>
                             <type>CHANGE_PER_SECOND</type>
@@ -815,14 +786,12 @@
                             </parameters>
                         </step>
                     </preprocessing>
-                    <request_method>POST</request_method>
                 </item>
                 <item>
                     <uuid>6b33d0cd1ce242298d6de19fea75d328</uuid>
                     <name>N LRU moved objects</name>
                     <key>varnish.stat[n_lru_moved]</key>
                     <delay>60</delay>
-                    <allowed_hosts>localhost</allowed_hosts>
                     <preprocessing>
                         <step>
                             <type>CHANGE_PER_SECOND</type>
@@ -831,14 +800,12 @@
                             </parameters>
                         </step>
                     </preprocessing>
-                    <request_method>POST</request_method>
                 </item>
                 <item>
                     <uuid>5ddef535ffef4b4690505f7c220efa1d</uuid>
                     <name>N LRU nuked objects</name>
                     <key>varnish.stat[n_lru_nuked]</key>
                     <delay>60</delay>
-                    <allowed_hosts>localhost</allowed_hosts>
                     <preprocessing>
                         <step>
                             <type>CHANGE_PER_SECOND</type>
@@ -847,28 +814,24 @@
                             </parameters>
                         </step>
                     </preprocessing>
-                    <request_method>POST</request_method>
                 </item>
                 <item>
                     <uuid>468eedb8338c4150888119b7c735dbd7</uuid>
                     <name>N struct objectcore</name>
                     <key>varnish.stat[n_objectcore]</key>
                     <delay>60</delay>
-                    <request_method>POST</request_method>
                 </item>
                 <item>
                     <uuid>84baae82571849a09f949dc02c0f8de3</uuid>
                     <name>N struct objecthead</name>
                     <key>varnish.stat[n_objecthead]</key>
                     <delay>60</delay>
-                    <request_method>POST</request_method>
                 </item>
                 <item>
                     <uuid>79e02e3508284073938a13cb7b0f372b</uuid>
                     <name>N struct object</name>
                     <key>varnish.stat[n_object]</key>
                     <delay>60</delay>
-                    <request_method>POST</request_method>
                 </item>
                 <item>
                     <uuid>ff94bc53aac04f829677c2371ba5032a</uuid>
@@ -886,7 +849,6 @@
                             </parameters>
                         </step>
                     </preprocessing>
-                    <request_method>POST</request_method>
                     <tags>
                         <tag>
                             <tag>Application</tag>
@@ -914,7 +876,6 @@
                             </parameters>
                         </step>
                     </preprocessing>
-                    <request_method>POST</request_method>
                     <tags>
                         <tag>
                             <tag>Application</tag>
@@ -942,7 +903,6 @@
                             </parameters>
                         </step>
                     </preprocessing>
-                    <request_method>POST</request_method>
                     <tags>
                         <tag>
                             <tag>Application</tag>
@@ -959,7 +919,6 @@
                     <name>N unresurrected objects</name>
                     <key>varnish.stat[n_vampireobject]</key>
                     <delay>60</delay>
-                    <request_method>POST</request_method>
                 </item>
                 <item>
                     <uuid>dadc546246064b15bb8a3a269325ba3b</uuid>
@@ -968,7 +927,6 @@
                     <delay>90</delay>
                     <history>14d</history>
                     <trends>90d</trends>
-                    <request_method>POST</request_method>
                     <tags>
                         <tag>
                             <tag>Application</tag>
@@ -987,7 +945,6 @@
                     <delay>90</delay>
                     <history>14d</history>
                     <trends>90d</trends>
-                    <request_method>POST</request_method>
                     <tags>
                         <tag>
                             <tag>Application</tag>
@@ -1006,7 +963,6 @@
                     <delay>90</delay>
                     <history>14d</history>
                     <trends>90d</trends>
-                    <request_method>POST</request_method>
                     <tags>
                         <tag>
                             <tag>Application</tag>
@@ -1025,7 +981,6 @@
                     <delay>90</delay>
                     <history>14d</history>
                     <trends>90d</trends>
-                    <request_method>POST</request_method>
                     <tags>
                         <tag>
                             <tag>Application</tag>
@@ -1044,7 +999,6 @@
                     <delay>90</delay>
                     <history>14d</history>
                     <trends>90d</trends>
-                    <request_method>POST</request_method>
                     <tags>
                         <tag>
                             <tag>Application</tag>
@@ -1063,7 +1017,6 @@
                     <delay>90</delay>
                     <history>14d</history>
                     <trends>90d</trends>
-                    <request_method>POST</request_method>
                     <tags>
                         <tag>
                             <tag>Application</tag>
@@ -1082,7 +1035,6 @@
                     <delay>90</delay>
                     <history>14d</history>
                     <trends>90d</trends>
-                    <request_method>POST</request_method>
                     <tags>
                         <tag>
                             <tag>Application</tag>
@@ -1110,7 +1062,6 @@
                             </parameters>
                         </step>
                     </preprocessing>
-                    <request_method>POST</request_method>
                     <tags>
                         <tag>
                             <tag>Application</tag>
@@ -1138,7 +1089,6 @@
                             </parameters>
                         </step>
                     </preprocessing>
-                    <request_method>POST</request_method>
                     <tags>
                         <tag>
                             <tag>Application</tag>
@@ -1166,7 +1116,6 @@
                             </parameters>
                         </step>
                     </preprocessing>
-                    <request_method>POST</request_method>
                     <tags>
                         <tag>
                             <tag>Application</tag>
@@ -1194,7 +1143,6 @@
                             </parameters>
                         </step>
                     </preprocessing>
-                    <request_method>POST</request_method>
                     <tags>
                         <tag>
                             <tag>Application</tag>
@@ -1222,7 +1170,6 @@
                             </parameters>
                         </step>
                     </preprocessing>
-                    <request_method>POST</request_method>
                     <tags>
                         <tag>
                             <tag>Application</tag>
@@ -1242,7 +1189,6 @@
                     <history>14d</history>
                     <trends>0</trends>
                     <value_type>FLOAT</value_type>
-                    <request_method>POST</request_method>
                     <tags>
                         <tag>
                             <tag>Application</tag>

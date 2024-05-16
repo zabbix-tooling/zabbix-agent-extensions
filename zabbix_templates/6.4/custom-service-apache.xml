@@ -34,7 +34,6 @@
                             </parameters>
                         </step>
                     </preprocessing>
-                    <request_method>POST</request_method>
                     <tags>
                         <tag>
                             <tag>Application</tag>
@@ -53,7 +52,6 @@
                     <status>DISABLED</status>
                     <units>backends</units>
                     <description>Activated Backends</description>
-                    <request_method>POST</request_method>
                     <tags>
                         <tag>
                             <tag>Application</tag>
@@ -72,7 +70,6 @@
                     <status>DISABLED</status>
                     <units>backends</units>
                     <description>Disabled Backends, no new sessions</description>
-                    <request_method>POST</request_method>
                     <tags>
                         <tag>
                             <tag>Application</tag>
@@ -91,7 +88,6 @@
                     <status>DISABLED</status>
                     <units>backends</units>
                     <description>Stopped Backends, no request processing</description>
-                    <request_method>POST</request_method>
                     <tags>
                         <tag>
                             <tag>Application</tag>
@@ -121,7 +117,6 @@
                             </parameters>
                         </step>
                     </preprocessing>
-                    <request_method>POST</request_method>
                     <tags>
                         <tag>
                             <tag>Application</tag>
@@ -138,7 +133,6 @@
                     <trends>30d</trends>
                     <units>tasks</units>
                     <description>Apache workers which are currently in keepalive state</description>
-                    <request_method>POST</request_method>
                     <tags>
                         <tag>
                             <tag>Application</tag>
@@ -155,7 +149,6 @@
                     <trends>30d</trends>
                     <units>tasks</units>
                     <description>Apache workers which are currently reading a request.</description>
-                    <request_method>POST</request_method>
                     <tags>
                         <tag>
                             <tag>Application</tag>
@@ -173,7 +166,6 @@
                     <trends>30d</trends>
                     <units>bytes</units>
                     <description>Average RSS memory used by apache process</description>
-                    <request_method>POST</request_method>
                     <tags>
                         <tag>
                             <tag>Application</tag>
@@ -191,7 +183,6 @@
                     <trends>30d</trends>
                     <units>bytes</units>
                     <description>Biggest RSS memory used by apache process</description>
-                    <request_method>POST</request_method>
                     <tags>
                         <tag>
                             <tag>Application</tag>
@@ -209,7 +200,6 @@
                     <trends>30d</trends>
                     <units>bytes</units>
                     <description>Smallest RSS memory used by apache process</description>
-                    <request_method>POST</request_method>
                     <tags>
                         <tag>
                             <tag>Application</tag>
@@ -227,7 +217,6 @@
                     <trends>30d</trends>
                     <units>bytes</units>
                     <description>Total RSS memory used by apache</description>
-                    <request_method>POST</request_method>
                     <tags>
                         <tag>
                             <tag>Application</tag>
@@ -245,7 +234,6 @@
                     <trends>0</trends>
                     <units>tasks</units>
                     <description>Total amout of possible apache workers.</description>
-                    <request_method>POST</request_method>
                     <tags>
                         <tag>
                             <tag>Application</tag>
@@ -262,7 +250,6 @@
                     <trends>30d</trends>
                     <units>tasks</units>
                     <description>Apache workers which are currently a request result writing to a client.</description>
-                    <request_method>POST</request_method>
                     <tags>
                         <tag>
                             <tag>Application</tag>
@@ -290,7 +277,6 @@
                     <valuemap>
                         <name>Service state</name>
                     </valuemap>
-                    <request_method>POST</request_method>
                     <tags>
                         <tag>
                             <tag>Application</tag>
@@ -317,7 +303,6 @@
                     <trends>30d</trends>
                     <value_type>FLOAT</value_type>
                     <units>sec</units>
-                    <request_method>POST</request_method>
                     <tags>
                         <tag>
                             <tag>Application</tag>
