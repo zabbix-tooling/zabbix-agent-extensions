@@ -73,7 +73,7 @@
 <td>Type</td><td>ZABBIX_ACTIVE</td>
 </tr>
 <tr>
-<td>Delay</td><td></td>
+<td>Delay</td><td>60m</td>
 </tr>
 </table>
 <h2>Trigger Overview</h2>
@@ -88,23 +88,23 @@
 <th>Name</th><th>Elements</th>
 </tr>
 <tr>
-<td>IO: Activities</td><td><tt>custom.vfs.dev.io.active[{#BLOCKDEVICE}]<br>custom.vfs.dev.queue_depth[{#BLOCKDEVICE}]<br>
+<td>{#BLOCKDEVICE} - IO: Activities</td><td><tt>custom.vfs.dev.io.active[{#BLOCKDEVICE}]<br>custom.vfs.dev.queue_depth[{#BLOCKDEVICE}]<br>
 </tt></td>
 </tr>
 <tr>
-<td>IO: Merged Operations</td><td><tt>custom.vfs.dev.read.merged[{#BLOCKDEVICE}]<br>custom.vfs.dev.write.merged[{#BLOCKDEVICE}]<br>
+<td>{#BLOCKDEVICE} - IO: Merged Operations</td><td><tt>custom.vfs.dev.read.merged[{#BLOCKDEVICE}]<br>custom.vfs.dev.write.merged[{#BLOCKDEVICE}]<br>
 </tt></td>
 </tr>
 <tr>
-<td>IO: Milleseconds spend in IO</td><td><tt>custom.vfs.dev.read.ms[{#BLOCKDEVICE}]<br>custom.vfs.dev.write.ms[{#BLOCKDEVICE}]<br>custom.vfs.dev.io.ms[{#BLOCKDEVICE}]<br>custom.vfs.dev.weight.io.ms[{#BLOCKDEVICE}]<br>
+<td>{#BLOCKDEVICE} - IO: Milleseconds spend in IO</td><td><tt>custom.vfs.dev.read.ms[{#BLOCKDEVICE}]<br>custom.vfs.dev.write.ms[{#BLOCKDEVICE}]<br>custom.vfs.dev.io.ms[{#BLOCKDEVICE}]<br>custom.vfs.dev.weight.io.ms[{#BLOCKDEVICE}]<br>
 </tt></td>
 </tr>
 <tr>
-<td>IO: Ops</td><td><tt>custom.vfs.dev.read.ops[{#BLOCKDEVICE}]<br>custom.vfs.dev.write.ops[{#BLOCKDEVICE}]<br>
+<td>{#BLOCKDEVICE} - IO: Ops</td><td><tt>custom.vfs.dev.read.ops[{#BLOCKDEVICE}]<br>custom.vfs.dev.write.ops[{#BLOCKDEVICE}]<br>
 </tt></td>
 </tr>
 <tr>
-<td>IO: Transfer</td><td><tt>custom.vfs.dev.read.sectors[{#BLOCKDEVICE}]<br>custom.vfs.dev.write.sectors[{#BLOCKDEVICE}]<br>
+<td>{#BLOCKDEVICE} -  IO: Transfer</td><td><tt>custom.vfs.dev.read.sectors[{#BLOCKDEVICE}]<br>custom.vfs.dev.write.sectors[{#BLOCKDEVICE}]<br>
 </tt></td>
 </tr>
 </table>
@@ -115,47 +115,47 @@
 </tr>
 <tr>
 <td>ZABBIX_ACTIVE</td><td>{#BLOCKDEVICE} - IO: Currently Active</td><td><tt>custom.vfs.dev.io.active[{#BLOCKDEVICE}]</tt></td><td>Number of I/Os currently in progress.
-The only field that should go to zero. Incremented as requests are given to appropriate struct request_queue and decremented as they finish.</td><td></td><td></td><td></td>
+The only field that should go to zero. Incremented as requests are given to appropriate struct request_queue and decremented as they finish.</td><td></td><td>14d</td><td>0</td>
 </tr>
 <tr>
-<td>ZABBIX_ACTIVE</td><td>{#BLOCKDEVICE} - IO: Milleseconds spend in IO</td><td><tt>custom.vfs.dev.io.ms[{#BLOCKDEVICE}]</tt></td><td>Number of milliseconds spent doing I/Os. This field increases so long as field #12 (custom.vfs.dev.io.active) is nonzero.</td><td></td><td></td><td></td>
+<td>ZABBIX_ACTIVE</td><td>{#BLOCKDEVICE} - IO: Milleseconds spend in IO</td><td><tt>custom.vfs.dev.io.ms[{#BLOCKDEVICE}]</tt></td><td>Number of milliseconds spent doing I/Os. This field increases so long as field #12 (custom.vfs.dev.io.active) is nonzero.</td><td></td><td>14d</td><td>0</td>
 </tr>
 <tr>
-<td>ZABBIX_ACTIVE</td><td>{#BLOCKDEVICE} - IO:Queue Depth</td><td><tt>custom.vfs.dev.queue_depth[{#BLOCKDEVICE}]</tt></td><td>Number of I/Os currently in progress.&amp;#13;
-The only field that should go to zero. Incremented as requests are given to appropriate struct request_queue and decremented as they finish.</td><td></td><td></td><td></td>
+<td>ZABBIX_ACTIVE</td><td>{#BLOCKDEVICE} - IO: Queue Depth</td><td><tt>custom.vfs.dev.queue_depth[{#BLOCKDEVICE}]</tt></td><td>Number of I/Os currently in progress.&amp;#13;
+The only field that should go to zero. Incremented as requests are given to appropriate struct request_queue and decremented as they finish.</td><td></td><td>14d</td><td>0</td>
 </tr>
 <tr>
 <td>ZABBIX_ACTIVE</td><td>{#BLOCKDEVICE} - IO: Merged Reads</td><td><tt>custom.vfs.dev.read.merged[{#BLOCKDEVICE}]</tt></td><td>Number of reads merged.
-Reads and writes which are adjacent to each other may be merged for efficiency. Thus two 4K reads may become one 8K read before it is ultimately handed to the disk, and so it will be counted (and queued) as only one I/O.  This field lets you know how often this was done.</td><td></td><td></td><td></td>
+Reads and writes which are adjacent to each other may be merged for efficiency. Thus two 4K reads may become one 8K read before it is ultimately handed to the disk, and so it will be counted (and queued) as only one I/O.  This field lets you know how often this was done.</td><td></td><td>14d</td><td>0</td>
 </tr>
 <tr>
 <td>ZABBIX_ACTIVE</td><td>{#BLOCKDEVICE} - IO: Milleseconds spend in Read IO</td><td><tt>custom.vfs.dev.read.ms[{#BLOCKDEVICE}]</tt></td><td>Number of milliseconds spent reading.
-This is the total number of milliseconds spent by all reads (as measured from __make_request() to end_that_request_last()).</td><td></td><td></td><td></td>
+This is the total number of milliseconds spent by all reads (as measured from __make_request() to end_that_request_last()).</td><td></td><td>14d</td><td>0</td>
 </tr>
 <tr>
-<td>ZABBIX_ACTIVE</td><td>{#BLOCKDEVICE} - IO: Ops Read</td><td><tt>custom.vfs.dev.read.ops[{#BLOCKDEVICE}]</tt></td><td>This is the total number of reads completed successfully.</td><td></td><td></td><td></td>
+<td>ZABBIX_ACTIVE</td><td>{#BLOCKDEVICE} - IO: Ops Read</td><td><tt>custom.vfs.dev.read.ops[{#BLOCKDEVICE}]</tt></td><td>This is the total number of reads completed successfully.</td><td></td><td>14d</td><td>0</td>
 </tr>
 <tr>
-<td>ZABBIX_ACTIVE</td><td>{#BLOCKDEVICE} - IO Transfer Read</td><td><tt>custom.vfs.dev.read.sectors[{#BLOCKDEVICE}]</tt></td><td>This is the total number of sectors read successfully.</td><td></td><td></td><td></td>
+<td>ZABBIX_ACTIVE</td><td>{#BLOCKDEVICE} - IO Transfer Read</td><td><tt>custom.vfs.dev.read.sectors[{#BLOCKDEVICE}]</tt></td><td>This is the total number of sectors read successfully.</td><td></td><td>14d</td><td>0</td>
 </tr>
 <tr>
 <td>ZABBIX_ACTIVE</td><td>{#BLOCKDEVICE} - IO: Milleseconds weighted spend in IO</td><td><tt>custom.vfs.dev.weight.io.ms[{#BLOCKDEVICE}]</tt></td><td>Weighted number of milliseconds spent doing I/Os.
 
-This field is incremented at each I/O start, I/O completion, I/O merge, or read of these stats by the number of I/Os in progress (field 12) times the number of milliseconds spent doing I/O since the last update of this field.  This can provide an easy measure of both I/O completion time and the backlog that may be accumulating</td><td></td><td></td><td></td>
+This field is incremented at each I/O start, I/O completion, I/O merge, or read of these stats by the number of I/Os in progress (field 12) times the number of milliseconds spent doing I/O since the last update of this field.  This can provide an easy measure of both I/O completion time and the backlog that may be accumulating</td><td></td><td>14d</td><td>0</td>
 </tr>
 <tr>
 <td>ZABBIX_ACTIVE</td><td>{#BLOCKDEVICE} - IO: Merged Writes</td><td><tt>custom.vfs.dev.write.merged[{#BLOCKDEVICE}]</tt></td><td>Number of writes merged.
-Reads and writes which are adjacent to each other may be merged for efficiency. Thus two 4K reads may become one 8K read before it is ultimately handed to the disk, and so it will be counted (and queued) as only one I/O.  This field lets you know how often this was done.</td><td></td><td></td><td></td>
+Reads and writes which are adjacent to each other may be merged for efficiency. Thus two 4K reads may become one 8K read before it is ultimately handed to the disk, and so it will be counted (and queued) as only one I/O.  This field lets you know how often this was done.</td><td></td><td>14d</td><td>0</td>
 </tr>
 <tr>
 <td>ZABBIX_ACTIVE</td><td>{#BLOCKDEVICE} - IO: Milleseconds spend in Write IO</td><td><tt>custom.vfs.dev.write.ms[{#BLOCKDEVICE}]</tt></td><td>Number of milliseconds spent writing.&amp;#13;
-This is the total number of milliseconds spent by all writes (as measured from __make_request() to end_that_request_last()).</td><td></td><td></td><td></td>
+This is the total number of milliseconds spent by all writes (as measured from __make_request() to end_that_request_last()).</td><td></td><td>14d</td><td>0</td>
 </tr>
 <tr>
-<td>ZABBIX_ACTIVE</td><td>{#BLOCKDEVICE} - IO: Ops Write</td><td><tt>custom.vfs.dev.write.ops[{#BLOCKDEVICE}]</tt></td><td>This is the total number of reads completed successfully.</td><td></td><td></td><td></td>
+<td>ZABBIX_ACTIVE</td><td>{#BLOCKDEVICE} - IO: Ops Write</td><td><tt>custom.vfs.dev.write.ops[{#BLOCKDEVICE}]</tt></td><td>This is the total number of reads completed successfully.</td><td></td><td>14d</td><td>0</td>
 </tr>
 <tr>
-<td>ZABBIX_ACTIVE</td><td>{#BLOCKDEVICE} - IO Transfer Write</td><td><tt>custom.vfs.dev.write.sectors[{#BLOCKDEVICE}]</tt></td><td>This is the total number of sectors write successfully.</td><td></td><td></td><td></td>
+<td>ZABBIX_ACTIVE</td><td>{#BLOCKDEVICE} - IO Transfer Write</td><td><tt>custom.vfs.dev.write.sectors[{#BLOCKDEVICE}]</tt></td><td>This is the total number of sectors write successfully.</td><td></td><td>14d</td><td>0</td>
 </tr>
 </table>
 </body>
