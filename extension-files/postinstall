@@ -19,7 +19,7 @@ if (grep -q -P "Ubuntu|Debian|CentOS|Raspbian" /etc/os-release);then
      echo "" >> /etc/zabbix/$AGENT_CONF
      echo "#################################################################" >> /etc/zabbix/$AGENT_CONF
      echo "# Added by postinstall of package zabbix-agent-extensions" >> /etc/zabbix/$AGENT_CONF
-     echo "$THE_INCLUDE" >> /etc/zabbix/$AGENT_CONF_CONF
+     echo "$THE_INCLUDE" >> /etc/zabbix/$AGENT_CONF
 
    fi
 
@@ -40,7 +40,7 @@ if (grep -q -P "Ubuntu|Debian|CentOS|Raspbian" /etc/os-release);then
 
    mkdir -m 755 -p /etc/zabbix/zabbix-discovery-generic
    chown zabbix:zabbix /etc/zabbix/zabbix-discovery-generic
-  
+
    if (which systemctl >/dev/null 2>&1);then
       echo "Restarting with systemctl"
       systemctl restart $AGENT.service
