@@ -35,7 +35,6 @@
                             <history>2h</history>
                             <trends>0</trends>
                             <value_type>TEXT</value_type>
-                            <request_method>POST</request_method>
                             <tags>
                                 <tag>
                                     <tag>Application</tag>
@@ -53,7 +52,6 @@
                             <value_type>FLOAT</value_type>
                             <units>s</units>
                             <params>last(//springboot.uri[{#URI},time])/last(//springboot.uri[{#URI},requests])</params>
-                            <request_method>POST</request_method>
                             <tags>
                                 <tag>
                                     <tag>Application</tag>
@@ -87,7 +85,6 @@
                             <master_item>
                                 <key>springboot.get[{$SPRINGBOOT_BASE_URI}/metrics/http.server.requests,tag=uri:{#URI}]</key>
                             </master_item>
-                            <request_method>POST</request_method>
                             <tags>
                                 <tag>
                                     <tag>Application</tag>
@@ -122,7 +119,6 @@
                             <master_item>
                                 <key>springboot.get[{$SPRINGBOOT_BASE_URI}/metrics/http.server.requests,tag=uri:{#URI}]</key>
                             </master_item>
-                            <request_method>POST</request_method>
                             <tags>
                                 <tag>
                                     <tag>Application</tag>
@@ -157,7 +153,6 @@
                             <master_item>
                                 <key>springboot.get[{$SPRINGBOOT_BASE_URI}/metrics/http.server.requests,tag=uri:{#URI}]</key>
                             </master_item>
-                            <request_method>POST</request_method>
                             <tags>
                                 <tag>
                                     <tag>Application</tag>
@@ -194,7 +189,6 @@
                             </graph_items>
                         </graph_prototype>
                     </graph_prototypes>
-                    <request_method>POST</request_method>
                 </discovery_rule>
             </discovery_rules>
             <macros>
