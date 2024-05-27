@@ -64,9 +64,9 @@ def read_config(config_file):
             content = fh.read()
 
             # Remove multiline comments
-            content = re.sub('^\s*/\*.*?\*/\s*', '', content, 0, re.DOTALL | re.MULTILINE)
+            content = re.sub(r'^\s*/\*.*?\*/\s*', '', content, 0, re.DOTALL | re.MULTILINE)
             # Remove single line comments
-            content = re.sub('^\s*//.*$\n', '', content, 0, re.MULTILINE)
+            content = re.sub(r'^\s*//.*$'+'\n', '', content, 0, re.MULTILINE)
 
             config = json.loads(content)
 

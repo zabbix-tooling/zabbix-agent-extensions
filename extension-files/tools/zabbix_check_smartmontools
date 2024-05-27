@@ -64,7 +64,7 @@ def get_attribute(device, attribute):
     #   1 Raw_Read_Error_Rate     0x000a   100   100   000    Old_age   Always       -       0
     for line in out.decode('utf8').splitlines():
         if attribute == "Temperature_Celsius":
-            line = re.sub("\(Min\/Max \d+\/\d+\)", "", line) 
+            line = re.sub(r"\(Min\/Max \d+\/\d+\)", "", line)
 
         m = re.match(r"^\s*\d+\s+([^\s]+?)\s+0x.*\s+(([^\s]+))\s*$", line)
         if not m:
