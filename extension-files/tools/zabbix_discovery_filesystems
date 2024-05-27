@@ -30,7 +30,7 @@ config_default = {
     "regex_includes_type": [".*"],
     "regex_excludes_name": [],
     "regex_excludes_type": ["nfs", "nfs4", "nfsd", "cifs", "autofs", "binfmt_misc", "cgroup", "cgroup2", "configfs",
-                            "debugfs", "overlay", "overlay2","systemd-1", "nsfs", "lxcfs", 
+                            "debugfs", "overlay", "overlay2","systemd-1", "nsfs", "lxcfs",
                             "devpts", "devtmpfs", "efivarfs", "fusectl", "fuse.gvfsd-fuse", "hugetlbfs", "mqueue",
                             "fuse.lxcfs", "xenfs", "rpc_pipefs", "efivarfs", "tracefs", "squashfs",
                             "proc", "pstore", "securityfs", "sysfs", "tmpfs", "vfat", "iso9660" ],
@@ -45,7 +45,7 @@ def check_match(matchfor, filesystem_name, config, key):
 
     if key in config:
         regexes = config[key]
-    else: 
+    else:
         regexes = []
 
     for regex in regexes:
@@ -67,9 +67,9 @@ def read_config(config_file):
             content = fh.read()
 
             # Remove multiline comments
-            content = re.sub('^\s*/\*.*?\*/\s*', '', content, 0, re.DOTALL | re.MULTILINE)
+            content = re.sub(r'^\s*/\*.*?\*/\s*', '', content, 0, re.DOTALL | re.MULTILINE)
             # Remove single line comments
-            content = re.sub('^\s*//.*$\n', '', content, 0, re.MULTILINE)
+            content = re.sub(r'^\s*//.*$'+'\n', '', content, 0, re.MULTILINE)
 
             config = json.loads(content)
 
