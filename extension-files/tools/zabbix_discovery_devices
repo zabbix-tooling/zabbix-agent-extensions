@@ -243,17 +243,30 @@ for filename in glob.glob('/sys/block/*'):
         for smartarg in config["smartctl_subdevices"][device_name]:
             device = {}
             device['{#BLOCKDEVICE}'] = device_name + " " + smartarg
+            device['{#DEVNAME}'] = device_name + " " + smartarg
+            device['{#DEVTYPE}'] = "disk"
             devices_discovered['data'].append(device)
     elif args.software_raid:
         if raid_disks_level:
             device = {}
             device['{#BLOCKDEVICE}'] = device_name
+            device['{#DEVNAME}'] = device_name
+            device['{#DEVTYPE}'] = "disk"
             device['{#RAIDLEVEL}'] = raid_disks_level.upper()
             devices_discovered['data'].append(device)
     else:
         device = {}
         device['{#BLOCKDEVICE}'] = device_name
+        device['{#DEVNAME}'] = device_name
+        device['{#DEVTYPE}'] = "disk"
         devices_discovered['data'].append(device)
+
+for filename in glob.glob('/sys/block/*/*/partition'):
+    partition = os.path.basename(os.path.dirname(filename))
+    device = {}
+    device['{#DEVNAME}'] = partition
+    device['{#DEVTYPE}'] = "partition"
+    devices_discovered['data'].append(device)
 
 if args.debug:
     print(json.dumps(devices_discovered, sort_keys=True, indent=2))

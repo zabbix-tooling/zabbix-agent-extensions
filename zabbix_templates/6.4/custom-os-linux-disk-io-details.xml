@@ -24,6 +24,15 @@
                     <type>ZABBIX_ACTIVE</type>
                     <key>vfs.dev.discovery.detail</key>
                     <delay>60m</delay>
+                    <filter>
+                        <conditions>
+                            <condition>
+                                <macro>{#BLOCKDEVICE}</macro>
+                                <value>.+</value>
+                                <formulaid>A</formulaid>
+                            </condition>
+                        </conditions>
+                    </filter>
                     <lifetime>14d</lifetime>
                     <item_prototypes>
                         <item_prototype>

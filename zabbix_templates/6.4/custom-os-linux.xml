@@ -39,7 +39,7 @@
                             <expression>count(/Custom - OS - Linux/agent.ping,#3,&quot;eq&quot;,&quot;0&quot;)=3</expression>
                             <name>Zabbix Agent Ping</name>
                             <priority>HIGH</priority>
-                            <description>Zabbix agent does not respond to a ping request in the last two calls or no information about 
+                            <description>Zabbix agent does not respond to a ping request in the last two calls or no information about
  agent-status is received in the last 30 minutes.</description>
                         </trigger>
                         <trigger>
@@ -232,11 +232,11 @@ This trigger does not recover automatically, to get rid of this trigger, you hav
                             <priority>AVERAGE</priority>
                             <description>Check if there are failed fiberchannel paths. Check zabbix_agent log, dmesg or &quot;multipath -ll&quot; to verify.
  Status &quot;ERROR&quot; is reported if one or more paths are not ok.
- 
- example output: 
- &quot;OK: L:6,P:15,B0&quot; 
- &quot;ERROR: L:6,P:15,B2&quot; 
- 
+
+ example output:
+ &quot;OK: L:6,P:15,B0&quot;
+ &quot;ERROR: L:6,P:15,B2&quot;
+
  L: Number of LUNS
  P: Number of paths
  B: Number of failed paths</description>
@@ -1573,6 +1573,15 @@ Remove the flagfile if you decide that no reboot is required (/var/run/reboot-re
                     <name>Software RAID discovery</name>
                     <key>vfs.dev.discovery.softwareraid</key>
                     <delay>1h</delay>
+                    <filter>
+                        <conditions>
+                            <condition>
+                                <macro>{#BLOCKDEVICE}</macro>
+                                <value>.+</value>
+                                <formulaid>A</formulaid>
+                            </condition>
+                        </conditions>
+                    </filter>
                     <lifetime>14d</lifetime>
                     <item_prototypes>
                         <item_prototype>
