@@ -145,7 +145,7 @@ if args.debug:
 with open("/proc/mounts", "r") as mounts:
     for line in mounts:
 
-        m = re.match("^([^ ]+) ([^ ]+) ([^ ]+) .*$", line)
+        m = re.match(r"^([^ ]+) ([^ ]+) ([^ ]+) .*$", line)
         if not m:
             continue
 

@@ -86,7 +86,7 @@ def get_info(device, info):
     out, err = process.communicate()
     result = None
     for line in out.decode('utf8').splitlines():
-        m = re.match("^%s:\s+(.*)$" % info, line)
+        m = re.match(r"^%s:\s+(.*)$" % info, line)
         if not m:
             continue
         result = m.group(1)
@@ -139,7 +139,7 @@ parser_group.add_argument(
 
 
 args = parser.parse_args()
-args.device = re.sub("/dev/+", "", args.device)
+args.device = re.sub(r"/dev/+", "", args.device)
 
 if args.health:
     get_health(args.device)

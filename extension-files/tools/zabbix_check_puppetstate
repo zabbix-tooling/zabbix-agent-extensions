@@ -41,7 +41,7 @@ def identifiy_trim_spaces(file_name):
     with open(file_name, 'r') as stream:
         for line in stream:
             if not line.startswith("---"):
-                m = re.match("^(\s*)[^ ]", line)
+                m = re.match(r"^(\s*)[^ ]", line)
                 if m:
                     return m.group(1)
 
@@ -59,14 +59,14 @@ def read_puppet_yaml(file_name):
         for line in stream:
 
             # Workaround for antique puppet releases
-            line = re.sub("^" + spaces_to_trim, '', line)
+            line = re.sub(r"^" + spaces_to_trim, '', line)
 
-            m = re.match("^([^ ]+):", line)
+            m = re.match(r"^([^ ]+):", line)
             if m:
                 key = m.group(1)
                 read_dict[key] = {}
                 continue
-            m = re.match("^[ ]+([^ ]+): (.+)$", line)
+            m = re.match(r"^[ ]+([^ ]+): (.+)$", line)
             if m:
                 read_dict[key][m.group(1)] = m.group(2)
 
@@ -111,7 +111,7 @@ for run_report_file in possible_run_report:
         try:
             with open(run_report_file) as report_data:
                 for line in report_data:
-                    m = re.match("^environment: (.+)$", line)
+                    m = re.match(r"^environment: (.+)$", line)
                     if m:
                         dict_state["environment"] = m.group(1)
                         break
