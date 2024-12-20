@@ -1418,7 +1418,7 @@ Remove the flagfile if you decide that no reboot is required (/var/run/reboot-re
                         <conditions>
                             <condition>
                                 <macro>{#BLOCKDEVICE}</macro>
-                                <value>^.*</value>
+                                <operator>EXISTS</operator>
                                 <formulaid>A</formulaid>
                             </condition>
                         </conditions>
@@ -1577,7 +1577,7 @@ Remove the flagfile if you decide that no reboot is required (/var/run/reboot-re
                         <conditions>
                             <condition>
                                 <macro>{#BLOCKDEVICE}</macro>
-                                <value>.+</value>
+                                <operator>EXISTS</operator>
                                 <formulaid>A</formulaid>
                             </condition>
                         </conditions>

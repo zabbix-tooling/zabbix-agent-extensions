@@ -28,7 +28,7 @@
                         <conditions>
                             <condition>
                                 <macro>{#BLOCKDEVICE}</macro>
-                                <value>.+</value>
+                                <operator>EXISTS</operator>
                                 <formulaid>A</formulaid>
                             </condition>
                         </conditions>
