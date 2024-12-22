@@ -22,7 +22,7 @@
                     <uuid>6e50927ae08242c0a136e53e23500428</uuid>
                     <name>Disk IO detail discovery</name>
                     <type>ZABBIX_ACTIVE</type>
-                    <key>vfs.dev.discovery.detail</key>
+                    <key>vfs.dev.discovery.rawdisks</key>
                     <delay>60m</delay>
                     <filter>
                         <conditions>
