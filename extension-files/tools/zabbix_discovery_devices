@@ -157,9 +157,16 @@ parser.add_argument(
 
 parser.add_argument(
     '--only_rawdisk',
-    help='Discovery for real raw/hardware devices',
+    help='Discovery for real raw/hardware devices and partitions',
     action='store_true',
 )
+
+parser.add_argument(
+    '--no_partitions',
+    help='Exclude partitions from discovery',
+    action='store_true',
+)
+
 
 parser.add_argument(
     '--config',
@@ -261,12 +268,19 @@ for filename in glob.glob('/sys/block/*'):
         device['{#DEVTYPE}'] = "disk"
         devices_discovered['data'].append(device)
 
-for filename in glob.glob('/sys/block/*/*/partition'):
-    partition = os.path.basename(os.path.dirname(filename))
-    device = {}
-    device['{#DEVNAME}'] = partition
-    device['{#DEVTYPE}'] = "partition"
-    devices_discovered['data'].append(device)
+if args.debug:
+    sys.stderr.write("** Discover partitions\n")
+
+if args.no_partitions:
+    if args.debug:
+        sys.stderr.write("do not add partitions to the result\n")
+else:
+    for filename in glob.glob('/sys/block/*/*/partition'):
+        partition = os.path.basename(os.path.dirname(filename))
+        device = {}
+        device['{#DEVNAME}'] = partition
+        device['{#DEVTYPE}'] = "partition"
+        devices_discovered['data'].append(device)
 
 if args.debug:
     print(json.dumps(devices_discovered, sort_keys=True, indent=2))
