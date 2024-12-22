@@ -142,22 +142,22 @@ parser.add_argument(
 )
 
 parser.add_argument(
-    '--check_not_devdev',
-    help='Check fpr a device at /dev',
+    '--check_for_dev',
+    help='Check for a device at /dev and exclude it if it does not exist',
     action='store_true',
 )
 
 
 parser.add_argument(
     '--software_raid',
-    help='Discovery for software_raid',
+    help='Discovery for software_raid devices',
     action='store_true',
 )
 
 
 parser.add_argument(
     '--only_rawdisk',
-    help='Output only hardware devices',
+    help='Discovery for real raw/hardware devices',
     action='store_true',
 )
 
@@ -194,7 +194,7 @@ for filename in glob.glob('/sys/block/*'):
     device_model_file = "/sys/block/%s/device/model" % device_name
     device_model = "UNDEFINED"
 
-    if not args.check_not_devdev and not os.path.exists("/dev/%s" % device_name):
+    if not args.check_for_dev and not os.path.exists("/dev/%s" % device_name):
        continue
 
     if os.path.isfile(device_model_file):
