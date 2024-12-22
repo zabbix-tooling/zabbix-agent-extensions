@@ -23,7 +23,7 @@
                     <uuid>841fe680e6cc4f1c9b6e7065ca044ffe</uuid>
                     <name>Hard Disk discovery</name>
                     <type>ZABBIX_ACTIVE</type>
-                    <key>vfs.dev.discovery.rawdisks</key>
+                    <key>vfs.dev.discovery.smart</key>
                     <delay>15m</delay>
                     <filter>
                         <conditions>
