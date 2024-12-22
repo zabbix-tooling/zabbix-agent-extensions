@@ -2,7 +2,7 @@ name: Build package and test
 on:
   push:
     branches:
-      - master
+      - '*'
 jobs:
   build:
     name: CI
@@ -12,7 +12,6 @@ jobs:
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
-          ref: refs/heads/master
       - name: Setup
         run: |
           sudo apt-get install ruby-dev build-essential debhelper devscripts rpm xalan wget -y
