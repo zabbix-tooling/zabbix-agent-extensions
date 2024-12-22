@@ -150,14 +150,14 @@ parser.add_argument(
 
 parser.add_argument(
     '--software_raid',
-    help='Discovery for software_raid devices',
+    help='Discovery only for software_raid devices',
     action='store_true',
 )
 
 
 parser.add_argument(
     '--only_rawdisk',
-    help='Discovery for real raw/hardware devices and partitions',
+    help='Discovery only for real raw/hardware devices',
     action='store_true',
 )
 
