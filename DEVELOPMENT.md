@@ -2,13 +2,13 @@
 
  * Install the packages on the zabbix agent host
  * Test the agent on the agent machine
- 
+
    ```
    zabbix_agentd  -t linux.dmesg
    zabbix_agentd --print
    ```
  * Test the agent on the server machine
- 
+
    ```
    apt-get install zabbix-get
    zabbix_get -s 127.0.0.1 -k linux.dmesg
@@ -23,7 +23,7 @@
    sudo apt-get install ruby-dev build-essential debhelper devscripts rpm xalan
    gem install --no-document fpm
    ```
- * Get the repo 
+ * Get the repo
    ```
    git clone https://github.com/scoopex/zabbix-agent-extensions
    cd zabbix-agent-extensions
@@ -35,7 +35,7 @@
    ./create_packages
    ```
  * Install the rpm or debian archive on as an addition to your zabbix-agent:
- 
+
    ```
    rpm -Uvh noarch/zabbix-agent-extensions-<version>.noarch.rpm
    dpkg -i zabbix-agent-extensions_<version>_all.deb

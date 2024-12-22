@@ -31,7 +31,7 @@ This package provides the following capabilities:
         (the amount of discovered devices can be limited by a configuration file on the monitored host)
       * network interfaces: packets and transferrates per second
    * number of processes
- * monitor ICMP ping 
+ * monitor ICMP ping
  * monitor the MTA mailqueue
  * monitor NFS operations/retransmits
  * apache monitoring:
@@ -56,7 +56,7 @@ This package provides the following capabilities:
  * Configurable autodisovery of real disk devices
  * Check smart state of disks and gather statistics
  * Discover network devices and monitor performance and error behavior
- * Zabbix agent version 
+ * Zabbix agent version
  * Monitor springboot servers
     * beta, monitoring is still rudimentary
     * contributions are very welcome
@@ -122,7 +122,7 @@ This procedure deploy zabbix agents on all worker nodes of your kubernetes clust
       * "Add to host groups: [DEVELOPMENT]"
       * "Link to templates: Custom - OS - Kubernetes Node"
  * Configure deployment
-   * Download [kubernetes yaml file](https://raw.githubusercontent.com/scoopex/zabbix-agent-extensions/master/zabbix-agent-daemonset-kubernetes.yaml) 
+   * Download [kubernetes yaml file](https://raw.githubusercontent.com/scoopex/zabbix-agent-extensions/master/zabbix-agent-daemonset-kubernetes.yaml)
    * Adapt the file to your own needs
     * Configure `ZBX_ACTIVESERVER`
     * Configure `ZBX_PASSIVESERVERS`
@@ -139,7 +139,7 @@ How to configure the zabbix server/templates
 --------------------------------------------
 
  * Open Zabbix web frontend
- * Create a host 
+ * Create a host
    * Configuration -> Hosts -> Create host
    * Add the name ds "Host name" efined in the first step of this section
    * Define a agent interface with the correct fully qualified hostname and the ip address
@@ -160,7 +160,7 @@ How to configure the zabbix server/templates
        * NTP
          * {$MAX_NTP_OFFSET_MS} : the maximum offset limit in milliseconds
          * {$MIN_NTP_SERVER_COUNT} : how many good ntp sources should be avaiilable, it is istrongly recommended to change the default to 2
-       * {$MONITOR_LOAD_WARNING_MULT} : a multiplicator with the number of cpus for load monitoring 
+       * {$MONITOR_LOAD_WARNING_MULT} : a multiplicator with the number of cpus for load monitoring
        * {$MONITOR_TIMEOUT} : amount of time to complain if hosts does not provide values anymore
      * Assign template "Custom - OS - Linux" to the desired hosts and modify the default values to host specific settings
    * Activate Apache template
@@ -177,14 +177,14 @@ How to configure the zabbix server/templates
 
 How to configure discovery for zabbix agent
 -------------------------------------------
- 
+
  * Configure disk device discovery
-    * Create files: 
+    * Create files:
       (if the file does not exist, the default is used)
        * /etc/zabbix/item_zabbix_device_discovery.json<BR>
        * /etc/zabbix/item_zabbix_discovery_filesystems.json<BR>
     * Add content to include/exclude devices<BR>
-      (what it does: include all devices and hardware models, after that filter out all devices and models which match to one of the python regexes) 
+      (what it does: include all devices and hardware models, after that filter out all devices and models which match to one of the python regexes)
       ```
       /usr/bin/zabbix_discovery_devices --help
       /usr/bin/zabbix_discovery_filesystems --help
@@ -218,5 +218,5 @@ Additional authors are very welcome - just submit your patches as pull requests.
   * Marc Schoechlin <ms@256bit.org>
   * Marc Schoechlin <marc.schoechlin@vico-research.com> (not active anymore)
   * Marc Schoechlin <marc.schoechlin@breuninger.de> (not active anymore)
- 
+
 This software is licensed by GPLv2 - review file "LICENSE"
