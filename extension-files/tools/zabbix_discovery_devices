@@ -271,7 +271,7 @@ for filename in glob.glob('/sys/block/*'):
 if args.debug:
     sys.stderr.write("** Discover partitions\n")
 
-if args.no_partitions:
+if args.no_partitions or args.software_raid or args.only_rawdisk:
     if args.debug:
         sys.stderr.write("do not add partitions to the result\n")
 else:
