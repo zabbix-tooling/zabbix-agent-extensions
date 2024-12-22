@@ -169,7 +169,7 @@ def check_systemd(what):
         if sys.stderr.isatty():
             sys.stderr.write("match:%s\n" % line.rstrip())
 
-        items = re.split("\s*,\s*", m.group(1))
+        items = re.split(r"\s*,\s*", m.group(1))
         result = None
         for item in items:
             m_item = re.match(r"^(.+?)=(.+)$", item.strip())
