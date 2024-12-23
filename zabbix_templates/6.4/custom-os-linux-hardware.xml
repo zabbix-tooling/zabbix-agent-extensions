@@ -51,6 +51,14 @@
                                     <tag>Application</tag>
                                     <value>OS - Hardware - Disks</value>
                                 </tag>
+                                <tag>
+                                    <tag>component</tag>
+                                    <value>storage</value>
+                                </tag>
+                                <tag>
+                                    <tag>disk</tag>
+                                    <value>{#BLOCKDEVICE}</value>
+                                </tag>
                             </tags>
                             <trigger_prototypes>
                                 <trigger_prototype>
@@ -59,6 +67,20 @@
                                     <name>Smart Disk Health {#BLOCKDEVICE}</name>
                                     <priority>AVERAGE</priority>
                                     <description>A disk failed or is going to fail in the next 24 hours. Watch zabbix agent log to get details.</description>
+                                    <tags>
+                                        <tag>
+                                            <tag>Application</tag>
+                                            <value>OS - Hardware - Disks</value>
+                                        </tag>
+                                        <tag>
+                                            <tag>component</tag>
+                                            <value>storage</value>
+                                        </tag>
+                                        <tag>
+                                            <tag>disk</tag>
+                                            <value>{#BLOCKDEVICE}</value>
+                                        </tag>
+                                    </tags>
                                 </trigger_prototype>
                             </trigger_prototypes>
                         </item_prototype>
@@ -75,6 +97,14 @@
                                     <tag>Application</tag>
                                     <value>OS - Hardware - Disks</value>
                                 </tag>
+                                <tag>
+                                    <tag>component</tag>
+                                    <value>storage</value>
+                                </tag>
+                                <tag>
+                                    <tag>disk</tag>
+                                    <value>{#BLOCKDEVICE}</value>
+                                </tag>
                             </tags>
                         </item_prototype>
                         <item_prototype>
@@ -89,6 +119,14 @@
                                 <tag>
                                     <tag>Application</tag>
                                     <value>OS - Hardware - Disks</value>
+                                </tag>
+                                <tag>
+                                    <tag>component</tag>
+                                    <value>storage</value>
+                                </tag>
+                                <tag>
+                                    <tag>disk</tag>
+                                    <value>{#BLOCKDEVICE}</value>
                                 </tag>
                             </tags>
                         </item_prototype>
@@ -114,6 +152,14 @@
                                     <tag>Application</tag>
                                     <value>OS - Hardware - Disks</value>
                                 </tag>
+                                <tag>
+                                    <tag>component</tag>
+                                    <value>storage</value>
+                                </tag>
+                                <tag>
+                                    <tag>disk</tag>
+                                    <value>{#BLOCKDEVICE}</value>
+                                </tag>
                             </tags>
                         </item_prototype>
                         <item_prototype>
@@ -129,6 +175,14 @@
                                     <tag>Application</tag>
                                     <value>OS - Hardware - Disks</value>
                                 </tag>
+                                <tag>
+                                    <tag>component</tag>
+                                    <value>storage</value>
+                                </tag>
+                                <tag>
+                                    <tag>disk</tag>
+                                    <value>{#BLOCKDEVICE}</value>
+                                </tag>
                             </tags>
                         </item_prototype>
                         <item_prototype>
@@ -143,6 +197,14 @@
                                 <tag>
                                     <tag>Application</tag>
                                     <value>OS - Hardware - Disks</value>
+                                </tag>
+                                <tag>
+                                    <tag>component</tag>
+                                    <value>storage</value>
+                                </tag>
+                                <tag>
+                                    <tag>disk</tag>
+                                    <value>{#BLOCKDEVICE}</value>
                                 </tag>
                             </tags>
                         </item_prototype>
@@ -160,6 +222,14 @@
                                     <tag>Application</tag>
                                     <value>OS - Hardware - Disks</value>
                                 </tag>
+                                <tag>
+                                    <tag>component</tag>
+                                    <value>storage</value>
+                                </tag>
+                                <tag>
+                                    <tag>disk</tag>
+                                    <value>{#BLOCKDEVICE}</value>
+                                </tag>
                             </tags>
                         </item_prototype>
                         <item_prototype>
@@ -173,6 +243,14 @@
                                 <tag>
                                     <tag>Application</tag>
                                     <value>OS - Hardware - Disks</value>
+                                </tag>
+                                <tag>
+                                    <tag>component</tag>
+                                    <value>storage</value>
+                                </tag>
+                                <tag>
+                                    <tag>disk</tag>
+                                    <value>{#BLOCKDEVICE}</value>
                                 </tag>
                             </tags>
                         </item_prototype>
@@ -189,6 +267,14 @@
                                     <tag>Application</tag>
                                     <value>OS - Hardware - Disks</value>
                                 </tag>
+                                <tag>
+                                    <tag>component</tag>
+                                    <value>storage</value>
+                                </tag>
+                                <tag>
+                                    <tag>disk</tag>
+                                    <value>{#BLOCKDEVICE}</value>
+                                </tag>
                             </tags>
                         </item_prototype>
                         <item_prototype>
@@ -203,6 +289,14 @@
                                 <tag>
                                     <tag>Application</tag>
                                     <value>OS - Hardware - Disks</value>
+                                </tag>
+                                <tag>
+                                    <tag>component</tag>
+                                    <value>storage</value>
+                                </tag>
+                                <tag>
+                                    <tag>disk</tag>
+                                    <value>{#BLOCKDEVICE}</value>
                                 </tag>
                             </tags>
                         </item_prototype>
