@@ -1,5 +1,4 @@
-FROM zabbix/zabbix-agent:ubuntu-6.4-latest
-MAINTAINER operations@flipapp.de
+FROM zabbix/zabbix-agent:ubuntu-7.2-latest
 
 USER 0
 ADD /docker-scripts /tmp/setup
