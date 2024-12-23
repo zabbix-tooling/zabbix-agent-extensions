@@ -2,7 +2,13 @@ zabbix-agent-extensions
 =======================
 
 [![Build package and test](https://github.com/scoopex/zabbix-agent-extensions/actions/workflows/continuous-integration-workflow.yml/badge.svg)](https://github.com/scoopex/zabbix-agent-extensions/actions/workflows/continuous-integration-workflow.yml)
+* Releases:
 [![Releases](https://github.com/scoopex/zabbix-agent-extensions/actions/workflows/release.yml/badge.svg)](https://github.com/scoopex/zabbix-agent-extensions/actions/workflows/release.yml)
+
+[Docker Images](https://hub.docker.com/repository/docker/scoopex666/zabbix-agent-with-agent-extensions/general)
+```
+docker run scoopex666/zabbix-agent-with-agent-extensions
+```
 
 # Overview
 
@@ -133,6 +139,20 @@ This procedure deploy zabbix agents on all worker nodes of your kubernetes clust
      kubectl describe -n infra-zabbix-agent daemonsets.apps zabbix-agent
      kubectl logs -n infra-zabbix-agent zabbix-agent-8n4ss -f
      ```
+
+Test docker image
+---------------------------------------------
+
+```
+docker run scoopex666/zabbix-agent-with-agent-extensions
+docker run -d --rm \
+         -e ZBX_ACTIVESERVER=127.0.0.1 \
+         -e ZBX_PASSIVESERVERS=127.0.0.1 \
+         --name zabbix-agent-extentions-test \
+         scoopex666/zabbix-agent-with-agent-extensions
+docker exec -ti zabbix-agent-extentions-test zabbix_get -s 127.0.0.1 -k zabbix.agent_extensions.version
+docker stop zabbix-agent-extentions-test
+```
 
 
 How to configure the zabbix server/templates
