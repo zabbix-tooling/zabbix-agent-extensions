@@ -1,0 +1,54 @@
+name: Shared Build Workflow
+
+on:
+  workflow_call:
+    inputs:
+      publish_steps:
+        description: "Publish artefacts"
+        required: false
+        default: false
+        type: boolean
+
+jobs:
+  build-pkg:
+    name: CI-PKGs
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Setup
+        run: |
+          sudo apt-get install ruby-dev build-essential debhelper devscripts rpm xalan wget -y
+          sudo gem install fpm
+      - name: Build Package
+        run: ./create_packages
+      - name: Test Package
+        run: sudo ./ci_test
+      - uses: ncipollo/release-action@v1
+        if: ${{ inputs.publish_steps }}
+        with:
+          artifacts: "zabbix-agent-extensions*.deb,zabbix-agent-extensions-*.rpm"
+  build-docker:
+    name: CI-Docker
+    runs-on: ubuntu-latest
+    environment: "Docker Upload"
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Login to Docker Hub
+        if: ${{ inputs.publish_steps }}
+        uses: docker/login-action@v3
+        with:
+          username: ${{ vars.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Build
+        run: |
+          ./create_docker build
+      - name: Publish docker images
+        if: ${{ inputs.publish_steps }}
+        run: |
+          ./create_docker publish

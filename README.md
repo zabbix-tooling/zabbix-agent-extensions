@@ -2,7 +2,13 @@ zabbix-agent-extensions
 =======================
 
 [![Build package and test](https://github.com/scoopex/zabbix-agent-extensions/actions/workflows/continuous-integration-workflow.yml/badge.svg)](https://github.com/scoopex/zabbix-agent-extensions/actions/workflows/continuous-integration-workflow.yml)
+* Releases:
 [![Releases](https://github.com/scoopex/zabbix-agent-extensions/actions/workflows/release.yml/badge.svg)](https://github.com/scoopex/zabbix-agent-extensions/actions/workflows/release.yml)
+
+[Docker Images](https://hub.docker.com/repository/docker/scoopex666/zabbix-agent-with-agent-extensions/general)
+```
+docker run scoopex666/zabbix-agent-with-agent-extensions
+```
 
 # Overview
 
@@ -109,6 +115,8 @@ Install the agent extensions on kubernetes nodes
 ---------------------------------------------
 
 This procedure deploy zabbix agents on all worker nodes of your kubernetes cluster and provides autodiscovery for all nodes
+It is based on the offical [image](https://hub.docker.com/r/zabbix/zabbix-agent).
+
 
  * Make zabbix available to the deployed agent, i.e. by deploying a zabbix proxy in k8s
  * Import template [custom-os-kubernetes-node.xml](http://htmlpreview.github.io/?https://github.com/scoopex/zabbix-agent-extensions/blob/master/zabbix_templates/5.2/documentation/custom-os-kubernetes-node.html)
@@ -123,7 +131,7 @@ This procedure deploy zabbix agents on all worker nodes of your kubernetes clust
       * "Link to templates: Custom - OS - Kubernetes Node"
  * Configure deployment
    * Download [kubernetes yaml file](https://raw.githubusercontent.com/scoopex/zabbix-agent-extensions/master/zabbix-agent-daemonset-kubernetes.yaml)
-   * Adapt the file to your own needs
+   * Adapt the file to your own needs, see [environment variables](https://hub.docker.com/r/zabbix/zabbix-agent)
     * Configure `ZBX_ACTIVESERVER`
     * Configure `ZBX_PASSIVESERVERS`
     * Configure the version of the image [check dockerhub](https://hub.docker.com/repository/docker/scoopex666/zabbix-agent-with-agent-extensions)
@@ -133,6 +141,21 @@ This procedure deploy zabbix agents on all worker nodes of your kubernetes clust
      kubectl describe -n infra-zabbix-agent daemonsets.apps zabbix-agent
      kubectl logs -n infra-zabbix-agent zabbix-agent-8n4ss -f
      ```
+
+Test docker image
+---------------------------------------------
+
+It is based on the offical [image](https://hub.docker.com/r/zabbix/zabbix-agent).
+```
+docker run scoopex666/zabbix-agent-with-agent-extensions
+docker run -d --rm \
+         -e ZBX_ACTIVESERVER=127.0.0.1 \
+         -e ZBX_PASSIVESERVERS=127.0.0.1 \
+         --name zabbix-agent-extentions-test \
+         scoopex666/zabbix-agent-with-agent-extensions
+docker exec -u root -ti zabbix-agent-extentions-test zabbix_get -s 127.0.0.1 -k zabbix.agent_extensions.version
+docker stop zabbix-agent-extentions-test
+```
 
 
 How to configure the zabbix server/templates
