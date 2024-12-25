@@ -2,21 +2,121 @@
 
 IMAGE_REPO="scoopex666"
 IMAGE_NAME="zabbix-agent-with-agent-extensions"
+CONTAINER_TEST_NAME="zabbix-agent-extentions-test"
 VERSION="${2:-$(git describe --abbrev=0 --tags)}"
 
-if [ "$1" = "build" ];then
-   docker build -t ${IMAGE_NAME}:${VERSION} -f Dockerfile .
-elif [ "$1" = "inspect" ];then
-   docker run -ti ${IMAGE_NAME}:${VERSION} /bin/bash
-elif [ "$1" = "publish" ];then
+
+FAILED_TESTS=""
+
+assertSuccess(){
+ local STRATEGY="$1"
+ local CMD="docker exec -u root -ti ${CONTAINER_TEST_NAME} $2"
+ echo "****************************************************************************"
+ echo "** EXECUTE: $CMD";
+ eval "$CMD 2>&1"
+ local RET="$?"
+ echo "**"
+
+ if [ "$RET" != "0" ];then
+   echo "** ERROR: execution failed (returncode $RET)"
+   FAILED_TESTS="$FAILED_TESTS#assertSuccess => $CMD"
+   echo "****************************************************************************"
+   if [ "$STRATEGY" = "STOP_ON_ERROR" ];then
+      exit 100
+   else
+      return 100
+   fi
+ fi
+ echo "****************************************************************************"
+ return 0
+}
+
+
+
+testPackage(){
+   buildDocker
+   docker stop ${CONTAINER_TEST_NAME}
+   set -x
+   docker run --privileged --rm \
+         -d \
+         --network host \
+         -v $PWD:/src \
+         -e ZBX_HOSTNAME=${CONTAINER_TEST_NAME} \
+         -e ZBX_SERVER_HOST=127.0.0.1 \
+         -e ZBX_PASSIVESERVERS=127.0.0.1 \
+         --name ${CONTAINER_TEST_NAME} ${IMAGE_NAME}:${VERSION}
+   set +x
+   echo '{ "{#FOO}" : "BAR" }' | docker exec -i -u root ${CONTAINER_TEST_NAME} tee /etc/zabbix/zabbix-discovery-generic/foo-bar.json
+   assertSuccess STOP_ON_ERROR "ls -l /etc/zabbix/zabbix-discovery-generic/foo-bar.json"
+   assertSuccess STOP_ON_ERROR "zabbix_get -s 127.0.0.1 -k 'generic.discovery[foo,json]' | tee /dev/stderr | grep -q -P 'BAR'" # Without sudo
+
+   assertSuccess STOP_ON_ERROR "zabbix_get -s 127.0.0.1 -k linux.dmesg | tee /dev/stderr | grep -q -P 'OK: ALL OK|ERROR:'" # Without sudo
+   assertSuccess STOP_ON_ERROR "zabbix_get -s 127.0.0.1 -k linux.dmesg | tee /dev/stderr | grep -q -P 'OK: ALL OK|ERROR:'" # Without sudo
+   assertSuccess STOP_ON_ERROR "zabbix_get -s 127.0.0.1 -k linux.multipath | tee /dev/stderr | grep -q 'OK:'" # With sudo
+
+   assertSuccess STOP_ON_ERROR "zabbix_get -s 127.0.0.1 -k 'custom.process[zabbix_agentd,minage]'|tee /dev/stderr | grep -q -P '^\d+'"
+   assertSuccess STOP_ON_ERROR "zabbix_get -s 127.0.0.1 -k 'custom.process[zabbix_agentd,maxage]'|tee /dev/stderr | grep -q -P '^\d+'"
+   assertSuccess STOP_ON_ERROR "zabbix_get -s 127.0.0.1 -k 'custom.process[nosuchprocess,maxage]'|tee /dev/stderr | grep -q -P '^\d+'"
+   assertSuccess STOP_ON_ERROR "zabbix_get -s 127.0.0.1 -k 'zabbix.agent_extensions.version'|tee /dev/stderr | grep -q -P '^\d+'"
+
+   docker exec -i -u root ${CONTAINER_TEST_NAME} mkdir -m 755  -p /opt/puppetlabs/puppet/cache/state/
+   docker exec -i -u root ${CONTAINER_TEST_NAME} cp /src/extension-files/test/last_run_summary.yaml /opt/puppetlabs/puppet/cache/state/last_run_summary.yaml
+   docker exec -i -u root ${CONTAINER_TEST_NAME} cp /src/extension-files/test/last_run_report.yaml /opt/puppetlabs/puppet/cache/state/last_run_report.yaml
+
+   assertSuccess STOP_ON_ERROR "zabbix_get -s 127.0.0.1 -k 'puppet[state]'|tee /dev/stderr | grep -q -P '^OK: puppetrun successful, no changes'"
+   assertSuccess STOP_ON_ERROR "zabbix_get -s 127.0.0.1 -k 'puppet[changes,total]'|tee /dev/stderr | grep -q -P '^\d+'"
+   assertSuccess STOP_ON_ERROR "zabbix_get -s 127.0.0.1 -k 'puppet[environment]'|tee /dev/stderr | grep -q -P '^production_master'"
+
+   assertSuccess STOP_ON_ERROR "zabbix_get -s 127.0.0.1 -k vfs.dev.discovery | tee /dev/stderr | grep -q '#BLOCKDEVICE'"
+   assertSuccess STOP_ON_ERROR "zabbix_get -s 127.0.0.1 -k vfs.fs.discovery | grep -v /proc"
+   assertSuccess STOP_ON_ERROR "zabbix_get -s 127.0.0.1 -k nfs.rpc.calls|grep -P '^\d+'"
+
+   docker stop ${CONTAINER_TEST_NAME}
+   echo
+   echo
+   echo "*** SUMMARY"
+   if [ -z "$FAILED_TESTS" ];then
+      echo "ALL TESTS PASSED"
+      return 0
+   else
+      echo "THE FOLLOWING TESTS FAILED"
+      echo "$FAILED_TESTS"|tr '#' '\n'|sed '~s,^, ,'
+      return 1
+   fi
+}
+
+buildDocker(){
+   set -x
+   docker rmi ${IMAGE_NAME}:${VERSION}
+   set -e
+   docker build --progress plain --build-arg BUILD_DATE="$(date "+%Y-%m-%d")" -t ${IMAGE_NAME}:${VERSION} -f Dockerfile .
+   set +xe
+}
+
+inspectDocker(){
+   set -x
+   docker stop ${CONTAINER_TEST_NAME}
+   exec docker run --network host --rm --name ${CONTAINER_TEST_NAME} -ti ${IMAGE_NAME}:${VERSION} /bin/bash
+}
+
+publishDocker(){
+   buildDocker
+   set -xe
    docker tag ${IMAGE_NAME}:${VERSION} ${IMAGE_REPO}/${IMAGE_NAME}:${VERSION}
    docker push ${IMAGE_REPO}/${IMAGE_NAME}:${VERSION}
    docker tag ${IMAGE_NAME}:${VERSION} ${IMAGE_REPO}/${IMAGE_NAME}:latest
    docker push ${IMAGE_REPO}/${IMAGE_NAME}:latest
+   set +xe
+}
+
+if [ "$1" = "build" ];then
+   buildDocker
+elif [ "$1" = "inspect" ];then
+   inspectDocker
+elif [ "$1" = "publish" ];then
+   publishDocker
 elif [ "$1" = "test" ];then
-   docker run ${IMAGE_NAME}:${VERSION}
+   testPackage
 else
-   echo "$0 build|inspect|publish|run"
+   echo "$0 build|inspect|publish|test"
 fi
-
-

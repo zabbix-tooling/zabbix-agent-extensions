@@ -47,5 +47,7 @@
    git push
    git push --tags
    ```
- * TravisCI builds and tests the release and uploads it to github
+ * Github builds and tests the release and uploads it to github
+    * RPM and DEB packages
+    * Docker Images
 
