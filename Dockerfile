@@ -1,3 +1,4 @@
+# see https://github.com/zabbix/zabbix-docker/blob/7.2/Dockerfiles/agent/ubuntu/Dockerfile
 FROM zabbix/zabbix-agent:ubuntu-7.2-latest
 
 USER 0
@@ -9,7 +10,7 @@ ADD zabbix-agent-extensions_*_all.deb /tmp/setup
 RUN /tmp/setup/04_install_agent_extensions.sh
 RUN /tmp/setup/05_perform_upgrade.sh
 
-ENTRYPOINT ["/usr/bin/tini", "--", "/usr/bin/docker-entrypoint.sh"]
+ENTRYPOINT ["/usr/bin/docker-entrypoint.sh"]
 
 USER 1997
 
