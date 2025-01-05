@@ -2,3 +2,4 @@
 *.deb
 *.rpm
 *.idea
+zabbix-agent-daemonset-kubernetes-release.yaml

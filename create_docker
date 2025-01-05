@@ -93,6 +93,8 @@ buildDocker(){
       --build-arg BUILD_DATE="$(date "+%Y-%m-%d")" \
       --build-arg BUILD_VERSION="$VERSION" \
       -t ${IMAGE_NAME}:${VERSION} -f Dockerfile .
+   sed "~s,${IMAGE_REPO}/${IMAGE_NAME}:latest,${IMAGE_REPO}/${IMAGE_NAME}:${VERSION}," zabbix-agent-daemonset-kubernetes.yaml > \
+      zabbix-agent-daemonset-kubernetes-release.yaml
    set +xe
 }
 

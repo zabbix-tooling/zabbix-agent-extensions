@@ -19,7 +19,7 @@ spec:
       labels:
         name: zabbix-agent
     spec:
-      # this toleration is to have the daemonset runnable on master nodes
+      # this toleration is to have the daemonset runnable also on master nodes
       # tolerations:
       #   - key: node-role.kubernetes.io/master
       #     effect: NoSchedule
@@ -43,7 +43,7 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: spec.nodeName
-            - name: ZBX_ACTIVESERVERS
+            - name: ZBX_SERVER_HOST
               value: "zabbix-proxy"
             - name: ZBX_PASSIVESERVERS
               value: "127.0.0.1,zabbix-proxy"
@@ -77,5 +77,5 @@ metadata:
   name: zabbix-agent-extensions-include
   namespace: "infra-zabbix-agent"
 data:
-  "zabbix-agent-extensions-include.conf": |
-       Include=/usr/share/zabbix-agent-extensions/include.d/*.conf
+  "zabbix-agent-extensions-include-extra.conf": |
+    # Extra
