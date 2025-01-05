@@ -11,7 +11,7 @@ RUN /tmp/setup/01_phase_base.sh
 
 ADD zabbix-agent-extensions_${BUILD_VERSION}_all.deb /tmp/setup
 RUN /tmp/setup/04_install_agent_extensions.sh
-RUN /tmp/setup/05_perform_upgrade.sh
+RUN /tmp/setup/05_perform_upgrade_and_cleanup.sh
 
 ENTRYPOINT ["/usr/bin/docker-entrypoint.sh"]
 
