@@ -409,7 +409,7 @@
                             <type>7</type>
                             <snmp_community/>
                             <snmp_oid/>
-                            <key>hardware.disk.smart.infos[{#BLOCKDEVICE},Device Model]</key>
+                            <key>hardware.disk.smart.info[{#BLOCKDEVICE},Device Model]</key>
                             <delay>1d</delay>
                             <history>90d</history>
                             <trends>0</trends>
@@ -451,7 +451,7 @@
                             <type>7</type>
                             <snmp_community/>
                             <snmp_oid/>
-                            <key>hardware.disk.smart.infos[{#BLOCKDEVICE},Serial Number]</key>
+                            <key>hardware.disk.smart.info[{#BLOCKDEVICE},Serial Number]</key>
                             <delay>1d</delay>
                             <history>90d</history>
                             <trends>0</trends>

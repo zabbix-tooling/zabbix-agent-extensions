@@ -171,7 +171,7 @@
                         <item_prototype>
                             <name>{#BLOCKDEVICE} Device model</name>
                             <type>ZABBIX_ACTIVE</type>
-                            <key>hardware.disk.smart.infos[{#BLOCKDEVICE},Device Model]</key>
+                            <key>hardware.disk.smart.info[{#BLOCKDEVICE},Device Model]</key>
                             <delay>1d</delay>
                             <trends>0</trends>
                             <value_type>CHAR</value_type>
@@ -185,7 +185,7 @@
                         <item_prototype>
                             <name>{#BLOCKDEVICE} Serial Number</name>
                             <type>ZABBIX_ACTIVE</type>
-                            <key>hardware.disk.smart.infos[{#BLOCKDEVICE},Serial Number]</key>
+                            <key>hardware.disk.smart.info[{#BLOCKDEVICE},Serial Number]</key>
                             <delay>1d</delay>
                             <trends>0</trends>
                             <value_type>CHAR</value_type>
