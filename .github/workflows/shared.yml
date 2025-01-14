@@ -13,6 +13,7 @@ jobs:
   build-and-release:
     name: CI-PKGs
     runs-on: ubuntu-latest
+    environment: Docker Upload
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
