@@ -89,7 +89,12 @@ buildDocker(){
    set -x
    docker rmi ${IMAGE_NAME}:${VERSION}
    set -e
-   docker build --progress plain --build-arg BUILD_DATE="$(date "+%Y-%m-%d")" -t ${IMAGE_NAME}:${VERSION} -f Dockerfile .
+   docker build --progress plain \
+      --build-arg BUILD_DATE="$(date "+%Y-%m-%d")" \
+      --build-arg BUILD_VERSION="$VERSION" \
+      -t ${IMAGE_NAME}:${VERSION} -f Dockerfile .
+   sed "~s,${IMAGE_REPO}/${IMAGE_NAME}:latest,${IMAGE_REPO}/${IMAGE_NAME}:${VERSION}," zabbix-agent-daemonset-kubernetes.yaml > \
+      zabbix-agent-daemonset-kubernetes-release.yaml
    set +xe
 }
 
