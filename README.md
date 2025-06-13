@@ -9,9 +9,10 @@ zabbix-agent-extensions
 
 A set of zabbix UserParameter scripts and production ready monitoring templates for linux systems.
 
- * this project ist originated on: https://github.com/scoopex/zabbix-agent-extensions
+ * this project ist originated on: https://github.com/zabbix-tooling/zabbix-agent-extensions
  * the ci is implemented with github actions (creating packages, docker images and testing)
- * docker images of a zabbix agent can be obtained at https://hub.docker.com/repository/docker/scoopex666/zabbix-agent-with-agent-extensions
+ * packages can be downlaoded at [the releases page](https://github.com/zabbix-tooling/zabbix-agent-extensions/releases)
+ * docker images of a zabbix agent can be obtained at [Dockerhub](https://hub.docker.com/repository/docker/zabbixtooling/zabbix-agent-with-agent-extensions/general)
 
 # Monitoring details
 
