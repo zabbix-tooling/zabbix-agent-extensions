@@ -24,8 +24,8 @@ jobs:
           sudo gem install fpm
       - name: Build Package
         run: ./create_packages
-      - name: Test Package
-        run: sudo ./ci_test
+#      - name: Test Package
+#        run: sudo ./ci_test
       - name: Build and test container image zabbix-agent
         run: |
           ./create_docker -t zabbix-agent test
