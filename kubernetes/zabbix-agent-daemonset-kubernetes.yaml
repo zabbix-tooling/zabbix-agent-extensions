@@ -47,7 +47,7 @@ spec:
               value: "zabbix-proxy"
             - name: ZBX_PASSIVESERVERS
               value: "127.0.0.1,zabbix-proxy"
-          image: scoopex666/zabbix-agent-with-agent-extensions:latest
+          image: zabbix-tooling/zabbix-agent-with-agent-extensions:latest
           imagePullPolicy: Always
           name: zabbix-agent
           volumeMounts:
