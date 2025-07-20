@@ -24,23 +24,30 @@ jobs:
           sudo gem install fpm
       - name: Build Package
         run: ./create_packages
-      - name: Test Package
-        run: sudo ./ci_test
-      - name: Build Docker Image
+#      - name: Test Package
+#        run: sudo ./ci_test
+      - name: Build and test container image zabbix-agent
         run: |
-          ./create_docker build
+          ./create_docker -t zabbix-agent test
+      - name: Build and test container image zabbix-agent2
+        run: |
+          ./create_docker -t zabbix-agent2 test
       # Publish release
       - uses: ncipollo/release-action@v1
         if: ${{ inputs.publish_steps }}
         with:
-          artifacts: "zabbix-agent-extensions*.deb,zabbix-agent-extensions-*.rpm,zabbix-agent-daemonset-kubernetes-release.yaml"
+          artifacts: "zabbix-agent-extensions*.deb,zabbix-agent-extensions-*.rpm,kubernetes/zabbix-agent*-daemonset-kubernetes-release.yaml"
       - name: Login to Docker Hub
         if: ${{ inputs.publish_steps }}
         uses: docker/login-action@v3
         with:
           username: ${{ vars.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      - name: Publish docker images
+      - name: Publish docker images for zabbix-agent
         if: ${{ inputs.publish_steps }}
         run: |
-          ./create_docker publish
+          ./create_docker -t zabbix-agent publish
+      - name: Publish docker images for zabbix-agent2
+        if: ${{ inputs.publish_steps }}
+        run: |
+          ./create_docker -t zabbix-agent2 publish
