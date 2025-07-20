@@ -42,7 +42,6 @@ testPackage(){
          -e ZBX_ACTIVESERVERS=127.0.0.1 \
          --name ${CONTAINER_TEST_NAME} ${IMAGE_NAME}:${VERSION}
    set +x
-   sleep 3
    echo '{ "{#FOO}" : "BAR" }' | docker exec -i -u root ${CONTAINER_TEST_NAME} tee /etc/zabbix/zabbix-discovery-generic/foo-bar.json
    assertSuccess STOP_ON_ERROR "ls -l /etc/zabbix/zabbix-discovery-generic/foo-bar.json"
    assertSuccess STOP_ON_ERROR "zabbix_get -s 127.0.0.1 -k 'generic.discovery[foo,json]' | tee /dev/stderr | grep -q -P 'BAR'" # Without sudo
@@ -147,7 +146,7 @@ fi
 
 IMAGE_DOCKERFILE="Dockerfile-${target}"
 IMAGE_REPO="zabbixtooling"
-IMAGE_NAME="${TARGET}-with-agent-extensions"
+IMAGE_NAME="docker.io/library/${TARGET}-with-agent-extensions"
 CONTAINER_TEST_NAME="${TARGET}-extentions-test"
 
 for ACTION in $@; do
