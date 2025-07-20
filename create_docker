@@ -6,7 +6,7 @@ FAILED_TESTS=""
 
 assertSuccess(){
  local STRATEGY="$1"
- local CMD="docker exec -u root -ti ${CONTAINER_TEST_NAME} $2"
+ local CMD="docker exec -u root -t ${CONTAINER_TEST_NAME} $2"
  echo "****************************************************************************"
  echo "** EXECUTE: $CMD";
  eval "$CMD 2>&1"
