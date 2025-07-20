@@ -103,10 +103,10 @@ inspectDocker(){
 publishDocker(){
    buildDocker
    set -xe
-   docker tag ${IMAGE_NAME}:${VERSION} ${IMAGE_REPO}/${IMAGE_NAME}:${VERSION}
-   docker push ${IMAGE_REPO}/${IMAGE_NAME}:${VERSION}
-   docker tag ${IMAGE_NAME}:${VERSION} ${IMAGE_REPO}/${IMAGE_NAME}:latest
-   docker push ${IMAGE_REPO}/${IMAGE_NAME}:latest
+   docker tag ${IMAGE_NAME}:${VERSION} ${IMAGE_NAME_PUBLISH}:${VERSION}
+   docker push ${IMAGE_NAME_PUBLISH}:${VERSION}
+   docker tag ${IMAGE_NAME}:${VERSION} ${IMAGE_NAME_PUBLISH}:latest
+   docker push ${IMAGE_NAME_PUBLISH}:latest
    set +xe
 }
 
@@ -147,6 +147,7 @@ fi
 IMAGE_DOCKERFILE="Dockerfile-${target}"
 IMAGE_REPO="zabbixtooling"
 IMAGE_NAME="docker.io/library/${TARGET}-with-agent-extensions"
+IMAGE_NAME_PUBLISH="${IMAGE_REPO}/${TARGET}-with-agent-extensions"
 CONTAINER_TEST_NAME="${TARGET}-extentions-test"
 
 for ACTION in $@; do
