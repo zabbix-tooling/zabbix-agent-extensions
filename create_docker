@@ -1,6 +1,5 @@
 #!/bin/bash
 
-CONTAINER_TEST_NAME="zabbix-agent-extentions-test"
 
 
 FAILED_TESTS=""
@@ -148,6 +147,7 @@ fi
 IMAGE_DOCKERFILE="Dockerfile-${target}"
 IMAGE_REPO="zabbixtooling"
 IMAGE_NAME="${TARGET}-with-agent-extensions"
+CONTAINER_TEST_NAME="${TARGET}-extentions-test"
 
 for ACTION in $@; do
    if [ "$ACTION" = "build" ];then
