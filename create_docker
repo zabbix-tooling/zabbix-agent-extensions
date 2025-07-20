@@ -1,9 +1,6 @@
 #!/bin/bash
 
-IMAGE_REPO="zabbixtooling"
-IMAGE_NAME="zabbix-agent-with-agent-extensions"
 CONTAINER_TEST_NAME="zabbix-agent-extentions-test"
-VERSION="${2:-$(git describe --abbrev=0 --tags)}"
 
 
 FAILED_TESTS=""
@@ -35,15 +32,15 @@ assertSuccess(){
 
 testPackage(){
    buildDocker
-   docker stop ${CONTAINER_TEST_NAME}
    set -x
+   docker stop ${CONTAINER_TEST_NAME}
    docker run --privileged --rm \
          -d \
          --network host \
          -v $PWD:/src \
          -e ZBX_HOSTNAME=${CONTAINER_TEST_NAME} \
-         -e ZBX_SERVER_HOST=127.0.0.1 \
          -e ZBX_PASSIVESERVERS=127.0.0.1 \
+         -e ZBX_ACTIVESERVERS=127.0.0.1 \
          --name ${CONTAINER_TEST_NAME} ${IMAGE_NAME}:${VERSION}
    set +x
    echo '{ "{#FOO}" : "BAR" }' | docker exec -i -u root ${CONTAINER_TEST_NAME} tee /etc/zabbix/zabbix-discovery-generic/foo-bar.json
@@ -92,9 +89,9 @@ buildDocker(){
    docker build --progress plain \
       --build-arg BUILD_DATE="$(date "+%Y-%m-%d")" \
       --build-arg BUILD_VERSION="$VERSION" \
-      -t ${IMAGE_NAME}:${VERSION} -f Dockerfile .
-   sed "~s,${IMAGE_REPO}/${IMAGE_NAME}:latest,${IMAGE_REPO}/${IMAGE_NAME}:${VERSION}," zabbix-agent-daemonset-kubernetes.yaml > \
-      zabbix-agent-daemonset-kubernetes-release.yaml
+      -t ${IMAGE_NAME}:${VERSION} -f docker-files/Dockerfile-${TARGET} .
+   sed "~s,${IMAGE_REPO}/${IMAGE_NAME}:latest,${IMAGE_REPO}/${IMAGE_NAME}:${VERSION}," kubernetes/${TARGET}-daemonset-kubernetes.yaml > \
+      kubernetes/${TARGET}-daemonset-kubernetes-release.yaml
    set +xe
 }
 
@@ -114,14 +111,54 @@ publishDocker(){
    set +xe
 }
 
-if [ "$1" = "build" ];then
-   buildDocker
-elif [ "$1" = "inspect" ];then
-   inspectDocker
-elif [ "$1" = "publish" ];then
-   publishDocker
-elif [ "$1" = "test" ];then
-   testPackage
-else
-   echo "$0 build|inspect|publish|test"
+usage(){
+   echo "$0 OPTIONS TARGETS"
+   echo
+   echo "-v <version> : $VERSION (default)"
+   echo "-t <target>  : zabbix-agent (default) | zabbix-agent2"
+   echo ""
+   echo "Targets:"
+   echo "- build"
+   echo "- inspect"
+   echo "- publish"
+   echo "- test"
+   exit 1
+}
+
+TARGET="zabbix-agent"
+VERSION="$(git describe --abbrev=0 --tags)"
+
+
+while getopts "t:v:" opt; do
+  case "$opt" in
+    t) TARGET="$OPTARG" ;;
+    v) VERSION="$OPTARG" ;;
+    \?) echo "Ungültige Option: -$OPTARG" >&2; exit 1 ;;
+  esac
+done
+shift $((OPTIND - 1))
+
+if ! [[ "$TARGET" =~ zabbix-agent|zabbix-agent2 ]];then
+   usage
 fi
+if [ -z "$@" ];then
+   usage
+fi
+
+IMAGE_DOCKERFILE="Dockerfile-${target}"
+IMAGE_REPO="zabbixtooling"
+IMAGE_NAME="${TARGET}-with-agent-extensions"
+
+for ACTION in $@; do
+   if [ "$ACTION" = "build" ];then
+      buildDocker
+   elif [ "$ACTION" = "inspect" ];then
+      inspectDocker
+   elif [ "$ACTION" = "publish" ];then
+      publishDocker
+   elif [ "$ACTION" = "test" ];then
+      testPackage
+   else
+      usage
+   fi
+done 
