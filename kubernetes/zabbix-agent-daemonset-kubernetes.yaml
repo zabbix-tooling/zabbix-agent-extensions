@@ -11,6 +11,10 @@ metadata:
   name: zabbix-agent
   namespace: "infra-zabbix-agent"
 spec:
+  updateStrategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 5   # allow 3 nodes to update at once
   selector:
     matchLabels:
       name: zabbix-agent
