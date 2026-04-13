@@ -37,6 +37,8 @@ spec:
           securityContext:
             privileged: true
           env:
+            - name: ZABBIX_EXTENTIONS_OS_TOOLS_CHROOT
+              value: "/rootfs"
             - name: ZBX_METADATA
               value: "kubernetes-node"
             - name: ZBX_HOSTNAME

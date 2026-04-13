@@ -40,7 +40,7 @@ def check_ntpd(what):
     #
 
     server_count = 0
-    cmd = "ntpq -n -c peers"
+    cmd = f"chroot {get_root()} ntpq -n -c peers"
     process = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
     out, err = process.communicate()
     for line in out.decode('utf8').splitlines():
@@ -93,7 +93,7 @@ def check_chronyc(what):
     server_count = 0
 
     if what == "count":
-        cmd = "chronyc -c sources"
+        cmd = f"chroot {get_root()} chronyc -c sources"
         process = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
         out, err = process.communicate()
         for line in out.decode('utf8').splitlines():
@@ -105,7 +105,7 @@ def check_chronyc(what):
             server_count += 1
         sys.stdout.write(str(server_count))
     else:
-        cmd = "chronyc -c tracking"
+        cmd = f"chroot {get_root()} chronyc -c tracking"
         process = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
         out, err = process.communicate()
         for line in out.decode('utf8').splitlines():
@@ -158,7 +158,7 @@ def check_systemd(what):
         sys.stdout.write(str(server_count))
         return
 
-    cmd = "timedatectl show-timesync"
+    cmd = f"chroot {get_root()} timedatectl show-timesync"
     process = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
     out, err = process.communicate()
     for line in out.decode('utf8').splitlines():
@@ -182,6 +182,20 @@ def check_systemd(what):
             elif what == "offset" and k == "RootDispersion":
                 sys.stdout.write(convert_time_systemd(v))
 
+def get_root():
+  return os.environ.get("ZABBIX_EXTENTIONS_OS_TOOLS_CHROOT", "/")
+
+def which(tool: str):
+  result = subprocess.run(
+      ["chroot", get_root(), "which", tool],
+      capture_output=True,
+      text=True
+  )
+  if result.returncode == 0:
+    return True
+  else:
+    return False
+
 
 if len(sys.argv) != 2:
     print(sys.argv[0] + " offset|jitter|delay|count")
@@ -189,11 +203,11 @@ if len(sys.argv) != 2:
 
 what = sys.argv[1]
 
-if shutil.which("ntpq"):
+if which("ntpq"):
     check_ntpd(what)
-elif shutil.which("chronyc"):
+elif which("chronyc"):
     check_chronyc(what)
-elif shutil.which("timedatectl"):
+elif which("timedatectl"):
     check_systemd(what)
 else:
     print("No ntp client implementation found", file=sys.stderr)
