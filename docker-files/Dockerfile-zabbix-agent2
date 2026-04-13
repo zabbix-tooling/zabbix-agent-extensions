@@ -1,5 +1,5 @@
 # see https://github.com/zabbix/zabbix-docker/blob/7.2/Dockerfiles/agent/ubuntu/Dockerfile
-FROM zabbix/zabbix-agent2:ubuntu-7.2-latest
+FROM zabbix/zabbix-agent2:ubuntu-7.4-latest
 
 ARG BUILD_DATE
 ARG BUILD_VERSION
