@@ -132,7 +132,6 @@ It is based on the offical [image](https://hub.docker.com/r/zabbix/zabbix-agent)
    * Adapt the file to your own needs, see [environment variables](https://hub.docker.com/r/zabbix/zabbix-agent)
     * Configure `ZBX_ACTIVESERVER`
     * Configure `ZBX_PASSIVESERVERS`
-    * Configure `ZABBIX_EXTENTIONS_OS_TOOLS_CHROOT` to the path wher your hostfs is mounted (typically /rootfs)
     * Configure the version of the image [check dockerhub](https://hub.docker.com/repository/docker/scoopex666/zabbix-agent-with-agent-extensions)
    * Apply deployment
      ```

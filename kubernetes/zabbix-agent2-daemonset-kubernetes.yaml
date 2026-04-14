@@ -41,8 +41,6 @@ spec:
           securityContext:
             privileged: true
           env:
-            - name: ZABBIX_EXTENTIONS_OS_TOOLS_CHROOT
-              value: "/rootfs"
             - name: ZBX_METADATA
               value: "kubernetes-node"
             - name: ZBX_HOSTNAME
@@ -57,6 +55,7 @@ spec:
           imagePullPolicy: Always
           name: zabbix-agent
           volumeMounts:
+            # Its important that the Rootfs is mounted on /rootfs because some user scripts rely on that
             - name: rootfs
               mountPath: /rootfs
             - name: run

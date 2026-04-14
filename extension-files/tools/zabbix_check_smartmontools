@@ -14,8 +14,10 @@ import stat
 
 
 def get_root():
-  return os.environ.get("ZABBIX_EXTENTIONS_OS_TOOLS_CHROOT", "/")
-
+  if os.path.isdir("/rootfs"):
+    return "/rootfs"
+  else:
+    return "/" 
 
 def is_device(dev):
 

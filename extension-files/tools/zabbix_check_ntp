@@ -183,7 +183,11 @@ def check_systemd(what):
                 sys.stdout.write(convert_time_systemd(v))
 
 def get_root():
-  return os.environ.get("ZABBIX_EXTENTIONS_OS_TOOLS_CHROOT", "/")
+  if os.path.isdir("/rootfs"):
+    return "/rootfs"
+  else:
+    return "/" 
+
 
 def which(tool: str):
   result = subprocess.run(
