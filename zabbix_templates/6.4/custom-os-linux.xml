@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
-    <version>6.4</version>
+    <version>7.4</version>
     <template_groups>
         <template_group>
             <uuid>7df96b18c230490a9a0a9e2307226338</uuid>
@@ -39,7 +39,7 @@
                             <expression>count(/Custom - OS - Linux/agent.ping,#3,&quot;eq&quot;,&quot;0&quot;)=3</expression>
                             <name>Zabbix Agent Ping</name>
                             <priority>HIGH</priority>
-                            <description>Zabbix agent does not respond to a ping request in the last two calls or no information about
+                            <description>Zabbix agent does not respond to a ping request in the last two calls or no information about 
  agent-status is received in the last 30 minutes.</description>
                         </trigger>
                         <trigger>
@@ -58,7 +58,6 @@
                     <key>agent.version</key>
                     <delay>60m</delay>
                     <history>8d</history>
-                    <trends>0</trends>
                     <value_type>TEXT</value_type>
                     <description>The release of the zabbix agent</description>
                     <tags>
@@ -172,7 +171,7 @@
                     <type>ZABBIX_ACTIVE</type>
                     <key>linux.dmesg</key>
                     <delay>5m</delay>
-                    <trends>0</trends>
+                    <history>90d</history>
                     <value_type>TEXT</value_type>
                     <description>Reads the output of dmesg and discovers kernel problems.</description>
                     <tags>
@@ -215,9 +214,8 @@ This trigger does not recover automatically, to get rid of this trigger, you hav
                     <key>linux.multipath</key>
                     <delay>5m</delay>
                     <history>2w</history>
-                    <trends>0</trends>
-                    <status>DISABLED</status>
                     <value_type>TEXT</value_type>
+                    <status>DISABLED</status>
                     <tags>
                         <tag>
                             <tag>Application</tag>
@@ -232,11 +230,11 @@ This trigger does not recover automatically, to get rid of this trigger, you hav
                             <priority>AVERAGE</priority>
                             <description>Check if there are failed fiberchannel paths. Check zabbix_agent log, dmesg or &quot;multipath -ll&quot; to verify.
  Status &quot;ERROR&quot; is reported if one or more paths are not ok.
-
- example output:
- &quot;OK: L:6,P:15,B0&quot;
- &quot;ERROR: L:6,P:15,B2&quot;
-
+ 
+ example output: 
+ &quot;OK: L:6,P:15,B0&quot; 
+ &quot;ERROR: L:6,P:15,B2&quot; 
+ 
  L: Number of LUNS
  P: Number of paths
  B: Number of failed paths</description>
@@ -296,6 +294,7 @@ This trigger does not recover automatically, to get rid of this trigger, you hav
                     <type>ZABBIX_ACTIVE</type>
                     <key>net.tcp.service[smtp,,25]</key>
                     <delay>10m</delay>
+                    <history>90d</history>
                     <trends>90d</trends>
                     <valuemap>
                         <name>Service state</name>
@@ -321,6 +320,7 @@ This trigger does not recover automatically, to get rid of this trigger, you hav
                     <type>ZABBIX_ACTIVE</type>
                     <key>net.tcp.service[ssh,,22]</key>
                     <delay>5m</delay>
+                    <history>90d</history>
                     <trends>90d</trends>
                     <valuemap>
                         <name>Service state</name>
@@ -352,9 +352,6 @@ This trigger does not recover automatically, to get rid of this trigger, you hav
                     <preprocessing>
                         <step>
                             <type>CHANGE_PER_SECOND</type>
-                            <parameters>
-                                <parameter/>
-                            </parameters>
                         </step>
                     </preprocessing>
                     <tags>
@@ -376,9 +373,6 @@ This trigger does not recover automatically, to get rid of this trigger, you hav
                     <preprocessing>
                         <step>
                             <type>SIMPLE_CHANGE</type>
-                            <parameters>
-                                <parameter/>
-                            </parameters>
                         </step>
                     </preprocessing>
                     <tags>
@@ -428,8 +422,8 @@ A man with one watch knows what time it is. A man with two watches is never sure
                     <key>ntpd.primarypeer.stats[delay]</key>
                     <delay>120s</delay>
                     <history>5d</history>
-                    <trends>90d</trends>
                     <value_type>FLOAT</value_type>
+                    <trends>90d</trends>
                     <units>ms</units>
                     <description>Round trip communication delay to the remote peer or server (milliseconds)</description>
                     <tags>
@@ -446,8 +440,8 @@ A man with one watch knows what time it is. A man with two watches is never sure
                     <key>ntpd.primarypeer.stats[jitter]</key>
                     <delay>120s</delay>
                     <history>5d</history>
-                    <trends>90d</trends>
                     <value_type>FLOAT</value_type>
+                    <trends>90d</trends>
                     <units>ms</units>
                     <description>Mean deviation (jitter) in the time reported for that remote peer or server (RMS of difference of multiple time samples, milliseconds)</description>
                     <tags>
@@ -464,8 +458,8 @@ A man with one watch knows what time it is. A man with two watches is never sure
                     <key>ntpd.primarypeer.stats[offset]</key>
                     <delay>120s</delay>
                     <history>5d</history>
-                    <trends>90d</trends>
                     <value_type>FLOAT</value_type>
+                    <trends>90d</trends>
                     <units>ms</units>
                     <description>Mean offset (phase) in the times reported between this local host and the remote peer or server (RMS, milliseconds)</description>
                     <tags>
@@ -513,8 +507,8 @@ A man with one watch knows what time it is. A man with two watches is never sure
                     <key>os.linux.memory.userspace.percent</key>
                     <delay>2m</delay>
                     <history>2w</history>
-                    <trends>120d</trends>
                     <value_type>FLOAT</value_type>
+                    <trends>120d</trends>
                     <units>%</units>
                     <params>(last(//vm.memory.size[total]) - last(//vm.memory.size[free]) -  last(//vm.memory.size[buffers]) - last(//vm.memory.size[cached]))  / last(//vm.memory.size[total])</params>
                     <preprocessing>
@@ -589,6 +583,7 @@ If memory usage of userspace processes is too high, this typically leads to bad 
                     <type>ZABBIX_ACTIVE</type>
                     <key>proc.num[cron,,,]</key>
                     <delay>10m</delay>
+                    <history>90d</history>
                     <description>Ubuntu,Debian, ...</description>
                     <tags>
                         <tag>
@@ -603,6 +598,7 @@ If memory usage of userspace processes is too high, this typically leads to bad 
                     <type>ZABBIX_ACTIVE</type>
                     <key>proc.num[crond,,,]</key>
                     <delay>10m</delay>
+                    <history>90d</history>
                     <trends>0</trends>
                     <tags>
                         <tag>
@@ -635,9 +631,6 @@ If memory usage of userspace processes is too high, this typically leads to bad 
                     <preprocessing>
                         <step>
                             <type>CHANGE_PER_SECOND</type>
-                            <parameters>
-                                <parameter/>
-                            </parameters>
                         </step>
                     </preprocessing>
                     <tags>
@@ -653,6 +646,7 @@ If memory usage of userspace processes is too high, this typically leads to bad 
                     <type>ZABBIX_ACTIVE</type>
                     <key>system.cpu.load[,avg5]</key>
                     <delay>5m</delay>
+                    <history>90d</history>
                     <value_type>FLOAT</value_type>
                     <tags>
                         <tag>
@@ -686,9 +680,6 @@ If memory usage of userspace processes is too high, this typically leads to bad 
                     <preprocessing>
                         <step>
                             <type>CHANGE_PER_SECOND</type>
-                            <parameters>
-                                <parameter/>
-                            </parameters>
                         </step>
                     </preprocessing>
                     <tags>
@@ -704,8 +695,8 @@ If memory usage of userspace processes is too high, this typically leads to bad 
                     <type>ZABBIX_ACTIVE</type>
                     <key>system.cpu.util[,idle,avg1]</key>
                     <history>7d</history>
-                    <status>DISABLED</status>
                     <value_type>FLOAT</value_type>
+                    <status>DISABLED</status>
                     <units>%</units>
                     <tags>
                         <tag>
@@ -864,9 +855,6 @@ If memory usage of userspace processes is too high, this typically leads to bad 
                     <preprocessing>
                         <step>
                             <type>SIMPLE_CHANGE</type>
-                            <parameters>
-                                <parameter/>
-                            </parameters>
                         </step>
                     </preprocessing>
                     <tags>
@@ -889,9 +877,6 @@ If memory usage of userspace processes is too high, this typically leads to bad 
                     <preprocessing>
                         <step>
                             <type>SIMPLE_CHANGE</type>
-                            <parameters>
-                                <parameter/>
-                            </parameters>
                         </step>
                     </preprocessing>
                     <tags>
@@ -907,8 +892,9 @@ If memory usage of userspace processes is too high, this typically leads to bad 
                     <type>ZABBIX_ACTIVE</type>
                     <key>system.swap.size[,pused]</key>
                     <delay>5m</delay>
-                    <trends>90d</trends>
+                    <history>90d</history>
                     <value_type>FLOAT</value_type>
+                    <trends>90d</trends>
                     <units>%</units>
                     <tags>
                         <tag>
@@ -945,6 +931,7 @@ If memory usage of userspace processes is too high, this typically leads to bad 
                     <type>ZABBIX_ACTIVE</type>
                     <key>system.uptime</key>
                     <delay>10m</delay>
+                    <history>90d</history>
                     <units>s</units>
                     <tags>
                         <tag>
@@ -997,6 +984,7 @@ If memory usage of userspace processes is too high, this typically leads to bad 
                     <type>ZABBIX_ACTIVE</type>
                     <key>vfs.file.exists[/var/run/reboot-required]</key>
                     <delay>10m</delay>
+                    <history>90d</history>
                     <trends>0</trends>
                     <description>Indicates if a restart is required after system updates.</description>
                     <tags>
@@ -1119,7 +1107,6 @@ Remove the flagfile if you decide that no reboot is required (/var/run/reboot-re
                     <key>zabbix.agent_extensions.version</key>
                     <delay>60m</delay>
                     <history>8d</history>
-                    <trends>0</trends>
                     <value_type>TEXT</value_type>
                     <description>The release of the zabbix agent extensions</description>
                     <tags>
@@ -1158,11 +1145,11 @@ Remove the flagfile if you decide that no reboot is required (/var/run/reboot-re
                             <condition>
                                 <macro>{#IFNAME}</macro>
                                 <value>^(eth|bond|xapi|enp|eno|vlan|em)</value>
-                                <formulaid>A</formulaid>
                             </condition>
                         </conditions>
                     </filter>
                     <lifetime>3d</lifetime>
+                    <enabled_lifetime_type>DISABLE_NEVER</enabled_lifetime_type>
                     <description>Discovery of network interfaces</description>
                     <item_prototypes>
                         <item_prototype>
@@ -1176,9 +1163,6 @@ Remove the flagfile if you decide that no reboot is required (/var/run/reboot-re
                             <preprocessing>
                                 <step>
                                     <type>CHANGE_PER_SECOND</type>
-                                    <parameters>
-                                        <parameter/>
-                                    </parameters>
                                 </step>
                                 <step>
                                     <type>MULTIPLIER</type>
@@ -1200,13 +1184,11 @@ Remove the flagfile if you decide that no reboot is required (/var/run/reboot-re
                             <type>ZABBIX_ACTIVE</type>
                             <key>net.if.in[{#IFNAME},errors]</key>
                             <delay>5m</delay>
+                            <history>90d</history>
                             <units>e/sec</units>
                             <preprocessing>
                                 <step>
                                     <type>CHANGE_PER_SECOND</type>
-                                    <parameters>
-                                        <parameter/>
-                                    </parameters>
                                 </step>
                             </preprocessing>
                             <tags>
@@ -1227,9 +1209,6 @@ Remove the flagfile if you decide that no reboot is required (/var/run/reboot-re
                             <preprocessing>
                                 <step>
                                     <type>CHANGE_PER_SECOND</type>
-                                    <parameters>
-                                        <parameter/>
-                                    </parameters>
                                 </step>
                             </preprocessing>
                             <tags>
@@ -1250,9 +1229,6 @@ Remove the flagfile if you decide that no reboot is required (/var/run/reboot-re
                             <preprocessing>
                                 <step>
                                     <type>CHANGE_PER_SECOND</type>
-                                    <parameters>
-                                        <parameter/>
-                                    </parameters>
                                 </step>
                                 <step>
                                     <type>MULTIPLIER</type>
@@ -1274,13 +1250,11 @@ Remove the flagfile if you decide that no reboot is required (/var/run/reboot-re
                             <type>ZABBIX_ACTIVE</type>
                             <key>net.if.out[{#IFNAME},errors]</key>
                             <delay>5m</delay>
+                            <history>90d</history>
                             <units>e/sec</units>
                             <preprocessing>
                                 <step>
                                     <type>CHANGE_PER_SECOND</type>
-                                    <parameters>
-                                        <parameter/>
-                                    </parameters>
                                 </step>
                             </preprocessing>
                             <tags>
@@ -1301,9 +1275,6 @@ Remove the flagfile if you decide that no reboot is required (/var/run/reboot-re
                             <preprocessing>
                                 <step>
                                     <type>CHANGE_PER_SECOND</type>
-                                    <parameters>
-                                        <parameter/>
-                                    </parameters>
                                 </step>
                             </preprocessing>
                             <tags>
@@ -1418,12 +1389,12 @@ Remove the flagfile if you decide that no reboot is required (/var/run/reboot-re
                         <conditions>
                             <condition>
                                 <macro>{#BLOCKDEVICE}</macro>
-                                <operator>EXISTS</operator>
-                                <formulaid>A</formulaid>
+                                <value>^.*</value>
                             </condition>
                         </conditions>
                     </filter>
                     <lifetime>3d</lifetime>
+                    <enabled_lifetime_type>DISABLE_NEVER</enabled_lifetime_type>
                     <description>Discovery of disks.</description>
                     <item_prototypes>
                         <item_prototype>
@@ -1432,8 +1403,8 @@ Remove the flagfile if you decide that no reboot is required (/var/run/reboot-re
                             <type>ZABBIX_ACTIVE</type>
                             <key>vfs.dev.read[{#BLOCKDEVICE},ops,avg1]</key>
                             <history>2w</history>
-                            <trends>90d</trends>
                             <value_type>FLOAT</value_type>
+                            <trends>90d</trends>
                             <units>iops</units>
                             <tags>
                                 <tag>
@@ -1448,8 +1419,8 @@ Remove the flagfile if you decide that no reboot is required (/var/run/reboot-re
                             <type>ZABBIX_ACTIVE</type>
                             <key>vfs.dev.read[{#BLOCKDEVICE},sps,avg1]</key>
                             <history>2w</history>
-                            <trends>90d</trends>
                             <value_type>FLOAT</value_type>
+                            <trends>90d</trends>
                             <units>sps</units>
                             <tags>
                                 <tag>
@@ -1464,8 +1435,8 @@ Remove the flagfile if you decide that no reboot is required (/var/run/reboot-re
                             <type>ZABBIX_ACTIVE</type>
                             <key>vfs.dev.write[{#BLOCKDEVICE},ops,avg1]</key>
                             <history>2w</history>
-                            <trends>90d</trends>
                             <value_type>FLOAT</value_type>
+                            <trends>90d</trends>
                             <units>iops</units>
                             <tags>
                                 <tag>
@@ -1491,8 +1462,8 @@ Remove the flagfile if you decide that no reboot is required (/var/run/reboot-re
                             <type>ZABBIX_ACTIVE</type>
                             <key>vfs.dev.write[{#BLOCKDEVICE},sps,avg1]</key>
                             <history>2w</history>
-                            <trends>90d</trends>
                             <value_type>FLOAT</value_type>
+                            <trends>90d</trends>
                             <units>sps</units>
                             <tags>
                                 <tag>
@@ -1573,16 +1544,8 @@ Remove the flagfile if you decide that no reboot is required (/var/run/reboot-re
                     <name>Software RAID discovery</name>
                     <key>vfs.dev.discovery.softwareraid</key>
                     <delay>1h</delay>
-                    <filter>
-                        <conditions>
-                            <condition>
-                                <macro>{#BLOCKDEVICE}</macro>
-                                <operator>EXISTS</operator>
-                                <formulaid>A</formulaid>
-                            </condition>
-                        </conditions>
-                    </filter>
                     <lifetime>14d</lifetime>
+                    <enabled_lifetime_type>DISABLE_NEVER</enabled_lifetime_type>
                     <item_prototypes>
                         <item_prototype>
                             <uuid>fde7ffb203aa49dca5be0cfe8103c8a2</uuid>
@@ -1590,6 +1553,7 @@ Remove the flagfile if you decide that no reboot is required (/var/run/reboot-re
                             <type>ZABBIX_ACTIVE</type>
                             <key>vfs.file.contents[/sys/block/{#BLOCKDEVICE}/md/degraded]</key>
                             <delay>5m</delay>
+                            <history>90d</history>
                             <trends>0</trends>
                             <tags>
                                 <tag>
@@ -1612,7 +1576,7 @@ Remove the flagfile if you decide that no reboot is required (/var/run/reboot-re
                             <type>ZABBIX_ACTIVE</type>
                             <key>vfs.file.contents[/sys/block/{#BLOCKDEVICE}/md/sync_action]</key>
                             <delay>5m</delay>
-                            <trends>0</trends>
+                            <history>90d</history>
                             <value_type>TEXT</value_type>
                             <tags>
                                 <tag>
@@ -1642,11 +1606,11 @@ Remove the flagfile if you decide that no reboot is required (/var/run/reboot-re
                             <condition>
                                 <macro>{#FSTYPE}</macro>
                                 <value>^(xfs|ext2|ext3|jfs|reiserfs|ext4|btrfs)</value>
-                                <formulaid>A</formulaid>
                             </condition>
                         </conditions>
                     </filter>
                     <lifetime>3d</lifetime>
+                    <enabled_lifetime_type>DISABLE_NEVER</enabled_lifetime_type>
                     <description>Discovery of filesystems</description>
                     <item_prototypes>
                         <item_prototype>
@@ -2085,7 +2049,7 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
                             <widgets>
                                 <widget>
                                     <type>graphprototype</type>
-                                    <width>12</width>
+                                    <width>36</width>
                                     <height>6</height>
                                     <fields>
                                         <field>
@@ -2102,6 +2066,11 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
                                             </value>
                                         </field>
                                         <field>
+                                            <type>STRING</type>
+                                            <name>reference</name>
+                                            <value>AAADN</value>
+                                        </field>
+                                        <field>
                                             <type>INTEGER</type>
                                             <name>rows</name>
                                             <value>1</value>
@@ -2115,8 +2084,8 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
                                 </widget>
                                 <widget>
                                     <type>graphprototype</type>
-                                    <x>12</x>
-                                    <width>12</width>
+                                    <x>36</x>
+                                    <width>36</width>
                                     <height>6</height>
                                     <fields>
                                         <field>
@@ -2131,6 +2100,11 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
                                                 <host>Custom - OS - Linux</host>
                                                 <name>Blockdevice {#BLOCKDEVICE} SPS</name>
                                             </value>
+                                        </field>
+                                        <field>
+                                            <type>STRING</type>
+                                            <name>reference</name>
+                                            <value>AAADO</value>
                                         </field>
                                         <field>
                                             <type>INTEGER</type>
@@ -2156,7 +2130,7 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
                             <widgets>
                                 <widget>
                                     <type>graphprototype</type>
-                                    <width>8</width>
+                                    <width>24</width>
                                     <height>19</height>
                                     <fields>
                                         <field>
@@ -2173,6 +2147,11 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
                                             </value>
                                         </field>
                                         <field>
+                                            <type>STRING</type>
+                                            <name>reference</name>
+                                            <value>AAADP</value>
+                                        </field>
+                                        <field>
                                             <type>INTEGER</type>
                                             <name>rows</name>
                                             <value>2</value>
@@ -2181,8 +2160,8 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
                                 </widget>
                                 <widget>
                                     <type>graphprototype</type>
-                                    <x>8</x>
-                                    <width>8</width>
+                                    <x>24</x>
+                                    <width>24</width>
                                     <height>19</height>
                                     <fields>
                                         <field>
@@ -2199,6 +2178,11 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
                                             </value>
                                         </field>
                                         <field>
+                                            <type>STRING</type>
+                                            <name>reference</name>
+                                            <value>AAADQ</value>
+                                        </field>
+                                        <field>
                                             <type>INTEGER</type>
                                             <name>rows</name>
                                             <value>2</value>
@@ -2207,8 +2191,8 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
                                 </widget>
                                 <widget>
                                     <type>graphprototype</type>
-                                    <x>16</x>
-                                    <width>8</width>
+                                    <x>48</x>
+                                    <width>24</width>
                                     <height>19</height>
                                     <fields>
                                         <field>
@@ -2225,6 +2209,11 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
                                             </value>
                                         </field>
                                         <field>
+                                            <type>STRING</type>
+                                            <name>reference</name>
+                                            <value>AAADR</value>
+                                        </field>
+                                        <field>
                                             <type>INTEGER</type>
                                             <name>rows</name>
                                             <value>2</value>
@@ -2238,34 +2227,16 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
                 <dashboard>
                     <uuid>9d38463c5ae741b994b722fdfcd52996</uuid>
                     <name>Custom - OS - Linux - General</name>
+                    <display_period>600</display_period>
+                    <auto_start>NO</auto_start>
                     <pages>
                         <page>
+                            <name>CPU</name>
                             <widgets>
                                 <widget>
                                     <type>graph</type>
-                                    <width>24</width>
-                                    <height>4</height>
-                                    <fields>
-                                        <field>
-                                            <type>GRAPH</type>
-                                            <name>graphid</name>
-                                            <value>
-                                                <host>Custom - OS - Linux</host>
-                                                <name>System Load</name>
-                                            </value>
-                                        </field>
-                                        <field>
-                                            <type>INTEGER</type>
-                                            <name>source_type</name>
-                                            <value>0</value>
-                                        </field>
-                                    </fields>
-                                </widget>
-                                <widget>
-                                    <type>graph</type>
-                                    <y>4</y>
-                                    <width>24</width>
-                                    <height>4</height>
+                                    <width>72</width>
+                                    <height>9</height>
                                     <fields>
                                         <field>
                                             <type>GRAPH</type>
@@ -2276,17 +2247,81 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
                                             </value>
                                         </field>
                                         <field>
-                                            <type>INTEGER</type>
-                                            <name>source_type</name>
-                                            <value>0</value>
+                                            <type>STRING</type>
+                                            <name>reference</name>
+                                            <value>AAADT</value>
                                         </field>
                                     </fields>
                                 </widget>
                                 <widget>
                                     <type>graph</type>
-                                    <y>8</y>
-                                    <width>24</width>
-                                    <height>4</height>
+                                    <y>9</y>
+                                    <width>36</width>
+                                    <height>6</height>
+                                    <fields>
+                                        <field>
+                                            <type>GRAPH</type>
+                                            <name>graphid</name>
+                                            <value>
+                                                <host>Custom - OS - Linux</host>
+                                                <name>System Load</name>
+                                            </value>
+                                        </field>
+                                        <field>
+                                            <type>STRING</type>
+                                            <name>reference</name>
+                                            <value>AAADS</value>
+                                        </field>
+                                    </fields>
+                                </widget>
+                                <widget>
+                                    <type>graph</type>
+                                    <y>15</y>
+                                    <width>36</width>
+                                    <height>6</height>
+                                    <fields>
+                                        <field>
+                                            <type>GRAPH</type>
+                                            <name>graphid</name>
+                                            <value>
+                                                <host>Custom - OS - Linux</host>
+                                                <name>Processes</name>
+                                            </value>
+                                        </field>
+                                        <field>
+                                            <type>STRING</type>
+                                            <name>reference</name>
+                                            <value>AAADW</value>
+                                        </field>
+                                    </fields>
+                                </widget>
+                                <widget>
+                                    <type>graph</type>
+                                    <y>21</y>
+                                    <width>36</width>
+                                    <height>7</height>
+                                    <fields>
+                                        <field>
+                                            <type>GRAPH</type>
+                                            <name>graphid</name>
+                                            <value>
+                                                <host>Custom - OS - Linux</host>
+                                                <name>File descriptors</name>
+                                            </value>
+                                        </field>
+                                        <field>
+                                            <type>STRING</type>
+                                            <name>reference</name>
+                                            <value>AAADX</value>
+                                        </field>
+                                    </fields>
+                                </widget>
+                                <widget>
+                                    <type>graph</type>
+                                    <x>36</x>
+                                    <y>9</y>
+                                    <width>36</width>
+                                    <height>6</height>
                                     <fields>
                                         <field>
                                             <type>ITEM</type>
@@ -2297,6 +2332,11 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
                                             </value>
                                         </field>
                                         <field>
+                                            <type>STRING</type>
+                                            <name>reference</name>
+                                            <value>AAADU</value>
+                                        </field>
+                                        <field>
                                             <type>INTEGER</type>
                                             <name>source_type</name>
                                             <value>1</value>
@@ -2305,9 +2345,10 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
                                 </widget>
                                 <widget>
                                     <type>graph</type>
-                                    <y>12</y>
-                                    <width>24</width>
-                                    <height>4</height>
+                                    <x>36</x>
+                                    <y>15</y>
+                                    <width>36</width>
+                                    <height>6</height>
                                     <fields>
                                         <field>
                                             <type>GRAPH</type>
@@ -2318,17 +2359,21 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
                                             </value>
                                         </field>
                                         <field>
-                                            <type>INTEGER</type>
-                                            <name>source_type</name>
-                                            <value>0</value>
+                                            <type>STRING</type>
+                                            <name>reference</name>
+                                            <value>AAADV</value>
                                         </field>
                                     </fields>
                                 </widget>
+                            </widgets>
+                        </page>
+                        <page>
+                            <name>Memory</name>
+                            <widgets>
                                 <widget>
                                     <type>graph</type>
-                                    <y>16</y>
-                                    <width>24</width>
-                                    <height>4</height>
+                                    <width>72</width>
+                                    <height>7</height>
                                     <fields>
                                         <field>
                                             <type>GRAPH</type>
@@ -2339,17 +2384,17 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
                                             </value>
                                         </field>
                                         <field>
-                                            <type>INTEGER</type>
-                                            <name>source_type</name>
-                                            <value>0</value>
+                                            <type>STRING</type>
+                                            <name>reference</name>
+                                            <value>AAAFR</value>
                                         </field>
                                     </fields>
                                 </widget>
                                 <widget>
                                     <type>graph</type>
-                                    <y>20</y>
-                                    <width>24</width>
-                                    <height>4</height>
+                                    <y>7</y>
+                                    <width>72</width>
+                                    <height>8</height>
                                     <fields>
                                         <field>
                                             <type>GRAPH</type>
@@ -2360,17 +2405,17 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
                                             </value>
                                         </field>
                                         <field>
-                                            <type>INTEGER</type>
-                                            <name>source_type</name>
-                                            <value>0</value>
+                                            <type>STRING</type>
+                                            <name>reference</name>
+                                            <value>AAAFS</value>
                                         </field>
                                     </fields>
                                 </widget>
                                 <widget>
                                     <type>graph</type>
-                                    <y>24</y>
-                                    <width>24</width>
-                                    <height>5</height>
+                                    <y>15</y>
+                                    <width>72</width>
+                                    <height>8</height>
                                     <fields>
                                         <field>
                                             <type>GRAPH</type>
@@ -2381,17 +2426,16 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
                                             </value>
                                         </field>
                                         <field>
-                                            <type>INTEGER</type>
-                                            <name>source_type</name>
-                                            <value>0</value>
+                                            <type>STRING</type>
+                                            <name>reference</name>
+                                            <value>AAAFT</value>
                                         </field>
                                     </fields>
                                 </widget>
                                 <widget>
                                     <type>graph</type>
-                                    <y>29</y>
-                                    <width>24</width>
-                                    <height>5</height>
+                                    <y>23</y>
+                                    <width>72</width>
                                     <fields>
                                         <field>
                                             <type>GRAPH</type>
@@ -2402,16 +2446,16 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
                                             </value>
                                         </field>
                                         <field>
-                                            <type>INTEGER</type>
-                                            <name>source_type</name>
-                                            <value>0</value>
+                                            <type>STRING</type>
+                                            <name>reference</name>
+                                            <value>AAAFU</value>
                                         </field>
                                     </fields>
                                 </widget>
                                 <widget>
                                     <type>graph</type>
-                                    <y>34</y>
-                                    <width>24</width>
+                                    <y>25</y>
+                                    <width>72</width>
                                     <height>5</height>
                                     <fields>
                                         <field>
@@ -2423,16 +2467,16 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
                                             </value>
                                         </field>
                                         <field>
-                                            <type>INTEGER</type>
-                                            <name>source_type</name>
-                                            <value>0</value>
+                                            <type>STRING</type>
+                                            <name>reference</name>
+                                            <value>AAAFV</value>
                                         </field>
                                     </fields>
                                 </widget>
                                 <widget>
                                     <type>graph</type>
-                                    <y>39</y>
-                                    <width>24</width>
+                                    <y>30</y>
+                                    <width>72</width>
                                     <height>5</height>
                                     <fields>
                                         <field>
@@ -2444,16 +2488,16 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
                                             </value>
                                         </field>
                                         <field>
-                                            <type>INTEGER</type>
-                                            <name>source_type</name>
-                                            <value>0</value>
+                                            <type>STRING</type>
+                                            <name>reference</name>
+                                            <value>AAAFW</value>
                                         </field>
                                     </fields>
                                 </widget>
                                 <widget>
                                     <type>graph</type>
-                                    <y>44</y>
-                                    <width>24</width>
+                                    <y>35</y>
+                                    <width>72</width>
                                     <height>5</height>
                                     <fields>
                                         <field>
@@ -2465,6 +2509,11 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
                                             </value>
                                         </field>
                                         <field>
+                                            <type>STRING</type>
+                                            <name>reference</name>
+                                            <value>AAAFX</value>
+                                        </field>
+                                        <field>
                                             <type>INTEGER</type>
                                             <name>source_type</name>
                                             <value>1</value>
@@ -2473,29 +2522,8 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
                                 </widget>
                                 <widget>
                                     <type>graph</type>
-                                    <y>49</y>
-                                    <width>24</width>
-                                    <height>5</height>
-                                    <fields>
-                                        <field>
-                                            <type>GRAPH</type>
-                                            <name>graphid</name>
-                                            <value>
-                                                <host>Custom - OS - Linux</host>
-                                                <name>Processes</name>
-                                            </value>
-                                        </field>
-                                        <field>
-                                            <type>INTEGER</type>
-                                            <name>source_type</name>
-                                            <value>0</value>
-                                        </field>
-                                    </fields>
-                                </widget>
-                                <widget>
-                                    <type>graph</type>
-                                    <y>54</y>
-                                    <width>24</width>
+                                    <y>45</y>
+                                    <width>72</width>
                                     <height>5</height>
                                     <fields>
                                         <field>
@@ -2507,16 +2535,16 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
                                             </value>
                                         </field>
                                         <field>
-                                            <type>INTEGER</type>
-                                            <name>source_type</name>
-                                            <value>0</value>
+                                            <type>STRING</type>
+                                            <name>reference</name>
+                                            <value>AAAFY</value>
                                         </field>
                                     </fields>
                                 </widget>
                                 <widget>
                                     <type>graph</type>
-                                    <y>59</y>
-                                    <width>24</width>
+                                    <y>50</y>
+                                    <width>72</width>
                                     <height>5</height>
                                     <fields>
                                         <field>
@@ -2528,9 +2556,97 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
                                             </value>
                                         </field>
                                         <field>
-                                            <type>INTEGER</type>
-                                            <name>source_type</name>
-                                            <value>0</value>
+                                            <type>STRING</type>
+                                            <name>reference</name>
+                                            <value>AAAFZ</value>
+                                        </field>
+                                    </fields>
+                                </widget>
+                            </widgets>
+                        </page>
+                        <page>
+                            <name>Misc</name>
+                            <widgets>
+                                <widget>
+                                    <type>graph</type>
+                                    <width>72</width>
+                                    <height>8</height>
+                                    <fields>
+                                        <field>
+                                            <type>GRAPH</type>
+                                            <name>graphid</name>
+                                            <value>
+                                                <host>Custom - OS - Linux</host>
+                                                <name>NTP  Sychronisation</name>
+                                            </value>
+                                        </field>
+                                        <field>
+                                            <type>STRING</type>
+                                            <name>reference</name>
+                                            <value>AAAGA</value>
+                                        </field>
+                                    </fields>
+                                </widget>
+                                <widget>
+                                    <type>graph</type>
+                                    <y>8</y>
+                                    <width>72</width>
+                                    <height>9</height>
+                                    <fields>
+                                        <field>
+                                            <type>GRAPH</type>
+                                            <name>graphid</name>
+                                            <value>
+                                                <host>Custom - OS - Linux</host>
+                                                <name>MTA Mailqueue</name>
+                                            </value>
+                                        </field>
+                                        <field>
+                                            <type>STRING</type>
+                                            <name>reference</name>
+                                            <value>AAAGB</value>
+                                        </field>
+                                    </fields>
+                                </widget>
+                                <widget>
+                                    <type>graph</type>
+                                    <y>17</y>
+                                    <width>72</width>
+                                    <height>7</height>
+                                    <fields>
+                                        <field>
+                                            <type>GRAPH</type>
+                                            <name>graphid</name>
+                                            <value>
+                                                <host>Custom - OS - Linux</host>
+                                                <name>NFS RPC Operations</name>
+                                            </value>
+                                        </field>
+                                        <field>
+                                            <type>STRING</type>
+                                            <name>reference</name>
+                                            <value>AAAGC</value>
+                                        </field>
+                                    </fields>
+                                </widget>
+                                <widget>
+                                    <type>graph</type>
+                                    <y>24</y>
+                                    <width>72</width>
+                                    <height>9</height>
+                                    <fields>
+                                        <field>
+                                            <type>GRAPH</type>
+                                            <name>graphid</name>
+                                            <value>
+                                                <host>Custom - OS - Linux</host>
+                                                <name>File descriptors</name>
+                                            </value>
+                                        </field>
+                                        <field>
+                                            <type>STRING</type>
+                                            <name>reference</name>
+                                            <value>AAAGD</value>
                                         </field>
                                     </fields>
                                 </widget>
@@ -2546,7 +2662,7 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
                             <widgets>
                                 <widget>
                                     <type>graphprototype</type>
-                                    <width>8</width>
+                                    <width>24</width>
                                     <height>6</height>
                                     <fields>
                                         <field>
@@ -2563,6 +2679,11 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
                                             </value>
                                         </field>
                                         <field>
+                                            <type>STRING</type>
+                                            <name>reference</name>
+                                            <value>AAADY</value>
+                                        </field>
+                                        <field>
                                             <type>INTEGER</type>
                                             <name>rows</name>
                                             <value>1</value>
@@ -2576,8 +2697,8 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
                                 </widget>
                                 <widget>
                                     <type>graphprototype</type>
-                                    <x>8</x>
-                                    <width>8</width>
+                                    <x>24</x>
+                                    <width>24</width>
                                     <height>6</height>
                                     <fields>
                                         <field>
@@ -2594,6 +2715,11 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
                                             </value>
                                         </field>
                                         <field>
+                                            <type>STRING</type>
+                                            <name>reference</name>
+                                            <value>AAADZ</value>
+                                        </field>
+                                        <field>
                                             <type>INTEGER</type>
                                             <name>rows</name>
                                             <value>1</value>
@@ -2607,8 +2733,8 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
                                 </widget>
                                 <widget>
                                     <type>graphprototype</type>
-                                    <x>16</x>
-                                    <width>8</width>
+                                    <x>48</x>
+                                    <width>24</width>
                                     <height>6</height>
                                     <fields>
                                         <field>
@@ -2623,6 +2749,11 @@ Filesystem greater that 1TB are alarmed if the free space of the partion is lowe
                                                 <host>Custom - OS - Linux</host>
                                                 <name>Interface {#IFNAME} errors</name>
                                             </value>
+                                        </field>
+                                        <field>
+                                            <type>STRING</type>
+                                            <name>reference</name>
+                                            <value>AAAEA</value>
                                         </field>
                                         <field>
                                             <type>INTEGER</type>
